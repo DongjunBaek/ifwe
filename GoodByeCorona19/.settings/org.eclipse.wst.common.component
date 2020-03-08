@@ -2,7 +2,7 @@
     <wb-module deploy-name="GoodByeCorona19">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="corona19"/>
         <property name="java-output-path" value="/GoodByeCorona19/WebContent/WEB-INF/classes"/>
+        <property name="context-root" value="corona19"/>
     </wb-module>
 </project-modules>
