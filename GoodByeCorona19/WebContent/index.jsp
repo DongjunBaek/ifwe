@@ -9,7 +9,6 @@
 <body>
     <h1>안녕하세요 git project 테스트 입니다.</h1>
     <p>백동준</p>
-    <p>test1</p>
     <a href="https://github.com/DongjunBaek">Git Addr to 백동준</a>
     <p>신형철</p>
     <a href="">Git Addr to 신형철</a>    
