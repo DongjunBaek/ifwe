@@ -6,6 +6,8 @@ public class run {
 		System.out.println("Welcome to GoodByeConona19 project");
 		System.out.println("jinsang change");
 		System.out.println("no hangle angry");
+		
+		System.out.println("jinsang");
 	}
 
 }
