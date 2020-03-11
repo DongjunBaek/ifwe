@@ -15,7 +15,7 @@
     <p>정진상</p>
     <a href="">Git Addr to 정진상</a>
     <p>문보라</p>
-    <a href="https://github.com/BoraMoon">Git Addr to 문보라</a>
+    <a href="">Git Addr to 문보라</a>
     <p>김원재</p>
     <a href="">Git Addr to 김원재</a>
     <p>장여주</p>
