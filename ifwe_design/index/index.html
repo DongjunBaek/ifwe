@@ -31,6 +31,7 @@
     padding: 0px;
     margin: 0px;    
     color:#3b3b3b;
+    outline: none;
 }
 .main-body{    
     width: 1920px;
@@ -60,6 +61,7 @@
     z-index: -1;
     left: -25%;
     top: -35%;
+    border-radius: 50%;
 }
 .main-div-bg img{
     width: 100%;
@@ -91,7 +93,10 @@
 .main-header-ul li:not(:nth-child(1)){    
      float: right;
      text-align: center;
-     font-size: 20px;
+     font-size: 27px;
+}
+.main-header-ul li:not(:nth-child(2n-1)){
+    cursor: pointer;
 }
 .main-header-ul li .fa-circle{
     font-size: 8px;
@@ -125,7 +130,7 @@
 .main-section article:first-child div{    
     width: 100%;
     text-align: left;
-    border: 1px red solid;
+    /* border: 1px red solid; */
 }
 
 .main-section article:first-child div:first-child p:nth-child(1){
@@ -160,6 +165,7 @@
     font-size: 25px;
     border: none;
     font-weight: bold;    
+    cursor: pointer;
 }
 
 /* article box right*/
