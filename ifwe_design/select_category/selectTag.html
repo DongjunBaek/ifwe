@@ -19,6 +19,10 @@
 <style>
     @font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
 
+    body{
+        margin: 0;        
+    }
+
     #container {
         position: absolute;
         background-image: url("image/bmg.png");
@@ -32,19 +36,14 @@
         border: 1px solid #fff;
         /* margin:auto; */
         /* z-index: 3; */
+        left: 50%;
+        transform: translateX(-50%);
     }
-
-
-
-
 
     #ifwe {
         position: absolute;
-
         top: 5%;
         left: 5%;
-
-
     }
 
 
@@ -86,21 +85,13 @@
         /* 모든 이미지 위치 */
         position: relative;
         top: 35%;
-
         left: 13%;
-
-
 
     }
 
 
     .cateimg {
-
-
         display: inline-block;
-
-
-
     }
 
 
@@ -108,7 +99,6 @@
     #cateimg1 {
         position: relative;
         background-image: url(image/cate1.png);
-
         width: 540px;
         height: 495px;
         background-color: black;
@@ -119,31 +109,20 @@
     #cateimg2 {
 
         background-image: url(image/cate2.png);
-
         position: relative;
         left: 20px;
-
-
         width: 540px;
         height: 495px;
-
-
 
     }
 
     #cateimg3 {
 
         position: relative;
-
         left: 39px;
-
-
         background-image: url(image/cate3.png);
-
         width: 540px;
         height: 495px;
-
-
     }
 
 
@@ -151,7 +130,6 @@
         overflow: hidden;
         border-radius: 70px;
         /* z-index: 1; */
-
     }
 
 
@@ -163,9 +141,7 @@
 
 
     #allcircle {
-
         position: absolute;
-
         top: 26%;
         left: 80%;
     }
@@ -178,7 +154,6 @@
         height: 15px;
         background-color: white;
         border-radius: 100%;
-
 
     }
 
@@ -197,14 +172,6 @@
         position: relative;
         left: 50%;
     }
-
-
-
-
-
-
-
-
 
     #blackfilter1 {
         display: inline-block;
@@ -241,11 +208,7 @@
 
     .blackfilter {
         position: relative;
-
-
     }
-
-
 
     .var1 {
 
@@ -254,8 +217,6 @@
         left: 12%;
         color: white;
         font-size: 35px;
-
-
         text-align: center;
         z-index: 6;
     }
@@ -267,14 +228,10 @@
         left: 11%;
         color: white;
         font-size: 18px;
-
         line-height: 30px;
         text-align: center;
         z-index: 6;
     }
-
-
-
 
     .var3 {
         position: absolute;
@@ -290,17 +247,9 @@
 
 
     .cateimg:hover {
-
         cursor: pointer;
 
-
     }
-
-
-
-
-
-
 
     #fontcircle1 {
 
@@ -308,16 +257,6 @@
         top: 36%;
         left: 48%;
     }
-
-
-
-    /*  
-        #circle1:hover {
-
-            background-color: blue;
-        }  */
-
-
 
     #cicleallowright {
 
@@ -356,40 +295,22 @@
         <div id="ifwe">
             <img src="image/logo.png" alt="" width="80" height="35">
         </div>
-
         <p style="font-size: 85pt;" id="text1">01</p>
-
-
         <p style="font-size: 25pt;" id="text2">반가워요!</p>
-
-        <p style="font-size: 35pt;" id="text3">어떤 소모임에<br>가입하고 싶으신가요?
+        <p style="font-size: 35pt;" id="text3">
+            어떤 소모임에<br>가입하고 싶으신가요?
         </p>
-
-
-
         <div id="allcircle">
-
-
-
             <div class="circle" id="circle1"></div>
-
-
-
             <div class="circle" id="circle2"></div>
-
             <div class="circle" id="circle3"></div>
         </div>
 
-        
-        
-        
-        
+  
         <div id="cateallimg">
             
             <div id="cateimg1" class="cateimg">
                 <div class="whitevar"></div>
-                
-                
                 <div class="blackfilter" id="blackfilter1"></div>
                 
                 <p class="var1">공연&nbsp;<i class="fa fa-circle fa-xs" style="font-size:0.2rem"
@@ -440,25 +361,9 @@
 
 
         </div>
-
-
-
         <div id="allblackfilter">
 
-
-
-
-
         </div>
-
-
-
-
-
-
-
-
-
 
         <p style="font-size: 12pt;" id="text4">kh academy</p>
     </div>
@@ -547,25 +452,6 @@
         });
 
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 
