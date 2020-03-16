@@ -1,0 +1,246 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enroll</title>
+<!-- 영문폰트(구글웹폰트) -->
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
+<style>
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+.font-kor{
+    font-family : 'GmarketSansLight';
+    font-weight: 100;
+}
+html{
+    width: 1920px;
+    height: 1280px;
+    color: #3b3b3b;
+    font-size:14px;
+    margin:0 auto;
+}
+body{
+	margin: 5%;
+    width: 1660px;
+    height: 1040px;
+}
+header{
+    margin-bottom: 5%;
+}
+.number,h2,.posts,.post,.info-container,#container,#button-container,#left,#right,#thrid{
+	display:inline-block;
+}
+[name=num]{
+	font-size:40px;
+    color: #2756a6;
+}
+#container{
+    width: 400px;
+    height: 100px;
+    padding-top: 2%;
+}
+#button-container{
+    width: 400px;
+    height: 130px;
+    position: relative;
+    top: 50%;
+}
+#first{
+    width: 400px;
+    height: 100%;
+}
+#hr01{
+    border: solid 2px #2756a6;
+    width: 400px;
+    text-align: left;
+    margin-left: 0;
+}
+.post span{
+    font-size: 20px; 
+    font-weight: 100;
+}
+.posts{
+    position: absolute;
+    margin-left: 3%;
+}
+section{
+    position: absolute;
+}
+[name=btn]{
+    width: 400px;
+    height: 130px;
+    border:0;
+    outline: 0;
+    background-color: #f3f3f3;
+}
+[name=btn]>p{
+    font-size:20px; 
+    margin: 0;
+    font-weight: 100;
+}
+footer{
+    text-align: left;
+    color: #3b3b3b;
+    font-size: 12px;
+    position: relative;
+    top: 85%;
+}
+article{
+    display: inline;
+}
+#thrid{
+    position: relative;
+    top: -270px;
+    left: 35%;
+}
+#second{
+    display: inline-block;
+    position: relative;
+    top: -150px;
+    margin: 3%;
+}
+[name=num02]{
+    font-size:40px;
+    font-weight: 100;
+}
+[name=info]{
+    font-size: 20px;
+    font-weight: 100;
+}
+.info-container{
+    padding-left: 10px;
+}
+#hr02{
+    width: 1100px;
+    color: #f3f3f3;
+    margin-top: 4%;
+}
+.label, .birth-label{
+    font-size: 14px;
+    margin: 2% 0 5% 0;
+}
+#enroll{
+    padding: 2%;
+}
+.input{
+    width: 260px;
+    height: 44px;
+}
+input{
+    border:1px solid #ebebeb;
+    margin-bottom: 5%;
+}
+#right{
+    margin-left: 20%;
+    position: absolute;
+}
+.gender-button{
+    width: 55px;
+    height: 45px;
+    font-size: 16px;
+    font-family : 'Godo';
+    font-weight: 100;
+}
+.enroll-btn{
+    width: 470px;
+    height: 70px;
+    background-color: #ffc862;
+    color: white;
+    font-weight: normal;
+    font-size: 20px;
+    border-radius: 20px;
+    outline: 0;
+}
+</style>
+</head>
+<body>
+<header>
+<span><img src="resources/images/index/logo_black.png" alt="" style="width: 80px; height: 35px;"></span>
+</header>
+<section>
+	<article id="first"> 
+        <hr id="hr01" noshade>
+		<div id="container">
+			<div class="number font-kor"><span name="num">02</span></div>
+            <div class="posts">
+                <div class="post font-kor"><span>안전한 회원가입을 위해</span></div><br>
+                <div class="post font-kor"><span>본인인증을 진행해주세요</span></div>   
+            </div>
+		</div>
+        <br />
+        <div id="button-container">
+            <button name="btn">
+               <p class="font-kor" style="font-weight: normal;">휴대폰인증</p> <br>
+               <span style="font-size: 12px;" class="font-kor">본인인증 기관을 통해 본인인증 후 가입하기</span>
+            </button>
+        </div>
+    </article>
+	<article id="second"> 
+        <div id="arrow"><img src="https://img.icons8.com/ios/30/000000/forward--v1.png"></div>
+    </article>
+    <article id="thrid">
+        <div class="number"><span name="num02" class="font-kor">03</span></div>
+        <div class="info-container"><span name="info" class="font-kor">회원님의 정보를 입력해주세요 </span></div>
+        <hr id="hr02" noshade>
+        <div id="enroll">
+            <form action="">
+                <div id="left">
+                    <div id="name">
+                        <div class="label font-kor">이름</div>
+                        <input type="text" name="name" class="input">
+                    </div>
+                    <div id="birth">
+                        <div class="label font-kor">생년월일</div>
+                        <input type="text" name="year" style="width: 132px;height: 44px;">
+                        <span class="birth-label font-kor">년</span>
+                        <input type="text" name="month" style="width: 73px;height: 44px;">
+                        <span class="birth-label font-kor">월</span>
+                        <input type="text" name="day" style="width: 73px;height: 44px;">
+                        <span class="birth-label font-kor">일</span>
+                    </div>
+                    <div id="addr">
+                        <div class="label font-kor">주소</div>
+                        <input type="text" name="addr" style="width: 400px;height: 44px;">
+                    </div>
+                    <div id="gender">
+                        <div class="label font-kor">성별</div>
+                        <input type="button" name="male" value="남" class="gender-button">
+                        <input type="button" name="female" value="여" class="gender-button">
+                    </div>
+                </div>
+                <div id="right">
+                    <div id="id">
+                        <div class="label font-kor">아이디</div>
+                        <input type="text" class="input" name="id"><span class="font-kor" style="color: rgb(56, 209, 9);">사용가능한 아이디입니다.</span>
+                    </div>
+                    <div id="pwd">
+                        <div class="label font-kor">비밀번호</div>
+                        <input type="password" class="input" name="password">
+                    </div>
+                    <div id="pwdchk">
+                        <div class="label font-kor">비밀번호 확인</div>
+                        <input type="password" name="passwordCheck" class="input">
+                        <span class="font-kor" style="color:rgb(235, 42, 14)">비밀번호가 다릅니다.</span>
+                    </div>
+                    <div id="email">
+                        <div class="label font-kor">이메일</div>
+                        <input type="email" name="email" style="width: 400px; height: 44px;">
+                    </div>
+                    <div id="enroll-btn">
+                        <input type="button" value="회원가입" class="enroll-btn font-kor">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+</section>
+
+
+<footer class="font-kor"> kh academy </footer>
+</body>
+</html>
