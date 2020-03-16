@@ -1,0 +1,147 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{
+    margin:0;
+    padding:0;
+}
+.back{
+    background-color: black;
+    width:1920px;
+    height: 1280px;
+    position:relative;
+    opacity: 0.7;
+}
+.login-container{
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-335px;
+    margin-top: -422px;
+    background-color: white;
+    width:670px;
+    height:845px;
+    border-radius: 20px;
+    font-family:'GmarketSansLight';
+    color:#3b3b3b;
+    
+}
+.title{
+    margin-top:100px;
+    font-size:35pt;
+    text-align: center;
+    
+}
+.input{
+    margin-top:70px;
+    margin-bottom:10px;
+    font-size:14pt;
+
+}
+
+.fa-user{
+    font-size:30px;
+    color:lightgray;
+    margin-left:20%;
+    margin-right:20px;
+}
+
+.border{
+    
+    margin:0 auto;
+    width:405px;
+    border: 1px solid #ebebeb
+}
+.input-box{
+    border:none;
+    outline:none;
+    font-size:14pt;
+    width:160px;
+    margin-left:10px;
+}
+
+.fa-lock{
+    font-size:30px;
+    color:lightgray;
+    margin-left:20%;
+    margin-right:20px;
+}
+.extra{
+    margin-left:20%;
+    margin-top:5%;
+    font-size:14pt;
+}
+.extra a{
+    text-decoration: none;
+}
+.extra a:visited{
+    color:#3b3b3b;
+}
+.saveid-container{
+    display:inline;
+    position:relative;
+}
+input[type=checkbox] {
+    display: none;
+}
+input[type=checkbox] + label{
+    cursor: pointer;
+    padding-left:115px;
+}
+input[type=checkbox] + label:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    margin-left: 70px;
+    position: absolute;
+    left: 0;
+    border:3px solid #ffc862;
+}
+input[type=checkbox]:checked + label:before{
+    content: "\2714";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 15px; 
+    font-weight:600; 
+    color: #fff;  
+    background: #ffc862;
+    text-align: center;   
+}
+
+
+.login button[id="loginbtn"]{
+        width:400px;
+        height:70px;
+        background-color:#ffc862;
+        border-radius: 20px;
+        outline:none;
+        font-size:16pt;
+        color:white;
+        margin-left:20%;
+        margin-top:70px;
+        
+    }
+    .login button[id="naver"]{
+        background: url("./image/naverlogin.PNG") no-repeat;
+        width:400px;
+        height:70px;
+        margin-left:20%;
+        margin-top:20px;
+        font-size:14pt;
+        outline:none;
+        border:none;
+        cursor: pointer;
+        
+    }
+    .register {
+        margin-top:20px;
+        margin-left:20%;
+        font-size:14pt;
+    }
+    button[id="register"]{
+        width:145px;
+        height:45px;
+        border: 1px solid #ebebeb;
+        border-radius:50px;
+        font-size:14pt;
+        background-color:white;
+        margin-left:50px;
+    }
+   

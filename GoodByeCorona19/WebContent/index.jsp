@@ -19,6 +19,7 @@
     <p>김원재</p>
     <a href="https://github.com/Greenonionroot">Git Addr to 김원재  </a>
     <p>장여주</p>
-    <a href="https://github.com/jangyeoju">Git Addr to 장여주</a>
+    <a href="">Git Addr to 장여주</a>
+    <a href=""></a>
 </body>
 </html>

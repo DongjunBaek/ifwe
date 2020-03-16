@@ -1,0 +1,393 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+body{
+    background-color: rgba(246,246,246,0.5);
+    color:#3b3b3b;
+}
+.flotclass{
+    float: left;
+}
+.font-hk{
+    font-family: 'GmarketSansLight';
+}
+.wrapper{
+    margin:0 auto;
+    width:1920px;
+    min-height: 1600px;
+    font-family: 'GmarketSansLight';
+}
+nav{
+    width: 100%;
+    height:120px;
+    background-color: #ffc862;
+}
+.nav-container{
+    width:1600px;
+    height:120px;
+    margin:0 auto;
+}
+.logo-box{
+    float: left;
+    width: 75px;
+    height: 30px;
+    margin-top:3%;
+    background-image: url("image/logo.png");
+    background-size: cover;
+}
+.nav-content-right{
+    width:390px;
+    height:100px;
+    float: right;
+}
+.nav-right-leader{
+    width: 160px;
+    height:56px;
+    font-size: 19px;
+    text-align: right;
+    color: white;
+    float: right;
+    margin-top:10%;
+    
+}
+.nav-clubimg{
+    border: 5px solid white;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    float: right;
+    background-image: url("image/ex2.jpg");
+    background-size: cover;
+    margin-top:6%;
+    margin-left: 3%;
+}
+.nav-right-icon1{
+    width:50px;
+    height:55px;
+    float: right;
+    color:white;
+    margin-top:10%;
+    margin-left: 5%;
+}
+.nav-right-icon2{
+    width:50px;
+    height:55px;
+    float: right;
+    color:white;
+    margin-top:12%;
+}
+
+.fa-bell{
+    margin-left: 30%;
+}
+.wrapper-content{
+    width:1650px;
+    height:100px;
+    margin:0 auto;
+}
+aside{
+    width: 230px;
+    min-height:1300px;
+}
+.aside-icon-arrow{
+    width:40px;
+    margin-top:24%;
+
+}
+.aside-leader-img{
+    width:180px;
+    height:180px;
+    border:5px solid white;
+    border-radius: 50%;
+    margin:10% auto;
+    background-image: url("image/ex2.jpg");
+    background-size: cover;
+}
+.plus-box{
+    width: 40px;
+    height:40px;
+    border:5px solid white;
+    border-radius: 50%;
+    color: white;
+    background-color: #2756a6;
+    font-weight: bold;
+    margin-left:67%;
+    margin-top:80%;
+}
+.plus-icon{
+    width:14px;
+    height:14px;
+    margin:20% auto;
+    font-size: 24px;
+}
+.aside-leader-information{
+    margin-top:15%;
+    height:115px;
+}
+.aside-leader-information p{
+    float: left;
+}
+.aside-leader-allias{
+    font-size:28pt;
+    font-weight: bold;
+}
+.aside-leader-id{
+    font-size:13pt;
+}
+.fa-crown{
+    color:#ffc862;
+    margin-left: 20%;
+    margin-top:3%;
+}
+.aside-join{
+    height:65px;
+    border-radius: 20px;
+    background-color: #ffc862;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+}
+.aside-join p{
+    padding-top:9%;
+    font-weight: bold;
+}
+.aside-boardmenu{
+    background-color: rgb(255, 255, 255);
+    margin-top:15%;
+    
+}
+.aside-boardmenu p{
+    font-size: 20px;
+    margin: 15px;
+    margin-left: 25px;
+}
+.aside-boardmenu p:first-child{
+    padding-top:10%;
+}
+.aside-boardmenu p:last-child{
+    padding-bottom: 10%;
+}
+.aside-friend-box{
+    height:450px;
+    background-color: white;
+}
+.aside-friend-title{
+    width:180px;
+    height:35px;
+    margin:0 auto;
+    margin-top:30px;
+    padding-top:20px;
+}
+.aside-line{
+    margin:0 auto;
+    width:180px;
+    border:1px solid black;
+}
+.aside-friend-list{
+    height:300px;
+    width:180px;
+    margin:0 auto;
+    margin-top:30px;
+    overflow:auto;
+}
+.aside-friend-title p{
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+
+.aside-friend-count{
+    float: right;
+    width:65px;
+    height:30px;
+    border:1px solid #2756a6;
+    border-radius: 20px;
+    color: #2756a6;
+}
+.aside-friend-count p{
+    font-size: 10pt;
+    width: 35px;
+    height:15px;
+    float: left;
+    margin-left: 22%;
+    margin-top:13%;
+}
+.aside-friend{
+    height:40px;
+    margin-bottom: 30px;
+}
+.fried-profileimg{
+    border-radius: 50%;
+    background-image: url("image/frofileimg.PNG");
+    background-size: cover;
+    width:42px;
+    height:42px;
+    float: left;
+    margin-right: 3%;
+}
+.friendplus{
+    float: right;
+    font-family: 'Godo';
+    font-size: 15px;
+    color: #2756a6;
+    font-weight: 900;
+    margin-top:5%;
+    margin-right: 2%;
+}
+.friendname{
+    float: right;
+    font-size: 20px;
+    margin-right: 20%;
+    margin-top:5%;
+}
+
+
+
+header{
+    width:1350px;
+    height: 380px;
+    margin-left:45px;
+    position: relative;
+}
+.header-search-box{
+    height:65px;
+    margin-top:3%;
+    color: #3b3b3b;
+}
+.header-icon{
+    width:35px;
+    height:35px;
+    margin-top:1%;
+    color: #989898;
+    float: left;
+}
+#search{
+    border-radius: 20px;
+    width: 1050px;
+    height:65px;
+    font-size: 20px;
+    outline: none;
+    margin-left: 2%;
+    padding-left: 2%;
+}
+.header-titleimg{
+    background-image: url("image/titleimg.png");
+    background-size: cover;
+    width:100%;
+    height:230px;
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.7);
+
+}
+.header-titleimg-cover{
+    width:100%;
+    height:230px;
+    background-color: rgba(0,0,0,0.6);
+}
+.header-title-left{
+    width: 900px;
+    color: white;
+    float: left;
+    margin-top:5%;
+    margin-left:4%;
+}
+.header-title1{
+    font-size:38px;
+    font-weight: bold;
+
+}
+.header-title2{
+    font-size:20px;
+}
+.header-title-right{
+    height:35px;
+    width: 300px;
+    float: right;
+    color: white;
+    margin-top: 10%;
+    margin-right: 5%;
+}
+.header-location-icon{
+    float: right;
+    padding-right: 6%;
+}
+.header-title-right p{
+    float:right;
+    font-size: 30px;
+
+}
+
+section{
+    width:1350px;
+    min-height: 1000px;
+    margin-left:45px;
+}
+.section-block{
+    width:1350px;
+    height:55px;
+    margin-top:55px;
+}
+.section-wrapper{
+    width:820px;
+    height:100%;
+
+}
+.section-boradmenu{
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-container{
+    width: 100%;
+    height:410px;
+    background-color: white;
+}
+.section-container-content{
+    width: 450px;
+    height:185px;
+    margin:0 auto;
+    padding-top:8%;
+    text-align: center;
+    font-size: 24px;
+}
+.section-container-content p:first-child{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.section-homebutton{
+    border-radius: 20px;
+    background-color: #ffc862;
+    color: white;
+    width:230px;
+    margin:0 auto;
+    padding:13px 0;
+    margin-top:10%;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

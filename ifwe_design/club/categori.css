@@ -1,0 +1,225 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.font-hk{
+    font-family: 'GmarketSansLight';
+}
+.wrapper{
+    width: 1920px;
+    height:1280px;
+    margin: auto;
+    position: relative;
+}
+.wrapper-left{
+    width: 270px;
+    height: 1280px;
+    background-image: url("image/leftbackground.png");
+    background-size: cover;
+    position: relative;
+}
+.backarrow{
+    width:70px;
+    height:70px;
+    border:5px solid white;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    left:45%;
+    top:80%;
+    cursor: pointer;
+}
+.backarrow p{
+    font-size: 30pt;
+    font-weight: 900;
+    padding-top:3px;
+}
+
+.wrapper-right{
+    color:#3b3b3b;
+    font-size: 14pt;
+    width:1600px;
+    height:1040px;
+    margin-top: 5%;
+    margin-left: 40px;
+
+}
+.container{
+    float: left;
+}
+.logo{
+    width: 80px;
+    height:35px;
+    margin-left: 50%;
+    margin-top:35%;
+}
+.search-box{
+    height: 80px;
+    position: relative;
+}
+.select-box{
+    width:120px;
+    float: left;
+    padding-top:10px
+}
+.searh-icon{
+    width: 60px;
+    height: 60px;
+    padding-top: 10px;
+    margin-left: 3%;
+    float: left;
+}
+.fa-search{
+    font-size: 40px;
+    color: #ebebeb;
+}
+#club-search{
+    width:1122px;
+    height:66px;
+    background-color: #ebebeb;
+    outline: none;
+    border-radius: 20px;
+    font-size: 16pt;
+    padding-left: 30px;
+    font-family: 'GmarketSansLight';
+}
+
+
+
+.cate-title{
+    font-size: 30pt;
+    margin-top:20px;
+    font-weight: bold;
+}
+.cate-Classify{
+    height:50px;
+    margin-top:20px;
+    
+}
+.classify-menu-box{
+    border-radius: 20px;
+    background-color: #beceea;
+    width:140px;
+    height:50px;
+    font-size: 16pt;
+    color: white;
+    margin-right: 15px;
+    float: left;
+    cursor: pointer;
+}
+.classify-menu{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card-wrapper{
+    height: 700px;
+    margin-top:20px;
+}
+.card-container{
+    width:470px;
+    height:687px;
+    margin-right: 20px;
+    float: left;
+    position: relative;
+    box-shadow: 5px 5px 10px #b5b5b5;
+}
+.club-img{
+    width: 470px;
+    height: 220px;
+    background-image: url("image/ex1.jpg");
+    background-size: cover;
+}
+.club-leader{
+    border:5px solid white;
+    border-radius: 50%;
+    width: 165px;
+    height:165px;
+    position: absolute;
+    left:50%;
+    top:19%;
+    transform: translate(-50%);
+    background-image: url("image/ex2.jpg");
+    background-size: cover;
+}
+.plus-box{
+    border:5px solid white;
+    border-radius: 50%;
+    width: 39px;
+    height:39px;
+    left:58%;
+    top: 39%;
+    background-color: #2756a6;
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    
+}
+.plus-icon{
+    font-size: 20px;
+    width: 15px;
+    height:15px;
+    margin-left: 33%;
+    margin-top:13%;
+    font-weight: bold;
+
+}
+.information-container{
+    margin: 0 auto;
+    margin-top:20%;
+    width:410px;
+    height:290px;
+    text-align: center;
+}
+.club-leader-name{
+    font-size: 16pt;
+}
+.club-name{
+    font-size: 20pt;
+}
+.club-location{
+    font-size: 20pt;
+    margin-top:10px;
+}
+.information-box{
+    width:126px;
+    height:117px;
+    border: 2px solid #ebebeb;
+    border-radius: 20px;
+    margin-top:20px;
+    margin-right: 10px;
+    float: left;
+}
+.lastbox{
+    margin-right:0px;
+}
+.information-fontsize{
+    font-size: 23pt;
+    color: #2756a6;
+}
+.information-fontsize2{
+    font-size: 23pt;
+}
+.information-fontsize3{
+    font-size: 23pt;
+    color: #ffc862;
+}
+.information-button{
+    width: 100px;
+}
+.information-botton{
+    border-radius: 20px;
+    width: 100%;
+    height: 60px;
+    background-color: #ffc862;
+    margin-top:15px;
+    color: white;
+    font-size:20pt;
+    outline: none;
+    cursor: pointer;
+
+}
+

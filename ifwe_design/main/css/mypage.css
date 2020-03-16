@@ -1,0 +1,134 @@
+section{
+    width: 1500px;
+    height: 1000px;
+    margin-top: 2%;
+    margin-left: 4%;
+}
+.first{
+    margin-right: 2%;
+    width: 345px;
+    height: 800px;
+    float: left;
+}
+.second{
+    margin-right: 2%;
+    width: 820px;
+    height: 1000px;
+    float: left;
+}
+.third{
+    width: 269px;
+    height: 745px;
+    float: left;
+}
+.intro-div{
+    height: 350px;
+    margin-bottom: 13%;
+}
+.btn-div{
+    height: 55px;
+    margin-bottom: 13%;
+}
+.list-div{
+    height: 280px;
+}
+.img-div{
+    width: 195px;
+    height: 195px;
+    border: 5px solid white;
+    border-radius: 50%;
+    margin: 5% 20%;
+    background-image: url("../images/ex2.jpg");
+    background-size: cover;
+}
+.myname-div{
+    margin:10%;
+}
+.update-btn{
+    width: 345px;
+    height: 55px;
+    background-color: #ffc862;
+    border: 0;outline: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+}
+.list-title{
+    height: 65px;
+    background-color: #2756a6;
+}
+.list-ul-container{
+    margin: 5%;
+}
+.list-ul li{
+    margin: 10%;
+    font-size: 30px;
+    color:#2756a6
+}
+.p-class{
+    font-size: 25px;
+}
+.friend-title{
+    height: 65px;
+    background-color: #2756a6;
+    color: white;
+}
+.friend-list{
+    width: 210px;
+    height: 50px;
+    margin-bottom: 15%;
+}
+.friend-lists{
+    height: 700px;
+    background-color: white;
+    padding: 10%;
+}
+.profile{
+    font-size: 40px;
+}
+.friend-img{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10%;
+}
+.friend-name{
+    float: left;
+    font-size: 20px;
+    margin-top: 5%;
+}
+.notice-container{
+    height: 300px;
+    background-color: white;
+}
+.notice-title{
+    width: 720px;
+    border-bottom: 1px solid gray;
+    margin: 0 auto;
+}
+.contents{
+    margin: 0 auto;
+    width: 720px;
+    height: 200px;
+}
+.p-content{
+    font-size: 20px;
+    padding: 3%;
+}
+.friend-btn{
+    height: 35px;
+    width: 90px;
+    color: white;
+    font-size: 20px;
+    outline: 0;
+    font-weight: bolder;
+    background-color: #2756a6;
+    border-radius: 20px;
+    margin-left: 40%;
+}
+.blank-div{
+    margin-top: 5%;
+    height: 660px;
+    background-color: white;
+}
