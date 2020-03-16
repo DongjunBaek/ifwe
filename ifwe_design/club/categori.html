@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>categori</title>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.selectric.min.js"></script>
+    <link rel="stylesheet" href="categori.css">
+    <link rel="stylesheet" href="selectric.css">
+    <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<script>
+$(function(){
+    $("#search").selectric();
+
+    $("#cate-Classify div").click(function(){
+
+        $("#cate-Classify div").css("background-color","#beceea");
+        $(this).css("background-color","#2756a6");
+
+    });
+});
+
+</script>
+
+<body>
+
+<section>
+    <div class="wrapper">
+        <div class="wrapper-left container">
+            <img src="image/logo.png" alt="" class="logo">
+            <div class="backarrow">
+              <p>&lt;</p>
+            </div>
+        </div>
+        <div class="wrapper-right container">
+            <div class="search-box">
+                <div class="select-box">
+                    <select name="search" id="search">
+                        <option value="">전체</option>
+                        <option value="">지역별</option>
+                        <option value="">모임명</option>
+                    </select>
+                </div>
+                <div class="searh-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                    <input type="text" name="club-search" id="club-search"
+                            placeholder="검색어를 입력하세요">
+
+            </div>
+            <p class="cate-title font-hk">스터디</p>
+            <div class="cate-Classify" id="cate-Classify">
+                <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
+                <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
+                <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
+                <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
+
+            </div>
+            <div class="card-wrapper">
+                <div class="card-container">
+                    <div class="club-img"></div>
+                    <div class="club-leader"></div>
+                    <div class="plus-box"><p class="plus-icon">+</p></div>
+                    <div class="information-container">
+                        <p class="club-leader-name font-hk">@wingStudy_02</p>
+                        <p class="club-name font-hk">윙스터디 모임</p>
+                        <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i> 서울,경기</p>
+
+                        <div class="information-box">
+                            <br>
+                            <p class="people-title font-hk">정원수</p>
+                            <span class="information-fontsize">23</span>/25
+                        </div>
+                        <div class="information-box">
+                                <br>
+                                <p class="people-title font-hk">남여비율</p>
+                                <span class="information-fontsize">23</span>
+                                <span class="information-fontsize2">:</span>
+                                <span class="information-fontsize3">4</span>
+                        </div>
+                        <div class="information-box lastbox">
+                                <br>
+                                <p class="people-title font-hk">평균나이</p>
+                                <span class="information-fontsize">28세</span>
+                        </div>
+                
+                        <button class="information-botton font-hk">자세히 보기</button>
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="card-container">
+                    
+
+                </div>
+                <div class="card-container">
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+    
+</body>
+</html>
