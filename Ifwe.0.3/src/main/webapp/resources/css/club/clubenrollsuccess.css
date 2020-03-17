@@ -1,0 +1,71 @@
+
+section{
+    width:1350px;
+    min-height: 1000px;
+    margin-left:45px;
+}
+.section-block{
+    width:1350px;
+    height:55px;
+    margin-top:55px;
+}
+.section-wrapper{
+    width:820px;
+    height:100%;
+
+}
+.section-boradmenu{
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-container{
+    width: 100%;
+    height:410px;
+    background-color: white;
+}
+.section-container-content{
+    width: 450px;
+    height:185px;
+    margin:0 auto;
+    padding-top:8%;
+    text-align: center;
+    font-size: 24px;
+}
+.section-container-content p:first-child{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.section-homebutton{
+    border-radius: 20px;
+    background-color: #ffc862;
+    color: white;
+    width:230px;
+    margin:0 auto;
+    padding:13px 0;
+    margin-top:10%;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
