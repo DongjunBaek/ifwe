@@ -16,6 +16,9 @@
     margin-left: 40px;
 
 }
+.friend-name-profile{
+	cursor:pointer;
+}
 .container-clubsearch{
     float: left;
 }

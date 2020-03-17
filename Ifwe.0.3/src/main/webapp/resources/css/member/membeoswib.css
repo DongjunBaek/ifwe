@@ -1,0 +1,344 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+section{
+    width: 1500px;
+    height: 1000px;
+    margin-left: 4%;
+    
+}
+.bold{
+    font-family: 'GmarketSansMedium';
+   
+    
+}
+.first{
+    margin-top:4%;
+   
+}
+.title-container p{
+    text-align: center;
+}
+.p-title{
+    font-size: 38px;
+   
+}
+.p-content{
+    font-size: 18px;
+    margin-top:10px;
+    
+}
+.second{
+    height:770px;
+    margin-top: 56px;
+    float:left;
+
+}
+.grade{
+    width:870px;
+    height:235px;
+    margin-bottom:39px;
+    float:left;
+    background: white;
+    
+}
+.grade-icon{
+    width:120px;
+    height:235px;
+    font-size:2em;
+    margin-top: 40px;
+    text-align:center;
+    float:left;
+   
+}
+.grade-content{
+    width:360px;
+    height:235px;
+    
+    float:left;
+   
+}
+.grade-price{
+    width:384px;
+    height:235px;
+   
+    float:left;
+    
+}
+.grade-price button{
+    margin-top: 60px;
+    color:#2756a6;
+    font-size:30px;
+    width:344px;
+    height:110px;
+    outline:none;
+    border-radius: 20px;
+   border:3px solid #2756a6;
+   background: white;
+   
+    float:left;
+    
+}
+
+ 
+.grade-content ul {
+    margin-top:11px;
+    padding:0px;
+    list-style: none; /* Remove default bullets */
+  }
+.grade-content li{
+    display:inline-block;
+}
+.grade-content>ul p{
+    margin-top: 20px;
+}
+.p-grade-ko{
+    margin-top:35px;
+    font-size:18px;
+}
+.p-grade-en{
+    margin-top:11px;
+    font-size:30px;
+}
+
+.choice-container{
+    float:left;
+    position: relative;
+    width:537px;
+    height:286px;
+    background: white;
+    margin-left:40px;
+    
+}
+.choice{
+    width:537px;
+    min-height:290px;
+    margin-left:40px;
+    position:relative;
+    
+}
+.choice-title{
+    margin-top:53px;
+    font-size:20px;
+}
+.choice-checkbox label{
+    font-size:18px;
+}
+
+.grade-content ul>li{
+    font-size:18px;
+}
+.choice-checkbox{
+    position: relative;
+    display:block;
+}
+
+.choice-checkbox input[type=checkbox] {
+   
+    position: absolute;
+    display:none;
+}
+.choice-checkbox input[type=checkbox] + label{
+    display:block;
+    margin-left:42px;
+    margin-top:30px;
+    
+    
+}
+.choice-checkbox input[type=checkbox] + label:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    border:3px solid #ffc862;
+}
+.choice-checkbox input[type=checkbox]:checked + label:before{
+    content: "\2714";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 15px; 
+    font-weight:600; 
+    color: #fff;  
+    background: #ffc862;
+    text-align: center;   
+}
+
+.add{
+    margin-top:62px;
+    width:537px;
+    height:69px;
+    float:right;
+    
+}
+.add>button{
+    width:537px;
+    height:69px;
+    background-color:#ffc862;
+    color:white;
+    font-size:30px;
+    float:right;
+    border-radius: 20px;
+    outline: none;
+    border:0;
+}
+.third{
+    margin-top: 62px;
+    height: 501px;
+    
+    float:left;
+    width:1500px;
+}
+.payment-container{
+    min-height:375px;
+    float:left;
+    
+}
+
+.list-container{
+    min-height: 362px;
+    width:1460px;
+    background:white;
+   
+}
+.payment-title {
+    margin-top:39px;
+    margin-left:174px;
+    width:1500px;
+    float:left;
+    
+    margin-bottom:47px;
+    
+}
+.payment-title p{
+    font-size:18px;
+    
+}
+
+.membership-name{
+    width:373px;
+    float:left;
+}
+.club-name{
+    width:602px;
+    
+    float:left;
+}
+.duration{
+    width:202px;
+    float:left;
+}
+.list-price{
+    float:left;
+}
+.payment-lists{
+    float:left;
+    min-height: 161px;
+    width:1200px;
+}
+
+.payment-list{
+   width:1373px;
+    margin-left:48px;
+    float:left;
+    margin-bottom:22px;
+    font-size:18px;
+}
+.name-checkbox{
+    float:left;
+    position: relative;
+    display:block;
+    
+}
+
+
+.name-checkbox input[type=checkbox] {
+   
+    position: absolute;
+    display:none;
+}
+.name-checkbox input[type=checkbox] + label{
+    display:inline-block;
+    margin-left:70px;
+    
+}
+.name-checkbox input[type=checkbox] + label:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    border:3px solid #ffc862;
+}
+.name-checkbox input[type=checkbox]:checked + label:before{
+    content: "\2714";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 15px; 
+    font-weight:600; 
+    color: #fff;  
+    background: #ffc862;
+    text-align: center;   
+}
+.name-checkbox>p{
+    /* display:block; */
+    margin-left: 40px;
+    width:407px;
+    
+}
+.list-club{
+    width:594px;
+    float:left;
+    margin-left:230px;
+    
+}
+.list-duration{
+    width:202px;
+    float:left;
+    margin-left:5px;
+}
+.list-price{
+    float:right;
+    margin-right:20px;
+}
+.result-container{
+    height: 117px;
+    float: left;
+}
+.payment-border{
+    margin-left:36px;
+    width:1387px;
+    border: 1px  #ebebeb;
+   
+}
+.payment-result{
+    margin-top:42px;
+    margin-left:50px;
+    width:1363px;
+    float:left;
+    
+}
+.payment-result p{
+    font-size:28px;
+    display:inline-block;
+}
+.result-name{
+    float:left;
+}
+.result-price{
+    float:right;
+}
+.payment{
+   
+    width:540px;
+    margin:0 auto;
+ 
+}
+.payment button{
+    width:540px;
+    height:68px;
+    background: #ffc862;
+    color: white;
+    outline: none;
+    font-size:20px;
+    border-radius: 20px;
+    border:0;
+   
+}

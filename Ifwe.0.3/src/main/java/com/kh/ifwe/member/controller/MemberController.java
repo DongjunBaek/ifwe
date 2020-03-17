@@ -23,9 +23,29 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	@GetMapping("/member/frofile.do")
+	@GetMapping("/member/profile.do")
 	public String frofile() {
-		return "member/frofile";
+		return "member/profile";
 	}
+	
+	@GetMapping("/member/profileUpdate.do")
+	public String profileUpdate() {
+		return "member/profileUpdate";
+	}
+	
+	
+	
+	@GetMapping("/member/update.do")
+	public String update() {
+		return "member/update";
+	}
+	
+	@GetMapping("/member/membeoswib.do")
+	public String membeoswib() {
+		return "member/membeoswib";
+	}
+	
+	
+	
 	
 }

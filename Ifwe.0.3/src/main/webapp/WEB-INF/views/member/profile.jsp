@@ -7,11 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>frofile</title>
+<title>ProfileCard</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/frofile.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/profile.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 </head>
 <body>
