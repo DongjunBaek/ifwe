@@ -39,7 +39,9 @@ $(function(){
     	location.href="${pageContext.request.contextPath }/club/clubMain.do";
     });
     
-    
+	$(".friend-name-profile").click(function(){
+		location.href="${pageContext.request.contextPath }/member/profile.do"
+	});
     
     
 });
@@ -83,7 +85,7 @@ $(function(){
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
                         <div class="information-container">
-                            <p class="club-leader-name font-hk">@wingStudy_02</p>
+                            <p class="club-leader-name font-hk friend-name-profile">@wingStudy_02</p>
                             <p class="club-name font-hk">윙스터디 모임</p>
                             <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i> 서울,경기</p>
     

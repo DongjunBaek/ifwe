@@ -15,6 +15,16 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
 
+<script>
+$(function(){
+	$(".friend-name-profile").click(function(){
+		location.href="${pageContext.request.contextPath }/member/profile.do"
+	});
+	
+})
+</script>
+
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
@@ -30,9 +40,10 @@
                 </div>
             </div>
             <div class="btn-div">
-                <input type="button" value="회원정보 수정" class="update-btn font-kor">
+                <input type="button" value="회원정보 수정" class="update-btn font-kor"
+                		onclick="location.href='${pageContext.request.contextPath}/member/update.do'">
                 <input type="button" value="프로필 카드" class="update-btn font-kor" 
-                		onclick="location.href='${pageContext.request.contextPath}/member/frofile.do'">
+                		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do'">
             </div>
             <div class="list-div">
                 <div class="list-title">
@@ -55,8 +66,8 @@
                 <div class="contents">
                     <div class="content font-kor">
                         <p class="p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <p class="p-content">김원재님에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
-                        <p class="p-content">신형철님에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
+                        <p class="p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
+                        <p class="p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
                     </div>
                 </div>
             </div>
@@ -127,19 +138,19 @@
                         <div class="friend-img">
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
-                        <div class="friend-name font-kor">김원재</div>
+                        <div class="friend-name font-kor friend-name-profile">김원재</div>
                     </div>
                     <div class="friend-list">
                         <div class="friend-img">
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />	
                         </div>
-                        <div class="friend-name font-kor">신형철</div>
+                        <div class="friend-name font-kor friend-name-profile">신형철</div>
                     </div>
                     <div class="friend-list">
                         <div class="friend-img">
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
-                        <div class="friend-name font-kor">백동준</div>
+                        <div class="friend-name font-kor friend-name-profile">백동준</div>
                     </div>
                 </div>
             </div>

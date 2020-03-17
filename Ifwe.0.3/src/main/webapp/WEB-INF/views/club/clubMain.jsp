@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,11 @@ $(function(){
     $(".comment-sliderbutton").click(function(){
         $(this).parent().nextAll(".comment-hiddenbox").slideToggle(300);
     })
+    
+	$(".friend-name-profile").click(function(){
+		location.href="${pageContext.request.contextPath }/member/profile.do"
+	});
+    
 
 });
 
@@ -46,7 +54,7 @@ $(function(){
                       </div>
                           <div class="article1-frofile-name">
                               <p >@wingStudy_02</p>
-                              <p class="article1-leader-name">스테파니</p>
+                              <p class="article1-leader-name friend-name-profile">스테파니</p>
                           </div>
                           <div class="article1-curcle-box">
                               <div class="article1-curcle"></div>
@@ -81,7 +89,7 @@ $(function(){
                               	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                               </div>
                               <div class="comment-block"></div>
-                          <div class="comment-frofile-name">신형철</div>
+                          <div class="comment-frofile-name friend-name-profile">신형철</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -95,7 +103,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name">백동준</div>
+                          <div class="comment-frofile-name friend-name-profile">백동준</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -109,7 +117,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name">문보라</div>
+                          <div class="comment-frofile-name friend-name-profile">문보라</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -131,7 +139,7 @@ $(function(){
                       </div>
                           <div class="article1-frofile-name">
                               <p >@wingStudy_02</p>
-                              <p class="article1-leader-name">스테파니</p>
+                              <p class="article1-leader-name friend-name-profile">스테파니</p>
                           </div>
                           <div class="article1-curcle-box">
                               <div class="article1-curcle"></div>
@@ -166,7 +174,7 @@ $(function(){
                               	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                               </div>
                               <div class="comment-block"></div>
-                          <div class="comment-frofile-name">신형철</div>
+                          <div class="comment-frofile-name friend-name-profile">신형철</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -180,7 +188,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name">백동준</div>
+                          <div class="comment-frofile-name friend-name-profile">백동준</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -194,7 +202,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name">문보라</div>
+                          <div class="comment-frofile-name friend-name-profile">문보라</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>

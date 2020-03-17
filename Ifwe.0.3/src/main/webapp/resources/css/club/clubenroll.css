@@ -1,0 +1,85 @@
+
+section{
+    width:1350px;
+    min-height: 1000px;
+    margin-left:45px;
+}
+.section-block{
+    width:1350px;
+    height:55px;
+    margin-top:55px;
+}
+.section-wrapper{
+    width:820px;
+    height:100%;
+
+}
+.section-boradmenu{
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+.section-container{
+    width: 100%;
+    height:410px;
+    background-color: white;
+}
+.section-container-inputbox{
+    width: 800px;
+    height:270px;
+    float: left;
+    padding-top:4%;
+    padding-left: 5%;
+    font-size: 22px;
+}
+.section-container-inputbox p{
+    margin-top:2%;
+}
+.section-container-inputbox input{
+    border:1px solid #989898;
+    outline: none;
+    height:55px;
+    width: 270px;
+    font-size: 20px;
+    padding-left: 3%;
+    margin-top:2%;
+
+}
+.section-container-inputbox input[name="enrollreason"]{
+    width: 600px;
+}
+.section-container-enrollbutton{
+    border-radius: 20px;
+    background-color: #ffc862;
+    width:400px;
+    font-size: 24px;
+    float: left;
+    color: white;
+    text-align: center;
+    padding:17px;
+    margin-top:17%;
+    cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
