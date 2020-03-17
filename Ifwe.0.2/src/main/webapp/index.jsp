@@ -247,6 +247,7 @@ $(function(){
                     		style="width:115px; height:50px;" alt=""> 에서 만나보세요</p></div>                    
                     <div>
                     	<a href="${pageContext.request.contextPath }/main/mainPage.do">메인페이지</a>
+                    	<a href="${pageContext.request.contextPath }/admin/adminPage.do">관리자페이지</a>
                         <p>회원님의 관심사에 맞는 친구모임을</p>
                         <p>찾아보세요. 나와 같은 취미의 친구들과</p>
                         <p>즐거운 시간을 if we에서 보내보세요.</p>
