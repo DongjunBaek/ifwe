@@ -40,7 +40,7 @@ public class HomeController {
 		
 		
 		
-		return "forward:/WEB-INF/views/main/mainPage.jsp";
+		return "forward:/index.jsp";
 	}
 	
 }
