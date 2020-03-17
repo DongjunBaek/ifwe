@@ -1,0 +1,252 @@
+
+/* .hover-class{
+    border-radius: 0 25px  25px 0 ;
+    color: white;
+    width: 270px;
+    height: 65px;
+    background-color: #2756a6;
+} */
+.first{
+   width: 1460px;
+   height: 550px;
+   margin-top: 3%;
+   float: right;
+}
+.second{
+   margin-top: 2%;
+   width: 1460px;
+   height: 450px;
+   float: right;
+}
+.one{
+   width: 250px;
+   height: 470px;
+   float: left;
+}
+.two{
+   margin-left: 2%;
+   width: 480px;
+   height: 470px;
+   float: left;
+}
+.three{
+    margin-left: 2%;
+    width: 665px;
+    height: 470px;
+   float: left;
+}
+.one-one{
+   width: 250px;
+   height: 250px;
+   margin-bottom: 3%;
+}
+.one-two{
+  width: 250px;
+  height: 180px;
+  margin-top: 20%;
+}
+.card{
+  width: 250px;
+  height: 65px;
+  background-color: #beceea;
+  font-size: 20px;
+}
+.list{
+  width: 250px;
+  height: 200px;
+  background-color: white;
+}
+.list-ul li {
+padding: 5%;
+}
+.list-ul li{
+line-height: 1.5em;
+color: #2756a6;
+font-size: 30px;
+}
+.linebar{
+ width: 65px;
+ height: 5px;
+ background-color: #2756a6;
+}
+.list-ul p{
+color: black;
+font-weight: normal;
+font-size: 20px;
+padding: 0;
+}
+.post p{
+font-size: 25px;
+margin: 2%;
+}
+.post{
+margin-top: 5%;
+margin-bottom: 10%;
+}
+.make-btn,.make-btn input{
+border-radius: 10px;
+width: 250px;
+height: 60px;
+font-size: 20px;
+color: white;
+border: 0;
+outline: 0;
+background-color:  #ffc862;
+}
+.two-title{
+width: 480px;
+height: 65px;
+background-color: #2756a6;
+}
+.three-title{
+width: 665px;
+height: 65px;
+background-color: #beceea;
+}
+.two-content{
+ height: 405px;
+ background-color: white;
+ font-size: 20px;
+
+}
+.number{
+ color: #2756a6;
+ float: left;
+ margin-top:11%;
+ margin-right: 8%;
+ font-size: 30px;
+ font-weight: bolder;
+}
+.posts{
+float: left;
+margin: 9% 0 0 0;
+}
+.post-container{
+width: 400px;
+height: 105px;
+margin: 0% 10% 5% 10%;
+}
+.post1{
+color: #2756a6;
+}
+.two-hr{
+width: 400px;
+border: 1px solid #c7c8c8;
+margin: 0 auto;
+}
+.three-content,.three-container{
+height: 405px;
+background-color: white;
+}
+.three-img,.three-posts{
+margin:5% 5% 0 5%;
+float: left;
+}
+.posts p:first-child{
+padding-bottom:5%;
+}
+.three-post1{
+font-size: 20px;
+margin: 4%;
+}
+.three-post2{
+font-size: 25px;
+}
+.three-post3{
+font-size: 25px;
+margin-top: 10%;
+}
+.three-btn, .three-btn input{
+background-color: #2756a6;
+width: 200px;
+height: 65px;
+float: left;
+border-radius: 20px;
+margin:8% 0 0 3%;
+}
+.three-btn input{
+width: 200px;
+background-color: #2756a6;
+border-radius: 20px;
+height: 65px;
+color: white;
+font-size: 20px;
+font-weight: bolder;
+margin: 0 auto;
+border: 0;
+outline: 0;
+}
+.three-div{
+ height: 200px;
+}
+.swiper-container{
+width: 1460px;
+height: 550px;
+}
+.swiper-slide {
+text-align: center;
+font-size: 18px;
+background: #fff;
+/* Center slide text vertically */
+display: -webkit-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+display: flex;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+-webkit-justify-content: center;
+justify-content: center;
+-webkit-box-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+}
+.slide ul,.slide li{list-style:none; padding: 0;}
+.slide{height:550px;overflow:hidden;position:relative;width: 1450px;}
+.slide ul{width:calc(100% * 4);display:flex;transition:1s;}
+.slide li{width:calc(100% / 4);height:300px;}
+.slide input{display:none;}
+.slide .bullet{position:absolute;bottom:20px;left:0;right:0;text-align:center;}
+.slide .bullet label{width:12px;height:12px;border-radius:10px;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;margin-right: 0.5%;}
+/* 슬라이드 조작 */
+#pos1:checked ~ ul,#next:checked ~ ul{margin-left:0;}
+#pos2:checked ~ ul{margin-left:-100%;}
+#pos3:checked ~ ul{margin-left:-200%;}
+/* bullet 조작 */
+#pos1:checked ~ .bullet label:nth-child(1),
+#pos2:checked ~ .bullet label:nth-child(2),
+#pos3:checked ~ .bullet label:nth-child(3){background:#666;}
+li>img{
+width: 1450px;
+height: 550px;
+}
+.search{
+position: absolute;
+top:100px;left: 100px;
+}
+.li-content{
+width: 1450px;
+height: 550px;
+margin: 0;
+position: relative;
+}
+.search-btn,.search-btn button{
+width: 300px;
+height: 60px;
+background-color: #ffc862;
+color: white;
+font-size: 25px;
+border-radius: 10px;
+border: 0;
+}
+.p-class{
+font-size: 25px;
+}
+.search-content{
+margin-top: 5%;
+}
+.next-arrow{
+position: absolute;
+top:50%;
+left: 300%;
+}
