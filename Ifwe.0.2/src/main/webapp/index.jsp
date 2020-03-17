@@ -259,7 +259,7 @@ $(function(){
                 </article>
             </section>
             <footer class="main-footer">
-                <p>kh academy</p>
+                <p>if we us</p>
             </footer>
         </div>
     </div>
