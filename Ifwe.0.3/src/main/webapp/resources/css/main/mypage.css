@@ -113,6 +113,9 @@ section{
     font-size: 20px;
     margin-top: 5%;
 }
+.friend-name-profile{
+	cursor:pointer;
+}
 .notice-container{
     height: 300px;
     background-color: white;

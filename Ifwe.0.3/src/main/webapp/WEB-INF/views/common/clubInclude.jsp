@@ -21,8 +21,28 @@ $(function(){
     });
     
     $(".logo-box").click(function(){
-    	location.href="${pageContext.request.contextPath }/index/mainpage.do";
+    	location.href="${pageContext.request.contextPath }/main/mainPage.do";
     })
+    
+    $("#enrollbutton").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/enroll.do";
+    });
+    
+    $("#calendarbutton").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/calendar.do";
+    });
+    
+    $("#freeboardbutton").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/freeboard.do";
+    });
+    
+    $("#noticebutton").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/notice.do";
+    });
+    
+	$(".friend-name-profile").click(function(){
+		location.href="${pageContext.request.contextPath }/member/profile.do"
+	});
     
     
 })
@@ -63,19 +83,19 @@ $(function(){
                 	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                 </div>
                 <div class="aside-leader-information">
-                    <p class="aside-leader-allias">스테파니</p>
+                    <p class="aside-leader-allias friend-name-profile">스테파니</p>
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
                     <p class="aside-leader-id">@wingStudy_02</p>
                 </div>
-                <div class="aside-join">
+                <div class="aside-join" id="enrollbutton">
                     <p>가입하기</p>
                 </div>
          <div class="aside-scroll-box">
           	<div id="aside-scroll">
                 <div class="aside-boardmenu">
-                        <p><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;공지사항</p>
-                        <p><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;일정캘린더</p>
-                        <p><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;자유게시판</p>
+                        <p id="noticebutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;공지사항</p>
+                        <p id="calendarbutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;일정캘린더</p>
+                        <p id="freeboardbutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;자유게시판</p>
                 </div>
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
@@ -87,37 +107,37 @@ $(function(){
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                         <div class="aside-friend">
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                         <div class="aside-friend">
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                         <div class="aside-friend">
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                         <div class="aside-friend">
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                         <div class="aside-friend">
                             <div class="fried-profileimg">
                             	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                             </div>
-                            <p class="friendname">김원재</p>
+                            <p class="friendname friend-name-profile">김원재</p>
                         </div>
                    </div>
               </div>
@@ -128,12 +148,6 @@ $(function(){
 
             </aside>
             <header class="flotclass">
-                <div class="header-search-box">
-                    <div class="header-icon">
-                        <i class="fas fa-search" style="font-size:35px;"></i>
-                    </div>
-                        <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
-                </div>
                 <div class="header-titleimg">
                     <div class="header-titleimg-cover">
                         <div class="header-title-left">
@@ -149,6 +163,14 @@ $(function(){
 
                     </div>
                 </div>
+                <div class="header-search-box">
+                    <div class="header-icon">
+                        <i class="fas fa-search" style="font-size:35px;"></i>
+                    </div>
+                        <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
+                </div>
+                
+                
             </header>
 
 
