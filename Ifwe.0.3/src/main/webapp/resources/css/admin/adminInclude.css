@@ -1,0 +1,95 @@
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+aside{
+    width: 305px;
+    height: 1280px;
+    background-color: #3b3b3b;
+    /* border: 1px solid red; */
+    float: left;
+}
+.bar_wrap{
+    position: fixed;
+}
+.side_bar{
+    margin-top: 120px;
+    float: left;
+    margin-left: 162px;
+    position: relative;
+}
+.side_bar h1{
+    font-family: 'Josefin Sans', sans-serif;
+    margin-bottom: 75px;
+    font-size: 20px;
+    color: white;
+    margin-top: 25px;
+    /* border: 1px solid red; */
+}
+.white_back1{
+    width: 305px;
+    height: 75px;
+    background-color: white;
+    opacity: 0;
+    /* border: 1px solid red; */
+    margin-top: 160px;
+    cursor: pointer;
+
+}
+.white_back2{
+    width: 305px;
+    height: 75px;
+    background-color: white;
+    opacity: 0;
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    cursor: pointer;
+    
+}
+.white_back3{
+    width: 305px;
+    height: 75px;
+    background-color: white;
+    opacity: 0;
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    cursor: pointer;
+    
+}
+.white_back4{
+    width: 305px;
+    height: 75px;
+    background-color: white;
+    opacity: 0;
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    cursor: pointer;
+    
+}
+.logo{
+    width: 75px;
+    height: 30px;
+    margin-bottom: 130px;
+}
+.hover_wrap{
+    /* border: 1px solid orange; */
+    margin-top: 120px;
+    position: absolute;
+}
+.white_back1:hover{
+    opacity: .3;
+}
+.white_back2:hover{
+    opacity: .3;
+}
+.white_back3:hover{
+    opacity: .3;
+}
+.white_back4:hover{
+    opacity: .3;
+}
