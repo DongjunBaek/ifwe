@@ -1,0 +1,220 @@
+*{
+    margin:0;
+    border: 0;
+    outline: 0;
+}
+
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+.font-kor{
+    font-family : 'GmarketSansLight';
+}
+.bold-kor{
+    font-family: 'GmarketSansMedium';
+}
+.font-eng{
+    font-family: 'Fredoka One';
+}
+html{
+    width: 1920px;
+    height: 1280px;
+    color: #3b3b3b;
+
+}
+header{
+    width: 1660px;
+    height: 40px;
+    margin: 6% auto 0 auto;
+}
+section{
+    width: 1660px;
+    margin: 0 auto;
+}
+footer{
+    width: 1660px;
+    margin: 0 auto;
+    height: 20px;
+    position:fixed; 
+    left:5%; 
+    bottom:5%; 
+}
+.enroll-article-first{
+    margin: 7% 0 7% 0;
+    width: 1660px;
+    height: 790px;
+}
+.enroll-container{
+    width: 1660px;
+    height: 790px;
+}
+.enroll-container-number{
+    font-size: 110px;
+    color: #2756a6;
+    float: left;
+}
+.enroll-hyphen{
+    width: 140px;
+    height: 10px;
+    background-color: #2756a6;
+    margin-bottom: 1%;
+}
+.enroll-container-posts{
+    width: 450px;
+    height: 180px;
+    float: left;
+    margin-left: 5%;
+}
+.img-container{
+    width: 1660px;
+    height: 500px;
+    margin-top: 15% ;
+}
+.img-container-img{
+    border-radius: 30px;
+    width: 540px;
+    height: 500px;
+    display: inline-block;
+    background-repeat : no-repeat;
+    background-size : cover;
+}
+.img-concert{
+    background-image: url("../../images/selectcate/cate1.png");
+}
+.img-study{
+    background-image: url("../../images/selectcate/cate2.png");
+    margin-left: .7%;
+}
+.img-music{
+    background-image: url("../../images/selectcate/cate3.png");
+    margin-left: .7%;
+}
+.img-hyphen{
+    width: 50px;
+    height: 5px;
+    background-color: white;
+}
+.img-title{
+    height: 60px;
+    width: 220px;
+    color: white;
+    font-size: 40px;
+}
+.img-container-img-container{
+    width: 430px;
+    height: 380px;
+    margin: 12% 0 0 8%;
+}
+.img-title{
+    margin-top: 5%;
+}
+.posts-container{
+    float: left;
+}
+.img-container-posts-container{
+    width: 100%;
+    height: 70px;
+    margin-top: 50%;
+    color: white;
+    float: left;
+}
+.posts-container-post{
+    padding-top: 1%;
+    font-size: 20px;
+}
+.posts-container-posts-icon{
+    width: 48px;
+    height: 48px;
+    border-radius: 30px;
+    border: 2px solid white;
+    float: right;
+}
+.background-black{
+    width: 540px;
+    height: 500px;
+    border-radius: 30px;
+    background-color: black;
+    position: absolute;
+    top: 42%;
+    opacity: 0.5;
+}
+.enroll-article-second{
+    margin: 7% 0 7% 0;
+    width: 400px;
+    height: 790px;
+    float: left;
+}
+.phone-posts{
+
+    margin-top: 40%;
+}
+.phone-post{
+    font-size: 25px;
+}
+.phone-btn-container{
+    width: 400px;
+    height: 100px;
+    margin-top: 10%;
+}
+.phone-btn{
+    background-color: #ebebeb;
+    width: 400px;
+    height: 100px;
+    padding-top: 5%;
+}
+.phone-btn-p{
+    line-height: 2;
+    max-width: fit-content;
+    font-size: 25px;
+    margin: 0 auto;
+}
+
+.enroll-form{
+    width: 100%;
+    height: 100%;
+
+}
+.enroll-article-third{
+    width: 1100px;
+    height: 790px;
+    float: left;
+    padding-left: 8%;
+    margin: 7% 0 7% 0;
+}
+.info-posts{
+    margin-top: 15%;
+}
+.form-left,.form-right{
+    width: 550px;
+    height: 600px;
+    margin-top: 5%;
+    float: left;
+}
+.label{
+    font-size: 20px;
+    margin: 2% 0 5% 0;
+}
+.input{
+    width: 260px;
+    height: 44px;
+}
+input{
+    border:1px solid #ebebeb;
+    margin-bottom: 5%;
+    font-size: 20px;
+    outline: 0;
+}
+.gender-button{
+    width: 55px;
+    height: 45px;
+    font-size: 16px;
+    background-color: white;
+}
+.enroll-btn{
+    width: 470px;
+    height: 70px;
+    background-color: #ffc862;
+    color: white;
+    font-size: 20px;
+    border-radius: 20px;
+    outline: 0;
+}

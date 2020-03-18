@@ -38,7 +38,7 @@ $(function(){
 	});
 	
 	$("#joinbutton").click(function(){
-		location.href="${pageContext.request.contextPath }/member/selectcate.do";
+		location.href="${pageContext.request.contextPath }/member/enroll.do";
 		
 	});
 	
