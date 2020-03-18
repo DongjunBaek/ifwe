@@ -163,7 +163,6 @@ section{
 }
 
 .add{
-    margin-top:62px;
     width:537px;
     height:69px;
     float:right;
@@ -174,7 +173,7 @@ section{
     height:69px;
     background-color:#ffc862;
     color:white;
-    font-size:30px;
+    font-size:20px;
     float:right;
     border-radius: 20px;
     outline: none;
@@ -182,7 +181,7 @@ section{
 }
 .third{
     margin-top: 62px;
-    height: 501px;
+    min-height: 501px;
     
     float:left;
     width:1500px;
@@ -190,13 +189,14 @@ section{
 .payment-container{
     min-height:375px;
     float:left;
-    
+    background:white;
+    /* border : 1px solid red; */
 }
 
 .list-container{
-    min-height: 362px;
+    /* min-height: 362px; */
     width:1460px;
-    background:white;
+    /* background:white; */
    
 }
 .payment-title {
@@ -329,7 +329,7 @@ section{
    
     width:540px;
     margin:0 auto;
- 
+ 	
 }
 .payment button{
     width:540px;
@@ -340,5 +340,6 @@ section{
     font-size:20px;
     border-radius: 20px;
     border:0;
-   
+   margin-top: 10%;
+   margin-bottom: 20%;
 }
