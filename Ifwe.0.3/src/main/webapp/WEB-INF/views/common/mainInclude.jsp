@@ -56,7 +56,7 @@ $(function(){
                     <div class="blue-back font-kor"><li class="li-hover"><a href="${pageContext.request.contextPath }/club/clubSearch.do">소모임 검색</a> </li></div>
                     <div class="blue-back font-kor"><li class="li-hover"><a href="${pageContext.request.contextPath }/main/mainBoard.do">게시판</a> </li></div>
                     <div class="blue-back font-kor"><li class="li-hover"><a href="#">소개</a> </li></div>
-                    <div class="blue-back font-kor"><li class="li-hover"><a href="${pageContext.request.contextPath }/member/membeoswib.do">멤버쉽 구매</a> </li></div>
+                    <div class="blue-back font-kor"><li class="li-hover"><a href="${pageContext.request.contextPath }/member/membership.do">멤버쉽 구매</a> </li></div>
                 </ul>
             </div>
         </div>
