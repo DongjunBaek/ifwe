@@ -24,13 +24,10 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-<<<<<<< HEAD
-	@GetMapping("/profile.do")
-	public String frofile() {
-=======
+
 	@GetMapping("/member/profile.do")
 	public String profile() {
->>>>>>> master
+
 		return "member/profile";
 	}
 	
@@ -46,15 +43,11 @@ public class MemberController {
 		return "member/update";
 	}
 	
-<<<<<<< HEAD
-	@GetMapping("/membeoswib.do")
-	public String membeoswib() {
-		return "member/membeoswib";
-=======
-	@GetMapping("/member/membership.do")
+
+	@GetMapping("/membership.do")
 	public String membership() {
 		return "member/membership";
->>>>>>> master
+
 	}
 	
 	
