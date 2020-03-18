@@ -16,13 +16,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membeoswib.css">
 <script>
 $(function(){
+	
     $(".grade-price").children().on('click',function(e){
 	console.log("야야야");
         $(e.target).css("background-color","#2756a6")
                 .css("color","white")
         
     });
-
+	
     
 })
 </script>
