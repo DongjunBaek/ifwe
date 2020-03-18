@@ -7,20 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Membeoswib</title>
+<title>Membership</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membeoswib.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membership.css">
 <script>
 $(function(){
-    $(".grade-price").children().on('click',function(e){
-	console.log("야야야");
+    $(".price").on('click',function(e){
+	
+		$(".price").css("background-color","white")
+        .css("color","#2756a6")
+	
+	
         $(e.target).css("background-color","#2756a6")
-                .css("color","white")
+                .css("color","white");
         
+    });
+    
+    $(".addbtn").on('click', function(){
+    	$(".third").css("display","block");
+    	
     });
 
     
@@ -98,15 +107,15 @@ $(function(){
                 </ul>
             </div>
             <div class="grade-price font-kor">
-                <button class="pricebtn font-kor" id="siverbtn" >
+                <button class="price font-kor" id="siverbtn" >
                      3,900원 / 30일
                 </button>
             </div>
         </div>
       
     </article>
-    <article class="third">
-        <div class="payment-container">
+    <article class="third" style="display:none;">
+        <div class="payment-container" >
             <div class="list-container">
                 <div class="payment-title font-kor">
                     <div class="membership-name"><p>멤버십 명</p></div>
@@ -131,7 +140,7 @@ $(function(){
                         <div class="list-duration "><p>90일 사용</p></div>
                         <div class="list-price bold"><p >9900원</p></div>
                     </div>
-                   
+               
                    
                 </div>
                 <div class="result-container">
@@ -141,11 +150,11 @@ $(function(){
                         </div>
                 </div>
         
-         </div>  
-         <div class="payment">
+         	</div>  
+        </div>
+         		<div class="payment">
             <button class="paymentbtn font-kor">결제하기</button>
-        </div>
-        </div>
+        		</div>
     </article>
 </section>
 

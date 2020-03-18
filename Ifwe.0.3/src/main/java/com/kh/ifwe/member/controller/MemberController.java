@@ -24,7 +24,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/profile.do")
-	public String frofile() {
+	public String profile() {
 		return "member/profile";
 	}
 	
@@ -40,9 +40,9 @@ public class MemberController {
 		return "member/update";
 	}
 	
-	@GetMapping("/member/membeoswib.do")
-	public String membeoswib() {
-		return "member/membeoswib";
+	@GetMapping("/member/membership.do")
+	public String membership() {
+		return "member/membership";
 	}
 	
 	
