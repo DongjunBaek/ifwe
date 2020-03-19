@@ -56,13 +56,12 @@
   height: 200px;
   background-color: white;
 }
-.list-ul li {
-padding: 5%;
-}
 .list-ul li{
-line-height: 1.5em;
+/* line-height: 1.5em; */
 color: #2756a6;
 font-size: 30px;
+padding: 5%;
+margin-left: 8%;
 }
 .linebar{
  width: 65px;
@@ -71,7 +70,6 @@ font-size: 30px;
 }
 .list-ul p{
 color: black;
-font-weight: normal;
 font-size: 20px;
 padding: 0;
 }
@@ -238,6 +236,7 @@ color: white;
 font-size: 25px;
 border-radius: 10px;
 border: 0;
+
 }
 .p-class{
 font-size: 25px;

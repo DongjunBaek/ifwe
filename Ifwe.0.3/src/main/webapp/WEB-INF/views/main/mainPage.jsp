@@ -3,20 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Main</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLogin-css.css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-</head>
-<body>
-	<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+		<jsp:param value="메인페이지" name="pageTitle"/>
+	</jsp:include>
+	<script>
+		$(function(){
+			
+			$("#search-somoim").click(function(){
+				location.href="${pageContext.request.contextPath }/club/clubSearch.do";
+			});
+			$("#create-somoim").click(function(){
+				location.href="${pageContext.request.contextPath }/club/clubCreate.do";
+			});
+		});
+	</script>
 	  <section>
         <div class="container">
             <article class="first">
@@ -42,7 +42,7 @@
                                         <p class="p-class">회원님의 관심사 어쩌고</p>
                                     </div>
                                     <div class="search-btn font-kor" style="margin-top: 10%;">
-                                        <button class="font-kor">소모임 검색하기</button>
+                                        <button class="font-kor" id="search-somoim">소모임 검색하기</button>
                                     </div>
                                  </div>
                             </div>
@@ -85,7 +85,7 @@
                        <div class="linebar"></div>
                        <div class="post"><p class="font-kor"><span style="font-weight: bolder;">소모임</span>을</p> <p class="font-kor">직접 만들어 보세요!</p></div>
                        <div class="make-btn">
-                           <input type="button" value="소모임 만들기" class="font-kor">
+                           <input type="button" value="소모임 만들기" class="font-kor" id="create-somoim">
                        </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                         <div class="three-container">
                             <div class="three-div">
                                 <div class="three-img">
-                                    <img src="./images/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
+                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
                                 </div>
                                 <div class="three-posts">
                                     <div class="three-post1">@english_4965</div>
@@ -141,7 +141,7 @@
                             </div>
                             <div class="three-div">
                                 <div class="three-img">
-                                    <img src="./images/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
+                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
                                 </div>
                                 <div class="three-posts">
                                     <div class="three-post1">@english_4965</div>
