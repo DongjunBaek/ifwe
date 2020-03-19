@@ -2,7 +2,9 @@ package com.kh.ifwe.member.controller;
 
 import java.sql.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -95,10 +97,28 @@ public class MemberController {
 	public String login(@RequestParam("memberId") String memberId,
 					    @RequestParam("password") String password,
 					    Model model,
-					    RedirectAttributes redirectAttributes) {
-		try {
-			
+					    RedirectAttributes redirectAttributes,
+					    @RequestParam(value = "saveid",required = false) String isStored,
+					    HttpServletResponse response) {
+		try {			
 			log.debug(password);
+			
+			//0320 dongjun 아이디 저장 구현 코드
+			//isStored == true
+			if("on".equals(isStored)) {
+				// create cookie
+				Cookie storedCookie = new Cookie("storedCookie", memberId);
+				// cookie setting 
+				storedCookie.setPath("/ifwe"); //only in index page
+				storedCookie.setMaxAge(60 * 60 * 24 * 30); // 7 days
+				response.addCookie(storedCookie);
+			}else {
+				Cookie storedCookie = new Cookie("storedCookie", "");
+				storedCookie.setPath("/ifwe"); //only in index page
+				storedCookie.setMaxAge(0); // 7 days
+				response.addCookie(storedCookie);
+			}
+			
 			
 			
 			//로그인 처리
@@ -111,8 +131,8 @@ public class MemberController {
 			//로그인한 경우, session에 member객체 저장
 			if(member != null && 
 					bcryptPasswordEncoder.matches(password, member.getMemberPwd())) {
-				model.addAttribute("memberLoggedIn", member);
 				
+				model.addAttribute("memberLoggedIn", member);
 				return "main/mainPage";
 				
 			}

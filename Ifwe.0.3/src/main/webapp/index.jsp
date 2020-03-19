@@ -52,7 +52,6 @@ $(function(){
 	});
 	
 	
-	
 });
 
 
@@ -281,13 +280,13 @@ $(function(){
                     <p>로그인</p>
                 </div>
                 <div class="login-input">
-                    <i class="far fa-user"></i> <input class="input-box" type="text" name="memberId" id="userid" placeholder="아이디">
+                    <i class="far fa-user"></i> <input class="input-box" type="text" name="memberId" id="userid" placeholder="아이디" value="<c:if test='${not empty cookie.storedCookie.value }'>${cookie.storedCookie.value}</c:if>"><!-- 아이디 저장 코드 구현 0320-->
                 </div>
                 <div class="login-input">
                     <i class="fas fa-lock"></i> <input class="input-box" type="password" name="password" id="password" placeholder="비밀번호" >
                 </div>
                 <div class="login-extra">
-                    <a href="">아이디 | 비밀번호 찾기</a> <div class="saveid-container"><input type="checkbox" name="saveid" id="saveid"><label for="saveid">아이디 저장</label></div>
+                    <a href="">아이디 | 비밀번호 찾기</a> <div class="saveid-container"><input type="checkbox" name="saveid" id="saveid" <c:if test='${not empty cookie.storedCookie.value }'>checked</c:if> ><label for="saveid">아이디 저장</label></div>
                     
                 </div>
                   <input type="submit" class="loginbutton" value="로그인" />
