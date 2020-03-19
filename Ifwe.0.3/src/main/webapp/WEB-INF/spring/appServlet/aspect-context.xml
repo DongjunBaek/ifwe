@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- #10. aop관련 빈설정 -->
+	<!-- #10.1 xml 선언적 aop 시작 -->
+	<!-- <bean id="loggerAspect" 
+		  class="com.kh.spring.common.aop.LoggerAspect"/>
+	<aop:config>
+		<aop:aspect id="loggerAspect" ref="loggerAspect">
+			<aop:pointcut expression="execution(* com.kh.spring.memo..*(..))" 
+						  id="pointcutAll"/>
+			<aop:around method="loggerAdvice" pointcut-ref="pointcutAll"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+	
+	<!-- #10.1 xml 선언적 aop 끝-->
+
+	<!-- #10.2 annotation aop 시작 -->
+	<!-- 
+		#12.3 root-context에 선언된 transaction관련 설정을 가져와
+		servlet-context에 적용해 준다. 
+	 -->
+	<aop:aspectj-autoproxy/>
+	<!-- #10.2 annotation aop 끝-->
+	
+	
+	
+	
+	
+</beans>

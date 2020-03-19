@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+
 	<!-- #6.1. myBatis(JDBC)설정 연결 설정하기 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="ifwe"/>
 		<property name="password" value="ifwe"/>
 	</bean>
-	
-	<!-- #6.2. myBatis(JDBC)설정 : SqlSessionFactory -->
+	<!-- #9.1.log4jdbc-remix 관련 dataSource처리  -->
+  	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">  
+        <constructor-arg ref="realDataSource" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">    
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="[SQL] " />
+            </bean>
+        </property>
+    </bean>
+    <!-- #6.2. myBatis(JDBC)설정 : SqlSessionFactory -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- name=dataSource => 빈객체sqlSessionFactoryBean의  property명 dataSource임(setter) -->
 		<!-- ref의 dataSource는 위에서 선언한 datasource 빈객체를 의미함. -->
@@ -35,4 +48,16 @@
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
 	</bean>
 	
-</beans>
+	
+
+	<!-- #12.1. 트랜잭션 처리를 위한 트랜잭션매니저 설정해야 한다. -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- #12.2. @Transactional이 붙은 메소드를 대상으로 Transaction Advice를 적용함. -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+    
+    
+    
+    </beans>
