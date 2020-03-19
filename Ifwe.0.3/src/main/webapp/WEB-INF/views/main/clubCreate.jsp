@@ -33,7 +33,8 @@ $(function(){
     
 });
 </script>
-<style>
+<style>,nm,n k,n,m,n k,,nm,,nk n,nk 
+" bvb cgm,n lm
 	.select-boxs{
 		width:200px;
 		float:left;
@@ -130,6 +131,9 @@ $(function(){
         outline: 0;
         margin-bottom:2%;
     }
+
+
+ 
 </style>
 	<section>
 		<div id="container" >
@@ -138,9 +142,10 @@ $(function(){
                         <div class="number-createclub font-kor">01</div>
                         <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
                         <div class="inputs">
-                            <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
-                            <input type="button" value="스터디" name="study" class="font-kor buttons">
-                            <input type="button" value="음악/댄스" name="music" class="font-kor buttons">
+
+
+
+
                         </div>
                     </div>
                     <div id="second" class="info-container">
@@ -210,7 +215,6 @@ $(function(){
 	
 	
 	</section>
-
 
 </body>
 </html>

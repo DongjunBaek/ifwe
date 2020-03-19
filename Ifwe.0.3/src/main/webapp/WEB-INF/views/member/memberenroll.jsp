@@ -16,28 +16,6 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/enrollpage.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-    @media ( max-width: 1920px) {
-        .background-black{
-            width: 540px;
-            height: 500px;
-            border-radius: 30px;
-            background-color: black;
-            position: absolute;
-            top: 41.5%;
-            opacity: 0.5;
-        }
-    }
-    @media ( max-width:  1280px) {
-        .background-black{
-            width: 540px;
-            height: 500px;
-            border-radius: 30px;
-            background-color: black;
-            position: absolute;
-            top: 41.5%;
-            opacity: 0.5;
-        }
-    }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -333,98 +311,8 @@ function maxLengtYear(object){
                     <p class="bold-kor" style="font-size: 45px;">가입하고 싶으신가요?</p>
                 </div>
                 <div class="img-container">
-                    <div class="img-concert img-container-img">
-                        <div class="img-container-img-container">
-                            <div class="img-hyphen"></div>
-                            <div class="img-title">공연·전시</div>
-                            <div class="img-container-posts-container">
-                                <div class="posts-container font-kor">
-                                    <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                    <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                </div>
-                                <div class="posts-container-posts-icon">
-                                    <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="background-black">
-                            <div class="img-container-img-container">
-                                <div class="img-hyphen"></div>
-                                <div class="img-title">공연·전시</div>
-                                <div class="img-container-posts-container">
-                                    <div class="posts-container font-kor">
-                                        <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                        <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                    </div>
-                                    <div class="posts-container-posts-icon">
-                                        <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				
 
-                    <div class="img-study img-container-img">
-                        <div class="img-container-img-container">
-                            <div class="img-hyphen"></div>
-                            <div class="img-title">스터디</div>
-                            <div class="img-container-posts-container">
-                                <div class="posts-container font-kor">
-                                    <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                    <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                </div>
-                                <div class="posts-container-posts-icon">
-                                    <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="background-black">
-                            <div class="img-container-img-container">
-                                <div class="img-hyphen"></div>
-                                <div class="img-title">스터디</div>
-                                <div class="img-container-posts-container">
-                                    <div class="posts-container font-kor">
-                                        <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                        <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                    </div>
-                                    <div class="posts-container-posts-icon">
-                                        <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="img-music img-container-img">
-                        <div class="img-container-img-container">
-                            <div class="img-hyphen"></div>
-                            <div class="img-title">음악·댄스</div>
-                            <div class="img-container-posts-container">
-                                <div class="posts-container font-kor">
-                                    <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                    <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                </div>
-                                <div class="posts-container-posts-icon">
-                                    <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="background-black">
-                            <div class="img-container-img-container">
-                                <div class="img-hyphen"></div>
-                                <div class="img-title">음악·댄스</div>
-                                <div class="img-container-posts-container">
-                                    <div class="posts-container font-kor">
-                                        <div class="posts-container-post">내가 좋아하는 음악과 춤을</div>
-                                        <div class="posts-container-post">즐거운 사람들과 함께 즐겨보세요</div>
-                                    </div>
-                                    <div class="posts-container-posts-icon">
-                                        <p style="padding: 10%; font-size: 40px;">&nbsp;></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 

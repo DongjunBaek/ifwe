@@ -139,7 +139,6 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-
 	@GetMapping("/profile.do")
 	public String profile() {
 
@@ -152,13 +151,11 @@ public class MemberController {
 	}
 	
 	
-	
 	@GetMapping("/update.do")
 	public String update() {
 		return "member/update";
 	}
 	
-
 	@GetMapping("/membership.do")
 	public String membership() {
 		return "member/membership";

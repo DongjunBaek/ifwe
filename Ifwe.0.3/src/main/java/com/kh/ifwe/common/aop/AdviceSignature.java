@@ -62,7 +62,6 @@ public class AdviceSignature {
 	public void afterThrowingAdvice(JoinPoint jp, Exception exceptObj) {
 		//타겟메소드 실행중 예외가 발생했을 때, 부가적인 로직을 제공할 목적으로 사용하는 Advice
 		String methodName = jp.getSignature().getName();
-		logger.debug(methodName + "() 메소드 수행 중 예외 발생!");
 		
 		if(exceptObj instanceof IllegalArgumentException) {
 			logger.debug("IllegalArgumentException : 부적합한 값이 입력되었습니다.");
