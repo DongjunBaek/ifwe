@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="프로필카드" name="pageTitle"/>
 </jsp:include>
-	<section>
+	<section class="profile-section">
         <div class="section-frofile-title">프로필</div>
         <div class="section-frofilecard-box">
             <div class="section-frofileimg">

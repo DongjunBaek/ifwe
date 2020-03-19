@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
-<section class="mypage-section">
+<section>
   <article class="mypage-first">
       <div class="intro-div">
           <div class="img-div">
