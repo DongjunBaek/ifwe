@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/boardForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/profile.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/makeProfile.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/update.css">
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

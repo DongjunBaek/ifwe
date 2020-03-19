@@ -1,4 +1,4 @@
-section{
+.profile-section{
     font-family: 'GmarketSansLight';
     width: 1460px;
     height: 1080px;
@@ -91,7 +91,7 @@ section{
 .hashtag-box{
     text-align: center;
     padding:15px 40px;
-    height:20px;
+    height:50px;
     background-color: #2756a6;
     border-radius: 20px;
     font-size: 20px;

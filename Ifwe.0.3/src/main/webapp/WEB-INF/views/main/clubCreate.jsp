@@ -9,27 +9,28 @@
 
 <script>
 $(function(){
+	
+	$('[name=category]').click(function () {
+        var radioVal = $('input[name="category"]:checked').val();
+        console.log(radioVal);
+      });
+	
+	$(".yellow-label-span").click(function(){
+		$(this).css('background-color','#ffc862');
+		$(this).children().css('color','white');
+		$(this).next().css('background-color','');
+		$(this).next().children().css('color','');
+		$(this).next().next().css('background-color','');
+		$(this).next().next().children().css('color','');
+		$(this).prev().css('background-color','');
+		$(this).prev().children().css('color','');
+		$(this).prev().prev().css('background-color','');
+		$(this).prev().prev().children().css('color','');
+	
+	});
+	
     $("#search1").selectric();
     $("#search2").selectric();
-    
-    $("[name=concert]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).next().css('background','');
-    	$(this).next().next().css('background','');    	
-    });
-    $("[name=study]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).next().css('background','');
-    	$(this).prev().css('background','');
-    });
-    $("[name=music]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).prev().css('background','');
-    	$(this).prev().prev().css('background','');
-    });
     
 });
 </script>
@@ -130,17 +131,50 @@ $(function(){
         outline: 0;
         margin-bottom:2%;
     }
+    .yellow-lable{
+        margin-left: 25%;
+    }
+   	.yellow-label-span{
+    	line-height:2;
+        display: inline-block;
+        width: 200px;
+        border: 1px solid #ffc862;
+        font-size: 20px;
+        border-radius: 20px;
+        outline: 0;
+        margin-right:3%;
+    }
+    .radio-hidden{
+    	display:none;
+    }
 </style>
-	<section>
+	<section class="clubcreate-section">
 		<div id="container" >
                 <form action="">
                     <div id="first" class="info-container">
                         <div class="number-createclub font-kor">01</div>
                         <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
                         <div class="inputs">
-                            <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
+                     	<div class="yellow-label-span">		
+       			 			<label for="concert" class="yellow-lable">공연/전시</label>
+    					</div>
+
+					    <div class="yellow-label-span">
+					        <label for="study" class="yellow-lable">&nbsp;&nbsp;&nbsp;스터디</label>
+					    </div>
+
+					    <div class="yellow-label-span">
+					        <label for="music" class="yellow-lable">음악/댄스</label>
+					    </div>
+                       		
+                       	<div class="radio-hidden">
+	                    	<input type="radio" name="category" id="music" value="music"/>
+	                       	<input type="radio" name="category" id="study" value="study"/>
+	                       	<input type="radio" name="category" id="concert"  value="concert"/>
+                       	</div>
+                            <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
                             <input type="button" value="스터디" name="study" class="font-kor buttons">
-                            <input type="button" value="음악/댄스" name="music" class="font-kor buttons">
+                            <input type="button" value="음악/댄스" name="music" class="font-kor buttons"> -->
                         </div>
                     </div>
                     <div id="second" class="info-container">

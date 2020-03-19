@@ -6,13 +6,16 @@
     height: 65px;
     background-color: #2756a6;
 } */
-.first{
+p{
+	margin:0;
+}
+.mainpage-first{
    width: 1460px;
    height: 550px;
    margin-top: 3%;
    float: right;
 }
-.second{
+.mainpage-second{
    margin-top: 2%;
    width: 1460px;
    height: 450px;

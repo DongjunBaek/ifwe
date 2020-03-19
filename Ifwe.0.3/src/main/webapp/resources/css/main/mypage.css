@@ -8,7 +8,8 @@ p{
     margin-left: 4%;
 }
 .mypage-first{
-    margin-right: 2%;
+	margin-top:2%;
+    margin-right: 3%;
     width: 345px;
     height: 800px;
     float: left;
@@ -20,7 +21,7 @@ p{
     float: left;
 }
 .mypage-third{
-    width: 269px;
+    width: 250px;
     height: 745px;
     float: left;
 }
