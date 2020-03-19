@@ -3,17 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Membership</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membership.css">
+<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+	<jsp:param value="멤버쉽 구매" name="pageTitle"/>
+</jsp:include>
 <script>
 $(function(){
     $(".price").on('click',function(e){
@@ -28,26 +20,21 @@ $(function(){
     });
     
     $(".addbtn").on('click', function(){
-    	$(".third").css("display","block");
+    	$(".membership-third").css("display","block");
     	
     });
 
     
 })
 </script>
-
-
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
  <section>
-   <article class="first">
+   <article class="membership-first">
        <div class="title-container font-kor">
            <p class="p-title bold">멤버십 구매</p>
            <p class="p-content" style="color:#606060;">멤버십 구매해서 ifwe를 더욱 풍부하게 즐겨보세요!</p>
        </div>
    </article>
-   <article class="second">
+   <article class="membership-second">
        <div class="grade" id="primieum">
            <div class="grade-icon"><i class="fas fa-crown" style="color:#c332f1;"></i></div>
            <div class="grade-content">
@@ -114,7 +101,7 @@ $(function(){
         </div>
       
     </article>
-    <article class="third" style="display:none;">
+    <article class="membership-third" style="display:none;">
         <div class="payment-container" >
             <div class="list-container">
                 <div class="payment-title font-kor">

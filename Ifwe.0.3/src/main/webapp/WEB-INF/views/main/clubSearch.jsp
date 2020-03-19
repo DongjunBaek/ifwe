@@ -3,23 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Club Search</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jquery.selectric.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/categori.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/selectric.css">
+<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+	<jsp:param value="소모임 검색" name="pageTitle"/>
+</jsp:include>
 <style>
-section{
+/* section{
 	width:1580px;
-}
+} */
 .classify-menu{
 	color:white;
 }
@@ -47,10 +37,6 @@ $(function(){
 });
 
 </script>
-
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">
@@ -86,7 +72,7 @@ $(function(){
                         </div>
                         <div class="information-container">
                             <p class="club-leader-name font-hk friend-name-profile">@wingStudy_02</p>
-                            <p class="club-name font-hk">윙스터디 모임</p>
+                            <p class="club-name-search font-hk">윙스터디 모임</p>
                             <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i> 서울,경기</p>
     
                             <div class="information-box">
