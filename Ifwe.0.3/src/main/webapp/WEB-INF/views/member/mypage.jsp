@@ -3,36 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mypage</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
+<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+	<jsp:param value="마이페이지" name="pageTitle"/>
+</jsp:include>
+<style>
+p{
+margin:0;
+}
+</style>
 
-<script>
-$(function(){
-	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do"
-	});
-	
-})
-</script>
-
-
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
-	<section>
-        <article class="first">
+	<section class="mypage-section">
+        <article class="mypage-first">
             <div class="intro-div">
                 <div class="img-div">
-              	  <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+              	  <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" width="100px"/>
                 </div>
                 <div class="myname-div font-kor">
                     <div style="font-size: 25px;margin:0 10% ">@wingStudy_02</div>
@@ -49,25 +33,25 @@ $(function(){
                 <div class="list-title">
                     <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
                     <div class="list-ul-container">
-                        <ul class="font-kor list-ul" style="padding: 0;">
-                            <li><p class="p-class">윙스터디 모임</p></li>
-                            <li><p class="p-class">윙스터디</p></li>
-                            <li><p class="p-class">윙</p></li>
+                        <ul class="font-kor mypage-list-ul" style="padding: 0;">
+                            <li><p class="mypage-p-class">윙스터디 모임</p></li>
+                            <li><p class="mypage-p-class">윙스터디</p></li>
+                            <li><p class="mypage-p-class">윙</p></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </article>
 
-        <article class="second">
+        <article class="mypage-second">
             <div class="notice-container">
                 <div class="notice-title font-kor">
                     <i class="fas fa-bell" style="font-size:25px;color: #2756a6;margin:5% 5% 2% 0;"></i><span style="font-size:25px;">알림</span></div>
                 <div class="contents">
                     <div class="content font-kor">
-                        <p class="p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <p class="p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
-                        <p class="p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
+                        <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
+                        <p class="mypage-p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
+                        <p class="mypage-p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
                     </div>
                 </div>
             </div>
@@ -130,7 +114,7 @@ $(function(){
             </div>
         </article>
 
-        <article class="third">
+        <article class="mypage-third">
             <div class="friend-container">
                 <div class="friend-title font-kor"><p style="color: white;font-size: 20px;font-weight: bold;padding: 6%;">친구 목록</p></div>
                 <div class="friend-lists">

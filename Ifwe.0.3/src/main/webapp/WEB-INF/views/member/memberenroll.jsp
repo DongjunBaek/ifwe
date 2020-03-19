@@ -27,7 +27,7 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
             opacity: 0.5;
         }
     }
-    @media ( max-width:  1600px) {
+    @media ( max-width:  1280px) {
         .background-black{
             width: 540px;
             height: 500px;
