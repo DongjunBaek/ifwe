@@ -109,19 +109,6 @@ input[type=checkbox]:checked + label:before{
 }
 
 
-.login-area{
-        width:400px;
-        height:22px;
-        padding:22px 0;
-        background-color:#ffc862;
-        text-align: center;
-        border-radius: 20px;
-        font-size:16pt;
-        color:white;
-        margin-top:70px;
-        cursor: pointer;
-        
-    }
     .login-naver-box{
         background: url("/images/naverlogin.PNG") no-repeat;
         width:400px;
@@ -150,4 +137,18 @@ input[type=checkbox]:checked + label:before{
         float: right;
         cursor: pointer;
     }
+    
+    
+.loginbutton{
+        width:400px;
+        height:80px;
+        background-color:#ffc862;
+        text-align: center;
+        border-radius: 20px;
+        font-size:16pt;
+        color:white;
+        margin-top:70px;
+        cursor: pointer;
+        -webkit-appearance: none;
+}
    

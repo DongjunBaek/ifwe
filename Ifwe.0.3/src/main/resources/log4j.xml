@@ -7,7 +7,7 @@
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<!-- <param name="ConversionPattern" value="%-5p: %c - %m%n" /> -->
-			<param name="ConversionPattern" value="[%d{yyyy-mm-dd HH:mm:ss}]: %l - %m%n" />
+			<param name="ConversionPattern" value="%p[%d{yyyy-mm-dd HH:mm:ss}]: %l - %m%n" />
 		</layout>
 	</appender>
 	
@@ -16,14 +16,14 @@
 		<param name="append" value="true"/>
 		<param name="datePattern" value=".yyyy-MM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d{yyyy-mm-dd HH:mm:ss}]: %l - %m%n"/>
+			<param name="ConversionPattern" value="%p[%d{yyyy-mm-dd HH:mm:ss}]: %l - %m%n"/>
 		</layout>
 	</appender>
 	
 	
 	
 	<!-- Application Loggers -->
-	<logger name="com.kh.spring" additivity="true">
+	<logger name="com.kh.ifwe" additivity="true">
 		<level value="debug" />
 	</logger>
 	
