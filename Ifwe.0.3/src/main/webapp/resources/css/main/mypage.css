@@ -1,22 +1,25 @@
-section{
+p{
+	margin:0;
+}
+.mypage-section{
     width: 1500px;
     height: 1000px;
     margin-top: 2%;
     margin-left: 4%;
 }
-.first{
+.mypage-first{
     margin-right: 2%;
     width: 345px;
     height: 800px;
     float: left;
 }
-.second{
+.mypage-second{
     margin-right: 2%;
     width: 820px;
     height: 1000px;
     float: left;
 }
-.third{
+.mypage-third{
     width: 269px;
     height: 745px;
     float: left;
@@ -69,12 +72,12 @@ section{
 .list-ul-container{
     margin: 5%;
 }
-.list-ul li{
-    margin: 10%;
+.mypage-list-ul li{
+    margin: 7%;
     font-size: 30px;
     color:#2756a6
 }
-.p-class{
+.mypage-p-class{
     font-size: 22px;
 }
 .friend-title{
@@ -130,7 +133,7 @@ section{
     width: 720px;
     height: 200px;
 }
-.p-content{
+.mypage-p-content{
     font-size: 20px;
     padding: 3%;
 }
@@ -169,7 +172,7 @@ section{
 .p-board{
     width: 300px;
     font-size: 20px;
-    padding: 1%;
+   /*  padding: 1%; */
 }
 .board-con{
     float: left;

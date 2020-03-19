@@ -140,7 +140,7 @@ public class MemberController {
 	}
 	
 
-	@GetMapping("/member/profile.do")
+	@GetMapping("/profile.do")
 	public String profile() {
 
 		return "member/profile";

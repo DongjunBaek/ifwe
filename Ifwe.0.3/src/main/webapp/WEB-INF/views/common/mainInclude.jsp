@@ -14,9 +14,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/categori.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mainboard.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membership.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLogin-css.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/boardForm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/profile.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/makeProfile.css">
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -3,19 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ProfileCard</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/profile.css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+	<jsp:param value="프로필카드" name="pageTitle"/>
+</jsp:include>
 	<section>
         <div class="section-frofile-title">프로필</div>
         <div class="section-frofilecard-box">

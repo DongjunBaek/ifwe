@@ -3,23 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Profile Update</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/748cfe3a61.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/makeProfile.css">
-</head>
-<body>
+
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
-<section>
-  <article class="first">
+<section class="mypage-section">
+  <article class="mypage-first">
       <div class="intro-div">
           <div class="img-div">
           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="">
@@ -36,10 +23,10 @@
           <div class="list-title">
               <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
               <div class="list-ul-container">
-                  <ul class="font-kor list-ul" style="padding: 0;">
-                      <li><p class="p-class">윙스터디 모임</p></li>
-                      <li><p class="p-class">윙스터디</p></li>
-                      <li><p class="p-class">윙</p></li>
+                  <ul class="font-kor mypage-list-ul" style="padding: 0;">
+                      <li><p class="mypage-p-class">윙스터디 모임</p></li>
+                      <li><p class="mypage-p-class">윙스터디</p></li>
+                      <li><p class="mypage-p-class">윙</p></li>
                   </ul>
               </div>
           </div>
