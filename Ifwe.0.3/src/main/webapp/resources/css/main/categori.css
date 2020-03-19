@@ -1,9 +1,4 @@
 @font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
-*{
-    padding: 0;
-    border: 0;
-    margin: 0;
-}
 .font-hk{
     font-family: 'GmarketSansLight';
 }
@@ -57,6 +52,7 @@
     font-size: 16pt;
     padding-left: 30px;
     font-family: 'GmarketSansLight';
+    border:0;
 }
 
 
@@ -102,7 +98,7 @@
 .club-img{
     width: 470px;
     height: 220px;
-    background-image: url("../../image/club/ex1.jpg");
+    background-image: url("../../images/club/ex1.jpg");
     background-size: cover;
     overflow:hidden;
 }
@@ -158,7 +154,7 @@
 .club-leader-name{
     font-size: 16pt;
 }
-.club-name{
+.club-name-search{
     font-size: 20pt;
 }
 .club-location{
@@ -201,6 +197,7 @@
     font-size:20pt;
     outline: none;
     cursor: pointer;
+    border:0;
 
 }
 

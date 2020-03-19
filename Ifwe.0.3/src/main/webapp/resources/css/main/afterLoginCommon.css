@@ -4,18 +4,24 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+
 a{
     text-decoration:none;
 }
 * {
     margin: 0;
     color: #3b3b3b;
+    outline:0;
 }
 .font-kor {
     font-family: 'GmarketSansLight';
 }
 .font-eng {
     font-family: 'Fredoka One';
+}
+.bold-kor{
+    font-family: 'GmarketSansMedium';
 }
 html {
     width: 1920px;
@@ -87,7 +93,7 @@ header {
     height: 55px;
     float: right;
     color: white;
-    margin-top: 12%;
+    margin-top: 10%;
 }
 .fa-bell {
     margin-left: 30%;
@@ -141,7 +147,6 @@ nav{
 .blue-back li{
     margin-top: 8%;
     margin-left: 50%;
-    font-weight: 900;
 }
 .ul-background{
     /* border: 1px solid black; */
@@ -167,6 +172,7 @@ nav{
     border:1px solid rgba(246,246,246,0.5);
     height: 65px;
     margin-top: 15%;
+    cursor:pointer;
 }
 .blue-back:hover{
     background-color: #2756a6;
