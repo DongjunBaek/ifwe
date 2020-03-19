@@ -6,13 +6,22 @@
 <fmt:requestEncoding value="utf-8"/>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>if we</title>
-    <script src="resources/js/jquery-3.4.1.js"></script>
-    <link rel="stylesheet" href="resources/css/index/login.css">
-    <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>if we</title>
+<script src="resources/js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="resources/css/index/login.css">
+<script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
+
+<c:if test="${not empty msg }">
+<script>
+	$(()=>{
+		alert("${msg}");
+	});
+</script>
+</c:if>
+    
 </head>
 <!-- 한글 폰트 -->
 <style>
@@ -267,12 +276,12 @@ $(function(){
 	<div class="back">
         <div class="login-container">
             <div class="login-container-box">
-
+				<form action="${pageContext.request.contextPath }/member/login.do" method="post">
                 <div class="login-title">
                     <p>로그인</p>
                 </div>
                 <div class="login-input">
-                    <i class="far fa-user"></i> <input class="input-box" type="text" name="userid" id="userid" placeholder="아이디">
+                    <i class="far fa-user"></i> <input class="input-box" type="text" name="memberId" id="userid" placeholder="아이디">
                 </div>
                 <div class="login-input">
                     <i class="fas fa-lock"></i> <input class="input-box" type="password" name="password" id="password" placeholder="비밀번호" >
@@ -281,14 +290,13 @@ $(function(){
                     <a href="">아이디 | 비밀번호 찾기</a> <div class="saveid-container"><input type="checkbox" name="saveid" id="saveid"><label for="saveid">아이디 저장</label></div>
                     
                 </div>
-                <div class="login-area">
-                    로그인
-                </div> 
+                  <input type="submit" class="loginbutton" value="로그인" />
                 <div class="login-naver-box">
                     <button id="naver"></button>
                 </div>
+				</form>
                 <div class="login-register">
-                    <p>아직 회원이 아니신가요?</p> <button id="register">회원가입</button> 
+                    <p>아직 회원이 아니신가요?</p> <button id="register" onclick="location.href='${pageContext.request.contextPath}/member/enroll.do'">회원가입</button> 
                 </div>
             </div>
         </div>
