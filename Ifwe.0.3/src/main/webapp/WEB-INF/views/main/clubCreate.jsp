@@ -6,35 +6,98 @@
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="소모임 생성" name="pageTitle"/>
 </jsp:include>
-
 <script>
 $(function(){
-    $("#search1").selectric();
-    $("#search2").selectric();
-    
-    $("[name=concert]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).next().css('background','');
-    	$(this).next().next().css('background','');    	
-    });
-    $("[name=study]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).next().css('background','');
-    	$(this).prev().css('background','');
-    });
-    $("[name=music]").click(function(){
-    	$(this).css('background','#2756a6');
-    	$(this).css('border','#2756a6');
-    	$(this).prev().css('background','');
-    	$(this).prev().prev().css('background','');
-    });
+	
+	$('[name=category]').click(function () {
+        var radioVal = $('input[name="category"]:checked').val();
+        console.log(radioVal);
+      });
+	
+	$(".yellow-label-span").click(function(){
+		$(this).css('background-color','#ffc862');
+		$(this).children().css('color','white');
+		$(this).next().css('background-color','');
+		$(this).next().children().css('color','');
+		$(this).next().next().css('background-color','');
+		$(this).next().next().children().css('color','');
+		$(this).prev().css('background-color','');
+		$(this).prev().children().css('color','');
+		$(this).prev().prev().css('background-color','');
+		$(this).prev().prev().children().css('color','');
+	
+	});
+	
+	
+	//*****************해쉬태그 생성 **********************
+	 var tag = {};
+     var counter = 0;
+
+     // 태그를 추가한다.
+     function addTag (value) {
+         tag[counter] = value; // 태그를 Object 안에 추가
+         counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+     }
+
+     // 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+     function marginTag () {
+         return Object.values(tag).filter(function (word) {
+             return word !== "";
+         });
+     }
+ 
+     // 서버에 넘기기
+     $("#tag-form").on("submit", function (e) {
+         var value = marginTag(); // return array
+         $("#rdTag").val(value); 
+
+         $(this).submit();
+     });
+
+     $("#tag").on("keypress", function (e) {
+         var self = $(this);
+
+         // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
+         if (e.key === "Enter" || e.keyCode == 32) {
+
+             var tagValue = self.val(); // 값 가져오기
+
+             // 값이 없으면 동작 ㄴㄴ
+             if (tagValue !== "") {
+
+                 // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                 var result = Object.values(tag).filter(function (word) {
+                     return word === tagValue;
+                 })
+             
+                 // 태그 중복 검사
+                 if (result.length == 0) { 
+                     $("#tag-list").append("<li class='tag-item'>#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+                     addTag(tagValue);
+                     self.val("");
+                 } else {
+                     alert("태그값이 중복됩니다.");
+                 }
+             }
+             e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+         }
+     });
+
+     // 삭제 버튼 
+     // 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+     $(document).on("click", ".del-btn", function (e) {
+         var index = $(this).attr("idx");
+         tag[index] = "";
+         $(this).parent().remove();
+     });
+	
+	//****************해쉬태그 끝 ********************
+	
+	
     
 });
 </script>
-<style>,nm,n k,n,m,n k,,nm,,nk n,nk 
-" bvb cgm,n lm
+<style>
 	.select-boxs{
 		width:200px;
 		float:left;
@@ -59,6 +122,7 @@ $(function(){
     .inputs{
         margin-left: 6%;
         margin-top: 2%;
+        list-style: none;
     }
     .inputs .buttons{
         border: 1px solid #ffc862;
@@ -131,29 +195,106 @@ $(function(){
         outline: 0;
         margin-bottom:2%;
     }
-
-
+    .yellow-lable{
+        margin-left: 25%;
+    }
+   	.yellow-label-span{
+    	line-height:2;
+        display: inline-block;
+        width: 200px;
+        border: 1px solid #ffc862;
+        font-size: 20px;
+        border-radius: 20px;
+        outline: 0;
+        margin-right:3%;
+    }
+    .radio-hidden{
+    	display:none;
+    }
+    
+     ul {
+         padding: 16px 0;
+     }
  
+     ul li {
+         display: inline-block;
+         margin: 0 5px;
+         font-size: 14px;
+         letter-spacing: -.5px;
+     }
+     
+     form {
+         padding-top: 16px;
+     }
+ 
+     ul li.tag-item {
+         padding: 10px 15px;
+         background-color: #ffc862;
+         color: white;
+         border-radius: 20px;
+         font-size:20px;
+     }
+ 
+     .tag-item:hover {
+         background-color: #2756a6;
+         color: #fff;
+     }
+ 
+     .del-btn {
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 15px;
+        vertical-align: 12%;
+        color:black;
+     }
+    input{
+    	padding-left : 30px;
+    }
+    
 </style>
-	<section>
+	<section class="clubcreate-section">
 		<div id="container" >
                 <form action="">
                     <div id="first" class="info-container">
                         <div class="number-createclub font-kor">01</div>
                         <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
                         <div class="inputs">
+                     	<div class="yellow-label-span">		
+       			 			<label for="concert" class="yellow-lable">공연/전시</label>
+    					</div>
 
+					    <div class="yellow-label-span">
+					        <label for="study" class="yellow-lable">&nbsp;&nbsp;&nbsp;스터디</label>
+					    </div>
 
-
-
+					    <div class="yellow-label-span">
+					        <label for="music" class="yellow-lable">음악/댄스</label>
+					    </div>
+                       		
+                       	<div class="radio-hidden">
+	                    	<input type="radio" name="category" id="music" value="music"/>
+	                       	<input type="radio" name="category" id="study" value="study"/>
+	                       	<input type="radio" name="category" id="concert"  value="concert"/>
+                       	</div>
+                            <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
+                            <input type="button" value="스터디" name="study" class="font-kor buttons">
+                            <input type="button" value="음악/댄스" name="music" class="font-kor buttons"> -->
                         </div>
                     </div>
                     <div id="second" class="info-container">
                         <div class="number-createclub font-kor">02</div>
                         <div class="font-kor title thin-font">소모임 키워드를 4개이하로 입력해주세요</div>
-                        <span class="font-kor span-post thin-font">단어 앞에 #을 붙여서 입력하세요</span>
+                        <span class="font-kor span-post thin-font">단어입력후 Enter쳐주세요</span>
                         <div class="inputs">
-                            <input type="text" name="keywords" class="font-kor input-text thin-font" placeholder="       예)   #영어 #영어회화 #스터디모임 #서울/경기">
+                        	<input type="hidden" value="" name="tag" id="rdTag" />
+                        
+                            <input type="text" name="keywords" class="font-kor input-text thin-font" 
+                            	   id="tag" size="6">
+                            
+                            <ul id="tag-list">
+           				    </ul>
+                            
                         </div>
                     </div>
                     <div id="third" class="info-container">
@@ -215,6 +356,17 @@ $(function(){
 	
 	
 	</section>
+<script>
+$(function(){
+	  $("#search1").selectric();
+	  $("#search2").selectric();
+	
+	
+	
+});
 
+
+
+</script>
 </body>
 </html>

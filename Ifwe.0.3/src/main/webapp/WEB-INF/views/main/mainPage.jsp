@@ -19,7 +19,7 @@
 	</script>
 	  <section>
         <div class="container">
-            <article class="first">
+            <article class="mainpage-first">
                 <div class="slide">
                     <input type="radio" name="pos" id="pos1" checked>
                     <input type="radio" name="pos" id="pos2">
@@ -67,7 +67,7 @@
                   </div>
             </article>
     
-            <article class="second"> 
+            <article class="mainpage-second"> 
                 <div class="one">
                     <div class="one-one">
                         <div class="card font-kor">
@@ -75,9 +75,9 @@
                         </div>
                         <div class="list">
                             <ul class="font-kor list-ul">
-                                <li> <p>윙스터디 모임</p> </li>
-                                <li><p>윙스터디 모임</p></li>
-                                <li><p>윙스터디 모임</p></li>
+                                <li style="margin:0"><p>윙스터디 모임</p> </li>
+                                <li style="margin:0"><p>윙스터디 모임</p></li>
+                                <li style="margin:0"><p>윙스터디 모임</p></li>
                             </ul>
                         </div>
                     </div>

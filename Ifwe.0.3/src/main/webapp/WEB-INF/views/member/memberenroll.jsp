@@ -21,6 +21,11 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
+
+
+
 </style>
 <script>
 function sample6_execDaumPostcode() {
@@ -61,20 +66,20 @@ function sample6_execDaumPostcode() {
 }
 
     $(document).ready(function() {
+    	
         console.log($('.enroll-article-second'));
         $('.enroll-article-second').css('display','none');
         $('.enroll-article-third').css('display','none');
     });
 
    $(function(){
-    $(".img-container-img").hover(function(){
-        $(this).find('.background-black').css('display','none');
-        console.log(this);
+    $(".shc-img-box-float").hover(function(){
+        $(this).find('.shc-black-fileter').removeClass("shc-filter-blackcolor");
     },function(){
-        $(this).find('.background-black').css('display','');
+        $(this).find('.shc-black-fileter').addClass("shc-filter-blackcolor");
     });
 
-    $(".img-container-img").click(function(){
+    $(".shc-img-box-float").click(function(){
     	$('.enroll-article-first').css('display','none');
     	$('.enroll-article-second').css('display','');
     });
@@ -311,8 +316,62 @@ function maxLengtYear(object){
                     <p class="bold-kor" style="font-size: 45px;">가입하고 싶으신가요?</p>
                 </div>
                 <div class="img-container">
-				
-
+					<div class="shc-culture-box shc-img-box-float">
+                        <div class="shc-black-fileter shc-filter-blackcolor">
+                            <div class="shc-img-container-box">
+                                <div class="shc-container-header">
+                                    <div class="shc-white-line"></div>
+                                    <p class="shc-float-left">공연</p>
+                                    <p class="shc-float-left"><i class="fas fa-circle"></i></p>
+                                    <p class="shc-float-left">전시</p>
+                                </div>
+                                <div class="shc-container-bottom">
+                                    <p>
+				                                        내 취향에 맞는 공연, 전시, 뮤지컬을 <br>
+				                                        소모임을 만들어 함께 즐겨보세요
+                                    </p>
+                                    <div class="shc-circle-box"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shc-study-box shc-img-box-float">
+                        <div class="shc-black-fileter shc-filter-blackcolor">
+                                <div class="shc-img-container-box">
+                                    <div class="shc-container-header">
+                                        <div class="shc-white-line"></div>
+                                        <p class="shc-float-left">스터디</p>
+                                    </div>
+                                    <div class="shc-container-bottom">
+                                        <p>
+				                                                혼자 공부하는게 어렵고 막막하다면 <br>
+				                                                소모임을 통해 시작해보세요!
+                                        </p>
+                                        <div class="shc-circle-box"><i class="fas fa-chevron-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="shc-music-box shc-img-box-float">
+                       <div class="shc-black-fileter shc-filter-blackcolor">
+                               <div class="shc-img-container-box">
+                                   <div class="shc-container-header">
+                                       <div class="shc-white-line"></div>
+                                       <p class="shc-float-left">음악</p>
+                                       <p class="shc-float-left"><i class="fas fa-circle"></i></p>
+                                       <p class="shc-float-left">댄스</p>
+                                   </div>
+                                   <div class="shc-container-bottom">
+                                       <p>
+					                                           내가 좋아하는 음악과 춤을 <br>
+					                                           즐거운 사람들과 함께 만들어가요!
+                                       </p>
+                                       <div class="shc-circle-box"><i class="fas fa-chevron-right"></i></div>
+                                   </div>
+                               </div>
+                           </div>
+                    </div>
+					
                 </div>
             </div>
 

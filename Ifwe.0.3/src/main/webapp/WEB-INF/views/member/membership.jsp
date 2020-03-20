@@ -31,7 +31,7 @@ $(function(){
    <article class="membership-first">
        <div class="title-container font-kor">
            <p class="p-title bold">멤버십 구매</p>
-           <p class="p-content" style="color:#606060;">멤버십 구매해서 ifwe를 더욱 풍부하게 즐겨보세요!</p>
+           <p class="membership-p-content" style="color:#606060;">멤버십 구매해서 ifwe를 더욱 풍부하게 즐겨보세요!</p>
        </div>
    </article>
    <article class="membership-second">
