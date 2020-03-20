@@ -15,11 +15,9 @@ public class LoggerAspect {
 		String type = signature.getDeclaringTypeName();//클래스
 		String methodName = signature.getName();
 		
-		log.debug("[Before] {}.{} ", type, methodName);
 		
 		Object obj = joinPoint.proceed(); 
 		
-		log.debug("[After] {}.{} ", type, methodName);
 		
 		return obj;
 	}

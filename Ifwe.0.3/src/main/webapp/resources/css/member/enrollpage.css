@@ -68,6 +68,16 @@ footer{
     width: 1660px;
     height: 500px;
     margin-top: 15% ;
+    font-family: 'GmarketSansLight';
+    
+}
+.img-container-blackfilter{
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.2);
+	float:left;
+	
+	
 }
 .img-container-img{
     border-radius: 30px;
@@ -103,6 +113,7 @@ footer{
     width: 430px;
     height: 380px;
     margin: 12% 0 0 8%;
+    position:relative;
 }
 .img-title{
     margin-top: 5%;
@@ -127,15 +138,6 @@ footer{
     border-radius: 30px;
     border: 2px solid white;
     float: right;
-}
-.background-black{
-    width: 540px;
-    height: 500px;
-    border-radius: 30px;
-    background-color: black;
-    position: absolute;
-    top: 42%;
-    opacity: 0.5;
 }
 .enroll-article-second{
     margin: 7% 0 7% 0;
@@ -271,4 +273,91 @@ input{
 .radio-items input[type="radio"]:checked + label {
   background-color: #ffc862;
   color: #fff;
+}
+
+
+.shc-img-box-float{
+    border-radius: 20px;
+    width:540px;
+    height:500px;
+    float:left;
+}
+.shc-culture-box{
+    background-image: url("../../images/selectcate/cate1.png");
+    background-size: cover;
+}
+.shc-study-box{
+    margin-left: 15px;
+    background-image: url("../../images/selectcate/cate2.png");
+    background-size: cover;
+}
+.shc-music-box{
+    margin-left: 15px;
+    background-image: url("../../images/selectcate/cate3.png");
+    background-size: cover;
+}
+.shc-black-fileter{
+    width:100%;
+    height:100%;
+    border-radius: 20px;
+    
+}
+.shc-filter-blackcolor{
+	background-color:rgba(0,0,0,0.4);
+}
+
+
+
+
+.shc-white-line{
+    width:50px;
+    height:5px;
+    background-color: white;
+}
+.shc-img-container-box{
+    width:440px;
+    height:370px;
+    margin: 0 auto;
+    padding-top:70px;
+}
+.shc-container-header{
+    width:100%;
+    height:300px;
+    color: white;
+}
+.shc-container-header p{
+    font-size: 40px;
+    margin-top:30px;
+}
+.fa-circle{
+    font-size:10px;
+    vertical-align: super;
+}
+.shc-float-left{
+    float: left;
+}
+.shc-container-header p:nth-child(3){
+    width:48px;
+    height:48px;
+    text-align: center;
+    padding-bottom: 40%;
+}
+.shc-container-bottom{
+    width:100%;
+    height:60px;
+    color:white;
+}
+.shc-container-bottom p{
+    float: left;
+    font-size: 20px;
+}
+.shc-circle-box{
+    border:2px solid white;
+    border-radius: 50%;
+    width:60px;
+    height:50px;
+    float: right;
+    font-size: 40px;
+    text-align: center;
+    padding-top:10px;
 }
