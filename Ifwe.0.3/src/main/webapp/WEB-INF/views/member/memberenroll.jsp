@@ -99,7 +99,7 @@ $(function(){
 		let regex = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,11}$/;
 		
 		if(!regex.test(memberId) || memberId ==''){
-			msg = "사용불가능한 형식의 아이디입니다.";
+			msg = "5~20자의 영문소문자,숫자와 특수기호만 사용 가능합니다.";
 			$("#memberIdChk").text(msg).css("color","rgb(235, 42, 14)");
 		}else{
 			$("#memberIdChk").text('');
@@ -118,7 +118,7 @@ $(function(){
 			$("#passwordChk").html(msg).css("color","#4EC407");
 		}
 		else{
-			msg = "올바른 형식이아닙니다."
+			msg = "8~15자의 영문소문자,숫자,특수기호의 조합으로 사용 가능합니다."
 			$("#passwordChk").html(msg).css("color","rgb(235, 42, 14)");
 		}
 		
@@ -142,7 +142,7 @@ $(function(){
 		
 		let name = $("#memberName").val();
 		let reg = /^[가-힣]{2,4}$/;
-		let msg = "올바른 형식이 아닙니다.";	
+		let msg = "2~4자의 한글만 사용 가능합니다";	
 		
 		if(reg.test(name)){
 			$("#nameChk").text('');
@@ -206,7 +206,7 @@ $(function(){
 		if(reg.test(email)){
 			$("#memberEmailChk").text("");
 		}else{
-			$("memberEmailChk").text("이메일형식이 올바르지 않습니다.").css("color","rgb(235, 42, 14)");
+			$("#memberEmailChk").text("이메일형식이 올바르지 않습니다.").css("color","rgb(235, 42, 14)");
 		}
 		
 	});
@@ -241,11 +241,11 @@ function duplicate(){
 	
 	
 	
-	if(memberId.trim()=="" || checkId == "사용불가능한 형식의 아이디입니다." || checkId=="이미 사용중인 아이디입니다."){
+	if(memberId.trim()=="" || checkId == "6~12자의 영문소문자,숫자만 사용 가능합니다." || checkId=="이미 사용중인 아이디입니다."){
 		$("#memberId").focus();
 		return false;
 	}
-	else if(password.trim()=="" || checkpas=="올바른 형식이아닙니다."){
+	else if(password.trim()=="" || checkpas=="8~15자의 영문소문자,숫자,특수기호의 조합으로 사용 가능합니다."){
 		$("#password").focus();
 		return false;
 	}
@@ -404,7 +404,7 @@ function maxLengtYear(object){
                     <div class="form-left">
                         <div id="name">
                             <div class="label font-kor">이름</div>
-                            <input type="text" name="memberName" id="memberName" class="input">
+                            <input type="text" name="memberName" id="memberName" class="input"><br />
                             <span class="font-kor" id="nameChk"></span>
                         </div>
                         <div id="birth">
@@ -445,25 +445,24 @@ function maxLengtYear(object){
                     <div class="form-right">
                         <div id="id">
                             <div class="label font-kor">아이디</div>
-                            <input type="text" class="input" id="memberId" name="memberId"
-                            		placeholder="영문자숫자로이루어진 6~12자리">
+                            <input type="text" class="input" id="memberId" name="memberId"><br />
                             <span class="font-kor" id="memberIdChk"></span>
                         </div>
                         <div id="pwd">
                             <div class="label font-kor">비밀번호</div>
                             <input type="password" class="input" id="password" 
-                            name="memberPwd" autocomplete="off" placeholder="영문,숫자,특수문자가포함된 8~12자리">
+                            name="memberPwd" autocomplete="off"><br />
                             <span class="font-kor" id="passwordChk"></span>
                         </div>
                         <div id="pwdchk">
                             <div class="label font-kor">비밀번호 확인</div>
-                            <input type="password" name="passwordCheck" id="passwordCheck" class="input" autocomplete="off">
+                            <input type="password" name="passwordCheck" id="passwordCheck" class="input" autocomplete="off"><br />
                             <span class="font-kor" id="passwordChk2"></span>
                         </div>
                         <div id="email">
                             <div class="label font-kor">이메일</div>
                             <input type="email" name="memberEmail" id="memberEmail" style="width: 400px; height: 44px;"
-                            		placeholder=" ex) abcd@naver.com">
+                            		placeholder=" ex) abcd@naver.com"><br />
                             <span class="font-kor" id="memberEmailChk"></span>
                         </div>
                         <div id="enroll-btn">
