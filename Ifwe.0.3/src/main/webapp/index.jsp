@@ -31,9 +31,17 @@
 <!-- 영문폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
 <script>
+	
+
 $(function(){
+	
+	
+	
 	$("#loginbutton").click(function(){
 		$(".back").css("display","inline-block");
+		$("#search-id-pwd-container").css('display','none');
+		$("#search-number-container-pwd").css('display','none');
+		$("#search-number-container-id").css('display','none');
 	});
 	
 	$("#startbutton").click(function(){
@@ -42,7 +50,10 @@ $(function(){
 	
 	$(".back").click(function(e){
 		if($(e.target).is(".back")){
-		$(".back").css("display","none");
+			$(".back").css("display","none");
+			$("#login-container-first").css('display','');
+			$("#search-id-div").css('display','');
+			
 		}
 	});
 	
@@ -51,6 +62,30 @@ $(function(){
 		
 	});
 	
+	$("#search-id-pwd-button").click(function(){
+		$("#login-container-first").css('display','none');
+		$("#search-pwd-div").css('display','none');
+		$("#search-id-pwd-container").css('display','block');
+	});
+	
+	$("#li-pwd-search").click(function(){
+		$("#search-pwd-div").css('display','block');
+		$("#search-id-div").css('display','none');
+		$("#search-number-container-id").css('display','none');
+	});
+	
+	$("#li-id-search").click(function(){
+		$("#search-pwd-div").css('display','none');
+		$("#search-id-div").css('display','block');
+		$("#search-number-container-pwd").css('display','none');
+	});
+	
+	$("#search-id-btn-num").click(function(){
+		$("#search-number-container-id").css('display','');
+	});
+	$("#search-pwd-btn-num").click(function(){
+		$("#search-number-container-pwd").css('display','');
+	});
 	
 });
 
@@ -273,7 +308,7 @@ $(function(){
     </div>
 	
 	<div class="back">
-        <div class="login-container">
+        <div class="login-container" id="login-container-first">
             <div class="login-container-box">
 				<form action="${pageContext.request.contextPath }/member/login.do" method="post">
                 <div class="login-title">
@@ -286,8 +321,7 @@ $(function(){
                     <i class="fas fa-lock"></i> <input class="input-box" type="password" name="password" id="password" placeholder="비밀번호" >
                 </div>
                 <div class="login-extra">
-                    <a href="">아이디 | 비밀번호 찾기</a> <div class="saveid-container"><input type="checkbox" name="saveid" id="saveid" <c:if test='${not empty cookie.storedCookie.value }'>checked</c:if> ><label for="saveid">아이디 저장</label></div>
-                    
+                    <span id="search-id-pwd-button">아이디 | 비밀번호 찾기</span> <div class="saveid-container"><input type="checkbox" name="saveid" id="saveid" <c:if test='${not empty cookie.storedCookie.value }'>checked</c:if> ><label for="saveid">아이디 저장</label></div>
                 </div>
                   <input type="submit" class="loginbutton" value="로그인" />
                 <div class="login-naver-box">
@@ -297,12 +331,125 @@ $(function(){
                 <div class="login-register">
                     <p>아직 회원이 아니신가요?</p> <button id="register" onclick="location.href='${pageContext.request.contextPath}/member/enroll.do'">회원가입</button> 
                 </div>
-            </div>
+            </div> 
+            
         </div>
+        
+ <!-- 아이디 비번 찾기 div 시작 -->
+ 
+        <div class="login-container" id="search-id-pwd-container" >
+            <div class="login-container-box" id="search-id-pwd-container-box">
+                <div class="search-title">
+                	<ul>
+                		<li id="li-id-search" style="margin-right:20%;margin-left:5%;">아이디찾기</li>
+                		<li id="li-pwd-search" style="margin-left:10%;">비밀번호찾기</li>
+                	</ul>
+                </div>
+                <hr />
+ 
+ <!-- 아이디 찾기 div 시작-->
+               <div class="search-id-div" id="search-id-div">
+	                <div class="login-input">
+	                	<i class="far fa-user"></i> 
+	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="이름입력">
+	                </div>
+	                <div class="login-input">
+	                	<i class="fas fa-birthday-cake index-i-class"></i>
+	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="생년월일">
+	                </div>
+	                <div class="login-input">
+	                	<i class="fas fa-phone-alt index-i-class"></i>
+	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="전화번호">
+	                	<input type="button" value="인증번호받기" class="index-search-btn" id="search-id-btn-num"/>
+	                </div>
+	                 <div class="search-number-container" id="search-number-container-id" >
+		                 <div class="search-title">
+		                    <p>인증번호</p>
+		                 </div>
+		                 <div class="number-input">
+		                 	<i class="fas fa-mobile-alt index-i-class"></i>
+		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
+		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check"/>	
+		                 </div>
+	                 </div>
+               </div>
+ <!-- 아이디 찾기 div 끝 -->
+ 
+ 
+ <!-- 비밀번호 찾기 div 시작 -->
+ 				<div class="search-id-div" id="search-pwd-div">
+	                <div class="login-input pwd-input">
+	                	<i class="fas fa-id-card index-i-class"></i> 
+	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="아이디입력">
+	                </div>
+	                <div class="login-input pwd-input">
+	                	<i class="far fa-user"></i> 
+	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="이름입력">
+	                </div>
+	                <div class="login-input pwd-input">
+	                	<i class="fas fa-birthday-cake index-i-class"></i>
+	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="생년월일">
+	                </div>
+	                <div class="login-input pwd-input">
+	                	<i class="fas fa-phone-alt index-i-class"></i>
+	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="전화번호">
+	                	<input type="button" value="인증번호받기" class="index-search-btn" id="search-pwd-btn-num"/>
+	                </div>
+	                
+	                 <div class="search-number-container" id="search-number-container-pwd">
+		                 <div class="search-title">
+		                    <p>인증번호</p>
+		                 </div>
+		                 <div class="number-input">
+		                 	<i class="fas fa-mobile-alt index-i-class" ></i>
+		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
+		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check"/>	
+		                 </div>
+	                 </div>
+               </div>
+  <!-- 비밀번호 찾기 div 끝 -->
+
+ 
+            </div> 
+        </div>
+        
+  <!-- 아이디 비번 찾기 div 끝 -->
+        
     </div>
-	
-	
-	
+	<style>
+	.index-i-class{
+		color:#cecece;font-size:25px;padding:2%;
+	}
+	.pwd-input{
+		margin-top:60px;
+	}
+		.search-title li{
+			display:inline-block;
+			font-size:20px;
+			margin-top:10%;
+			margin-bottom:4%;
+			
+		}
+		.index-search-btn{
+			width:100px;height:40px;	
+			background-color:#ebebeb;
+			border:0;
+			border-radius:20px;
+			position:absolute;cursor:pointer;left:56%;
+		}
+		.search-title{
+			font-size:20px;
+			margin-top:10%;
+		}
+		.number-input{
+			width: 100%;
+		    height: 50px;
+		    margin-top: 5%;
+		    margin-bottom: 10px;
+		    font-size: 14pt;
+		    border-bottom: 1px solid #ebebeb;	
+		}
+	</style>
 	
 
 </body>
