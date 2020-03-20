@@ -21,11 +21,11 @@ public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	private int memberCode;
-	private String locCode;
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
 	private String memberPhone;
+	private String memberLoc;
 	private String memberEmail;
 	private Date memberBirth;
 	private String memberGender;
@@ -34,6 +34,7 @@ public class Member implements Serializable {
 	private String memberSuspension;
 	private String memberRole;
 	private int memberMsg;
+	private String memberLike;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -79,7 +79,7 @@ $(function(){
                      alert("태그값이 중복됩니다.");
                  }
              }else{
-            	 tagValue.text('');
+            	$("#tag").val('');
              }
              e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
          }
@@ -218,7 +218,7 @@ $(function(){
          padding: 16px 0;
      }
  
-     ul li {
+     ul li.tag-item{
          display: inline-block;
          margin: 0 5px;
          font-size: 14px;
