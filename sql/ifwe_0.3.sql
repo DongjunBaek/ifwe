@@ -243,8 +243,8 @@ CREATE TABLE  PREMIUM  (
 	 premium_code 	VARCHAR2(30)		NOT NULL,
 	 premium_name 	VARCHAR2(50)		NULL,
 	 premium_info 	VARCHAR2(50)		NULL,
-	 premium_start 	NUMBER		NULL,
-	 premium_end 	NUMBER		NULL
+	 premium_duration 	NUMBER		NULL,
+	 premium_price 	NUMBER		NULL
 );
 
 COMMENT ON COLUMN  PREMIUM . premium_start  IS '단위 : 일';
