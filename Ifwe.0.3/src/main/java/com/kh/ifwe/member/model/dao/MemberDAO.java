@@ -1,11 +1,14 @@
 package com.kh.ifwe.member.model.dao;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberDAO {
 
 	int insertMember(Member member);
 
 	Member selectOne(String memberId);
+
+	int insertProfile(Profile profile);
 
 }

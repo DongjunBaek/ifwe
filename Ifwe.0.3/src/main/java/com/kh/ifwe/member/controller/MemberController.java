@@ -1,5 +1,7 @@
 package com.kh.ifwe.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.servlet.http.Cookie;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -181,6 +184,54 @@ public class MemberController {
 		return "member/membership";
 
 	}
+	
+	
+	/**
+	 * 김원재
+	 * 프로필 인서트,
+	 * 업데이트(selectOne 이후추가예정)
+	 * 
+	 * 20200320 19:40
+	 */
+	@PostMapping("/profileInsert.do")
+	public String insertProfile(com.kh.ifwe.member.model.vo.Profile profile, @RequestParam(value = "upFile", required = false) MultipartFile upFile,
+			HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		log.debug("profile={}", profile);
+
+		try {
+
+
+   		log.debug("filename={}",upFile.getOriginalFilename());
+ 		log.debug("size={}",upFile.getSize());
+
+				// 파일명 재생성 renamedFileName으로 저장하기
+				String originalFileName = upFile.getOriginalFilename();
+				String renamedFileName = com.kh.ifwe.common.util.Utils.getRenamedFileName(originalFileName);
+
+				// 파일이동폴더
+				String saveDirectory = request.getServletContext().getRealPath("/resources/upload/proFile");
+
+				try {
+					upFile.transferTo(new File(saveDirectory, renamedFileName));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+
+
+
+			int result = memberService.insertProfile(profile);
+
+			redirectAttributes.addFlashAttribute("msg", result > 0 ? "등록성공!" : "등록실패!");
+
+		} catch (Exception e) {
+
+			log.error("프로필 등록 오류!", e);
+
+//			throw new BoardException("프로필 등록 오류! 관리자에게 문의하세요", e);
+		}
+		return "redirect:/member/profile";
+	}
+	
 	
 	
 	

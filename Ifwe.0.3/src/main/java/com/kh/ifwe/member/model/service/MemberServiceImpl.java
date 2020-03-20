@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -20,6 +21,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectOne(String memberId) {
 		return memberDAO.selectOne(memberId);
+	}
+
+	@Override
+	public int insertProfile(Profile profile) {
+		return memberDAO.insertProfile(profile);
 	}
 	
 	

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -20,6 +21,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member selectOne(String memberId) {
 		return sqlSession.selectOne("member.selectOne",memberId);
+	}
+
+	@Override
+	public int insertProfile(Profile profile) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("member.profileInsert",profile);
 	}
 	
 	
