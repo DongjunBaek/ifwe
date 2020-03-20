@@ -61,10 +61,10 @@ $(function(){
          if (e.key === "Enter" || e.keyCode == 32) {
 
              var tagValue = self.val(); // 값 가져오기
-
+			 var reg = /^[가-힣]{1,8}$/;
              // 값이 없으면 동작 ㄴㄴ
-             if (tagValue !== "") {
-
+             if (tagValue !== "" && reg.test(tagValue)) {
+					
                  // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
                  var result = Object.values(tag).filter(function (word) {
                      return word === tagValue;
@@ -78,6 +78,8 @@ $(function(){
                  } else {
                      alert("태그값이 중복됩니다.");
                  }
+             }else{
+            	 tagValue.text('');
              }
              e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
          }
@@ -229,6 +231,7 @@ $(function(){
  
      ul li.tag-item {
          padding: 10px 15px;
+         padding-right:20px;
          background-color: #ffc862;
          color: white;
          border-radius: 20px;
@@ -236,7 +239,7 @@ $(function(){
      }
  
      .tag-item:hover {
-         background-color: #2756a6;
+         background-color: #feba3b;
          color: #fff;
      }
  
@@ -244,7 +247,7 @@ $(function(){
         font-size: 17px;
         font-weight: bold;
         cursor: pointer;
-        margin-left: 15px;
+        margin-left: 20px;
         vertical-align: 12%;
         color:black;
      }
@@ -255,106 +258,104 @@ $(function(){
 </style>
 	<section class="clubcreate-section">
 		<div id="container" >
-                <form action="">
-                    <div id="first" class="info-container">
-                        <div class="number-createclub font-kor">01</div>
-                        <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
-                        <div class="inputs">
-                     	<div class="yellow-label-span">		
-       			 			<label for="concert" class="yellow-lable">공연/전시</label>
-    					</div>
-
-					    <div class="yellow-label-span">
-					        <label for="study" class="yellow-lable">&nbsp;&nbsp;&nbsp;스터디</label>
-					    </div>
-
-					    <div class="yellow-label-span">
-					        <label for="music" class="yellow-lable">음악/댄스</label>
-					    </div>
-                       		
-                       	<div class="radio-hidden">
-	                    	<input type="radio" name="category" id="music" value="music"/>
-	                       	<input type="radio" name="category" id="study" value="study"/>
-	                       	<input type="radio" name="category" id="concert"  value="concert"/>
-                       	</div>
-                            <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
-                            <input type="button" value="스터디" name="study" class="font-kor buttons">
-                            <input type="button" value="음악/댄스" name="music" class="font-kor buttons"> -->
-                        </div>
+            <form action="">
+                <div id="first" class="info-container">
+                    <div class="number-createclub font-kor">01</div>
+                    <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
+                    <div class="inputs">
+                 	<div class="yellow-label-span">		
+   			 			<label for="concert" class="yellow-lable">공연/전시</label>
+					</div>
+			
+				    <div class="yellow-label-span">
+				        <label for="study" class="yellow-lable">&nbsp;&nbsp;&nbsp;스터디</label>
+				    </div>
+			
+				    <div class="yellow-label-span">
+				        <label for="music" class="yellow-lable">음악/댄스</label>
+				    </div>
+                   		
+                   	<div class="radio-hidden">
+                 	<input type="radio" name="category" id="music" value="music"/>
+                    	<input type="radio" name="category" id="study" value="study"/>
+                    	<input type="radio" name="category" id="concert"  value="concert"/>
+                   	</div>
+                        <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
+                        <input type="button" value="스터디" name="study" class="font-kor buttons">
+                        <input type="button" value="음악/댄스" name="music" class="font-kor buttons"> -->
                     </div>
-                    <div id="second" class="info-container">
-                        <div class="number-createclub font-kor">02</div>
-                        <div class="font-kor title thin-font">소모임 키워드를 4개이하로 입력해주세요</div>
-                        <span class="font-kor span-post thin-font">단어입력후 Enter쳐주세요</span>
-                        <div class="inputs">
-                        	<input type="hidden" value="" name="tag" id="rdTag" />
+                </div>
+                <div id="second" class="info-container">
+                    <div class="number-createclub font-kor">02</div>
+                    <div class="font-kor title thin-font">소모임 키워드를 4개이하로 입력해주세요</div>
+                    <span class="font-kor span-post thin-font">단어입력후 Enter쳐주세요</span>
+                    <div class="inputs">
+                    	<input type="hidden" value="" name="tag" id="rdTag" />
+                    
+                        <input type="text" name="keywords" class="font-kor input-text thin-font" 
+                        	   id="tag" size="6">
                         
-                            <input type="text" name="keywords" class="font-kor input-text thin-font" 
-                            	   id="tag" size="6">
-                            
-                            <ul id="tag-list">
-           				    </ul>
-                            
-                        </div>
+                        <ul id="tag-list">
+       				    </ul>
+                        
                     </div>
-                    <div id="third" class="info-container">
-                        <div class="number-createclub font-kor">03</div>
-                        <div class="font-kor title thin-font">소모임명을 정해주세요</div>
-                        <div class="inputs">
-                            <input type="text" name="somoim-name" class="font-kor input-text thin-font">
-                        </div>
+                </div>
+                <div id="third" class="info-container">
+                    <div class="number-createclub font-kor">03</div>
+                    <div class="font-kor title thin-font">소모임명을 정해주세요</div>
+                    <div class="inputs">
+                        <input type="text" name="somoim-name" class="font-kor input-text thin-font">
                     </div>
-                    <div id="fourth" class="info-container">
-                        <div class="number-createclub font-kor">04</div>
-                        <div class="font-kor title thin-font">소모임 소개글을 입력하세요</div>
-                        <div class="inputs">
-                            <input type="text" name="somoim-info" class="font-kor input-text thin-font" >
-                        </div>
+                </div>
+                <div id="fourth" class="info-container">
+                    <div class="number-createclub font-kor">04</div>
+                    <div class="font-kor title thin-font">소모임 소개글을 입력하세요</div>
+                    <div class="inputs">
+                        <input type="text" name="somoim-info" class="font-kor input-text thin-font" >
                     </div>
-                    <div id="fifth" class="info-container">
-                        <div class="number-createclub font-kor">05</div>
-                        <div class="font-kor title thin-font">소모임 주 활동지역을 설정해주세요</div>
-                          <div class="inputs">
-                            <div class="select-boxs">
-	                        <select name="search" id="search1">
-	                            <option value="">전체</option>
-	                            <option value="">지역별</option>
-	                            <option value="">모임명</option>
-	                        </select>
-                    	</div>
-                            <span class="font-kor thin-font span-people"></span>
-                        </div>
+                </div>
+                <div id="fifth" class="info-container">
+                    <div class="number-createclub font-kor">05</div>
+                    <div class="font-kor title thin-font">소모임 주 활동지역을 설정해주세요</div>
+                      <div class="inputs">
+                        <div class="select-boxs">
+                     <select name="search" id="search1">
+                         <option value="">전체</option>
+                         <option value="">지역별</option>
+                         <option value="">모임명</option>
+                     </select>
+                	</div>
+                        <span class="font-kor thin-font span-people"></span>
                     </div>
-                    <div id="sixth" class="info-container">
-                        <div class="number-createclub font-kor">06</div>
-                        <div class="font-kor title thin-font">소모임 인원수를 정해주세요</div>
-                        <div class="inputs">
-                            <div class="select-boxs">
-	                        <select name="search" id="search2">
-	                            <option value="">전체</option>
-	                            <option value="">지역별</option>
-	                            <option value="">모임명</option>
-	                        </select>
-                    	</div>
-                            <span class="font-kor thin-font span-people">최대 25명</span>
-                        </div>
+                </div>
+                <div id="sixth" class="info-container">
+                    <div class="number-createclub font-kor">06</div>
+                    <div class="font-kor title thin-font">소모임 인원수를 정해주세요</div>
+                    <div class="inputs">
+                        <div class="select-boxs">
+                     <select name="search" id="search2">
+                         <option value="">전체</option>
+                         <option value="">지역별</option>
+                         <option value="">모임명</option>
+                     </select>
+                	</div>
+                        <span class="font-kor thin-font span-people">최대 25명</span>
                     </div>
-                    <div id="seventh" class="info-container">
-                        <div class="number-createclub font-kor">07</div>
-                        <div class="font-kor title thin-font">소모임 배너에 들어갈 대표이미지를 지정해주세요</div>
-                        <div class="inputs">
-                            <input name="fileName" id="" class="font-kor input-file thin-font">
-                            <label for="input-file" class="file-label font-kor">파일첨부</label>
-                            <input type="file" id="input-file" class="upload-hidden">
-                        </div>
+                </div>
+                <div id="seventh" class="info-container">
+                    <div class="number-createclub font-kor">07</div>
+                    <div class="font-kor title thin-font">소모임 배너에 들어갈 대표이미지를 지정해주세요</div>
+                    <div class="inputs">
+                        <input name="fileName" id="" class="font-kor input-file thin-font">
+                        <label for="input-file" class="file-label font-kor">파일첨부</label>
+                        <input type="file" id="input-file" class="upload-hidden">
                     </div>
-                    <div id="create-btn" class="inputs">
-                        <input type="button" value="소모임 생성" class="font-kor c-btn">
-                    </div>
-                </form>
-            </div>
-	
-	
+                </div>
+                <div id="create-btn" class="inputs">
+                    <input type="button" value="소모임 생성" class="font-kor c-btn">
+                </div>
+            </form>
+        </div>
 	</section>
 <script>
 $(function(){
