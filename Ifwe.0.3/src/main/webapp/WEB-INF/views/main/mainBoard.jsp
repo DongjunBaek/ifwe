@@ -6,6 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="게시판" name="pageTitle"/>
 </jsp:include>
+
 <script>
      $(function(){
          $(".section-boardcate-button").click(function(){
@@ -21,7 +22,8 @@
          $("#notice").trigger("click");
      });
  </script>
-<section>
+ 
+<section style="margin:0;">
         <div class="section-container-box">
             <div class="section-title-box">
                 <p>게시판</p>
