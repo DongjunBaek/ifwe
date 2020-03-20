@@ -82,6 +82,19 @@ function sample6_execDaumPostcode() {
     $(".shc-img-box-float").click(function(){
     	$('.enroll-article-first').css('display','none');
     	$('.enroll-article-second').css('display','');
+    	if($(this).attr('class') == "shc-culture-box shc-img-box-float"){
+    		$("#memberLike").val("공연전시");
+    	}
+    	else if($(this).attr('class') == "shc-study-box shc-img-box-float"){
+    		$("#memberLike").val("스터디");
+    	}
+    	else if($(this).attr('class') == "shc-music-box shc-img-box-float"){
+    		$("#memberLike").val("음악댄스");
+    	}
+    	
+    	
+    	
+    	
     });
     $(".phone-btn-container").click(function(){
         alert('본인인증성공!')
@@ -401,6 +414,7 @@ function maxLengtYear(object){
             <div class="enroll-form">
                 <form action="${pageContext.request.contextPath }/member/enroll.do" method="post"
                 	onsubmit="return duplicate();" autocomplete="off">
+                	<input type="hidden" name="memberLike" id="memberLike" />
                     <div class="form-left">
                         <div id="name">
                             <div class="label font-kor">이름</div>
@@ -426,7 +440,7 @@ function maxLengtYear(object){
                             <div class="label font-kor">주소</div>
                             <input type="text" name="memberAddr" id="sample6_address" style="width: 400px;height: 44px;"
                             	   onclick="sample6_execDaumPostcode()" placeholder=" 클릭하세요" readonly>
-                           	<input type="hidden" name="locCode" id="sidohidden"/>
+                           	<input type="hidden" name="memberLoc" id="sidohidden"/>
                         </div>
                         <div class="label font-kor">성별</div>
                    		<div style="width: 180px;">
