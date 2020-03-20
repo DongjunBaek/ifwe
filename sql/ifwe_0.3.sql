@@ -39,7 +39,7 @@
 --DROP TABLE  CLUB_CATEGORY CASCADE CONSTRAINT;
 --DROP TABLE  CLUB_HISTORY CASCADE CONSTRAINT;
 
-CREATE TABLE "MEMBER" (
+CREATE TABLE MEMBER (
 	member_code	NUMBER		NOT NULL,
 	member_id	VARCHAR2(30)		NULL,
 	member_pwd	VARCHAR2(300)		NULL,
@@ -50,8 +50,8 @@ CREATE TABLE "MEMBER" (
 	member_birth	DATE		NULL,
 	member_gender	CHAR(1)		NULL,
 	member_addr	VARCHAR2(100)		NULL,
-	member_enrolldate	DATE		NULL,
-	member_suspension	CHAR(1)		NULL,
+	member_enrolldate	DATE    default sysdate,
+	member_suspension	CHAR(1)		NULL, -- 징계여부 y or n
 	member_role	VARCHAR2(15)		NULL,
 	member_msg	NUMBER		NULL,
 	member_like	VARCHAR2(100)		NULL
