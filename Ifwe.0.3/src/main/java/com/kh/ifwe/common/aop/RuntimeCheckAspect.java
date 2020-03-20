@@ -27,17 +27,13 @@ public class RuntimeCheckAspect {
 	
 	@Around("pointcut()")
 	public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable{
-		//Target메소드 실행전 코드 
 		StopWatch sw = new StopWatch();
 		sw.start();
-		log.debug("시간 측정 시작 {}");
 		Object obj = joinPoint.proceed();
 		
 		sw.stop();
 		Long time = sw.getTotalTimeMillis();
 
-		//Target메소드 실행후 코드 
-		log.debug("시간 측정 종료 {}millis",time);
 		
 		return obj;
 	}

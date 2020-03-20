@@ -8,5 +8,7 @@ public class BoardController {
 	@GetMapping("/board/insertBoard.do")
 	public String insertBoard() {
 		return "board/insertBoard";
+		
+		
 	}
 }
