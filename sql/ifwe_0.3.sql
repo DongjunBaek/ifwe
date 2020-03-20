@@ -171,7 +171,7 @@ DROP TABLE  CLUB ;
 CREATE TABLE  CLUB  (
 	 club_code 	NUMBER		NOT NULL,
 	 club_master 	NUMBER		NOT NULL,
-	 club_title 	CHAR(120)		NULL,
+	 club_title 	VARCHAR2(120)		NULL,
 	 club_img_ori 	VARCHAR2(100)		NULL,
 	 club_img_re 	VARCHAR2(100)		NULL,
 	 club_current 	NUMBER		NULL,
@@ -676,4 +676,6 @@ commit;
 select * from member;
 --id : admin1234
 --password : admin1234!
+
+
 
