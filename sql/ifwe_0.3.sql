@@ -52,12 +52,12 @@ CREATE TABLE MEMBER (
 	member_addr	VARCHAR2(100)		NULL,
 	member_enrolldate	DATE    default sysdate,
 	member_suspension	CHAR(1)		NULL, -- 징계여부 y or n
-	member_role	VARCHAR2(15)		NULL,
+	member_role	VARCHAR2(15)		NULL, -- 사용자 분류 'A' 관리자 'M' 일반 회원 'D' 탈퇴한 회원 'H' 휴면 회원
 	member_msg	NUMBER		NULL,
 	member_like	VARCHAR2(100)		NULL
 );
 
-DROP TABLE  BOARD ;
+
 
 CREATE TABLE  BOARD  (
 	 board_no 	NUMBER		NOT NULL,
@@ -67,20 +67,19 @@ CREATE TABLE  BOARD  (
 	 board_content 	VARCHAR2(2000)		NULL,
 	 board_img_ori 	VARCHAR2(100)		NULL,
 	 board_img_re 	VARCHAR2(100)		NULL,
-	 board_date 	DATE		NULL,
-	 board_readcount 	NUMBER		NULL,
-	 board_level 	NUMBER		NULL,
-	 board_del 	CHAR(1)		NULL
+	 board_date 	DATE		default sysdate,
+	 board_readcount 	NUMBER	default	0,
+	 board_level 	NUMBER		default 0,
+	 board_del 	CHAR(1) default 'N' -- 삭제 글 여부 'Y' 'N'
 );
 
-DROP TABLE  BOARD_CATEGORY ;
 
 CREATE TABLE  BOARD_CATEGORY  (
 	 board_cate 	VARCHAR2(20)		NOT NULL,
 	 board_cateinfo 	CHAR(20)		NULL
 );
 
-DROP TABLE  TBL_SEARCH ;
+
 
 CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		NOT NULL,
@@ -102,7 +101,7 @@ CREATE TABLE  BOARD_COMMENT  (
 	 comment_no_ref 	NUMBER		NOT NULL
 );
 
-DROP TABLE  MEMBER_REPORT ;
+
 
 CREATE TABLE  MEMBER_REPORT  (
 	 report_code 	NUMBER		NOT NULL,
@@ -147,7 +146,7 @@ CREATE TABLE  MEMBER_EVENT  (
 	 event_date 	DATE		NULL
 );
 
-DROP TABLE  CONTENTS_CATEGORY ;
+
 
 CREATE TABLE  CONTENTS_CATEGORY  (
 	 cate_code 	VARCHAR2(100)		NOT NULL,
@@ -171,7 +170,7 @@ DROP TABLE  CLUB ;
 CREATE TABLE  CLUB  (
 	 club_code 	NUMBER		NOT NULL,
 	 club_master 	NUMBER		NOT NULL,
-	 club_title 	CHAR(120)		NULL,
+	 club_title 	VARCHAR2(120)		NULL,
 	 club_img_ori 	VARCHAR2(100)		NULL,
 	 club_img_re 	VARCHAR2(100)		NULL,
 	 club_current 	NUMBER		NULL,
@@ -650,11 +649,11 @@ REFERENCES  CLUB  (
 -- 시퀀스
 --===================================================================
 create sequence seq_member_no;
-
+--create sequence seq_board_no;
 
 
 --===================================================================
---더미
+--member dummy
 --===================================================================
 
 insert into member
@@ -676,4 +675,32 @@ commit;
 select * from member;
 --id : admin1234
 --password : admin1234!
+
+
+--=============================================
+-- board_cate dummy
+--=============================================
+insert into board_category values('notice','공지사항');
+insert into board_category values('qna','문의사항');
+insert into board_category values('report','신고');
+commit;
+--select * from board_category;
+--=============================================
+-- board dummy
+--=============================================
+select * from board;
+insert into board values (
+    seq_board_no.nextval,
+    3,
+    'notice',
+    'test Title',
+    'test Contents',
+    null,
+    null,
+    default,
+    default,
+    default,
+    default    
+);
+commit;
 
