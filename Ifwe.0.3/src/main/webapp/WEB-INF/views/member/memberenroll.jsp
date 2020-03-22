@@ -21,11 +21,8 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-
-
-
-
+.enroll-btn{
+border:0;}
 </style>
 <script>
 function sample6_execDaumPostcode() {
@@ -105,7 +102,7 @@ function sample6_execDaumPostcode() {
    });
 $(function(){
 	
-	$("#memberId").keyup(function(){
+	$("#memberId").blur(function(){
 		let memberId = $("#memberId").val();
 		
 		let msg = "";
@@ -119,7 +116,7 @@ $(function(){
 		}
 	});	
 
-	$("#password").keyup(function(){
+	$("#password").blur(function(){
 		
 		let password = $("#password").val();
 		
@@ -137,7 +134,7 @@ $(function(){
 		
 	});
 	
-	$("#passwordCheck").keyup(function(){
+	$("#passwordCheck").blur(function(){
 		
 		let password = $("#password").val();
 		let passchk = $("#passwordCheck").val();
@@ -151,7 +148,7 @@ $(function(){
 		
 	});
 	
-	$("#memberName").keyup(function(){
+	$("#memberName").blur(function(){
 		
 		let name = $("#memberName").val();
 		let reg = /^[가-힣]{2,4}$/;
@@ -165,7 +162,7 @@ $(function(){
 		
 	});
 	
-	$("#year").keyup(function(){
+	$("#year").blur(function(){
 		let year = $(this).val();
 		let today = new Date();
 		let yearNow = today.getFullYear();
@@ -179,7 +176,7 @@ $(function(){
 		
 	});
 	
-	$("#month").keyup(function(){
+	$("#month").blur(function(){
 		let month = $(this).val();
 		if(month<1 || month>12){
 			$("#monthChk").text("월이 올바르지않습니다.").css("color","rgb(235, 42, 14)");
@@ -188,7 +185,7 @@ $(function(){
 		}
 		
 	});
-	$("#day").keyup(function(){
+	$("#day").blur(function(){
 		let year = $("#year").val();
 		let month = $("#month").val();
 		let day = $(this).val();
@@ -212,7 +209,7 @@ $(function(){
 	});
 	
 	
-	$("#memberEmail").keyup(function(){
+	$("#memberEmail").blur(function(){
 		let email = $(this).val();
 		let reg = /^[A-Za-z0-9]+[-A-Za-z0-9_]*[@]{1}[A-Za-z0-9]+[-A-Za-z0-9_]*[.]{1}[A-Za-z]{2,5}$/;
 		
