@@ -95,7 +95,20 @@ $(function(){
 	
 	//****************해쉬태그 끝 ********************
 	
-	
+ 	$("[name=upFile]").on("change",e=>{
+		let $file = $(e.target);
+		
+		//취소한경우
+		if($file.prop('files')[0] === undefined){
+			$("#upFileLabel").val("파일을 선택하세요");
+		}else{
+			$("#upFileLabel").val($file.prop('files')[0].name);
+		}
+		
+		
+		
+		
+	});
 	
     
 });
@@ -264,7 +277,7 @@ function clubDuplicate(){
 </style>
 	<section class="clubcreate-section">
 		<div id="container" >
-            <form action="${pageContext.request.contextPath }/club/clubCreate.do" method="post" 
+            <form action="${pageContext.request.contextPath }/club/clubCreate.do" method="post" id="tag-form" 
             	  autocomplete="off" enctype="multipart/form-data" onsubmit="return clubDuplicate();">
             	  <input type="hidden" name="clubMaster" value="${memberLoggedIn.memberCode }" />
                 <div id="first" class="info-container">
@@ -284,9 +297,9 @@ function clubDuplicate(){
 				    </div>
                    		
                    	<div class="radio-hidden">
-                 		<input type="radio" name="category" id="music" value="음악댄스"/>
-                    	<input type="radio" name="category" id="study" value="스터디"/>
-                    	<input type="radio" name="category" id="concert"  value="공연전시"/>
+                 		<input type="radio" name="clubCatecode" id="music" value="음악댄스"/>
+                    	<input type="radio" name="clubCatecode" id="study" value="스터디"/>
+                    	<input type="radio" name="clubCatecode" id="concert"  value="공연전시"/>
                    	</div>
                         <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
                         <input type="button" value="스터디" name="study" class="font-kor buttons">
@@ -312,14 +325,14 @@ function clubDuplicate(){
                     <div class="number-createclub font-kor">03</div>
                     <div class="font-kor title thin-font">소모임명을 정해주세요</div>
                     <div class="inputs">
-                        <input type="text" name="somoim-name" class="font-kor input-text thin-font">
+                        <input type="text" name="clubTitle" class="font-kor input-text thin-font">
                     </div>
                 </div>
                 <div id="fourth" class="info-container">
                     <div class="number-createclub font-kor">04</div>
                     <div class="font-kor title thin-font">소모임 소개글을 입력하세요</div>
                     <div class="inputs">
-                        <input type="text" name="somoim-info" class="font-kor input-text thin-font" >
+                        <input type="text" name="clubContent" class="font-kor input-text thin-font" >
                     </div>
                 </div>
                 <div id="fifth" class="info-container">
@@ -327,10 +340,18 @@ function clubDuplicate(){
                     <div class="font-kor title thin-font">소모임 주 활동지역을 설정해주세요</div>
                       <div class="inputs">
                         <div class="select-boxs">
-                     <select name="search" id="search1">
-                         <option value="">전체</option>
-                         <option value="">지역별</option>
-                         <option value="">모임명</option>
+                     <select name="clubLocation" id="search1">
+                         <option value="전체" disabled selected>전체</option>
+                         <option value="서울">서울시</option>
+                         <option value="경기">경기도</option>
+                         <option value="강원">강원도</option>
+                         <option value="충북">충청북도</option>
+                         <option value="충남">충청남도</option>
+                         <option value="경북">경상북도</option>
+                         <option value="경남">경상남도</option>
+                         <option value="전북">전라북도</option>
+                         <option value="전남">전라남도</option>
+                         <option value="제주특별자치도">제주도</option>
                      </select>
                 	</div>
                         <span class="font-kor thin-font span-people"></span>
@@ -341,10 +362,12 @@ function clubDuplicate(){
                     <div class="font-kor title thin-font">소모임 인원수를 정해주세요</div>
                     <div class="inputs">
                         <div class="select-boxs">
-                     <select name="search" id="search2">
-                         <option value="">전체</option>
-                         <option value="">지역별</option>
-                         <option value="">모임명</option>
+                     <select name="clubMax" id="search2">
+                         <option value="전체" disabled selected>전체</option>
+                         <option value="10">10</option>
+                         <option value="15">15</option>
+                         <option value="20">20</option>
+                         <option value="25">25</option>
                      </select>
                 	</div>
                         <span class="font-kor thin-font span-people">최대 25명</span>
@@ -354,9 +377,10 @@ function clubDuplicate(){
                     <div class="number-createclub font-kor">07</div>
                     <div class="font-kor title thin-font">소모임 배너에 들어갈 대표이미지를 지정해주세요</div>
                     <div class="inputs">
-                        <input name="fileName" id="" class="font-kor input-file thin-font">
+                        <input name="fileName" id="upFileLabel" class="font-kor input-file thin-font" 
+                        	   value="파일을 선택하세요" readonly>
                         <label for="input-file" class="file-label font-kor">파일첨부</label>
-                        <input type="file" id="input-file" name="clubTitleFileUpload" class="upload-hidden">
+                        <input type="file" id="input-file" name="upFile" class="upload-hidden">
                     </div>
                 </div>
                 <div id="create-btn" class="inputs">
