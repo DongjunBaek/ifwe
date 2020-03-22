@@ -153,3 +153,13 @@ input[type=checkbox]:checked + label:before{
         border:0;
 }
    
+.index-i-class{
+	color:#cecece;font-size:25px;padding:2%;
+	}
+		.index-search-btn{
+			width:100px;height:40px;	
+			background-color:#ebebeb;
+			border:0;
+			border-radius:20px;
+			position:absolute;cursor:pointer;left:56%;
+		}

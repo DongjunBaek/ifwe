@@ -189,3 +189,198 @@
     font-size: 15px;
     font-weight: bolder;
 }
+
+
+    .update-li-i-class{color:#cbcbcb; margin-left:5%;cursor:pointer;}
+    .update-list-div li{color:#2756a6; margin-bottom:3%;}
+   	.update-li-p-class{font-size:22px;}
+    .update-list-div{margin-top:5%;}
+    .phone-number-title{max-width:max-content;font-size:20px;}
+    .phone-number-content{max-width:max-content;font-size:16px;}
+    .email-title{max-width:max-content;clear:both;font-size:20px;margin-top:5%;}
+    .email-content{max-width:max-content;font-size:16px;margin-top:5%;}
+    .phone-email-container{margin-top:7%;}
+    .update-titles{ float:left;margin-right:20%;}
+    .update-contents{ float:left;}
+.radio-items {
+  display: table;
+  width: 100%;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.radio-items > div {
+  display: table-cell;
+  height: 44px;
+  line-height: 44px;
+  border-left: 1px solid #ebebeb;
+  text-align: center;
+}
+.radio-items > div:first-child {
+  border-left: none;
+  width: auto !important;
+}
+.radio-items label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #3b3b3b;
+  vertical-align: middle;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.radio-items input[type="radio"]:checked + label {
+  background-color: #ffc862;
+  color: #fff;
+}
+
+   .update-title{
+       width: 1100px;
+       height: 75px;
+   }
+   .update-title-p{
+       font-size: 35px;
+       margin-left: 5%;
+       margin-top:2%;
+   }
+   .update-form{
+       /* margin-top: 3%; */
+       width: 1100px;
+       height: 750px;
+       background-color: white;
+       float: left;
+   }
+   .first-form,.second-form{
+       margin-top: 6%;
+       width: 480px;
+       height: 580px;
+       float: left;
+       margin-left:6.3%
+   }
+   .update-form-input{
+       border:1px solid #ebebeb;
+       /* margin-bottom: 5%; */
+   }
+   .update-label{
+       font-size: 20px;
+       margin: 4% 0 5% 0;
+   }
+   .update-input{
+       width: 260px;
+       height: 44px;
+       font-size: 20px;
+       padding-left:3%;
+   }
+   .input-long{
+       width: 430px;
+       height: 44px;
+       font-size:20px;
+       padding-left:3%;
+   }
+   .update-button{
+       margin-top: 10%;
+       width: 345px;
+       height: 50px;
+       background-color: #ffc862;
+       border: 0;
+       outline: 0;
+       border-radius: 20px;
+       color: white;
+       font-size: 20px;
+   }
+   .only-sr {
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+}
+.profile-update-div{
+	border: 1px solid #ebebeb;
+    width: 600px;
+    height: 450px;
+    margin: 7%;
+    padding: 5%;
+    background-color: white;
+}
+.profile-update-div-list{
+	border: 1px solid #ebebeb;
+    width: 600px;
+    height: 450px;
+    margin: 7%;
+    padding: 5%;
+    background-color: white;
+}
+
+.profile-update-btn{
+	clear: both;
+    width: 150px;
+    height: 50px;
+    margin-top: 50%;
+    }
+.profile-update-btn-class{
+	border:1px solid #cbcbcb;
+	outline:0;
+	width:100%;
+	height: 100%;
+    margin-left: 10%;
+    cursor:pointer;
+}
+.update-second{
+float:left;
+width:700px;
+margin-left:2%;
+}
+.update-first{
+width:700px;
+float:left;
+margin-left:5%;
+}
+.profile-update-image{
+width:200px;
+height: 200px;
+border:1px solid black;
+}
+.profile-update-div-in p{
+font-size:30px;}
+
+.profile-img-div{
+    width: 160px;
+    height: 160px;
+   /*  border: 5px solid black; */
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-top: 5%;
+}
+.profile-img-div>img{
+width:100%;
+height:100%;
+}
+.profile-nickname-div{
+	float:left;
+    margin-top: 25%;
+    margin-left: 10%;
+    width:300px;
+}
+.profile-nickname-div-title{
+	font-size:30px;
+	float:left;
+	
+}
+.profile-nickname-div-content{
+float:left;
+
+    margin-top: 2%;
+    font-size: 20px;
+    margin-left: 3%;}
+    
+.updatePassword-artical{width:600px;height:800px;margin:3% auto; background-color:white;padding:3%;}
+.updatePassword-div-container{width:100%; height:300px;margin-top:10%;}
+.updatePassword-old,.updatePassword-new,.updatePassword-new-chk{width:100%;height:65px;}
+.updatePassword-new{margin-top:5%;}
+.updatePassword-inputs{width:100%;height: 100%; padding:2%;border:1px solid #cbcbcb;}
+.updatePassword-btn{height:65px; color:white;}
+.recaptcha-div{margin-top:5%;}
+ .update-password-span{cursor:pointer;}
+    
