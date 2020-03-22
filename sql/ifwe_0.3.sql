@@ -113,7 +113,7 @@ CREATE TABLE  MEMBER_REPORT  (
 	 repost_end 	DATE		NULL
 );
 
-DROP TABLE  CONTENTS_INFO ;
+
 
 CREATE TABLE  CONTENTS_INFO  (
 	 contents_code 	NUMBER		NOT NULL,
@@ -125,7 +125,6 @@ CREATE TABLE  CONTENTS_INFO  (
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
 
-DROP TABLE  MEMBER_PROFILE ;
 
 CREATE TABLE  MEMBER_PROFILE  (
 	 member_code 	NUMBER		NOT NULL,
@@ -148,9 +147,9 @@ CREATE TABLE  MEMBER_EVENT  (
 
 
 
-CREATE TABLE  CONTENTS_CATEGORY  (
-	 cate_code 	VARCHAR2(100)		NOT NULL,
-	 cate_codeinfo 	VARCHAR2(100)		NULL
+CREATE TABLE  CLUB_CATEGORY  (
+    club_code    NUMBER      NOT NULL,
+    club_cate    VARCHAR2(100)      NOT NULL
 );
 
 DROP TABLE  EVENT ;
@@ -167,19 +166,27 @@ CREATE TABLE  EVENT  (
 
 DROP TABLE  CLUB ;
 
+-- 0323 변경
 CREATE TABLE  CLUB  (
-	 club_code 	NUMBER		NOT NULL,
-	 club_master 	NUMBER		NOT NULL,
-	 club_title 	VARCHAR2(120)		NULL,
-	 club_img_ori 	VARCHAR2(100)		NULL,
-	 club_img_re 	VARCHAR2(100)		NULL,
-	 club_current 	NUMBER		NULL,
-	 club_max 	NUMBER		NULL,
-	 club_date 	DATE		NULL,
-	 premium_code 	VARCHAR2(30)		NOT NULL
+    club_code    NUMBER      NOT NULL,
+    club_master    NUMBER      NOT NULL,
+    club_title    varCHAR2(120)      NULL,
+    club_img_ori    VARCHAR2(100)      NULL,
+    club_img_re    VARCHAR2(100)      NULL,
+    club_current    NUMBER      NULL,
+    club_max    NUMBER      NULL,
+    club_date    DATE default sysdate,
+    club_content varchar2(300) null,
+     club_catecode varchar2(10) null,
+     club_location varchar2(10) null,
+     premium_code    VARCHAR2(30)    NULL
+     
 );
 
-DROP TABLE  CONTENTS_IMG ;
+-- 0323 추가
+CREATE TABLE  CONTENTS_CATEGORY  (
+    cate_code    VARCHAR2(100)   NOT NULL
+);
 
 CREATE TABLE  CONTENTS_IMG  (
 	 img_code 	VARCHAR2(20)		NOT NULL,
@@ -650,7 +657,7 @@ REFERENCES  CLUB  (
 --===================================================================
 create sequence seq_member_no;
 --create sequence seq_board_no;
-
+--create sequence seq_club_no;
 
 --===================================================================
 --member dummy
