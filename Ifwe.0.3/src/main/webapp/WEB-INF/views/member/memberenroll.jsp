@@ -383,10 +383,9 @@ function maxLengtYear(object){
                                    </div>
                                </div>
                            </div>
-                    </div>
-
-                </div>
-            </div>
+                    	</div>
+	                </div>
+	            </div>
 
         </article>
 

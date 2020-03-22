@@ -96,8 +96,14 @@ $(function(){
 	//****************해쉬태그 끝 ********************
 	
 	
+	
     
 });
+function clubDuplicate(){
+	
+	return true;
+};
+
 </script>
 <style>
 	.select-boxs{
@@ -258,7 +264,9 @@ $(function(){
 </style>
 	<section class="clubcreate-section">
 		<div id="container" >
-            <form action="">
+            <form action="${pageContext.request.contextPath }/club/clubCreate.do" method="post" 
+            	  autocomplete="off" enctype="multipart/form-data" onsubmit="return clubDuplicate();">
+            	  <input type="hidden" name="clubMaster" value="${memberLoggedIn.memberCode }" />
                 <div id="first" class="info-container">
                     <div class="number-createclub font-kor">01</div>
                     <div class="font-kor title thin-font">어떤 소모임을 만드실건가요?</div>
@@ -276,9 +284,9 @@ $(function(){
 				    </div>
                    		
                    	<div class="radio-hidden">
-                 	<input type="radio" name="category" id="music" value="music"/>
-                    	<input type="radio" name="category" id="study" value="study"/>
-                    	<input type="radio" name="category" id="concert"  value="concert"/>
+                 		<input type="radio" name="category" id="music" value="음악댄스"/>
+                    	<input type="radio" name="category" id="study" value="스터디"/>
+                    	<input type="radio" name="category" id="concert"  value="공연전시"/>
                    	</div>
                         <!-- <input type="button" value="공연/전시" name="concert" class="font-kor buttons">
                         <input type="button" value="스터디" name="study" class="font-kor buttons">
@@ -290,7 +298,7 @@ $(function(){
                     <div class="font-kor title thin-font">소모임 키워드를 4개이하로 입력해주세요</div>
                     <span class="font-kor span-post thin-font">단어입력후 Enter쳐주세요</span>
                     <div class="inputs">
-                    	<input type="hidden" value="" name="tag" id="rdTag" />
+                    	<input type="hidden" value="" name="cateCode" id="rdTag" />
                     
                         <input type="text" name="keywords" class="font-kor input-text thin-font" 
                         	   id="tag" size="6">
@@ -348,11 +356,11 @@ $(function(){
                     <div class="inputs">
                         <input name="fileName" id="" class="font-kor input-file thin-font">
                         <label for="input-file" class="file-label font-kor">파일첨부</label>
-                        <input type="file" id="input-file" class="upload-hidden">
+                        <input type="file" id="input-file" name="clubTitleFileUpload" class="upload-hidden">
                     </div>
                 </div>
                 <div id="create-btn" class="inputs">
-                    <input type="button" value="소모임 생성" class="font-kor c-btn">
+                    <input type="submit" value="소모임 생성" class="font-kor c-btn">
                 </div>
             </form>
         </div>
