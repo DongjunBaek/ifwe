@@ -11,7 +11,7 @@ p{
 margin:0;
 }
 </style>
-
+<!-- 문보라 수정 03.20  -->
 	<section class="mypage-section">
         <article class="mypage-first">
             <div class="intro-div">
@@ -19,8 +19,8 @@ margin:0;
               	  <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" width="100px"/>
                 </div>
                 <div class="myname-div font-kor">
-                    <div style="font-size: 25px;margin:0 10% ">@wingStudy_02</div>
-                    <div style="font-size:30px;font-weight: 900;margin:5% 20% 0 30%" >스테파니</div>
+                    <div style="font-size: 25px;margin:0 auto;max-width: fit-content;">@${memberLoggedIn.memberId }</div>
+                    <div style="margin:0 auto;font-size:30px;font-weight: 900;max-width: fit-content;" >${memberLoggedIn.memberName }</div>
                 </div>
             </div>
             <div class="btn-div">

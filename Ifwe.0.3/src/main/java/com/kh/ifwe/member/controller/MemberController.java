@@ -11,9 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -154,9 +156,16 @@ public class MemberController {
 	
 	
 	
+//	@GetMapping("/mypage.do")
+//	public String mypage(@ModelAttribute("memberLoggedIn") Member member) {
+//		
+//		return "member/mypage";
+//	}
+	
+	//문보라
 	@GetMapping("/mypage.do")
-	public String mypage() {
-		return "member/mypage";
+	public void mypage(@RequestParam("memberId") String memberId) {
+		
 	}
 	
 	@GetMapping("/profile.do")
@@ -182,7 +191,183 @@ public class MemberController {
 
 	}
 	
+	//03.21 문보라 프로필 수정 버튼 클릭 -> 프로필수정하는 폼
+	@GetMapping("/updateProfile.do")
+	public String updateProfile() {
+		return "member/profileUpdate";
+	}
+
+	//문보라 비밀번호 변경 뷰단
+	@GetMapping("/updatePassword.do")
+	public String updatePassword() {
+		
+		return "member/updatePassword";
+		
+	}
 	
 	
+	//03.21 문보라 비밀번호 변경
+	@PostMapping("/updatePasswordFrm.do")
+	public String updatePasswordFrm(@RequestParam("password-old") String password_old,
+									@RequestParam("password-new") String password_new,
+									@RequestParam("password-new-chk") String password_new_chk,
+									@RequestParam("memberId") String memberId,
+									RedirectAttributes redirectAttributes) {
+
+		
+		String msg = "";
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}",member);
+		
+		//현재 비밀번호와 입력한 비밀번호가 맞을 때 
+		if(bcryptPasswordEncoder.matches(password_old, member.getMemberPwd())) {
+			String bcryptPassword = bcryptPasswordEncoder.encode(password_new);
+			member.setMemberPwd(bcryptPassword);
+			int result = memberService.updatePassword(member);
+			
+			
+			if(result>0) {
+				msg = "비밀번호가 변경되었습니다.";
+			}else {
+				msg = "비밀번호가 번경되지않았습니다.";
+			}
+			
+			
+		}else {
+			log.debug("일치하지 않음");
+			msg = "현재비밀번호가 일치하지 않습니다.";
+		}
+		
+		redirectAttributes.addFlashAttribute("msg",msg);
+		return "redirect:/member/update.do";
+	}
+	
+	//문보라 이메일 전화번호 변경 뷰단
+	@GetMapping("/updateEmailPhone.do")
+	public String updateEmailPhone() {
+		
+		return "member/updateEmailPhone";
+	}
+	
+	//핸드폰 번호 변경 POPUP 문보라
+	@GetMapping("/updatePhonePUPUP.do")
+	public String updatePhonePOPUP() {
+		
+		return "member/updatePhonePOPUP";
+	}
+	
+	@PostMapping("/updatePhoneFrm.do")
+	public ModelAndView updatePhone(@RequestParam("member_phone") String member_phone, 
+							  @RequestParam("memberId") String memberId,
+							  ModelAndView mav,String close) {
+		
+		log.debug("memberId = {}",memberId);
+		log.debug("memberPhone = {}",member_phone);
+		
+		String msg = "";
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}",member);
+		
+		member.setMemberPhone(member_phone);
+		
+		log.debug("member = {}",member);
+		
+		int result = memberService.updatePhone(member);
+		
+		log.debug("reslt = {}",result);
+		if(result>0) {
+			msg = "전화번호가 변경되었습니다.";
+		}else {
+			msg = "전화번호가 번경되지않았습니다.";
+		}
+		
+		close="close";
+		mav.addObject("msg", msg);
+		mav.setViewName("/member/updateEmailPhone");
+		mav.addObject("close", close);
+		
+		log.debug("mav = {}",mav);
+		return mav;
+	}
+	
+	//0322 이메일 변경 팝업창 문보라
+	@GetMapping("/updateEmailPOPUP.do")
+	public String updatEmailPOPUP() {
+		
+		return "member/updateEmailPOPUP";
+	}
+	
+	//0322 이메일 변경 문보라
+	@PostMapping("/updateEmailFrm.do")
+	public ModelAndView updateEmail(@RequestParam("memberEmail") String memberEmail, 
+							  @RequestParam("memberId") String memberId,
+							  RedirectAttributes redirectAttributes,ModelAndView mav,String close) {
+		
+		log.debug("memberId = {}",memberId);
+		log.debug("memberEmail = {}",memberEmail);
+		
+		String msg = "";
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}",member);
+		
+		member.setMemberEmail(memberEmail);
+		
+		log.debug("member = {}",member);
+		
+		int result = memberService.updateEamil(member);
+		
+		log.debug("reslt = {}",result);
+		if(result>0) {
+			msg = "이메일 주소가 변경되었습니다.";
+		}else {
+			msg = "이메일 주소가 번경되지않았습니다.";
+		}
+		
+		close="close";
+		mav.addObject("msg", msg);
+		mav.setViewName("/member/updateEmailPhone");
+		mav.addObject("close", close);
+		
+		log.debug("mav = {}",mav);
+		return mav;
+	}
+	
+	//회원탈퇴 문보라
+	@GetMapping("/deleteMember.do")
+	public String deletMember() {
+		
+		return "member/deleteMember";
+		
+	}
+	
+	@PostMapping("/deleteForm.do")
+	public ModelAndView deleteForm(@RequestParam("memberId")String memberId, RedirectAttributes redirectAttributes,ModelAndView mav) {
+		log.debug("memberId = {}",memberId);
+		
+		
+		String msg = "";
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}",member);
+		
+		member.setMemberRole("d");
+		
+		log.debug("member = {}",member);
+		
+		int result = memberService.deleteMember(member);
+		
+		log.debug("reslt = {}",result);
+		if(result>0) {
+			msg = "회원탈퇴가 되었습니다. 그 동안 ifwe를 이용해주셔서 감사합니다.";
+		}else {
+			msg = "회원탈퇴가 실패하였습니다.";
+		}
+		
+		redirectAttributes.addFlashAttribute("msg",msg);
+		mav.setViewName("redirect:/");
+		
+		
+		return mav;
+		
+	}
 	
 }

@@ -46,6 +46,9 @@ $(function(){
 	
 	$("#startbutton").click(function(){
 		$(".back").css("display","inline-block");
+		$("#search-number-container-pwd").css('display','none');
+		$("#search-number-container-id").css('display','none');
+		$("#search-id-pwd-container").css('display','none');
 	});
 	
 	$(".back").click(function(e){

@@ -8,4 +8,12 @@ public interface MemberService {
 
 	Member selectOne(String memberId);
 
+	int updatePassword(Member member);
+
+	int updatePhone(Member member);
+
+	int updateEamil(Member member);
+
+	int deleteMember(Member member);
+
 }

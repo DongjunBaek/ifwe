@@ -21,6 +21,26 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectOne(String memberId) {
 		return memberDAO.selectOne(memberId);
 	}
+
+	@Override
+	public int updatePassword(Member member) {
+		return memberDAO.updatePassword(member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return memberDAO.updatePhone(member);
+	}
+
+	@Override
+	public int updateEamil(Member member) {
+		return memberDAO.updateEmail(member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return memberDAO.deleteMember(member);
+	}
 	
 	
 }

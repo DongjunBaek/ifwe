@@ -9,7 +9,6 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery.selectric.min.js"></script>
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/selectric.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/categori.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mainboard.css">
@@ -34,7 +33,7 @@ $(function(){
     });
    
    $("#mypagebutton").click(function(){
-   	location.href="${pageContext.request.contextPath }/member/mypage.do";
+	   location.href="${pageContext.request.contextPath }/member/mypage.do?memberId=${memberLoggedIn.memberId}";
    });
    
    $(".logo-box").click(function(){
@@ -61,7 +60,11 @@ $(function(){
 </script>
 <style>
 .font-black{
-color:black;}
+color:black;
+text-decoration: none;}
+a:hover{
+text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -78,9 +81,10 @@ color:black;}
                 <div class="nav-clubimg">
                 	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                 </div>
+                <!-- 문보라수정 -->
                 <div class="nav-right-leader font-kor">
-                    <p style="color: white; margin:0;">@wingStudy_02</p>
-                    <p style="color: white;margin:0;">스테파니 님</p>
+                    <p style="color: white; margin:0;">@ ${memberLoggedIn.memberId }</p>
+                    <p style="color: white;margin:0;">${memberLoggedIn.memberName } 님</p>
                 </div>
             </div>
         </div>
@@ -95,7 +99,7 @@ color:black;}
             <div class="ul-background">
                 <ul class="ul-tag bold-kor">
                     <div class="blue-back" id="somoim-create">
-                        <li><a href="${pageContext.request.contextPath }/club/clubCreate.do" class="font-black">소모임 생성</a></li>
+                        <li><a href="${pageContext.request.contextPath }/club/clubCreate.do" class="font-black" >소모임 생성</a></li>
                     </div>
                     <div class="blue-back" id="somoim-search">
                     	<li>
