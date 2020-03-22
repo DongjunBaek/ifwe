@@ -7,17 +7,18 @@
 		insert into member
 		values(
 			seq_member_no.nextval,
-			#{locCode},
 			#{memberId},
 			#{memberPwd},
 			#{memberName},
 			#{memberPhone},
+			#{memberLoc},
 			#{memberEmail},
 			#{memberBirth},
 			#{memberGender},
 			#{memberAddr},
 			default,
-			null,'member',0
+			null,'member',0,
+			#{memberLike}
 			)
 	</insert>
 	<select id="selectOne" resultType="member">
