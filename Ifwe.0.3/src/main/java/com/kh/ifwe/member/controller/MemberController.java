@@ -1,5 +1,7 @@
 package com.kh.ifwe.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.servlet.http.Cookie;
@@ -11,12 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -369,5 +370,62 @@ public class MemberController {
 		return mav;
 		
 	}
+	
+		
+		@PostMapping("/profileUpdate.do")
+		public String updatetProfile(com.kh.ifwe.member.model.vo.Profile profile, @RequestParam(value = "upFile", required = false) MultipartFile upFile,
+				HttpServletRequest request, RedirectAttributes redirectAttributes) {
+			try {
+				log.debug("controller@profile={}", profile);
+				
+				System.out.println("프로필 카테코드"+
+	//			profile.getContentsCateCodes()+
+				request.getParameterValues("contentsCateCodes")
+				
+						);
+	
+				
+	 		
+	 		if(!upFile.isEmpty()) {
+	 			
+	 			log.debug("filename={}",upFile.getOriginalFilename());
+	 			log.debug("size={}",upFile.getSize());
+					// 파일명 재생성 renamedFileName으로 저장하기
+					String originalFileName = upFile.getOriginalFilename();
+					String renamedFileName = com.kh.ifwe.common.util.Utils.getRenamedFileName(originalFileName);
+	
+					// 파일이동폴더
+					String saveDirectory = request.getServletContext().getRealPath("/resources/upload/profile");
+					try {
+//						File file= new File(saveDirectory, renamedFileName);
+//						log.debug("파일={}"+file);
+//					file.createNewFile();
+						log.debug("세이브디렉토리"+saveDirectory);
+						upFile.transferTo(new File(saveDirectory, renamedFileName));
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
+	
+					profile.setProfileImgOri(originalFileName);
+					
+					profile.setProfileImgRe(renamedFileName);
+	
+	 		}
+				int result = memberService.updateProfile(profile);
+	
+				System.out.println(result);
+				redirectAttributes.addFlashAttribute("msg", result > 0 ? "등록성공!" : "등록실패!");
+	
+			} catch (Exception e) {
+	
+				log.error("프로필 등록 오류!", e);
+	
+	//			throw new BoardException("프로필 등록 오류! 관리자에게 문의하세요", e);
+			}
+	//		return "redirect:/member/profile";
+			return "redirect:/	";
+		}
+	
+	
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -36,11 +37,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateEamil(Member member) {
 		return memberDAO.updateEmail(member);
-	}
+	}	
 
 	@Override
 	public int deleteMember(Member member) {
 		return memberDAO.deleteMember(member);
+	}
+
+	@Override
+	public int updateProfile(Profile profile) {
+		return memberDAO.updateProfile(profile);
 	}
 	
 	

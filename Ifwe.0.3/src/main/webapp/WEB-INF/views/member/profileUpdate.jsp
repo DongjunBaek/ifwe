@@ -84,7 +84,7 @@ $(()=>{
 	            })
 	            // 태그 중복 검사
 	            if (result.length == 0) {
-	                $("#tag-list").append("<li class='tag-item'>#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+	                $("#tag-list").append("<li class='tag-item' >#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
 	                addTag(tagValue);
 	                self.val("");
 	            } else {
@@ -164,17 +164,15 @@ $(()=>{
 			</div>
 
 
-				<div class="makeProfile-article-contents font-kor">
+			<!-- 	<div class="makeProfile-article-contents font-kor">
 					<input type="text" class="makeProfile-infotext1 font-kor">
 					<input type="text" class="makeProfile-infotext2 font-kor"
 						placeholder="    #관심사 입력" id="tag" size="6">					
 						<input type="hidden" value="" name="tag" id="rdTag" />
-                    <!--    원본 <input type="text" name="keywords" class="font-kor input-text thin-font"
-                        	   id="tag" size="6"> -->
                         <ul id="tag-list">
                    
        				    </ul>
-				</div>
+				</div> -->
 				<div class="makeProfile-article-inputImg font-kor">
 					<p>프로필 이미지 등록</p>
 					<div class="uploadImg-div">
@@ -191,20 +189,23 @@ $(()=>{
 					</div>
 				</div>
 
+<!-- 				onsubmit="return boardValidate();" -->
 				
 					<form name="profileFrm"
-				action="${pageContext.request.contextPath}/member/profileInsert.do"
-				method="post" onsubmit="return boardValidate();"
-				enctype="multipart/form-data">
+				action="${pageContext.request.contextPath}/member/profileUpdate.do"
+				method="post" 
+				enctype="multipart/form-data"
+				id="tag-form"
+				>
 				
 				<div class="input-group mb-3" style="padding: 0px;">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" name="upFile"
-							id="upFile1"> <label class="custom-file-label"
-							for="upFile1">파일을 선택하세요</label>
-					</div>
+							id="upFile"> <label class="custom-file-label"
+							for="upFile">파일을 선택하세요</label>
+					</div>	
 				</div>
-				<input type="text" placeholder="프로필소개글" />
+				<input type="text" placeholder="프로필소개글" name="profileComment" id="profileComment" />
 				
 				
 				
@@ -212,9 +213,24 @@ $(()=>{
 				<input type="text" placeholder="닉네임" />
 
 				<div class="makeProfile-article-button font-kor">
-					<input type="button" value="프로필 카드 등록"
+					<input type="submit" value="프로필 카드 등록"
 						class="makeProfile-btn-insert font-kor">
 				</div>
+			
+			
+			
+				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }" />
+				<input type="hidden" name="memberCode" id="profileAge" value="${memberLoggedIn.memberBirth }" />
+				<input type="hidden" name="memberCode" id="profileAge" value="${memberLoggedIn.memberGender }" />
+			
+				<div class="makeProfile-article-contents font-kor">
+					<input type="text" class="makeProfile-infotext2 font-kor"
+						placeholder="    #관심사 입력" id="tag" size="6">					
+						<input type="hidden" value="" name="contentsCateCodes" id="rdTag" />
+                        <ul id="tag-list">                   
+       				    </ul>
+				</div>
+			
 			</form>
 		</article>
 

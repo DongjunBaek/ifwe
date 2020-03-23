@@ -1,6 +1,7 @@
 package com.kh.ifwe.member.model.dao;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberDAO {
 
@@ -15,5 +16,7 @@ public interface MemberDAO {
 	int updateEmail(Member member);
 
 	int deleteMember(Member member);
+
+	int updateProfile(Profile profile);
 
 }

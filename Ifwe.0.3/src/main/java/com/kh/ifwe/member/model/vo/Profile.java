@@ -23,6 +23,5 @@ public class Profile implements Serializable {
 	private String profileComment;
 	private int profileAge;
 	private String profileGender;
-	private String contentsCateCodes;
-
+	private String[] contentsCateCodes;
 }

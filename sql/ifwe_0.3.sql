@@ -9,7 +9,7 @@
 --=================================================================
 -- ifwe
 --=================================================================
-
+--
 --DROP TABLE member CASCADE CONSTRAINT;
 --DROP TABLE  MEMBER_REPORT CASCADE CONSTRAINT;
 --DROP TABLE  MEMBER CASCADE CONSTRAINT;
@@ -125,6 +125,7 @@ CREATE TABLE  CONTENTS_INFO  (
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
 
+drop table member_profile;
 
 CREATE TABLE  MEMBER_PROFILE  (
 	 member_code 	NUMBER		NOT NULL,
@@ -134,9 +135,21 @@ CREATE TABLE  MEMBER_PROFILE  (
 	 profile_comment 	CHAR(200)		NULL,
 	 profile_age 	NUMBER		NULL,
 	 profile_gender 	CHAR(1)		NULL,
-	 contents_cate_codes 	VARCHAR2(100)		NOT NULL
+	 contents_cate_codes 	VARCHAR2(100)	 NULL
 );
 
+insert into member_profile values(
+'41','null','null','null','null','0','M','null'
+
+);
+
+
+
+
+commit;
+delete from member_profile where member_code='41';
+select * from member;
+select * from member_profile;
 DROP TABLE  MEMBER_EVENT ;
 
 CREATE TABLE  MEMBER_EVENT  (
@@ -289,7 +302,7 @@ CREATE TABLE  CALENDAR  (
 	 calendar_title 	VARCHAR2(300)		NULL,
 	 calendar_start 	DATE		NULL,
 	 calendar_end 	DATE		NULL,
-	 calendar_content 	VARCJAR2(500)		NULL
+	 calendar_content 	VARChAR2(500)		NULL
 );
 
 DROP TABLE  CLUB_BOARDLIST ;
@@ -682,6 +695,7 @@ commit;
 select * from member;
 --id : admin1234
 --password : admin1234!
+--delete from member where member_code=42;
 
 
 --=============================================
@@ -710,4 +724,4 @@ insert into board values (
     default    
 );
 commit;
-
+select * from member;
