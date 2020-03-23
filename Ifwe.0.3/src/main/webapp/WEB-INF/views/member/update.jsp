@@ -85,7 +85,7 @@
 		   			<div class="email-title bold-kor">이메일</div>
    				</div>
 	   			<div class="update-contents">
-		   			<div class="phone-number-content"><%-- ${memberLoggedIn.memberPhone } --%> 010-3594-4957</div>
+		   			<div class="phone-number-content">${memberLoggedIn.memberPhone==null?"&nbsp;":memberLoggedIn.memberPhone }</div>
 		   			<div class="email-content"> ${memberLoggedIn.memberEmail }</div>
 	   			</div>
 	   			

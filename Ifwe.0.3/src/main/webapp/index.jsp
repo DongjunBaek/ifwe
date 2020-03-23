@@ -12,6 +12,7 @@
 <title>if we</title>
 <script src="resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="resources/css/index/login.css">
+<link rel="stylesheet" href="resources/css/main/index.css">
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
 
 <c:if test="${not empty msg }">
@@ -22,6 +23,14 @@
 </script>
 </c:if>
     
+<c:if test="${not empty mav }">
+<script>
+	$(function(){
+		console.log("!23123123");
+	});
+</script>
+</c:if>
+
 </head>
 <!-- 한글 폰트 -->
 <style>
@@ -35,7 +44,9 @@
 
 $(function(){
 	
-	
+	$(".searchId-result").css('display','none');
+	$(".searchPwd-result").css('display','none');
+	$("#uncorrect-pwd").css('display','none');
 	
 	$("#loginbutton").click(function(){
 		$(".back").css("display","inline-block");
@@ -69,18 +80,26 @@ $(function(){
 		$("#login-container-first").css('display','none');
 		$("#search-pwd-div").css('display','none');
 		$("#search-id-pwd-container").css('display','block');
+		$("[name=searchIdForm]").css('display','');
 	});
 	
 	$("#li-pwd-search").click(function(){
+		$(".searchPwd-result").css('display','none');
+		$(".searchId-result").css('display','none');
 		$("#search-pwd-div").css('display','block');
 		$("#search-id-div").css('display','none');
+		$("[name=searchPwdFrm]").css('display','');
 		$("#search-number-container-id").css('display','none');
 	});
 	
+	
 	$("#li-id-search").click(function(){
+		$(".searchPwd-result").css('display','none');
+		$("[name=searchIdForm]").css('display','');
 		$("#search-pwd-div").css('display','none');
 		$("#search-id-div").css('display','block');
 		$("#search-number-container-pwd").css('display','none');
+		$(".searchId-result").css('display','none');
 	});
 	
 	$("#search-id-btn-num").click(function(){
@@ -90,188 +109,120 @@ $(function(){
 		$("#search-number-container-pwd").css('display','');
 	});
 	
+	
+	
+	
+	$("#search-btn-check-id").click(function(){
+		if($("#memberName").val()==''){
+			alert('이름을 입력해주세요.');
+		}
+		if($("#birthday").val()==''){
+			alert('생년월일을 입력해주세요.');
+		}
+		if($("#phone").val()==''){
+			alert('핸드폰 번호을 입력해주세요. ');
+		}
+		console.log("123");
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/member/searchId",
+			data: $("[name=searchIdForm]").serialize(),
+			success:data => {
+				console.log(data);
+				console.log(data.memberId);
+				$("[name=searchIdForm]").css('display','none');
+				$(".searchId-result-content").text(data.memberId);
+				$(".searchId-result").css('display','');
+				$("#memberName").val('');
+				$("#phone").val('');
+				$("#birthday").val('');
+			
+			},
+			error:(xhr,status,error) =>{
+				console.log(xhr,status,error);
+			}
+		});
+	});
+	
+	
+	
+	$("#search-btn-check-pwd").click(function(){
+		if($("#memberName_").val()==''){
+			alert('이름을 입력해주세요.');
+		}
+		if($("#birthday_").val()==''){
+			alert('생년월일을 입력해주세요.');
+		}
+		if($("#phone_").val()==''){
+			alert('핸드폰 번호을 입력해주세요. ');
+		}
+		if($("#memberId").val()==''){
+			alert('아이디 입력해주세요.');
+		}
+		if($("#memberName_").val()!='' && $("#birthday_").val()!='' && $("#phone_").val()!='' && $("#memberId").val()!=''){
+			
+		
+		console.log("5845835803245");
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/member/searchPwd.do",
+			data: $("[name=searchPwdFrm]").serialize(),
+			success:data => {
+				if(data == "") {
+					alert('틀림');
+					$("[name=searchPwdFrm]").css('display','');
+					$(".searchPwd-result").css('display','none');
+					$("#search-number-container-pwd").css('display','none');
+					$("memberName_").val('');
+					$("birthday_").val('');
+					$("phone").val('');
+					$("#memberId").val('');
+				}
+				else{
+					console.log(data);
+					console.log(data.memberId);
+					console.log(data.memberPwd);
+					$("#searchPwdAfterMemberId").val(data.memberId);
+					$("[name=searchPwdFrm]").css('display','none');
+					$(".searchPwd-result").css('display','');
+					$("memberName_").val('');
+					$("#memberId").val('');
+					$("birthday_").val('');
+					$("phone").val('');
+				}
+			
+			},
+			error:(xhr,status,error) =>{
+				console.log(xhr,status,error);
+				
+			}
+		});
+	}
+});
+	
+	
+	
+	$("#searchId-login-btn").click(function(){
+		$(".searchId-result").css('display','none');
+		$("#login-container-first").css('display','');
+	});
+	
+	$("#password_chk").blur(function(){
+		if($("#new-password").val() != $("#new-password_chk").val()){
+			$("#uncorrect-pwd").css('display','');
+		}
+		else{
+			$("#uncorrect-pwd").css('display','none');
+		}
+	});
+	
+	
+	
 });
 
 
 
 </script>
-<style>
-.main-kor{
-    font-family: 'GmarketSansLight';
-}
-.main-eng{
-    font-family: 'Fredoka One';
-}
-
-
-    
-/* body */
-*{
-    padding: 0px;
-    margin: 0px;    
-    color:#3b3b3b;
-    outline: none;
-}
-.main-body{    
-    width: 1920px;
-    height: 1280px;
-    margin: 0 auto;
-    /* border: 1px solid #61d4b3;     */
-    overflow: hidden;
-    position:absolute;
-    left:50%;
-    transform: translate(-50%);
-}
-
-/* wrapper main div */
-.wrapper-main{
-    position: relative;
-    width: 1660px;
-    height: 1040px;
-    margin: 0 auto;
-    transform: translateY(-50%);
-    top: 50%;
-    /* border: 1px solid #fdd365; */
-}
-
-
-
-/* background circle */
-
-.main-div-bg{
-    position: absolute;
-    z-index: -1;
-    left: -25%;
-    top: -35%;
-    width:1210px;
-    height:1250px;
-    border-radius: 50%;
-}
-.main-div-bg img{
-    width: 100%;
-    height: 100%;    
-    border-radius: 50%;
-}
-
-/* header */
-.wrapper-main header{
-    width: 100%;
-    height: 35px;
-    /* border: 1px solid #fb8d62; */
-    z-index: 10;
-}
-.main-header-ul{    
-    width: 100%;
-    height: 35px;
-    list-style: none;
-    /* border: 1px solid #fd2eb3; */
-}
-.main-header-ul li{    
-    width: 65px;
-    height: 100%;    
-    /* border: 1px solid black; */
-}
-.main-header-ul li:nth-child(1){    
-     float: left;
-}
-.main-header-ul li:not(:nth-child(1)){    
-     float: right;
-     text-align: center;
-     font-size: 27px;
-}
-.main-header-ul li:not(:nth-child(2n-1)){
-    cursor: pointer;
-}
-.main-header-ul li .fa-circle{
-    font-size: 8px;
-}
-.main-header-ul li img{
-    width: 80px;
-    height: 35px;
-}
-
-/* section */
-.main-section{
-    width: 100%;
-    height: 94%;
-    /* border: 1px solid red; */
-    display: flex;
-}
-
-/* article box left*/
-.main-section article{
-    flex: 1;    
-    height: 100%;
-    /* border: 1px solid #413c69; */
-}
-.main-section article:first-child{
-    position: relative;
-    width: 500px;
-    height: 51%;
-    top: 51%;
-    transform: translateY(-50%);        
-}
-.main-section article:first-child div{    
-    width: 100%;
-    text-align: left;
-    /* border: 1px red solid; */
-}
-
-.main-section article:first-child div:first-child p:nth-child(1){
-    font-size: 30px;
-}
-.main-section article:first-child div:nth-child(2) {    
-    margin-top: 5.2%;
-}
-.main-section article:first-child div:nth-child(2) p{    
-    font-size: 40px;
-    font-weight: bold;
-}
-.main-section article:first-child div:nth-child(3){
-    margin-top: 5.2%;
-}
-.main-section article:first-child div:nth-child(3) p{
-    margin-top: 2%;
-    font-size: 16px;
-    opacity: 0.65;    
-}
-.main-section article:first-child div:nth-child(4){
-    margin-top: 6.5%;
-}
-
-/* 시작하기 button */
-.main-btn-start{
-    width: 320px;
-    height: 82px;
-    border-radius: 20px;
-    background: #ffc862;
-    color: white;
-    font-size: 25px;
-    border: none;
-    font-weight: bold;    
-    cursor: pointer;
-}
-
-/* article box right*/
-.main-section article:last-child img{
-    position: relative;
-    top: 22%;
-    z-index: -2;
-    
-}
-/* main footer */
-.main-footer{
-    width: 100%;
-    height: 2%;
-    /* border: 1px solid #eab9c9; */
-}
-.main-footer p{
-    color: #3b3b3b;
-    opacity: 0.65;
-}
-
-
-</style>
 <body>
     <div class="main-body main-kor">
         <div class="wrapper-main">    
@@ -351,18 +302,19 @@ $(function(){
                 <hr />
  
  <!-- 아이디 찾기 div 시작-->
+ 		<form name="searchIdForm" method="POST">
                <div class="search-id-div" id="search-id-div">
 	                <div class="login-input">
 	                	<i class="far fa-user"></i> 
-	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="이름입력">
+	                	<input class="input-box" type="text" name="memberName" id="memberName" placeholder="이름입력">
 	                </div>
 	                <div class="login-input">
 	                	<i class="fas fa-birthday-cake index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="생년월일">
+	                	<input class="input-box" type="text" name="birthday" id="birthday" placeholder="생년월일">
 	                </div>
 	                <div class="login-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="전화번호">
+	                	<input class="input-box" type="text" name="phone" id="phone" placeholder="전화번호">
 	                	<input type="button" value="인증번호받기" class="index-search-btn" id="search-id-btn-num"/>
 	                </div>
 	                 <div class="search-number-container" id="search-number-container-id" >
@@ -371,31 +323,39 @@ $(function(){
 		                 </div>
 		                 <div class="number-input">
 		                 	<i class="fas fa-mobile-alt index-i-class"></i>
-		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
-		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check"/>	
+		                 	<input class="input-box" type="text" name="id-number" id="pd-number" placeholder="인증번호">	
+		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check-id"/>	
 		                 </div>
 	                 </div>
                </div>
+ 		</form>
+ 		<div class="searchId-result">
+ 			<div class="searchId-result-title">내 아이디는</div>
+ 			<div class="searchId-result-content bold-kor"> </div>
+ 			<span class="font-kor" style="font-size:25px;"> 입니다.</span>
+ 			<input type="button" value="로그인하러가기" class="loginbutton" id="searchId-login-btn" style="margin-top: 32%;"/>
+ 			
+ 		</div>
  <!-- 아이디 찾기 div 끝 -->
  
- 
  <!-- 비밀번호 찾기 div 시작 -->
+ 	<form name="searchPwdFrm" method="POST">
  				<div class="search-id-div" id="search-pwd-div">
 	                <div class="login-input pwd-input">
 	                	<i class="fas fa-id-card index-i-class"></i> 
-	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="아이디입력">
+	                	<input class="input-box" type="text" name="memberId" id="memberId" placeholder="아이디입력">
 	                </div>
 	                <div class="login-input pwd-input">
 	                	<i class="far fa-user"></i> 
-	                	<input class="input-box" type="text" name="memberName" id="userid" placeholder="이름입력">
+	                	<input class="input-box" type="text" name="memberName_" id="memberName_" placeholder="이름입력">
 	                </div>
 	                <div class="login-input pwd-input">
 	                	<i class="fas fa-birthday-cake index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="생년월일">
+	                	<input class="input-box" type="text" name="birthday_" id="birthday_" placeholder="생년월일">
 	                </div>
 	                <div class="login-input pwd-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday" id="userid" placeholder="전화번호">
+	                	<input class="input-box" type="text" name="phone_" id="phone_" placeholder="전화번호">
 	                	<input type="button" value="인증번호받기" class="index-search-btn" id="search-pwd-btn-num"/>
 	                </div>
 	                
@@ -405,11 +365,34 @@ $(function(){
 		                 </div>
 		                 <div class="number-input">
 		                 	<i class="fas fa-mobile-alt index-i-class" ></i>
-		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
-		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check"/>	
+		                 	<input class="input-box" type="text" name="pwd-number" id="pwd-number" placeholder="인증번호">	
+		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check-pwd"/>	
 		                 </div>
 	                 </div>
                </div>
+ 	</form>
+ 	
+ 	<form action="${pageContext.request.contextPath }/member/searchPwdAfter" method="POST">
+ 		<input type="hidden" name="memberId" id="searchPwdAfterMemberId"/>
+	 	<div class="searchPwd-result font-kor">
+	 		<div class="searchId-result-title">변경하실 비밀번호를 입력해주세요.</div>
+	 		<div class="login-input">
+	           	<i class="fas fa-lock"></i> <input class="input-box" type="password" name="new-password" id="new-password" placeholder="새 비밀번호" >
+	        </div>
+	        <div class="login-input">
+	            <i class="fas fa-lock"></i> <input class="input-box" type="password" name="new-password_chk" id="new-password_chk" placeholder="새 비밀번호 확인" >
+	            <p id="uncorrect-pwd">비밀번호와 비밀번호 확인이 다릅니다.</p>
+	        </div>
+	        
+	        <input type="submit" value="확인" id="searchPwd-btn" class="loginbutton"/>
+	        
+	 	</div>
+ 	</form>
+ 	
+ 	<style>
+ 		.searchPwd-result{height:300px;margin-top:20%;}
+ 		#uncorrect-pwd{color:red;margin-top:7%;}
+ 	</style>
   <!-- 비밀번호 찾기 div 끝 -->
 
  
@@ -419,40 +402,7 @@ $(function(){
   <!-- 아이디 비번 찾기 div 끝 -->
         
     </div>
-	<style>
-	.index-i-class{
-		color:#cecece;font-size:25px;padding:2%;
-	}
-	.pwd-input{
-		margin-top:60px;
-	}
-		.search-title li{
-			display:inline-block;
-			font-size:20px;
-			margin-top:10%;
-			margin-bottom:4%;
-			
-		}
-		.index-search-btn{
-			width:100px;height:40px;	
-			background-color:#ebebeb;
-			border:0;
-			border-radius:20px;
-			position:absolute;cursor:pointer;left:56%;
-		}
-		.search-title{
-			font-size:20px;
-			margin-top:10%;
-		}
-		.number-input{
-			width: 100%;
-		    height: 50px;
-		    margin-top: 5%;
-		    margin-bottom: 10px;
-		    font-size: 14pt;
-		    border-bottom: 1px solid #ebebeb;	
-		}
-	</style>
+	
 	
 
 </body>

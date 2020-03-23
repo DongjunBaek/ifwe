@@ -1,5 +1,7 @@
 package com.kh.ifwe.member.model.dao;
 
+import java.util.Map;
+
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface MemberDAO {
@@ -15,5 +17,7 @@ public interface MemberDAO {
 	int updateEmail(Member member);
 
 	int deleteMember(Member member);
+
+	Member searchId(Map<String, String> param);
 
 }

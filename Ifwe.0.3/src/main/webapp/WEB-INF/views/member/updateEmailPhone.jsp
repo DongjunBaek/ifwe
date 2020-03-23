@@ -73,7 +73,7 @@
 					</th>
 					<td>
 						<div class="update-tbl-content">
-							<p class="bold-kor"><%-- ${memberLoggedIn.memberPhone } --%>010-3594-4957</p>
+							<p class="bold-kor">${memberLoggedIn.memberPhone==null?"휴대폰번호를 등록주세요":memberLoggedIn.memberPhone }</p>
 							<span style="font-size:12px">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우에 사용할 휴대전화입니다.</span> <br />
 							<input type="button" value="수정" class="updateEmailPhone-btn" id="updatePhone"/>
 						

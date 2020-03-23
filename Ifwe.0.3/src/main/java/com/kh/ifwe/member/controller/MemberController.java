@@ -1,6 +1,8 @@
 package com.kh.ifwe.member.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,6 +51,7 @@ public class MemberController {
 	public String selectCate() {
 		return "member/memberenroll";
 	}
+	
 	
 	@PostMapping("/enroll.do")
 	public ModelAndView insertMember(ModelAndView mav,Member member,
@@ -153,7 +158,17 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
+	//문보라로그아웃구현
+	@GetMapping("/logout.do")
+	public String logout(SessionStatus sessionStatus,@ModelAttribute("memberLoggedIn") Member member) {
+		
+		log.debug("["+member.getMemberId()+"]가 로그아웃했습니다.");
+		
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete();
+		
+		return "redirect:/";
+	}
 	
 	
 //	@GetMapping("/mypage.do")
@@ -256,6 +271,7 @@ public class MemberController {
 		return "member/updatePhonePOPUP";
 	}
 	
+	//문보라 핸드폰 번호 변경
 	@PostMapping("/updatePhoneFrm.do")
 	public ModelAndView updatePhone(@RequestParam("member_phone") String member_phone, 
 							  @RequestParam("memberId") String memberId,
@@ -277,6 +293,7 @@ public class MemberController {
 		log.debug("reslt = {}",result);
 		if(result>0) {
 			msg = "전화번호가 변경되었습니다.";
+			mav.addObject("memberLoggedIn", member);
 		}else {
 			msg = "전화번호가 번경되지않았습니다.";
 		}
@@ -319,6 +336,7 @@ public class MemberController {
 		log.debug("reslt = {}",result);
 		if(result>0) {
 			msg = "이메일 주소가 변경되었습니다.";
+			mav.addObject("memberLoggedIn", member);
 		}else {
 			msg = "이메일 주소가 번경되지않았습니다.";
 		}
@@ -340,6 +358,7 @@ public class MemberController {
 		
 	}
 	
+	//회원탈퇴처리 문보라
 	@PostMapping("/deleteForm.do")
 	public ModelAndView deleteForm(@RequestParam("memberId")String memberId, RedirectAttributes redirectAttributes,ModelAndView mav) {
 		log.debug("memberId = {}",memberId);
@@ -369,5 +388,112 @@ public class MemberController {
 		return mav;
 		
 	}
+	
+	
+	
+	//아이디 찾기 처리 문보라
+	@PostMapping("/searchId")
+	@ResponseBody
+	public Member searchId(@RequestParam("memberName") String memberName,
+								@RequestParam("birthday")String birthday, 
+								@RequestParam("phone")String phone,
+								ModelAndView mav) {
+		
+		
+		log.debug("memberName ={}",memberName);
+		log.debug("birthday ={}",birthday);
+		log.debug("phone ={}",phone);
+		
+		log.debug("year = {}",birthday.substring(0, 4));
+		log.debug("mouth = {}",birthday.substring(4, 6));
+		log.debug("day = {}",birthday.substring(6,8));
+		String birth =  birthday.substring(0, 4)+"/"+birthday.substring(4, 6)+"/"+birthday.substring(6,8);
+		String phoneNum = phone+"  ";
+		
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("memberName", memberName);
+		param.put("birth", birth);
+		param.put("phone", phoneNum);
+		
+		log.debug("param ={}",param);
+		Member member = memberService.searchId(param);
+		log.debug("member = {}", member);
+		
+		return member;
+	}
+	
+	
+	//비밀번호 찾기 처리 문보라
+	@PostMapping("/searchPwd.do")
+	@ResponseBody
+	public Member searchPwd(@RequestParam("memberId") String memberId,
+							@RequestParam("memberName_") String memberName,
+							@RequestParam("birthday_")String birthday, 
+							@RequestParam("phone_")String phone,
+							ModelAndView mav) {
+		
+		
+		if(memberId == null ) return null;
+		
+		log.debug("memberId ={}",memberId);
+		log.debug("memberName ={}",memberName);
+		log.debug("birthday ={}",birthday);
+		log.debug("phone ={}",phone);
+	
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}", member);
+		mav.addObject("member", member);
+		log.debug("mav = {} " ,mav);
+		
+		return member;
+		
+	}
+	
+	
+	
+	@PostMapping("/searchPwdAfter")
+	public ModelAndView searchPwdAfter(@RequestParam("new-password") String password,
+									   @RequestParam("memberId") String memberId,
+									   RedirectAttributes redirectAttributes,
+									   ModelAndView mav){
+		
+		log.debug("mav = {}",mav);
+		
+		log.debug("password = {}",password);
+		log.debug("memberId = {}",memberId);
+		
+		
+		Member member = memberService.selectOne(memberId);
+		log.debug("member = {}",member);
+	
+		String bcryptPassword = bcryptPasswordEncoder.encode(password);
+		member.setMemberPwd(bcryptPassword);
+		int result = memberService.updatePassword(member);
+			
+		String msg =result>0?"비밀번호가 변경되었습니다.로그인 해주세요!":"비밀번호 변경이 실패했습니다.";
+		log.debug("msg = {}",msg);
+		
+		redirectAttributes.addFlashAttribute("msg",msg);
+		mav.setViewName("redirect:/");
+
+		return mav;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
