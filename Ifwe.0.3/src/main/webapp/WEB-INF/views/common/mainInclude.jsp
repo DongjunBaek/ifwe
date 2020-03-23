@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/categori.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mainboard.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/membership.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/deleteMember.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLogin-css.css">
@@ -54,6 +55,10 @@ $(function(){
    
    $("#buy-membership").click(function(){
 	   location.href = "${pageContext.request.contextPath}/member/membership.do";
+   });
+   
+   $("#logoutbutton").click(function(){
+	   location.href = "${pageContext.request.contextPath}/member/logout.do";
    });
    
 });
