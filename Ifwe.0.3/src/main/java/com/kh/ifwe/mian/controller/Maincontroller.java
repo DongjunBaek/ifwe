@@ -10,11 +10,7 @@ public class Maincontroller {
 	public String mainPage() {
 		return "main/mainPage";
 	}
-	
-	@GetMapping("/main/mainBoard.do")
-	public String mainBoard() {
-		return "main/mainBoard";
-	}
+
 	
 	@GetMapping("/index/mainpage.do")
 	public String index() {

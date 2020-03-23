@@ -19,6 +19,15 @@
     default    
 	)
 	</insert>
+	
+	<select id="selectOne" resultType="board">
+		select 
+			*
+		from 
+			board		
+		where BOARD_CATE like #{boardCategory}
+	</select>
+
 </mapper>
 
 
