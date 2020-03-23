@@ -21,18 +21,6 @@
 			#{memberLike}
 			)
 	</insert>
-	
-	<insert id="insertProfile">
-	
-	
-insert into member_profile values(
-'#{memberId}','null','null','null','null','0','M','null'
-
-);
-	
-	
-	</insert>
-	
 	<select id="selectOne" resultType="member">
 		select * from member where member_id = #{memberId}
 	</select>
@@ -73,15 +61,29 @@ insert into member_profile values(
 			member_id = #{memberId}
 	</update>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="searchId" resultType="member">
+		 select 
+			* 
+		from
+			member
+		where 
+			member_name = #{memberName}
+		and 
+			member_phone = #{phone}
+		and 
+			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
+	</select>
+
+
+
+
+
+
+
+
+
+
+
 	
 	<!-- 20200323김원재 -->
 <update id="updateProfile">
@@ -99,6 +101,19 @@ insert into member_profile values(
 		where
 			member_code=#{memberCode}
 </update>
+
+	<insert id="insertProfile">
+	
+	
+insert into member_profile values(
+'#{memberId}','null','null','null','null','0','M','null'
+
+);
+	
+</insert>
+
+
+
 
 </mapper>
 

@@ -1,6 +1,8 @@
 
 package com.kh.ifwe.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateProfile(profile);
 	}
 	
+	public Member searchId(Map<String, String> param) {
+		return memberDAO.searchId(param);
+	}
+
 	
 }

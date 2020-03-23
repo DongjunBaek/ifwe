@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/afterLoginCommon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/deleteMember.css">
-<script src="https://kit.fontawesome.com/5e1e16b3f4.js"></script>
-<meta charset="UTF-8">
-<title>IFWE 회원탈퇴</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
+	<jsp:param value="마이페이지" name="pageTitle"/>
+</jsp:include>
 <script>
 $(document).ready(function(){
-	
+	$(".ul-container").css('display','none');
 });
 function checkboxTrue(){
 	
@@ -27,35 +24,6 @@ function checkboxTrue(){
 	}
 }
 </script>
-</head>
-<body>
-<header>
-        <div class="nav-container">
-            <div class="logo-box"></div>
-            <div class="nav-content-right">
-                <div class="nav-right-icon2">
-                    <i class="fas fa-bell" style="font-size:35px;color: white;" ></i>
-                </div>
-                <div class="nav-right-icon1">
-                    <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
-                </div>
-                <div class="nav-clubimg">
-                	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                </div>
-                <!-- 문보라수정 -->
-                <div class="nav-right-leader font-kor">
-                    <p style="color: white; margin:0;">@ ${memberLoggedIn.memberId }</p>
-                    <p style="color: white;margin:0;">${memberLoggedIn.memberName } 님</p>
-                </div>
-            </div>
-        </div>
-        <div class="nav-myfrofile-box" id="nav-mypagebox">
-             <p id="mypagebutton">마이페이지</p>
-             <div class="nav-box-line"></div>
-             <p id="logoutbutton">로그아웃</p>
-         </div>
-    </header>
-    
     
 <section class="deleteMember-section font-kor">
 	<article class="deleteMember-article">
@@ -77,9 +45,9 @@ function checkboxTrue(){
 				삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.</p>
 				<table class="update-tbl">
 			<tbody>
-				<tr>
+				<tr style="border-bottom:1px solid #ebebeb">
 					<th>
-						<div class="update-tbl-title bold-kor">
+						<div class="update-tbl-title-delete bold-kor">
 							소모임
 						</div>
 					</th>
@@ -89,9 +57,9 @@ function checkboxTrue(){
 						</div>
 					</td>
 				</tr>
-				<tr>
+				<tr style="border-bottom:1px solid #ebebeb">
 					<th>
-						<div class="update-tbl-title bold-kor">
+						<div class="update-tbl-title-delete bold-kor">
 							내정보
 						</div>
 					</th>
@@ -101,9 +69,9 @@ function checkboxTrue(){
 						</div>
 					</td>
 				</tr>
-				<tr>
+				<tr >
 					<th>
-						<div class="update-tbl-title bold-kor">
+						<div class="update-tbl-title-delete bold-kor">
 							친구목록
 						</div>
 					</th>

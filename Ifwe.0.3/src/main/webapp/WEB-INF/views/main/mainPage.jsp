@@ -17,7 +17,7 @@
 			});
 		});
 	</script>
-	  <section>
+	  <section style="margin:0;">
         <div class="container">
             <article class="mainpage-first">
                 <div class="slide">
