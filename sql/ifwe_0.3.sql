@@ -177,7 +177,7 @@ CREATE TABLE  CLUB  (
     club_max    NUMBER      NULL,
     club_date    DATE default sysdate,
     club_content varchar2(300) null,
-     club_catecode varchar2(10) null,
+     club_catecode varchar2(12) null,
      club_location varchar2(10) null,
      premium_code    VARCHAR2(30)    NULL
      
