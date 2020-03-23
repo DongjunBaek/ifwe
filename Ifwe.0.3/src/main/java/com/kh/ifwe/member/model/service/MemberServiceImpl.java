@@ -1,3 +1,4 @@
+
 package com.kh.ifwe.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -5,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
-import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -24,8 +24,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insertProfile(Profile profile) {
-		return memberDAO.insertProfile(profile);
+	public int updatePassword(Member member) {
+		return memberDAO.updatePassword(member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return memberDAO.updatePhone(member);
+	}
+
+	@Override
+	public int updateEamil(Member member) {
+		return memberDAO.updateEmail(member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return memberDAO.deleteMember(member);
 	}
 	
 	

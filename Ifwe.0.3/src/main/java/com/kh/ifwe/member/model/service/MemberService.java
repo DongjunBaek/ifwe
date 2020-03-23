@@ -1,7 +1,6 @@
 package com.kh.ifwe.member.model.service;
 
 import com.kh.ifwe.member.model.vo.Member;
-import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberService {
 
@@ -9,6 +8,12 @@ public interface MemberService {
 
 	Member selectOne(String memberId);
 
-	int insertProfile(Profile profile);
+	int updatePassword(Member member);
+
+	int updatePhone(Member member);
+
+	int updateEamil(Member member);
+
+	int deleteMember(Member member);
 
 }

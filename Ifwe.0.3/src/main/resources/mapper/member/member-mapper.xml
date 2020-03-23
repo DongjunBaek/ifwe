@@ -25,6 +25,42 @@
 		select * from member where member_id = #{memberId}
 	</select>
 	
+	<update id="updatePassword">
+		update 
+			member
+		set 
+			member_pwd = #{memberPwd}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="updatePhone">
+		update 
+			member
+		set 
+			member_phone = #{memberPhone}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="updateEmail">
+		update 
+			member
+		set 
+			member_email = #{memberEmail}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="deleteMember">
+		update 
+			member
+		set 
+			member_role = #{memberRole}
+		where 
+			member_id = #{memberId}
+	</update>
+	
 	
 
 </mapper>

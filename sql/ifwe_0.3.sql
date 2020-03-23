@@ -52,12 +52,12 @@ CREATE TABLE MEMBER (
 	member_addr	VARCHAR2(100)		NULL,
 	member_enrolldate	DATE    default sysdate,
 	member_suspension	CHAR(1)		NULL, -- 징계여부 y or n
-	member_role	VARCHAR2(15)		NULL,
+	member_role	VARCHAR2(15)		NULL, -- 사용자 분류 'A' 관리자 'M' 일반 회원 'D' 탈퇴한 회원 'H' 휴면 회원
 	member_msg	NUMBER		NULL,
 	member_like	VARCHAR2(100)		NULL
 );
 
-DROP TABLE  BOARD ;
+
 
 CREATE TABLE  BOARD  (
 	 board_no 	NUMBER		NOT NULL,
@@ -67,20 +67,19 @@ CREATE TABLE  BOARD  (
 	 board_content 	VARCHAR2(2000)		NULL,
 	 board_img_ori 	VARCHAR2(100)		NULL,
 	 board_img_re 	VARCHAR2(100)		NULL,
-	 board_date 	DATE		NULL,
-	 board_readcount 	NUMBER		NULL,
-	 board_level 	NUMBER		NULL,
-	 board_del 	CHAR(1)		NULL
+	 board_date 	DATE		default sysdate,
+	 board_readcount 	NUMBER	default	0,
+	 board_level 	NUMBER		default 0,
+	 board_del 	CHAR(1) default 'N' -- 삭제 글 여부 'Y' 'N'
 );
 
-DROP TABLE  BOARD_CATEGORY ;
 
 CREATE TABLE  BOARD_CATEGORY  (
 	 board_cate 	VARCHAR2(20)		NOT NULL,
 	 board_cateinfo 	CHAR(20)		NULL
 );
 
-DROP TABLE  TBL_SEARCH ;
+
 
 CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		NOT NULL,
@@ -102,7 +101,7 @@ CREATE TABLE  BOARD_COMMENT  (
 	 comment_no_ref 	NUMBER		NOT NULL
 );
 
-DROP TABLE  MEMBER_REPORT ;
+
 
 CREATE TABLE  MEMBER_REPORT  (
 	 report_code 	NUMBER		NOT NULL,
@@ -114,7 +113,7 @@ CREATE TABLE  MEMBER_REPORT  (
 	 repost_end 	DATE		NULL
 );
 
-DROP TABLE  CONTENTS_INFO ;
+
 
 CREATE TABLE  CONTENTS_INFO  (
 	 contents_code 	NUMBER		NOT NULL,
@@ -126,7 +125,6 @@ CREATE TABLE  CONTENTS_INFO  (
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
 
-DROP TABLE  MEMBER_PROFILE ;
 
 CREATE TABLE  MEMBER_PROFILE  (
 	 member_code 	NUMBER		NOT NULL,
@@ -147,11 +145,11 @@ CREATE TABLE  MEMBER_EVENT  (
 	 event_date 	DATE		NULL
 );
 
-DROP TABLE  CONTENTS_CATEGORY ;
 
-CREATE TABLE  CONTENTS_CATEGORY  (
-	 cate_code 	VARCHAR2(100)		NOT NULL,
-	 cate_codeinfo 	VARCHAR2(100)		NULL
+
+CREATE TABLE  CLUB_CATEGORY  (
+    club_code    NUMBER      NOT NULL,
+    club_cate    VARCHAR2(100)      NOT NULL
 );
 
 DROP TABLE  EVENT ;
@@ -168,19 +166,27 @@ CREATE TABLE  EVENT  (
 
 DROP TABLE  CLUB ;
 
+-- 0323 변경
 CREATE TABLE  CLUB  (
-	 club_code 	NUMBER		NOT NULL,
-	 club_master 	NUMBER		NOT NULL,
-	 club_title 	CHAR(120)		NULL,
-	 club_img_ori 	VARCHAR2(100)		NULL,
-	 club_img_re 	VARCHAR2(100)		NULL,
-	 club_current 	NUMBER		NULL,
-	 club_max 	NUMBER		NULL,
-	 club_date 	DATE		NULL,
-	 premium_code 	VARCHAR2(30)		NOT NULL
+    club_code    NUMBER      NOT NULL,
+    club_master    NUMBER      NOT NULL,
+    club_title    varCHAR2(120)      NULL,
+    club_img_ori    VARCHAR2(100)      NULL,
+    club_img_re    VARCHAR2(100)      NULL,
+    club_current    NUMBER      NULL,
+    club_max    NUMBER      NULL,
+    club_date    DATE default sysdate,
+    club_content varchar2(300) null,
+     club_catecode varchar2(10) null,
+     club_location varchar2(10) null,
+     premium_code    VARCHAR2(30)    NULL
+     
 );
 
-DROP TABLE  CONTENTS_IMG ;
+-- 0323 추가
+CREATE TABLE  CONTENTS_CATEGORY  (
+    cate_code    VARCHAR2(100)   NOT NULL
+);
 
 CREATE TABLE  CONTENTS_IMG  (
 	 img_code 	VARCHAR2(20)		NOT NULL,
@@ -650,11 +656,11 @@ REFERENCES  CLUB  (
 -- 시퀀스
 --===================================================================
 create sequence seq_member_no;
-
-
+--create sequence seq_board_no;
+--create sequence seq_club_no;
 
 --===================================================================
---더미
+--member dummy
 --===================================================================
 
 insert into member
@@ -676,4 +682,32 @@ commit;
 select * from member;
 --id : admin1234
 --password : admin1234!
+
+
+--=============================================
+-- board_cate dummy
+--=============================================
+insert into board_category values('notice','공지사항');
+insert into board_category values('qna','문의사항');
+insert into board_category values('report','신고');
+commit;
+--select * from board_category;
+--=============================================
+-- board dummy
+--=============================================
+select * from board;
+insert into board values (
+    seq_board_no.nextval,
+    3,
+    'notice',
+    'test Title',
+    'test Contents',
+    null,
+    null,
+    default,
+    default,
+    default,
+    default    
+);
+commit;
 
