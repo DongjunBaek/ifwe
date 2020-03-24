@@ -19,6 +19,49 @@
     default    
 	)
 	</insert>
+	
+	<select id="selectMemberList" resultType="member">
+		select
+			*
+		from
+			member
+	</select>
+	
+	<select id="selectDropMemberList" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_role = 'd'
+	</select>
+	
+	<select id="selectDormantMemberList" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_role ='h'
+	</select>
+	
+	<select id="selectOne" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_code = #{memberCode}
+	</select>
+	
+	<update id="cancelMember">
+		update
+			member
+		set
+			member_role = 'member'
+		where
+			member_code = #{memberCode}
+	</update>
 </mapper>
 
 
