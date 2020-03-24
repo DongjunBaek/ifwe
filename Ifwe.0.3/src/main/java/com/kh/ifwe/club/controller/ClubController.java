@@ -2,6 +2,7 @@ package com.kh.ifwe.club.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,8 +32,18 @@ public class ClubController {
 	
 
 	@GetMapping("/clubSearch.do")
-	public String clubSearch() {
-		return "main/clubSearch";
+	public ModelAndView clubSearch(ModelAndView mav) {
+		log.debug("소모임 검색");
+		List<Club> clubList = clubService.clubSearch();
+		log.debug("clubList = {}",clubList);
+		
+		
+		
+		
+		mav.setViewName("main/clubSearch");
+		mav.addObject("clubList", clubList);
+		
+		return mav;
 	};
 	
 	@GetMapping("/clubCreate.do")
