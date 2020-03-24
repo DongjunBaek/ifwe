@@ -44,7 +44,6 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
     
-    
 })
 
 </script>
@@ -64,8 +63,9 @@ $(function(){
 						<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                     </div>
                         <div class="nav-right-leader">
-                            <p>${memberLoggedIn.memberId }</p>
-                            <p>${memberLoggedIn.memberName } 님</p>
+
+                            <p>@ ${memberLoggedIn.memberId }</p>
+                            <p>${memberLoggedIn.memberName} 님</p>
                         </div>
                 </div>
             </div>
@@ -84,9 +84,9 @@ $(function(){
                 	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                 </div>
                 <div class="aside-leader-information">
-                    <p class="aside-leader-allias friend-name-profile">스테파니</p>
+                    <p class="aside-leader-allias friend-name-profile">${clubMaster.memberName }</p>
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
-                    <p class="aside-leader-id">@wingStudy_02</p>
+                    <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
                 <div class="aside-join" id="enrollbutton">
                     <p>가입하기</p>
@@ -152,11 +152,11 @@ $(function(){
                 <div class="header-titleimg">
                     <div class="header-titleimg-cover">
                         <div class="header-title-left">
-                            <p class="header-title1">윙스터디 모임</p>
-                            <p class="header-title2">강남역 스터디모임에서 같이공부해요!</p>
+                            <p class="header-title1">${club.clubTitle}</p>
+                            <p class="header-title2">${club.clubContent }</p>
                         </div>
                         <div class="header-title-right">
-                            <p>서울,경기</p>
+                            <p>${club.clubLocation }</p>
                             <div class="header-location-icon">
                                 <i class="fas fa-map-marker-alt" style="font-size: 30px;"></i>
                             </div>

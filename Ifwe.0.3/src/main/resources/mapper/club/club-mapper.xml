@@ -19,7 +19,9 @@
 			#{clubLocation},
 			null
 			)
-	
+		<selectKey keyProperty="clubCode" resultType="_int" order="AFTER">
+			select seq_club_no.currval from dual
+		</selectKey>
 	</insert>
 	
 	<select id="selectSeq" resultType="_int">
@@ -46,15 +48,19 @@
 			)
 	
 	</insert>
-	
-	<select id="selectClub" resultType="club">
-		select * from club where club_code = #{clubSeq}
-		
+
+	<select id="clubSearch" resultType="clubMaster">
+		select C.*, M.member_id from club C left join member M on c.club_master = m.member_code
 	</select>
 	
+	<select id="selectOne" resultType="club">
+		select * from club where club_code = #{clubCode}
+	</select>
+	
+	
+	<select id="selectClubMaster" resultType="member">
+		select * from member where member_code = #{clubMaster}
 
-	<select id="clubSearch" resultType="club">
-		select * from club
 	</select>
 </mapper>
 

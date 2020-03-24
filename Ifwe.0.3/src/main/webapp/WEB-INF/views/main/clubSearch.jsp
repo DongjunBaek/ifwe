@@ -25,8 +25,10 @@ $(function(){
 
     });
     
-    $("#goclub").click(function(){
-    	location.href="${pageContext.request.contextPath }/club/clubMain.do";
+    $("[name=goclub]").click(function(){
+    	let clubCode = $(this).attr("data-clubCode");
+    	console.log(clubCode);
+    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
     });
     
 	$(".friend-name-profile").click(function(){
@@ -37,22 +39,56 @@ $(function(){
 });
 
 </script>
+<style>
+.card-container:nth-child(n+4) {
+	margin-top:3%;
+}
+</style>
+<script>
+$(function(){
+	
+	$("[name=somoim-search-btn]").click(function(){
+		let searchType = $("[name=searchType]").val();
+		let clubSearchKeyword = $("[name=clubSearchKeyword]").val();
+		console.log("dkdkdkdkdk");
+		
+		
+		console.log(searchType);
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/club/clubSearchKeyword?searchType="+searchType+"&clubSearchKeyword="+clubSearchKeyword,
+			success:data => {
+				console.log(data);	
+			},
+			error:(x,s,e) =>{
+				console.log("에러 ㅡㅡ ");
+				console.log(x,s,e);
+			}
+		});
+		
+		
+	});
+	
+	
+	
+	
+});
+</script>
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">
                     <div class="select-box">
-                        <select name="search" id="search">
+                        <select name="searchType" id="search">
                             <option value="">전체</option>
-                            <option value="">지역별</option>
-                            <option value="">모임명</option>
+                            <option value="loc">지역별</option>
+                            <option value="mName">모임명</option>
                         </select>
                     </div>
                     <div class="searh-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                        <input type="text" name="club-search" id="club-search"
-                                placeholder="검색어를 입력하세요">
-    
+                        <input type="text" name="clubSearchKeyword" id="club-search" placeholder="검색어를 입력하세요">
+                        <input type="button" value="검색" name="somoim-search-btn" />          
                 </div>
                 <p class="cate-title font-hk">스터디</p>
                 <div class="cate-Classify" id="cate-Classify">
@@ -72,14 +108,14 @@ $(function(){
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
                         <div class="information-container">
-                            <p class="club-leader-name font-hk friend-name-profile">@wingStudy_02</p>
+                            <p class="club-leader-name font-hk friend-name-profile">@ ${list.memberId}</p>
                             <p class="club-name-search font-hk">${list.clubTitle }</p>
                             <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>${list.clubLocation }</p>
     
                             <div class="information-box">
                                 <br>
                                 <p class="people-title font-hk">정원수 </p>
-                                <span class="information-fontsize"> ${list.clubMax }</span>/25
+                                <span class="information-fontsize">1</span>/${list.clubMax }
                             </div>
                             <div class="information-box">
                                     <br>
@@ -93,7 +129,7 @@ $(function(){
                                     <p class="people-title font-hk">평균나이</p>
                                     <span class="information-fontsize">28세</span>
                             </div>
-                            <button class="information-botton font-hk" id="goclub">자세히 보기</button>
+                            <button class="information-botton font-hk" name="goclub" data-clubCode=${list.clubCode }>자세히 보기</button>
                         </div>
                     </div>
                    <!--  <div class="card-container">
