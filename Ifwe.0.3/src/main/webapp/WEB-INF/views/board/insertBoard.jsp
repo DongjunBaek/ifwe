@@ -94,7 +94,9 @@ border:0;}
 					<h3 class="main_content">내용</h3>
 					<br /><br />
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
+				<input type="hidden" name="boardImgOri" id="boardImgOri">
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
+				<input type="hidden" name="boardImgRe" id="boardImgRe">
 				<div class="btn_wrap">
 	           		<input type="submit" id="modify_1" value="등록" class="no-border">
 	       		 </div>

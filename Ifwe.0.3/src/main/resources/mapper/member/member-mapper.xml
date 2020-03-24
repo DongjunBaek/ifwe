@@ -74,47 +74,6 @@
 			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
 	</select>
 
-
-
-
-
-
-
-
-
-
-
-	
-	<!-- 20200323김원재 -->
-<update id="updateProfile">
-
-	update
-		member_profile
-	set
-		     profile_name=#{profileName},
-			 profile_img_ori=#{profileImgOri},
-			 profile_img_re=#{profileImgRe},
-		     profile_comment =#{profileComment},
-			 profile_age = #{profileAge},
-			 profile_gender=#{profileGender},
-			 contents_cate_codes =#{contentsCateCodes, typeHandler=StrArrTypeHandler}
-		where
-			member_code=#{memberCode}
-</update>
-
-	<insert id="insertProfile">
-	
-	
-insert into member_profile values(
-'#{memberId}','null','null','null','null','0','M','null'
-
-);
-	
-</insert>
-
-
-
-
 </mapper>
 
 
