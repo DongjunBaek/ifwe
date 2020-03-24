@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,21 +33,42 @@ public class ClubController {
 	@Autowired
 	private ClubService clubService;
 	
+	
+	@GetMapping("/clubSearchKeyword")
+	public ModelAndView clubSearchKeyword(ModelAndView mav,
+										  @RequestParam("searchType") String searchType,
+									      @RequestParam("clubSearchKeyword")String clubSearchKeyword
+										  ) {
+		
+		log.debug("searchType = {}",searchType);
+		log.debug("clubSearchKeyword = {}",clubSearchKeyword);
+		
+		
+		
+		
+		
+		
+		
+		return mav;
+		
+	}
 
-	@GetMapping("/clubSearch.do")
+	
+	
+	@GetMapping("/clubSearch")
 	public ModelAndView clubSearch(ModelAndView mav) {
+		
 		log.debug("소모임 검색");
-		List<Club> clubList = clubService.clubSearch();
+		
+		List<ClubMaster> clubList = clubService.clubSearch();
 		log.debug("clubList = {}",clubList);
-		
-		
 		
 		
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
 		
 		return mav;
-	};
+	}
 	
 	@GetMapping("/clubCreate.do")
 	public String clubCreate() {
@@ -90,19 +113,15 @@ public class ClubController {
 	    	
 	    	int result = clubService.create(club);
 	    	
-	    	int clubseqno = clubService.selectseq();
-	    	
-	    	
-    	
-	    	redirectAttributes.addAttribute("clubSeq", clubseqno);
-	    	mav.setViewName("redirect:/club/clubMain.do?clubSeq="+clubseqno);
+	    	log.debug("result @ club create {}", result);
+
     	
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
-		
-		
-		
+
+		mav.setViewName("redirect:/club/clubMain.do?clubCode="+club.getClubCode());
+			
 		return mav;
 	}
 	
@@ -110,20 +129,25 @@ public class ClubController {
 	
 	
 	@GetMapping("/clubMain.do")
-	public String clubMain(@RequestParam("clubSeq") int clubSeq,
-						   Model model) {
-		
-		Club club = clubService.selectClub(clubSeq);
+	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
 		
 		
+		log.debug("clubCode = {}",clubCode);
+		
+		Club club = clubService.selectOne(clubCode);
+		
+		log.debug("club = {}",club);
 		
 		
+		Member clubMaster = clubService.selectClubMaster(club.getClubMaster());
 		
+		mav.addObject("club", club);
+		mav.addObject("clubMaster", clubMaster);
+		mav.setViewName("/club/clubMain");
 		
+		return mav;
 		
-		
-		
-		return "club/clubMain";
+
 	}
 	
 	@RequestMapping("/insert.do")

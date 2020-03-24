@@ -29,6 +29,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectOne(String boardCategory) {
 		return boardDAO.selectOne(boardCategory);
 	}
+
+	@Override
+	public Board selectBoardDetail(int boardNo) {
+		return boardDAO.selectBoardDetail(boardNo);
+	}
 	
 	
 }

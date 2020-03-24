@@ -30,13 +30,14 @@
             			 */
             			 
             			 $children1 = $("<div class='section-boardtitle-box'>").append("<p>"+(value.boardCate == "notice"?"공지" : value.boardCate == "qna"?"문의":"신고")+"</p>");
-            			 $children2 = $children1.append("<div class='section-boardtitle'>"+value.boardTitle+"</div>");
+            			 $children2 = $children1.append("<div class='section-boardtitle'><a href='${pageContext.request.contextPath}/board/boardDetail?boardNo="+value.boardNo+"'>"+value.boardTitle+"</a></div>");
             			 $children3 = $children2.append("<p>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</p></div>");
-            			 
+            			 console.log(value.boardNo);
  	                     $parentDiv.append($children1);
  	                     $parentDiv.append($children2);
  	                     $parentDiv.append($children3);
-						            			 
+						
+ 	                     
             		 });            		 
             	 },
             	 error : function(x,h,r){

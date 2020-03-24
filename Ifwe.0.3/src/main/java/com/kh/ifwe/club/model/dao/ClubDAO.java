@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.member.model.vo.Member;
 
 public interface ClubDAO {
 
@@ -17,8 +19,11 @@ public interface ClubDAO {
 
 	int insertCategory(Map<String, Object> map);
 
-	Club selectClub(int clubSeq);
+	List<ClubMaster> clubSearch();
 
-	List<Club> clubSearch();
+	Club selectOne(int clubCode);
+
+	Member selectClubMaster(int clubMaster);
+
 
 }
