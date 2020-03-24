@@ -60,25 +60,26 @@ $(function(){
                     <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
                     <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
                     <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
-    
                 </div>
                 <div class="card-wrapper">
+                <c:if test="${not empty clubList }">
+                <c:forEach items="${clubList }" var="list">
                     <div class="card-container">
                         <div class="club-img">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/ex1.jpg" alt="" />
+                        	<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${list.clubImgRe}" alt="" />
                         </div>
                         <div class="club-leader">
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
                         <div class="information-container">
                             <p class="club-leader-name font-hk friend-name-profile">@wingStudy_02</p>
-                            <p class="club-name-search font-hk">윙스터디 모임</p>
-                            <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i> 서울,경기</p>
+                            <p class="club-name-search font-hk">${list.clubTitle }</p>
+                            <p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>${list.clubLocation }</p>
     
                             <div class="information-box">
                                 <br>
-                                <p class="people-title font-hk">정원수</p>
-                                <span class="information-fontsize">23</span>/25
+                                <p class="people-title font-hk">정원수 </p>
+                                <span class="information-fontsize"> ${list.clubMax }</span>/25
                             </div>
                             <div class="information-box">
                                     <br>
@@ -95,15 +96,16 @@ $(function(){
                             <button class="information-botton font-hk" id="goclub">자세히 보기</button>
                         </div>
                     </div>
-                    <div class="card-container">
+                   <!--  <div class="card-container">
                     </div>
                     <div class="card-container">
                         
     
-                    </div>
+                    </div> -->
+                </c:forEach>
+                </c:if>    
     
                 </div>
-    
             </div>
     </section>
 

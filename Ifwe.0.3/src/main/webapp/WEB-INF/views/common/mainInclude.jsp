@@ -48,7 +48,7 @@ $(function(){
 	   location.href = "${pageContext.request.contextPath}/club/clubSearch.do";
    });
    $("#main-board").click(function(){
-	   location.href = "${pageContext.request.contextPath}/main/mainBoard.do";
+	   location.href = "${pageContext.request.contextPath}/board/mainBoard.do";
    });
    $("#information").click(function(){
    });
@@ -112,7 +112,7 @@ text-decoration: none;
                     	</li>
                     </div>
                     <div class="blue-back" id="main-board">
-                    	<li><a href="${pageContext.request.contextPath }/main/mainBoard.do" class="font-black">게시판</a></li>
+                    	<li><a href="${pageContext.request.contextPath }/board/mainBoard.do" class="font-black">게시판</a></li>
                     </div>
                     <div class="blue-back" id="information">
                     	<li><a href="#" class="font-black">소개</a> </li>

@@ -98,4 +98,38 @@ public class BoardController {
 		return list;
 	}
 	
+	
+	
+	/**
+	 * 0324 동준 작업 게시판 목록 조회
+	 * 
+	 * @param mav
+	 * @return
+	 */
+	@GetMapping("/mainBoard.do")
+	public ModelAndView mainBoard(ModelAndView mav) {
+		
+		List<Board> boardList = boardService.selectOne("notice");
+		
+		log.debug("mainBoard @ boardController {}", boardList);
+		mav.addObject("boardList", boardList);
+		mav.setViewName("main/mainBoard");
+		
+		return mav;
+	}
+	
+	@GetMapping("/mainBoardList.do")
+	@ResponseBody
+	public List<Board> mainBoardList(ModelAndView mav, @RequestParam( 
+																value = "boardCategory",
+																required = false, 
+																defaultValue = "notice") String boardCategory) {
+		log.debug("boardCategory = ",boardCategory);
+		List<Board> boardList = boardService.selectOne(boardCategory);
+		
+		log.debug("mainBoardList @ boardController {}", boardList);
+		
+		
+		return boardList;
+	}
 }
