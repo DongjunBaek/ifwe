@@ -28,6 +28,6 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public List<Board> selectOne(String BoardCategory) {
-		return sqlSession.selectList("admin.selectOne",BoardCategory);
+		return sqlSession.selectList("admin.selectOneBoard",BoardCategory);
 	}
 }
