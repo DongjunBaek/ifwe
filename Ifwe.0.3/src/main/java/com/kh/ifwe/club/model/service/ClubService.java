@@ -8,6 +8,10 @@ public interface ClubService {
 
 	int create(Club club);
 
+	int selectseq();
+
+	Club selectClub(int clubSeq);
+	
 	List<Club> clubSearch();
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,14 +90,17 @@ public class ClubController {
 	    	
 	    	int result = clubService.create(club);
 	    	
+	    	int clubseqno = clubService.selectseq();
+	    	
+	    	
     	
+	    	redirectAttributes.addAttribute("clubSeq", clubseqno);
+	    	mav.setViewName("redirect:/club/clubMain.do?clubSeq="+clubseqno);
     	
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
 		
-		
-		mav.setViewName("redirect:/club/clubMain.do");
 		
 		
 		return mav;
@@ -106,7 +110,19 @@ public class ClubController {
 	
 	
 	@GetMapping("/clubMain.do")
-	public String clubMain() {
+	public String clubMain(@RequestParam("clubSeq") int clubSeq,
+						   Model model) {
+		
+		Club club = clubService.selectClub(clubSeq);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return "club/clubMain";
 	}
 	
