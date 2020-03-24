@@ -1,0 +1,111 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+section{
+    font-family: 'GmarketSansLight';
+}
+.section-boradmenu{
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    font-size: 24px;
+}
+.section-wrapper{
+    width:100%;
+    height:55px;
+}
+.section-wrapper p{
+    font-family: 'GmarketSansLight';
+}
+
+.section-boradmenu{
+    float: left;
+    
+}
+.shc-premiumbox{
+    float: right;
+    width:210px;
+    height:55px;
+    background-color: #ffc862;
+    border-radius: 20px;
+
+}
+.shc-premiumbox p{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top:6%;
+
+}
+.shc-section-container{
+    width:100%;
+    height:700px;
+    margin-top:50px;
+}
+.shc-section-leftbox{
+    float: left;
+    width:665px;
+    height:330px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+.shc-section-rightbox{
+    float: right;
+    width:665px;
+    height:330px;
+    background-color: white;
+    margin-bottom: 20px;
+
+}
+.shc-section-centerbox{
+    width:575px;
+    height:100%;
+    margin:0 auto;
+    padding-top:115px;
+    position: relative;
+}
+.shc-section-boxline{
+    width:80px;
+    height:8px;
+    background-color: #ffc862;
+}
+.shc-centerboxp1{
+    font-size: 40px;
+    margin-top: 50px;
+    font-weight: bold;
+}
+.shc-centerboxp2{
+    font-size:24px;
+    margin-top:30px;
+}
+.fa-chevron-right{
+    position: absolute;
+    right:0%;
+    top:50%;
+}
+.shcbox:hover{
+    background-color: #ffc862;
+}
+.shcbox:hover .shc-section-boxline{
+    background-color: white;
+}
+.shcbox:hover .fa-chevron-right{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
