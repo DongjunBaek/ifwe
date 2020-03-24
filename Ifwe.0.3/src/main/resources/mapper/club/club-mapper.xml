@@ -47,6 +47,11 @@
 	
 	</insert>
 	
+	<select id="selectClub" resultType="club">
+		select * from club where club_code = #{clubSeq}
+		
+	</select>
+	
 
 </mapper>
 

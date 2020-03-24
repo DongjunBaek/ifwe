@@ -49,6 +49,16 @@ public class ClubServiceImpl implements ClubService {
 		return result;
 		
 	}
+
+	@Override
+	public int selectseq() {
+		return clubDAO.selectSeq();
+	}
+
+	@Override
+	public Club selectClub(int clubSeq) {
+		return clubDAO.selectClub(clubSeq);
+	}
 	
 	
 	
