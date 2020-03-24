@@ -113,7 +113,7 @@ CREATE TABLE  MEMBER_REPORT  (
 	 repost_end 	DATE		NULL
 );
 
-DROP TABLE  CONTENTS_INFO ;
+
 
 CREATE TABLE  CONTENTS_INFO  (
 	 contents_code 	NUMBER		NOT NULL,
@@ -125,7 +125,6 @@ CREATE TABLE  CONTENTS_INFO  (
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
 
-DROP TABLE  MEMBER_PROFILE ;
 
 CREATE TABLE  MEMBER_PROFILE  (
 	 member_code 	NUMBER		NOT NULL,
@@ -148,9 +147,9 @@ CREATE TABLE  MEMBER_EVENT  (
 
 
 
-CREATE TABLE  CONTENTS_CATEGORY  (
-	 cate_code 	VARCHAR2(100)		NOT NULL,
-	 cate_codeinfo 	VARCHAR2(100)		NULL
+CREATE TABLE  CLUB_CATEGORY  (
+    club_code    NUMBER      NOT NULL,
+    club_cate    VARCHAR2(100)      NOT NULL
 );
 
 DROP TABLE  EVENT ;
@@ -167,19 +166,27 @@ CREATE TABLE  EVENT  (
 
 DROP TABLE  CLUB ;
 
+-- 0323 변경
 CREATE TABLE  CLUB  (
-	 club_code 	NUMBER		NOT NULL,
-	 club_master 	NUMBER		NOT NULL,
-	 club_title 	VARCHAR2(120)		NULL,
-	 club_img_ori 	VARCHAR2(100)		NULL,
-	 club_img_re 	VARCHAR2(100)		NULL,
-	 club_current 	NUMBER		NULL,
-	 club_max 	NUMBER		NULL,
-	 club_date 	DATE		NULL,
-	 premium_code 	VARCHAR2(30)		NOT NULL
+    club_code    NUMBER      NOT NULL,
+    club_master    NUMBER      NOT NULL,
+    club_title    varCHAR2(120)      NULL,
+    club_img_ori    VARCHAR2(100)      NULL,
+    club_img_re    VARCHAR2(100)      NULL,
+    club_current    NUMBER      NULL,
+    club_max    NUMBER      NULL,
+    club_date    DATE default sysdate,
+    club_content varchar2(300) null,
+     club_catecode varchar2(12) null,
+     club_location varchar2(10) null,
+     premium_code    VARCHAR2(30)    NULL
+     
 );
 
-DROP TABLE  CONTENTS_IMG ;
+-- 0323 추가
+CREATE TABLE  CONTENTS_CATEGORY  (
+    cate_code    VARCHAR2(100)   NOT NULL
+);
 
 CREATE TABLE  CONTENTS_IMG  (
 	 img_code 	VARCHAR2(20)		NOT NULL,
@@ -650,7 +657,7 @@ REFERENCES  CLUB  (
 --===================================================================
 create sequence seq_member_no;
 --create sequence seq_board_no;
-
+--create sequence seq_club_no;
 
 --===================================================================
 --member dummy
@@ -702,5 +709,27 @@ insert into board values (
     default,
     default    
 );
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (45,1,'notice','테스트6','<p>테스트6</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (46,1,'notice','테스트7','<p>테스트7</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (47,1,'notice','테스트8','<p>테스트8</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (48,1,'notice','테스트9','<p>테스트9</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (49,1,'notice','테스트10','<p>테스트10</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (50,1,'notice','테스트11','<p>테스트11</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (51,1,'report','테스트21','<p>테스트21</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (52,1,'report','테스트22','<p>테스트22</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (53,1,'report','테스트23','<p>테스트23</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (54,1,'report','테스트24','<p>테스트24</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (55,1,'report','테스트25','<p>테스트25</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (56,1,'report','테스트26','<p>테스트26</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (57,1,'qna','테스트31','<p>테스트31</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (58,1,'qna','테스트32','<p>테스트32</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (59,1,'qna','테스트33','<p>테스트33</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (60,1,'qna','테스트34','<p>테스트34</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (61,1,'qna','테스트35','<p>테스트35</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (42,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (43,1,'notice','테스트2','<p>테스트2</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (44,1,'report','테스트5','<p>테스트5</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (21,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
+Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (41,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
 

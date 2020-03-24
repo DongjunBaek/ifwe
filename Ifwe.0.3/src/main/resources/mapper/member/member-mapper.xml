@@ -25,7 +25,95 @@
 		select * from member where member_id = #{memberId}
 	</select>
 	
+	<update id="updatePassword">
+		update 
+			member
+		set 
+			member_pwd = #{memberPwd}
+		where 
+			member_id = #{memberId}
+	</update>
 	
+	<update id="updatePhone">
+		update 
+			member
+		set 
+			member_phone = #{memberPhone}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="updateEmail">
+		update 
+			member
+		set 
+			member_email = #{memberEmail}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="deleteMember">
+		update 
+			member
+		set 
+			member_role = #{memberRole}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<select id="searchId" resultType="member">
+		 select 
+			* 
+		from
+			member
+		where 
+			member_name = #{memberName}
+		and 
+			member_phone = #{phone}
+		and 
+			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<!-- 20200323김원재 -->
+<update id="updateProfile">
+
+	update
+		member_profile
+	set
+		     profile_name=#{profileName},
+			 profile_img_ori=#{profileImgOri},
+			 profile_img_re=#{profileImgRe},
+		     profile_comment =#{profileComment},
+			 profile_age = #{profileAge},
+			 profile_gender=#{profileGender},
+			 contents_cate_codes =#{contentsCateCodes, typeHandler=StrArrTypeHandler}
+		where
+			member_code=#{memberCode}
+</update>
+
+	<insert id="insertProfile">
+	
+	
+insert into member_profile values(
+'#{memberId}','null','null','null','null','0','M','null'
+
+);
+	
+</insert>
+
+
+
 
 </mapper>
 

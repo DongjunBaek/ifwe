@@ -53,6 +53,9 @@
 	</select>
 	
 
+	<select id="clubSearch" resultType="club">
+		select * from club
+	</select>
 </mapper>
 
 

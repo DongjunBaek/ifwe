@@ -19,5 +19,6 @@ public interface ClubDAO {
 
 	Club selectClub(int clubSeq);
 
+	List<Club> clubSearch();
 
 }

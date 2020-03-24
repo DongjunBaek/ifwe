@@ -6,157 +6,124 @@
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="회원정보수정" name="pageTitle"/>
 </jsp:include>
-<style>
-bady{
-background-color:rgba(246,246,246,0.5);
-color:#3b3b3b;
-}
-   .update-second{
-       width: 1100px;
-       min-height: 500px;
-       float: left;
-       margin-top: 2%;
-   }
-   .update-title{
-       width: 1100px;
-       height: 75px;
-   }
-   .update-title-p{
-       font-size: 35px;
-       margin-left: 5%;
-       margin-top:2%;
-   }
-   .update-form{
-       /* margin-top: 3%; */
-       width: 1100px;
-       height: 750px;
-       background-color: white;
-       float: left;
-   }
-   .first-form,.second-form{
-       margin-top: 6%;
-       width: 480px;
-       height: 580px;
-       float: left;
-       margin-left:6.3%
-   }
-   .update-form-input{
-       border:1px solid #ebebeb;
-       /* margin-bottom: 5%; */
-   }
-   .update-label{
-       font-size: 20px;
-       margin: 4% 0 5% 0;
-   }
-   .update-input{
-       width: 260px;
-       height: 44px;
-       font-size: 20px;
-   }
-   .input-long{
-       width: 400px;
-       height: 44px;
-   }
-   .update-button{
-       margin-top: 10%;
-       width: 345px;
-       height: 50px;
-       background-color: #ffc862;
-       border: 0;
-       outline: 0;
-       border-radius: 20px;
-       color: white;
-       font-size: 20px;
-   }
+    <script>
+    $(function(){
+    	$(".update-li-p-class").next().css('display','none');
+    	
+    	$(".update-list-div li").hover(function(){
+    		console.log($(this));
+    		console.log($(this).children().next());
+    		$(this).children().next().css('display','');
+    	},function(){
+    		$(this).children().next().css('display','none');
+    	});
+    	
+    	$("#profile-update-btn").click(function(){
+    		location.href = "${pageContext.request.contextPath}/member/updateProfile.do";
+    	});
+    
+    	$(".update-password-span").click(function(){
+    		location.href = "${pageContext.request.contextPath}/member/updatePassword.do";
+    	});
+    	
+    	$("#phone-email-update-btn").click(function(){
+    		location.href = "${pageContext.request.contextPath}/member/updateEmailPhone.do";
+    	});
+    });
+    
+    </script>
+    
+    
+
+<section style="margin:0;">
+ <!-- 왼쪽 2개 div 시작 -->
+   <article class="update-first">
+   		<div class="profile-update-div">
+   			<div class="profile-update-div-in bold-kor">
+   				<p>ifwe 프로필</p>
+   			</div>
+   			<div class="profile-img-div">
+   				<img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt=""/>
+   			</div>
+   			<div class="profile-nickname-div">
+   				<div class="profile-nickname-div-title bold-kor">닉네임:</div>
+   				<div class="profile-nickname-div-content">얄라얄라얄라셩</div>
+   			</div>
+   			<div class="profile-update-btn">
+	   			<input type="button" value="프로필 수정" id="profile-update-btn" class="profile-update-btn-class" />
+   			</div>
+   		</div>	
    
-</style>
+   <div class="profile-update-div-list">
+   		<div class="profile-update-div-in bold-kor">
+   			<p>내 소모임 목록</p>
+   		</div>
+   		<div class="update-list-div">
+   			<ul class="mypage-p-class" style="color:#2756a6">
+   				<li><span class="update-li-p-class">윙스터디 모임1</span><i class="far fa-times-circle update-li-i-class"></i></li>
+   				<li><span class="update-li-p-class">윙스터디 모임2</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
+   				<li><span class="update-li-p-class">윙스터디 모임3</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
+   			</ul>
+   		</div>
 
-<section>
-   <article class="mypage-first">
-       <div class="intro-div">
-           <div class="img-div">
-           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-           </div>
-           <div class="myname-div font-kor">
-               <div style="font-size: 25px;margin:0 10% ">@wingStudy_02</div>
-               <div style="font-size:30px;font-weight: 900;margin:5% 20% 0 30%" >스테파니</div>
-           </div>
-       </div>
-       <div class="btn-div">
-           <input type="button" value="회원정보 수정" class="update-btn font-kor">
-           <input type="button" value="프로필 카드" class="update-btn font-kor">
-       </div>
-       <div class="list-div">
-           <div class="list-title">
-               <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
-               <div class="list-ul-container">
-                   <ul class="font-kor mypage-list-ul" style="padding: 0;">
-                        <li><p class="mypage-p-class">윙스터디 모임</p></li>
-                        <li><p class="mypage-p-class">윙스터디</p></li>
-                        <li><p class="mypage-p-class">윙</p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+   		
+   		</div>	
+    <!-- 왼쪽  2개 div  끝 -->
+        
     </article>
     
-    <article class="update-second bold-font">
-        <div class="update-title">
-            <p class="update-title-p">회원정보 수정</p>
-        </div>
-        <div class="update-form font-kor">
-            <form action="">
-                <div class="first-form" >
-                    <div id="name">
-                        <div class="update-label">이름</div>
-                        <input type="text" name="name" class="update-form-input update-input">
-                    </div>
-                    <div id="birthday">
-                        <div class="update-label">생년월일</div>
-                        <div class="update-label">1999 년 07 월 11 일</div>
-                    </div>
-                    <div id="address">
-                        <div class="update-label">주소</div>
-                        <input type="text" name="address" class="update-form-input input-long">
-                    </div>
-                    <div id="gender">
-                        <div class="update-label">성별</div>
-                        <input type="text" name="gender" class="update-form-input update-input">
-                    </div>
-                    <div id="email">
-                        <div class="update-label">이메일</div>
-                        <input type="text" name="email" class="update-form-input input-long">
-                    </div>
-                </div>
+    <!-- 오른쪽 2개 div 시작-->
 
-                <div class="second-form" >
-                    <div id="nickName">
-                        <div class="update-label">닉네임</div>
-                        <input type="text" name="nickName" class="update-form-input update-input">
-                    </div>
-                    <div id="id">
-                        <div class="update-label">아이디</div>
-                        <div class="update-label">wingStudy_02</div>
-                    </div>
-                    <div id="password">
-                        <div class="update-label">비밀번호</div>
-                        <input type="password" name="password" class="update-form-input input-long">
-                    </div>
-                    <div id="password-chk">
-                        <div class="update-label">비밀번호 확인</div>
-                        <input type="text" name="passwordChk" class="update-form-input update-input">
-                    </div>
-                    <div id="update-button">
-                        <input type="button" value="회원정보 수정" class="update-button bold-font">
-                    </div>
-                </div>
-            </form>
-        </div>
+    <article class="update-second">
+   		<div class="profile-update-div">
+   			<div class="profile-update-div-in bold-kor">
+   				<p>연락처</p>
+   			</div>
+   			<div class="phone-email-container">
+   				<div class="update-titles">
+		   			<div class="phone-number-title bold-kor">휴대전화</div>
+		   			<div class="email-title bold-kor">이메일</div>
+   				</div>
+	   			<div class="update-contents">
+		   			<div class="phone-number-content">${memberLoggedIn.memberPhone==null?"&nbsp;":memberLoggedIn.memberPhone }</div>
+		   			<div class="email-content"> ${memberLoggedIn.memberEmail }</div>
+	   			</div>
+	   			
+   			</div>
+	   			<div class="profile-update-btn">
+	   			<input type="button" value="수정" id="phone-email-update-btn" class="profile-update-btn-class" />
+   			</div>
+   		</div>	
+   
+   <div class="profile-update-div" style="height:400px;margin-bottom:0;">
+		<div class="profile-update-div-in bold-kor">
+   			<p>비밀번호</p>
+   		</div>
+   		<div class="update-password-info">
+   			<span>
+   				ifwe 로그인 시 사용하는 <span style="color:red">비밀번호를 변경</span>할 수 있습니다. <br />
+   				주기적인 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요. 
+   			</span>
+   		</div>
+   		<div class="phone-email-container">
+   			<div class="update-titles">
+   				<div class="email-title bold-kor">비밀번호</div>
+   			</div>
+   			<div class="update-contents">
+		   		<div class="email-content"> <span class="bold-kor update-password-span" style="color:black;">변경하기</span> </div>
+	   		</div>
+   		</div>
+   	</div>	
+   	
+   	<div class="delete-member bold-kor">
+   		<span>ifwe를 더이상 이용하지 않는다면 </span><a href="${pageContext.request.contextPath }/member/deleteMember.do" style="color:red;">회원탈퇴 바로가기 ></a>
+   	</div>
+   	
     </article>
-    
+    <style>
+    .delete-member{height:30px;font-size:16px;margin-top:3%;margin-left:38%;}
+    </style>
+     <!-- 오른쪽 2개 div 끝-->
 </section>
-
-
-
 </body>
 </html>

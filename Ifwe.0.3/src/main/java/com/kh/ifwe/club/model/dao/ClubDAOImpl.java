@@ -45,6 +45,9 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectOne("club.selectClub", clubSeq);
 	}
 
+	public List<Club> clubSearch() {
+		return sqlSession.selectList("club.clubSearch");
+	}
 
 	
 	

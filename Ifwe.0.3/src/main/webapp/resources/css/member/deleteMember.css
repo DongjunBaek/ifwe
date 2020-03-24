@@ -1,0 +1,12 @@
+.update-tbl{margin-top:5%;border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;margin-left: 3%;}
+.update-tbl-title-delete{font-size:20px;padding:5%;width:200px;height:80px;background-color:#ebebeb}
+.update-tbl-content{font-size:16px;margin-left:15%;width:500px;}
+.blue-color{color:#2756a6;}
+.deleteMember-section{/* width:100%;height:100%; */ margin-left: -9%;}
+.deleteMember-article{width: 1100px; height: 1000px;margin:3% 24% 0 24%;}
+.deleteMember-title{font-size:40px;}
+.subTitle-p-class{padding-left:3%;}
+.deleteMember-subTitle{margin-top:5%;font-size:20px;}
+.red-color{color:red;}
+.deleteMember-checkdiv{margin-top:20%;font-size:18px;line-height:1.8;margin-left:3%;}
+.deleteBtn{width:100px;height: 50px;border:1px solid #cbcbcb; background-color:#ebebeb;font-size:20px;margin:3% 0 0 40%;}

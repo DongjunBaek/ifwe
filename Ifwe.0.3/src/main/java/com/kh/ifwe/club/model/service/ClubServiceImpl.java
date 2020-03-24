@@ -59,6 +59,12 @@ public class ClubServiceImpl implements ClubService {
 	public Club selectClub(int clubSeq) {
 		return clubDAO.selectClub(clubSeq);
 	}
+
+	//0324 문보라 소모임목록 뿌려주기 
+	@Override
+	public List<Club> clubSearch() {
+		return clubDAO.clubSearch();
+	}
 	
 	
 	

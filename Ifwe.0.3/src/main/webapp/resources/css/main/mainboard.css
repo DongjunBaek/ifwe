@@ -88,6 +88,7 @@ section{
     min-height: 65px;
     border-bottom: 1px solid #989898;
     margin-bottom: 50px;
+    text-align: center;
 }
 .section-boardtitle{
     float: left;
