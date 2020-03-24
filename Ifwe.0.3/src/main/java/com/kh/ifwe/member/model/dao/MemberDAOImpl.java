@@ -1,5 +1,7 @@
 package com.kh.ifwe.member.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,31 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member selectOne(String memberId) {
 		return sqlSession.selectOne("member.selectOne",memberId);
+	}
+
+	@Override
+	public int updatePassword(Member member) {
+		return sqlSession.update("member.updatePassword", member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return sqlSession.update("member.updatePhone",member);
+	}
+
+	@Override
+	public int updateEmail(Member member) {
+		return sqlSession.update("member.updateEmail", member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return sqlSession.update("member.deleteMember",member);
+	}
+
+	@Override
+	public Member searchId(Map<String, String> param) {
+		return sqlSession.selectOne("member.searchId",param);
 	}
 	
 	

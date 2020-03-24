@@ -1,5 +1,7 @@
 package com.kh.ifwe.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,31 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectOne(String memberId) {
 		return memberDAO.selectOne(memberId);
 	}
-	
+
+	@Override
+	public int updatePassword(Member member) {
+		return memberDAO.updatePassword(member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return memberDAO.updatePhone(member);
+	}
+
+	@Override
+	public int updateEamil(Member member) {
+		return memberDAO.updateEmail(member);
+	}
+
+	@Override
+	public int deleteMember(Member member) {
+		return memberDAO.deleteMember(member);
+	}
+
+	@Override
+	public Member searchId(Map<String, String> param) {
+		return memberDAO.searchId(param);
+	}
+
 	
 }

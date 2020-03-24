@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<insert id="insertBoard">
+	
+	insert into board values (
+    seq_board_no.nextval,
+    #{memberCode},
+    #{boardCate},
+    #{boardTitle},
+    #{boardContent},
+    #{boardImgOri},
+    #{boardImgRe},
+    default,
+    default,
+    default,
+    default    
+	)
+	</insert>
+	
+	<select id="selectMemberList" resultType="member">
+		select
+			*
+		from
+			member
+	</select>
+	
+	<select id="selectDropMemberList" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_role = 'd'
+	</select>
+	
+	<select id="selectDormantMemberList" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_role ='h'
+	</select>
+	
+	<select id="selectOne" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_code = #{memberCode}
+	</select>
+	
+	<update id="cancelMember">
+		update
+			member
+		set
+			member_role = 'member'
+		where
+			member_code = #{memberCode}
+	</update>
+
+	<select id="selectOneBoard" resultType="board">
+		select 
+			*
+		from 
+			board		
+		where BOARD_CATE like #{boardCategory}
+	</select>
+
+
+</mapper>
+
+

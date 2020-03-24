@@ -43,6 +43,7 @@ section{
 }
 .btn_wrap{
     float: right;
+    /* border: 1px solid blue; */
 }
 .btn_member{
     width: 162px;
@@ -50,14 +51,26 @@ section{
     background-color:#e7e8e8;
     margin-top: 70px;
     border-radius: 20px;
-    font-family: 'Noto Sans KR', sans-serif;
-    outline: none;
     cursor: pointer;
+    text-align: center;
+    float: left;
+    outline: none;
+    text-decoration: none;
+}
+.btn_member h2{
+    padding-top: 10px;
+    font-size: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+#all_member{
+    margin-right: 20px;
+    /* border: 1px solid red; */
 }
 #drop_member{
     margin-right: 20px;
+    /* border: 1px solid red; */
 }
-
 .btn_member:hover{
     background-color: #3b3b3b;
     color: white;
@@ -68,6 +81,7 @@ section{
     height: 600px;
     /* margin-left: 400px;   */
     margin-top: 150px;
+    position: relative;
 }
 
 table{ 
@@ -126,4 +140,25 @@ td:last-child{
 .quit:hover{
     background-color: #3b3b3b;
     color: white;
+}
+
+.member_list_drop{
+    width: 1400px;
+    height: 600px;
+    margin-top: 150px;
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    /* border: 3px solid red;
+     */
+}
+.member_list_dormant{
+    width: 1400px;
+    height: 600px;
+    margin-top: 150px;
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    /* border: 3px solid red;
+     */
 }

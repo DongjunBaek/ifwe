@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club">
+	<insert id="clubCreate">
+		insert into club
+		values(
+			seq_club_no.nextval,
+			#{clubMaster},
+			#{clubTitle},
+			#{clubImgOri},
+			#{clubImgRe},
+			#{clubCurrent},
+			#{clubMax},
+			default,
+			#{clubContent},
+			#{clubCatecode},
+			#{clubLocation},
+			null
+			)
+	
+	</insert>
+	
+	<select id="selectSeq" resultType="_int">
+		select SEQ_club_no.currval
+		from dual
+	</select>
+	
+	<select id="selectCate" resultType="String">
+		select * from contents_category
+		where cate_code = #{hashtag}
+	</select>
+	
+	<insert id="insertContent">
+		insert into contents_category
+		values(#{hashtag})
+	
+	</insert>
+	
+	<insert id="insertCategory" parameterType="HashMap">
+		insert into club_category
+		values(
+			#{clubseq},
+			#{clubcate}
+			)
+	
+	</insert>
+	
+	<select id="clubSearch" resultType="club">
+		select * from club
+	</select>
+</mapper>
+
+

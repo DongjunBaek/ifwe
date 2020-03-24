@@ -7,24 +7,72 @@
 		insert into member
 		values(
 			seq_member_no.nextval,
-			#{locCode},
 			#{memberId},
 			#{memberPwd},
 			#{memberName},
 			#{memberPhone},
+			#{memberLoc},
 			#{memberEmail},
 			#{memberBirth},
 			#{memberGender},
 			#{memberAddr},
 			default,
-			null,'member',0
+			null,'member',0,
+			#{memberLike}
 			)
 	</insert>
 	<select id="selectOne" resultType="member">
 		select * from member where member_id = #{memberId}
 	</select>
 	
+	<update id="updatePassword">
+		update 
+			member
+		set 
+			member_pwd = #{memberPwd}
+		where 
+			member_id = #{memberId}
+	</update>
 	
+	<update id="updatePhone">
+		update 
+			member
+		set 
+			member_phone = #{memberPhone}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="updateEmail">
+		update 
+			member
+		set 
+			member_email = #{memberEmail}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<update id="deleteMember">
+		update 
+			member
+		set 
+			member_role = #{memberRole}
+		where 
+			member_id = #{memberId}
+	</update>
+	
+	<select id="searchId" resultType="member">
+		 select 
+			* 
+		from
+			member
+		where 
+			member_name = #{memberName}
+		and 
+			member_phone = #{phone}
+		and 
+			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
+	</select>
 
 </mapper>
 
