@@ -44,6 +44,7 @@ public class ClubDAOImpl implements ClubDAO {
 
 	@Override
 	public List<ClubMaster> clubSearch() {
+
 		return sqlSession.selectList("club.clubSearch");
 	}
 

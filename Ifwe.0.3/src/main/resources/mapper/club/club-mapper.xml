@@ -48,7 +48,7 @@
 			)
 	
 	</insert>
-	
+
 	<select id="clubSearch" resultType="clubMaster">
 		select C.*, M.member_id from club C left join member M on c.club_master = m.member_code
 	</select>
@@ -60,6 +60,7 @@
 	
 	<select id="selectClubMaster" resultType="member">
 		select * from member where member_code = #{clubMaster}
+
 	</select>
 </mapper>
 

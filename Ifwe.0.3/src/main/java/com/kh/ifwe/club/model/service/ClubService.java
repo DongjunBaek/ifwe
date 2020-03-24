@@ -16,4 +16,5 @@ public interface ClubService {
 
 	Member selectClubMaster(int clubMaster);
 
+
 }

@@ -113,18 +113,19 @@ public class ClubController {
 	    	
 	    	int result = clubService.create(club);
 	    	
+	    	int clubseqno = clubService.selectseq();
+	    	
+	    	
     	
+	    	redirectAttributes.addAttribute("clubSeq", clubseqno);
+	    	mav.setViewName("redirect:/club/clubMain.do?clubSeq="+clubseqno);
     	
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
-		
-		
-		
-		
+
 		mav.setViewName("redirect:/club/clubMain.do?clubCode="+club.getClubCode());
-		
-		
+			
 		return mav;
 	}
 	
@@ -150,7 +151,7 @@ public class ClubController {
 		
 		return mav;
 		
-		
+
 	}
 	
 	@RequestMapping("/insert.do")

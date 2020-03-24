@@ -63,6 +63,7 @@ $(function(){
 						<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                     </div>
                         <div class="nav-right-leader">
+
                             <p>@ ${memberLoggedIn.memberId }</p>
                             <p>${memberLoggedIn.memberName} 님</p>
                         </div>

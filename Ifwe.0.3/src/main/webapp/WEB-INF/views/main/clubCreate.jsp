@@ -105,14 +105,51 @@ $(function(){
 			$("#upFileLabel").val($file.prop('files')[0].name);
 		}
 		
-		
-		
-		
 	});
 	
     
 });
+
+
 function clubDuplicate(){
+	let radio = $("input[type=radio]").val();
+	let hash = $("#rdTag").val();
+	let title = $("#clubtitle").val();
+	let content = $("#clubContent").val();
+	let location = $("#search1").val();
+	let peopleMax = $("#search2").val();
+	let file = $("#upFileLabel").val();
+	
+	
+	if(radio.trim() == ""){
+		$("input[type=radio]").focus();
+		return false;
+	}
+	if(hash.trim() == ""){
+		$("#rdTag").focus();
+		return false;
+	}
+	if(title.trim() == ""){
+		$("#clubtitle").focus();
+		return false;	
+	}
+	if(content.trim() == ""){
+		$("#clubContent").focus();
+		return false;
+	}
+	if(location.trim() == ""){
+		$("#search1").focus();
+		return false;
+	}
+	if(peopleMax.trim() == "" ){
+		$("#search2").focus();
+		return false;
+	}
+	if(file == "파일을 선택하세요"){
+		$("#upFileLabel").focus();
+		return false;
+	}
+		
 	
 	return true;
 };
@@ -325,14 +362,14 @@ function clubDuplicate(){
                     <div class="number-createclub font-kor">03</div>
                     <div class="font-kor title thin-font">소모임명을 정해주세요</div>
                     <div class="inputs">
-                        <input type="text" name="clubTitle" class="font-kor input-text thin-font">
+                        <input type="text" id="clubtitle" name="clubTitle" class="font-kor input-text thin-font">
                     </div>
                 </div>
                 <div id="fourth" class="info-container">
                     <div class="number-createclub font-kor">04</div>
                     <div class="font-kor title thin-font">소모임 소개글을 입력하세요</div>
                     <div class="inputs">
-                        <input type="text" name="clubContent" class="font-kor input-text thin-font" >
+                        <input type="text" id="clubContent" name="clubContent" class="font-kor input-text thin-font" >
                     </div>
                 </div>
                 <div id="fifth" class="info-container">
@@ -394,10 +431,7 @@ $(function(){
 	  $("#search1").selectric();
 	  $("#search2").selectric();
 	
-	
-	
 });
-
 
 
 </script>

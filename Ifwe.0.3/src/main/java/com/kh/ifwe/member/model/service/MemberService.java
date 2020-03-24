@@ -3,6 +3,7 @@ package com.kh.ifwe.member.model.service;
 import java.util.Map;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberService {
 
@@ -18,6 +19,7 @@ public interface MemberService {
 
 	int deleteMember(Member member);
 
+	int updateProfile(Profile profile);
 	Member searchId(Map<String, String> param);
 
 

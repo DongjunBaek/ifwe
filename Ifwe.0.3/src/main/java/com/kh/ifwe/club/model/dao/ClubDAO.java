@@ -25,4 +25,5 @@ public interface ClubDAO {
 
 	Member selectClubMaster(int clubMaster);
 
+
 }
