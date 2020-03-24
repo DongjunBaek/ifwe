@@ -1,0 +1,88 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+section{
+    font-family: 'GmarketSansLight';
+}
+.section-boradmenu{
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    font-size: 24px;
+}
+.section-wrapper{
+    width:100%;
+}
+.section-wrapper p{
+    font-family: 'GmarketSansLight';
+}
+
+.section-boradmenu{
+    float: left;
+}
+.shc-premiumbox{
+    float: right;
+    width:210px;
+    height:55px;
+    background-color: #ffc862;
+    border-radius: 20px;
+
+}
+.shc-premiumbox p{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top:6%;
+
+}
+.shc-section-memberlist-container>p{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: 'GmarketSansMedium';
+}
+
+.shc-section-friendbox{
+    width:100%;
+    min-height:100px;
+    background-color: white;
+    border-top:4px solid #ffc862;
+    padding-bottom: 40px;
+
+}
+.shc-friendtable td{
+    border-bottom: 1px solid #ebebeb;
+    font-size: 18px;
+    height:60px;
+}
+.shc-friendtable tr td:first-child{
+    width:50px;
+    text-align: center;
+    color:#ffc862;
+
+}
+.shc-friendtable tr td:last-child{
+    width:1300px;
+}
+
+
+.shc-friendtable a:link{
+    color: black; text-decoration: none;
+}
+.shc-friendtable a:visited{
+    color:black;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

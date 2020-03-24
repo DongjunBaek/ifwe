@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Club Management</title>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmngmember.css">
+<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery.selectric.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/selectric.css">
+<script>
+$(function(){
+	$(".member-ranking").selectric();
+});
+
+</script>
+
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
+  <section class="flotclass">
+      <div class="section-block">
+          <div class="section-wrapper">
+              <p class="section-boradmenu">소모임 관리</p>
+              <div class="shc-premiumbox">
+                  <p>프리미엄 사용중</p>
+              </div>
+          </div>
+      </div>
+
+      <div class="shc-section-memberlist-container">
+          <p>회원관리</p>
+          <div class="shc-section-memberlist-box">
+              <table class="shc-friendtable">
+
+                  <tr>
+                      <th>사진</th>
+                      <th>닉네임</th>
+                      <th>등급</th>
+                      <th>신고</th>
+                      <th>탈퇴</th>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="shc-table-img">
+                              <img src="#" alt="">
+                          </div>
+                      </td>
+                      <td>김원재</td>
+                      <td>
+                          <div class="table-selectsize-div">
+                              <select name="" id="" class="member-ranking">
+                                  <option value="master">마스터</option>
+                                  <option value="nomal">일반회원</option>
+                              </select>
+                          </div>
+                      </td>
+                      <td>
+                          <button type="button" class="table-declaration">신고</button>
+                      </td>
+                      <td>
+                          <button type="button" class="table-secession">탈퇴</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="shc-table-img">
+                              <img src="#" alt="">
+                          </div>
+                      </td>
+                      <td>김원재</td>
+                      <td>
+                          <div class="table-selectsize-div">
+                              <select name="" id="" class="member-ranking">
+                                  <option value="master">마스터</option>
+                                  <option value="nomal">일반회원</option>
+                              </select>
+                          </div>
+                      </td>
+                      <td>
+                          <button type="button" class="table-declaration">신고</button>
+                      </td>
+                      <td>
+                          <button type="button" class="table-secession">탈퇴</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="shc-table-img">
+                              <img src="#" alt="">
+                          </div>
+                      </td>
+                      <td>김원재</td>
+                      <td>
+                          <div class="table-selectsize-div">
+                              <select name="" id="" class="member-ranking">
+                                  <option value="master">마스터</option>
+                                  <option value="nomal">일반회원</option>
+                              </select>
+                          </div>
+                      </td>
+                      <td>
+                          <button type="button" class="table-declaration">신고</button>
+                      </td>
+                      <td>
+                          <button type="button" class="table-secession">탈퇴</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="shc-table-img">
+                              <img src="#" alt="">
+                          </div>
+                      </td>
+                      <td>김원재</td>
+                      <td>
+                          <div class="table-selectsize-div">
+                              <select name="" id="" class="member-ranking">
+                                  <option value="master">마스터</option>
+                                  <option value="nomal">일반회원</option>
+                              </select>
+                          </div>
+                      </td>
+                      <td>
+                          <button type="button" class="table-declaration">신고</button>
+                      </td>
+                      <td>
+                          <button type="button" class="table-secession">탈퇴</button>
+                      </td>
+                  </tr>
+              </table>
+                  
+              </div>
+
+              <button type="button" class="membertable-savebutton">저장하기</button>
+      </div>
+      
+  </section>
+
+</body>
+</html>
