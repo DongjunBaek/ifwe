@@ -6,12 +6,44 @@
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="게시판" name="pageTitle"/>
 </jsp:include>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 <script>
      $(function(){
          $(".section-boardcate-button").click(function(){
              $(".section-boardcate-button").css("background-color","#beceea");
              $(this).css("background-color","#2756a6");
+             var boardCategory = $(this).attr("id");             
+             $.ajax({
+            	url : "${pageContext.request.contextPath}/board/mainBoardList.do",
+            	data : {boardCategory : boardCategory},
+            	success : data =>{
+            		 
+            		 $parentDiv = $(".sction-board-center");
+            		 $parentDiv.empty();
+            		 $.each(data, function(idx, value){
+            			 /*
+            			 console.log(idx);
+            			 console.log(value); 
+            			 console.log(value.boardCate);
+            			 console.log(value.boardTitle);
+            			 console.log(moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString());
+            			 */
+            			 
+            			 $children1 = $("<div class='section-boardtitle-box'>").append("<p>"+(value.boardCate == "notice"?"공지" : value.boardCate == "qna"?"문의":"신고")+"</p>");
+            			 $children2 = $children1.append("<div class='section-boardtitle'>"+value.boardTitle+"</div>");
+            			 $children3 = $children2.append("<p>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</p></div>");
+            			 
+ 	                     $parentDiv.append($children1);
+ 	                     $parentDiv.append($children2);
+ 	                     $parentDiv.append($children3);
+						            			 
+            		 });            		 
+            	 },
+            	 error : function(x,h,r){
+            		 console.log(x,h,r);
+            	 }
+             });
+             
          });
          
          $(".section-block-right").click(function(){
@@ -20,6 +52,7 @@
          
          
          $("#notice").trigger("click");
+         
      });
  </script>
  
@@ -39,53 +72,16 @@
                 <div class="section-boardcate-button" id="notice">
                     <p>공지사항</p>
                 </div>
-                <div class="section-boardcate-button">
+                <div class="section-boardcate-button" id="qna">
                     <p>문의게시판</p>
                 </div>
-                <div class="section-boardcate-button">
+                <div class="section-boardcate-button" id="report">
                     <p>신고게시판</p>
                 </div>
             </div>
             <div class="section-board-container">
                 <div class="sction-board-center">
                     <div class="section-board-line"></div>
-
-                    <div class="section-boardtitle-box">
-                        <p>공지</p>
-                        <div class="section-boardtitle">
-                            안녕하세요.공지사항입니다.
-                        </div>
-                        <p>2020-03-10</p>
-                    </div>
-                    <div class="section-boardtitle-box">
-                        <p>공지</p>
-                        <div class="section-boardtitle">
-                            안녕하세요.공지사항입니다.
-                        </div>
-                        <p>2020-03-10</p>
-                    </div>
-                    <div class="section-boardtitle-box">
-                        <p>공지</p>
-                        <div class="section-boardtitle">
-                            안녕하세요.공지사항입니다.
-                        </div>
-                        <p>2020-03-10</p>
-                    </div>
-                    <div class="section-boardtitle-box">
-                        <p>공지</p>
-                        <div class="section-boardtitle">
-                            안녕하세요.공지사항입니다.
-                        </div>
-                        <p>2020-03-10</p>
-                    </div>
-                    <div class="section-boardtitle-box">
-                        <p>공지</p>
-                        <div class="section-boardtitle">
-                            안녕하세요.공지사항입니다.
-                        </div>
-                        <p>2020-03-10</p>
-                    </div>
-
                 </div>
             </div>
         </div>

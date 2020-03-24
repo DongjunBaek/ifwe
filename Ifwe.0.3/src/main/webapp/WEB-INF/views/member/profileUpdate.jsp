@@ -23,6 +23,7 @@
 	href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/member/makeProfile.css">
+
 <script>
 
 /* 파일 등록 취소시 취소되는구문	  */
@@ -117,6 +118,19 @@ $(()=>{
 
 </script>
 
+
+	
+	<style>
+	input[type=file]{
+	
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+	
+	}
+	</style>
 </head>
 
 
@@ -125,6 +139,12 @@ $(()=>{
 	<section>
 		
 
+					<form name="profileFrm"
+				action="${pageContext.request.contextPath}/member/profileUpdate.do"
+				method="post" 
+				enctype="multipart/form-data"
+				id="tag-form"
+				>
 
 		<article class="first">
 			<div class="intro-div">
@@ -136,7 +156,13 @@ $(()=>{
 				<div class="myname-div font-kor">
 					<div style="font-size: 25px; margin: 0 10%">@wingStudy_02</div>
 					<div
-						style="font-size: 30px; font-weight: 900; margin: 5% 20% 0 30%">스테파니</div>
+						style="font-size: 30px; font-weight: 900; margin: 5% 20% 0 30%">
+						
+										
+				
+				<input type="text" placeholder="닉네임" value="스테파니"  name="profileName" ></input>
+				
+				</div>
 				</div>
 			</div>
 			<div class="btn-div">
@@ -164,22 +190,26 @@ $(()=>{
 			</div>
 
 
-			<!-- 	<div class="makeProfile-article-contents font-kor">
-					<input type="text" class="makeProfile-infotext1 font-kor">
-					<input type="text" class="makeProfile-infotext2 font-kor"
-						placeholder="    #관심사 입력" id="tag" size="6">					
-						<input type="hidden" value="" name="tag" id="rdTag" />
-                        <ul id="tag-list">
-                   
-       				    </ul>
-				</div> -->
+		
+		 <input type="text" class="makeProfile-infotext1 font-kor" placeholder="프로필소개글" name="profileComment" id="profileComment"  >
+		
+		
 				<div class="makeProfile-article-inputImg font-kor">
 					<p>프로필 이미지 등록</p>
 					<div class="uploadImg-div">
 						<div><!-- 
 							<span></span> -->
+			<div class="input-group mb-3" class="uploadImg-div"  style="padding: 0px;">
 							
 							
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" name="upFile"
+							id="upFile"> <label class="custom-file-label"
+							for="upFile">파일을 선택하세요</label>
+					</div>	
+				</div>
+			
+	
 							
 						</div>
 						<div>
@@ -191,26 +221,18 @@ $(()=>{
 
 <!-- 				onsubmit="return boardValidate();" -->
 				
-					<form name="profileFrm"
-				action="${pageContext.request.contextPath}/member/profileUpdate.do"
-				method="post" 
-				enctype="multipart/form-data"
-				id="tag-form"
-				>
 				
-				<div class="input-group mb-3" style="padding: 0px;">
-					<div class="custom-file">
-						<input type="file" class="custom-file-input" name="upFile"
-							id="upFile"> <label class="custom-file-label"
-							for="upFile">파일을 선택하세요</label>
-					</div>	
+	
+				
+
+				<div class="makeProfile-article-contents font-kor">
+					<input type="text" class="makeProfile-infotext2 font-kor"
+						placeholder="    #관심사 입력" id="tag" size="6">					
+						<input type="hidden" value="" name="contentsCateCodes" id="rdTag" />
+                        <ul id="tag-list">                   
+       				    </ul>
 				</div>
-				<input type="text" placeholder="프로필소개글" name="profileComment" id="profileComment" />
-				
-				
-				
-				
-				<input type="text" placeholder="닉네임" />
+							
 
 				<div class="makeProfile-article-button font-kor">
 					<input type="submit" value="프로필 카드 등록"
@@ -222,14 +244,7 @@ $(()=>{
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }" />
 				<input type="hidden" name="memberCode" id="profileAge" value="${memberLoggedIn.memberBirth }" />
 				<input type="hidden" name="memberCode" id="profileAge" value="${memberLoggedIn.memberGender }" />
-			
-				<div class="makeProfile-article-contents font-kor">
-					<input type="text" class="makeProfile-infotext2 font-kor"
-						placeholder="    #관심사 입력" id="tag" size="6">					
-						<input type="hidden" value="" name="contentsCateCodes" id="rdTag" />
-                        <ul id="tag-list">                   
-       				    </ul>
-				</div>
+		
 			
 			</form>
 		</article>

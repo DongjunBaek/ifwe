@@ -40,6 +40,11 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.insert("club.insertCategory", map);
 	}
 
+	@Override
+	public List<Club> clubSearch() {
+		return sqlSession.selectList("club.clubSearch");
+	}
+
 	
 	
 	
