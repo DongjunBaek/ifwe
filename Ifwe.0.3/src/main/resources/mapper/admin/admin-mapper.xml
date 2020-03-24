@@ -62,6 +62,16 @@
 		where
 			member_code = #{memberCode}
 	</update>
+
+	<select id="selectOneBoard" resultType="board">
+		select 
+			*
+		from 
+			board		
+		where BOARD_CATE like #{boardCategory}
+	</select>
+
+
 </mapper>
 
 

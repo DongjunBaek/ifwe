@@ -17,4 +17,6 @@ public interface ClubDAO {
 
 	int insertCategory(Map<String, Object> map);
 
+	List<Club> clubSearch();
+
 }

@@ -1,5 +1,7 @@
 package com.kh.ifwe.board.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.ifwe.board.model.dao.BoardDAO;
@@ -21,6 +23,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertBoard(Board board) {
 		return boardDAO.insertBoard(board);
+	}
+
+	@Override
+	public List<Board> selectOne(String boardCategory) {
+		return boardDAO.selectOne(boardCategory);
 	}
 	
 	
