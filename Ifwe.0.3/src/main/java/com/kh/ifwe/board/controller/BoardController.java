@@ -132,4 +132,18 @@ public class BoardController {
 		
 		return boardList;
 	}
+	
+	@GetMapping("/boardDetail")
+	public ModelAndView boardDetail(ModelAndView mav, @RequestParam(value="boardNo", required= true, defaultValue = "1") int boardNo) {
+		log.debug("boardNo {}",boardNo);
+		
+		Board board = boardService.selectBoardDetail(boardNo);
+		/**
+		 * 이곳에 이미지 첨부 사용 할 것.
+		 */
+		mav.addObject("board",board);
+		mav.setViewName("board/boardDetail");
+		
+		return mav;
+	}
 }
