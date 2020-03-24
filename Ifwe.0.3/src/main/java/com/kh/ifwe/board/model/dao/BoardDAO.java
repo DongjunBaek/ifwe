@@ -10,4 +10,6 @@ public interface BoardDAO {
 
 	List<Board> selectOne(String boardCategory);
 
+	Board selectBoardDetail(int boardNo);
+
 }

@@ -10,4 +10,6 @@ public interface BoardService {
 
 	List<Board> selectOne(String boardCategory);
 
+	Board selectBoardDetail(int boardNo);
+
 }
