@@ -22,7 +22,12 @@ public interface MemberService {
 	int updateProfile(Profile profile);
 	Member searchId(Map<String, String> param);
 
+
+	int insertPre(Map<String, String> map);
+
 	Member memberSelectOneCode(int memberCode);
+
+	
 
 
 }
