@@ -6,7 +6,7 @@ import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminDAO {
 
-	List<Member> selectMemberList(int cPage, int numPerPage);
+	List<Member> selectMemberList(int cPage, int numPerPage, String memberRole);
 
 	List<Member> selectDropMemberList(int cPage, int numPerPage);
 
@@ -15,5 +15,9 @@ public interface AdminDAO {
 	Member selectOne(int memberCode);
 
 	int cancelMember(Member member, int memberCode);
+
+	int dropMember(Member member, int memberCode);
+
+	List<Member> searchMember(String memberName);
 
 }
