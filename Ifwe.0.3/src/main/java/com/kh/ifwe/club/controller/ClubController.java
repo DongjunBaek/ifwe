@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,30 +37,53 @@ public class ClubController {
 	private ClubService clubService;
 	
 	
-	@GetMapping("/clubSearchKeyword")
-	public ModelAndView clubSearchKeyword(ModelAndView mav,
+	
+	//소모임 검색 0325 문보라
+	@GetMapping("/clubSearchKeyword.do")
+	@ResponseBody
+	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
 										  @RequestParam("searchType") String searchType,
-									      @RequestParam("clubSearchKeyword")String clubSearchKeyword
+									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
+									      @RequestParam(value = "clubLocation", required = false) String clubLocation
 										  ) {
 		
+		
+		log.debug("으아아아아아아악");
+		
 		log.debug("searchType = {}",searchType);
+		log.debug("clubLocation = {}",clubLocation);
 		log.debug("clubSearchKeyword = {}",clubSearchKeyword);
+		
+		
 		String keyWord ="%"+clubSearchKeyword+"%";
 		
 		Map<String,String> param = new HashMap<>();
 		param.put("searchType", searchType);
 		param.put("keyWord", keyWord);
+		param.put("clubLocation", clubLocation);
 		
 		log.debug("param = {}",param);
 		
+		List<ClubMaster> searchListResult = null;
 		
-		List<ClubMaster> searchList = clubService.searchClub(param);
+		if(searchType.equals("hashtag")) {
+			//해쉬태그 검색
+			log.debug("해쉬태그 검색");
+			searchListResult = clubService.searchClubByHashtag(param);
+			
+		}else {
+			//모임명 검색
+			log.debug("모임명 검색");
+			searchListResult = clubService.selectListByName(param);
+		}
+
 		
 		
-		log.debug("list1231321321 ={}",searchList);
+		log.debug("list1231321321 ={}",searchListResult);
 		
-		mav.addObject("searchlist", searchList);
-		return mav;
+		
+		
+		return searchListResult;
 		
 	}
 

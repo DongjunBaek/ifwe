@@ -103,7 +103,6 @@ public class MemberController {
 		
 		return mav;
 	}
-	
 	@PostMapping("/login.do")
 	public String login(@RequestParam("memberId") String memberId,
 					    @RequestParam("password") String password,

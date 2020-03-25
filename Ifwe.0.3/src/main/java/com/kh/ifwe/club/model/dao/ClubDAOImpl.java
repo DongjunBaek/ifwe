@@ -59,12 +59,19 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectOne("club.selectClubMaster",clubMaster);
 	}
 
+	
+
 	@Override
-	public List<ClubMaster> searchClub(Map<String, String> param) {
-		return sqlSession.selectList("club.searchClub", param);
+	public List<ClubMaster> searchClubByHashtag(Map<String, String> param) {
+		return sqlSession.selectList("club.searchClubByHashtag", param);
 	}
 
-	
+	@Override
+	public List<ClubMaster> selectListByName(Map<String, String> param) {
+		return sqlSession.selectList("club.selectListByName", param);
+	}
+
+
 	
 	
 	
