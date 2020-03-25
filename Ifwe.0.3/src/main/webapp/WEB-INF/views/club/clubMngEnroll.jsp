@@ -33,7 +33,7 @@
                    <table class="shc-friendtable">
                        <tr>
                            <td><i class="fas fa-bell"></i></td>
-                           <td><a href="#">김원재 님에게 가입요청이 왔습니다</a></td>
+                           <td><a href="${pageContext.request.contextPath }/club/mngenrollend.do">김원재 님에게 가입요청이 왔습니다</a></td>
                        </tr>
                        <tr>
                            <td><i class="fas fa-bell"></i></td>
