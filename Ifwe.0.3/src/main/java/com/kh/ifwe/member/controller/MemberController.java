@@ -202,11 +202,28 @@ public class MemberController {
 	
 	@GetMapping("/membership.do")
 	public String membership() {
-		
-		
-		
 		return "member/membership";
 
+	}
+	@PostMapping("/membershipPay.do")
+	@ResponseBody
+	public int membershipPay(@RequestParam("membershipName") String membershipName ,
+								@RequestParam("clubCode") String clubCode,
+								@RequestParam("memberCode") String memberCode) {
+		log.debug("membershipName = {}",membershipName);
+		log.debug("clubName = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		map.put("membershipName", membershipName);
+		map.put("clubCode", clubCode);
+		map.put("memberCode", memberCode);
+		
+		int result = memberService.insertPre(map);
+		
+		
+		return result;
 	}
 	
 	//03.21 문보라 프로필 수정 버튼 클릭 -> 프로필수정하는 폼
@@ -231,7 +248,7 @@ public class MemberController {
 									@RequestParam("password-new-chk") String password_new_chk,
 									@RequestParam("memberId") String memberId,
 									RedirectAttributes redirectAttributes) {
-
+		
 		
 		String msg = "";
 		Member member = memberService.selectOne(memberId);

@@ -243,6 +243,7 @@ section{
     float:left;
     position: relative;
     display:block;
+	width: 475px;
     
 }
 
@@ -273,6 +274,7 @@ section{
     color: #fff;  
     background: #ffc862;
     text-align: center;   
+    
 }
 .name-checkbox>p{
     /* display:block; */
@@ -283,7 +285,6 @@ section{
 .list-club{
     width:594px;
     float:left;
-    margin-left:230px;
     
 }
 .list-duration{

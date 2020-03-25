@@ -54,6 +54,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member searchId(Map<String, String> param) {
 		return sqlSession.selectOne("member.searchId",param);
 	}
+
+	@Override
+	public int insertPre(Map<String, String> map) {
+		return sqlSession.insert("member.insertPre",map);
+	}
 	
 	
 	

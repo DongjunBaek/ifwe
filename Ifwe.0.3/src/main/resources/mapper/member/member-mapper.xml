@@ -107,11 +107,23 @@
 	
 	
 insert into member_profile values(
-'#{memberId}','null','null','null','null','0','M','null'
+#{memberId},'null','null','null','null','0','M','null'
 
 );
 	
 </insert>
+	
+	<insert id="insertPre">
+	
+	insert into premium_order values(
+		seq_order_code.nextval,
+		#{clubCode},
+		#{membershipName},
+		#{memberCode}
+		
+	)
+	
+	</insert>
 
 
 
