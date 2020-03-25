@@ -62,6 +62,20 @@
 		select * from member where member_code = #{clubMaster}
 
 	</select>
+	
+	<select id="searchClub" resultType="clubMaster">
+		select C.*, M.member_id from club C left join member M on c.club_master = m.member_code
+		<where>
+			<if test="searchType == 'club_location' ">
+				club_location like #{keyWord}
+			</if>
+			<if test="searchType == 'club_title' ">
+				club_title like #{keyWord}
+			</if>
+		</where> 
+	</select>
+	
+	
 </mapper>
 
 

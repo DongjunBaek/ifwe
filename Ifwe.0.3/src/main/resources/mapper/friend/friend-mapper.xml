@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="friend">
+
+<insert id="insertFriend">
+	insert into
+		friend
+	values (#{memberCode},#{memberId},#{memberPname},'N')
+
+</insert>
+
+
+<update id="updateFriend">
+
+update 
+	friend
+	set
+	 friend_accept='Y'
+	 where member_code=#{memberCode} and member_Id=#{memberId}
+</update>
+
+
+<update id="deleteFriend">
+
+
+update 
+	friend
+	set
+	 friend_accept='D'
+	 where member_code=#{memberCode} and member_Id=#{memberId}
+
+
+</update>
+
+
+<select id="selectListFriend" resultMap="ListFriend">
+
+select * from 
+	friend
+	where member_code=#{memberCode}
+</select>
+
+<resultMap type="Friend" id="ListFriend"></resultMap>
+
+</mapper>

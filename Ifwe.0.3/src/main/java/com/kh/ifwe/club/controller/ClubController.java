@@ -2,7 +2,9 @@ package com.kh.ifwe.club.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +47,21 @@ public class ClubController {
 		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubSearchKeyword = {}",clubSearchKeyword);
+		String keyWord ="%"+clubSearchKeyword+"%";
 		
+		Map<String,String> param = new HashMap<>();
+		param.put("searchType", searchType);
+		param.put("keyWord", keyWord);
+		
+		log.debug("param = {}",param);
+		
+		
+		List<ClubMaster> searchList = clubService.searchClub(param);
+		
+		
+		log.debug("list1231321321 ={}",searchList);
+		
+		mav.addObject("searchlist", searchList);
 		return mav;
 		
 	}

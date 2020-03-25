@@ -25,5 +25,7 @@ public interface ClubDAO {
 
 	Member selectClubMaster(int clubMaster);
 
+	List<ClubMaster> searchClub(Map<String, String> param);
+
 
 }
