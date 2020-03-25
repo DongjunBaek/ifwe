@@ -81,7 +81,7 @@ border:0;}
 					<div class="select-boxs">
 	                        <select name="boardCate" id="search">
 	                            <option value="notice">공지사항</option>
-	                            <option value="service">문의사항</option>
+	                            <option value="qna">문의사항</option>
 	                            <option value="report">신고사항</option>
 	                        </select>
 	                    </div>
@@ -103,4 +103,5 @@ border:0;}
 		</form>
 	</section>
 </body>
+
 </html>
