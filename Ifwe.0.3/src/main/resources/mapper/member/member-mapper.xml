@@ -73,6 +73,7 @@
 		and 
 			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
 	</select>
+	
 
 </mapper>
 

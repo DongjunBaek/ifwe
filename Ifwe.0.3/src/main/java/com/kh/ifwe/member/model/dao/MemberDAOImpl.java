@@ -48,6 +48,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member searchId(Map<String, String> param) {
 		return sqlSession.selectOne("member.searchId",param);
 	}
+
+
 	
 	
 	

@@ -16,17 +16,23 @@ $(function(){
 	
         $(e.target).css("background-color","#2756a6")
                 .css("color","white");
-        
+		
+		
     });
     
     $(".addbtn").on('click', function(){
-    	$(".membership-third").css("display","block");
+    	$(".membership-third").css("display","block");	
+    	
+		
+    	
     	
     });
-
+	
     
 })
+
 </script>
+
  <section>
    <article class="membership-first">
        <div class="title-container font-kor">
@@ -39,15 +45,15 @@ $(function(){
            <div class="grade-icon"><i class="fas fa-crown" style="color:#c332f1;"></i></div>
            <div class="grade-content">
                <p class="p-grade-ko font-kor">프리미엄</p>
-               <p class="p-grade-en bold">PRIMIEUM</p>
+               <p class="p-grade-en bold">PREMIUM</p>
                <ul>
                        <p> <li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 추가</li></p>
                        <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 개수 추가</li></p>
                </ul>
            </div>
-           <div class="grade-price" id="primieumbtn">
-               <button class="price font-kor" >
-                   9,900원 / 90일
+           <div class="grade-price" >
+               <button class="price font-kor" id="premiumbtn" >
+                   9,900원 / 무제한
                </button>
            </div>
        </div>
@@ -78,8 +84,8 @@ $(function(){
                </ul>
            </div>
            <div class="grade-price font-kor">
-               <button class="price font-kor" id="goldbtn" >
-                    5,900원 / 60일
+               <button class="price font-kor" id="goldbtn"  >
+                    5,900원 / 무제한
                </button>
            </div>
        </div>
@@ -94,8 +100,8 @@ $(function(){
                 </ul>
             </div>
             <div class="grade-price font-kor">
-                <button class="price font-kor" id="siverbtn" >
-                     3,900원 / 30일
+                <button class="price font-kor" id="silverbtn" >
+                     3,900원 / 무제한
                 </button>
             </div>
         </div>
@@ -110,30 +116,24 @@ $(function(){
                     <div class="duration "><p>기간</p></div>
                     <div class="payment-price"><p>가격</p></div>
                 </div>
-                <div class="payment-lists">
-                <div class="payment-list font-kor">
-                    <div class="name-checkbox bold">
-                        <input type="checkbox" name="membership-name1" id="membership-name1"><label for="membership-name1" >프리미엄 PRIMIEUM</label>
-                    </div>
-                    <div class="list-club bold" ><p>윙스터디 모임</p></div>
-                    <div class="list-duration "><p >90일 사용</p></div>
-                    <div class="list-price bold" ><p>9900원</p></div>
-                </div>
-                <div class="payment-list font-kor">
+                 <div class="payment-lists">
+                
+	       
+           		<!-- <div class="payment-list font-kor" style="display:none;">
                         <div class="name-checkbox bold">
-                            <input type="checkbox" name="membership-name2" id="membership-name2"><label for="membership-name2" >프리미엄 PRIMIEUM</label>
+                            <input type="checkbox" name="membership-name" id="membership-name"><label for="membership-name" >실버 SILVER</label>
                         </div>
-                        <div class="list-club bold"><p >윙스터디 모임</p></div>
-                        <div class="list-duration "><p>90일 사용</p></div>
-                        <div class="list-price bold"><p >9900원</p></div>
-                    </div>
-               
+                        <div class="list-club bold"><p id="list-club" ></p></div>
+                        <div class="list-duration "><p >무제한</p></div>
+                        <div class="list-price bold"><p id="list-price"></p></div>	
+           		</div>	 -->
+                
                    
                 </div>
                 <div class="result-container">
                     <div class="payment-border"><hr></div>
                         <div class="payment-result">
-                            <p class="result-name font-kor"  >프리미엄 PRIMIEUM / 2개</p><p class="result-price bold" >19800 원</p>
+                            <p class="result-name font-kor"  >프리미엄 PREMIUM / 1개</p><p class="result-price bold" >9900 원</p>
                         </div>
                 </div>
         
