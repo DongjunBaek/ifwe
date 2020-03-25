@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,11 +30,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
+@SessionAttributes(value= {"club","clubMaster"})
 public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
-	
 	
 	@GetMapping("/clubSearchKeyword")
 	public ModelAndView clubSearchKeyword(ModelAndView mav,
@@ -40,19 +42,13 @@ public class ClubController {
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword
 										  ) {
 		
+		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubSearchKeyword = {}",clubSearchKeyword);
-		
-		
-		
-		
-		
-		
 		
 		return mav;
 		
 	}
-
 	
 	
 	@GetMapping("/clubSearch")
@@ -126,8 +122,6 @@ public class ClubController {
 	}
 	
 	
-	
-	
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
 		
@@ -146,10 +140,8 @@ public class ClubController {
 		mav.setViewName("/club/clubMain");
 		
 		return mav;
-		
-
 	}
-	
+
 	@RequestMapping("/insert.do")
 	public ModelAndView insert(ModelAndView mav) {
 		
@@ -179,6 +171,32 @@ public class ClubController {
 	@GetMapping("/freeboard.do")
 	public String freeboard() {
 		return "club/clubFreeBoard";
+	}
+	
+	@GetMapping("/management.do")
+	public String management() {
+		return "club/clubManagement";
+	}
+	
+	@GetMapping("/mngclubinfo.do")
+	public String mngClubinfo() {
+		return "club/clubMngClubinfo";
+	}
+	@GetMapping("/mngmember.do")
+	public String mngMember() {
+		return "club/clubMngMember";
+	}
+	@GetMapping("/mngboard.do")
+	public String mngBoard() {
+		return "club/clubMngBoard";
+	}
+	@GetMapping("/mngenroll.do")
+	public String mngEnroll() {
+		return "club/clubMngEnroll";
+	}
+	@GetMapping("/mngenrollend.do")
+	public String mngEnrollEnd() {
+		return "club/clubMngEnrollEnd";
 	}
 	
 	
