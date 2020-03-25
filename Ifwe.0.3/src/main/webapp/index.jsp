@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -34,6 +34,8 @@
 </head>
 <!-- 한글 폰트 -->
 <style>
+	.searchPwd-result{height:300px;margin-top:20%;}
+ 	#uncorrect-pwd{color:red;margin-top:7%;}
     @font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
 </style>
 
@@ -103,39 +105,77 @@ $(function(){
 	});
 	
 	$("#search-id-btn-num").click(function(){
-		$("#search-number-container-id").css('display','');
+		if($("#memberName").val()==''){
+			alert('이름을 입력해주세요.');
+			$("#memberName").focus();
+		}
+		if($("#birthday").val()==''){
+			alert('생년월일을 입력해주세요.');
+			$("#birthday").focus();
+		}
+		if($("#phone").val()==''){
+			alert('핸드폰 번호을 입력해주세요. ');
+			$("#phone").focus();
+		}
+		if($("#birthday").val().length != 8){
+			alert("생년월일을 제대로 입력해주세요. (예. 20200417)");
+			$("#birthday").focus();
+		}
+		if($("#memberName").val()!='' && $("#birthday").val()!='' && $("#phone").val()!='' && $("#birthday").val().length==8){
+		$("#search-number-container-id").css('display','');			
+		}
 	});
 	$("#search-pwd-btn-num").click(function(){
-		$("#search-number-container-pwd").css('display','');
+		if($("#memberId").val()==''){
+			alert('아이디 입력해주세요.');
+			$("#memberId").focus();
+		}
+		if($("#memberName_").val()==''){
+			alert('이름을 입력해주세요.');
+			$("#memberName_").focus();
+		}
+		if($("#birthday_").val()==''){
+			alert('생년월일을 입력해주세요.');
+			$("#birthday_").focus();
+		}
+		if($("#birthday_").val().length!=8){
+			alert("생년월일을 제대로 입력해주세요. (예. 20200417)");
+			$("#birthday_").focus();
+		}
+		if($("#phone_").val()==''){
+			alert('핸드폰 번호을 입력해주세요. ');
+			$("#phone_").focus();
+		}
+		if($("#memberName_").val()!='' && $("#birthday_").val()!='' && $("#phone_").val()!='' && $("#memberId").val()!='' && $("#birthday_").val().length==8){
+			$("#search-number-container-pwd").css('display','');
+		}
 	});
 	
 	
 	
 	
 	$("#search-btn-check-id").click(function(){
-		if($("#memberName").val()==''){
-			alert('이름을 입력해주세요.');
-		}
-		if($("#birthday").val()==''){
-			alert('생년월일을 입력해주세요.');
-		}
-		if($("#phone").val()==''){
-			alert('핸드폰 번호을 입력해주세요. ');
-		}
-		console.log("123");
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/member/searchId",
 			data: $("[name=searchIdForm]").serialize(),
 			success:data => {
-				console.log(data);
-				console.log(data.memberId);
-				$("[name=searchIdForm]").css('display','none');
-				$(".searchId-result-content").text(data.memberId);
-				$(".searchId-result").css('display','');
-				$("#memberName").val('');
-				$("#phone").val('');
-				$("#birthday").val('');
+				if(data ==""){
+					alert("회원이 존재하지 않습니다.");
+					$("#memberName").val('');
+					$("#phone").val('');
+					$("#birthday").val('');
+					$("#search-number-container-id").css('display','none');
+				}else{
+					console.log(data);
+					console.log(data.memberId);
+					$("[name=searchIdForm]").css('display','none');
+					$(".searchId-result-content").text(data.memberId);
+					$(".searchId-result").css('display','');
+					$("#memberName").val('');
+					$("#phone").val('');
+					$("#birthday").val('');
+				}
 			
 			},
 			error:(xhr,status,error) =>{
@@ -147,21 +187,6 @@ $(function(){
 	
 	
 	$("#search-btn-check-pwd").click(function(){
-		if($("#memberName_").val()==''){
-			alert('이름을 입력해주세요.');
-		}
-		if($("#birthday_").val()==''){
-			alert('생년월일을 입력해주세요.');
-		}
-		if($("#phone_").val()==''){
-			alert('핸드폰 번호을 입력해주세요. ');
-		}
-		if($("#memberId").val()==''){
-			alert('아이디 입력해주세요.');
-		}
-		if($("#memberName_").val()!='' && $("#birthday_").val()!='' && $("#phone_").val()!='' && $("#memberId").val()!=''){
-			
-		
 		console.log("5845835803245");
 		$.ajax({
 			type:"POST",
@@ -169,13 +194,13 @@ $(function(){
 			data: $("[name=searchPwdFrm]").serialize(),
 			success:data => {
 				if(data == "") {
-					alert('틀림');
+					alert('존재하지 않는 회원입니다.');
 					$("[name=searchPwdFrm]").css('display','');
 					$(".searchPwd-result").css('display','none');
 					$("#search-number-container-pwd").css('display','none');
-					$("memberName_").val('');
-					$("birthday_").val('');
-					$("phone").val('');
+					$("#memberName_").val('');
+					$("#birthday_").val('');
+					$("#phone").val('');
 					$("#memberId").val('');
 				}
 				else{
@@ -185,20 +210,17 @@ $(function(){
 					$("#searchPwdAfterMemberId").val(data.memberId);
 					$("[name=searchPwdFrm]").css('display','none');
 					$(".searchPwd-result").css('display','');
-					$("memberName_").val('');
+					$("#memberName_").val('');
 					$("#memberId").val('');
-					$("birthday_").val('');
-					$("phone").val('');
+					$("#birthday_").val('');
+					$("#phone").val('');
 				}
-			
 			},
 			error:(xhr,status,error) =>{
 				console.log(xhr,status,error);
-				
 			}
 		});
-	}
-});
+	});
 	
 	
 	
@@ -207,16 +229,34 @@ $(function(){
 		$("#login-container-first").css('display','');
 	});
 	
-	$("#password_chk").blur(function(){
+	
+	$("#new-password").blur(function(){
+		
+		let password = $("#new-password").val();
+		
+		let msg = "";
+		let regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		
+		if(regex.test(password)){
+			msg = "사용가능한 비밀번호입니다.";
+			$("#passwordChk").html(msg).css("color","#4EC407");
+		}
+		else{
+			msg = "8~15자의 영문소문자,숫자,특수기호의 조합으로 사용 가능합니다."
+			$("#passwordChk").html(msg).css("color","rgb(235, 42, 14)");
+		}
+		
+	});
+	
+	$("#new-password_chk").blur(function(){
+		console.log($("#new-password").val(),$("#new-password_chk").val())
 		if($("#new-password").val() != $("#new-password_chk").val()){
-			$("#uncorrect-pwd").css('display','');
+			$("#uncorrect-pwd").css('display','block');
 		}
 		else{
 			$("#uncorrect-pwd").css('display','none');
 		}
 	});
-	
-	
 	
 });
 
@@ -310,7 +350,7 @@ $(function(){
 	                </div>
 	                <div class="login-input">
 	                	<i class="fas fa-birthday-cake index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday" id="birthday" placeholder="생년월일">
+	                	<input class="input-box" type="text" name="birthday" id="birthday" placeholder="생년월일 (ex.20200417)">
 	                </div>
 	                <div class="login-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
@@ -351,7 +391,7 @@ $(function(){
 	                </div>
 	                <div class="login-input pwd-input">
 	                	<i class="fas fa-birthday-cake index-i-class"></i>
-	                	<input class="input-box" type="text" name="birthday_" id="birthday_" placeholder="생년월일">
+	                	<input class="input-box" type="text" name="birthday_" id="birthday_" placeholder="생년월일 (ex.20200417)">
 	                </div>
 	                <div class="login-input pwd-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
@@ -378,6 +418,7 @@ $(function(){
 	 		<div class="searchId-result-title">변경하실 비밀번호를 입력해주세요.</div>
 	 		<div class="login-input">
 	           	<i class="fas fa-lock"></i> <input class="input-box" type="password" name="new-password" id="new-password" placeholder="새 비밀번호" >
+	           	<p class="font-kor" id="passwordChk" style="margin-top:7%;"></p>
 	        </div>
 	        <div class="login-input">
 	            <i class="fas fa-lock"></i> <input class="input-box" type="password" name="new-password_chk" id="new-password_chk" placeholder="새 비밀번호 확인" >
@@ -388,11 +429,7 @@ $(function(){
 	        
 	 	</div>
  	</form>
- 	
- 	<style>
- 		.searchPwd-result{height:300px;margin-top:20%;}
- 		#uncorrect-pwd{color:red;margin-top:7%;}
- 	</style>
+ 
   <!-- 비밀번호 찾기 div 끝 -->
 
  

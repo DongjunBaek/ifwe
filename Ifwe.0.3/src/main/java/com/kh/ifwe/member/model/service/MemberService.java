@@ -23,4 +23,11 @@ public interface MemberService {
 	Member searchId(Map<String, String> param);
 
 
+	int insertPre(Map<String, String> map);
+
+	Member memberSelectOneCode(int memberCode);
+
+	
+
+
 }
