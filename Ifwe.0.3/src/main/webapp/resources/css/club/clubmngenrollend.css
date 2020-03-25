@@ -32,7 +32,7 @@ section{
     width:125px;
     height:125px;
     border-radius: 50%;
-    background-image: url("image/basicfrofile.png");
+    background-image: url("../../images/club/basicfrofile.png");
     background-size: cover;
     overflow: hidden;
     float: left;

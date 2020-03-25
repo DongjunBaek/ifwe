@@ -56,11 +56,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public Member memberSelectOneCode(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectOneCode",memberCode);
+	}
+	
+	@Override
 	public int insertPre(Map<String, String> map) {
 		return sqlSession.insert("member.insertPre",map);
 	}
-	
-	
 	
 	
 	

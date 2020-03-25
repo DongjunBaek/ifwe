@@ -125,7 +125,11 @@ insert into member_profile values(
 	
 	</insert>
 
+<select id="selectOneCode" resultType="member">
 
+select * from member 
+where member_code=#{memberCode}
+</select>
 
 
 </mapper>

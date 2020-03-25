@@ -1,8 +1,9 @@
 package com.kh.ifwe.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -99,7 +103,6 @@ public class MemberController {
 		
 		return mav;
 	}
-	
 	@PostMapping("/login.do")
 	public String login(@RequestParam("memberId") String memberId,
 					    @RequestParam("password") String password,
@@ -205,26 +208,6 @@ public class MemberController {
 		return "member/membership";
 
 	}
-	@PostMapping("/membershipPay.do")
-	@ResponseBody
-	public int membershipPay(@RequestParam("membershipName") String membershipName ,
-								@RequestParam("clubCode") String clubCode,
-								@RequestParam("memberCode") String memberCode) {
-		log.debug("membershipName = {}",membershipName);
-		log.debug("clubName = {}",clubCode);
-		log.debug("memberCode = {}",memberCode);
-		
-		Map<String,String> map = new HashMap<String, String>();
-		
-		map.put("membershipName", membershipName);
-		map.put("clubCode", clubCode);
-		map.put("memberCode", memberCode);
-		
-		int result = memberService.insertPre(map);
-		
-		
-		return result;
-	}
 	
 	//03.21 문보라 프로필 수정 버튼 클릭 -> 프로필수정하는 폼
 	@GetMapping("/updateProfile.do")
@@ -248,7 +231,7 @@ public class MemberController {
 									@RequestParam("password-new-chk") String password_new_chk,
 									@RequestParam("memberId") String memberId,
 									RedirectAttributes redirectAttributes) {
-		
+
 		
 		String msg = "";
 		Member member = memberService.selectOne(memberId);
@@ -409,6 +392,64 @@ public class MemberController {
 		
 	}
 	
+		
+		@PostMapping("/profileUpdate.do")
+		public String updatetProfile(com.kh.ifwe.member.model.vo.Profile profile, @RequestParam(value = "upFile", required = false) MultipartFile upFile,
+				HttpServletRequest request, RedirectAttributes redirectAttributes) {
+			try {
+				log.debug("controller@profile={}", profile);
+				
+				System.out.println("프로필 카테코드"+
+	//			profile.getContentsCateCodes()+
+				request.getParameterValues("contentsCateCodes")
+				
+						);
+	
+				
+	 		
+	 		if(!upFile.isEmpty()) {
+	 			
+	 			log.debug("filename={}",upFile.getOriginalFilename());
+	 			log.debug("size={}",upFile.getSize());
+					// 파일명 재생성 renamedFileName으로 저장하기
+					String originalFileName = upFile.getOriginalFilename();
+					String renamedFileName = com.kh.ifwe.common.util.Utils.getRenamedFileName(originalFileName);
+	
+					// 파일이동폴더
+					String saveDirectory = request.getServletContext().getRealPath("/resources/upload/profile");
+					try {
+//						File file= new File(saveDirectory, renamedFileName);
+//						log.debug("파일={}"+file);
+//					file.createNewFile();
+						log.debug("세이브디렉토리"+saveDirectory);
+						upFile.transferTo(new File(saveDirectory, renamedFileName));
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
+	
+					profile.setProfileImgOri(originalFileName);
+					
+					profile.setProfileImgRe(renamedFileName);
+	
+	 		}
+				int result = memberService.updateProfile(profile);
+	
+				System.out.println(result);
+				redirectAttributes.addFlashAttribute("msg", result > 0 ? "등록성공!" : "등록실패!");
+	
+			} catch (Exception e) {
+	
+				log.error("프로필 등록 오류!", e);
+	
+	//			throw new BoardException("프로필 등록 오류! 관리자에게 문의하세요", e);
+			}
+	//		return "redirect:/member/profile";
+			return "redirect:/	";
+		}
+	
+	
+	
+
 	
 	
 	//아이디 찾기 처리 문보라
@@ -509,7 +550,33 @@ public class MemberController {
 	
 	
 	
+	@GetMapping("/memberSelectOne")
+	public Member memberSelectOneCode(Model model, int memberCode, HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
+		Member member = memberService.memberSelectOneCode(memberCode);
+		return member;
+	}
 	
+	@PostMapping("/membershipPay.do")
+	@ResponseBody
+	public int membershipPay(@RequestParam("membershipName") String membershipName ,
+								@RequestParam("clubCode") String clubCode,
+								@RequestParam("memberCode") String memberCode) {
+		log.debug("membershipName = {}",membershipName);
+		log.debug("clubName = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		map.put("membershipName", membershipName);
+		map.put("clubCode", clubCode);
+		map.put("memberCode", memberCode);
+		
+		int result = memberService.insertPre(map);
+		
+		
+		return result;
+	}
 	
 	
 	
