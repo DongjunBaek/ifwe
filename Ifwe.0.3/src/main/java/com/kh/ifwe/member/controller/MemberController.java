@@ -507,25 +507,28 @@ public class MemberController {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		return member;
 	}
-
+	
 	@PostMapping("/membershipPay.do")
 	@ResponseBody
-	public int membershipPay(@RequestParam("membershipName") String membershipName,
-			@RequestParam("clubCode") String clubCode, @RequestParam("memberCode") String memberCode) {
-		log.debug("membershipName = {}", membershipName);
-		log.debug("clubName = {}", clubCode);
-		log.debug("memberCode = {}", memberCode);
-
-		Map<String, String> map = new HashMap<String, String>();
-
+	public int membershipPay(@RequestParam("membershipName") String membershipName ,
+								@RequestParam("clubCode") String clubCode,
+								@RequestParam("memberCode") String memberCode) {
+		log.debug("membershipName = {}",membershipName);
+		log.debug("clubName = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
 		map.put("membershipName", membershipName);
 		map.put("clubCode", clubCode);
 		map.put("memberCode", memberCode);
-
+		
 		int result = memberService.insertPre(map);
-
+		
+		
 		return result;
 	}
+
 
 	@Autowired
 	ProfileService profileservice;

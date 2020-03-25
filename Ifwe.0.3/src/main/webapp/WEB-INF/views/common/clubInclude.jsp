@@ -117,7 +117,7 @@ $(function(){
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
                         <p>회원 목록</p>
-                        <div class="aside-friend-count"><p>23명</p></div>
+                        <div class="aside-friend-count"><p>${club.clubCurrent}명</p></div>
                     </div>
                     <div class="aside-friend-list">
                         <div class="aside-friend">
@@ -165,7 +165,7 @@ $(function(){
 
             </aside>
             <header class="flotclass">
-                <div class="header-titleimg">
+                <div class="header-titleimg" style="background-image: url('${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${club.clubImgRe}');">
                     <div class="header-titleimg-cover">
                         <div class="header-title-left">
                             <p class="header-title1">${club.clubTitle}</p>
