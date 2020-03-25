@@ -53,8 +53,8 @@ $(function(){
                       	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                       </div>
                           <div class="article1-frofile-name">
-                              <p >@wingStudy_02</p>
-                              <p class="article1-leader-name friend-name-profile">스테파니</p>
+                              <p >@ ${clubMaster.memberId }</p>
+                              <p class="article1-leader-name friend-name-profile">${member.memberName }</p>
                           </div>
                           <div class="article1-curcle-box">
                               <div class="article1-curcle"></div>

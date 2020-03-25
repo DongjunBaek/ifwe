@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.member.model.vo.Member;
 
 @Repository
 public class ClubDAOImpl implements ClubDAO {
@@ -41,8 +43,25 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<Club> clubSearch() {
+	public List<ClubMaster> clubSearch() {
+
 		return sqlSession.selectList("club.clubSearch");
+	}
+
+	
+	@Override
+	public Club selectOne(int clubCode) {
+		return sqlSession.selectOne("club.selectOne",clubCode);
+	}
+
+	@Override
+	public Member selectClubMaster(int clubMaster) {
+		return sqlSession.selectOne("club.selectClubMaster",clubMaster);
+	}
+
+	@Override
+	public List<ClubMaster> searchClub(Map<String, String> param) {
+		return sqlSession.selectList("club.searchClub", param);
 	}
 
 	

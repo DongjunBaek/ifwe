@@ -91,6 +91,13 @@
 		where BOARD_CATE like #{boardCategory}
 	</select>
 
+	<select id="selectBoardDetail" resultType="board">
+		select
+			*
+		from
+			board
+		where board_no = #{boardNo}
+	</select>
 
 </mapper>
 
