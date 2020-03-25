@@ -31,7 +31,7 @@ $(function(){
 				data : {boardNo : boardNo},
 				type : "POST",
 				success : function(data){
-					console.log(data==1?"삭제성공":"삭제실패");
+					location.href="${pageContext.request.contextPath}/board/mainBoard.do";
 				},
 				error : function(x,h,r){
 					console.log(x,h,r)
