@@ -25,6 +25,7 @@
 			*
 		from
 			member
+		where member_role like #{memberRole}
 	</select>
 	
 	<select id="selectDropMemberList" resultType="member">
@@ -62,6 +63,25 @@
 		where
 			member_code = #{memberCode}
 	</update>
+	
+	<update id="dropMember">
+		update
+			member
+		set
+			member_role = 'd'
+		where
+			member_code = #{memberCode}
+	</update>
+
+	<select id="searchMember" resultType="member">
+		select
+			*
+		from
+			member
+		where
+			member_name = #{memberName}
+	</select>
+
 
 	<select id="selectOneBoard" resultType="board">
 		select 

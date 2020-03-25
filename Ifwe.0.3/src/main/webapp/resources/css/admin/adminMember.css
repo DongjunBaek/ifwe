@@ -63,13 +63,17 @@ section{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
 }
-#all_member{
+#member{
     margin-right: 20px;
     /* border: 1px solid red; */
 }
-#drop_member{
+#d{
     margin-right: 20px;
     /* border: 1px solid red; */
+}
+#membersrh{
+	float:right;
+	margin-left: 10px;
 }
 .btn_member:hover{
     background-color: #3b3b3b;
