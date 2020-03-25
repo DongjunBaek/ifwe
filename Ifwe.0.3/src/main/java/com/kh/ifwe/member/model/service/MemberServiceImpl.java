@@ -55,5 +55,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.searchId(param);
 	}
 
+	@Override
+	public Member selectOne(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.selectOne(memberCode);
+	}
+
 	
 }
