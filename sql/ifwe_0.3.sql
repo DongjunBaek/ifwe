@@ -1,4 +1,4 @@
---================================================
+l--================================================
 --관리자계정 system
 --================================================
 --ifwe 계정생성
@@ -124,6 +124,15 @@ CREATE TABLE  CONTENTS_INFO  (
 	 contents_site 	VARCHAR2(300)		NULL,
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
+
+
+	select 
+		* 
+	from 
+		MEMBER_PROFILE
+	where member_code=41;
+
+
 
 
 CREATE TABLE  MEMBER_PROFILE  (
@@ -300,9 +309,9 @@ CREATE TABLE  CLUB_BOARDLIST  (
 	 board_name 	char(30)		NULL
 );
 
-DROP TABLE  Untitled ;
+DROP TABLE  friend;
 
-CREATE TABLE  Untitled  (
+CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL,
 	 member_id 	VARCHAR2(30)		NULL,
 	 member_pname 	VARCHAR2(50)		NULL
@@ -733,3 +742,21 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (41,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
 
+select * from friend;
+
+
+insert into friend
+values(
+41,'test1','김김김a'
+
+);
+commit;
+
+insert into friend
+values(
+41,'test1','김김김'
+
+);
+commit;
+
+commit;
