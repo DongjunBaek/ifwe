@@ -11,7 +11,7 @@
 			#{clubTitle},
 			#{clubImgOri},
 			#{clubImgRe},
-			#{clubCurrent},
+			1,
 			#{clubMax},
 			default,
 			#{clubContent},
@@ -58,7 +58,7 @@
 	</select>
 	
 	
-	<select id="selectClubMaster" resultType="clubMaster">
+	<select id="selectClubMaster" resultType="member">
 		select * from member where member_code = #{clubMaster}
 
 	</select>
