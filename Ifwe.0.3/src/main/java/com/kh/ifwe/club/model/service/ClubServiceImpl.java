@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.ifwe.club.model.dao.ClubDAO;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class ClubServiceImpl implements ClubService {
 		String[] clubcate = club.getCateCode();
 		Map<String , Object> map = new HashMap<String, Object>();
 		for(int i=0; i<clubcate.length; i++) {
-			List<String> selectCate = new ArrayList<>();
+			String selectCate = null;
 			selectCate = clubDAO.selectCate(clubcate[i]); 
 			map.put("clubseq", clubseq);
 			map.put("clubcate", clubcate[i]);
@@ -81,6 +82,18 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubMaster> selectListByName(Map<String, String> param) {
 		return clubDAO.selectListByName(param);
+	}
+
+	
+	@Override
+	public List<Member> selectMemberCode(int clubCode) {
+		return clubDAO.selectMemberCode(clubCode);
+	}
+
+
+	@Override
+	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
+		return clubDAO.selectClubMember(clubMemberCode);
 	}
 
 

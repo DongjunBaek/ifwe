@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
 
 @Repository
@@ -28,8 +29,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<String> selectCate(String hashtag) {
-		return sqlSession.selectList("club.selectCate",hashtag);
+	public String selectCate(String hashtag) {
+		return sqlSession.selectOne("club.selectCate",hashtag);
 	}
 
 	@Override
@@ -69,6 +70,16 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<ClubMaster> selectListByName(Map<String, String> param) {
 		return sqlSession.selectList("club.selectListByName", param);
+	}
+
+	@Override
+	public List<Member> selectMemberCode(int clubCode) {
+		return sqlSession.selectList("club.selectMemberCode",clubCode);
+	}
+
+	@Override
+	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
+		return sqlSession.selectList("club.selectClubMember",clubMemberCode);
 	}
 
 
