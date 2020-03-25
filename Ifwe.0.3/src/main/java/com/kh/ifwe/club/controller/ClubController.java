@@ -137,7 +137,7 @@ public class ClubController {
 		return mav;
 	}
 	
-	
+	//보라,0325형철 메인페이지 출력
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
 		

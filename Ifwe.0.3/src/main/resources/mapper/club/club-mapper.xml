@@ -58,7 +58,7 @@
 	</select>
 	
 	
-	<select id="selectClubMaster" resultType="member">
+	<select id="selectClubMaster" resultType="clubMaster">
 		select * from member where member_code = #{clubMaster}
 
 	</select>
