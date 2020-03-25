@@ -71,10 +71,19 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	//소모임 검색 해쉬태그로 0325
 	@Override
-	public List<ClubMaster> searchClub(Map<String, String> param) {
-		return clubDAO.searchClub(param);
+	public List<ClubMaster> searchClubByHashtag(Map<String, String> param) {
+		return clubDAO.searchClubByHashtag(param);
 	}
+
+
+	@Override
+	public List<ClubMaster> selectListByName(Map<String, String> param) {
+		return clubDAO.selectListByName(param);
+	}
+
+
 	
 	
 	
