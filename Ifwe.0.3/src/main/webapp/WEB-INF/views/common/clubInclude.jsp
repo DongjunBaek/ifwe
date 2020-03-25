@@ -117,7 +117,7 @@ $(function(){
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
                         <p>회원 목록</p>
-                        <div class="aside-friend-count"><p>${clubMaster.clubCurrent }명</p></div>
+                        <div class="aside-friend-count"><p>23명</p></div>
                     </div>
                     <div class="aside-friend-list">
                         <div class="aside-friend">

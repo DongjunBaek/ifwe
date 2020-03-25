@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"club","clubMaster"})
+@SessionAttributes(value= {"clubMaster","club"})
 public class ClubController {
 	
 	@Autowired
