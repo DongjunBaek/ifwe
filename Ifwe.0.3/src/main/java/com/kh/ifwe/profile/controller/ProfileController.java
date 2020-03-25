@@ -85,7 +85,7 @@ public class ProfileController {
 	@GetMapping("/memberSelectOne")
 	public Member memberSelectOne(Model model, int profileMemberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		Member member = memberService.selectOne(profileMemberCode);
+		Member member = memberService.memberSelectOneCode(profileMemberCode);
 		return member;
 	}
 	

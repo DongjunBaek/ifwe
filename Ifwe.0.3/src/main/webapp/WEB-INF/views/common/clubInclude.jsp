@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <script>
 $(function(){
@@ -41,9 +44,14 @@ $(function(){
     });
     
 	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do"
+		location.href="${pageContext.request.contextPath }/member/profile.do";
+	});
+	
+	$("#managementbutton").click(function(){
+		location.href="${pageContext.request.contextPath }/club/management.do";
 	});
     
+	
 })
 
 </script>
@@ -88,9 +96,17 @@ $(function(){
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
+                <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
                 <div class="aside-join" id="enrollbutton">
                     <p>가입하기</p>
                 </div>
+                </c:if>
+                <c:if test="${clubMaster.memberCode == memberLoggedIn.memberCode}">
+                <div class="aside-join" id="managementbutton">
+                    <p>관리하기</p>
+                </div>
+                </c:if>
+                
          <div class="aside-scroll-box">
           	<div id="aside-scroll">
                 <div class="aside-boardmenu">
@@ -100,7 +116,7 @@ $(function(){
                 </div>
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
-                        <p>친구 목록</p>
+                        <p>회원 목록</p>
                         <div class="aside-friend-count"><p>23명</p></div>
                     </div>
                     <div class="aside-friend-list">

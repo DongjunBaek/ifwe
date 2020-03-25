@@ -22,5 +22,7 @@ public interface MemberService {
 	int updateProfile(Profile profile);
 	Member searchId(Map<String, String> param);
 
+	Member memberSelectOneCode(int memberCode);
+
 
 }

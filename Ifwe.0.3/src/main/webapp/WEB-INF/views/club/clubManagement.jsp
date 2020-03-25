@@ -13,7 +13,30 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmanagement.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+<script>
+$(function(){
+	$("#mng-enroll").click(function(){
+		location.href="${pageContext.request.contextPath}/club/mngenroll.do";
+	});
+	$("#mng-member").click(function(){
+		location.href="${pageContext.request.contextPath}/club/mngmember.do";
+	});
+	$("#mng-clubinfo").click(function(){
+		location.href="${pageContext.request.contextPath}/club/mngclubinfo.do";
+	});
+	$("#mng-board").click(function(){
+		location.href="${pageContext.request.contextPath}/club/mngboard.do";
+	});
+	
+	
+	
+	
+	
+	
+	
+});
 
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
@@ -29,7 +52,7 @@
          
          <div class="shc-section-container">
 
-             <div class="shc-section-leftbox shcbox">
+             <div class="shc-section-leftbox shcbox" id="mng-enroll">
                  <div class="shc-section-centerbox">
                      <div class="shc-section-boxline"></div>
                      <p class="shc-centerboxp1">가입요청</p>
@@ -38,7 +61,7 @@
                  </div>
              </div>
              
-             <div class="shc-section-rightbox shcbox">
+             <div class="shc-section-rightbox shcbox" id="mng-member">
                  <div class="shc-section-centerbox">
                      <div class="shc-section-boxline"></div>
                      <p class="shc-centerboxp1">멤버 관리</p>
@@ -47,7 +70,7 @@
                  </div>
                  
              </div>
-             <div class="shc-section-leftbox shcbox">
+             <div class="shc-section-leftbox shcbox" id="mng-clubinfo">
                  <div class="shc-section-centerbox">
                      <div class="shc-section-boxline"></div>
                      <p class="shc-centerboxp1">소모임 정보 수정</p>
@@ -56,7 +79,7 @@
                  </div>
              </div>
              
-             <div class="shc-section-rightbox shcbox">
+             <div class="shc-section-rightbox shcbox" id="mng-board">
                  <div class="shc-section-centerbox">
                      <div class="shc-section-boxline"></div>
                      <p class="shc-centerboxp1">게시판 관리</p>
