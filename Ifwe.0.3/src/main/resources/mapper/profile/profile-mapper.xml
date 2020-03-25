@@ -5,13 +5,19 @@
 <mapper namespace="profile">
 
 
-<select id="selectOne" resultType="Profile">
+<select id="selectOne" resultMap="ProfileMap">
 	select 
 		* 
 	from 
 		MEMBER_PROFILE
 	where member_code=#{profileMemberCode}
 </select>
+
+
+
+	<resultMap type="Profile" id="ProfileMap">
+		<result column="contentsCateCodes" property="contentsCateCodes" typeHandler="StrArrTypeHandler"/>
+	</resultMap>
 </mapper>
 
 

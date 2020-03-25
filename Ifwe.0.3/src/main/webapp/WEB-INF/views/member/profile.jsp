@@ -20,8 +20,8 @@
             <div class="section-frofileinfo-wrapper">
                 <ul>
                     <li><p>회원정보</p></li>
-                    <p>생년월일:1999년1월20일 ${profile.profileAge }</p>
-                    <p>거주지:경기도 남양주시</p>
+                    <p>생년월일:${member.memberBirth }</p>
+                    <p>거주지:${member.memberAddr }</p>
                     <p>성별:여 ${profile.profileGender }</p>
                     <li><p>소개글</p></li>
                     <p>
