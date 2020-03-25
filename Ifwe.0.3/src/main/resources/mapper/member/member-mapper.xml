@@ -109,7 +109,7 @@
 insert into member_profile values(
 #{memberId},'null','null','null','null','0','M','null'
 
-);
+)
 	
 </insert>
 	
