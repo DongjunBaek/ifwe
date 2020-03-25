@@ -12,4 +12,6 @@ public interface BoardService {
 
 	Board selectBoardDetail(int boardNo);
 
+	int deleteBoardOne(int boardNo);
+
 }
