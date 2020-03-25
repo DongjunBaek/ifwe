@@ -13,16 +13,16 @@
                 <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="">
             </div>
             <p class="frofile-id">@wingStudy_02</p>
-            <p class="frofile-name">스테파니</p>
+            <p class="frofile-name">스테파니${profile.profileName }</p>
             <div class="section-friendbutton">친구요청</div>
         </div>
         <div class="section-frofileinfo-box">
             <div class="section-frofileinfo-wrapper">
                 <ul>
                     <li><p>회원정보</p></li>
-                    <p>생년월일:1999년1월20일</p>
+                    <p>생년월일:1999년1월20일 ${profile.profileAge }</p>
                     <p>거주지:경기도 남양주시</p>
-                    <p>성별:여</p>
+                    <p>성별:여 ${profile.profileGender }</p>
                     <li><p>소개글</p></li>
                     <p>
 		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
@@ -30,7 +30,7 @@
 		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
 		                        저랑같이 영어공부해요!
 		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
-		                        저랑같이 영어공부해요!
+		                        저랑같이 영어공부해요!${profile.profileComment }
                     </p>
                     <li><p>관심키워드</p></li>
                     <div class="hashtag-wrapper">
@@ -46,4 +46,58 @@
 
 
 </body>
+<script>
+$(()=>{
+	
+	
+	
+})
+
+
+console.log("onload On");
+		
+	/* 	location.href="${pageContext.request.contextPath}/Friend/selectFriendList.do?memberCode="+41; */
+		var a = ${memberLoggedIn.memberCode };
+		$.ajax({
+			url:"<%=request.getContextPath()%>/friend/selectFriendList",
+			type: "GET", 
+			 data:{"memberCode":a},
+	/* 		dataType: "text",  */
+			beforeSend: function(){
+				console.log("beforeSend");
+			},
+			success: function(data){
+				
+				console.log("success");
+				console.log("data :", data);
+				
+		/* 		$(".friend-lists").append("<div class='friend-list'><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' alt='' /></div><div class='friend-name font-kor friend-name-profile'>김원재</div></div>"); 
+		 */		
+				
+				$.each(data,function(idx,value){
+					console.log(idx);
+					console.log(value);
+				
+					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' id='profileImg' value='"+value.memberCode+"'  alt='' /></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
+					
+			
+					
+				})
+				
+			},
+			error: function(jqxhr, textStatus, errorThrown){
+		
+				console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
+			}, 
+			complete: function(){
+		
+				console.log("complete");
+				
+			}
+			
+		});
+	
+
+</script>
+
 </html>
