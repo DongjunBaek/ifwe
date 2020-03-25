@@ -51,14 +51,15 @@ $(function(){
 		let searchType = $("[name=searchType]").val();
 		let clubSearchKeyword = $("[name=clubSearchKeyword]").val();
 		console.log("dkdkdkdkdk");
-		
+	    var allData = { "searchType": searchType, "clubSearchKeyword": clubSearchKeyword};
 		
 		console.log(searchType);
 		
 		$.ajax({
-			url:"${pageContext.request.contextPath}/club/clubSearchKeyword?searchType="+searchType+"&clubSearchKeyword="+clubSearchKeyword,
+			url:"${pageContext.request.contextPath}/club/clubSearchKeyword",
+			data: allData,
 			success:data => {
-				console.log(data);	
+				console.log(data.key);	
 			},
 			error:(x,s,e) =>{
 				console.log("에러 ㅡㅡ ");
@@ -80,8 +81,8 @@ $(function(){
                     <div class="select-box">
                         <select name="searchType" id="search">
                             <option value="">전체</option>
-                            <option value="loc">지역별</option>
-                            <option value="mName">모임명</option>
+                            <option value="club_location">지역별</option>
+                            <option value="club_title">모임명</option>
                         </select>
                     </div>
                     <div class="searh-icon">
