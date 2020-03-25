@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class AdviceSignature {
 	private Logger logger = Logger.getLogger(AdviceSignature.class);
 	
-	@Pointcut("execution(* com.kh.aop..*Impl.*(..))")
+//	@Pointcut("execution(* com.kh.aop..*Impl.*(..))")
 	public void pointcut() {}
 	
 	@Before("pointcut()")

@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RuntimeCheckAspect {
 	
 //	@Pointcut("execution(* com.kh.spring.memo.controller.MemoController.insertMemo(..))")
-	@Pointcut("execution(* com.kh..*insert*(..))")
+//	@Pointcut("execution(* com.kh..*insert*(..))")
 	public void pointcut() {}
 	
 	
