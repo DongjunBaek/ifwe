@@ -56,7 +56,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Member selectOne(int memberCode) {
+	public Member memberSelectOneCode(int memberCode) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectOneCode",memberCode);
 	}

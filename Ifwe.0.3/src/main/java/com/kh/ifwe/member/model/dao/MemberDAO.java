@@ -23,7 +23,7 @@ public interface MemberDAO {
 
 	Member searchId(Map<String, String> param);
 
-	Member selectOne(int memberCode);
+	Member memberSelectOneCode(int memberCode);
 
 
 }

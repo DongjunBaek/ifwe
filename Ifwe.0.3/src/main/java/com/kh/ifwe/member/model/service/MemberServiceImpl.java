@@ -56,9 +56,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member selectOne(int memberCode) {
+	public Member memberSelectOneCode(int memberCode) {
 		// TODO Auto-generated method stub
-		return memberDAO.selectOne(memberCode);
+		return memberDAO.memberSelectOneCode(memberCode);
 	}
 
 	
