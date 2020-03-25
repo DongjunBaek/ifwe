@@ -123,12 +123,8 @@ public class ClubController {
 	    	
 	    	int result = clubService.create(club);
 	    	
-	    	//int clubseqno = clubService.selectseq();
-	    	
-	    	
-    	
-	    	//redirectAttributes.addAttribute("clubSeq", clubseqno);
-	    	//mav.setViewName("redirect:/club/clubMain.do?clubSeq="+clubseqno);
+	    	log.debug("result @ club create {}", result);
+
     	
     	}catch(Exception e) {
     		e.printStackTrace();
