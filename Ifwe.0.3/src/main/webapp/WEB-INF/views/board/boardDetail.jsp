@@ -14,8 +14,8 @@ function boardOneDelete(){
 	console.log(checkDelBoardOne);
 	
 	$.ajax({
-		url:"",
-		data : {boardNo : ${boardNo}},
+		
+		url : "",
 		success : function(data){
 			console.log(data);
 		},
@@ -47,10 +47,12 @@ $(function(){
 	width: 100%;
 	height: 10%;
 }
-
+.titlebox2{
+	margin-top: 4%;
+}
 .boardDetail-div-content {
 	width: 90%;
-	height: 60%;
+	min-height: 60%;
 	background-color: #ebebeb;
 	margin-left: 5%;
 	margin-top: 3%;
@@ -66,18 +68,39 @@ $(function(){
 	top: 50%;
 	left: 50%;
 	transform: translateY(-50%) translateX(-50%);
-	display: flex;
+	
 }
 
 .boardDetail-div-title-center div:first-child {
+	float : left;
 	margin-left: 5%;
+	padding-top : 1%;
 	height: 50%;
 	font-size: 32px;
 	position: relative;
 	top: 50%;
-	border-bottom: 8px solid #2756a6;
+	border-top: 5px solid #2756a6;	
 }
-
+.boardDetail-div-title-center div:nth-child(2){
+	float : right;
+	width : 2%;
+}
+.boardDetail-div-title-center div:nth-child(3){
+	width : 8.2%;
+	margin-right : 5%;
+	font-size: 26px;
+	line-height: 60px;
+}
+.boardDetail-div-title-center div:nth-child(4){
+	width: 8.2%;
+    margin-right: 5%;
+    font-size: 20px;
+    line-height: 60px;
+}
+.boardDetail-div-title-center div:nth-child(5){
+	margin-right : 5%;
+	border: none;
+}
 
 .boardDetail-div-content-date {
 	margin-left: 5%;
@@ -87,29 +110,31 @@ $(function(){
 	top: 50%;
 	border-bottom: 8px solid #2756a6;
 }
-
-.boardDetail-div-title-center div:last-child {
-	width: 20%;
-	height: 50%;
-	position: relative;
-	left: 43%;
-	display: flex;
-	top: 50%;
+.boardDetail-div-title-2-1{
+	margin-left : 5%;	
+	width : 8%;
+	height: 100%;
+	float: left;
+	
 }
-
-.boardDetail-div-title-center button {
-	outline: none;
-	border: none;
-	flex: 1;
-	margin-right: 10%;
-	font-size: 20px;
-	color: #ebebeb;
-	background-color: #2756a6;
+.boardDetail-div-title-2-2{
+	float : right;
+	width: 84%;
 }
-
-.boardDetail-div-title-center button:last-child {
-	color: #ebebeb;
-	background-color: #c0392b;
+#boardDetal-profile-img{
+	width: 100px;
+	height: 100px;
+	background-image: url("../resources/upload/admin/board/20200324_200732838_465.jpg");
+	background-size: cover;
+	border-radius: 50%; 
+	float: left;
+}
+.boardDetail-div-title-2-1-name{
+	width: 55%;
+	height: 100%;
+	float: right;
+	font-size: 24px;
+    line-height: 103px;
 }
 
 .boardDetail-div-content div {
@@ -118,20 +143,59 @@ $(function(){
 	margin-top: 3%;
 	width: 90%;
 }
+.title-2-2-title{
+	font-size: 48px;
+}
+.boardDetail_bgcolor{
+	margin-top : 3%;
+	background-color: white;
+	min-height: 1080px;
+}
+.boardDetail-div-writerBox p{
+	font-size: 32px;
+}
+.boardDetail-div-dateBox{
+	float: right;
+    margin-right: 12%;
+    margin-bottom: 2%;
+    font-size : 28px;
+}
+.boardDetail-div-optionBox{
+	margin-right : 2%;
+	float: right;
+}
+.boardDetail-div-optionBox i{
+	float: right;
+}
 </style>
-
-	<section>
+	
+	<section class="boardDetail_bgcolor">
 		<div class="boardDetail-div-title">
-			<div class="boardDetail-div-title-center">							
-				<div>${board.boardTitle }</div>
-				<div class="boardDetail-div-content-date">
+			
+			<div class="boardDetail-div-title-center">			
+				<div>${board.boardCate == notice?"공지 사항":board.boardCate == "qna"?"문의 사항":"신고 사항	" }</div>
+				<div class="boardDetail-div-dateBox">
 					<p> ${board.boardDate }</p>
+				</div>										
+				<div class="boardDetail-div-optionBox">
+					<i class="fas fa-caret-down"></i>
 				</div>
-				<div>
-					<button onclick="boardOneUpdate();"> 수정 하기 </button>
-					<button onclick="boardOneDelete();"> 삭제 하기 </button>
-				</div>
+				
 			</div>
+		</div>
+		<div class="boardDetail-div-title titlebox2">
+			<div class="boardDetail-div-title-2-1">
+				<div id="boardDetal-profile-img">
+					
+				</div>
+			
+			</div>
+			<div class="boardDetail-div-title-2-2">
+				<div class="title-2-2-title">${board.boardTitle }</div>
+				<div class="boardDetail-div-writerBox">
+					<p> 작성자 </p>
+				</div>
+			</div>		
 		</div>
  		<div class="boardDetail-div-content">
 
@@ -139,7 +203,8 @@ $(function(){
 				<p> ${board.boardContent }</p>
 			</div>
 
-		</div> 
+		</div>
+		 
 	</section>
 </body>
 </html>
