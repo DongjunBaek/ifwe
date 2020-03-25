@@ -1,0 +1,121 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+section{
+    font-family: 'GmarketSansLight';
+}
+.section-boradmenu{
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    font-size: 24px;
+}
+.section-wrapper{
+    width:100%;
+}
+.section-wrapper p{
+    font-family: 'GmarketSansLight';
+}
+
+.section-boradmenu{
+    float: left;
+}
+.shc-premiumbox{
+    float: right;
+    width:210px;
+    height:55px;
+    background-color: #ffc862;
+    border-radius: 20px;
+
+}
+.shc-premiumbox p{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top:6%;
+
+}
+.shc-section-memberlist-container>p{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+}
+.shc-section-memberlist-box{
+    width: 100%;
+    background-color: white;
+}
+.shc-friendtable{
+    width:100%;
+}
+
+.shc-friendtable th{
+    border-top: 3px solid #ffc862;
+    border-bottom: 3px solid #ffc862;
+    height:50px;
+    font-size: 20px;
+    width:270px;
+    font-family: 'GmarketSansLight';
+}
+.shc-friendtable td{
+    text-align: center;
+    height:80px;
+    font-size: 18px;
+    border-bottom: 1px solid #ebebeb;
+    font-family: 'GmarketSansLight';
+}
+.shc-table-img{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+    margin:0 auto;
+    overflow: hidden;
+    background-image: url("../../images/club/basicfrofile.png");
+    background-size: cover;
+}
+.shc-table-img img{
+    width:60px;
+}
+.shc-friendtable button{
+    width:80px;
+    height:40px;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+}
+.table-declaration{
+    border:2px solid rgb(30, 212, 45);
+}
+.table-declaration:hover{
+    color:white;
+    background-color: rgb(30, 212, 45);
+}
+.table-secession{
+    border:2px solid red;
+}
+.table-secession:hover{
+    color: white;
+    background-color: red;
+}
+.table-selectsize-div{
+    width:120px;
+    margin:0 auto;
+}
+.membertable-savebutton{
+    float: right;
+    margin:30px;
+    width:210px;
+    height:55px;
+    font-size: 20px;
+    border-radius: 20px;
+    color: white;
+    background-color: #2756a6;
+    outline: none;
+    cursor: pointer;
+
+}
+
+
+
+
+

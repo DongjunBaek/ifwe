@@ -1,6 +1,7 @@
 package com.kh.ifwe.club.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
@@ -15,6 +16,10 @@ public interface ClubService {
 	Club selectOne(int clubCode);
 
 	Member selectClubMaster(int clubMaster);
+
+	List<ClubMaster> searchClubByHashtag(Map<String, String> param);
+
+	List<ClubMaster> selectListByName(Map<String, String> param);
 
 
 }

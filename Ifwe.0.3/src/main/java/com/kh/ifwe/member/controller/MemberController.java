@@ -103,7 +103,6 @@ public class MemberController {
 		
 		return mav;
 	}
-	
 	@PostMapping("/login.do")
 	public String login(@RequestParam("memberId") String memberId,
 					    @RequestParam("password") String password,
@@ -551,7 +550,33 @@ public class MemberController {
 	
 	
 	
+	@GetMapping("/memberSelectOne")
+	public Member memberSelectOneCode(Model model, int memberCode, HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
+		Member member = memberService.memberSelectOneCode(memberCode);
+		return member;
+	}
 	
+	@PostMapping("/membershipPay.do")
+	@ResponseBody
+	public int membershipPay(@RequestParam("membershipName") String membershipName ,
+								@RequestParam("clubCode") String clubCode,
+								@RequestParam("memberCode") String memberCode) {
+		log.debug("membershipName = {}",membershipName);
+		log.debug("clubName = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		map.put("membershipName", membershipName);
+		map.put("clubCode", clubCode);
+		map.put("memberCode", memberCode);
+		
+		int result = memberService.insertPre(map);
+		
+		
+		return result;
+	}
 	
 	
 	

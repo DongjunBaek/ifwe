@@ -25,5 +25,9 @@ public interface ClubDAO {
 
 	Member selectClubMaster(int clubMaster);
 
+	List<ClubMaster> searchClubByHashtag(Map<String, String> param);
+
+	List<ClubMaster> selectListByName(Map<String, String> param);
+
 
 }

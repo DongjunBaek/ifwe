@@ -73,6 +73,7 @@
 		and 
 			member_birth = to_date(#{birth}, 'yyyy/mm/dd')
 	</select>
+	
 
 
 
@@ -106,13 +107,29 @@
 	
 	
 insert into member_profile values(
-'#{memberId}','null','null','null','null','0','M','null'
+#{memberId},'null','null','null','null','0','M','null'
 
 );
 	
 </insert>
+	
+	<insert id="insertPre">
+	
+	insert into premium_order values(
+		seq_order_code.nextval,
+		#{clubCode},
+		#{membershipName},
+		#{memberCode}
+		
+	)
+	
+	</insert>
 
+<select id="selectOneCode" resultType="member">
 
+select * from member 
+where member_code=#{memberCode}
+</select>
 
 
 </mapper>

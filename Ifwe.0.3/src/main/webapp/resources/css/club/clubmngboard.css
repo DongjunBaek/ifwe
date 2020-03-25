@@ -1,0 +1,127 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+section{
+    font-family: 'GmarketSansLight';
+}
+.section-boradmenu{
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    font-size: 24px;
+}
+.section-wrapper{
+    width:100%;
+}
+.section-wrapper p{
+    font-family: 'GmarketSansLight';
+}
+
+.section-boradmenu{
+    float: left;
+}
+.shc-premiumbox{
+    float: right;
+    width:210px;
+    height:55px;
+    background-color: #ffc862;
+    border-radius: 20px;
+
+}
+.shc-premiumbox p{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top:6%;
+
+}
+
+.shc-section-board-container>p{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: 'GmarketSansMedium';
+}
+.boardplusbtn{
+    font-family: 'GmarketSansLight';
+    float: right;
+    background-color: #2756a6;
+    color:white;
+    font-size: 24px;
+    border-radius: 20px;
+    outline: none;
+    padding:5px 20px;
+    cursor: pointer;
+    
+}
+.shc-boardlist-box{
+    width:1290px;
+    min-height: 200px;
+    background-color: white;
+    border-top: 5px solid #ffc862;
+    margin-top:30px;
+    padding:30px 30px;
+}
+.circleicon{
+    color:#ffc862;
+    margin:20px 0;
+}
+.shc-boardlist-box input[type=text]{
+    border:1px solid #ebebeb;
+    width:400px;
+    height:30px;
+    font-size: 24px;
+    outline: none;
+    margin-left: 30px;
+}
+.shc-boardlist-box ul{
+    list-style-type: none;
+}
+.shc-boardlist-box img{
+    width:40px;
+    margin-left: 10px;
+}
+.boardlistspan{
+    font-size: 24px;
+    margin-left: 30px;
+}
+.newboardlistspan{
+    font-size: 24px;
+    margin-left: 36px;
+    font-weight: bold;
+}
+.btncenter{
+    width:400px;
+    height:65px;
+    margin:0 auto;
+    margin-top:40px;
+}
+.shc-savebtn{
+    font-family: 'GmarketSansLight';
+    width:400px;
+    height:65px;
+    border-radius: 20px;
+    background-color: #ffc862;
+    color:white;
+    font-size: 24px;
+    outline: none;
+}
+.del-btn{
+    color:white;
+    background-color: red;
+    cursor: pointer;
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding:2px 7px;
+    vertical-align: 15%;
+
+
+    
+}
+
+
+
+
+
+

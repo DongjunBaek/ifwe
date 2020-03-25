@@ -62,6 +62,37 @@
 		select * from member where member_code = #{clubMaster}
 
 	</select>
+	
+	<select id="searchClubByHashtag" resultType="clubMaster">
+		select    *
+		from 
+		    club C 
+		left join 
+		    member M 
+		on 
+		    c.club_master = m.member_code 
+		left join 
+		    club_category CC 
+		on 
+		    c.club_code=cc.club_code
+		<where>
+	        CC.club_cate like #{keyWord}
+	        <if test="clubLocation != '' ">
+				and club_location = #{clubLocation}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectListByName" resultType="clubMaster">
+		select * from club C left join member M on C.club_master=M.member_code 
+		<where>
+			club_title like #{keyWord} 
+			
+			<if test="clubLocation != '' ">
+				and club_location = #{clubLocation}
+			</if>
+		</where>
+	</select>
 </mapper>
 
 

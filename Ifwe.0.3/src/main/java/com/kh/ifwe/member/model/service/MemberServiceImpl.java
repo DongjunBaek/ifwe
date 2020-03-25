@@ -55,5 +55,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.searchId(param);
 	}
 
+	@Override
+	public int insertPre(Map<String, String> map) {
+		return memberDAO.insertPre(map);
+	};
+	
+	@Override
+	public Member memberSelectOneCode(int memberCode) {
+		return memberDAO.memberSelectOneCode(memberCode);
+	}
+
 	
 }

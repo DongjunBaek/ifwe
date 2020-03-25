@@ -16,14 +16,14 @@ public class AdminDAOImpl implements AdminDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Member> selectMemberList(int cPage, int numPerPage) {
+	public List<Member> selectMemberList(int cPage, int numPerPage, String memberRole) {
 		
 		int offset = (cPage-1)*numPerPage;
 		int limit = numPerPage;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		
-		return sqlSession.selectList("admin.selectMemberList", null, rowBounds);
+		return sqlSession.selectList("admin.selectMemberList", memberRole, rowBounds);
+	
 	}
 
 	@Override
@@ -55,6 +55,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int cancelMember(Member member, int memberCode) {
 		return sqlSession.update("admin.cancelMember",memberCode);
+	}
+
+	@Override
+	public int dropMember(Member member, int memberCode) {
+		return sqlSession.update("admin.dropMember",memberCode);
+	}
+
+	@Override
+	public List<Member> searchMember(String memberName) {
+		return sqlSession.selectList("admin.searchMember", memberName);
 	}
 
 	
