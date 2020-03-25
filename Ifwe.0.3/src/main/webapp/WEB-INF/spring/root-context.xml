@@ -13,8 +13,8 @@
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="test"/>
-		<property name="password" value="test"/>
+		<property name="username" value="ifwe"/>
+		<property name="password" value="ifwe"/>
 	</bean>
 	<!-- #9.1.log4jdbc-remix 관련 dataSource처리  -->
   	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">  
