@@ -81,7 +81,7 @@ border:0;}
 					<div class="select-boxs">
 	                        <select name="boardCate" id="search">
 	                            <option value="notice">공지사항</option>
-	                            <option value="service">문의사항</option>
+	                            <option value="qna">문의사항</option>
 	                            <option value="report">신고사항</option>
 	                        </select>
 	                    </div>
@@ -94,9 +94,7 @@ border:0;}
 					<h3 class="main_content">내용</h3>
 					<br /><br />
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
-				<input type="hidden" name="boardImgOri" id="boardImgOri">
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
-				<input type="hidden" name="boardImgRe" id="boardImgRe">
 				<div class="btn_wrap">
 	           		<input type="submit" id="modify_1" value="등록" class="no-border">
 	       		 </div>
@@ -105,4 +103,5 @@ border:0;}
 		</form>
 	</section>
 </body>
+
 </html>

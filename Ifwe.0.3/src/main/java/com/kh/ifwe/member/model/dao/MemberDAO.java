@@ -3,6 +3,7 @@ package com.kh.ifwe.member.model.dao;
 import java.util.Map;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberDAO {
 
@@ -18,8 +19,9 @@ public interface MemberDAO {
 
 	int deleteMember(Member member);
 
-	Member searchId(Map<String, String> param);
+	int updateProfile(Profile profile);
 
+	Member searchId(Map<String, String> param);
 
 
 }

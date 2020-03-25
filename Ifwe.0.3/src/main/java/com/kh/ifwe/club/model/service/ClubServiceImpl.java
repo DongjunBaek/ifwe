@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.dao.ClubDAO;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,10 +52,28 @@ public class ClubServiceImpl implements ClubService {
 		
 	}
 
+
 	//0324 문보라 소모임목록 뿌려주기 
 	@Override
-	public List<Club> clubSearch() {
+	public List<ClubMaster> clubSearch() {
 		return clubDAO.clubSearch();
+	}
+
+	//소모임 자세히 보기
+	@Override
+	public Club selectOne(int clubCode) {
+		return clubDAO.selectOne(clubCode);
+	}
+
+	@Override
+	public Member selectClubMaster(int clubMaster) {
+		return clubDAO.selectClubMaster(clubMaster);
+	}
+
+
+	@Override
+	public List<ClubMaster> searchClub(Map<String, String> param) {
+		return clubDAO.searchClub(param);
 	}
 	
 	

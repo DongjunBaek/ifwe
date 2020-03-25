@@ -2,12 +2,15 @@ package com.kh.ifwe.club.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,21 +35,50 @@ public class ClubController {
 	@Autowired
 	private ClubService clubService;
 	
+	
+	@GetMapping("/clubSearchKeyword")
+	public ModelAndView clubSearchKeyword(ModelAndView mav,
+										  @RequestParam("searchType") String searchType,
+									      @RequestParam("clubSearchKeyword")String clubSearchKeyword
+										  ) {
+		
+		log.debug("searchType = {}",searchType);
+		log.debug("clubSearchKeyword = {}",clubSearchKeyword);
+		String keyWord ="%"+clubSearchKeyword+"%";
+		
+		Map<String,String> param = new HashMap<>();
+		param.put("searchType", searchType);
+		param.put("keyWord", keyWord);
+		
+		log.debug("param = {}",param);
+		
+		
+		List<ClubMaster> searchList = clubService.searchClub(param);
+		
+		
+		log.debug("list1231321321 ={}",searchList);
+		
+		mav.addObject("searchlist", searchList);
+		return mav;
+		
+	}
 
-	@GetMapping("/clubSearch.do")
+	
+	
+	@GetMapping("/clubSearch")
 	public ModelAndView clubSearch(ModelAndView mav) {
+		
 		log.debug("소모임 검색");
-		List<Club> clubList = clubService.clubSearch();
+		
+		List<ClubMaster> clubList = clubService.clubSearch();
 		log.debug("clubList = {}",clubList);
-		
-		
 		
 		
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
 		
 		return mav;
-	};
+	}
 	
 	@GetMapping("/clubCreate.do")
 	public String clubCreate() {
@@ -89,16 +123,15 @@ public class ClubController {
 	    	
 	    	int result = clubService.create(club);
 	    	
-    	
+	    	log.debug("result @ club create {}", result);
+
     	
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
-		
-		
-		mav.setViewName("redirect:/club/clubMain.do");
-		
-		
+
+		mav.setViewName("redirect:/club/clubMain.do?clubCode="+club.getClubCode());
+			
 		return mav;
 	}
 	
@@ -106,8 +139,25 @@ public class ClubController {
 	
 	
 	@GetMapping("/clubMain.do")
-	public String clubMain() {
-		return "club/clubMain";
+	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
+		
+		
+		log.debug("clubCode = {}",clubCode);
+		
+		Club club = clubService.selectOne(clubCode);
+		
+		log.debug("club = {}",club);
+		
+		
+		Member clubMaster = clubService.selectClubMaster(club.getClubMaster());
+		
+		mav.addObject("club", club);
+		mav.addObject("clubMaster", clubMaster);
+		mav.setViewName("/club/clubMain");
+		
+		return mav;
+		
+
 	}
 	
 	@RequestMapping("/insert.do")

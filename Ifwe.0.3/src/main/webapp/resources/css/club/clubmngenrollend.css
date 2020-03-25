@@ -1,0 +1,105 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+section{
+    font-family: 'GmarketSansLight';
+}
+.section-boradmenu{
+    font-family: 'GmarketSansMedium';
+    font-weight: bold;
+    font-size: 24px;
+}
+.section-wrapper{
+    width:100%;
+}
+.section-wrapper p{
+    font-family: 'GmarketSansLight';
+}
+
+.section-boradmenu{
+    float: left;
+}
+.shc-section-container{
+    width:100%;
+    height:470px;
+    background-color: white;
+}
+.shc-section-centerbox{
+    width:1300px;
+    height:470px;
+    margin:0 auto;
+    padding:40px 0;
+}
+.shc-enrollmemberimg{
+    width:125px;
+    height:125px;
+    border-radius: 50%;
+    background-image: url("image/basicfrofile.png");
+    background-size: cover;
+    overflow: hidden;
+    float: left;
+    
+}
+.shc-enrollmemberimg img{
+    width:125px;
+}
+.shc-enrollmemberinfo{
+    width:1140px;
+    height:75px;
+    float: left;
+    margin-top:30px;
+    margin-left: 20px;
+}
+.enroll-name{
+    font-size: 30px;
+    font-weight: bold;
+}
+.enroll-date{
+    float: right;
+    font-size: 16px;
+}
+.enroll-id{
+    font-size: 16px;
+}
+.shc-section-centerbox>p{
+    font-size: 24px;
+    width:100%;
+    float: left;
+    margin-top:60px;
+    margin-bottom: 20px;
+}
+.shc-enroll-content{
+    width:100%;
+    height:150px;
+    border:1px solid #ebebeb;
+    float: left;
+}
+.enrollbtn-div{
+    width:460px;
+    height:65px;
+    margin:0 auto;
+    margin-top:50px;
+}
+
+.enrollbtn{
+    font-family: 'GmarketSansLight';
+    width:460px;
+    height:65px;
+    background-color: #ffc862;
+    color:white;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+

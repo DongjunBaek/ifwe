@@ -26,9 +26,76 @@ $(function(){
 		
     	
     	
+    	let checkval = $(".choice input[type=checkbox]:checked").val();
+    	console.log(checkval);
+    	
+    	let premiumbtncolor = $("#premiumbtn").css("background-color")
+	    let goldbtncolor = 	$("#goldbtn").css("background-color");
+	    let silverbtncolor = $("#siverbtn").css("background-color");
+	    
+	    let idx =1;
+	    
+    	if(goldbtncolor == 'rgb(39, 86, 166)'){
+    		
+    		
+    		let div = $(".payment-lists");
+    		
+    		div.append('<div class="payment-list font-kor">'+
+    	            	'<div class="name-checkbox bold">'+
+                   		'<input type="checkbox" name="membership-name2" id="membership-name2'+(idx++)+'"><label for="membership-name2'+(idx)+'" >골드 GOLD</label>'+
+               			'</div>'+
+		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+		               	'<div class="list-duration "><p>무제한 사용</p></div>'+
+		               	'<div class="list-price bold"><p >5900원</p></div>'+
+		         		'</div>');
+		    		
+    	}
+    	
+		if(premiumbtncolor == 'rgb(39, 86, 166)'){
+		    		
+		    		
+		    		let div = $(".payment-lists");
+		    		
+		    		div.append('<div class="payment-list font-kor">'+
+		    	            	'<div class="name-checkbox bold">'+
+		                   		'<input type="checkbox" name="membership-name2" id="membership-name2"><label for="membership-name2" >프리미엄 PRIMIEUM</label>'+
+		               			'</div>'+
+				               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+				               	'<div class="list-duration "><p>무제한 사용</p></div>'+
+				               	'<div class="list-price bold"><p >9900원</p></div>'+
+				         		'</div>');
+				    		
+		    	}
+		
+		if(silverbtncolor == 'rgb(39, 86, 166)'){
+			
+			
+			let div = $(".payment-lists");
+			
+			div.append('<div class="payment-list font-kor">'+
+		            	'<div class="name-checkbox bold">'+
+		           		'<input type="checkbox" name="membership-name2" id="membership-name2"><label for="membership-name2" >실버 SILVER</label>'+
+		       			'</div>'+
+		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+		               	'<div class="list-duration "><p>무제한 사용</p></div>'+
+		               	'<div class="list-price bold"><p >3900원</p></div>'+
+		               	'</div>');
+		    		
+		}
+    	
     });
 	
     
+    $(".choice input[type=checkbox]").click(function(){
+    	
+    	$(".choice input[type=checkbox]").prop("checked",false);
+    	$(this).prop("checked",true);
+    	
+    });
+    
+    
+    
+
 })
 
 </script>
@@ -51,10 +118,18 @@ $(function(){
                        <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 개수 추가</li></p>
                </ul>
            </div>
+<<<<<<< HEAD
            <div class="grade-price" >
                <button class="price font-kor" id="premiumbtn" >
                    9,900원 / 무제한
                </button>
+=======
+           <div class="grade-price" id="primieumbtn" >
+				<button class="price font-kor" id="premiumbtn" >
+                     9,900원 / 무제한
+                </button>
+
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
            </div>
        </div>
        <div class="choice-container">
@@ -63,9 +138,8 @@ $(function(){
                    <div class="choice-checkbox font-kor">
                        <input type="checkbox" name="membership-club1" id="membership-club1" value="윙스터디 모임"><label for="membership-club1" >윙스터디 모임</label>
                    </div>
-
                    <div class="choice-checkbox font-kor">
-                   <input type="checkbox" name="membership-club2" id="membership-club2" value="윙스터디 모임" ><label for="membership-club2" >윙스터디 모임</label>
+                   		<input type="checkbox" name="membership-club2" id="membership-club2" value="댄스 모임" ><label for="membership-club2" >댄스 모임</label>
                    </div>
                   
                </div>
@@ -119,15 +193,8 @@ $(function(){
                  <div class="payment-lists">
                 
 	       
-           		<!-- <div class="payment-list font-kor" style="display:none;">
-                        <div class="name-checkbox bold">
-                            <input type="checkbox" name="membership-name" id="membership-name"><label for="membership-name" >실버 SILVER</label>
-                        </div>
-                        <div class="list-club bold"><p id="list-club" ></p></div>
-                        <div class="list-duration "><p >무제한</p></div>
-                        <div class="list-price bold"><p id="list-price"></p></div>	
-           		</div>	 -->
-                
+              	<div class="payment-lists">
+               
                    
                 </div>
                 <div class="result-container">

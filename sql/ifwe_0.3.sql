@@ -39,6 +39,89 @@
 --DROP TABLE  CLUB_CATEGORY CASCADE CONSTRAINT;
 --DROP TABLE  CLUB_HISTORY CASCADE CONSTRAINT;
 
+
+----------------------------------------------------------------------
+-- 문보라 추가 member, board, club, club_boardlist, CLUB_BOARD_COMMENT,CLUB_BOARD
+----------------------------------------------------------------------
+
+CREATE TABLE  CLUB  (
+    club_code    NUMBER      NOT NULL,
+    club_master    NUMBER      NOT NULL,
+    club_title    varCHAR2(120)      NULL,
+    club_img_ori    VARCHAR2(100)      NULL,
+    club_img_re    VARCHAR2(100)      NULL,
+    club_current    NUMBER      NULL,
+    club_max    NUMBER      NULL,
+    club_date    DATE default sysdate,
+    club_content varchar2(300) null,
+     club_catecode varchar2(10) null,
+     club_location varchar2(10) null,
+     premium_code    VARCHAR2(30)    NULL,
+     constraint pk_club_code primary key(club_code)
+     
+);
+
+
+CREATE TABLE  CLUB_BOARDLIST  (
+	 club_boardname 	varchar2(30)		NOT NULL,
+	 club_code 	NUMBER		NOT NULL,
+	 board_name 	char(30)		NULL,
+     constraint pk_club_boardname primary key(club_boardname),
+     constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
+);
+
+CREATE TABLE  CLUB_BOARD_COMMENT  (
+	 coment_no 	NUMBER		NOT NULL,
+	 board_ref 	NUMBER		NOT NULL,
+	 member_code 	NUMBER		NOT NULL,
+	 comment_content 	VARCHAR2(500)		NULL,
+	 comment_date 	DATE		NULL,
+	 coment_level 	NUMBER		NULL,
+	 comnet_del 	CHAR(1)		NULL,
+	 coment_ref 	NUMBER		NOT NULL
+);
+
+
+select * from tab;
+
+CREATE TABLE  CLUB_BOARD  (
+	 board_no 	NUMBER		NOT NULL primary key ,
+	 club_code 	NUMBER		NOT NULL,
+	 member_code 	NUMBER		NOT NULL,
+	 club_boardname 	VARCHAR2(50)		NOT NULL,
+	 board_content 	VARCHAR2(2000)		NULL,
+	 board_date 	DATE		NULL,
+	 board_heart 	NUMBER		NULL,
+	 board_cate_code 	VARCHAR2(200)		NULL,
+	 board_del 	CHAR(1)		NULL,
+	 cate_code 	VARCHAR2(100)		NOT NULL,
+     constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
+     constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
+     constraint fk_club_boarddname_board foreign key (club_boardname) references CLUB_BOARDLIST (club_boardname)ON DELETE CASCADE
+     
+);
+
+CREATE TABLE MEMBER (
+	member_code	NUMBER		NOT NULL primary key,
+	member_id	VARCHAR2(30)		NULL,
+	member_pwd	VARCHAR2(300)		NULL,
+	member_name	VARCHAR2(15)		NULL,
+	member_phone	CHAR(13)		NULL,
+	member_loc	VARCHAR2(50)		NULL,
+	member_email	VARCHAR2(50)		NULL,
+	member_birth	DATE		NULL,
+	member_gender	CHAR(1)		NULL,
+	member_addr	VARCHAR2(100)		NULL,
+	member_enrolldate	DATE    default sysdate,
+	member_suspension	CHAR(1)		NULL, -- 징계여부 y or n
+	member_role	VARCHAR2(15)		NULL,
+	member_msg	NUMBER		NULL,
+	member_like	VARCHAR2(100)		NULL
+);
+
+----------------------------------------------------------------------
+
+
 CREATE TABLE MEMBER (
 	member_code	NUMBER		NOT NULL,
 	member_id	VARCHAR2(30)		NULL,
@@ -732,4 +815,4 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (21,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (41,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
-select /*insert*/ from board;
+

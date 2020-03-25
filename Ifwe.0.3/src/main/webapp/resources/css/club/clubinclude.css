@@ -162,6 +162,7 @@ aside{
 }
 .aside-leader-id{
     font-size:13pt;
+    clear: both;
 }
 .fa-crown{
     color:#ffc862;
