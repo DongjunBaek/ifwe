@@ -551,7 +551,12 @@ public class MemberController {
 	
 	
 	
-	
+	@GetMapping("/memberSelectOne")
+	public Member memberSelectOneCode(Model model, int memberCode, HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
+		Member member = memberService.memberSelectOneCode(memberCode);
+		return member;
+	}
 	
 	
 	

@@ -54,6 +54,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member searchId(Map<String, String> param) {
 		return sqlSession.selectOne("member.searchId",param);
 	}
+
+	@Override
+	public Member memberSelectOneCode(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectOneCode",memberCode);
+	}
 	
 	
 	
