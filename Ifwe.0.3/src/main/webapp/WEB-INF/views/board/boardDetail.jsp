@@ -5,35 +5,46 @@
 	<jsp:param value="게시글 상세보기" name="pageTitle"/>
 </jsp:include>
 
+<!-- 0326 dongjun 게시글 상세조회 작업중 -->
 <script>
-function boardOneUpdate(){
-	location.href = "";
-}
-function boardOneDelete(){
-	var checkDelBoardOne = prompt("삭제하시겠습니까?(Y or N)");
-	console.log(checkDelBoardOne);
-	
-	$.ajax({
-		
-		url : "",
-		success : function(data){
-			console.log(data);
-		},
-		error : function(x,h,r){
-			console.log(x,h,r);
-		}
-	});
-}
-
 /* 온로드 함수 */
 $(function(){
+	$(".boardDetail-div-optionBox i").click(function(){			
+			$(".board-option-box-div").toggleClass('toggleClassForOption');		
+	});
 	
+	$(".option-box-div-modify").click(function(){
+		location.href = "${pageContext.request.contextPath}/board/updateBoardOne.do?boardNo="+${board.boardNo};
+	});
+		
+	$(".option-box-div-delete").click(function(){
+		var userDelete = prompt("게시글을 삭제하시겠습니까?(Y or N)");
+		
+		console.log(userDelete);
+		
+		if(userDelete == 'Y' ||userDelete == 'y'){
+			var boardNo = ${board.boardNo};
+			console.log(boardNo);
+
+			$.ajax({
+				url  : "${pageContext.request.contextPath}/board/deleteBoardOne.do",
+				data : {boardNo : boardNo},
+				type : "POST",
+				success : function(data){
+					console.log(data==1?"삭제성공":"삭제실패");
+				},
+				error : function(x,h,r){
+					console.log(x,h,r)
+				}
+			}); 
+ 			
+ 			
+		}/*/if */
+	});
 });
 </script>
 
 <style>
-
-/* 0324 동준 여주에게 물어보고 css 조정해야할듯... */
 @font-face {
 	font-family: 'GmarketSansLight';
 	src:
@@ -71,7 +82,7 @@ $(function(){
 	
 }
 
-.boardDetail-div-title-center div:first-child {
+.boardDetail-div-title-cate {
 	float : left;
 	margin-left: 5%;
 	padding-top : 1%;
@@ -81,16 +92,18 @@ $(function(){
 	top: 50%;
 	border-top: 5px solid #2756a6;	
 }
-.boardDetail-div-title-center div:nth-child(2){
+/* .boardDetail-div-title-center div:nth-child(2){
 	float : right;
 	width : 2%;
-}
-.boardDetail-div-title-center div:nth-child(3){
+} */
+/* .boardDetail-div-title-center div:nth-child(3){
+	position : relative;
 	width : 8.2%;
 	margin-right : 5%;
 	font-size: 26px;
 	line-height: 60px;
-}
+	top : 50%;
+} */
 .boardDetail-div-title-center div:nth-child(4){
 	width: 8.2%;
     margin-right: 5%;
@@ -155,17 +168,43 @@ $(function(){
 	font-size: 32px;
 }
 .boardDetail-div-dateBox{
-	float: right;
-    margin-right: 12%;
-    margin-bottom: 2%;
+	float: right;    
     font-size : 28px;
+	width : 15%;
+	top : 50%;
+	position: relative;
 }
 .boardDetail-div-optionBox{
-	margin-right : 2%;
+	position : relative;
+	width : 8.2%;
+	margin-right : 5%;		
+	top : 50%;
 	float: right;
+	font-size : 28px;
+	cursor: pointer;
+	padding-left: 6%;
+	
 }
-.boardDetail-div-optionBox i{
-	float: right;
+.board-option-box-div{
+	position: relative;
+	width: 200px;
+	height: 0px;
+    top: 19%;
+    transform: translateX(-50%);
+  	display: flex;
+    flex-direction: column;
+    align-items: center;    
+    transition : 0.6s ease;
+    overflow: hidden;
+}
+
+.option-box-div-modify{
+	margin-top: 5%;
+	margin-bottom :5%;
+    border-bottom: 1px solid lightgray;
+}
+.toggleClassForOption{
+	height: 100px;
 }
 </style>
 	
@@ -173,16 +212,21 @@ $(function(){
 		<div class="boardDetail-div-title">
 			
 			<div class="boardDetail-div-title-center">			
-				<div>${board.boardCate == notice?"공지 사항":board.boardCate == "qna"?"문의 사항":"신고 사항	" }</div>
+				<div class="boardDetail-div-title-cate">${board.boardCate == notice?"공지 사항":board.boardCate == "qna"?"문의 사항":"신고 사항	" }</div>
+				<div class="boardDetail-div-optionBox">
+						<i class="fas fa-caret-down"></i>
+						<div class="board-option-box-div">
+							<div class="option-box-div-modify">수정 하기</div>
+							<div class="option-box-div-delete">삭제 하기</div>
+						</div>
+				</div>
 				<div class="boardDetail-div-dateBox">
 					<p> ${board.boardDate }</p>
 				</div>										
-				<div class="boardDetail-div-optionBox">
-					<i class="fas fa-caret-down"></i>
-				</div>
 				
 			</div>
 		</div>
+			
 		<div class="boardDetail-div-title titlebox2">
 			<div class="boardDetail-div-title-2-1">
 				<div id="boardDetal-profile-img">
