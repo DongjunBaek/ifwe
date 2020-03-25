@@ -93,6 +93,31 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectMemberCode" resultType="member" parameterType="_int">
+		select member_code 
+		from club_members
+		where club_grade='member' and club_code = #{clubCode}
+	
+	</select>
+	
+	<select id="selectClubMember" resultType="clubMember">
+		select M.*,p.profile_img_re 
+		from member M join member_profile P 
+            on M.member_code = P.member_code
+			where 
+			<if test="clubMemberCode != null">
+			M.member_code in
+			<foreach collection="clubMemberCode" item="item" open="(" close=")" separator=",">
+			#{item}
+			</foreach>
+			</if>
+	</select>
+	
+	
+	
+	
+	
 </mapper>
 
 

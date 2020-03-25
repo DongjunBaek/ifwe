@@ -30,6 +30,7 @@ public class ClubMaster extends Club implements Serializable {
 		super(clubCode,clubMaster,clubTitle,clubImgOri,clubImgRe,clubCurrent,clubMax,clubDate,clubContent,premiumCode,clubCatecode,clubLocation,cateCode);
 		this.memberId = memberId;
 		
+		
 	}
 
 }
