@@ -181,10 +181,6 @@ public class ClubController {
 		return "club/clubFreeBoard";
 	}
 	
-	@GetMapping("/clubManage")
-	public String clubManage() {
-		return "club/clubManage";
-	}
 	
 	
 }
