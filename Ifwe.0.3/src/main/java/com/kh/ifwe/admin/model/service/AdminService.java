@@ -6,7 +6,7 @@ import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminService {
 
-	List<Member> selectMemberList(int cPage, int numPerPage);
+	List<Member> selectMemberList(int cPage, int numPerPage, String memberRole);
 
 	List<Member> selectDropMemberList(int cPage, int numPerPage);
 
@@ -15,6 +15,10 @@ public interface AdminService {
 	Member selectOne(int memberCode);
 
 	int cancelMember(Member member, int memberCode);
+
+	int dropMember(Member member, int memberCode);
+
+	List<Member> selectOne(String memberName);
 
 
 }

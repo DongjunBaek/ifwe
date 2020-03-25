@@ -15,8 +15,8 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO adminDAO;
 	
 	@Override
-	public List<Member> selectMemberList(int cPage, int numPerPage) {
-		return adminDAO.selectMemberList(cPage,numPerPage);
+	public List<Member> selectMemberList(int cPage, int numPerPage, String memberRole) {
+		return adminDAO.selectMemberList(cPage,numPerPage, memberRole);
 	}
 
 	@Override
@@ -37,6 +37,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int cancelMember(Member member, int memberCode) {
 		return adminDAO.cancelMember(member, memberCode);
+	}
+
+	@Override
+	public int dropMember(Member member, int memberCode) {
+		return adminDAO.dropMember(member, memberCode);
+	}
+
+	@Override
+	public List<Member> selectOne(String memberName) {
+		return adminDAO.searchMember(memberName);
 	}
 
 
