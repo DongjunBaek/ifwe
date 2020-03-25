@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LoginCheckAspect {
 	
-	@Pointcut("execution(* com.kh.spring.member.controller.MemberController.login(..))")
+//	@Pointcut("execution(* com.kh.spring.member.controller.MemberController.login(..))")
 	public void pointcut() {}
 	
 	
