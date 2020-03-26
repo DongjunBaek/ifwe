@@ -73,7 +73,7 @@ section{
     float: left;
 }
 .enrollbtn-div{
-    width:460px;
+    width:620px;
     height:65px;
     margin:0 auto;
     margin-top:50px;
@@ -81,7 +81,7 @@ section{
 
 .enrollbtn{
     font-family: 'GmarketSansLight';
-    width:460px;
+    width:300px;
     height:65px;
     background-color: #ffc862;
     color:white;

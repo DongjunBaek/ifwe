@@ -38,6 +38,7 @@ $(function(){
 	            <input type="text" name="enrollreason" id="enrollreason">
 	        </div>
 	        	<input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" />
+	        	<input type="hidden" name="clubCode" value="${club.clubCode }" />
 	        	<input type="hidden" name="masterCode" value="${clubMaster.memberCode }" />	
 		    <input type="submit" class="section-container-enrollbutton enrollbutton" id="enrollbutton" value="가입하기"/>
         </form>
