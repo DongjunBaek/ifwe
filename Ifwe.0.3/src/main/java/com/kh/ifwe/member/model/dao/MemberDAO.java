@@ -1,7 +1,9 @@
 package com.kh.ifwe.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 
@@ -27,9 +29,9 @@ public interface MemberDAO {
 	
 	int insertPre(Map<String, String> map);
 
+
+	List<Club> selectClubList(String memberCode);
+
 	int insertProfile(Member member);
-
-
-
 
 }

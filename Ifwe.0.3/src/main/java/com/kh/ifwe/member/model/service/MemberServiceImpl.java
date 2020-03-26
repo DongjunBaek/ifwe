@@ -1,4 +1,3 @@
-
 package com.kh.ifwe.member.model.service;
 
 import java.util.Map;
@@ -75,7 +74,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+  
+  @Override
+	public List<Club> selectClubList(String memberCode) {
+		return memberDAO.selectClubList(memberCode);
+	}
 
 	
 }
+

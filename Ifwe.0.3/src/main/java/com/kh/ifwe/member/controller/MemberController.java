@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -19,16 +20,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
@@ -209,7 +208,14 @@ public class MemberController {
 	}
 
 	@GetMapping("/membership.do")
-	public String membership() {
+	public String membership(@RequestParam("memberCode") String memberCode,
+								Model model) {
+		List<Club> list = memberService.selectClubList(memberCode);
+		
+		log.debug("list = {}" ,list);
+		
+		model.addAttribute("list", list);
+		
 		return "member/membership";
 
 	}
