@@ -176,4 +176,18 @@ public class BoardController {
 		
 		return mav;
 	}
+	@PostMapping("updateBoardOne.do")
+	public ModelAndView updateBoardOne(ModelAndView mav, Board board 
+														 ) {
+		log.debug("board updateBoardOne @ boardController {}",board);
+		
+		int result = boardService.updateBoardOne(board);
+		log.debug("result @ updateBoardOne = {}",result);
+		mav.addObject("boardNo", board.getBoardNo() );
+		mav.setViewName("board/boardDetail");
+		
+		
+		return mav;
+	}
+	
 }
