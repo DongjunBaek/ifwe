@@ -18,8 +18,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertMember(Member member) {
 	
-		 sqlSession.insert("member.insertProfile",member);
-		
 		return sqlSession.insert("member.insertMember",member);
 	}
 
@@ -65,6 +63,13 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertPre(Map<String, String> map) {
 		return sqlSession.insert("member.insertPre",map);
+	}
+
+	@Override
+	public int insertProfile(int memberCode) {
+		return 
+				 sqlSession.insert("member.insertProfile",memberCode);
+		
 	}
 	
 	
