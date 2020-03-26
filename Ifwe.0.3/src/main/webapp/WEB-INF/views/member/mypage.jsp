@@ -27,7 +27,7 @@ margin:0;
                 <input type="button" value="회원정보 수정" class="update-btn font-kor"
                 		onclick="location.href='${pageContext.request.contextPath}/member/update.do'">
                 <input type="button" value="프로필 카드" class="update-btn font-kor" 
-                		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do?memberCode='+${memberLoggedIn.memberCode }">
+                		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do'">
             </div>
             <div class="list-div">
                 <div class="list-title">
@@ -50,8 +50,8 @@ margin:0;
                 <div class="contents">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <p class="mypage-p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
-                        <p class="mypage-p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor"></p>
+                        <p class="mypage-p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0"></p>
+                        <p class="mypage-p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0"></p>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ margin:0;
                     <i class="fas fa-pencil-alt" style="font-size:25px;color: #2756a6;margin:5% 4% 2% 0;"></i><span class="font-kor" style="font-size:25px;">내가 쓴 게시글</span>
                 </div>
                 <div class="board-contents font-kor">
-                    <ul style="font-size: 30px;">
+                    <ul style="font-size: 30px;margin-left: 9%;">
                         <li style="color: #2756a6;">
                             <div class="board-content">
                                 <div class="board-con">
@@ -69,7 +69,7 @@ margin:0;
                                     <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
                                 </div>
                                 <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor">
+                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
                                 </div>
                             </div>
                         </li>
@@ -81,7 +81,7 @@ margin:0;
                                     <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
                                 </div>
                                 <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor">
+                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
                                 </div>
                             </div>
                         </li>
@@ -93,7 +93,7 @@ margin:0;
                                     <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
                                 </div>
                                 <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor">
+                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
                                 </div>
                             </div>
                         </li>
@@ -105,7 +105,7 @@ margin:0;
                                     <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
                                 </div>
                                 <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor">
+                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
                                 </div>
                             </div>
                         </li>
@@ -142,4 +142,3 @@ margin:0;
     </section>
 	
 </body>
-</html>
