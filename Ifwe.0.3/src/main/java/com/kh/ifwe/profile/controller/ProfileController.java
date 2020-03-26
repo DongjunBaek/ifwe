@@ -55,7 +55,7 @@ public class ProfileController {
 	public Profile selectOneProfile(Model model, Friend friend, int profileMemberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 
-		Profile profile = profileservice.selectOneProfile(profileMemberCode);
+		Profile profile = profileservice.selectOneProfileWithCode(profileMemberCode);
 
 		return profile;
 	}
@@ -63,16 +63,16 @@ public class ProfileController {
 	
 	
 	@GetMapping("/profileview.do")
-	public String profile(Model model, int profileMemberCode, HttpServletRequest request,
+	public String profile(Model model, String profileMemberId, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
+		Member member = memberService.selectOne(profileMemberId);
 
-		Profile profile =  profileservice.selectOneProfile(profileMemberCode);
+		Profile profile =  profileservice.selectOneProfileWithCode(member.getMemberCode());
 
 		
 		model.addAttribute("profile",profile);
 
 
-		Member member = memberService.memberSelectOneCode(profileMemberCode);
 		
 		model.addAttribute("member",member);
 		

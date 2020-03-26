@@ -20,9 +20,15 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public Profile selectOneProfile(int profileMemberCode) {
+	public Profile selectOneProfile(String profileMemberId) {
 		// TODO Auto-generated method stub
-		return profiledao.selectOneProfile(profileMemberCode);
+		return profiledao.selectOneProfile(profileMemberId);
+	}
+
+	@Override
+	public Profile selectOneProfileWithCode(int memberCode) {
+		// TODO Auto-generated method stub
+		return profiledao.selectOneProfileWithCode(memberCode);
 	}
 
 	
