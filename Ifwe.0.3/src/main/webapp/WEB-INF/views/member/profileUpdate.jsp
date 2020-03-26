@@ -176,7 +176,7 @@ input#inputProfileName {
 
 					<div class="img-div">
 						<img
-							src="${pageContext.request.contextPath }/resources/upload/profile/normal-user-icon"
+							src="${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}"
 							alt="">
 					</div>
 
@@ -295,10 +295,12 @@ input#inputProfileName {
 
 			</article>
 			<input type="hidden" name="memberCode" id="memberCode"
-				value="${memberLoggedIn.memberCode }" /> <input type="hidden"
+				value="${memberLoggedIn.memberCode }" /> 
+				<input type="hidden"
 				name="memberCode" id="profileAge"
-				value="${memberLoggedIn.memberBirth }" /> <input type="hidden"
-				name="memberCode" id="profileAge"
+				value="${memberLoggedIn.memberBirth }" /> 
+				<input type="hidden"
+				name="memberCode" id="profileGender"
 				value="${memberLoggedIn.memberGender }" />
 		</form>
 
@@ -400,6 +402,7 @@ $(()=>{
 					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' id='profileImg' value='"+value.memberCode+"'  alt='' /></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
 					
 			
+					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
 					
 				})
 				

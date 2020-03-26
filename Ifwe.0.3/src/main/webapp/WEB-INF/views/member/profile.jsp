@@ -54,7 +54,7 @@ $(()=>{
 })
 
 
-console.log("onload On");
+console.log("onload On");	
 		
 	/* 	location.href="${pageContext.request.contextPath}/Friend/selectFriendList.do?memberCode="+41; */
 		var a = ${memberLoggedIn.memberCode };
