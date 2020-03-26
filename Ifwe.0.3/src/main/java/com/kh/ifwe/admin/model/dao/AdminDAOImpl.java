@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.member.model.vo.Member;
 
 @Repository
@@ -65,6 +66,15 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<Member> searchMember(String memberName) {
 		return sqlSession.selectList("admin.searchMember", memberName);
+	}
+
+	@Override
+	public List<Board> selectOneBoard(int cPage, int numPerPage, String boardCategory) {
+		int offset = (cPage-1)*numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("admin.selectOneBoard", boardCategory, rowBounds);
 	}
 
 	
