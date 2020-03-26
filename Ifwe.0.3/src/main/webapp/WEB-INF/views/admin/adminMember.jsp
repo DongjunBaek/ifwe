@@ -186,9 +186,9 @@ function cancelMember(){
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
 	
 	 <section>
+	<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
         <div class="title_wrap">
             <h1>member</h1>
             <form class="search_member" onsubmit="return false">
