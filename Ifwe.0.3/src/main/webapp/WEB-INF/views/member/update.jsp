@@ -50,7 +50,7 @@
    				<div class="profile-nickname-div-content">얄라얄라얄라셩</div>
    			</div>
    			<div class="profile-update-btn">
-	   			<input type="button" value="프로필 수정" id="profile-update-btn" class="profile-update-btn-class" />
+	   			<input type="button" value="프로필 수정" id="profile-update-btn" class="profile-update-btn-class" style="padding:0;"/>
    			</div>
    		</div>	
    
@@ -59,7 +59,7 @@
    			<p>내 소모임 목록</p>
    		</div>
    		<div class="update-list-div">
-   			<ul class="mypage-p-class" style="color:#2756a6">
+   			<ul class="mypage-p-class" style="color:#2756a6;margin-left: 5%;">
    				<li><span class="update-li-p-class">윙스터디 모임1</span><i class="far fa-times-circle update-li-i-class"></i></li>
    				<li><span class="update-li-p-class">윙스터디 모임2</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
    				<li><span class="update-li-p-class">윙스터디 모임3</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
@@ -91,7 +91,7 @@
 	   			
    			</div>
 	   			<div class="profile-update-btn">
-	   			<input type="button" value="수정" id="phone-email-update-btn" class="profile-update-btn-class" />
+	   			<input type="button" value="수정" id="phone-email-update-btn" class="profile-update-btn-class" style="padding:0;"/>
    			</div>
    		</div>	
    

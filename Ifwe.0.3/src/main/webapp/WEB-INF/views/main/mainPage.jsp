@@ -74,7 +74,7 @@
                             <p style="padding: 7%;margin-left: 10%; color: white;">내 소모임</p> 
                         </div>
                         <div class="list">
-                            <ul class="font-kor list-ul">
+                            <ul class="font-kor list-ul" style="margin-left: 20%;padding:0;">
                                 <li style="margin:0"><p>윙스터디 모임</p> </li>
                                 <li style="margin:0"><p>윙스터디 모임</p></li>
                                 <li style="margin:0"><p>윙스터디 모임</p></li>
