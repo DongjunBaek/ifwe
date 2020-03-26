@@ -40,4 +40,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public int deleteBoardOne(int boardNo) {
 		return sqlSession.delete("admin.deleteBoardOne",boardNo);
 	}
+
+	@Override
+	public int updateBoardOne(Board board) {
+		return sqlSession.update("admin.updateBoardOne", board);
+	}
 }
