@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
 
@@ -158,7 +159,7 @@ public class ClubController {
 		return mav;
 	}
 	
-	
+	//보라,0325형철 메인페이지 출력
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
 		
@@ -171,6 +172,15 @@ public class ClubController {
 		
 		
 		Member clubMaster = clubService.selectClubMaster(club.getClubMaster());
+		
+		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
+		List<ClubMember> clubMember = null;
+		if(!clubMemberCode.isEmpty()) {
+			clubMember = clubService.selectClubMember(clubMemberCode);
+		}
+		
+		
+		
 		
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);

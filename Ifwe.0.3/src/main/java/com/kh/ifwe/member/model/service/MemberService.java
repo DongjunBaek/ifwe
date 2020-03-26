@@ -29,7 +29,6 @@ public interface MemberService {
 
 	int insertProfile(int memberCode);
 
-	
 
 
 }

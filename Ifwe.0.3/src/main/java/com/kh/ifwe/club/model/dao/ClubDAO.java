@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface ClubDAO {
@@ -13,7 +14,7 @@ public interface ClubDAO {
 
 	int selectSeq();
 
-	List<String> selectCate(String hashtag);
+	String selectCate(String hashtag);
 
 	int insertContent(String hashtag);
 
@@ -28,6 +29,10 @@ public interface ClubDAO {
 	List<ClubMaster> searchClubByHashtag(Map<String, String> param);
 
 	List<ClubMaster> selectListByName(Map<String, String> param);
+
+	List<Member> selectMemberCode(int clubCode);
+
+	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
 
 
 }

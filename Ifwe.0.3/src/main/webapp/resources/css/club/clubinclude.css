@@ -301,18 +301,19 @@ header{
     padding-left: 2%;
 }
 .header-titleimg{
-    background-image: url("../../images/club/titleimg.png");
-    background-size: cover;
+	background-size:1350px 100%;
     width:100%;
     height:230px;
     margin-top:40px;
     background-color: rgba(0,0,0,0.7);
+    overflow:hidden;
 
 }
 .header-titleimg-cover{
     width:100%;
     height:230px;
     background-color: rgba(0,0,0,0.6);
+    z-index:100;
 }
 .header-title-left{
     width: 900px;
