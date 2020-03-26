@@ -106,6 +106,14 @@
 		where
 			board_no = #{boardNo}
 	</delete>
+	
+	<!-- 0326 동준 작업 게시글 내용 수정-->
+	 <update id="updateBoardOne">
+	 	update board set 
+	 		board_title = #{boardTitle},
+	 		board_content = #{boardContent}
+ 		where 
+ 			board_no = #{boardNo}
+	 </update>
 </mapper>
-
 

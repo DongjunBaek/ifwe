@@ -2,6 +2,7 @@ package com.kh.ifwe.admin.model.dao;
 
 import java.util.List;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminDAO {
@@ -19,5 +20,7 @@ public interface AdminDAO {
 	int dropMember(Member member, int memberCode);
 
 	List<Member> searchMember(String memberName);
+
+	List<Board> selectOneBoard(int cPage, int numPerPage, String boardCategory);
 
 }

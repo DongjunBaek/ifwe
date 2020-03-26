@@ -1,4 +1,3 @@
-
 package com.kh.ifwe.member.model.service;
 
 import java.util.List;
@@ -68,9 +67,27 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int insertProfile(Member member) {
+		return memberDAO.insertProfile(member);
+	}
+
+	@Override
+	public int insertProfile(int memberCode) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
 	public List<Club> selectClubList(String memberCode) {
 		return memberDAO.selectClubList(memberCode);
 	}
+
+	@Override
+	public Member checkId(String memberId) {
+		return memberDAO.checkId(memberId);
+	}
+
+
 
 	
 }
