@@ -27,7 +27,7 @@ public interface MemberService {
 
 	Member memberSelectOneCode(int memberCode);
 
-	int insertProfile(int memberCode);
+	int insertProfile(Member serchMember);
 
 
 

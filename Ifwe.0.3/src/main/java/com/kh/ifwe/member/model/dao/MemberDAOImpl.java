@@ -66,9 +66,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int insertProfile(int memberCode) {
+	public int insertProfile(Member member) {
 		return 
-				 sqlSession.insert("member.insertProfile",memberCode);
+				 sqlSession.insert("member.insertProfile",member);
 		
 	}
 	

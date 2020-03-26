@@ -101,7 +101,7 @@ public class MemberController {
 		Member serchMember = memberService.selectOne(member.getMemberId());
 		
 		
-		int insertProfileResult =memberService.insertProfile(serchMember.getMemberCode()); 
+		int insertProfileResult =memberService.insertProfile(serchMember); 
 		
 		redirectAttributes.addFlashAttribute("msg", msg);
 		mav.setViewName("redirect:/");
