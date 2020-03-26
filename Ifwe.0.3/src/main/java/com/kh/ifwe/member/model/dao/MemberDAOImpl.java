@@ -77,7 +77,7 @@ public class MemberDAOImpl implements MemberDAO {
 				 sqlSession.insert("member.insertProfile",member);
 		
 	}
-
+	
 	@Override
 	public Member checkId(String memberId) {
 		return sqlSession.selectOne("member.checkId",memberId);
