@@ -76,7 +76,6 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
-	
 
 	
 }
