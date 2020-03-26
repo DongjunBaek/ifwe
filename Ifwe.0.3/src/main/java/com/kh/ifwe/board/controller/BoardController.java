@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -142,6 +143,35 @@ public class BoardController {
 		 */
 		mav.addObject("board",board);
 		mav.setViewName("board/boardDetail");
+		
+		return mav;
+	}
+	
+	/**
+	 * 0326 동준 작업 게시글 삭제 기능 
+	 */
+	
+	@PostMapping("/deleteBoardOne.do")
+	public ModelAndView deleteBoardOne(ModelAndView mav, @RequestParam(value="boardNo", required= true) int boardNo) {
+		
+		log.debug("deleteBoardOne @ boardController {}", boardNo);
+		int result = boardService.deleteBoardOne(boardNo);
+		log.debug("deleteBoardOne result @ boardController {}",result);
+		mav.setViewName("main/mainBoard");
+		return mav;
+	}
+	
+	/**
+	 * 0326 동준 작업 게시글 수정 기능 
+	 */
+	@GetMapping("updateBoardOne.do")
+	public ModelAndView updateBoardOne(ModelAndView mav, @RequestParam(value="boardNo", required= true) int boardNo) {
+		
+		Board board = boardService.selectBoardDetail(boardNo);
+		log.debug("board updateBoardOne @ boardController {}",board);
+		mav.addObject("board",board);
+		mav.setViewName("board/boardUpdate");
+		
 		
 		return mav;
 	}
