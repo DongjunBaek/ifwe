@@ -212,7 +212,7 @@ $(function(){
 		<div class="boardDetail-div-title">
 			
 			<div class="boardDetail-div-title-center">			
-				<div class="boardDetail-div-title-cate">${board.boardCate == notice?"공지 사항":board.boardCate == "qna"?"문의 사항":"신고 사항	" }</div>
+				<div class="boardDetail-div-title-cate">${board.boardCate == "notice"?"공지 사항":board.boardCate == "qna"?"문의 사항":"신고 사항	" }</div>
 				<div class="boardDetail-div-optionBox">
 						<i class="fas fa-caret-down"></i>
 						<div class="board-option-box-div">

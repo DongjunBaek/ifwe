@@ -61,19 +61,11 @@ section{
    width:1400px;
    /* border: 1px solid blue; */
    position: relative;
-   display: none;
 }
 .notice1::after{
     content: "";
     display: block;
     clear: both;
-}
-.notice1_title h2{
-    font-size: 20px;
-    color: #3b3b3b;
-    float: left;
-    margin-top: 50px;
-    margin-bottom: 30px;
 }
 .write{
     width: 170px;

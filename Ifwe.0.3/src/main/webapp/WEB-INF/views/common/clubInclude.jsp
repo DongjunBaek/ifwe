@@ -20,7 +20,7 @@ $(function(){
     });
     
     $("#mypagebutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/member/mypage.do";
+    	location.href="${pageContext.request.contextPath }/member/mypage.do?memberId=${memberLoggedIn.memberId}";
     });
     
     $(".logo-box").click(function(){

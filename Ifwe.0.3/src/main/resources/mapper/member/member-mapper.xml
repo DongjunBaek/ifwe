@@ -108,7 +108,7 @@
 
 
 		insert into member_profile values(
-		#{memberCode},null,null,null,null,'0','M',null
+		#{memberCode},null,null,null,null,'0',#{memberGender},null
 
 		)
 
@@ -130,6 +130,15 @@
 
 		select * from member
 		where member_code=#{memberCode}
+	</select>
+	
+	<select id="selectClubList" resultType="club">
+		
+		select * 
+			from club
+		where 
+			club_master = #{memberCode}
+	
 	</select>
 
 	<select id="selectMemberLogin" resultType="memberLoggedIn">

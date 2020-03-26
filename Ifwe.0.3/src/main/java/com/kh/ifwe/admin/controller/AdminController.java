@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -105,12 +105,51 @@ public class AdminController {
 		return searchList;
 	}
 	
-	
 	@GetMapping("/notice.do")
 	public String notice() {
-		
-		return "admin/adminNotice";
+		return "/admin/adminNotice";
 	}
+	
+	@GetMapping("/adminBoardList.do")
+	@ResponseBody
+	public List<Board> boardList(@RequestParam(value="cPage",defaultValue="1")int cPage, @RequestParam(value="boardCategory", required=false, defaultValue="member")String boardCategory) {
+		log.debug("회원목록 페이지");
+		
+		final int numPerPage = 10;
+		
+		//업무로직 처리
+		List<Board> boardList = adminService.selectOneBoard(cPage, numPerPage, boardCategory);		
+		
+		log.debug("boardList{}="+boardList);
+		
+		return boardList;
+	}
+
+	@GetMapping("/boardForm.do")
+	public String boardForm() {
+		return "/admin/adminBoardFrm";
+	}
+	
+	
+	/*
+	 * @GetMapping("/adminBoardList.do")
+	 * 
+	 * @ResponseBody public List<Board>
+	 * boardList(@RequestParam(value="cPage",defaultValue="1")int
+	 * cPage, @RequestParam(value="boardCategory", required=false,
+	 * defaultValue="notice")String boardCategory){ log.debug("회원목록 페이지");
+	 * 
+	 * final int numPerPage = 10;
+	 * 
+	 * //업무로직 처리 List<Board> boardList = adminService.selectMemberList(cPage,
+	 * numPerPage, boardCategory);
+	 * 
+	 * log.debug("boardList{}="+boardList);
+	 * 
+	 * return boardList;
+	 * 
+	 * }
+	 */
 	
 	@GetMapping("/event.do")
 	public String event() {

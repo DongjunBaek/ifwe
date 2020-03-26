@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.admin.model.dao.AdminDAO;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.member.model.vo.Member;
 
 @Service
@@ -47,6 +48,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> selectOne(String memberName) {
 		return adminDAO.searchMember(memberName);
+	}
+
+	@Override
+	public List<Board> selectOneBoard(int cPage, int numPerPage, String boardCategory) {
+		return adminDAO.selectOneBoard(cPage, numPerPage, boardCategory);
 	}
 
 

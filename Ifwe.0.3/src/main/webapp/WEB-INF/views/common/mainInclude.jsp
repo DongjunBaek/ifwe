@@ -54,7 +54,7 @@ $(function(){
    });
    
    $("#buy-membership").click(function(){
-	   location.href = "${pageContext.request.contextPath}/member/membership.do";
+	   location.href = "${pageContext.request.contextPath}/member/membership.do?memberCode=${memberLoggedIn.memberCode}";
    });
    
    $("#logoutbutton").click(function(){
@@ -118,7 +118,7 @@ text-decoration: none;
                     	<li><a href="#" class="font-black">소개</a> </li>
                     </div>
                     <div class="blue-back" id="buy-membership">
-                    	<li><a href="${pageContext.request.contextPath }/member/membership.do" class="font-black">멤버쉽 구매</a></li>
+                    	<li><a href="${pageContext.request.contextPath }/member/membership.do?memberCode=${memberLoggedIn.memberCode}" class="font-black">멤버쉽 구매</a></li>
                     </div>
                 </ul>
             </div>

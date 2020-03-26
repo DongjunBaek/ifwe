@@ -2,6 +2,7 @@ package com.kh.ifwe.admin.model.service;
 
 import java.util.List;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminService {
@@ -19,6 +20,8 @@ public interface AdminService {
 	int dropMember(Member member, int memberCode);
 
 	List<Member> selectOne(String memberName);
+
+	List<Board> selectOneBoard(int cPage, int numPerPage, String boardCategory);
 
 
 }

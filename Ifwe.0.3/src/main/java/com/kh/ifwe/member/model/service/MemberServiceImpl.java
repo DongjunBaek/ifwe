@@ -1,11 +1,12 @@
-
 package com.kh.ifwe.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -67,9 +68,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int insertProfile(Member member) {
+		return memberDAO.insertProfile(member);
+	}
+
+	@Override
+	public int insertProfile(int memberCode) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+  
+  @Override
+	public List<Club> selectClubList(String memberCode) {
+		return memberDAO.selectClubList(memberCode);
+	}
+  
+  @Override
 	public MemberLoggedIn selectMemberLogin(int memberCode) {
 		return memberDAO.selectMemberLogin(memberCode);
 	}
 
 	
 }
+

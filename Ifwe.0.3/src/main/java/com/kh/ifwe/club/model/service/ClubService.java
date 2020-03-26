@@ -7,6 +7,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Message;
 
 public interface ClubService {
 
@@ -27,6 +28,18 @@ public interface ClubService {
 	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
 
 	ClubMember selectClubMaster2(int clubMaster);
+
+	int insertMsgEnroll(Map<String, Object> param);
+
+	List<Message> selectMsgList(int clubCode);
+
+	Message selectMsgOne(int msgCode);
+
+	int insertClubMembers(Map<String, Object> param);
+
+	int updateMembersGrade(Map<String, Integer> param);
+
+	int deleteMembers(Map<String, Integer> param);
 
 
 }

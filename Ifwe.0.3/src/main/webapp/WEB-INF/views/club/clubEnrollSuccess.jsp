@@ -16,7 +16,8 @@
 <script>
 $(function(){
 	$("#mainpagebutton").click(function(){
-		location.href="${pageContext.request.contextPath }/club/clubMain.do";
+		
+		location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+${club.clubCode};
 	});
 	
 	

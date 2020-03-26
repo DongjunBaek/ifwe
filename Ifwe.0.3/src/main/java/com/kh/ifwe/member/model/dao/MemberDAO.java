@@ -6,6 +6,14 @@ import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
+
+import java.util.List;
+import java.util.Map;
+
+import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Profile;
+
 public interface MemberDAO {
 
 	int insertMember(Member member);
@@ -28,7 +36,11 @@ public interface MemberDAO {
 	
 	int insertPre(Map<String, String> map);
 
-	MemberLoggedIn selectMemberLogin(int memberCode);
 
+	List<Club> selectClubList(String memberCode);
+
+	int insertProfile(Member member);
+	
+	MemberLoggedIn selectMemberLogin(int memberCode);
 
 }
