@@ -66,8 +66,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insertProfile(int memberCode) {
-		return memberDAO.insertProfile(memberCode);
+	public int insertProfile(Member member) {
+		return memberDAO.insertProfile(member);
 	}
 
 	

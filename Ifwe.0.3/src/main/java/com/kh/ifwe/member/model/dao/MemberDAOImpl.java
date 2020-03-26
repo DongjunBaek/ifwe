@@ -64,6 +64,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.insertPre",map);
 	}
 
+
+	@Override
+	public int insertProfile(Member member) {
+		return 
+				 sqlSession.insert("member.insertProfile",member);
+		
+	}
+
 	
 	
 	

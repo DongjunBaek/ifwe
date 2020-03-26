@@ -108,7 +108,7 @@
 
 
 		insert into member_profile values(
-		#{memberCode},null,null,null,null,'0','M','관심사'
+		#{memberCode},null,null,null,null,'0',#{memberGender},null
 
 		)
 
