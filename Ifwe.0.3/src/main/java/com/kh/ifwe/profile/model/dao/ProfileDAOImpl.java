@@ -23,10 +23,17 @@ public class ProfileDAOImpl implements ProfileDAO {
 
 
 	@Override
-	public Profile selectOneProfile(int profileMemberCode) {
-//		System.out.println("DAO 코드="+profileMemberCode);
+	public Profile selectOneProfile(String profileMemberId) {
+		System.out.println("DAO 코드="+profileMemberId);
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne("profile.selectOne",profileMemberCode);
+		return sqlsession.selectOne("profile.selectOne",profileMemberId);
+	}
+
+
+	@Override
+	public Profile selectOneProfileWithCode(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("profile.selectOneProfileWithCode",memberCode);
 	}
 
 	
