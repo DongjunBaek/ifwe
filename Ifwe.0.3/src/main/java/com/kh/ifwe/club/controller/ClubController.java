@@ -189,10 +189,35 @@ public class ClubController {
 		return mav;
 	}
 
+	
+	
+	
 	@RequestMapping("/insert.do")
-	public ModelAndView insert(ModelAndView mav) {
+	public ModelAndView insert(ModelAndView mav,
+							   @RequestParam("memberCode") int memberCode,
+							   @RequestParam("masterCode") int masterCode,
+							   @RequestParam("enrollreason") String enrollreason) {
+		
+		log.debug("소모임가입신청");
+		log.debug("memberCode = {}",memberCode);
+		log.debug("masterCode = {}",masterCode);
+		log.debug("enrollreason = {}",enrollreason);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("memberCode", memberCode);
+		param.put("masterCode", masterCode);
+		param.put("enrollreason", enrollreason);
+		
+		int result = clubService.insertMsgEnroll(param);
+		
+		
+		
+		log.debug("result = {}",result);
 		
 		mav.setViewName("club/clubEnrollSuccess");
+		
+		
+		
 		
 		return mav;
 	}

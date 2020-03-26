@@ -34,5 +34,7 @@ public interface ClubDAO {
 
 	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
 
+	int insertMsgEnroll(Map<String, Object> param);
+
 
 }

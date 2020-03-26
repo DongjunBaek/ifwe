@@ -97,6 +97,12 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	@Override
+	public int insertMsgEnroll(Map<String, Object> param) {
+		return clubDAO.insertMsgEnroll(param);
+	}
+
+
 	
 	
 	

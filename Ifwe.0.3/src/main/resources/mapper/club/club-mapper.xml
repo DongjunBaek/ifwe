@@ -114,7 +114,19 @@
 			</if>
 	</select>
 	
-	
+	<insert id="insertMsgEnroll">
+		insert into 
+			member_msg 
+		values(
+				seq_msg_code.nextval, 
+				#{masterCode}, 
+				'c1', 
+				#{enrollreason}, 
+				default, 
+				default, 
+				#{memberCode}
+		)
+	</insert>
 	
 	
 	

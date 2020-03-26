@@ -26,5 +26,7 @@ public interface ClubService {
 
 	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
 
+	int insertMsgEnroll(Map<String, Object> param);
+
 
 }

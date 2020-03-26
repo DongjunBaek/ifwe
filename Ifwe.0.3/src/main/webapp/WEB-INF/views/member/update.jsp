@@ -47,7 +47,7 @@
    			</div>
    			<div class="profile-nickname-div">
    				<div class="profile-nickname-div-title bold-kor">닉네임:</div>
-   				<div class="profile-nickname-div-content">얄라얄라얄라셩</div>
+   				<div class="profile-nickname-div-content">${profile.profileName }</div>
    			</div>
    			<div class="profile-update-btn">
 	   			<input type="button" value="프로필 수정" id="profile-update-btn" class="profile-update-btn-class" style="padding:0;"/>

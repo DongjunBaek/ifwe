@@ -12,26 +12,19 @@
             <div class="section-frofileimg">
                 <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="">
             </div>
-            <p class="frofile-id">@wingStudy_02</p>
-            <p class="frofile-name">스테파니${profile.profileName }</p>
+            <p class="frofile-id">${memberLoggedIn.memberId }</p>
+            <p class="frofile-name">${profile.profileName }</p>
             <div class="section-friendbutton">친구요청</div>
         </div>
         <div class="section-frofileinfo-box">
             <div class="section-frofileinfo-wrapper">
                 <ul>
                     <li><p>회원정보</p></li>
-                    <p>생년월일:${member.memberBirth }</p>
-                    <p>거주지:${member.memberAddr }</p>
-                    <p>성별:여 ${profile.profileGender }</p>
+                    <p>생년월일: ${memberLoggedIn.memberBirth }</p>
+                    <p>거주: ${memberLoggedIn.memberAddr }</p>
+                    <p>성별: ${profile.profileGender=='F'?'여':'남' }</p>
                     <li><p>소개글</p></li>
-                    <p>
-		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
-		                        저랑같이 영어공부해요!
-		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
-		                        저랑같이 영어공부해요!
-		                        안녕하세요! 윙스터디 모임을 관리하고있는 스테파니입니다. <br>
-		                        저랑같이 영어공부해요!${profile.profileComment }
-                    </p>
+                    <p>${profile.profileComment } </p>
                     <li><p>관심키워드</p></li>
                     <div class="hashtag-wrapper">
                         <div class="hashtag-box">#영어공부</div>

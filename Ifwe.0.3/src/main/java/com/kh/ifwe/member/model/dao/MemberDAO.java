@@ -30,4 +30,6 @@ public interface MemberDAO {
 	int insertProfile(Member member);
 
 
+
+
 }

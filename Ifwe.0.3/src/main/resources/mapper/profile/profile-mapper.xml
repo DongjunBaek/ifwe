@@ -18,6 +18,7 @@
 	<resultMap type="Profile" id="ProfileMap">
 		<result column="contentsCateCodes" property="contentsCateCodes" typeHandler="StrArrTypeHandler"/>
 	</resultMap>
+	
 </mapper>
 
 
