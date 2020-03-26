@@ -26,6 +26,8 @@ public interface MemberService {
 	int insertPre(Map<String, String> map);
 
 	Member memberSelectOneCode(int memberCode);
+	
+	int insertProfile(int memberCode);
 
 
 }

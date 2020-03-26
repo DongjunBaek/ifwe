@@ -99,12 +99,22 @@ public class MemberController {
 			msg = "회원가입실패";
 		}
 
+
+		
+		Member serchMember = memberService.selectOne(member.getMemberId());
+		
+		
+		int insertProfileResult =memberService.insertProfile(serchMember.getMemberCode()); 
+		
 		redirectAttributes.addFlashAttribute("msg", msg);
 		mav.setViewName("redirect:/");
 
 		return mav;
 	}
 
+	
+	
+	
 	@PostMapping("/login.do")
 	public String login(@RequestParam("memberId") String memberId, @RequestParam("password") String password,
 			Model model, RedirectAttributes redirectAttributes,
