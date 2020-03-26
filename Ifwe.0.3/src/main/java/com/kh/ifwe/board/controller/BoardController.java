@@ -130,7 +130,6 @@ public class BoardController {
 		
 		log.debug("mainBoardList @ boardController {}", boardList);
 		
-		
 		return boardList;
 	}
 	

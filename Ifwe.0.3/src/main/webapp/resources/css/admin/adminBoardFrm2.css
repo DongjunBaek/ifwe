@@ -1,27 +1,20 @@
-section{
-    font-family: 'GmarketSansLight';
-    width: 1500px;
-    height: 1080px;
-    float: left;
-}
 .section-container-box{
     width: 1460px;
     float: right;
 }
 .section-title-box{
-    height: 90px;
     font-size: 20px;
     text-align: center;
-    margin-top:100px;
+    margin-top: 30px;
+    margin-bottom : - 50px;
 }
 .section-title-box p:first-child{
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
-    margin-bottom: 1%;
 }
 .writing-button-box{
-    margin-top:50px;
-    height: 35px;
+    margin-top:30px;
+     height: 35px;
 }
 .section-block-right{
     float: right;
@@ -104,8 +97,13 @@ section{
     font-size: 20px;
     width: 135px;
 }
-
-
+.board{
+	margin-left : 300px;
+}
+/* .white_bgm{
+	margin-top : -30px;
+	border : 1px solid blue;
+} */
 
 
 
