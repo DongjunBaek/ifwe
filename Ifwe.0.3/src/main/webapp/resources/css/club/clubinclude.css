@@ -73,6 +73,8 @@ nav{
 }
 .nav-clubimg img{
     width:65px;
+    height:100%;
+    
 }
 
 
@@ -147,6 +149,7 @@ aside{
 }
 .aside-leader-img img{
     width:180px;
+    height:100%;
 }
 .aside-leader-information{
     margin-top:15%;
@@ -262,11 +265,11 @@ aside{
 }
 .fried-profileimg img{
     width:42px;
+    height:100%;
 }
 .friendname{
-    float: right;
+    float: left;
     font-size: 20px;
-    margin-right: 20%;
     margin-top:5%;
     cursor: pointer;
 }

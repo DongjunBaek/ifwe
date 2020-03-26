@@ -86,10 +86,9 @@ $(function(){
         <div class="wrapper-content">
             <aside class="flotclass">
                 <div class="aside-icon-arrow">
-                        <i class="fas fa-arrow-left" style="font-size:40px;"></i>
                 </div>
                 <div class="aside-leader-img">
-                	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+                	<img src="${pageContext.request.contextPath }/resources/upload/profile/${clubMaster.profileImgRe}" alt="" />
                 </div>
                 <div class="aside-leader-information">
                     <p class="aside-leader-allias friend-name-profile">${clubMaster.memberName }</p>
@@ -117,45 +116,23 @@ $(function(){
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
                         <p>회원 목록</p>
-                        <div class="aside-friend-count"><p>${club.clubCurrent}명</p></div>
                     </div>
                     <div class="aside-friend-list">
                         <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
+                            <p class="friendname friend-name-profile">${clubMaster.profileName }</p>
                         </div>
+                        <c:if test="${not empty clubMember }">
+                        <c:forEach items="${clubMember }" var="cmember">
                         <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
+                            <p class="friendname friend-name-profile">${cmember.memberName}</p>
                         </div>
-                        <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
-                        </div>
-                        <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
-                        </div>
-                        <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
-                        </div>
-                        <div class="aside-friend">
-                            <div class="fried-profileimg">
-                            	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                            </div>
-                            <p class="friendname friend-name-profile">김원재</p>
-                        </div>
+                        
+                        </c:forEach>
+                        </c:if>
+                        
+                        
+                        
+                        
                    </div>
               </div>
          </div>
