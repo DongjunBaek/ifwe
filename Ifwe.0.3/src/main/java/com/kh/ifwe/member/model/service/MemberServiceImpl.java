@@ -70,6 +70,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertProfile(member);
 	}
 
+	@Override
+	public int insertProfile(int memberCode) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 	
 
 	

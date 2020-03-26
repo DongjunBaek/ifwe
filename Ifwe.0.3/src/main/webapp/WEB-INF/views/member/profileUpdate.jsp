@@ -131,14 +131,15 @@ input#inputProfileName {
 			
 			<div class="makeProfile-article-inputImg font-kor">
 					<p>프로필 이미지 등록</p>
+
 					<div id="uploadFileDiv">
 						<!-- <div class="input-group mb-3" style="padding: 0px;">
 							<div class="custom-file">
 								<input type="file" class="custom-file-input" name="upFile"
-									id="upFile1"> <label class="custom-file-label"
-									for="upFile1">파일을 선택하세요</label>
-							</div>
-						</div> -->
+									id="upFile1"> 
+									<label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+							</div>-->
+
 						<div class="uploadImg-div">
 							<div>
 								<span id="fileNameForProfile"></span>
@@ -147,6 +148,7 @@ input#inputProfileName {
 								<label for="upFile">파일 첨부</label> 
 								<input type="file" name="upFile" id="upFile" style="display:none;">
 								 <!-- style="display: none -->	
+
 							</div>
 						</div>
 					</div>
@@ -247,11 +249,11 @@ $(()=>{
 				$.each(data,function(idx,value){
 					console.log(idx);
 					console.log(value);
-				
+/* 				
 					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' id='profileImg' value='"+value.memberCode+"'  alt='' /></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
-					
+					 */
 			
-					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
+					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberId+"' >"+value.memberPname+"</div></div>"); 
 					
 				})
 				
@@ -272,7 +274,7 @@ $(()=>{
 		
 
 		/* 마우스 클릭했을때, 프로필 출력  */
-		$(document).on("click",".friend-name",function(){
+	<%-- 	$(document).on("click",".friend-name",function(){
 			var a = $(this).attr('value');
 			console.log("a val ="+a);
 			$.ajax({
@@ -289,7 +291,7 @@ $(()=>{
 					console.log("data :", data);
 					
 
-					location.href="${pageContext.request.contextPath}/profile/profileview.do?profileMemberCode="+a;
+					location.href="${pageContext.request.contextPath}/profile/profileview.do?profileMemberId="+a;
 				},error: function(jqxhr, textStatus, errorThrown){
 			
 					console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
@@ -303,7 +305,18 @@ $(()=>{
 			});
 
 			
-		});
+		}); --%>
+		
+		$(document).on("click",".friend-name",function(){
+			var a = $(this).attr('value');
+			console.log("a val ="+a);
+			
+
+					location.href="${pageContext.request.contextPath}/profile/profileview.do?profileMemberId="+a;
+			
+			});
+
+
 		
 		$("[name=upFile]").on("change", e => {
 			let $file = $(e.target); //사용자가 작성한 file input 태그

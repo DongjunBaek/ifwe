@@ -149,7 +149,7 @@ public class MemberController {
 			if (member != null && bcryptPasswordEncoder.matches(password, member.getMemberPwd())) {
 				
 				model.addAttribute("memberLoggedIn", member);
-				Profile profile = profileService.selectOneProfile(member.getMemberCode());
+				Profile profile = profileService.selectOneProfileWithCode(member.getMemberCode());
 				log.debug("profile = {}",profile);
 				model.addAttribute("profile",profile);
 				
@@ -560,7 +560,7 @@ public class MemberController {
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		System.out.println("memberController 되나");
-	 Profile	profile=profileservice.selectOneProfile(memberCode);
+	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
 		return "member/profileUpdate";
