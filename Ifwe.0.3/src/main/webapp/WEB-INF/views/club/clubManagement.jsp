@@ -16,7 +16,8 @@
 <script>
 $(function(){
 	$("#mng-enroll").click(function(){
-		location.href="${pageContext.request.contextPath}/club/mngenroll.do";
+		$("[name=mngEnrollFrm]").submit();
+		
 	});
 	$("#mng-member").click(function(){
 		location.href="${pageContext.request.contextPath}/club/mngmember.do";
@@ -51,8 +52,10 @@ $(function(){
          </div>
          
          <div class="shc-section-container">
-
-             <div class="shc-section-leftbox shcbox" id="mng-enroll">
+         	<form action="${pageContext.request.contextPath}/club/mngenroll.do" method="POST" name="mngEnrollFrm">
+         		<input type="hidden" name="clubMasterCode" value="${clubMaster.memberCode }"/>
+         		<input type="hidden" name="clubCode" value= "${club.clubCode }"/>
+             <div class="shc-section-leftbox shcbox" id="mng-enroll" data-clubMasterCode=${clubMaster.memberCode }>
                  <div class="shc-section-centerbox">
                      <div class="shc-section-boxline"></div>
                      <p class="shc-centerboxp1">가입요청</p>
@@ -60,6 +63,7 @@ $(function(){
                      <i class="fas fa-chevron-right" style="font-size: 50px;"></i>
                  </div>
              </div>
+         	</form>
              
              <div class="shc-section-rightbox shcbox" id="mng-member">
                  <div class="shc-section-centerbox">

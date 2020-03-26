@@ -13,7 +13,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmngenrollend.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-
+<script>
+$(function(){
+	$("#enrollbtnYes").click(function(){
+		$("[name=yes]").submit()
+	});
+	$("#enrollbtnNo").click(function(){
+		$("[name=no]").submit()
+	});
+	
+})
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
@@ -30,17 +40,26 @@
                      <img src="#" alt="">
                  </div>
                  <div class="shc-enrollmemberinfo">
-                     <p class="enroll-date">2020-03-11</p>
-                     <p class="enroll-name">스테파니</p>
-                     <p class="enroll-id">@wingStudy_02</p>
+                     <p class="enroll-date">${msg.msgDate }</p>
+                     <p class="enroll-name">${msg.memberName }</p>
+                     <p class="enroll-id">@ ${msg.memberId }</p>
                  </div>
 
                  <p>가입 메세지</p>
-                 <div class="shc-enroll-content"></div>
+                 <div class="shc-enroll-content" style="font-size:20px;">${msg.msgContent }</div>
              </div>
          </div>
          <div class="enrollbtn-div">
-             <input type="button" value="가입수락" class="enrollbtn">
+	         <input type="button" value="가입수락" class="enrollbtn" id="enrollbtnYes">
+	         <input type="button" value="가입거절" class="enrollbtn" id="enrollbtnNo">
+         	<form action="${pageContext.request.contextPath}/club/enrollYes.do" name="yes" method="POST">
+         		<input type="hidden" name="clubCode" value="${msg.clubCode }"/>
+         		<input type="hidden" name="memberCode" value="${msg.memberFrom }" />
+         	</form>
+         	<form action="${pageContext.request.contextPath}/club/enrollNo.do" name="no" method="POST">
+         		<input type="hidden" name="clubCode" value="${msg.clubCode }"/>
+         		<input type="hidden" name="memberCode" value="${msg.memberFrom }" />
+         	</form>
          </div>
      </section>
 
