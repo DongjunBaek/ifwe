@@ -16,11 +16,6 @@
 <script>
 $(function(){
 	
-	$(".enrollbutton").click(function(){
-		location.href="${pageContext.request.contextPath }/club/insert.do";		
-		
-		
-	});
 	
 });
 
@@ -35,13 +30,17 @@ $(function(){
         </div>
     </div>
     <div class="section-container">
-        <div class="section-container-inputbox">
-            <p>닉네임</p>
-            <input type="text" name="memberallias" id="memberallias" value="스테파니" readonly>
-            <p>가입 이유</p>
-            <input type="text" name="enrollreason" id="enrollreason">
-        </div>
-        <div class="section-container-enrollbutton enrollbutton" id="enrollbutton">가입하기</div>
+        <form action="${pageContext.request.contextPath }/club/insert.do" method="POST">
+	        <div class="section-container-inputbox">
+	            <p>닉네임</p>
+	            <input type="text" name="memberallias" id="memberallias" value="${profile.profileName }" readonly>
+	            <p>가입 이유</p>
+	            <input type="text" name="enrollreason" id="enrollreason">
+	        </div>
+	        	<input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" />
+	        	<input type="hidden" name="masterCode" value="${clubMaster.memberCode }" />	
+		    <input type="submit" class="section-container-enrollbutton enrollbutton" id="enrollbutton" value="가입하기"/>
+        </form>
 
     </div>
 </section>

@@ -65,5 +65,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.memberSelectOneCode(memberCode);
 	}
 
+	@Override
+	public int insertProfile(Member member) {
+		return memberDAO.insertProfile(member);
+	}
+
+	
+
 	
 }

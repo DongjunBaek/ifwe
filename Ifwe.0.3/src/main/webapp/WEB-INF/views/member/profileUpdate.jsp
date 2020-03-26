@@ -25,13 +25,11 @@
 	href="${pageContext.request.contextPath }/resources/css/main/mypage.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/member/makeProfile.css">
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-
 
 <script>
 
@@ -130,12 +128,25 @@ $(()=>{
 
 
 <style>
-input[type=file] {
-	font-size: 100px;
+#uploadFileDiv {
 	position: absolute;
-	left: 0;
-	top: 0;
-	opacity: 0;
+	left: 50%;
+}
+
+input#inputProfileName {
+	width: 200px;
+	position: absolute;
+	left: 31%;
+}
+
+#inputProfileName {
+	display: none;
+}
+
+#toggle {
+	position: absolute;
+	font-size: 30px;
+	left:39%;
 }
 </style>
 </head>
@@ -143,11 +154,15 @@ input[type=file] {
 
 <body>
 	<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
+
+
 	<section>
 
-<button onclick="" value="프로필 네임 변경">
 
-</button>
+
+
+
+
 
 
 
@@ -157,18 +172,32 @@ input[type=file] {
 
 			<article class="first">
 				<div class="intro-div">
+
+
 					<div class="img-div">
 						<img
-							src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
+							src="${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}"
 							alt="">
 					</div>
+
 					<div class="myname-div font-kor">
-						<div style="font-size: 25px; margin: 0 10%">@wingStudy_02</div>
+						<div style="font-size: 25px; margin: 0 10%">@
+							${memberLoggedIn.memberId }</div>
+						<button onclick="" id="toggle" class="fas fa-edit" type="button"></button>
+
+
 						<div
 							style="font-size: 30px; font-weight: 900; margin: 5% 20% 0 30%">
 
-							<input type="text" placeholder="닉네임" value="${profile.profileName }"
-								name="profileName"></input>
+
+
+
+
+							<input type="text" placeholder="닉네임" id="inputProfileName"
+								value="${profile.profileName }" name="profileName"></input>
+							<div id="liProfileName">${profile.profileName }</div>
+
+
 
 						</div>
 					</div>
@@ -200,37 +229,49 @@ input[type=file] {
 
 
 				<input type="text" class="makeProfile-infotext1 font-kor"
-					placeholder="프로필소개글" name="profileComment" id="profileComment" value=${profile.profileComment }>
+					placeholder="프로필소개글" name="profileComment" id="profileComment"
+					value=${profile.profileComment }>
+
 
 
 				<div class="makeProfile-article-inputImg font-kor">
 					<p>프로필 이미지 등록</p>
-					<div class="uploadImg-div">
-						<div>
-							<!-- 
-							<span></span> -->
-							<div class="input-group mb-3" class="uploadImg-div"
-								style="padding: 0px;">
 
+					<div id="uploadFileDiv">
 
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" name="upFile"
-										id="upFile"> <label class="custom-file-label"
-										for="upFile">파일을 선택하세요</label>
-								</div>
+						<div class="input-group mb-3" style="padding: 0px;">
+
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="upFile"
+									id="upFile1"> <label class="custom-file-label"
+									for="upFile1">파일을 선택하세요</label>
 							</div>
-
-
-
 						</div>
-						<div>
-							<!-- 							<label for="upFile">파일 첨부</label> <input type="file"
-								name="upFile" id="upFile" style="display: none;"> -->
+
+
+						<div class="uploadImg-div">
+							<div>
+								<span></span>
+							</div>
+							<div class="custom-file">
+								<label for="upFile">파일 첨부</label> <input type="file"
+									name="upFile" id="upFile" style="display: none;">
+							</div>
 						</div>
 					</div>
+
+
+
+
+
+
+
+
+
+
+
 				</div>
 
-				<!-- 				onsubmit="return boardValidate();" -->
 
 
 
@@ -252,16 +293,18 @@ input[type=file] {
 
 
 
-				<input type="hidden" name="memberCode" id="memberCode"
-					value="${memberLoggedIn.memberCode }" /> <input type="hidden"
-					name="memberCode" id="profileAge"
-					value="${memberLoggedIn.memberBirth }" /> <input type="hidden"
-					name="memberCode" id="profileAge"
-					value="${memberLoggedIn.memberGender }" />
+			</article>
+			<input type="hidden" name="memberCode" id="memberCode"
+				value="${memberLoggedIn.memberCode }" /> 
+				<input type="hidden"
+				name="memberCode" id="profileAge"
+				value="${memberLoggedIn.memberBirth }" /> 
+				<input type="hidden"
+				name="memberCode" id="profileGender"
+				value="${memberLoggedIn.memberGender }" />
 		</form>
 
 
-		</article>
 		<article class="mypage-third">
 			<div class="friend-container">
 				<div class="friend-title font-kor">
@@ -292,25 +335,42 @@ input[type=file] {
 								src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
 								alt="" />
 						</div>
-						<div class="friend-name font-kor friend-name-profile" value="testBack">백동준</div>
+						<div class="friend-name font-kor friend-name-profile">백동준</div>
 					</div>
 				</div>
 			</div>
 		</article>
+</body>
 
 
+<script type="text/javascript">
 
-<div class="friend-profile-show">
-asd
-</div>
+		
+		
+		
+		
+		
+		
+		
+		/*프로필 네임 수정  */
+		jQuery('#toggle').click(function () {  
+		    if($("#inputProfileName").css("display") == "none"){   
+		        jQuery('#inputProfileName').css("display", "block");   
+		        jQuery('#liProfileName').css("display", "none");
+		    } else {  
+		        jQuery('#liProfileName').css("display", "block");
+		        jQuery('#inputProfileName').css("display", "none");
+		    }  
+		});  
+		
+		
+		
+		
+		
+		
 
 
-
-		<script type="text/javascript">
-
-
-
-/*  친구에게 있는 프로필들 갖다 붙이기 */
+/*  친구 프로필들 출력 */
 
 $(()=>{
 
@@ -342,6 +402,7 @@ $(()=>{
 					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' id='profileImg' value='"+value.memberCode+"'  alt='' /></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
 					
 			
+					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
 					
 				})
 				
@@ -401,30 +462,15 @@ $(()=>{
 	});/*onload  */
 
 
-/* 
-	tr[profile-id] */
-
-
-
-	
-	
-	
 
 
 
 
 
 
+	</script>
 
 
+</section>
 
-
-
-
-
-
-
-</script>
-
-
-	</section>
+</html>

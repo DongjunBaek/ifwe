@@ -10,4 +10,6 @@ public interface ProfileService {
 
 	Profile selectOneProfile(int profileMemberCode);
 
+	
+
 }

@@ -27,7 +27,7 @@ margin:0;
                 <input type="button" value="회원정보 수정" class="update-btn font-kor"
                 		onclick="location.href='${pageContext.request.contextPath}/member/update.do'">
                 <input type="button" value="프로필 카드" class="update-btn font-kor" 
-                		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do'">
+                		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do?memberCode='+${memberLoggedIn.memberCode }">
             </div>
             <div class="list-div">
                 <div class="list-title">
