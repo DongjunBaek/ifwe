@@ -27,7 +27,5 @@ public interface MemberService {
 
 	Member memberSelectOneCode(int memberCode);
 
-	
-
 
 }
