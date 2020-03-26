@@ -1,10 +1,12 @@
 package com.kh.ifwe.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
@@ -75,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
   
-  @Override
+	@Override
 	public List<Club> selectClubList(String memberCode) {
 		return memberDAO.selectClubList(memberCode);
 	}
