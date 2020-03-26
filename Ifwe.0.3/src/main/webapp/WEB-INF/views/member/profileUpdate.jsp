@@ -176,7 +176,7 @@ input#inputProfileName {
 
 					<div class="img-div">
 						<img
-							src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
+							src="${pageContext.request.contextPath }/resources/upload/profile/normal-user-icon"
 							alt="">
 					</div>
 
