@@ -1,7 +1,9 @@
 package com.kh.ifwe.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 
@@ -26,6 +28,8 @@ public interface MemberService {
 	int insertPre(Map<String, String> map);
 
 	Member memberSelectOneCode(int memberCode);
+
+	List<Club> selectClubList(String memberCode);
 
 	
 

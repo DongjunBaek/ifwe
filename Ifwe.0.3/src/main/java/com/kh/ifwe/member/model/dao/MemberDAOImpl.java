@@ -1,11 +1,13 @@
 package com.kh.ifwe.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 
@@ -65,6 +67,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertPre(Map<String, String> map) {
 		return sqlSession.insert("member.insertPre",map);
+	}
+
+	@Override
+	public List<Club> selectClubList(String memberCode) {
+		return sqlSession.selectList("member.selectClubList",memberCode);
 	}
 	
 	

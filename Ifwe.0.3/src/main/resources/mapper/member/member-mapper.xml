@@ -131,6 +131,15 @@
 		select * from member
 		where member_code=#{memberCode}
 	</select>
+	
+	<select id="selectClubList" resultType="club">
+		
+		select * 
+			from club
+		where 
+			club_master = #{memberCode}
+	
+	</select>
 
 
 </mapper>
