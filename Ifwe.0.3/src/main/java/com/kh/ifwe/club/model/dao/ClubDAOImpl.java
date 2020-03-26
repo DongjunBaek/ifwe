@@ -82,6 +82,11 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectList("club.selectClubMember",clubMemberCode);
 	}
 
+	@Override
+	public int insertMsgEnroll(Map<String, Object> param) {
+		return sqlSession.insert("club.insertMsgEnroll", param);
+	}
+
 
 	
 	

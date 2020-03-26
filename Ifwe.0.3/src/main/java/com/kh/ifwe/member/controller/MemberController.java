@@ -36,7 +36,7 @@ import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn" })
+@SessionAttributes(value = { "memberLoggedIn","profile" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -44,6 +44,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ProfileService profileService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -144,8 +147,12 @@ public class MemberController {
 			// bcryptPasswordEncoder를 이용한 비교
 			// 로그인한 경우, session에 member객체 저장
 			if (member != null && bcryptPasswordEncoder.matches(password, member.getMemberPwd())) {
-
+				
 				model.addAttribute("memberLoggedIn", member);
+				Profile profile = profileService.selectOneProfile(member.getMemberCode());
+				log.debug("profile = {}",profile);
+				model.addAttribute("profile",profile);
+				
 				return "main/mainPage";
 
 			} else {
@@ -191,9 +198,14 @@ public class MemberController {
 		return "member/profile";
 	}
 
+	
 	@GetMapping("/update.do")
-	public String update() {
-		return "member/update";
+	public ModelAndView update(ModelAndView mav) {
+		
+		
+		mav.setViewName("member/update");
+		
+		return mav;
 	}
 
 	@GetMapping("/membership.do")
@@ -379,7 +391,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/profileUpdate.do")
-	public String updatetProfile(com.kh.ifwe.member.model.vo.Profile profile,
+	public String updatetProfile(Profile profile,
 			@RequestParam(value = "upFile", required = false) MultipartFile upFile, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		try {
