@@ -10,7 +10,7 @@
 		* 
 	from 
 		MEMBER_PROFILE
-	where member_code=#{profileMemberCode}
+	where member_Id=#{profileMemberId}
 </select>
 
 
@@ -18,6 +18,18 @@
 	<resultMap type="Profile" id="ProfileMap">
 		<result column="contentsCateCodes" property="contentsCateCodes" typeHandler="StrArrTypeHandler"/>
 	</resultMap>
+
+
+
+<select id="selectOneProfileWithCode" resultMap="ProfileMap">
+	select 
+		* 
+	from 
+		MEMBER_PROFILE
+	where member_Code=#{memberCode}
+</select>
+
+	
 </mapper>
 
 

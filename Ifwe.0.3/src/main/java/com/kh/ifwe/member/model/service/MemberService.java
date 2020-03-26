@@ -31,7 +31,8 @@ public interface MemberService {
 
 	List<Club> selectClubList(String memberCode);
 
-	
+	int insertProfile(Member serchMember);
 
+	int insertProfile(int memberCode);
 
 }

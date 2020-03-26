@@ -29,7 +29,9 @@ public interface MemberDAO {
 	
 	int insertPre(Map<String, String> map);
 
+
 	List<Club> selectClubList(String memberCode);
 
+	int insertProfile(Member member);
 
 }

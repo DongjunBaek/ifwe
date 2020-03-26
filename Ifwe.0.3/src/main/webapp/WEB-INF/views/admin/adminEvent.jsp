@@ -12,9 +12,9 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
 
    <section>
+	<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
         <div class="title_wrap">
             <h1>event</h1>
         </div>
