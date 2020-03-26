@@ -34,5 +34,7 @@ public interface ClubDAO {
 
 	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
 
+	ClubMember selectClubMaster2(int clubMaster);
+
 
 }

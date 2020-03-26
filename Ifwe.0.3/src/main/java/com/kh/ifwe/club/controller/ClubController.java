@@ -28,13 +28,14 @@ import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","memberLoggedIn"})
 public class ClubController {
 	
 	@Autowired
@@ -159,9 +160,10 @@ public class ClubController {
 		return mav;
 	}
 	
-	//보라,0325형철 메인페이지 출력
+	//보라,형철 소모임 메인페이지 출력
 	@GetMapping("/clubMain.do")
-	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
+	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav,
+								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member) {
 		
 		
 		log.debug("clubCode = {}",clubCode);
@@ -171,17 +173,25 @@ public class ClubController {
 		log.debug("club = {}",club);
 		
 		
-		Member clubMaster = clubService.selectClubMaster(club.getClubMaster());
+		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
+		
+		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
+		ClubMember memberLoggedIn = clubService.selectClubMaster2(member.getMemberCode());
+		
+		
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
+		
 		if(!clubMemberCode.isEmpty()) {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
-		
-		
-		
+		log.debug("memberLoggedIn={}",memberLoggedIn);
+		log.debug("clubMaster={}",clubMaster);
+		log.debug("clubMember={}",clubMember);
+		mav.addObject("memberLoggedIn",memberLoggedIn);
+		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
 		mav.setViewName("/club/clubMain");

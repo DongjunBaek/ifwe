@@ -102,19 +102,22 @@
 	</select>
 	
 	<select id="selectClubMember" resultType="clubMember">
-		select M.*,p.profile_img_re 
+		select M.*,p.profile_name,p.profile_img_re 
 		from member M join member_profile P 
             on M.member_code = P.member_code
 			where 
-			<if test="clubMemberCode != null">
 			M.member_code in
-			<foreach collection="clubMemberCode" item="item" open="(" close=")" separator=",">
-			#{item}
+			<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item.memberCode}
 			</foreach>
-			</if>
 	</select>
 	
-	
+	<select id="selectClubMaster2" resultType="clubMember">
+		select M.*,p.profile_name,p.profile_img_re
+		from member M join member_profile P 
+            on M.member_code = P.member_code
+        where M.member_code = #{clubMaster}
+	</select>
 	
 	
 	

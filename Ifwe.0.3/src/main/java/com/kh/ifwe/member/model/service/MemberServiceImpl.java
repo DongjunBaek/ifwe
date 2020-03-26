@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
@@ -63,6 +64,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member memberSelectOneCode(int memberCode) {
 		return memberDAO.memberSelectOneCode(memberCode);
+	}
+
+	@Override
+	public MemberLoggedIn selectMemberLogin(int memberCode) {
+		return memberDAO.selectMemberLogin(memberCode);
 	}
 
 	

@@ -3,6 +3,7 @@ package com.kh.ifwe.member.model.service;
 import java.util.Map;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberService {
@@ -26,6 +27,8 @@ public interface MemberService {
 	int insertPre(Map<String, String> map);
 
 	Member memberSelectOneCode(int memberCode);
+
+	MemberLoggedIn selectMemberLogin(int memberCode);
 
 	
 

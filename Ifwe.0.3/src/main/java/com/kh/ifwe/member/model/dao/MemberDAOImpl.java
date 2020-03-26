@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Repository
@@ -65,6 +66,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertPre(Map<String, String> map) {
 		return sqlSession.insert("member.insertPre",map);
+	}
+
+	@Override
+	public MemberLoggedIn selectMemberLogin(int memberCode) {
+		return sqlSession.selectOne("member.selectMemberLogin",memberCode);
 	}
 	
 	

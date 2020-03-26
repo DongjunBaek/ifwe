@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.profile.model.service.ProfileService;
 
@@ -134,8 +135,9 @@ public class MemberController {
 			// bcryptPasswordEncoder를 이용한 비교
 			// 로그인한 경우, session에 member객체 저장
 			if (member != null && bcryptPasswordEncoder.matches(password, member.getMemberPwd())) {
-
-				model.addAttribute("memberLoggedIn", member);
+				
+				MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+				model.addAttribute("memberLoggedIn", memberLoggedIn);
 				return "main/mainPage";
 
 			} else {

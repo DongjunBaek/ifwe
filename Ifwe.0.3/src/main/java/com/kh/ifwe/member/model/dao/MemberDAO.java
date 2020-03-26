@@ -3,6 +3,7 @@ package com.kh.ifwe.member.model.dao;
 import java.util.Map;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 public interface MemberDAO {
@@ -26,6 +27,8 @@ public interface MemberDAO {
 	Member memberSelectOneCode(int memberCode);
 	
 	int insertPre(Map<String, String> map);
+
+	MemberLoggedIn selectMemberLogin(int memberCode);
 
 
 }
