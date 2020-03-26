@@ -1,9 +1,7 @@
-package com.kh.ifwe.club.model.vo;
+package com.kh.ifwe.member.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-
-import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,14 +14,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class ClubMember extends Member implements Serializable{
-
+public class MemberLoggedIn extends Member implements Serializable{
+	 
 	private static final long serialVersionUID = 1L;
 	
 	private String profileName;
 	private String profileImgRe;
 	
-	public ClubMember(int memberCode, String memberId, String memberPwd, String memberName, String memberPhone,
+	public MemberLoggedIn(int memberCode, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberLoc, String memberEmail, Date memberBirth, String memberGender, String memberAddr,
 			Date memberEnrolldate, String memberSuspension, String memberRole, int memberMsg, String memberLike,
 			String profileName, String profileImgRe) {
@@ -32,8 +30,10 @@ public class ClubMember extends Member implements Serializable{
 		this.profileName = profileName;
 		this.profileImgRe = profileImgRe;
 	}
-
-
+	
+	
+	
+	
 	
 	
 	
