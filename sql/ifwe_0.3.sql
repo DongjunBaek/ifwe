@@ -158,7 +158,7 @@ CREATE TABLE  BOARD  (
 
 
 CREATE TABLE  BOARD_CATEGORY  (
-	 board_cate 	VARCHAR2(20)		NOT NULL,
+	 board_cate 	VARCHAR2(50)		NOT NULL,
 	 board_cateinfo 	CHAR(20)		NULL
 );
 

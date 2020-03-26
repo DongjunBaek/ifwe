@@ -35,4 +35,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public Board selectBoardDetail(int boardNo) {
 		return sqlSession.selectOne("admin.selectBoardDetail",boardNo);
 	}
+
+	@Override
+	public int deleteBoardOne(int boardNo) {
+		return sqlSession.delete("admin.deleteBoardOne",boardNo);
+	}
 }

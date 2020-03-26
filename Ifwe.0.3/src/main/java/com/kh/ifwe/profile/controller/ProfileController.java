@@ -71,6 +71,10 @@ public class ProfileController {
 		
 		model.addAttribute("profile",profile);
 
+
+		Member member = memberService.memberSelectOneCode(profileMemberCode);
+		
+		model.addAttribute("member",member);
 		
 		
 		
@@ -88,6 +92,12 @@ public class ProfileController {
 		Member member = memberService.memberSelectOneCode(profileMemberCode);
 		return member;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

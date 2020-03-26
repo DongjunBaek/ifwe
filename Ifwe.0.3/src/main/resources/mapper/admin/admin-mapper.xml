@@ -98,7 +98,14 @@
 			board
 		where board_no = #{boardNo}
 	</select>
-
+	
+	<!-- 0326 동준 작업 게시글 삭제-->
+	<delete id="deleteBoardOne">
+		delete from 
+			board
+		where
+			board_no = #{boardNo}
+	</delete>
 </mapper>
 
 

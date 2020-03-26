@@ -145,8 +145,10 @@ input[type=file] {
 	<jsp:include page="/WEB-INF/views/common/mainInclude.jsp"></jsp:include>
 	<section>
 
+<button onclick="" value="프로필 네임 변경">
 
-		<div id="test">ㅂㅈㄷㅈㅂㄷ</div>
+</button>
+
 
 
 		<form name="profileFrm"
@@ -165,9 +167,7 @@ input[type=file] {
 						<div
 							style="font-size: 30px; font-weight: 900; margin: 5% 20% 0 30%">
 
-
-
-							<input type="text" placeholder="닉네임" value="스테파니"
+							<input type="text" placeholder="닉네임" value="${profile.profileName }"
 								name="profileName"></input>
 
 						</div>
@@ -200,7 +200,7 @@ input[type=file] {
 
 
 				<input type="text" class="makeProfile-infotext1 font-kor"
-					placeholder="프로필소개글" name="profileComment" id="profileComment">
+					placeholder="프로필소개글" name="profileComment" id="profileComment" value=${profile.profileComment }>
 
 
 				<div class="makeProfile-article-inputImg font-kor">

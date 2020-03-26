@@ -24,6 +24,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 
 	@Override
 	public Profile selectOneProfile(int profileMemberCode) {
+//		System.out.println("DAO 코드="+profileMemberCode);
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne("profile.selectOne",profileMemberCode);
 	}
