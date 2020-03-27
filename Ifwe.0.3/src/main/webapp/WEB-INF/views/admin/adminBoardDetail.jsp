@@ -18,6 +18,9 @@
 function boardUpdateFrm(){
 	location.href="${pageContext.request.contextPath}/admin/boardUpdateFrm.do?boardNo="+${board.boardNo};
 }
+function boardDel(){
+	location.href="${pageContext.request.contextPath}/admin/boardDelete.do?boardNo="+${board.boardNo};
+}
 </script>
 </head>
 <body>
