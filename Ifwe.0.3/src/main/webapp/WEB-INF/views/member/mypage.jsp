@@ -34,9 +34,11 @@ margin:0;
                     <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
                     <div class="list-ul-container">
                         <ul class="font-kor mypage-list-ul" style="padding: 0;">
-                            <li><p class="mypage-p-class">윙스터디 모임</p></li>
-                            <li><p class="mypage-p-class">윙스터디</p></li>
-                            <li><p class="mypage-p-class">윙</p></li>
+                            <c:if test="${not empty clubList }">
+                        	<c:forEach items="${clubList }" var="list">
+                                <li class="clubListLi" data-clubCode=${list.clubCode }><p class="mypage-p-class">${list.clubTitle }</p> </li>
+                        	</c:forEach>
+                        	</c:if>
                         </ul>
                     </div>
                 </div>
