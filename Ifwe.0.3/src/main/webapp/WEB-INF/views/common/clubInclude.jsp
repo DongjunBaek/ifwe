@@ -31,18 +31,6 @@ $(function(){
     	location.href="${pageContext.request.contextPath }/club/enroll.do";
     });
     
-    $("#calendarbutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/club/calendar.do";
-    });
-    
-    $("#freeboardbutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/club/freeboard.do";
-    });
-    
-    $("#noticebutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/club/notice.do";
-    });
-    
 	$(".friend-name-profile").click(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do";
 	});
@@ -68,7 +56,7 @@ $(function(){
                         <i class="fas fa-sort-down fa-2x"></i>
                     </div>
                     <div class="nav-clubimg">
-						<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+						<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
                     </div>
                         <div class="nav-right-leader">
 
@@ -91,7 +79,7 @@ $(function(){
                 	<img src="${pageContext.request.contextPath }/resources/upload/profile/${clubMaster.profileImgRe}" alt="" />
                 </div>
                 <div class="aside-leader-information">
-                    <p class="aside-leader-allias friend-name-profile">${clubMaster.memberName }</p>
+                    <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
@@ -109,22 +97,50 @@ $(function(){
          <div class="aside-scroll-box">
           	<div id="aside-scroll">
                 <div class="aside-boardmenu">
-                        <p id="noticebutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;공지사항</p>
-                        <p id="calendarbutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;일정캘린더</p>
-                        <p id="freeboardbutton"><i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>&nbsp;&nbsp;&nbsp;자유게시판</p>
+                <ul>
+                	<li>
+                		<i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
+						<span><a href="${pageContext.request.contextPath }/club/clubMain.do?clubCode=${club.clubCode}">전체보기</a></span>
+                	</li>
+                	<li>
+                      <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
+						<span><a href="${pageContext.request.contextPath }/club/notice.do">공지사항</a></span>
+                	</li>
+                	<li>
+                        <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
+						<span><a href="${pageContext.request.contextPath }/club/calendar.do">일정캘린더</a></span>
+                	
+                	</li>
+                   	<li>
+                        <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
+						<span><a href="${pageContext.request.contextPath }/club/freeboard.do">자유게시판</a></span>
+                   	</li>
+                </ul>
                 </div>
                 <div class="aside-friend-box">
                     <div class="aside-friend-title">
-                        <p>회원 목록</p>
+                        <p>회원 목록</p><i class="fas fa-users"></i>
                     </div>
                     <div class="aside-friend-list">
                         <div class="aside-friend">
-                            <p class="friendname friend-name-profile">${clubMaster.profileName }</p>
+                        	<c:if test="${clubMaster.memberGender=='F' }">
+                        	<i class="fas fa-female"></i>
+                        	</c:if>
+                        	<c:if test="${clubMaster.memberGender=='M' }">
+                        	<i class="fas fa-male"></i>
+                        	</c:if>
+                            <span class="friendname friend-name-profile">${clubMaster.profileName }</span>
                         </div>
                         <c:if test="${not empty clubMember }">
                         <c:forEach items="${clubMember }" var="cmember">
                         <div class="aside-friend">
-                            <p class="friendname friend-name-profile">${cmember.memberName}</p>
+                        	<c:if test="${cmember.memberGender=='F' }">
+                        	<i class="fas fa-female"></i>
+                        	</c:if>
+                        	<c:if test="${cmember.memberGender=='M' }">
+                        	<i class="fas fa-male"></i>
+                        	</c:if>
+                            <span class="friendname friend-name-profile">${cmember.memberName}</span>
                         </div>
                         
                         </c:forEach>
