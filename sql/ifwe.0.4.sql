@@ -154,7 +154,7 @@ CREATE TABLE  MEMBER_REPORT  (
 );
 -- 6.회원 메세지 카테고리 테이블
 CREATE TABLE  MSG_CATEGORY  (
-	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. C1-> 소모임 신청
+	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. c1-> 소모임 신청
 	 msg_cate_info 	VARCHAR2(100)		NULL -- 메세지 카테고리 별 내용 
      
 );
@@ -176,6 +176,7 @@ CREATE TABLE  MEMBER_MSG  (
                                                         REFERENCES MSG_CATEGORY(msg_cate_code)                                                    
                                                         on delete cascade,
           constraint ck_msg_msgView check(msg_view in ('y','n'))
+          --member-from fk
      
 );
 
@@ -202,6 +203,7 @@ CREATE TABLE  PREMIUM_ORDER  (
 	 club_code 	NUMBER		NOT NULL, -- 구매한 소모임
 	 premium_code 	VARCHAR2(30)		NOT NULL, -- 프리미엄 코드
 	 member_code 	NUMBER		NOT NULL -- 구매한 소모임 마스터 회원코드
+     -- 소모임 프리미엄 구매가격 넣을지말지는 구매기록 확인 구현시 
 );
 
 -- 11.게시판 카테고리
@@ -227,7 +229,7 @@ CREATE TABLE  BOARD  (
      -- 카테고리 코드 fk
      -- 삭제 여부 check
 );
--- 13.게시판 댓글테이블 -- 필요한 테이블인지?
+-- 13.게시판 댓글테이블 --
 CREATE TABLE  BOARD_COMMENT  (
 	 comment_no 	NUMBER		NOT NULL,
 	 member_code 	NUMBER		NOT NULL,
@@ -242,38 +244,37 @@ CREATE TABLE  BOARD_COMMENT  (
 CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
-	 search_date 	DATE		NULL, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL, -- 검색한 회원 번호
-	 cate_code 	VARCHAR2(100)		NOT NULL -- 검색어 분류
+	 search_date 	DATE		default sysdate, -- 검색날짜
+	 member_code 	NUMBER		NOT NULL, -- 검색한 회원 번호 --pk
+	 cate_code 	VARCHAR2(100)		NOT NULL -- 검색어 분류 -- 어디서검색하는지로할지
 );
 
 
--- 15.컨텐츠 카테고리 테이블
+-- 15.컨텐츠 카테고리 테이블 -- 검색어 자동완성
 CREATE TABLE  CONTENTS_CATEGORY  (
     cate_code    VARCHAR2(100)   PRIMARY KEY
 );
 
 -- 16.컨텐츠 정보 테이블
 CREATE TABLE  CONTENTS_INFO  (
-	 contents_code 	NUMBER		PRIMARY KEY,
+	 contents_code 	NUMBER		PRIMARY KEY, -- 시퀀스 (만들것)
 	 contents_name 	VARCHAR2(100)		NULL,
 	 contents_info 	VARCHAR2(2000)		NULL,
-	 contents_date 	DATE		NULL,
-	 contents_com 	VARCHAR2(100)		NULL,
+	 contents_date 	DATE		default sysdate, 
 	 contents_site 	VARCHAR2(300)		NULL,
 	 cate_code 	VARCHAR2(100)		NOT NULL
 );
 
 -- 17.컨텐츠 이미지 테이블
 CREATE TABLE  CONTENTS_IMG  (
-	 img_code 	VARCHAR2(100)		NOT NULL, -- 컨텐츠 정보 테이블의 PK를 참조함.
+	 contents_code 	 VARCHAR2(100)		NOT NULL, -- 컨텐츠 정보 테이블의 PK를 참조함.
 	 img_ori 	VARCHAR2(100)		NULL,
 	 img_re 	VARCHAR2(100)		NULL
 );
 
 -- 18.소모임 테이블
 CREATE TABLE  CLUB  (
-    club_code    NUMBER      NOT NULL,
+    club_code    NUMBER      NOT NULL, -- 시퀀스
     club_master    NUMBER      NOT NULL,
     club_title    VARCHAR2(120)      NULL,
     club_img_ori    VARCHAR2(100)      NULL,
@@ -286,7 +287,7 @@ CREATE TABLE  CLUB  (
     club_location varchar2(100) null,
     premium_code    VARCHAR2(50)    NULL,
     constraint pk_club_code primary key(club_code)
-     
+    
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
@@ -321,9 +322,9 @@ CREATE TABLE  CLUB_BOARD_COMMENT  (
 	 member_code 	NUMBER		NOT NULL,
 	 comment_content 	VARCHAR2(500)		NULL,
 	 comment_date 	DATE		NULL,
-	 coment_level 	NUMBER		NULL,
-	 comnet_del 	CHAR(1)		NULL,
-	 coment_ref 	NUMBER		NULL
+	 comment_level 	NUMBER		NULL,
+	 comment_del 	CHAR(1)		NULL,
+	 comment_ref 	NUMBER		NULL
 );
 
 -- 22.소모임 게시판 이미지 테이블
@@ -345,14 +346,16 @@ CREATE TABLE  CLUB_MEMBERS  (
 	 club_code 	NUMBER		NOT NULL, -- 소모임 코드
 	 member_code 	NUMBER		NOT NULL, -- 소모임 가입한 회원 코드
 	 club_grade 	VARCHAR2(30)		NULL, -- 소모임을 가입한 회원의 등급 준회원 정회원 마스터
-	 club_enrolldate 	DATE		NULL -- 소모임 가입일
+	 club_enrolldate 	DATE default sysdate -- 소모임 가입일
+     -- club_Code fk
+     -- member_code fk
 );
--- 25.소모임 방문 기록 테이블
+-- 25.소모임 방문 기록 테이블 
 CREATE TABLE  CLUB_HISTORY  (
 	 club_code 	NUMBER		NOT NULL,
 	 club_count 	NUMBER		NULL,
 	 club_boardcnt 	NUMBER		NULL,
-	 club_usedate 	DATE		NULL,
+	 club_usedate 	DATE		default sydate,
 	 member_code 	NUMBER		NOT NULL
 );
 -- 26.소모임 일정정보 저장 테이블
