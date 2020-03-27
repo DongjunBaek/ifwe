@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -164,7 +166,13 @@ public class ClubController {
 	//보라,형철 소모임 메인페이지 출력
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav,
-								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member) {
+								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member,
+								 HttpServletRequest request) {
+		
+		
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("clubMember");
 		
 		
 		log.debug("clubCode = {}",clubCode);
@@ -185,6 +193,7 @@ public class ClubController {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
+		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
 		mav.addObject("clubMember",clubMember);
@@ -260,12 +269,25 @@ public class ClubController {
 	}
 	
 	@GetMapping("/mngclubinfo.do")
-	public String mngClubinfo() {
-		return "club/clubMngClubinfo";
+	public ModelAndView mngClubinfo(@RequestParam("clubCode") int clubCode,
+									ModelAndView mav) {
+		
+		Club club = clubService.selectOne(clubCode);
+		
+		mav.addObject("club",club);
+		mav.setViewName("club/clubMngClubinfo");
+		
+		return mav;
 	}
+	
+	//0327형철 클럽회원관리
 	@GetMapping("/mngmember.do")
-	public String mngMember() {
-		return "club/clubMngMember";
+	public ModelAndView mngMember(ModelAndView mav) {
+		
+		
+		mav.setViewName("club/clubMngMember");
+		
+		return mav;
 	}
 	@GetMapping("/mngboard.do")
 	public String mngBoard() {
@@ -342,6 +364,77 @@ public class ClubController {
 		return "club/clubManagementt";
 		
 	}
+	
+	//0327형철 소모임정보수정
+	@PostMapping("/mngclubinfo.do")
+	public ModelAndView mngClubInfo(ModelAndView mav,
+							        @RequestParam(value="upFile",required=false) MultipartFile upFile,
+							        Club newClub,
+							        HttpServletRequest request,
+							        @SessionAttribute("club") Club oldClub) {
+		
+			log.debug(upFile.getName());
+		
+		try {
+			
+			if(!upFile.isEmpty()) {
+				
+	    		//파일명 재생성 renamedFileName으로 저장하기
+	    		String originalFileName = upFile.getOriginalFilename();
+	    		String renamedFileName = Utils.getRenamedFileName(originalFileName);
+	    		
+	    		//파일이동
+	    		String saveDirectory = request.getServletContext().getRealPath("/resources/upload/club/maintitleimg");
+	    		try {
+					upFile.transferTo(new File(saveDirectory,renamedFileName));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+	    		
+		    	//기존파일삭제
+	    		String deletename = request.getParameter("clubImgReName");
+	    		String deleteFile = saveDirectory+"/"+deletename;    		
+	    		
+	    		File oldFile = new File(deleteFile);
+	    		
+	    		if(oldFile.exists()) {
+	    			oldFile.delete();
+	    		}
+	    		
+		    		
+    			newClub.setClubImgOri(originalFileName);
+    			newClub.setClubImgRe(renamedFileName);
+    		
+    			log.debug("newClub={}",newClub);
+    			
+			}else {
+				
+				newClub.setClubImgOri(oldClub.getClubImgOri());
+    			newClub.setClubImgRe(oldClub.getClubImgRe());
+				
+				
+				
+			}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		int result = clubService.updateClub(newClub);
+		
+		log.debug("result @ updateClub= {}", result);
+		
+		
+		mav.setViewName("redirect:/club/mngclubinfo.do?clubCode="+newClub.getClubCode());
+		
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
 	
 	
 }

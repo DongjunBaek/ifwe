@@ -132,6 +132,11 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.update("club.updateClubCurrent",clubCode);
 	}
 
+	@Override
+	public int updateClub(Club newClub) {
+		return sqlSession.update("club.updateClub",newClub);
+	}
+
 
 	
 	

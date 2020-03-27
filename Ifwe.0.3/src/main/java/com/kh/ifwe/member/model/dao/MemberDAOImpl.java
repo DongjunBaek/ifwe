@@ -36,6 +36,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Member selectOne(String memberId) {
+		System.out.println("멤버DAO체크");
 		return sqlSession.selectOne("member.selectOne",memberId);
 	}
 
@@ -78,7 +79,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Club> selectClubList(String memberCode) {
+	public List<Club> selectClubList(int memberCode) {
 		return sqlSession.selectList("member.selectClubList",memberCode);
 	}
 
@@ -96,6 +97,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member checkId(String memberId) {
 		return sqlSession.selectOne("member.checkId",memberId);
+	}
+
+	@Override
+	public List<Club> selectInterClub(String memberLike) {
+		return sqlSession.selectList("member.selectInterClub",memberLike);
 	}
 	
 	

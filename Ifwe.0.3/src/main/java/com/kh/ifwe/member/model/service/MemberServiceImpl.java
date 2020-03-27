@@ -25,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member selectOne(String memberId) {
+		System.out.println("멤버 서비스 체크");
 		return memberDAO.selectOne(memberId);
 	}
 
@@ -79,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 	}
   
   @Override
-	public List<Club> selectClubList(String memberCode) {
+	public List<Club> selectClubList(int memberCode) {
 		return memberDAO.selectClubList(memberCode);
 	}
   
@@ -91,6 +92,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
 	public Member checkId(String memberId) {
 		return memberDAO.checkId(memberId);
+	}
+
+	@Override
+	public List<Club> selectInterClub(String memberLike) {
+		return memberDAO.selectInterClub(memberLike);
 	}
 
 	

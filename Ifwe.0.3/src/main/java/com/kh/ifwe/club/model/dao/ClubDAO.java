@@ -53,5 +53,7 @@ public interface ClubDAO {
 
 	int updateClubCurrent(int clubCode);
 
+	int updateClub(Club newClub);
+
 
 }

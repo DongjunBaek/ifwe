@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -64,11 +65,17 @@ public class ProfileController {
 	
 	@GetMapping("/profileview.do")
 	public String profile(Model model, String profileMemberId, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes,@RequestParam("memberCode") int memberCode) {
 		Member member = memberService.selectOne(profileMemberId);
+		
+		member.setMemberCode(memberCode);
+		
 
+		log.debug("member@Controller={}"+member);
 		Profile profile =  profileservice.selectOneProfileWithCode(member.getMemberCode());
-
+		
+		
+		log.debug("Profile@Controller={}",profile);
 		
 		model.addAttribute("profile",profile);
 

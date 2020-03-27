@@ -36,7 +36,7 @@ public interface MemberService {
 
 	Member memberSelectOneCode(int memberCode);
 
-	List<Club> selectClubList(String memberCode);
+	List<Club> selectClubList(int memberCode);
 
 	int insertProfile(Member serchMember);
 
@@ -45,5 +45,7 @@ public interface MemberService {
 	MemberLoggedIn selectMemberLogin(int memberCode);
 	
 	Member checkId(String memberId);
+
+	List<Club> selectInterClub(String memberLike);
 
 }
