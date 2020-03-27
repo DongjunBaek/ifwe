@@ -23,5 +23,10 @@ public interface AdminService {
 
 	List<Board> selectOneBoard(int cPage, int numPerPage, String boardCategory);
 
+	Board selectBoard(int boardNo);
+
+	int updateBoard(int boardNo);
+
+
 
 }

@@ -77,5 +77,16 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.selectOneBoard", boardCategory, rowBounds);
 	}
 
+	@Override
+	public Board selectBoard(int boardNo) {
+		return sqlSession.selectOne("admin.selectBoardDetail", boardNo);
+	}
+
+	@Override
+	public int updateBoard(int boardNo) {
+		return sqlSession.update("admin.updateBoard", boardNo);
+	}
+
+
 	
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin/adminInclude.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin/adminBoardFrm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin/adminBoardFrm2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/boardForm.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/boardForm.css">
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
@@ -19,8 +20,12 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+
+<!-- 0326 게시글 수정 작업 -->
+
 <script>
 	$(document).ready(function() {
+		$('#summernote').val("${board.boardContent}");
 		$('#summernote').summernote({
 			placeholder : 'content',
 			minHeight : 400,
@@ -35,7 +40,10 @@
 		});
 		$("#search").selectric();
 		
+		console.log($('summernote'));
+		console.log($('#summernote'));
 		
+
 	});
 	
 	function sendUpLoadImgFile(file, el){
@@ -73,32 +81,33 @@
 	
 	function boardValidate(){
 		/* 게시글 등록 유효성 검사 */
-		return true;
+		return false;
 	}
 </script>
-</head>
-<body>
-	
+<style>
+.no-border{
+border:0;}
+
+</style>
+
 	<section>
-	<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
-        <div class="title_wrap">
+		<jsp:include page="/WEB-INF/views/common/adminInclude.jsp"></jsp:include>
+	  <div class="title_wrap">
             <h1>notice</h1>
         </div>		
         <div class="section-title-box">
-			<p>공지사항 등록</p>
+			<p>공지사항 수정</p>
 		</div>
-		<form action="${pageContext.request.contextPath }/board/insertBoard.do" autocomplete="off" method="POST" onsubmit="return boardValidate();" enctype = "multipart/form-data">
+				
+		<form action="${pageContext.request.contextPath }/admin/adminBoardUpdate.do" autocomplete="off" method="GET" onsubmit="return boardValidate();" enctype = "multipart/form-data">
 			<div class="board">
 				<div class="white_bgm">
 						<div class="select-boxs">
       						<input type="hidden" name="boardCate" value="notice"> 
-<!-- 	                        <select name="boardCate" id="search">
-	                            <option value="notice" selected>공지사항</option>
-	                        </select> -->
 	                    </div>
 					<div class="wrap_1">
 						<label id="main_title">제목</label> 
-						<input type="text" id="title" class="no-border" name="boardTitle">
+						<input type="text" id="title" class="no-border" name="boardTitle" value="${board.boardTitle}">
 						<h3 class="writer">작성자 : ${memberLoggedIn.memberId}</h3>
 					</div>
 					<hr>
@@ -107,12 +116,16 @@
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
 				<div class="btn_wrap">
-	           		<input type="submit" id="modify_1" value="등록" class="no-border">
+	           		<input type="submit" id="modify_1" value="수정" class="no-border">
 	       		 </div>
 				</div>
 			</div>
 		</form>
-    </section>
-	
+	</section>
 </body>
+<style>
+input {
+	padding:0;
+}
+</style>
 </html>

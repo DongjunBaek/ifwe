@@ -55,6 +55,16 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectOneBoard(cPage, numPerPage, boardCategory);
 	}
 
+	@Override
+	public Board selectBoard(int boardNo) {
+		return adminDAO.selectBoard(boardNo);
+	}
+
+	@Override
+	public int updateBoard(int boardNo) {
+		return adminDAO.updateBoard(boardNo);
+	}
+
 
 
 	
