@@ -45,5 +45,7 @@ public interface ClubService {
 
 	int updateClubCurrent(int clubCode);
 
+	int updateClub(Club newClub);
+
 
 }

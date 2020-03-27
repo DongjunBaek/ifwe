@@ -153,6 +153,12 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	@Override
+	public int updateClub(Club newClub) {
+		return clubDAO.updateClub(newClub);
+	}
+
+
 	
 	
 	
