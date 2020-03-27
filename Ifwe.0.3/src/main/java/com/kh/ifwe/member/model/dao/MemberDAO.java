@@ -1,5 +1,12 @@
 package com.kh.ifwe.member.model.dao;
 
+import java.util.Map;
+
+import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Profile;
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +40,8 @@ public interface MemberDAO {
 	List<Club> selectClubList(String memberCode);
 
 	int insertProfile(Member member);
+	
+	MemberLoggedIn selectMemberLogin(int memberCode);
 	
 	Member checkId(String memberId);
 

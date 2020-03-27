@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
@@ -77,15 +78,21 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
   
-	@Override
+  @Override
 	public List<Club> selectClubList(String memberCode) {
 		return memberDAO.selectClubList(memberCode);
 	}
   
-	@Override
+  @Override
+	public MemberLoggedIn selectMemberLogin(int memberCode) {
+		return memberDAO.selectMemberLogin(memberCode);
+	}
+  	
+  @Override
 	public Member checkId(String memberId) {
 		return memberDAO.checkId(memberId);
 	}
+
 	
 }
 

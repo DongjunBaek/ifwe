@@ -136,6 +136,12 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	@Override
+	public ClubMember selectClubMaster2(int clubMaster) {
+		return clubDAO.selectClubMaster2(clubMaster);
+	}
+
+
 	
 	
 	
