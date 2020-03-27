@@ -119,7 +119,7 @@ $(function(){
 				success: function(data){
 					console.log(data);
 					if( data != ""){
-						$("#memberIdChk").text("아이디가 존재합니다.").css("color","rgb(235, 42, 14)");
+						$("#memberIdChk").text("중복된 아이디입니다.").css("color","rgb(235, 42, 14)");
 					}
 					else{
 						$("#memberIdChk").text("훌륭한 아이디군요!").css("color","#4EC407");
