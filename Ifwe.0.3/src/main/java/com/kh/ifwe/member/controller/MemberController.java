@@ -574,5 +574,16 @@ public class MemberController {
 		model.addAttribute("profile",profile);
 		return "member/profileUpdate";
 	}
+	
+	// 2020326 아이디 중복 검사 
+	@GetMapping("/checkId.do")
+	@ResponseBody
+	public Member checkId(@RequestParam("memberId") String memberId) {
+		
+		Member member = memberService.checkId(memberId);
+		log.debug("member={}",member);
+		
+		return member;
+	}
 
 }
