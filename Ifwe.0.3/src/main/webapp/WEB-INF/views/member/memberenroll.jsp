@@ -112,28 +112,28 @@ $(function(){
 			msg = "5~20자의 영문소문자,숫자와 특수기호만 사용 가능합니다.";
 			$("#memberIdChk").text(msg).css("color","rgb(235, 42, 14)");
 		}else{
-			$("#memberIdChk").text('');
+			$.ajax({
+				type:"GET",
+				url:"${pageContext.request.contextPath}/member/checkId.do",
+				data: {memberId: memberId},
+				success: function(data){
+					console.log(data);
+					if( data != ""){
+						$("#memberIdChk").text("아이디가 존재합니다.").css("color","rgb(235, 42, 14)");
+					}
+					else{
+						$("#memberIdChk").text("훌륭한 아이디군요!").css("color","#4EC407");
+						
+					}
+						
+				},
+				error: function(x,s,e){
+					
+				}
+				
+			})
 		}
-		$.ajax({
-			type:"GET",
-			url:"${pageContext.request.contextPath}/member/checkId.do",
-			data: {memberId: memberId},
-			success: function(data){
-				
-				if( data != null){
-					$("#memberIdChk").text("아이디가 존재합니다.");
-				}
-				else{
-					$("#memberIdChk").text("훌륭한 아이디군요!");
-					
-				}
-					
-			},
-			error: function(x,s,e){
-				
-			}
-			
-		})
+		
 	});	
 
 	$("#password").blur(function(){

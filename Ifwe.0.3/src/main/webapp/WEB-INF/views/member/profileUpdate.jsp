@@ -126,21 +126,16 @@ input#inputProfileName {
 						placeholder="    #관심사 입력" id="tag" size="6"> <input
 						type="hidden" value="" name="contentsCateCodes" id="rdTag" />
 					<ul id="tag-list">
+	   	<c:forEach items="${profile.contentsCateCodes }" var="list">
+					<li class='tag-item' >#${list }<span class='del-btn' idx='"+counter+"'>x</span></li>
+					</c:forEach>
 					</ul>
 				</div>
 			
 			<div class="makeProfile-article-inputImg font-kor">
 					<p>프로필 이미지 등록</p>
 
-					<div id="uploadFileDiv">
-						<!-- <div class="input-group mb-3" style="padding: 0px;">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="upFile"
-									id="upFile1"> 
-									<label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-							</div>-->
-
-						<div class="uploadImg-div">
+									<div class="uploadImg-div">
 							<div>
 								<span id="fileNameForProfile"></span>
 							</div>
@@ -177,30 +172,7 @@ input#inputProfileName {
 						목록</p>
 				</div>
 				<div class="friend-lists">
-					<div class="friend-list">
-						<div class="friend-img">
-							<img
-								src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
-								alt="" />
-						</div>
-						<div class="friend-name font-kor friend-name-profile">김원재</div>
-					</div>
-					<div class="friend-list">
-						<div class="friend-img">
-							<img
-								src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
-								alt="" />
-						</div>
-						<div class="friend-name font-kor friend-name-profile">신형철</div>
-					</div>
-					<div class="friend-list">
-						<div class="friend-img">
-							<img
-								src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg"
-								alt="" />
-						</div>
-						<div class="friend-name font-kor friend-name-profile">백동준</div>
-					</div>
+					
 				</div>
 			</div>
 		</article>
@@ -211,6 +183,14 @@ input#inputProfileName {
 
 
 <script type="text/javascript">
+
+		
+		
+		
+		
+		
+		
+		
 		/*프로필 네임 수정  */
 		jQuery('#toggle').click(function () {  
 		    if($("#inputProfileName").css("display") == "none"){   
@@ -221,11 +201,19 @@ input#inputProfileName {
 		        jQuery('#inputProfileName').css("display", "none");
 		    }  
 		});  
+		
+		
+		
+		
+		
+		
+
 
 /*  친구 프로필들 출력 */
 
 $(()=>{
 
+	
 	console.log("onload On");
 		/*친구찾기  */
 	/* 	location.href="${pageContext.request.contextPath}/Friend/selectFriendList.do?memberCode="+41; */
@@ -249,12 +237,12 @@ $(()=>{
 				$.each(data,function(idx,value){
 					console.log(idx);
 					console.log(value);
-/* 				
+ /* 				
 					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg' id='profileImg' value='"+value.memberCode+"'  alt='' /></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberCode+"' >"+value.memberPname+"</div></div>"); 
-					 */
+					  */
 			
-					$(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberId+"' >"+value.memberPname+"</div></div>"); 
-					
+					 $(".friend-lists").append("<div class='friend-list'    ><div class='friend-img'><img src='${pageContext.request.contextPath }/resources/upload/profile/${profile.profileImgRe!=null?profile.profileImgRe:''}' alt=''></div><div class='friend-name font-kor friend-name-profile' id='profileId' value='"+value.memberId+"' >"+value.memberPname+"</div></div>"); 
+					 
 				})
 				
 			},
@@ -318,85 +306,116 @@ $(()=>{
 
 
 		
-		$("[name=upFile]").on("change", e => {
-			let $file = $(e.target); //사용자가 작성한 file input 태그
-			
-			//취소한 경우
-			if($file.prop('files')[0] === undefined){
-				$file.next(".custom-file-label").html("파일을 선택하세요.");
-			}
-			else{
-				let fileName = $file.prop('files')[0].name;
-				$file.next(".custom-file-label").html(fileName);
-			}
-		});
 		
 		
-		//*****************해쉬태그 생성 **********************
-		var tag = {};
-		var counter = 0;
-		// 태그를 추가한다.
-		function addTag (value) {
-		    tag[counter] = value; // 태그를 Object 안에 추가
-		    counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
-		}
-		// 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
-		function marginTag () {
-		    return Object.values(tag).filter(function (word) {
-		        return word !== "";
-		    });
-		}
-		// 서버에 넘기기
-		$("#tag-form").on("submit", function (e) {
-		    var value = marginTag(); // return array
-		    $("#rdTag").val(value);
-		    $(this).submit();
-		});
-		$("#tag").on("keypress", function (e) {
-		    var self = $(this);
-		    // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
-		    if (e.key === "Enter" || e.keyCode == 32) {
-		        var tagValue = self.val(); // 값 가져오기
-				 var reg = /^[가-힣]{1,8}$/;
-		        // 값이 없으면 동작 ㄴㄴ
-		        if (tagValue !== "" && reg.test(tagValue)) {
-		            // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
-		            var result = Object.values(tag).filter(function (word) {
-		                return word === tagValue;
-		            })
-		            // 태그 중복 검사
-		            if (result.length == 0) {
-		                $("#tag-list").append("<li class='tag-item' >#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
-		                addTag(tagValue);
-		                self.val("");
-		            } else {
-		                alert("태그값이 중복됩니다.");
-		            }
-		        }else{
-		       	$("#tag").val('');
-		        }
-		        e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
-		    }
-		});
-		// 삭제 버튼
-		// 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
-		$(document).on("click", ".del-btn", function (e) {
-		    var index = $(this).attr("idx");
-		    tag[index] = "";
-		    $(this).parent().remove();
-		});
-		//****************해쉬태그 끝 ********************
+		
 	});/*onload  */
 
-	$("#upFile").on("change",function(){
-		/* console.log(this.value); */
-		$("#fileNameForProfile").text(this.value);
-	});
-		
-		
-	
+
+
+
+
+
+
 
 	</script>
+	
+	
+	
+<script>
+
+/* 파일 등록 취소시 취소되는구문	  */
+$(()=>{
+	
+	$("[name=upFile]").on("change", e => {
+		let $file = $(e.target); //사용자가 작성한 file input 태그
+		
+		//취소한 경우
+		if($file.prop('files')[0] === undefined){
+			$file.next(".custom-file-label").html("파일을 선택하세요.");
+		}
+		else{
+			let fileName = $file.prop('files')[0].name;
+			$file.next(".custom-file-label").html(fileName);
+		}
+	});
+	
+	
+});
+
+
+
+
+
+$(()=>{
+	
+	//*****************해쉬태그 생성 **********************
+	var tag = {};
+	var counter = 0;
+	// 태그를 추가한다.
+	function addTag (value) {
+	    tag[counter] = value; // 태그를 Object 안에 추가
+	    counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+	}
+	// 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+	function marginTag () {
+	    return Object.values(tag).filter(function (word) {
+	        return word !== "";
+	    });
+	}
+	// 서버에 넘기기
+	$("#tag-form").on("submit", function (e) {
+	    var value = marginTag(); // return array
+	    $("#rdTag").val(value);
+	    $(this).submit();
+	});
+	$("#tag").on("keypress", function (e) {
+	    var self = $(this);
+	    // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
+	    if (e.key === "Enter" || e.keyCode == 32) {
+	        var tagValue = self.val(); // 값 가져오기
+			 var reg = /^[가-힣]{1,8}$/;
+	        // 값이 없으면 동작 ㄴㄴ
+	        if (tagValue !== "" && reg.test(tagValue)) {
+	            // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+	            var result = Object.values(tag).filter(function (word) {
+	                return word === tagValue;
+	            })
+	            // 태그 중복 검사
+	            if (result.length == 0) {
+	                $("#tag-list").append("<li class='tag-item' >#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+	                addTag(tagValue);
+	                self.val("");
+	            } else {
+	                alert("태그값이 중복됩니다.");
+	            }
+	        }else{
+	       	$("#tag").val('');
+	        }
+	        e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+	    }
+	});
+	// 삭제 버튼
+	// 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+	$(document).on("click", ".del-btn", function (e) {
+	    var index = $(this).attr("idx");
+	    tag[index] = "";
+	    $(this).parent().remove();
+	});
+	//****************해쉬태그 끝 ********************
+	
+	
+});
+
+
+
+
+
+
+
+
+</script>
+
 <style>
 .list-ul li{
 		padding: 0%;

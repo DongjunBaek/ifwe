@@ -67,8 +67,11 @@ public class ProfileController {
 			RedirectAttributes redirectAttributes) {
 		Member member = memberService.selectOne(profileMemberId);
 
+		log.debug("member@Controller={}"+member);
 		Profile profile =  profileservice.selectOneProfileWithCode(member.getMemberCode());
-
+		
+		
+		log.debug("Profile@Controller={}",profile);
 		
 		model.addAttribute("profile",profile);
 
