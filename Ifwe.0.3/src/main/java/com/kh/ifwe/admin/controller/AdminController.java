@@ -170,6 +170,18 @@ public class AdminController {
 		return "redirect:/admin/adminBoardDetail";
 	}
 	
+	@GetMapping("/boardDelete.do")
+	public String boardDelete(@RequestParam("boardNo") int boardNo,RedirectAttributes redirectAttributes ) {
+		log.debug("공지사항 삭제");
+		
+		int result = adminService.deleteBoard(boardNo);
+		
+		redirectAttributes.addFlashAttribute("msg", result>0?"삭제성공!":"삭제 실패!");
+		
+		return "redirect:/admin/adminNotice";
+		
+	}
+	
 	/*
 	 * @GetMapping("/adminBoardList.do")
 	 * 

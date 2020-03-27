@@ -65,6 +65,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.updateBoard(boardNo);
 	}
 
+	@Override
+	public int deleteBoard(int boardNo) {
+		return adminDAO.deleteBoard(boardNo);
+	}
+
 
 
 	

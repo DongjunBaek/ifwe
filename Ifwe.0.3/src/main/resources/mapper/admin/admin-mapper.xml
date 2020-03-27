@@ -99,7 +99,7 @@
 		where board_no = #{boardNo}
 	</select>
 	
-	<update id="updateBoard">
+<!-- 	<update id="updateBoard">
 		update 
 			board
 		set 
@@ -108,15 +108,15 @@
 		where
 			board_no = #{boardNo}
 	</update>
-	
+	 -->
 	
 	<!-- 0326 동준 작업 게시글 삭제-->
-	<delete id="deleteBoardOne">
-		delete from 
-			board
+	<update id="deleteBoard">
+	 	update board set 
+			board_del = 'y'
 		where
 			board_no = #{boardNo}
-	</delete>
+	</update>
 	
 	<!-- 0326 동준 작업 게시글 내용 수정-->
 	 <update id="updateBoardOne">

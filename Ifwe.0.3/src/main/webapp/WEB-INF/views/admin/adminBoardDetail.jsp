@@ -40,7 +40,7 @@ function boardUpdateFrm(){
         </div>
         <div class="del_update_btn_wrap">
             <input type="button" id="board_update_btn" class="btn_board" value="수정하기" onclick="boardUpdateFrm()">
-            <input type="button" id="board_delete_btn" class="btn_board" value="삭제하기">
+            <input type="button" id="board_delete_btn" class="btn_board" value="삭제하기" onclick="boardDel()">
         </div>
         
     </section>
