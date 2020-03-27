@@ -48,8 +48,11 @@ public class BoardController {
 	 * @return
 	 */
 	@PostMapping("/insertBoard.do")
-	public ModelAndView insertBoard( Board board,ModelAndView mav) {
-		
+	public ModelAndView insertBoard( Board board,ModelAndView mav, @RequestParam("viewName") String viewName) {
+		/**
+		 * 0327 set view name 반영 기능 구현 동준.
+		 */
+		log.debug("viewName {}", viewName);
 		int result = boardService.insertBoard(board);
 		
 		if (result > 0) {
@@ -57,7 +60,7 @@ public class BoardController {
 		}else
 			log.debug("Board @ insertBoard.do : 글 등록 실패");
 		
-		mav.setViewName("main/mainBoard"); // 게시글 상세 보기로 이동할 예정.
+		mav.setViewName(viewName); // 게시글 상세 보기로 이동할 예정.
 		
 		return mav;
 	}

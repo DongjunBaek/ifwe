@@ -106,6 +106,7 @@
 					<br /><br />
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
+				<input type="hidden" name="viewName" value="admin/adminNotice">
 				<div class="btn_wrap">
 	           		<input type="submit" id="modify_1" value="등록" class="no-border">
 	       		 </div>
