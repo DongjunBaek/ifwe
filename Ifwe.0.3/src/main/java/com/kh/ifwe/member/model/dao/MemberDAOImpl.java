@@ -36,6 +36,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Member selectOne(String memberId) {
+		System.out.println("멤버DAO체크");
 		return sqlSession.selectOne("member.selectOne",memberId);
 	}
 

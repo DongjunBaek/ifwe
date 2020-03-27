@@ -102,14 +102,14 @@
 	</select>
 	
 	<select id="selectClubMember" resultType="clubMember">
-		select M.*,p.profile_name,p.profile_img_re 
-		from member M join member_profile P 
-            on M.member_code = P.member_code
-			where 
-			M.member_code in
-			<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item.memberCode}
-			</foreach>
+		select M.*,p.profile_name,p.profile_img_re,H.club_grade
+		from member M join member_profile P on M.member_code = P.member_code
+                      join club_members H on M.member_code=H.member_code
+		where 
+		M.member_code in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item.memberCode}
+		</foreach>
 	</select>
 	
 	<select id="selectClubMaster2" resultType="clubMember">
@@ -202,6 +202,23 @@
 		where 
 			club_code = #{clubCode}
 	</update>
+	
+	<update id="updateClub">
+		update
+			club
+		set
+			club_title = #{clubTitle},
+			club_img_ori=#{clubImgOri},
+			club_img_re=#{clubImgRe},
+			club_location=#{clubLocation},
+			club_content=#{clubContent}
+		where
+			club_code=#{clubCode}
+			
+	
+	</update>
+	
+	
 </mapper>
 
 

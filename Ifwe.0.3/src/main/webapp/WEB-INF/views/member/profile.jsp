@@ -22,7 +22,7 @@
                     <li><p>회원정보</p></li>
                     <p>생년월일: ${member.memberBirth }</p>
                     <p>거주: ${member.memberAddr }</p>
-                    <p>성별: ${profile.profileGender=='F'?'여':'남' }</p>
+                    <p>성별: ${profile.profileGender=='f'?'여':'남' }</p>
                     <li><p>소개글</p></li>
                     <p>${profile.profileComment } </p>
                     <li><p>관심키워드</p></li>

@@ -84,7 +84,11 @@ section{
     font-size: 20px;
 }
 .upfileinput{
-    display: none;
+     width: 0;
+     height: 0;
+     padding: 0;
+     overflow: hidden;
+     border: 0;
 }
 .upfilelabel{
     margin-left:20px;
@@ -107,6 +111,7 @@ section{
     outline: none;
     margin-top: 40px;
     font-weight: 600;
+    cursor:pointer;
 
 }
 

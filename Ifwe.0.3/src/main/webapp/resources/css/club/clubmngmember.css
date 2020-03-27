@@ -73,6 +73,7 @@ section{
 }
 .shc-table-img img{
     width:60px;
+    height:100%;
 }
 .shc-friendtable button{
     width:80px;
