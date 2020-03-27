@@ -16,7 +16,7 @@
 
 
 	<resultMap type="Profile" id="ProfileMap">
-		<result column="contentsCateCodes" property="contentsCateCodes" typeHandler="StrArrTypeHandler"/>
+		<result column="contents_Cate_Codes" property="contentsCateCodes" typeHandler="StrArrTypeHandler"/>
 	</resultMap>
 
 
