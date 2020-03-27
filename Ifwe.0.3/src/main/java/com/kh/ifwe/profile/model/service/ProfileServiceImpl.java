@@ -22,6 +22,7 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public Profile selectOneProfile(String profileMemberId) {
 		// TODO Auto-generated method stub
+		System.out.println("프로필 서비스 작동 확인");
 		return profiledao.selectOneProfile(profileMemberId);
 	}
 

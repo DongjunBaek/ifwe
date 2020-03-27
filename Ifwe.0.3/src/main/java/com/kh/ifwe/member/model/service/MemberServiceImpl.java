@@ -25,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member selectOne(String memberId) {
+		System.out.println("멤버 서비스 체크");
 		return memberDAO.selectOne(memberId);
 	}
 
