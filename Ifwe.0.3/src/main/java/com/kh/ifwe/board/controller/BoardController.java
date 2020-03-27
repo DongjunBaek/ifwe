@@ -175,10 +175,10 @@ public class BoardController {
 		mav.addObject("board",board);
 		mav.setViewName("board/boardUpdate");
 		
-		
 		return mav;
 	}
-	@PostMapping("updateBoardOne.do")
+	
+	@PostMapping("/updateBoard.do")
 	public ModelAndView updateBoardOne(ModelAndView mav, Board board 
 														 ) {
 		log.debug("board updateBoardOne @ boardController {}",board);

@@ -15,7 +15,6 @@
 <script>
 
 $(document).ready(function(){     
-	   
 			var boardCategory = "notice";
 			console.log(boardCategory)
 			$.ajax({
@@ -41,7 +40,6 @@ $(document).ready(function(){
 				}
 			});
 		});
-    
     $(function(){
         $(".notice_menu").click(function(){
 			var boardCategory = $(this).attr("id");
@@ -62,11 +60,19 @@ $(document).ready(function(){
 				/* 	$parentDiv.append("<tr><td onclick='boardTitleClick()'><form id='boardNoFrm'><input type='hidden' name='boardNo' value='"+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</td>"
 							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td>"+"<td>"+value.boardNo+"</td></tr>");				
 					});  */
+					if(value.boardCate == 'notice'){
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
+								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");		
+					}else if(value.boardCate=='qna'){						
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
+								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
 					
-					$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
-							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
+					}else{
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
+								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
+					}
+					
 					}); 
-					
 					
 				},
 				error : function(x,h,r){

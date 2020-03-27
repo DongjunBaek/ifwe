@@ -38,12 +38,15 @@
 				}
 			}
 		});
-		$("#search").selectric();
+/* 		$("#search").selectric(); */
 		
 		console.log($('summernote'));
 		console.log($('#summernote'));
 		
-
+		$("#modify_2").click(function(){
+			console.log(this);
+			$("#updateFrm").submit();
+		})
 	});
 	
 	function sendUpLoadImgFile(file, el){
@@ -81,8 +84,10 @@
 	
 	function boardValidate(){
 		/* 게시글 등록 유효성 검사 */
-		return false;
+		return true;
 	}
+	
+
 </script>
 <style>
 .no-border{
@@ -96,14 +101,18 @@ border:0;}
             <h1>notice</h1>
         </div>		
         <div class="section-title-box">
-			<p>공지사항 수정</p>
+			<p>${board.boardCate }</p>
 		</div>
 				
-		<form action="${pageContext.request.contextPath }/admin/adminBoardUpdate.do" autocomplete="off" method="GET" onsubmit="return boardValidate();" enctype = "multipart/form-data">
+			<form id="updateFrm" action="${pageContext.request.contextPath }/board/updateBoard.do" autocomplete="off" method="POST" onsubmit="return boardValidate();" enctype = "multipart/form-data">
 			<div class="board">
 				<div class="white_bgm">
-						<div class="select-boxs">
-      						<input type="hidden" name="boardCate" value="notice"> 
+					<div class="select-boxs">
+	                        <select name="boardCate" id="search">
+	                            <option value="notice" ${board.boardCate=='notice'?"selected":"" } selected>공지사항</option>
+	                          <%--   <option value="qna" ${board.boardCate=='qna'?"selected":"" }>문의사항</option>
+	                            <option value="report" ${board.boardCate=='report'?"selected":"" }>신고사항</option> --%>
+	                        </select>
 	                    </div>
 					<div class="wrap_1">
 						<label id="main_title">제목</label> 
@@ -115,6 +124,7 @@ border:0;}
 					<br /><br />
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
+				<input type="hidden" name = "boardNo" value = "${board.boardNo }" />
 				<div class="btn_wrap">
 	           		<input type="submit" id="modify_1" value="수정" class="no-border">
 	       		 </div>
@@ -122,6 +132,7 @@ border:0;}
 			</div>
 		</form>
 	</section>
+
 </body>
 <style>
 input {
