@@ -31,10 +31,10 @@ $(document).ready(function(){
 					console.log(idx);
 					console.log(value);
 					
-					$parentDiv.append("<tr><td>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</td>"
-							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");
-						
+					$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
+							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
 					}); 
+					
 				},
 				error : function(x,h,r){
 					console.log(x,h,r);
@@ -54,14 +54,20 @@ $(document).ready(function(){
 
 					$parentDiv = $("#appendList");
 					$parentDiv.empty();
-
+               
 					$.each(data, function(idx,value){
 					console.log(idx);
 					console.log(value);
 					
-					$parentDiv.append("<tr><td>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</td>"
+				/* 	$parentDiv.append("<tr><td onclick='boardTitleClick()'><form id='boardNoFrm'><input type='hidden' name='boardNo' value='"+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</td>"
+							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td>"+"<td>"+value.boardNo+"</td></tr>");				
+					});  */
+					
+					$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
 							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
 					}); 
+					
+					
 				},
 				error : function(x,h,r){
 					console.log(x,h,r);
@@ -85,7 +91,16 @@ $(document).ready(function(){
     	})
     });
     
+/*     function boardTitleClick(){
+    	
+		$("#boardNoFrm").attr('action', "${pageContext.request.contextPath}/admin/adminBoardDetail.do")
+		.attr("method", "get")
+		.submit(); 
+		
+		console.log($("#boardNoFrm"));
     
+    } 
+     */
 
 </script>
 

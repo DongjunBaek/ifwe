@@ -164,7 +164,7 @@ public class BoardController {
 	/**
 	 * 0326 동준 작업 게시글 수정 기능 
 	 */
-	@GetMapping("updateBoardOne.do")
+	@GetMapping("/updateBoardOne.do")
 	public ModelAndView updateBoardOne(ModelAndView mav, @RequestParam(value="boardNo", required= true) int boardNo) {
 		
 		Board board = boardService.selectBoardDetail(boardNo);
