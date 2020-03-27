@@ -55,10 +55,12 @@ $(function(){
          	<form action="${pageContext.request.contextPath}/club/enrollYes.do" name="yes" method="POST">
          		<input type="hidden" name="clubCode" value="${msg.clubCode }"/>
          		<input type="hidden" name="memberCode" value="${msg.memberFrom }" />
+         		<input type="hidden" name="msgCode" value="${msg.msgCode }" />
          	</form>
          	<form action="${pageContext.request.contextPath}/club/enrollNo.do" name="no" method="POST">
          		<input type="hidden" name="clubCode" value="${msg.clubCode }"/>
          		<input type="hidden" name="memberCode" value="${msg.memberFrom }" />
+         		<input type="hidden" name="msgCode" value="${msg.msgCode }" />
          	</form>
          </div>
      </section>

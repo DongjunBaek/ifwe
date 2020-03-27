@@ -99,6 +99,17 @@
 		where board_no = #{boardNo}
 	</select>
 	
+	<update id="updateBoard">
+		update 
+			board
+		set 
+			board_title = #{boardTitle},
+			board_content = #{boardContent}
+		where
+			board_no = #{boardNo}
+	</update>
+	
+	
 	<!-- 0326 동준 작업 게시글 삭제-->
 	<delete id="deleteBoardOne">
 		delete from 

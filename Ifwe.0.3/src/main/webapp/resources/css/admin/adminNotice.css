@@ -103,6 +103,7 @@ th:last-child{
     text-align: right;
     padding-right: 70px;
 }
+
 td{
     height: 45px;
     font-family: 'Noto Sans KR', sans-serif;
@@ -114,6 +115,15 @@ td{
     padding-bottom: 10px;
     border-bottom: 1px solid #f1f2f2;
 }
+td:first-child a{
+	cursor: pointer;
+	text-decoration-line: none;
+	color : #3b3b3b;
+}
+td:first-child:hover{
+    font-weight: bold;
+}
+
 td:last-child{
     text-align: right;
     padding-right: 20px;

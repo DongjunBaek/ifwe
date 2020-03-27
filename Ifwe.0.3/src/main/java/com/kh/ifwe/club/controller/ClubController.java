@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","memberLoggedIn"})
+@SessionAttributes(value= {"clubMaster","club","clubMember"})
 public class ClubController {
 	
 	@Autowired
@@ -177,9 +177,6 @@ public class ClubController {
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
 		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
-		ClubMember memberLoggedIn = clubService.selectClubMaster2(member.getMemberCode());
-		
-		
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
@@ -188,10 +185,8 @@ public class ClubController {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
-		log.debug("memberLoggedIn={}",memberLoggedIn);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
-		mav.addObject("memberLoggedIn",memberLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
@@ -298,6 +293,10 @@ public class ClubController {
 		log.debug("msgCode = {}", msgCode);
 		
 		Message msg = clubService.selectMsgOne(msgCode);
+		//메서지 확인여부를 update
+		int result = clubService.updateMsgView(msgCode);
+		
+		log.debug("result = {}",result);
 		log.debug("msg = {}",msg);
 		mav.addObject("msg", msg);
 		mav.setViewName("club/clubMngEnrollEnd");
@@ -309,17 +308,23 @@ public class ClubController {
 	//0326 문보라 가입수락
 	@PostMapping("/enrollYes.do")
 	public String enrollYes(@RequestParam("clubCode") int clubCode,
-							@RequestParam("memberCode") int memberCode) {
+							@RequestParam("memberCode") int memberCode,
+							@RequestParam("msgCode")int msgCode) {
 		log.debug("cluc = {}",clubCode);
 		log.debug("memberCode = {}",memberCode);
+		log.debug("msgCode = {}",msgCode);
 		Map<String, Integer> param = new HashMap<String, Integer>();
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberCode);
+		param.put("msgCode",msgCode);
 		
 		int result = clubService.updateMembersGrade(param);
+		//가입수락을 누르면 club_current +1 update
+		int plusResult = clubService.updateClubCurrent(clubCode);
+		
 		log.debug("result = {}",result);
 		
-		return "club/management.do";
+		return "club/clubManagement";
 	}
 	
 	//0326 문보라 가입거절
@@ -333,7 +338,8 @@ public class ClubController {
 		param.put("memberCode", memberCode);
 		
 		int result = clubService.deleteMembers(param);
-		return "club/management.do";
+		log.debug("result = {}",result);
+		return "club/clubManagementt";
 		
 	}
 	

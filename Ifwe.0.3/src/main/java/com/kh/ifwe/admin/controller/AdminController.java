@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
@@ -130,6 +132,43 @@ public class AdminController {
 		return "/admin/adminBoardFrm";
 	}
 	
+	@GetMapping("/adminBoardDetail.do")
+	public ModelAndView boardDetail(@RequestParam(value="boardNo", required=false) int boardNo) {
+		log.debug("게시판 상세 페이지");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		mav.addObject("board",board);
+		mav.setViewName("/admin/adminBoardDetail");
+		
+		return mav;
+	}
+	@GetMapping("/boardUpdateFrm.do")
+	public ModelAndView boardUpdate(@RequestParam(value="boardNo", required=false) int boardNo) {
+		log.debug("공지사항 수정 페이지");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		mav.addObject("board",board);
+		mav.setViewName("admin/adminBoardUpdateFrm");
+		
+		return mav;
+	}
+	
+	@GetMapping("/adminBoardUpdate.do")
+	public String boardUpdateOne(@RequestParam(value="boardNo") int boardNo,RedirectAttributes redirectAttributes) {
+		log.debug("공지사항 수정");
+		
+		int result = adminService.updateBoard(boardNo);
+
+		redirectAttributes.addFlashAttribute("msg", result>0?"수정 성공!":"수정 실패!");
+		
+		return "redirect:/admin/adminBoardDetail";
+	}
 	
 	/*
 	 * @GetMapping("/adminBoardList.do")
