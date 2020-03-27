@@ -8,6 +8,10 @@ public interface ProfileService {
 
 	List<Profile> selectListProfile(int profileMemberCode);
 
-	Profile selectOneProfile(int profileMemberCode);
+	Profile selectOneProfile(String profileMemberId);
+
+	Profile selectOneProfileWithCode(int memberCode);
+
+	
 
 }

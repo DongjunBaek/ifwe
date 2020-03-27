@@ -63,8 +63,8 @@
 	}
 	
 	function boardValidate(){
-		/* 게시글 등록 유효성 검사 */
-		return false;
+		/* 게시글 수정 유효성 검사  */
+		return true;
 	}
 </script>
 <style>
@@ -75,18 +75,17 @@ border:0;}
 
 	<section>
 		<div class="section-title-box">
-			<p>게시판</p>
-			<p>ifwe를 사용하시면서 궁금한 점이나 신고사항을 적어주세요</p>
+			<p>게시글 수정하기</p>		
 		</div>
 				
-		<form action="${pageContext.request.contextPath }/board/boardUpdate.do" autocomplete="off" method="POST" onsubmit="return boardValidate();" enctype = "multipart/form-data">
+		<form action="${pageContext.request.contextPath }/board/updateBoardOne.do" autocomplete="off" method="POST" onsubmit="return boardValidate();" enctype = "multipart/form-data">
 			<div class="board">
 				<div class="white_bgm">
 					<div class="select-boxs">
 	                        <select name="boardCate" id="search">
-	                            <option value="notice">공지사항</option>
-	                            <option value="qna">문의사항</option>
-	                            <option value="report">신고사항</option>
+	                            <option value="notice" ${board.boardCate=='notice'?"selected":"" } selected>공지사항</option>
+	                            <option value="qna" ${board.boardCate=='qna'?"selected":"" }>문의사항</option>
+	                            <option value="report" ${board.boardCate=='report'?"selected":"" }>신고사항</option>
 	                        </select>
 	                    </div>
 					<div class="wrap_1">
@@ -99,6 +98,7 @@ border:0;}
 					<br /><br />
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
+				<input type="hidden" name = "boardNo" value = "${board.boardNo }" />
 				<div class="btn_wrap">
 	           		<input type="submit" id="modify_1" value="수정" class="no-border">
 	       		 </div>

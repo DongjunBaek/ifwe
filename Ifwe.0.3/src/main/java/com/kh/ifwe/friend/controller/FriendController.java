@@ -78,7 +78,7 @@ public class FriendController {
 		List<Friend> list = friendService.selectListFriend(memberCode);
 
 		model.addAttribute("list", list);
-
+log.debug("List@FindFriendController"+list);
 		return list;
 
 		

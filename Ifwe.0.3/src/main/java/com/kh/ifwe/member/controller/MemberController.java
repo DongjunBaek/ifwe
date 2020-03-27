@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -19,24 +20,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn" })
+@SessionAttributes(value = { "memberLoggedIn","profile" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -44,6 +44,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ProfileService profileService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -96,12 +99,22 @@ public class MemberController {
 			msg = "회원가입실패";
 		}
 
+
+		
+		Member serchMember = memberService.selectOne(member.getMemberId());
+		
+		
+		int insertProfileResult =memberService.insertProfile(serchMember); 
+		
 		redirectAttributes.addFlashAttribute("msg", msg);
 		mav.setViewName("redirect:/");
 
 		return mav;
 	}
 
+	
+	
+	
 	@PostMapping("/login.do")
 	public String login(@RequestParam("memberId") String memberId, @RequestParam("password") String password,
 			Model model, RedirectAttributes redirectAttributes,
@@ -134,8 +147,14 @@ public class MemberController {
 			// bcryptPasswordEncoder를 이용한 비교
 			// 로그인한 경우, session에 member객체 저장
 			if (member != null && bcryptPasswordEncoder.matches(password, member.getMemberPwd())) {
-
-				model.addAttribute("memberLoggedIn", member);
+				
+				MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+				model.addAttribute("memberLoggedIn", memberLoggedIn);
+				
+				Profile profile = profileService.selectOneProfileWithCode(member.getMemberCode());
+				log.debug("profile = {}",profile);
+				model.addAttribute("profile",profile);
+				
 				return "main/mainPage";
 
 			} else {
@@ -181,13 +200,25 @@ public class MemberController {
 		return "member/profile";
 	}
 
+	
 	@GetMapping("/update.do")
-	public String update() {
-		return "member/update";
+	public ModelAndView update(ModelAndView mav) {
+		
+		
+		mav.setViewName("member/update");
+		
+		return mav;
 	}
 
 	@GetMapping("/membership.do")
-	public String membership() {
+	public String membership(@RequestParam("memberCode") String memberCode,
+								Model model) {
+		List<Club> list = memberService.selectClubList(memberCode);
+		
+		log.debug("list = {}" ,list);
+		
+		model.addAttribute("list", list);
+		
 		return "member/membership";
 
 	}
@@ -369,7 +400,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/profileUpdate.do")
-	public String updatetProfile(com.kh.ifwe.member.model.vo.Profile profile,
+	public String updatetProfile(Profile profile,
 			@RequestParam(value = "upFile", required = false) MultipartFile upFile, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		try {
@@ -538,10 +569,21 @@ public class MemberController {
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		System.out.println("memberController 되나");
-	 Profile	profile=profileservice.selectOneProfile(memberCode);
+	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
 		return "member/profileUpdate";
+	}
+	
+	// 2020326 아이디 중복 검사 
+	@GetMapping("/checkId.do")
+	@ResponseBody
+	public Member checkId(@RequestParam("memberId") String memberId) {
+		
+		Member member = memberService.checkId(memberId);
+		log.debug("member={}",member);
+		
+		return member;
 	}
 
 }

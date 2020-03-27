@@ -1,5 +1,6 @@
 package com.kh.ifwe.club.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,11 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Message;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class ClubDAOImpl implements ClubDAO {
 	
@@ -78,8 +83,43 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
-		return sqlSession.selectList("club.selectClubMember",clubMemberCode);
+	public List<ClubMember> selectClubMember(List<Member> clubMemberCode_) {
+		return sqlSession.selectList("club.selectClubMember", clubMemberCode_);
+	}
+
+	@Override
+	public ClubMember selectClubMaster2(int clubMaster) {
+		return sqlSession.selectOne("club.selectClubMaster2",clubMaster);
+	}
+
+	@Override
+	public int insertMsgEnroll(Map<String, Object> param) {
+		return sqlSession.insert("club.insertMsgEnroll", param);
+	}
+
+	@Override
+	public List<Message> selectMsgList(int clubCode) {
+		return sqlSession.selectList("club.selectMsgList", clubCode);
+	}
+
+	@Override
+	public Message selectMsgOne(int msgCode) {
+		return sqlSession.selectOne("club.selectMsgOne", msgCode);
+	}
+
+	@Override
+	public int insertClubMembers(Map<String, Object> param) {
+		return sqlSession.insert("club.insertClubMembers", param);
+	}
+
+	@Override
+	public int updateMembersGrade(Map<String, Integer> param) {
+		return sqlSession.update("club.updateMembersGrade", param);
+	}
+
+	@Override
+	public int deleteMembers(Map<String, Integer> param) {
+		return sqlSession.delete("club.deleteMembers", param);
 	}
 
 

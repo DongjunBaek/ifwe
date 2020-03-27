@@ -114,6 +114,26 @@ $(function(){
 		}else{
 			$("#memberIdChk").text('');
 		}
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/member/checkId.do",
+			data: {memberId: memberId},
+			success: function(data){
+				
+				if( data != null){
+					$("#memberIdChk").text("아이디가 존재합니다.");
+				}
+				else{
+					$("#memberIdChk").text("훌륭한 아이디군요!");
+					
+				}
+					
+			},
+			error: function(x,s,e){
+				
+			}
+			
+		})
 	});	
 
 	$("#password").blur(function(){
@@ -469,6 +489,7 @@ function maxLengtYear(object){
                             <input type="password" name="passwordCheck" id="passwordCheck" class="input" autocomplete="off"><br />
                             <span class="font-kor" id="passwordChk2"></span>
                         </div>
+
                         <div id="email">
                             <div class="label font-kor">이메일</div>
                             <input type="email" name="memberEmail" id="memberEmail" style="width: 400px; height: 44px;"
@@ -488,7 +509,6 @@ function maxLengtYear(object){
 <input type="hidden" id="sample6_address" placeholder="주소"><br>
 <input type="hidden" id="sample6_detailAddress" placeholder="상세주소">
 <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
-
 
 
 

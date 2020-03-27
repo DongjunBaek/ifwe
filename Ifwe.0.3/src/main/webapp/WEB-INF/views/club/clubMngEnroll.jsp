@@ -13,7 +13,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmngenroll.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
-
+<script>
+	$(function(){
+		$(".memberEnrollMessage").click(function(){
+			let msgCode = $(this).attr("data-msg_code");
+			console.log(msgCode);
+			location.href = "${pageContext.request.contextPath}/club/mngenrollend.do?msg_code="+msgCode;
+		});
+	})
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
@@ -30,28 +38,16 @@
            <div class="shc-section-memberlist-container">
                <p>가입요청</p>
                <div class="shc-section-friendbox">
+               	<c:if test="${not empty msgList}">
                    <table class="shc-friendtable">
+               	<c:forEach items="${msgList }" var="list">
                        <tr>
                            <td><i class="fas fa-bell"></i></td>
-                           <td><a href="${pageContext.request.contextPath }/club/mngenrollend.do">김원재 님에게 가입요청이 왔습니다</a></td>
+                           <td><p class="memberEnrollMessage" data-msg_code=${list.msgCode }> ${list.memberName } 님에게 가입요청이 왔습니다</p></td>
                        </tr>
-                       <tr>
-                           <td><i class="fas fa-bell"></i></td>
-                           <td><a href="#">김원재 님에게 가입요청이 왔습니다</a></td>
-                       </tr>
-                       <tr>
-                           <td><i class="fas fa-bell"></i></td>
-                           <td><a href="#">김원재 님에게 가입요청이 왔습니다</a></td>
-                       </tr>
-                       <tr>
-                           <td><i class="fas fa-bell"></i></td>
-                           <td><a href="#">김원재 님에게 가입요청이 왔습니다</a></td>
-                       </tr>
-                       <tr>
-                           <td><i class="fas fa-bell"></i></td>
-                           <td><a href="#">김원재 님에게 가입요청이 왔습니다</a></td>
-                       </tr>
-                   </table>
+               	</c:forEach>
+                   </table>            
+               	</c:if>
                </div>
            </div>
        </section>

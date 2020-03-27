@@ -102,22 +102,88 @@
 	</select>
 	
 	<select id="selectClubMember" resultType="clubMember">
-		select M.*,p.profile_img_re 
+		select M.*,p.profile_name,p.profile_img_re 
 		from member M join member_profile P 
             on M.member_code = P.member_code
 			where 
-			<if test="clubMemberCode != null">
 			M.member_code in
-			<foreach collection="clubMemberCode" item="item" open="(" close=")" separator=",">
-			#{item}
+			<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item.memberCode}
 			</foreach>
-			</if>
 	</select>
 	
+	<select id="selectClubMaster2" resultType="clubMember">
+		select M.*,p.profile_name,p.profile_img_re
+		from member M join member_profile P 
+            on M.member_code = P.member_code
+        where M.member_code = #{clubMaster}
+     </select> 
+        
+        
+	<insert id="insertMsgEnroll">
+		insert into 
+			member_msg 
+		values(
+				seq_msg_code.nextval, 
+				#{masterCode}, 
+				'c1', 
+				#{enrollreason}, 
+				default, 
+				default, 
+				#{memberCode},
+				#{clubCode}
+				
+		)
+	</insert>
 	
+	<select id="selectMsgList" resultType="message">
+		select 
+			M.*, Me.member_name 
+		from 
+			member_msg M 
+		left join 
+			member ME 
+		on 
+			M.member_from = ME.member_code
+		where
+			club_code = #{clubCode}
+	</select>
 	
+	<select id="selectMsgOne" resultType="message">
+		select 
+			M.*, Me.member_name ,ME.member_id
+		from 
+			member_msg M 
+		left join 
+			member ME 
+		on 
+			M.member_from = ME.member_code
+		where
+			msg_code = #{msgCode}
+	</select>
 	
+	<insert id="insertClubMembers">
+		insert into
+			club_members
+		values(
+			#{clubCode},
+			#{memberCode},
+			'nm',
+			default)
+	</insert>
 	
+	<update id="updateMembersGrade">
+		update 
+			club_members 
+		set 
+			club_grade = 'member' 
+		where 
+			member_code = #{memberCode}
+	</update>
+	
+	<delete id="deleteMembers">
+		delete from club_members where member_code = #{memberCode}
+	</delete>
 </mapper>
 
 

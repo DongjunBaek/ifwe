@@ -1,0 +1,257 @@
+ORACLE SQL 
+-- 처리 순서
+/*
+처리순서는 from -> where ->  group by ->  having ->  select ->  order by 순서
+select 컬럼          -- (5)
+from 테이블절     -- (1)
+where 조건         -- (2)    -- 행마다 검사
+group by            -- (3)
+having               -- (4)
+order by 컬럼      -- (6)
+*/
+--##where
+--db 테이블에 접근해  결과집합에 해당행이 포함될지 여부를 결정.
+--where절에서 사용하는 연산자
+-- = : 같다 
+-- != <>  ^= : 같지 않다.
+-- >  <  >=  <=   : 비교 연산
+-- between a and b : 범위 연산자 a 이상 b 이하
+-- like      |   not like : 문자 패턴 비교
+-- is null   |  is not null  :  null 여부 검사 (=  null, !=null )(X)
+-- in        |   not in :  비교값 목록에 포함 여부
+-- and  : 두 논리 결과가 모두 참일때만 참 &&(X)
+-- or    : 두 논리결과 중 하나라도 참이면 참   ||   (X)
+-- not  : 논리 결과에 대한 반전 
+
+--문자열 패턴 비교 like | not like
+--비교 컬럼 값이 지정한 문자열 패턴에 만족하면 true를 리턴하고, 해당행은 결과 집합에 포함된다.
+--와일드카드
+--          %  : 글자가 0개이상을 의미함.
+--           _  : 글자 1개를 의미함.
+
+
+
+-- to_date
+	select to_date('20191123', 'yyyymmdd') from dual;
+-- to_char
+	select to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss') from dual;
+--distinct : 중복값을 제거
+	select distinct job_code
+	from employee;
+
+	select distinct job_code, dept_code -- 여러컬럼을 묶어서 비교
+	from employee;	
+
+--substr 
+--대상문자열에서 지정한 위치부터 지정한 개수의 문자열을 잘라내어 리턴함.
+--substr(대상 문자열, position[, length])
+
+--## c.  날짜 처리 함수
+--add_months
+--인자로 전달받은 날짜 타입값에 지정한 월만큼 더해서 특정 날짜를 반환함. 
+
+--months_between
+--날짜 타입의 인자 두개를 받아, 개월수의 차이를 리턴함(1 = 한달).
+--months_between(나중날짜, 이전날짜)
+
+	select MONTHS_BETWEEN (add_months(sysdate,3), sysdate),--3 개월
+       	add_months(sysdate, 3) - sysdate--92일
+	from dual;
+
+
+
+--## 제약조건 constraints
+--테이블 작성/수정시 각 컬럼에 대해서 제약조건을 설정할 수 있다.
+--데이터 무결성(데이터 정확성/ 일관성을 유지)을 위한 제한된 조건
+
+--1. not null : 컬럼 값에 null을 허용하지 않는다. 필수 항목에 적용
+--2. unique  : 중복값을 허용하지 않는다. 주민등록번호, 이메일, (핸드폰번호)
+--3. primary key : not null + unique 테이블당  한개의 pk만 허용, 테이블 행에 대해 고유 식별자
+--4. foreign key  :  테이블간의 부모-자식 관계를 설정함.
+-- 자식테이블 컬럼에 지정하고, 부모테이블 지정 컬럼의 값 중에서만 값을 취할 수 있다.
+-- department.dept_id(부모) => emloyee.dept_code(자식)
+
+--5. check          : 도메인(하나의 컬럼에서 취할수 있는 값의 범위)을 설정. 
+--employee.quit_yn => 'Y','N'
+
+--제약조건 정보확인
+-- user_constraints     : column명 확인 안됨
+-- user_cons_columns
+
+--제약조건 조회 쿼리
+
+select    UC.owner,
+            UC.table_name,
+            UCC.column_name,
+            constraint_name,
+            UC.constraint_type,
+            UC.search_condition
+from user_constraints UC join user_cons_columns UCC
+        using(constraint_name)
+where UC.table_name ='EMPLOYEE'
+
+
+
+
+-- 제약 조건 부여 table_level
+create table user_cons(
+    user_no number,
+    user_id varchar2(30),
+    constraint pk_user_cons_user_no primary key(user_no),
+    constraint uq_user_cons_user_id unique(user_id)
+);
+
+--### 1. not null
+-- 필수 항목에 적용.
+-- 컬럼레벨에만 작성 가능하다.
+
+--### 2.unique 
+--중복값을 허용하지 않는 제약조건
+--null은 허용
+
+create table user_unique(
+    user_no number not null,
+    user_email varchar2(50),
+    constraint uq_user_unique_user_email unique(user_email)
+);
+--### 3.primary key
+-- 테이블에서 한행의 정보를 구분하기 위한 고유식별자역할을 하는 컬럼에 지정
+-- 테이블당 하나의 PK 만 지정가능함.
+-- 복합 primary key
+-- 여러개의 컬럼을 동시에 복합키로 지정.
+-- pk로 사용된 컬럼은 하나라도 null일 수 없다.
+create table tbl_order_composite_pk(
+    product_no varchar2(30),
+    user_id varchar2(30),
+    order_date date,
+    num number,
+    constraints pk_table_order primary key(product_no, user_id, order_date)
+);
+
+
+--### 4.foreign key
+-- 참조 무결성을 유지하기 위한 제약 조건
+-- 참조하고 있는 테이블이 제공하는 값만 사용할 수 있도록 제한함. null도 허용
+-- 참조하는 부모테이블의 컬럼은 pk, uq 제약 조건이 걸려 있어야함.
+-- 부모- 자식 테이블 관계 생성
+
+create table shop_buy(
+    buy_no number,
+    member_id varchar2(20),
+    product_id varchar2(50),
+    buy_date date default sysdate,
+    constraint pk_shop_buy_no primary key(buy_no),
+    constraint fk_shop_buy_member_id foreign key(member_id) 
+                                                      references shop_member(member_id)
+);
+
+
+--## 외래키 삭제옵션
+-- 참조하고 있는 부모테이블의 행을 삭제할 경우, 참조중인(fk) 컬럼에 대한 처리
+--on delete restricted(기본값) : 부모데이터 삭제 불가
+--on delete set null              : 자식컬럼 null로 변경
+--on delete cascade              : 자식행을 따라 삭제
+
+create table shop_buy(
+    buy_no number,
+    member_id varchar2(20),
+    product_id varchar2(50),
+    buy_date date default sysdate,
+    constraint pk_shop_buy_no primary key(buy_no),
+    constraint fk_shop_buy_member_id foreign key(member_id) 
+                                                      references shop_member(member_id)                                                      
+--                                                      on delete set null
+                                                      on delete cascade -- 
+);
+
+
+--### 5. check
+create table user_check(
+    user_id varchar2(30) primary key,
+    gender char(1),
+    constraints ck_user_check_gender check(gender in ('m','f'))
+);
+
+--## 식별관계/비식별관계
+-- 1. 식별관계
+-- 참조하고 있는 부모테이블의 주키(primary key)를 자식테이블에서 다시 주키(primary key)로 사용하는 경우
+-- 자식테이블의 fk는 null이 허용되지 않는다.
+-- ex.member.member_code => ex_member_nickname.member_code
+
+--2.비 식별 관계
+-- 참조하고 있는 부모테이블의 주키(primary key)를 자식테이블에서 다시 주키(primary key)로 사용하지 않는 경우
+-- department.dept_id => employee.dept_code : dept_code에 null값 허용
+
+--# alter
+-- 객체 수정에 사용하는 구문
+-- table의 컬럼/제약조건에 대해 수정 가능 (제약조건을 수정하는것은 불가능)
+-- 1. add : 컬럼/제약조건 추가
+-- 2. modify : 컬럼 자료형/ default값 변경
+-- 3. rename : 컬럼명/제약조건명
+-- 4. drop : 컬럼/제약조건 삭제
+
+
+--사용자 휴지통
+select *
+from user_recyclebin
+order by droptime desc;
+
+--휴지통에서 복원
+flashback table tbl_alter to before drop;
+
+select * from tbl_alter;
+
+--영구삭제
+drop table tbl_alter purge;
+
+--2. view생성
+create or replace view v_emp_info
+as
+select E.emp_id 사번,
+         E.emp_name 사원명, 
+         J.job_name 직급명,
+         D.dept_title 부서명,
+         (select emp_name from employee where E.manager_id = emp_id) 관리자명,
+         E.hire_date 입사일
+from employee E, job J, department D
+where E.job_code = J.job_code and E.dept_code = d.dept_id
+with read only;
+
+--시퀀스 생성
+create sequence seq_tbl_rndnum_no -- 수정이 불가능함. 삭제후 생성해야 변경 가능.
+start with 1
+increment by 1
+nominvalue
+nomaxvalue
+nocycle
+cache 20;
+
+
+
+--## Trigger
+-- DML Trigger 는 해당테이블에 DML문 실행시, 자동으로 실행되는 처리코드를 가진 객체
+
+--트리거종류
+-- 1. DDL 트리거
+-- 2. DML 트리거
+-- 3. LOGON/OFF 트리거
+
+
+/*
+ create [or replace ] trigger 트리거명
+    before | after          --주  DML문 이전(before), 이후 (after) 실행 결정
+    update or delete or insert on 테이블명
+    [for each row] -- 문장/행 레벨 트리거(없으면 문장레벨 있으면 행레벨)
+ begin    
+    --실행로직
+ end;
+ /
+
+ - 문장 레벨 트리거 : 주 DML문 실행시 딱 한번 실행됨.
+ - 행 레벨 트리거   : 주 DML문 실행시 변경된 행마다 트리거 실행됨.
+ 
+ - 행레벨 실행시
+ 1. :OLD.컬럼명  ->주 DML문 실행전의 컬럼 데이터
+ 2. :NEW.컬럼명 -> 주 DML문 실행후의 컬럼데이터
+
+트리거에는 commit; rollback; 트랜잭션문장을 실행할 수 없다.

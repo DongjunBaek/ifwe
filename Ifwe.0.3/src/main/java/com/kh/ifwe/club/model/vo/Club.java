@@ -39,5 +39,4 @@ public class Club implements Serializable {
 	
 	
 	
-	
 }

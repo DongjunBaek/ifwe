@@ -28,13 +28,15 @@ import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Message;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","memberLoggedIn"})
 public class ClubController {
 	
 	@Autowired
@@ -159,9 +161,10 @@ public class ClubController {
 		return mav;
 	}
 	
-	//보라,0325형철 메인페이지 출력
+	//보라,형철 소모임 메인페이지 출력
 	@GetMapping("/clubMain.do")
-	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav) {
+	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav,
+								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member) {
 		
 		
 		log.debug("clubCode = {}",clubCode);
@@ -171,17 +174,25 @@ public class ClubController {
 		log.debug("club = {}",club);
 		
 		
-		Member clubMaster = clubService.selectClubMaster(club.getClubMaster());
+		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
+		
+		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
+		ClubMember memberLoggedIn = clubService.selectClubMaster2(member.getMemberCode());
+		
+		
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
+		
 		if(!clubMemberCode.isEmpty()) {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
-		
-		
-		
+		log.debug("memberLoggedIn={}",memberLoggedIn);
+		log.debug("clubMaster={}",clubMaster);
+		log.debug("clubMember={}",clubMember);
+		mav.addObject("memberLoggedIn",memberLoggedIn);
+		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
 		mav.setViewName("/club/clubMain");
@@ -189,10 +200,38 @@ public class ClubController {
 		return mav;
 	}
 
+	
+	
+	
 	@RequestMapping("/insert.do")
-	public ModelAndView insert(ModelAndView mav) {
+	public ModelAndView insert(ModelAndView mav,
+							   @RequestParam("memberCode") int memberCode,
+							   @RequestParam("masterCode") int masterCode,
+							   @RequestParam("enrollreason") String enrollreason,
+							   @RequestParam("clubCode") int clubCode) {
+		
+		log.debug("소모임가입신청");
+		log.debug("memberCode = {}",memberCode);
+		log.debug("masterCode = {}",masterCode);
+		log.debug("enrollreason = {}",enrollreason);
+		log.debug("clubCode = {}",clubCode);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("memberCode", memberCode);
+		param.put("masterCode", masterCode);
+		param.put("enrollreason", enrollreason);
+		param.put("clubCode", clubCode);
+		
+		int result = clubService.insertMsgEnroll(param);
+		int membersResult = clubService.insertClubMembers(param);
+		
+		
+		log.debug("result = {}",result);
 		
 		mav.setViewName("club/clubEnrollSuccess");
+		
+		
+		
 		
 		return mav;
 	}
@@ -237,15 +276,66 @@ public class ClubController {
 	public String mngBoard() {
 		return "club/clubMngBoard";
 	}
-	@GetMapping("/mngenroll.do")
-	public String mngEnroll() {
-		return "club/clubMngEnroll";
+	@PostMapping("/mngenroll.do")
+	public ModelAndView mngEnroll(@RequestParam("clubCode") int clubCode,
+							@RequestParam("clubMasterCode") int clubMasterCode,
+							ModelAndView mav) {
+		
+		log.debug("clubMasterCode={}",clubMasterCode);
+		log.debug("clubCode={}",clubCode);
+		
+		List<Message> msgList = clubService.selectMsgList(clubCode);
+		log.debug("msgList = {}",msgList);
+		
+		mav.addObject("msgList", msgList);
+		mav.setViewName("club/clubMngEnroll");
+		
+		return mav;
 	}
 	@GetMapping("/mngenrollend.do")
-	public String mngEnrollEnd() {
-		return "club/clubMngEnrollEnd";
+	public ModelAndView mngEnrollEnd(@RequestParam("msg_code") int msgCode,
+									ModelAndView mav) {
+		log.debug("msgCode = {}", msgCode);
+		
+		Message msg = clubService.selectMsgOne(msgCode);
+		log.debug("msg = {}",msg);
+		mav.addObject("msg", msg);
+		mav.setViewName("club/clubMngEnrollEnd");
+		
+		
+		return mav;
 	}
 	
+	//0326 문보라 가입수락
+	@PostMapping("/enrollYes.do")
+	public String enrollYes(@RequestParam("clubCode") int clubCode,
+							@RequestParam("memberCode") int memberCode) {
+		log.debug("cluc = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer> param = new HashMap<String, Integer>();
+		param.put("clubCode", clubCode);
+		param.put("memberCode", memberCode);
+		
+		int result = clubService.updateMembersGrade(param);
+		log.debug("result = {}",result);
+		
+		return "club/management.do";
+	}
+	
+	//0326 문보라 가입거절
+	@PostMapping("/enrollNo.do")
+	public String enrollNo(@RequestParam("clubCode") int clubCode,
+						   @RequestParam("memberCode") int memberCode) {
+		log.debug("cluc = {}",clubCode);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer> param = new HashMap<String, Integer>();
+		param.put("clubCode", clubCode);
+		param.put("memberCode", memberCode);
+		
+		int result = clubService.deleteMembers(param);
+		return "club/management.do";
+		
+	}
 	
 	
 }

@@ -13,6 +13,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Message;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -94,6 +95,50 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
 		return clubDAO.selectClubMember(clubMemberCode);
+	}
+
+	//0326문보라 가입요청 메세지 보내기
+	@Override
+	public int insertMsgEnroll(Map<String, Object> param) {
+		return clubDAO.insertMsgEnroll(param);
+	}
+
+	//0326문보라 가입요청 메세지 뿌려주기 
+	@Override
+	public List<Message> selectMsgList(int clubCode) {
+		return clubDAO.selectMsgList(clubCode);
+	}
+
+
+	//0326문보라 가입요청 메세지 뿌려주기 
+	@Override
+	public Message selectMsgOne(int msgCode) {
+		return clubDAO.selectMsgOne(msgCode);
+	}
+
+
+	@Override
+	public int insertClubMembers(Map<String, Object> param) {
+		return clubDAO.insertClubMembers(param);
+	}
+
+
+	//0326 문보라
+	@Override
+	public int updateMembersGrade(Map<String, Integer> param) {
+		return clubDAO.updateMembersGrade(param);
+	}
+
+
+	@Override
+	public int deleteMembers(Map<String, Integer> param) {
+		return clubDAO.deleteMembers(param);
+	}
+
+
+	@Override
+	public ClubMember selectClubMaster2(int clubMaster) {
+		return clubDAO.selectClubMaster2(clubMaster);
 	}
 
 
