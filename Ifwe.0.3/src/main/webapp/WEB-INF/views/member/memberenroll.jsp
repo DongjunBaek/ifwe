@@ -462,11 +462,11 @@ function maxLengtYear(object){
                    		<div style="width: 180px;">
 							<div class="radio-items">
 								<div class="col-6">
-									<input id="a1" class="only-sr checked" type="radio" name="memberGender" value="M" checked>
+									<input id="a1" class="only-sr checked" type="radio" name="memberGender" value="m" checked>
 									<label for="a1">남</label>
 								</div>
 								<div class="col-6">
-									<input id="a2" class="only-sr" type="radio" name="memberGender" value="F">
+									<input id="a2" class="only-sr" type="radio" name="memberGender" value="f">
 									<label for="a2">여</label>
 								</div>
 							</div>
