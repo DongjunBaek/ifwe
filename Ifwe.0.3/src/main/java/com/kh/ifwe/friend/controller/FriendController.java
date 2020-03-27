@@ -18,8 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ifwe.friend.model.service.FriendService;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.controller.MemberController;
+import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
+import com.kh.ifwe.profile.model.service.ProfileService;
+import com.kh.ifwe.profile.model.vo.FriendProfile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,31 +67,56 @@ public class FriendController {
 		 * friendService.DeleteFriendAccetp(friend); }
 		 */
 
-		
-		
-		
 	}
+@Autowired
+	ProfileService profileservice;
+@Autowired	
+MemberService memberservice;
 
 //	@PostMapping("/selectFriendList")
 	@GetMapping("/selectFriendList")
 	@ResponseBody
-	public List<Friend> SelectListFriend(Model model, Friend friend, int memberCode, HttpServletRequest request,
+	public 	List<FriendProfile>  SelectListFriend(Model model, Friend friend, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 
-		List<Friend> list = friendService.selectListFriend(memberCode);
+		List<FriendProfile> FPList= new ArrayList<FriendProfile>();
+		List<Friend> Friendlist = friendService.selectListFriend(memberCode);
 
-		model.addAttribute("list", list);
-log.debug("List@FindFriendController"+list);
-		return list;
+		model.addAttribute("FriendList", Friendlist);
+		List<Profile> profileList = new ArrayList<Profile>();
+		Profile pro = new Profile();
 
+	FriendProfile	FP= new FriendProfile();
 		
 		
+		System.out.println("listSize"+Friendlist.size());
 		
-		
-		
-		
+		for (int i = 0; i < Friendlist.size(); i++) {
+			Member member=	memberservice.selectOne( Friendlist.get(i).getMemberId());
+				
+				
+			pro = profileservice.selectOneProfileWithCode(member.getMemberCode());
+			
+			
+			FP.setMemberCode(Friendlist.get(i).getMemberCode());		
+			FP.setMemberId(Friendlist.get(i).getMemberId());	
+			FP.setMemberPname(Friendlist.get(i).getMemberPname());
+			FP.setProfileAge(pro.getProfileAge());
+			FP.setProfileComment(pro.getProfileComment());
+			FP.setProfileGender(pro.getProfileGender());
+			FP.setProfileImgOri(pro.getProfileImgOri());
+			FP.setProfileImgRe(pro.getProfileImgRe());
+			FP.setProfilememberCode(pro.getMemberCode());
+			FP.setProfileName(pro.getProfileName());
+			FPList.add(FP);
+		}
+
+		model.addAttribute("FriendProfile", profileList);
+
+		return FPList;
+
 	}
-	
+
 	/*
 	 * @GetMapping("/findProfile")
 	 * 
@@ -102,5 +130,5 @@ log.debug("List@FindFriendController"+list);
 	 * 
 	 * model.addAttribute("list",list); return list; }
 	 */
-		
+
 }
