@@ -138,7 +138,7 @@
 		on 
 			M.member_from = ME.member_code
 		where
-			club_code = #{clubCode}
+			club_code = #{clubCode} and msg_view = 'n'
 	</select>
 	
 	<select id="selectMsgOne" resultType="message">
@@ -176,6 +176,24 @@
 	<delete id="deleteMembers">
 		delete from club_members where member_code = #{memberCode}
 	</delete>
+	
+	<update id="updateMsgView">
+		update
+			member_msg
+		set 
+			msg_view = 'y'
+		where 
+			msg_code = #{msgCode}
+	</update>
+	
+	<update id="updateClubCurrent">
+		update 
+			club 
+		set 
+			club_current = club_current+1 
+		where 
+			club_code = #{clubCode}
+	</update>
 </mapper>
 
 

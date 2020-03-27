@@ -47,5 +47,9 @@ public interface ClubDAO {
 
 	int deleteMembers(Map<String, Integer> param);
 
+	int updateMsgView(int msgCode);
+
+	int updateClubCurrent(int clubCode);
+
 
 }

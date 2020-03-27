@@ -39,5 +39,9 @@ public interface ClubService {
 
 	int deleteMembers(Map<String, Integer> param);
 
+	int updateMsgView(int msgCode);
+
+	int updateClubCurrent(int clubCode);
+
 
 }

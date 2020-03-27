@@ -113,6 +113,16 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deleteMembers", param);
 	}
 
+	@Override
+	public int updateMsgView(int msgCode) {
+		return sqlSession.update("club.updateMsgView", msgCode);
+	}
+
+	@Override
+	public int updateClubCurrent(int clubCode) {
+		return sqlSession.update("club.updateClubCurrent",clubCode);
+	}
+
 
 	
 	

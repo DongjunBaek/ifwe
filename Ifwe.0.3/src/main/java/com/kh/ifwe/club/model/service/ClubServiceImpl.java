@@ -136,6 +136,18 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	@Override
+	public int updateMsgView(int msgCode) {
+		return clubDAO.updateMsgView(msgCode);
+	}
+
+
+	@Override
+	public int updateClubCurrent(int clubCode) {
+		return clubDAO.updateClubCurrent(clubCode);
+	}
+
+
 	
 	
 	
