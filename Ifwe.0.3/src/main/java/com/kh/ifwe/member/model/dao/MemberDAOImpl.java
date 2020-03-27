@@ -92,7 +92,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberLoggedIn selectMemberLogin(int memberCode) {
 		return sqlSession.selectOne("member.selectMemberLogin",memberCode);
 	}
-
+	
+	@Override
+	public Member checkId(String memberId) {
+		return sqlSession.selectOne("member.checkId",memberId);
+	}
 	
 	
 	

@@ -140,6 +140,15 @@
 			club_master = #{memberCode}
 	
 	</select>
+	
+	<select id="checkId" resultType="member">
+		
+		select *
+			from member
+		where
+			member_id = #{memberId}
+		
+	</select>
 
 	<select id="selectMemberLogin" resultType="memberLoggedIn">
 		select M.*,p.profile_name,p.profile_img_re

@@ -42,5 +42,7 @@ public interface MemberDAO {
 	int insertProfile(Member member);
 	
 	MemberLoggedIn selectMemberLogin(int memberCode);
+	
+	Member checkId(String memberId);
 
 }

@@ -87,7 +87,13 @@ public class MemberServiceImpl implements MemberService {
 	public MemberLoggedIn selectMemberLogin(int memberCode) {
 		return memberDAO.selectMemberLogin(memberCode);
 	}
+  	
+  @Override
+	public Member checkId(String memberId) {
+		return memberDAO.checkId(memberId);
+	}
 
 	
 }
+
 

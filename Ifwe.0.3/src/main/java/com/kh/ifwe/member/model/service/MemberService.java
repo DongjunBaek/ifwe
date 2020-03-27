@@ -43,5 +43,7 @@ public interface MemberService {
 	int insertProfile(int memberCode);
 	
 	MemberLoggedIn selectMemberLogin(int memberCode);
+	
+	Member checkId(String memberId);
 
 }
