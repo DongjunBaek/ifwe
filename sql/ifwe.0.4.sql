@@ -154,7 +154,7 @@ CREATE TABLE  MEMBER_REPORT  (
 );
 -- 6.회원 메세지 카테고리 테이블
 CREATE TABLE  MSG_CATEGORY  (
-	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. c1-> 소모임 신청
+	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. c1-> 소모임 신청 f1 -> 친구신
 	 msg_cate_info 	VARCHAR2(100)		NULL -- 메세지 카테고리 별 내용 
      
 );
@@ -383,6 +383,10 @@ CREATE TABLE  CALENDAR  (
 create sequence seq_member_no;  -- 회원 번호 
 create sequence seq_board_no;   -- 게시글 번호
 create sequence seq_club_no;    -- 소모임 번호 
+create sequence seq_msg_code; -- 메시지 번호
+create sequence seq_order_code; --구매기록 번호
+
+--select * from member_msg;
 
 --=================================================================
 --TRIGGER
@@ -440,4 +444,23 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'report','테스트5','<p>테스트5</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
+commit;
+
+select * from club_members;
+select * from friend;
+insert into friend values(2,'test2222','나야나');
+select * from member;
+select * from member_msg;
+
+select* from club_members;
+insert into club_members values(1,3,'member',sysdate);
+select * from member_profile;
+select* from club;
+
+insert into msg_category values('c1','가입신청');
+
+select * from msg_category;
+
+
+
 commit;
