@@ -27,7 +27,7 @@
 	<context:component-scan base-package="com.kh.ifwe" />
 	
 		<!-- #8. interceptor 등록 -->
-	<interceptors>
+	<!-- <interceptors>
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:bean id="loggerInterceptor"
@@ -36,7 +36,7 @@
 		<interceptor>
 			<mapping path="/member/view.do"/>
 			<mapping path="/board/**/*.do"/>
-			<exclude-mapping path="/board/list.do"/> <!-- spring 3.2 부터 -->
+			<exclude-mapping path="/board/list.do"/> spring 3.2 부터
 			<beans:bean id="loginCheckInterceptor"
 					    class="com.kh.ifwe.common.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
@@ -44,7 +44,7 @@
 		
 		
 		
-	</interceptors>
+	</interceptors> -->
 		    <!-- #12.1 파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의) -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
 		<beans:property name="maxUploadSize" value="52428800" /> <!-- multipart/form-data 요청당 최대 파일 크기는 50MB이다. default: -1(제한없음)-->
