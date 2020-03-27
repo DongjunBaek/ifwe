@@ -188,21 +188,24 @@ aside{
 .aside-boardmenu{
     background-color: rgb(255, 255, 255);
     margin-top:15%;
+    padding:20px 0;
     
 }
-.aside-boardmenu p{
-    font-size: 20px;
-    margin: 15px;
-    margin-left: 25px;  
-    cursor: pointer;
-    width:150px;
+.aside-boardmenu ul{
+	list-style-type: none;
 }
-.aside-boardmenu p:first-child{
-    padding-top:10%;
+.aside-boardmenu ul li{
+	padding-left:20px;
+	margin:20px 0;
 }
-.aside-boardmenu p:last-child{
-    padding-bottom: 10%;
+.aside-boardmenu span{
+	font-size: 20px;
+	margin-left: 15px;
+	cursor: pointer;
 }
+.aside-boardmenu a:link { color: black; text-decoration: none;}
+.aside-boardmenu a:visited { color: black; text-decoration: none;}
+
 .aside-friend-box{
     height:450px;
     background-color: white;
@@ -226,10 +229,26 @@ aside{
     margin-top:30px;
     overflow:auto;
 }
+.aside-friend-list .fas{
+	float:left;
+	font-size:25px;
+}
+.aside-friend-list .fa-male{
+	color:#2756a6;
+}
+.aside-friend-list .fa-female{
+	color:#fe4646;
+}
+
 .aside-friend-title p{
     font-size: 20px;
     font-weight: bold;
     float: left;
+}
+.aside-friend-title .fa-users{
+	float:right;
+	font-size:30px;
+	color:#ffc862;
 }
 
 .aside-friend-count{
@@ -249,29 +268,17 @@ aside{
     margin-top:13%;
 }
 .aside-friend{
+	border-bottom:1px solid #ebebeb;
     height:40px;
     margin-bottom: 30px;
-}
-.fried-profileimg{
-    border-radius: 50%;
-    background-color: white;
-    background-image: url("../../images/club/basicfrofile.png");
-    background-size: cover;
-    width:42px;
-    height:42px;
-    float: left;
-    margin-right: 3%;
-    overflow: hidden;
-}
-.fried-profileimg img{
-    width:42px;
-    height:100%;
+    
 }
 .friendname{
     float: left;
     font-size: 20px;
-    margin-top:5%;
     cursor: pointer;
+    margin-left:10px;
+    margin-top:2px;
 }
 
 

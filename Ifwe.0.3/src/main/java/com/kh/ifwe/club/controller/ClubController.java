@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","memberLoggedIn"})
+@SessionAttributes(value= {"clubMaster","club","clubMember"})
 public class ClubController {
 	
 	@Autowired
@@ -177,9 +177,6 @@ public class ClubController {
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
 		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
-		ClubMember memberLoggedIn = clubService.selectClubMaster2(member.getMemberCode());
-		
-		
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
@@ -188,10 +185,8 @@ public class ClubController {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
-		log.debug("memberLoggedIn={}",memberLoggedIn);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
-		mav.addObject("memberLoggedIn",memberLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
