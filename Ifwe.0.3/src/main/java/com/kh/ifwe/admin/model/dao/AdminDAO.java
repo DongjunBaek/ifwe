@@ -27,5 +27,7 @@ public interface AdminDAO {
 
 	int updateBoard(int boardNo);
 
+	int deleteBoard(int boardNo);
+
 
 }

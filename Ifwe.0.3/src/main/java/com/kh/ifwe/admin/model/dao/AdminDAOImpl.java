@@ -87,6 +87,11 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.update("admin.updateBoard", boardNo);
 	}
 
+	@Override
+	public int deleteBoard(int boardNo) {
+		return sqlSession.update("admin.deleteBoard",boardNo);
+	}
+
 
 	
 }
