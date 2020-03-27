@@ -30,10 +30,6 @@ $(function(){
     $("#enrollbutton").click(function(){
     	location.href="${pageContext.request.contextPath }/club/enroll.do";
     });
-    
-	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do";
-	});
 	
 	$("#managementbutton").click(function(){
 		location.href="${pageContext.request.contextPath }/club/management.do";
@@ -79,8 +75,8 @@ $(function(){
                 	<img src="${pageContext.request.contextPath }/resources/upload/profile/${clubMaster.profileImgRe}" alt="" />
                 </div>
                 <div class="aside-leader-information">
-                    <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
+                    <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
                 <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
@@ -123,24 +119,24 @@ $(function(){
                     </div>
                     <div class="aside-friend-list">
                         <div class="aside-friend">
-                        	<c:if test="${clubMaster.memberGender=='F' }">
+                        	<c:if test="${clubMaster.memberGender=='f' }">
                         	<i class="fas fa-female"></i>
                         	</c:if>
-                        	<c:if test="${clubMaster.memberGender=='M' }">
+                        	<c:if test="${clubMaster.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile">${clubMaster.profileName }</span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${clubMaster.memberCode}">${clubMaster.profileName }</a></span>
                         </div>
                         <c:if test="${not empty clubMember }">
                         <c:forEach items="${clubMember }" var="cmember">
                         <div class="aside-friend">
-                        	<c:if test="${cmember.memberGender=='F' }">
+                        	<c:if test="${cmember.memberGender=='f' }">
                         	<i class="fas fa-female"></i>
                         	</c:if>
-                        	<c:if test="${cmember.memberGender=='M' }">
+                        	<c:if test="${cmember.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile">${cmember.memberName}</span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a></span>
                         </div>
                         
                         </c:forEach>

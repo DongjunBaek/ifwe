@@ -48,94 +48,33 @@ $(function(){
                       <th>신고</th>
                       <th>탈퇴</th>
                   </tr>
-                  <tr>
-                      <td>
-                          <div class="shc-table-img">
-                              <img src="#" alt="">
-                          </div>
-                      </td>
-                      <td>김원재</td>
-                      <td>
-                          <div class="table-selectsize-div">
-                              <select name="" id="" class="member-ranking">
-                                  <option value="master">마스터</option>
-                                  <option value="nomal">일반회원</option>
-                              </select>
-                          </div>
-                      </td>
-                      <td>
-                          <button type="button" class="table-declaration">신고</button>
-                      </td>
-                      <td>
-                          <button type="button" class="table-secession">탈퇴</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="shc-table-img">
-                              <img src="#" alt="">
-                          </div>
-                      </td>
-                      <td>김원재</td>
-                      <td>
-                          <div class="table-selectsize-div">
-                              <select name="" id="" class="member-ranking">
-                                  <option value="master">마스터</option>
-                                  <option value="nomal">일반회원</option>
-                              </select>
-                          </div>
-                      </td>
-                      <td>
-                          <button type="button" class="table-declaration">신고</button>
-                      </td>
-                      <td>
-                          <button type="button" class="table-secession">탈퇴</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="shc-table-img">
-                              <img src="#" alt="">
-                          </div>
-                      </td>
-                      <td>김원재</td>
-                      <td>
-                          <div class="table-selectsize-div">
-                              <select name="" id="" class="member-ranking">
-                                  <option value="master">마스터</option>
-                                  <option value="nomal">일반회원</option>
-                              </select>
-                          </div>
-                      </td>
-                      <td>
-                          <button type="button" class="table-declaration">신고</button>
-                      </td>
-                      <td>
-                          <button type="button" class="table-secession">탈퇴</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="shc-table-img">
-                              <img src="#" alt="">
-                          </div>
-                      </td>
-                      <td>김원재</td>
-                      <td>
-                          <div class="table-selectsize-div">
-                              <select name="" id="" class="member-ranking">
-                                  <option value="master">마스터</option>
-                                  <option value="nomal">일반회원</option>
-                              </select>
-                          </div>
-                      </td>
-                      <td>
-                          <button type="button" class="table-declaration">신고</button>
-                      </td>
-                      <td>
-                          <button type="button" class="table-secession">탈퇴</button>
-                      </td>
-                  </tr>
+                    <c:if test="${not empty clubMember }">
+                    <c:forEach items="${clubMember }" var="cmember">
+                      <tr>
+	                       <td>
+	                          <div class="shc-table-img">
+	                              <img src="${pageContext.request.contextPath }/resources/upload/profile/${cmember.profileImgRe}" alt="">
+	                          </div>
+	                      </td>
+	                      <td>${cmember.memberName }</td>
+	                      <td>
+	                          <div class="table-selectsize-div">
+	                              <select name="" id="" class="member-ranking">
+	                                  <option value="master" ${cmember.clubGrade=='master'?'selected':'' }>마스터</option>
+	                                  <option value="nomal" ${cmember.clubGrade=='member'?'selected':'' }>일반회원</option>
+	                              </select>
+	                          </div>
+	                      </td>
+	                      <td>
+	                          <button type="button" class="table-declaration">신고</button>
+	                      </td>
+	                      <td>
+	                          <button type="button" class="table-secession">탈퇴</button>
+	                      </td>
+	                  </tr>
+                
+                    </c:forEach>
+                    </c:if>
               </table>
                   
               </div>

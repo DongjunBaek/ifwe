@@ -23,7 +23,7 @@ $(function(){
 		location.href="${pageContext.request.contextPath}/club/mngmember.do";
 	});
 	$("#mng-clubinfo").click(function(){
-		location.href="${pageContext.request.contextPath}/club/mngclubinfo.do";
+		location.href="${pageContext.request.contextPath}/club/mngclubinfo.do?clubCode=${club.clubCode}";
 	});
 	$("#mng-board").click(function(){
 		location.href="${pageContext.request.contextPath}/club/mngboard.do";
