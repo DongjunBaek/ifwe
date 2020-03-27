@@ -70,8 +70,12 @@ public class ProfileController {
 		
 		member.setMemberCode(memberCode);
 		
-		Profile profile =  profileservice.selectOneProfileWithCode(member.getMemberCode());
 
+		log.debug("member@Controller={}"+member);
+		Profile profile =  profileservice.selectOneProfileWithCode(member.getMemberCode());
+		
+		
+		log.debug("Profile@Controller={}",profile);
 		
 		model.addAttribute("profile",profile);
 

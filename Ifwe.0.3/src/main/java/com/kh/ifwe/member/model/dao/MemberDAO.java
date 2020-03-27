@@ -37,12 +37,14 @@ public interface MemberDAO {
 	int insertPre(Map<String, String> map);
 
 
-	List<Club> selectClubList(String memberCode);
+	List<Club> selectClubList(int memberCode);
 
 	int insertProfile(Member member);
 	
 	MemberLoggedIn selectMemberLogin(int memberCode);
 	
 	Member checkId(String memberId);
+
+	List<Club> selectInterClub(String memberLike);
 
 }

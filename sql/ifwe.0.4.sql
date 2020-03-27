@@ -159,27 +159,24 @@ CREATE TABLE  MSG_CATEGORY  (
      
 );
 
--- 7.회원 메세지 테이블
+--7.회원 메세지 테이블
 CREATE TABLE  MEMBER_MSG  (
-	 msg_code 	NUMBER		PRIMARY KEY, -- 메세지 생성 코드 시퀀스 
-	 member_code 	NUMBER		NOT NULL, -- 수신자 회원 번호
-	 msg_cate_code 	VARCHAR2(100),         -- 메세지 카테고리 
-	 msg_content 	VARCHAR2(300)		NULL, -- 메세지 내용
-	 msg_date 	DATE		NULL,           -- 보낸 시간 내용
-	 msg_view 	CHAR(1)		NULL,           -- 메세지 확인 여부
-     msg_from   number null,                -- 보낸 소모임 
-	 member_from 	NUMBER	 NULL,    -- 보낸 사람 회원 코드 
+	 msg_code 	NUMBER		PRIMARY KEY,-- 메세지 생성 코드 시퀀스 
+	 member_code 	NUMBER		NOT NULL,-- 수신자 회원 번호
+	 msg_cate_code 	VARCHAR2(100),        -- 메세지 카테고리 
+	 msg_content 	VARCHAR2(300)		NULL,-- 메세지 내용
+	 msg_date 	DATE		default sysdate,          -- 보낸 시간 내용
+	 msg_view 	CHAR(1)		default 'n',          -- 메세지 확인 여부          
+	 member_from 	NUMBER	 NULL,   -- 보낸 사람 회원 코드 
+     club_code number, -- 보낸 소모임 
           CONSTRAINT fk_msg_memberCode foreign key(member_code)
                                                         REFERENCES member(member_code)                                                    
                                                         on delete cascade,
           CONSTRAINT fk_msg_cateCode foreign key(msg_cate_code)
                                                         REFERENCES MSG_CATEGORY(msg_cate_code)                                                    
                                                         on delete cascade,
-          constraint ck_msg_msgView check(msg_view in ('y','n'))
-          --member-from fk
-     
+          constraint ck_msg_msgView check(msg_view in ('y','n')),--member-from fk
 );
-
 -- 8.회원 친구 목록
 CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL, -- 회원 코드
@@ -383,7 +380,9 @@ CREATE TABLE  CALENDAR  (
 create sequence seq_member_no;  -- 회원 번호 
 create sequence seq_board_no;   -- 게시글 번호
 create sequence seq_club_no;    -- 소모임 번호 
-
+create sequence seq_msg_code;   -- 메세지 번호
+create sequence seq_order_code; -- 구매기록 번호
+create sequence seq_contents_code; -- 컨텐츠 번호
 --=================================================================
 --TRIGGER
 --=================================================================

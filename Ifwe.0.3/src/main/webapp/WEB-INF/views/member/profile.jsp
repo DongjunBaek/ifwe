@@ -27,13 +27,11 @@
                     <p>${profile.profileComment } </p>
                     <li><p>관심키워드</p></li>
                     <div class="hashtag-wrapper">
-                    <%--   <c:forEach items="${profile. }" var="list">
-                        <div class="hashtag-box">#영어공부</div>
-                        <div class="hashtag-box">#영어공부</div>
-                        <div class="hashtag-box">#영어공부</div>
-                        <div class="hashtag-box">#영어공부</div>
-                    
-                    </c:forEach> --%>
+                     <c:forEach items="${profile.contentsCateCodes }" var="list">
+                   
+                        
+                        <div class="hashtag-box">#${list }</div> 
+					 </c:forEach>                        
                     </div>
                 </ul>
             </div>
@@ -90,11 +88,9 @@ console.log("onload On");
 			
 		});
 
-)};
 
 )};
 
-)};
 </script>
 
 </html>
