@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
@@ -36,7 +37,7 @@ import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn","profile" })
+@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -47,6 +48,9 @@ public class MemberController {
 	
 	@Autowired
 	private ProfileService profileService;
+	
+	@Autowired
+	private ClubService clubService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -155,6 +159,19 @@ public class MemberController {
 				log.debug("profile = {}",profile);
 				model.addAttribute("profile",profile);
 				
+				log.debug("메인페이지 들어옴 뿌려줄 거  = 내 소모임 목록, 이란 소모임은 어때요 (내 관심사에 맞는 소모임 뿌려주기), 주간베스트 글");
+				log.debug("memberLoggedId = {}", member);
+				
+				//내 소모임 목록
+				List<Club> clubList = memberService.selectClubList(member.getMemberCode());
+				model.addAttribute("clubList", clubList);
+				
+				//내 관심사 소모임목록 (가입 안되어있는 거 )
+				List<Club> interClub = memberService.selectInterClub(member.getMemberLike());
+				log.debug("interCLub= {}",interClub);
+				model.addAttribute("interClub", interClub);
+				
+				
 				return "main/mainPage";
 
 			} else {
@@ -211,7 +228,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/membership.do")
-	public String membership(@RequestParam("memberCode") String memberCode,
+	public String membership(@RequestParam("memberCode") int memberCode,
 								Model model) {
 		List<Club> list = memberService.selectClubList(memberCode);
 		
@@ -585,5 +602,9 @@ public class MemberController {
 		
 		return member;
 	}
+	
+	
+	
+	
 
 }

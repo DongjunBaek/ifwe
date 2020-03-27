@@ -172,7 +172,7 @@ $(function(){
                             <div class="information-box">
                                 <br>
                                 <p class="people-title font-hk">정원수 </p>
-                                <span class="information-fontsize">1</span>/${list.clubMax }
+                                <span class="information-fontsize">${list.clubCurrent }</span>/${list.clubMax }
                             </div>
                             <div class="information-box">
                                     <br>
