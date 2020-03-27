@@ -79,7 +79,7 @@ public class MemberServiceImpl implements MemberService {
 	}
   
   @Override
-	public List<Club> selectClubList(String memberCode) {
+	public List<Club> selectClubList(int memberCode) {
 		return memberDAO.selectClubList(memberCode);
 	}
   
@@ -91,6 +91,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
 	public Member checkId(String memberId) {
 		return memberDAO.checkId(memberId);
+	}
+
+	@Override
+	public List<Club> selectInterClub(String memberLike) {
+		return memberDAO.selectInterClub(memberLike);
 	}
 
 	

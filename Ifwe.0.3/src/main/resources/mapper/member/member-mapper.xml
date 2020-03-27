@@ -159,6 +159,18 @@
 	</select>
 
 
+	<select id="selectInterClub" resultType="clubMaster">
+		select 
+			M.member_id, C.* 
+		from 
+			club C 
+		left join 
+			member M 
+		on 
+			c.club_master = m.member_code 
+		where 
+			club_catecode = #{memberLike}
+	</select>
 
 
 </mapper>

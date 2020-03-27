@@ -15,6 +15,16 @@
 			$("#create-somoim").click(function(){
 				location.href="${pageContext.request.contextPath }/club/clubCreate.do";
 			});
+			
+			$("#clubMainBtn").click(function(){
+				let clubCode = $(this).attr("data-clubCode");
+				location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
+			});
+			
+			$(".clubListLi").click(function(){
+				let clubCode = $(this).attr("data-clubCode");
+				location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
+			});
 		});
 	</script>
 	  <section style="margin:0;">
@@ -75,9 +85,11 @@
                         </div>
                         <div class="list">
                             <ul class="font-kor list-ul" style="margin-left: 20%;padding:0;">
-                                <li style="margin:0"><p>윙스터디 모임</p> </li>
-                                <li style="margin:0"><p>윙스터디 모임</p></li>
-                                <li style="margin:0"><p>윙스터디 모임</p></li>
+                        	<c:if test="${not empty clubList }">
+                        	<c:forEach items="${clubList }" var="list">
+                                <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p>${list.clubTitle }</p> </li>
+                        	</c:forEach>
+                        	</c:if>
                             </ul>
                         </div>
                     </div>
@@ -126,32 +138,24 @@
                     </div>
                     <div class="three-content font-kor">
                         <div class="three-container">
+                        	<c:if test="${not empty interClub }">
+                        	<c:forEach items="${interClub }" var = "list">
                             <div class="three-div">
                                 <div class="three-img">
                                     <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
                                 </div>
                                 <div class="three-posts">
-                                    <div class="three-post1">@english_4965</div>
-                                    <div class="three-post2">기초 영어회화반</div>
-                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;서울/경기</div>
+                                    <div class="three-post1">@${list.memberId }</div>
+                                    <div class="three-post2">${list.clubTitle }</div>
+                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${list.clubLocation }</div>
                                 </div>
                                 <div class="three-btn">
-                                    <input type="button" value="자세히 보기" class="font-kor">
+                                    <input type="button" value="자세히 보기" class="font-kor" id="clubMainBtn" data-clubCode=${list.clubCode }>
                                 </div>
                             </div>
-                            <div class="three-div">
-                                <div class="three-img">
-                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
-                                </div>
-                                <div class="three-posts">
-                                    <div class="three-post1">@english_4965</div>
-                                    <div class="three-post2">기초 영어회화반</div>
-                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;서울/경기</div>
-                                </div>
-                                <div class="three-btn">
-                                    <input type="button" value="자세히 보기" class="font-kor">
-                                </div>
-                            </div>
+                        	</c:forEach>
+                        	</c:if>
+                           
                             
                         </div>
                     </div>
