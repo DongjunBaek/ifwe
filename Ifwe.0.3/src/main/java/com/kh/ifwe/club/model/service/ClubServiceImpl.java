@@ -145,6 +145,11 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateClubCurrent(int clubCode) {
 		return clubDAO.updateClubCurrent(clubCode);
+
+	}
+
+	public ClubMember selectClubMaster2(int clubMaster) {
+		return clubDAO.selectClubMaster2(clubMaster);
 	}
 
 

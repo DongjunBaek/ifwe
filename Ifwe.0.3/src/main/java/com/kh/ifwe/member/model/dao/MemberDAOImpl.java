@@ -7,6 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Profile;
+
+
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Repository
@@ -64,14 +77,26 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.insertPre",map);
 	}
 
+	@Override
+	public List<Club> selectClubList(String memberCode) {
+		return sqlSession.selectList("member.selectClubList",memberCode);
+	}
 
 	@Override
 	public int insertProfile(Member member) {
-		return 
-				 sqlSession.insert("member.insertProfile",member);
+		return sqlSession.insert("member.insertProfile",member);
 		
 	}
-
+	
+	@Override
+	public MemberLoggedIn selectMemberLogin(int memberCode) {
+		return sqlSession.selectOne("member.selectMemberLogin",memberCode);
+	}
+	
+	@Override
+	public Member checkId(String memberId) {
+		return sqlSession.selectOne("member.checkId",memberId);
+	}
 	
 	
 	

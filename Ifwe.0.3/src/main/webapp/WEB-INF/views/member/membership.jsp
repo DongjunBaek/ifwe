@@ -8,7 +8,6 @@
 </jsp:include>
 <script>
 $(function(){
-	var cnt = 0;
 	
     $(".price").on('click',function(e){
 	
@@ -31,7 +30,6 @@ $(function(){
 	    let goldbtncolor = 	$("#goldbtn").css("background-color");
 	    let silverbtncolor = $("#siverbtn").css("background-color");
 	    
-	    let idx =1;
 	    
     	if(goldbtncolor == 'rgb(39, 86, 166)'){
     		
@@ -40,7 +38,7 @@ $(function(){
     		
     		div.append('<div class="payment-list font-kor">'+
     	            	'<div class="name-checkbox bold">'+
-                   		'<input type="checkbox" name="membership-name"'+(cnt+1)+'" id="membership-name'+(cnt+1)+'"><label for="membership-name'+(cnt+1)+'" >골드 GOLD</label>'+
+                   		'<input type="checkbox" name="gold-membership" id="gold-membership"><label for="gold-membership" >골드 GOLD</label>'+
                			'</div>'+
 		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
 		               	'<div class="list-duration "><p>무제한</p></div>'+
@@ -56,7 +54,7 @@ $(function(){
 		    		
 		    		div.append('<div class="payment-list font-kor">'+
 		    	            	'<div class="name-checkbox bold">'+
-		                   		'<input type="checkbox" name="membership-name'+(cnt+1)+'" id="membership-name'+(cnt+1)+'"><label for="membership-name'+(cnt+1)+'" >프리미엄 PREMIUM</label>'+
+		                   		'<input type="checkbox" name="pre-membership" id="pre-membership"><label for="pre-membership" >프리미엄 PREMIUM</label>'+
 		               			'</div>'+
 				               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
 				               	'<div class="list-duration "><p>무제한</p></div>'+
@@ -72,7 +70,7 @@ $(function(){
 			
 			div.append('<div class="payment-list font-kor">'+
 		            	'<div class="name-checkbox bold">'+
-		           		'<input type="checkbox" name="membership-name3" id="membership-name3"><label for="membership-name3" >실버 SILVER</label>'+
+		           		'<input type="checkbox" name="silver-membership" id="silver-membership"><label for="silver-membership" >실버 SILVER</label>'+
 		       			'</div>'+
 		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
 		               	'<div class="list-duration "><p>무제한</p></div>'+
@@ -80,6 +78,25 @@ $(function(){
 		               	'</div>');
 		    		
 		}
+		
+		$(".name-checkbox input[type=checkbox]").click(function(){
+			var silver = $("#silver-membership").prop("checked",true);
+			var pre = $("#pre-membership").prop("checked",true);
+			var gold = $("#gold-membership").prop("checked",true);
+		
+			console.log(pre);
+			
+			if(this==pre){
+				$(".result-price").text(9900);
+			}
+			if(this==gold){
+				$(".result-price").text(5900);
+			}
+			if(this==silver){
+				$(".result-price").text(3900);
+			}
+			
+		});
     	
     });
     
@@ -88,41 +105,13 @@ $(function(){
     	$(".choice input[type=checkbox]").prop("checked",false);
     	$(this).prop("checked",true);
     	
+    	
     });
     
-    $(".name-checkbox input[type=checkbox]").click(function(){
-    	
-    	
-    })
     
-    $(".paymentbtn").click(function(){
+  	     
     	
-    	
-    	var membershipName = $(".name-checkbox input[type=checkbox] + label").text()=="프리미엄 PREMIUM"?"premium":$(".name-checkbox input[type=checkbox] + label").text()=="골드 GOLD"?"gold":"silver";
-    	var clubCode = $(".list-club").text()=="윙스터디 모임"?"1":"";
-    	var price = $(".list-price").text()=="9900원"?9000:$(".list-price").text()=="5900원"?5900:3900;
-    	var memberCode= ${memberLoggedIn.memberCode};
-    	
-    	$.ajax({
-    		url: "${pageContext.request.contextPath}/member/membershipPay.do",
-    		data: {
-    			membershipName : membershipName,
-    			clubCode : clubCode,
-    			price : price,
-    			memberCode : memberCode
-    		},
-    		type: "POST",
-    		success: function(data){
-    			console.log(data);
-    		},
-    		error: function(x,s,e){
-    			
-    		}
-    		
-    		})
-    	});
-    	
-    })
+  })
     
     
 </script>
@@ -131,7 +120,6 @@ $(function(){
        <div class="title-container font-kor">
            <p class="p-title bold">멤버십 구매</p>
            <p class="membership-p-content" style="color:#606060;">멤버십 구매해서 ifwe를 더욱 풍부하게 즐겨보세요!</p>
-           <input type="hidden" name="" />${memberLoggedIn.memberCode}; 
        </div>
    </article>
    <article class="membership-second">
@@ -155,9 +143,14 @@ $(function(){
        <div class="choice-container">
                <div class="choice">
                    <div class="choice-title bold" >적용할 소모임 선택</div>
-                   <div class="choice-checkbox font-kor">
-                       <input type="checkbox" name="membership-club"+${ vs}+" id="membership-club1" value="윙스터디 모임"><label for="membership-club1" >윙스터디 모임</label>
-                   </div>
+                 	<c:if test="${not empty list }">
+                   <c:forEach items="${list }" var="l" varStatus="vs">
+	                   <div class="choice-checkbox font-kor">
+	                       <input type="checkbox" name="membership-club" id="membership-club${vs.index }" value="${l.clubTitle }" ><label for="membership-club${vs.index }" >${l.clubTitle }</label>
+	                      	<input type="hidden" id ="clubCode" value="${l.clubCode }">
+	                   </div>
+                   </c:forEach>
+                   </c:if>
                    <!-- <div class="choice-checkbox font-kor">
                    		<input type="checkbox" name="membership-club2" id="membership-club2" value="댄스 모임" ><label for="membership-club2" >댄스 모임</label>
                    </div> -->
@@ -217,7 +210,7 @@ $(function(){
                 <div class="result-container">
                     <div class="payment-border"><hr></div>
                         <div class="payment-result">
-                            <p class="result-name font-kor"  >프리미엄 PREMIUM/ <span id="countMembership"></span></p><p class="result-price bold" id="totalprice" >9900</p>
+                            <p class="result-name font-kor"  >프리미엄 PREMIUM/ <span id="countMembership"></span></p><p class="result-price bold" id="totalprice" ></p>
                         </div>
                 </div>
         
@@ -228,6 +221,34 @@ $(function(){
         		</div>
     </article>
 </section>
+<script type="text/javascript">
+$(".paymentbtn").click(function(){
+	
+	
+	var membershipName = $(".name-checkbox input[type=checkbox] + label").text()=="프리미엄 PREMIUM"?"premium":$(".name-checkbox input[type=checkbox] + label").text()=="골드 GOLD"?"gold":"silver";
+	var clubCode = $("#clubCode").val();
+	var price = $(".list-price").text()=="9900원"?9000:$(".list-price").text()=="5900원"?5900:3900;
+	var memberCode= ${memberLoggedIn.memberCode};
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/member/membershipPay.do",
+		data: {
+			membershipName : membershipName,
+			clubCode : clubCode,
+			price : price,
+			memberCode : memberCode
+		},
+		type: "POST",
+		success: function(data){
+			console.log(data);
+		},
+		error: function(x,s,e){
+			
+		}
+		
+		})
+	})
+</script>
 
 
 

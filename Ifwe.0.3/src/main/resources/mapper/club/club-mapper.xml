@@ -102,7 +102,7 @@
 	</select>
 	
 	<select id="selectClubMember" resultType="clubMember">
-		select M.*,p.profile_img_re 
+		select M.*,p.profile_name,p.profile_img_re 
 		from member M join member_profile P 
             on M.member_code = P.member_code
 			where 
@@ -112,6 +112,14 @@
 			</foreach>
 	</select>
 	
+	<select id="selectClubMaster2" resultType="clubMember">
+		select M.*,p.profile_name,p.profile_img_re
+		from member M join member_profile P 
+            on M.member_code = P.member_code
+        where M.member_code = #{clubMaster}
+     </select> 
+        
+        
 	<insert id="insertMsgEnroll">
 		insert into 
 			member_msg 
