@@ -38,12 +38,15 @@
 				}
 			}
 		});
-		$("#search").selectric();
+/* 		$("#search").selectric(); */
 		
 		console.log($('summernote'));
 		console.log($('#summernote'));
 		
-
+		$("#modify_2").click(function(){
+			console.log(this);
+			$("#updateFrm").submit();
+		})
 	});
 	
 	function sendUpLoadImgFile(file, el){
@@ -81,7 +84,7 @@
 	
 	function boardValidate(){
 		/* 게시글 등록 유효성 검사 */
-		return false;
+		return true;
 	}
 	
 
@@ -98,7 +101,7 @@ border:0;}
             <h1>notice</h1>
         </div>		
         <div class="section-title-box">
-			<p>공지사항 수정</p>
+			<p>${board.boardCate }</p>
 		</div>
 				
 			<form id="updateFrm" action="${pageContext.request.contextPath }/board/updateBoard.do" autocomplete="off" method="POST" onsubmit="return boardValidate();" enctype = "multipart/form-data">
@@ -123,17 +126,13 @@ border:0;}
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
 				<input type="hidden" name = "boardNo" value = "${board.boardNo }" />
 				<div class="btn_wrap">
-	           		<input type="submit" id="modify_1" value="수정" class="no-border" onclick="action()">
+	           		<input type="submit" id="modify_1" value="수정" class="no-border">
 	       		 </div>
 				</div>
 			</div>
 		</form>
 	</section>
-<script>
-	function action(){
-	location.href="${pageContext.request.contextPath }/admin/notice.do";
-}
-</script>
+
 </body>
 <style>
 input {

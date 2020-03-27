@@ -159,29 +159,46 @@ public class AdminController {
 		return mav;
 	}
 	
-	@GetMapping("/adminBoardUpdate.do")
-	public String boardUpdateOne(@RequestParam(value="boardNo") int boardNo,RedirectAttributes redirectAttributes) {
-		log.debug("공지사항 수정");
-		
-		int result = adminService.updateBoard(boardNo);
-
-		redirectAttributes.addFlashAttribute("msg", result>0?"수정 성공!":"수정 실패!");
-		
-		return "redirect:/admin/adminBoardDetail";
-	}
+	/*
+	 * @GetMapping("/adminBoardUpdate.do") public String
+	 * boardUpdateOne(@RequestParam(value="boardNo") int boardNo,RedirectAttributes
+	 * redirectAttributes) { log.debug("공지사항 수정");
+	 * 
+	 * int result = adminService.updateBoard(boardNo);
+	 * 
+	 * redirectAttributes.addFlashAttribute("msg", result>0?"수정 성공!":"수정 실패!");
+	 * 
+	 * return "redirect:/admin/adminBoardDetail"; }
+	 */
 	
 	@GetMapping("/boardDelete.do")
-	public String boardDelete(@RequestParam("boardNo") int boardNo,RedirectAttributes redirectAttributes ) {
+	public ModelAndView boardDelete(@RequestParam("boardNo") int boardNo) {
 		log.debug("공지사항 삭제");
+		
+		ModelAndView mav = new ModelAndView();
 		
 		int result = adminService.deleteBoard(boardNo);
 		
-		redirectAttributes.addFlashAttribute("msg", result>0?"삭제성공!":"삭제 실패!");
+		mav.setViewName("admin/adminNotice");
 		
-		return "redirect:/admin/adminNotice";
+		return mav;
 		
 	}
 	
+
+	@GetMapping("/adminBoardAnswer.do")
+	public ModelAndView boardAnswerDetail(@RequestParam(value="boardNo", required=false) int boardNo) {
+		log.debug("게시판 상세 페이지");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		mav.addObject("board",board);
+		mav.setViewName("/admin/adminBoardAnswerFrm");
+		
+		return mav;
+	}
 	/*
 	 * @GetMapping("/adminBoardList.do")
 	 * 
