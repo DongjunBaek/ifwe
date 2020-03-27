@@ -43,6 +43,9 @@
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
 --drop sequence seq_club_no;    -- 소모임 번호 
+--create sequence seq_msg_code;   -- 메세지 번호
+--create sequence seq_order_code; -- 구매기록 번호
+--create sequence seq_contents_code; -- 컨텐츠 번호
 --=================================================================
 --select
 --=================================================================
