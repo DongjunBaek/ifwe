@@ -293,6 +293,10 @@ public class ClubController {
 		log.debug("msgCode = {}", msgCode);
 		
 		Message msg = clubService.selectMsgOne(msgCode);
+		//메서지 확인여부를 update
+		int result = clubService.updateMsgView(msgCode);
+		
+		log.debug("result = {}",result);
 		log.debug("msg = {}",msg);
 		mav.addObject("msg", msg);
 		mav.setViewName("club/clubMngEnrollEnd");
@@ -304,17 +308,23 @@ public class ClubController {
 	//0326 문보라 가입수락
 	@PostMapping("/enrollYes.do")
 	public String enrollYes(@RequestParam("clubCode") int clubCode,
-							@RequestParam("memberCode") int memberCode) {
+							@RequestParam("memberCode") int memberCode,
+							@RequestParam("msgCode")int msgCode) {
 		log.debug("cluc = {}",clubCode);
 		log.debug("memberCode = {}",memberCode);
+		log.debug("msgCode = {}",msgCode);
 		Map<String, Integer> param = new HashMap<String, Integer>();
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberCode);
+		param.put("msgCode",msgCode);
 		
 		int result = clubService.updateMembersGrade(param);
+		//가입수락을 누르면 club_current +1 update
+		int plusResult = clubService.updateClubCurrent(clubCode);
+		
 		log.debug("result = {}",result);
 		
-		return "club/management.do";
+		return "club/clubManagement";
 	}
 	
 	//0326 문보라 가입거절
@@ -328,7 +338,8 @@ public class ClubController {
 		param.put("memberCode", memberCode);
 		
 		int result = clubService.deleteMembers(param);
-		return "club/management.do";
+		log.debug("result = {}",result);
+		return "club/clubManagementt";
 		
 	}
 	
