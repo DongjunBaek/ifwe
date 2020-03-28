@@ -408,11 +408,11 @@ end;
 --MEMBER DUMMY
 --=================================================================
 --관리자 계정
-insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
-insert into member_profile values(
-      1,null,null,null,null,'0','m',null
-
-      );
+--insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
+--insert into member_profile values(
+--      1,null,null,null,null,'0','m',null
+--
+--      );
 --id : admin1234
 --password : admin1234!
 COMMIT;
