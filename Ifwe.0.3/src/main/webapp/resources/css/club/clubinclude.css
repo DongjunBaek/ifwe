@@ -218,8 +218,8 @@ aside{
     padding-top:20px;
 }
 .aside-member-container{
-	width:210px;
-	height:70px;
+	width:230px;
+	height:90px;
 	background-color: white;
 	padding-left:20px;
 	padding-top:20px;
@@ -247,6 +247,7 @@ aside{
 	font-size:22px;
 	font-weight: bold;
 	float:left;
+	margin-bottom: 0;
 }
 .aside-member-box span{
 	font-size:16px;

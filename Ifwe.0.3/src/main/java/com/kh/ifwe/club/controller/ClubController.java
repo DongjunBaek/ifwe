@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.common.util.Utils;
@@ -38,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn"})
 public class ClubController {
 	
 	@Autowired
@@ -166,21 +167,20 @@ public class ClubController {
 	//보라,형철 소모임 메인페이지 출력
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav,
-								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member,
+								 @SessionAttribute("memberLoggedIn") MemberLoggedIn memberLoggedIn,
 								 HttpServletRequest request) {
 		
 		
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("clubMember");
+		session.removeAttribute("clubLoggedIn");
 		
 		
-		log.debug("clubCode = {}",clubCode);
 		
 		Club club = clubService.selectOne(clubCode);
 		
-		log.debug("club = {}",club);
-		
+		ClubLoggedIn clubLoggedIn = clubService.selectClubLoggedIn(memberLoggedIn.getMemberCode());
 		
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
@@ -196,6 +196,9 @@ public class ClubController {
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
+		log.debug("clubLoggedIn={}",clubLoggedIn);
+		
+		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
@@ -431,10 +434,34 @@ public class ClubController {
 		return mav;
 	}
 	
+	//0329 형철 회원탈퇴페이지
+	@GetMapping("/secession.do")
+	public ModelAndView secession(ModelAndView mav) {
+		
+		
+		mav.setViewName("club/clubSecession");
+		
+		return mav;
+	}
 	
-	
-	
-	
+	@RequestMapping("/secessionEnd.do")
+	public ModelAndView secession(ModelAndView mav,
+								  @SessionAttribute("clubLoggedIn") ClubLoggedIn clubLoggedIn,
+								  @RequestParam("clubCode") int clubCode) {
+		
+		int memberCode = clubLoggedIn.getMemberCode();
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberCode", memberCode);
+		param.put("clubCode", clubCode);
+		
+		int result = clubService.deleteClubMember(param);
+		
+		
+		mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode);
+		
+		return mav;
+	}
 	
 	
 }

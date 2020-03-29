@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
@@ -54,6 +55,10 @@ public interface ClubDAO {
 	int updateClubCurrent(int clubCode);
 
 	int updateClub(Club newClub);
+
+	ClubLoggedIn selectClubLoggedIn(int memberCode);
+
+	int deleteClubMember(Map<String, Object> param);
 
 
 }

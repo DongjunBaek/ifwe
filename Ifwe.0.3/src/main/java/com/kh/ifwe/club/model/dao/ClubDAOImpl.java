@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
@@ -135,6 +136,16 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int updateClub(Club newClub) {
 		return sqlSession.update("club.updateClub",newClub);
+	}
+
+	@Override
+	public ClubLoggedIn selectClubLoggedIn(int memberCode) {
+		return sqlSession.selectOne("club.clubLoggedIn",memberCode);
+	}
+
+	@Override
+	public int deleteClubMember(Map<String, Object> param) {
+		return sqlSession.delete("club.deleteClubMember",param);
 	}
 
 
