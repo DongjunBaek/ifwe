@@ -43,10 +43,15 @@
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
 --drop sequence seq_club_no;    -- 소모임 번호 
+--create sequence seq_msg_code;   -- 메세지 번호
+--create sequence seq_order_code; -- 구매기록 번호
+--create sequence seq_contents_code; -- 컨텐츠 번호
 --=================================================================
 --select
 --=================================================================
 --select * from tab; -- 전체 테이블 조회
+select * from member;
+select * from member_profile;
 --=================================================================
 --TABLE
 --=================================================================
@@ -175,7 +180,7 @@ CREATE TABLE  MEMBER_MSG  (
           CONSTRAINT fk_msg_cateCode foreign key(msg_cate_code)
                                                         REFERENCES MSG_CATEGORY(msg_cate_code)                                                    
                                                         on delete cascade,
-          constraint ck_msg_msgView check(msg_view in ('y','n')),--member-from fk
+          constraint ck_msg_msgView check(msg_view in ('y','n'))--member-from fk
 );
 -- 8.회원 친구 목록
 CREATE TABLE  friend  (
@@ -352,7 +357,7 @@ CREATE TABLE  CLUB_HISTORY  (
 	 club_code 	NUMBER		NOT NULL,
 	 club_count 	NUMBER		NULL,
 	 club_boardcnt 	NUMBER		NULL,
-	 club_usedate 	DATE		default sydate,
+	 club_usedate 	DATE		default sysdate,
 	 member_code 	NUMBER		NOT NULL
 );
 -- 26.소모임 일정정보 저장 테이블
@@ -403,10 +408,18 @@ end;
 --MEMBER DUMMY
 --=================================================================
 --관리자 계정
-insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
+--insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
+--insert into member_profile values(
+--      1,null,null,null,null,'0','m',null
+--
+--      );
 --id : admin1234
 --password : admin1234!
 COMMIT;
+-- 사용자 계정
+
+
+
 --=============================================
 -- board_cate dummy
 --=============================================

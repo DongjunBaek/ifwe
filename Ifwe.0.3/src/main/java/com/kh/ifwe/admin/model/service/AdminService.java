@@ -27,6 +27,8 @@ public interface AdminService {
 
 	int updateBoard(int boardNo);
 
+	int deleteBoard(int boardNo);
+
 
 
 }
