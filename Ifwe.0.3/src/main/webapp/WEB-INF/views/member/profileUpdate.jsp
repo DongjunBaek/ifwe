@@ -42,18 +42,16 @@
 <style>
 input#inputProfileName {
    width: 200px;
-   position: absolute;
-   left: 31%;
+   position: relative;
+   margin-left: 10%;   
 }
 
 #inputProfileName {
    display: none;
 }
 
-#toggle {
-   position: absolute;
-   font-size: 30px;
-   left:39%;
+#liProfileName{
+	margin-left:10%;
 }
 
 </style>
@@ -81,16 +79,18 @@ input#inputProfileName {
                </div>
 
                <div class="myname-div font-kor">
+               	  
                   <div style="font-size: 25px; margin: 0 10%">@
-                     ${memberLoggedIn.memberId }</div>
-                  <button onclick="" id="toggle" class="fas fa-edit" type="button"></button>
+                     ${memberLoggedIn.memberId } <i class="fas fa-pencil-alt settingNickname"></i></div>
+                  
 
 
                   <div
-                     style="font-size: 30px; font-weight: 900; margin: 5% 20% 0 30%">
-                     <input type="text" placeholder="닉네임" id="inputProfileName"
+                     style="font-size: 30px; font-weight: 900;">
+                     
+                     <input type="text" placeholder="닉네임정하기" id="inputProfileName"
                         value="${profile.profileName }" name="profileName"></input>
-                     <div id="liProfileName">${profile.profileName }</div>
+                     <div id="liProfileName">${profile.profileName } </div>
                   </div>
                </div>
             </div>
@@ -192,10 +192,10 @@ input#inputProfileName {
       
       
       /*프로필 네임 수정  */
-      jQuery('#toggle').click(function () {  
+      jQuery('.settingNickname').click(function () {  
           if($("#inputProfileName").css("display") == "none"){   
               jQuery('#inputProfileName').css("display", "block");   
-              jQuery('#liProfileName').css("display", "none");
+              jQuery('#liProfileName').css("display", "none");              
           } else {  
               jQuery('#liProfileName').css("display", "block");
               jQuery('#inputProfileName').css("display", "none");
@@ -437,6 +437,11 @@ $(()=>{
 }
 .uploadImg-div div:first-child{
    font-size : 24px;
+}
+.fa-pencil-alt{
+	position : relative;	
+    margin : 0;     
+    color: #cbcbcb;
 }
 </style>
 
