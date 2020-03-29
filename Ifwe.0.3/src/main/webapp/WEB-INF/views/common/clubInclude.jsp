@@ -79,16 +79,39 @@ $(function(){
                     <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
-                <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
-                <div class="aside-join" id="enrollbutton">
-                    <p>가입하기</p>
-                </div>
-                </c:if>
+
                 <c:if test="${clubMaster.memberCode == memberLoggedIn.memberCode}">
                 <div class="aside-join" id="managementbutton">
                     <p>관리하기</p>
                 </div>
                 </c:if>
+
+                <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
+                <c:forEach items="${clubMember }" var="var">
+                <c:if test="${var.memberCode != memberLoggedIn.memberCode }">
+                <div class="aside-join" id="enrollbutton">
+                    <p>가입하기</p>
+                </div>
+                </c:if>
+                
+                <c:if test="${var.memberCode == memberLoggedIn.memberCode }">
+                <div class="aside-member-container">
+                	<c:if test="${memberLoggedIn.memberGender=='F' }">
+                   	<i class="fas fa-female" style="color:#fe4646"></i>
+                   	</c:if>
+                   	<c:if test="${memberLoggedIn.memberGender=='M' }">
+                   	<i class="fas fa-male" style="color:#2756a6 "></i>
+                   	</c:if>
+                   	<div class="aside-member-box">
+                   	<p>${memberLoggedIn.profileName }</p><i class="fas fa-cog"></i>
+                   	<span>${memberLoggedIn.memberId }</span>
+                   	</div>
+                </div>
+                </c:if>
+                
+                </c:forEach>
+                </c:if>
+                
                 
          <div class="aside-scroll-box">
           	<div id="aside-scroll">

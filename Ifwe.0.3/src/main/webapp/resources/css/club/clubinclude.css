@@ -154,6 +154,7 @@ aside{
 .aside-leader-information{
     margin-top:15%;
     height:115px;
+    margin-bottom:20px;
 }
 .aside-leader-information p{
     float: left;
@@ -216,6 +217,47 @@ aside{
     margin-top:30px;
     padding-top:20px;
 }
+.aside-member-container{
+	width:210px;
+	height:70px;
+	background-color: white;
+	padding-left:20px;
+	padding-top:20px;
+	
+	
+	
+}
+.aside-member-container .fas{
+	float:left;
+	font-size:40px;
+	margin-right:10px;
+	
+}
+
+
+
+
+.aside-member-box{
+	float:left;
+	height:90px;
+	width:180px;
+	cursor: pointer;
+}
+.aside-member-box p{
+	font-size:22px;
+	font-weight: bold;
+	float:left;
+}
+.aside-member-box span{
+	font-size:16px;
+}
+.aside-member-box .fa-cog{
+	font-size:22px;
+	float:right;
+	margin-left:20px;
+}
+
+
 .aside-line{
     margin:0 auto;
     width:180px;
@@ -280,6 +322,8 @@ aside{
     margin-top:2px;
 }
 
+.aside-friend-list a:link { color: black; text-decoration: none;}
+.aside-friend-list a:visited { color: black; text-decoration: none;}
 
 
 header{
