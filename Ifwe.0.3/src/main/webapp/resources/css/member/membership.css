@@ -200,7 +200,7 @@ section{
 .payment-title {
     margin-top:39px;
     margin-left: 3.5%;
-    width:1500px;
+    width:90%;
     float:left;
     
     margin-bottom:47px;
@@ -212,16 +212,16 @@ section{
 }
 
 .membership-name{
-    width:373px;
+    width:450px;
     float:left;
 }
 .club-name{
-    width:602px;
+    width:27%;
     
     float:left;
 }
 .duration{
-    width:202px;
+    width:25%;
     float:left;
 }
 .list-price{
@@ -229,12 +229,12 @@ section{
 }
 .payment-lists{
     float:left;
-    width:1460px;
+    width:100%;
 }
 
 .payment-list{
-   width:1373px;
-    margin-left:48px;
+    width:90%;
+    margin-left:3.5%;
     float:left;
     margin-bottom:22px;
     font-size:18px;
@@ -243,7 +243,7 @@ section{
     float:left;
     position: relative;
     display:block;
-	width: 475px;
+	width: 450px;
     
 }
 
@@ -283,17 +283,16 @@ section{
     
 }
 .list-club{
-    width:594px;
+    width:26.5%;
     float:left;
     
 }
 .list-duration{
-    width:202px;
+    width:24.5%;
     float:left;
     margin-left:5px;
 }
-.list-price{
-    float:right;
+.list-price{    
     margin-right:20px;
 }
 .result-container{
