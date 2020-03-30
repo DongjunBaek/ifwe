@@ -232,6 +232,13 @@
 		where club_code = #{clubCode} and member_code = #{memberCode}
 	
 	</delete>	
+	
+	<select id="selectBoardList" resultType="clubBoard">
+		select * from club_boardlist
+		
+	</select>
+	
+	
 		
 </mapper>
 
