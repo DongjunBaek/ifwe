@@ -47,7 +47,7 @@
     border: 1px rgba(128, 128, 128, 0.5) solid;
     outline: none;
     font-size: 20px;
-    
+    padding-left : 25px;
     
 }
 .makeProfile-infotext2{
@@ -56,7 +56,7 @@
     transform: translateX(-50%);
     margin-top: 3%;            
     margin-bottom: 3%;
-    width: 1000px;
+    width: 1024px;
     height: 55px;
     border: none;
     outline: none;

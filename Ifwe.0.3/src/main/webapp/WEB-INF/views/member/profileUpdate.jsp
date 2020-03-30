@@ -121,14 +121,15 @@ input#inputProfileName {
             <div class="makeProfile-article-contents font-kor">
             <input type="text" class="makeProfile-infotext1 font-kor"
                placeholder="프로필소개글" name="profileComment" id="profileComment"
-               value=${profile.profileComment }>
+               value="${profile.profileComment }">
                <input type="text" class="makeProfile-infotext2 font-kor"
                   placeholder="    #관심사 입력" id="tag" size="6"> <input
                   type="hidden" value="" name="contentsCateCodes" id="rdTag" />
                <ul id="tag-list">
-         <c:forEach items="${profile.contentsCateCodes }" var="list">
-               <li class='tag-item' >#${list }<span class='del-btn' idx='"+counter+"'>x</span></li>
-               </c:forEach>
+		       		<c:forEach items="${profile.contentsCateCodes }" var="list">
+		       			<input type="hidden" name="testValue" value="${list }"/>
+		                <!-- <li class='tag-item' >#${list }<span class='del-btn' idx='"+counter+"'>x</span></li> -->			                         
+               		</c:forEach>
                </ul>
             </div>
          
@@ -212,7 +213,7 @@ input#inputProfileName {
 /*  친구 프로필들 출력 */
 
 $(()=>{
-   
+	
    $("#upFile").on("change",function(){
       /* console.log(this.value); */
       $("#fileNameForProfile").text(this.value);
@@ -355,12 +356,17 @@ $(()=>{
 
 
 $(()=>{
-   
+
+		
+	
+	
    //*****************해쉬태그 생성 **********************
    var tag = {};
-   var counter = 0;
+   var counter = 0;   
+   
    // 태그를 추가한다.
    function addTag (value) {
+	   console.log(value);
        tag[counter] = value; // 태그를 Object 안에 추가
        counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
    }
@@ -410,8 +416,33 @@ $(()=>{
        $(this).parent().remove();
    });
    //****************해쉬태그 끝 ********************
-   
-   
+   	
+	var arrayForTag = $("input[name=testValue]");
+	
+	$.each(arrayForTag,function(idx, elem){
+		
+		/* console.log(elem.value); */		
+		var tagValue = elem.value; // 값 가져오기
+          var reg = /^[가-힣]{1,8}$/;
+           // 값이 없으면 동작 ㄴㄴ
+           if (tagValue !== "" && reg.test(tagValue)) {
+               // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+               var result = Object.values(tag).filter(function (word) {
+                   return word === tagValue;
+               })
+               // 태그 중복 검사
+               if (result.length == 0) {
+                   $("#tag-list").append("<li class='tag-item' >#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+                   addTag(tagValue);
+                   
+               } else {
+                   alert("태그값이 중복됩니다.");
+               }
+           }else{
+             $("#tag").val('');
+           }
+           
+	});
 });
 
 
@@ -442,6 +473,16 @@ $(()=>{
 	position : relative;	
     margin : 0;     
     color: #cbcbcb;
+}
+.makeProfile-infotext1{
+	padding-left: 25px;
+}
+.makeProfile-infotext2{
+	width : 1024px;	
+}
+#tag-list{
+	width : 1024px;
+	margin : 0 auto;
 }
 </style>
 
