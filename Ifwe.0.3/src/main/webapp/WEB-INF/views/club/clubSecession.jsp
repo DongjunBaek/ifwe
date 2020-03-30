@@ -75,7 +75,21 @@ function clubSecession(){
 		    </div>
 		  </div>
 		</div>
-	
+		
+<style>
+p{
+margin:0;
+}
+
+.aside-member-container{
+	width:230px;
+	height:90px;
+}
+.nav-myfrofile-box{
+	height:141px;
+}
+
+</style>
 	
 
 </body>

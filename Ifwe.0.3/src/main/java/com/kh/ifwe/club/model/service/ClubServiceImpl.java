@@ -161,8 +161,8 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
-	public ClubLoggedIn selectClubLoggedIn(int memberCode) {
-		return clubDAO.selectClubLoggedIn(memberCode);
+	public ClubLoggedIn selectClubLoggedIn(Map<String, Object> param) {
+		return clubDAO.selectClubLoggedIn(param);
 	}
 
 

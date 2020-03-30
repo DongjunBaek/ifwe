@@ -48,7 +48,7 @@ public interface ClubService {
 
 	int updateClub(Club newClub);
 
-	ClubLoggedIn selectClubLoggedIn(int memberCode);
+	ClubLoggedIn selectClubLoggedIn(Map<String, Object> param);
 
 	int deleteClubMember(Map<String, Object> param);
 
