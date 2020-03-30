@@ -113,7 +113,8 @@ $(function(){
              <input type="button" value="추가 +" class="boardplusbtn" id="boardplusbtn">
              <p>게시판 관리</p>
 			
-			
+			<form action="${pageContext.request.contextPath }/clubboard/insertlist.do?clubCode=${club.clubCode}" id="tag-form" 
+				  method="post" autocomplete="off">
              <div class="shc-boardlist-box">
                  <ul id="board-ul">
                      <li>
@@ -133,11 +134,12 @@ $(function(){
                      
                  </ul>
              </div>
-             <input type="hidden" name="" id="boradtitlehidden">
+             <input type="hidden" name="boardTitleList" id="boradtitlehidden">
              <div class="btncenter">
-                 <input type="button" value="저장하기" class="shc-savebtn">
+                 <input type="submit" value="저장하기" class="shc-savebtn">
              </div>
 
+			</form>
 
          </div>
      </section>

@@ -233,9 +233,18 @@
 	
 	</delete>	
 	
+
 	<insert id="insertBoard">
 		inert
 	</insert>
+
+	<select id="selectBoardList" resultType="clubBoard">
+		select * from club_boardlist
+		
+	</select>
+	
+	
+
 		
 </mapper>
 
