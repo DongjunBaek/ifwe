@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.dao.ClubDAO;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -169,6 +170,12 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int deleteClubMember(Map<String, Object> param) {
 		return clubDAO.deleteClubMember(param);
+	}
+
+
+	@Override
+	public int insertBoard(Board board) {
+		return clubDAO.insertBoard(board);
 	}
 
 

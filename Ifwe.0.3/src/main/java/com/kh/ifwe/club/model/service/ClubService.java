@@ -3,6 +3,7 @@ package com.kh.ifwe.club.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
@@ -51,6 +52,8 @@ public interface ClubService {
 	ClubLoggedIn selectClubLoggedIn(Map<String, Object> param);
 
 	int deleteClubMember(Map<String, Object> param);
+
+	int insertBoard(Board board);
 
 
 }

@@ -18,6 +18,10 @@ $(function(){
     $(".comment-sliderbutton").click(function(){
         $(this).parent().nextAll(".comment-hiddenbox").slideToggle(300);
     })
+    
+    $(".section-block-right").click(function(){
+    	location.href = "${pageContext.request.contextPath}/club/clubInsertNotice"
+    })
 
 });
 

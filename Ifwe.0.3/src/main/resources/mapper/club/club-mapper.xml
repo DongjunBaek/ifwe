@@ -232,6 +232,10 @@
 		where club_code = #{clubCode} and member_code = #{memberCode}
 	
 	</delete>	
+	
+	<insert id="insertBoard">
+		inert
+	</insert>
 		
 </mapper>
 

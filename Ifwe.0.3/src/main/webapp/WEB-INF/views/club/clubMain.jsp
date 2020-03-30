@@ -23,7 +23,9 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
     
-
+    $(".section-block-right").click(function(){
+    	location.href = "${pageContext.request.contextPath}/club/clubInsertBoard"
+    });
 });
 
 </script>
