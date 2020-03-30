@@ -37,8 +37,8 @@ $(function(){
     		let div = $(".payment-lists");
     		
     		div.append('<div class="payment-list font-kor">'+
-    	            	'<div class="name-checkbox bold">'+
-                   		'<input type="checkbox" name="gold-membership" id="gold-membership"><label for="gold-membership" >골드 GOLD</label>'+
+    	            	'<div class="name-checkbox bold">골드 GOLD'+
+                   		/* '<input type="checkbox" name="gold-membership" id="gold-membership"><label for="gold-membership" >골드 GOLD</label>'+ */
                			'</div>'+
 		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
 		               	'<div class="list-duration "><p>무제한</p></div>'+
