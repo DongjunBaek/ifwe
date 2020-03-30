@@ -240,6 +240,8 @@
 
 	<select id="selectBoardList" resultType="clubBoard">
 		select * from club_boardlist
+		where club_code = #{clubCode}
+		order by club_boardlist_no
 		
 	</select>
 
