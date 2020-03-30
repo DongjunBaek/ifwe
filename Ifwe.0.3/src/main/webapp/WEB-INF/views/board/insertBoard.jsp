@@ -79,9 +79,9 @@ border:0;}
 				<div class="white_bgm">
 					<div class="select-boxs">
 	                        <select name="boardCate" id="search">
-	                            <option value="notice">공지사항</option>
+	                            	
 	                            <option value="qna">문의사항</option>
-	                            <option value="report">신고사항</option>
+	                            <!-- <option value="report">신고사항</option> -->
 	                        </select>
 	                    </div>
 					<div class="wrap_1">
@@ -97,7 +97,7 @@ border:0;}
 				<input type="hidden" name="memberCode" id="memberCode" value="${memberLoggedIn.memberCode }">
 				<input type="hidden" name="viewName" value="main/mainBoard">
 				<div class="btn_wrap">
-	           		<input type="button" id="modify_1" value="등록" class="no-border">
+	           		<input type="submit" id="modify_1" value="등록" class="no-border">
 	       		 </div>
 				</div>
 			</div>
