@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -503,6 +504,37 @@ public class ClubController {
 	}
 	
 	
+	@GetMapping("/clubInsertBoard")
+	public String clubInsertBoard() {
+		return "club/clubInsertBoard";
+	}
+	@GetMapping("/clubInsertNotice")
+	public String clubInsertBoardNotice() {
+		return "club/clubInsertBoardNotice";
+	}
+	@GetMapping("/clubInsertBoardFree")
+	public String clubInsertBoardFree() {
+		return "club/clubInsertBoardFree";
+	}
+	
+	
+	@PostMapping("/clubInsertBoardFrm")
+	public ModelAndView clubInsertBoardFrm(ModelAndView mav,Board board) {
+		
+		log.debug("board = {}",board);
+		
+		int result = clubService.insertBoard(board);
+		
+		if (result > 0) {
+			log.debug("Board @ insertBoard.do : 글 등록 성공");
+		}else
+			log.debug("Board @ insertBoard.do : 글 등록 실패");
+		
+		mav.setViewName("/club/clubMain"); 
+		
+		return mav;
+		
+	}
 	
 	
 }
