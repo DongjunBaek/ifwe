@@ -50,7 +50,7 @@ $(function(){
      $("#tag-form").on("submit", function (e) {
          var value = marginTag(); // return array
          $("#rdTag").val(value); 
-
+         console.log($("#rdTag").val());
          $(this).submit();
      });
 

@@ -307,7 +307,7 @@ CREATE TABLE  CLUB_BOARD  (
     board_no    NUMBER      primary key ,
     club_code    NUMBER      NOT NULL,
     member_code    NUMBER      NOT NULL,
-    boardlist_no    number   NOT NULL,
+    club_boardlist_no    number   NOT NULL,
      board_title varchar2(100) null,
     board_content    VARCHAR2(2000)      NULL,
     board_date    DATE   default sysdate,
@@ -431,6 +431,20 @@ begin
 end;
 /
 
+create or replace trigger trig_club_boardlist
+after
+insert on club
+for each row
+begin
+
+    insert into club_boardlist
+    values(seq_club_boardlist_no.nextval, :new.club_code, '공지사항');
+    
+    insert into club_boardlist
+    values(seq_club_boardlist_no.nextval, :new.club_code, '자유게시판');
+    
+end;
+/
 --=================================================================
 --MEMBER DUMMY
 --=================================================================

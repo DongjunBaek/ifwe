@@ -179,11 +179,15 @@ public class ClubServiceImpl implements ClubService {
 	public int insertBoard(Board board) {
 		return clubDAO.insertBoard(board);
 
+
 	}
 
 	public List<ClubBoard> selectBoardList(int clubCode) {
 		return clubDAO.selectBoardList(clubCode);
 
+
+
+	}
 
 	public List<ClubBoard> selectBoardList(int clubCode) {
 		return clubDAO.selectBoardList(clubCode);
