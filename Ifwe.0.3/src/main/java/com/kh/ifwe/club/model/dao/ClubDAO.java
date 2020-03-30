@@ -7,6 +7,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
 
@@ -59,6 +60,8 @@ public interface ClubDAO {
 	ClubLoggedIn selectClubLoggedIn(Map<String, Object> param);
 
 	int deleteClubMember(Map<String, Object> param);
+
+	List<ClubBoard> selectBoardList(int clubCode);
 
 
 }

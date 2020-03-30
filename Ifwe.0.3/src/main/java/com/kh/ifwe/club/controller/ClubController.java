@@ -29,6 +29,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -39,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList"})
 public class ClubController {
 	
 	@Autowired
@@ -175,6 +176,7 @@ public class ClubController {
 		
 		session.removeAttribute("clubMember");
 		session.removeAttribute("clubLoggedIn");
+		session.removeAttribute("clubBoardList");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("clubCode", clubCode);
@@ -189,6 +191,8 @@ public class ClubController {
 		
 		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
 		
+		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
+		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
 		
@@ -201,6 +205,7 @@ public class ClubController {
 		log.debug("clubMember={}",clubMember);
 		log.debug("clubLoggedIn={}",clubLoggedIn);
 		
+		mav.addObject("clubBoardList",clubBoardList);
 		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
