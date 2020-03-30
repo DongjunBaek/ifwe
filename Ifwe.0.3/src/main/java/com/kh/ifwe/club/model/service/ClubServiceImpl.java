@@ -14,6 +14,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
 
@@ -174,8 +175,13 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
+
 	public int insertBoard(Board board) {
 		return clubDAO.insertBoard(board);
+
+	public List<ClubBoard> selectBoardList(int clubCode) {
+		return clubDAO.selectBoardList(clubCode);
+
 	}
 
 

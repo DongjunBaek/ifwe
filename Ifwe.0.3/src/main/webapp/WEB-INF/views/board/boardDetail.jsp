@@ -173,6 +173,7 @@ $(function(){
 	width : 15%;
 	top : 50%;
 	position: relative;
+	margin-rigth: 1.5%;
 }
 .boardDetail-div-optionBox{
 	position : relative;
@@ -183,7 +184,7 @@ $(function(){
 	font-size : 28px;
 	cursor: pointer;
 	padding-left: 6%;
-	
+	display: none;
 }
 .board-option-box-div{
 	position: relative;
