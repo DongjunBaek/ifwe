@@ -119,18 +119,26 @@ $(function(){
 						<span><a href="${pageContext.request.contextPath }/club/clubMain.do?clubCode=${club.clubCode}">전체보기</a></span>
                 	</li>
                 	<li>
-                      <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
-						<span><a href="${pageContext.request.contextPath }/club/notice.do">공지사항</a></span>
-                	</li>
-                	<li>
                         <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
 						<span><a href="${pageContext.request.contextPath }/club/calendar.do">일정캘린더</a></span>
                 	
                 	</li>
-                   	<li>
+                   	<c:if test="${not empty clubBoardList}">
+                   	<c:forEach items="${ clubBoardList}" var="boardList">
+	                
+	                <li>
                         <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
-						<span><a href="${pageContext.request.contextPath }/club/freeboard.do">자유게시판</a></span>
-                   	</li>
+						<span><a href="${pageContext.request.contextPath }/club/freeboard.do?clubBoardlistNo=${boardList.clubBoardlistNo}">${boardList.boardName }</a></span>
+                   	</li>   	
+                   	
+                   	</c:forEach>
+                   	</c:if>
+                   	
+                   	
+                   	
+                   	
+                   	
+                   	
                 </ul>
                 </div>
                 <div class="aside-friend-box">
@@ -156,7 +164,9 @@ $(function(){
                         	<c:if test="${cmember.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a></span>
+                            <span class="friendname friend-name-profile">
+                            <a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a>
+                            </span>
                         </div>
                         
                         </c:forEach>

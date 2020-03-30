@@ -37,7 +37,7 @@ $(function(){
   <section class="flotclass">
       <div class="section-block">
           <div class="section-wrapper">
-              <p class="section-boradall">자유게시판</p>
+              <p class="section-boradall">${clubBoardList.boardName }</p>
               <div class="section-block-right">
                   <p>글쓰기</p>
                   <i class="fas fa-pencil-alt"></i>

@@ -204,6 +204,9 @@ public class ClubController {
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
 		log.debug("clubLoggedIn={}",clubLoggedIn);
+		log.debug("clubBoardList={}",clubBoardList);
+		
+		
 		
 		mav.addObject("clubBoardList",clubBoardList);
 		mav.addObject("clubLoggedIn",clubLoggedIn);
@@ -264,15 +267,15 @@ public class ClubController {
 		return "club/clubcalendar";
 	}
 	
-	@GetMapping("/notice.do")
-	public String notice() {
-		return "club/clubNotice";
-	}
+//	@GetMapping("/notice.do")
+//	public String notice() {
+//		return "club/clubNotice";
+//	}
 	
-	@GetMapping("/freeboard.do")
-	public String freeboard() {
-		return "club/clubFreeBoard";
-	}
+//	@GetMapping("/freeboard.do")
+//	public String freeboard() {
+//		return "club/clubFreeBoard";
+//	}
 	
 	@GetMapping("/management.do")
 	public String management() {
