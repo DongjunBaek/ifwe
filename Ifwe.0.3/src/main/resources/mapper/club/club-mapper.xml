@@ -224,7 +224,7 @@
 					  on M.member_code = P.member_code
                       join club_members H 
                       on M.member_code=H.member_code
-		where M.member_code = #{memberCode}
+		where M.member_code = #{memberCode} and H.club_code = #{clubCode}
 	</select>
 		
 	<delete id="deleteClubMember">

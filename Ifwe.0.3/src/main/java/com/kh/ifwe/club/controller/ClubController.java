@@ -176,11 +176,14 @@ public class ClubController {
 		session.removeAttribute("clubMember");
 		session.removeAttribute("clubLoggedIn");
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("clubCode", clubCode);
+		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
 		
 		Club club = clubService.selectOne(clubCode);
 		
-		ClubLoggedIn clubLoggedIn = clubService.selectClubLoggedIn(memberLoggedIn.getMemberCode());
+		ClubLoggedIn clubLoggedIn = clubService.selectClubLoggedIn(param);
 		
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
@@ -462,6 +465,39 @@ public class ClubController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/memberDelete.do")
+	public ModelAndView memberDelete(ModelAndView mav,
+									 @RequestParam("memberCode") int memberCode,
+									 @SessionAttribute("club") Club club,
+									 HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("clubMember");
+		
+		int clubCode = club.getClubCode();
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberCode", memberCode);
+		param.put("clubCode", clubCode);
+		
+		int result = clubService.deleteClubMember(param);
+		
+		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
+		List<ClubMember> clubMember = null;
+		
+		if(!clubMemberCode.isEmpty()) {
+			clubMember = clubService.selectClubMember(clubMemberCode);
+		}
+		
+		mav.addObject("clubMember",clubMember);
+		mav.setViewName("redirect:/club/mngmember.do");
+		
+		
+		return mav;
+	}
+	
+	
 	
 	
 }

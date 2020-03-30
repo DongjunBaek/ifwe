@@ -102,12 +102,6 @@ $(function(){
                 
                 <c:if test="${clubLoggedIn.clubGrade == 'member' || clubLoggedIn.clubGrade == 'nm' }">
                 <div class="aside-member-container">
-                	<c:if test="${memberLoggedIn.memberGender=='f' }">
-                   	<i class="fas fa-female" style="color:#fe4646"></i>
-                   	</c:if>
-                   	<c:if test="${memberLoggedIn.memberGender=='m' }">
-                   	<i class="fas fa-male" style="color:#2756a6 "></i>
-                   	</c:if>
                    	<div class="aside-member-box">
                    	<p>${memberLoggedIn.profileName }</p><i class="fas fa-cog"></i>
                    	<span>${memberLoggedIn.memberId }</span>
