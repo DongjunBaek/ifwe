@@ -3,6 +3,7 @@ package com.kh.ifwe.admin.model.dao;
 import java.util.List;
 
 import com.kh.ifwe.board.model.vo.Board;
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminDAO {
@@ -28,6 +29,15 @@ public interface AdminDAO {
 	int updateBoard(int boardNo);
 
 	int deleteBoard(int boardNo);
+
+	int insertBoardComment(BoardComment boardComment);
+
+	BoardComment selectBoardComment(int boardNo);
+
+	int deleteBoardComment(int boardNo);
+
+	int updateBoardComment(BoardComment boardComment);
+
 
 
 }

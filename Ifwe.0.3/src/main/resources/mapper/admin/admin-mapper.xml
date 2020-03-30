@@ -127,5 +127,42 @@
  		where 
  			board_no = #{boardNo}
 	 </update>
+	 
+	 <insert id="insertBoardComment">
+	 	insert into
+	 		board_comment	
+	 	values(
+	 		seq_board_comment_no.nextval,
+	 		#{memberCode},
+	 		#{boardNo},
+	 		#{commentContent},
+	 		default,
+	 		'1',
+	 		'1'
+		 	)	
+	 </insert>
+	 
+	 <select id="selectBoardComment" resultType="BoardComment">
+	 	select
+	 		*
+	 	from
+	 		board_comment
+	 	where
+	 		board_no = #{boardNo}
+	 </select>
+	 
+	 <delete id="deleteBoardComment">
+		delete 
+			board_comment
+		where 
+			board_no = #{boardNo}
+	 </delete>
+	 
+	 <update id="updateBoardComment">
+	 	update board_comment set
+	 	comment_content = #{commentContent}
+	 	where board_no = #{boardNo}
+	 </update>
+	 
 </mapper>
 

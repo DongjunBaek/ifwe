@@ -56,6 +56,7 @@ $(document).ready(function(){
 					$.each(data, function(idx,value){
 					console.log(idx);
 					console.log(value);
+					console.log(value.boardLevel);
 					
 				/* 	$parentDiv.append("<tr><td onclick='boardTitleClick()'><form id='boardNoFrm'><input type='hidden' name='boardNo' value='"+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</td>"
 							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td>"+"<td>"+value.boardNo+"</td></tr>");				
@@ -63,12 +64,15 @@ $(document).ready(function(){
 					if(value.boardCate == 'notice'){
 						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
 								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");		
-					}else if(value.boardCate=='qna'){						
+					}else if(value.boardCate=='qna' && value.boardLevel == 1){
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswerDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a>  <span class='answerSucess'>[등록완료]</span> </td>"
+								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");	
+					}else if(value.boardCate=='qna' && value.boardLevel == 0){						
 						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
 								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
-					
-					}else{
-						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
+					}
+					else{
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardReport.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[신고] ")+value.boardTitle+"</a></td>"
 								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
 					}
 					

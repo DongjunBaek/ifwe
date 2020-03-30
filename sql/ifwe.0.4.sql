@@ -233,7 +233,7 @@ CREATE TABLE  BOARD  (
 );
 -- 13.게시판 댓글테이블 --
 CREATE TABLE  BOARD_COMMENT  (
-	 comment_no 	NUMBER		NOT NULL,
+	 comment_no 	NUMBER		PRIMARY key,
 	 member_code 	NUMBER		NOT NULL,
 	 board_no 	NUMBER		NOT NULL,
 	 comment_content 	VARCHAR2(500)		NULL,
@@ -388,6 +388,7 @@ create sequence seq_club_no;    -- 소모임 번호
 create sequence seq_msg_code;   -- 메세지 번호
 create sequence seq_order_code; -- 구매기록 번호
 create sequence seq_contents_code; -- 컨텐츠 번호
+create sequence seq_board_comment_no;
 --=================================================================
 --TRIGGER
 --=================================================================
@@ -453,3 +454,17 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
+insert into board_comment values(seq_board_comment_no.nextval,'1','13','dcdcd',sysdate,'1','1');
+select * from board_comment;
+delete board_comment where member_code = '1';
+
+create or replace trigger tri_board_level
+    after          --주  DML문 이전(before), 이후 (after) 실행 결정
+    insert on board_comment
+    for each row -- 문장/행 레벨 트리거(없으면 문장레벨 있으면 행레벨)
+begin    
+    update board set board_level= '1'
+end;
+ 
+drop trigger tri_board_level;
+

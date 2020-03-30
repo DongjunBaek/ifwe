@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.board.model.vo.Board;
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -199,6 +200,111 @@ public class AdminController {
 		
 		return mav;
 	}
+	
+	@PostMapping("/boardRepleInsert.do")
+	public ModelAndView boardRepleInsert(@RequestParam("boardNo") int boardNo, BoardComment boardComment, ModelAndView mav) {
+		/**
+		 * 0328 boardComment insert 기능 여주
+		 */
+		log.debug("boardComment 페이지");
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		
+		int result = adminService.insertBoardComment(boardComment);
+		
+		if(result > 0) {
+			log.debug("admin@insertBoardComment.do: 글 등록 성공");
+		}else {
+				log.debug("admin@insertBoardComment.do: 글 등록 실패");	
+			}
+		
+		boardComment = adminService.selectBoardComment(boardNo);
+		
+		
+		mav.addObject("board",board);
+		mav.addObject("boardComment",boardComment);
+		mav.setViewName("/admin/adminBoardAnswer");
+		
+		return mav;
+	}
+	
+	@GetMapping("/boardCommentDelete.do")
+	public ModelAndView boardCommentDelete(@RequestParam("boardNo") int boardNo) {
+		log.debug("공지사항 삭제");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int result = adminService.deleteBoardComment(boardNo);
+		
+		if(result > 0) {
+			log.debug("admin@deleteBoardComment.do: 글 삭제 성공");
+		}else {
+				log.debug("admin@deleteBoardComment.do: 글 삭제 실패");	
+			}
+		log.debug("삭제 작업 종료");	
+		mav.setViewName("/admin/adminNotice");
+		
+		return mav;
+		
+	}
+	@PostMapping("/boardCommentUpdateFrm.do")
+	public ModelAndView boardCommentUpdate(@RequestParam(value="boardNo", required=false) int boardNo, BoardComment boardComment) {
+		log.debug("답변 수정 페이지");
+		
+		ModelAndView mav = new ModelAndView();
+
+		log.debug("boardComment{}=",boardComment);
+		Board board = adminService.selectBoard(boardNo);
+		
+		int result = adminService.UpdateBoardComment(boardComment);
+		boardComment = adminService.selectBoardComment(boardNo);
+		
+		
+		mav.addObject("board",board);
+		mav.addObject("boardComment", boardComment);
+		
+		mav.setViewName("admin/adminBoardAnswer");
+		
+		return mav;
+	}
+	
+	@GetMapping("/adminBoardReport.do")
+	public ModelAndView boardReportDetail(@RequestParam(value="boardNo", required=false) int boardNo) {
+		log.debug("신고 상세 페이지");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		mav.addObject("board",board);
+		mav.setViewName("/admin/adminBoardReport");
+		
+		return mav;
+	}
+	
+
+	@GetMapping("/adminBoardAnswerDetail.do") 
+	 public ModelAndView adminboardAnswerDetail(@RequestParam(value="boardNo")int boardNo) {
+		ModelAndView mav = new ModelAndView();
+		log.debug("답변등록성공 페이지");
+		
+		Board board = adminService.selectBoard(boardNo);
+		
+		BoardComment boardComment = adminService.selectBoardComment(boardNo);
+		
+		mav.addObject("board",board);
+		mav.addObject("boardComment", boardComment);
+		mav.setViewName("/admin/adminBoardAnswer");
+		return mav; 
+	 }
+
+
+	@GetMapping("/event.do")
+	public String event() {
+		return "/admin/adminEvent";
+	}
+	
 	/*
 	 * @GetMapping("/adminBoardList.do")
 	 * 
@@ -219,9 +325,5 @@ public class AdminController {
 	 * }
 	 */
 	
-	@GetMapping("/event.do")
-	public String event() {
-		return "admin/adminEvent";
-	}
-	
+
 }

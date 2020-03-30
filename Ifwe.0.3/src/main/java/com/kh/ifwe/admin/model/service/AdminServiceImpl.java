@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.admin.model.dao.AdminDAO;
 import com.kh.ifwe.board.model.vo.Board;
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
 
 @Service
@@ -69,6 +70,27 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteBoard(int boardNo) {
 		return adminDAO.deleteBoard(boardNo);
 	}
+
+	@Override
+	public int insertBoardComment(BoardComment boardComment) {
+		return adminDAO.insertBoardComment(boardComment);
+	}
+
+	@Override
+	public BoardComment selectBoardComment(int boardNo) {
+		return adminDAO.selectBoardComment(boardNo);
+	}
+
+	@Override
+	public int deleteBoardComment(int boardNo) {
+		return adminDAO.deleteBoardComment(boardNo);
+	}
+
+	@Override
+	public int UpdateBoardComment(BoardComment boardComment) {
+		return adminDAO.updateBoardComment(boardComment);
+	}
+
 
 
 

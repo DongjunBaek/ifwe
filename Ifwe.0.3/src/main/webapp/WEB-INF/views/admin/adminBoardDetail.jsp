@@ -35,6 +35,7 @@ function boardDel(){
         <div class="board_content_wrap">
             <div class="content_title_wrap">
                 <h3>제목</h3>
+                
                 <input type="text" id="content_title" class="content_title" value="${board.boardTitle }" readonly>
                 <p>${board.boardDate }</p>
             </div>
