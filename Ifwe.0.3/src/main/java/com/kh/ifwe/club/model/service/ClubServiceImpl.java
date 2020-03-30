@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.dao.ClubDAO;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.member.model.vo.Member;
@@ -156,6 +157,18 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateClub(Club newClub) {
 		return clubDAO.updateClub(newClub);
+	}
+
+
+	@Override
+	public ClubLoggedIn selectClubLoggedIn(int memberCode) {
+		return clubDAO.selectClubLoggedIn(memberCode);
+	}
+
+
+	@Override
+	public int deleteClubMember(Map<String, Object> param) {
+		return clubDAO.deleteClubMember(param);
 	}
 
 

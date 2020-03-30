@@ -34,7 +34,15 @@ $(function(){
 	$("#managementbutton").click(function(){
 		location.href="${pageContext.request.contextPath }/club/management.do";
 	});
+	$("#logoutbutton").click(function(){
+		location.href="${pageContext.request.contextPath }/member/logout.do";
+	});
+    $(".aside-member-container").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/secession.do";
+    });
     
+	
+	
 	
 })
 
@@ -79,16 +87,34 @@ $(function(){
                     <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
-                <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
-                <div class="aside-join" id="enrollbutton">
-                    <p>가입하기</p>
-                </div>
-                </c:if>
+
                 <c:if test="${clubMaster.memberCode == memberLoggedIn.memberCode}">
                 <div class="aside-join" id="managementbutton">
                     <p>관리하기</p>
                 </div>
                 </c:if>
+				
+				<c:if test="${clubLoggedIn.clubGrade == null}">
+                <div class="aside-join" id="enrollbutton">
+                    <p>가입하기</p>
+                </div>
+				</c:if>
+                
+                <c:if test="${clubLoggedIn.clubGrade == 'member' || clubLoggedIn.clubGrade == 'nm' }">
+                <div class="aside-member-container">
+                	<c:if test="${memberLoggedIn.memberGender=='f' }">
+                   	<i class="fas fa-female" style="color:#fe4646"></i>
+                   	</c:if>
+                   	<c:if test="${memberLoggedIn.memberGender=='m' }">
+                   	<i class="fas fa-male" style="color:#2756a6 "></i>
+                   	</c:if>
+                   	<div class="aside-member-box">
+                   	<p>${memberLoggedIn.profileName }</p><i class="fas fa-cog"></i>
+                   	<span>${memberLoggedIn.memberId }</span>
+                   	</div>
+                </div>
+                </c:if>
+                
                 
          <div class="aside-scroll-box">
           	<div id="aside-scroll">

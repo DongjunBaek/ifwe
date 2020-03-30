@@ -154,6 +154,7 @@ public class MemberController {
 				
 				MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
 				model.addAttribute("memberLoggedIn", memberLoggedIn);
+				log.debug("memberLoggedIn={}",memberLoggedIn);
 				
 				Profile profile = profileService.selectOneProfileWithCode(member.getMemberCode());
 				log.debug("profile = {}",profile);

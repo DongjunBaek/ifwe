@@ -97,7 +97,7 @@
 	<select id="selectMemberCode" resultType="member" parameterType="_int">
 		select member_code 
 		from club_members
-		where club_grade='member' and club_code = #{clubCode}
+		where club_grade in('member','nm') and club_code = #{clubCode}
 	
 	</select>
 	
@@ -218,7 +218,21 @@
 	
 	</update>
 	
+	<select id="clubLoggedIn" resultType="clubLoggedIn">
+		select M.*,p.profile_name,p.profile_img_re,H.club_grade,h.club_enrolldate
+		from member M join member_profile P 
+					  on M.member_code = P.member_code
+                      join club_members H 
+                      on M.member_code=H.member_code
+		where M.member_code = #{memberCode}
+	</select>
+		
+	<delete id="deleteClubMember">
+		delete from club_members
+		where club_code = #{clubCode} and member_code = #{memberCode}
 	
+	</delete>	
+		
 </mapper>
 
 
