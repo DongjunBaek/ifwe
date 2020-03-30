@@ -27,7 +27,7 @@
 	margin-left: 50px;
 }
 
-#title {
+.board-input-text {
 	width: 900px;
 	height: 40px;
 	background-color: #f1f2f2;
