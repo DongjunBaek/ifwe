@@ -52,6 +52,7 @@ section{
     border-bottom: 1px solid #ebebeb;
     font-size: 18px;
     height:60px;
+    cursor: pointer;
 }
 .shc-friendtable tr td:first-child{
     width:50px;
