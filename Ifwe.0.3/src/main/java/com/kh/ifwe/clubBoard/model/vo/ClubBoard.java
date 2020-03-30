@@ -21,7 +21,7 @@ public class ClubBoard implements Serializable {
 	private int boardNo;
 	private int clubCode;
 	private int memberCode;
-	private int boardlistNo;
+	private int clubBoardlistNo;
 	private String boardTitle;
 	private String boardContent;
 	private Date boardDate;
