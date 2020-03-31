@@ -128,7 +128,7 @@ $(function(){
 	                
 	                <li>
                         <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
-						<span><a href="${pageContext.request.contextPath }/club/freeboard.do?clubBoardlistNo=${boardList.clubBoardlistNo}">${boardList.boardName }</a></span>
+						<span><a href="${pageContext.request.contextPath }/clubboard/freeboard.do?clubBoardlistNo=${boardList.clubBoardlistNo}">${boardList.boardName }</a></span>
                    	</li>   	
                    	
                    	</c:forEach>
