@@ -3,6 +3,8 @@ package com.kh.ifwe.friend.model.dao;
 import java.util.List;
 
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.member.model.vo.FriendList;
+import com.kh.ifwe.member.model.vo.Member;
 
 public interface FriendDAO {
 
@@ -14,6 +16,6 @@ public interface FriendDAO {
 
 	int DeleteFriendAccept(Friend friend);
 
-	List<Friend> selectListFreind(int memberCode);
+	List<FriendList> selectListFreind(int memberCode);
 
 }

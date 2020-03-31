@@ -527,5 +527,16 @@ public class ClubController {
 	
 	
 	
+	/**
+	 * 0331 membership 구매 기능 관련. 
+	 * 동준
+	 */
 	
+	@GetMapping("/selectOneClub")
+	public Club selectOneClub(@RequestParam(value="clubCode") int clubCode) {
+		
+		Club club = clubService.selectOne(clubCode);
+		
+		return club;
+	}
 }

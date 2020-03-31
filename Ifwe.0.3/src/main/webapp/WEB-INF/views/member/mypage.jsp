@@ -10,13 +10,16 @@
 p{
 margin:0;
 }
+.content{
+overflow:auto;
+}
 </style>
 <!-- 문보라 수정 03.20  -->
 	<section class="mypage-section">
         <article class="mypage-first">
             <div class="intro-div">
                 <div class="img-div">
-              	  <img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" width="100px"/>
+              	  <img src="${pageContext.request.contextPath }/resources/upload/proifle/ alt="" width="100px"/>
                 </div>
                 <div class="myname-div font-kor">
                     <div style="font-size: 25px;margin:0 auto;max-width: fit-content;">@${memberLoggedIn.memberId }</div>
@@ -52,8 +55,12 @@ margin:0;
                 <div class="contents">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <p class="mypage-p-content"><span class="friend-name-profile">김원재님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0"></p>
-                        <p class="mypage-p-content"><span class="friend-name-profile">신형철님</span>에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0"></p>
+                        <c:if test="${not empty friendList }">
+                        <c:forEach items="${friendList }" var="fl" varStatus="vs" >
+                        <p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
+                        																									onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberId=${memberLoggedIn.memberId }'"></p>
+                        </c:forEach>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -120,13 +127,17 @@ margin:0;
             <div class="friend-container">
                 <div class="friend-title font-kor"><p style="color: white;font-size: 20px;font-weight: bold;padding: 6%;">친구 목록</p></div>
                 <div class="friend-lists">
+                	<c:if test="${not empty friends }">
+                	<c:forEach items="${friends }" var="fr">
                     <div class="friend-list">
                         <div class="friend-img">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+                        	<img src="${pageContext.request.contextPath }/resources/upload/profile/${fr.profileImgRe!=null?fr.profileImgRe:''}" alt="" />
                         </div>
-                        <div class="friend-name font-kor friend-name-profile">김원재</div>
+                        <div class="friend-name font-kor friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${fr.friendCode}">${fr.memberPname }</a></div>
                     </div>
-                    <div class="friend-list">
+                    </c:forEach>
+                    </c:if>
+                    <%-- <div class="friend-list">
                         <div class="friend-img">
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />	
                         </div>
@@ -137,10 +148,9 @@ margin:0;
                         	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                         </div>
                         <div class="friend-name font-kor friend-name-profile">백동준</div>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
         </article>
     </section>
-	
 </body>
