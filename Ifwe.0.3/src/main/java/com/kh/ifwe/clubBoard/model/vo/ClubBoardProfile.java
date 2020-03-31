@@ -22,6 +22,7 @@ public class ClubBoardProfile extends ClubBoard implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String profileName;
 	private String profileImgRe;
+
 	
 	
 	public ClubBoardProfile(int boardNo, int clubCode, int memberCode, int clubBoardlistNo, String boardTitle,
@@ -31,6 +32,7 @@ public class ClubBoardProfile extends ClubBoard implements Serializable {
 				boardDel, boardReport, boardName);
 		this.profileImgRe = profileImgRe;
 		this.profileName = profileName;
+		
 	}
 	
 

@@ -52,7 +52,7 @@
 	
 	<select id="selectClubBoardList" resultMap="clubBoardProfileMap">
 		select 
-			C.*,L.*,M.profile_name, M.profile_img_re 
+			C.*,L.*,M.profile_name, M.profile_img_re
 		from 
 			club_board C 
 		left join 
@@ -62,12 +62,11 @@
 		left join 
 			member_profile M 
 		on 
-			C.member_code = M.member_code 
+            C.member_code = M.member_code 
 		where 
 			L.club_boardlist_no = #{clubBoardlistNo} 
 		order by 
 			C.board_no desc
-
 	</select>
 	
 	<resultMap type="clubBoardProfile" id="clubBoardProfileMap">
