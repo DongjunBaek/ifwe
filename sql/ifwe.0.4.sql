@@ -445,6 +445,16 @@ begin
     
 end;
 /
+
+-- 0331 프리미엄 구매시 자동으로 CLUB 프리미엄이 변경됨.
+create or replace trigger trig_update_clubPremium
+after
+insert on PREMIUM_ORDER
+for each row
+begin    
+    update club set PREMIUM_CODE = :new.premium_code where club_code= :new.club_code;
+end;
+/
 --=================================================================
 --MEMBER DUMMY
 --=================================================================

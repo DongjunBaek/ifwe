@@ -545,6 +545,7 @@ public class ClubController {
 	 */
 	
 	@GetMapping("/selectOneClub")
+	@ResponseBody
 	public Club selectOneClub(@RequestParam(value="clubCode") int clubCode) {
 		
 		Club club = clubService.selectOne(clubCode);
