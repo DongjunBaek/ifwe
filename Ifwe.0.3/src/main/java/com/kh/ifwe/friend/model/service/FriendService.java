@@ -3,6 +3,8 @@ package com.kh.ifwe.friend.model.service;
 import java.util.List;
 
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.member.model.vo.FriendList;
+import com.kh.ifwe.member.model.vo.Member;
 
 public interface FriendService {
 
@@ -12,6 +14,7 @@ public interface FriendService {
 
 	int DeleteFriendAccetp(Friend friend);
 
-	List<Friend> selectListFriend(int memberCode);
+	List<FriendList> selectListFriend(int memberCode);
+
 
 }

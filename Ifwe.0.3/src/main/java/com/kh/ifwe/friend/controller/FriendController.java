@@ -17,8 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.friend.model.service.FriendService;
 import com.kh.ifwe.friend.model.vo.Friend;
-import com.kh.ifwe.member.controller.MemberController;
 import com.kh.ifwe.member.model.service.MemberService;
+import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.profile.model.service.ProfileService;
@@ -80,7 +80,7 @@ MemberService memberservice;
 			RedirectAttributes redirectAttributes) {
 
 		List<FriendProfile> FPList= new ArrayList<FriendProfile>();
-		List<Friend> Friendlist = friendService.selectListFriend(memberCode);
+		List<FriendList> Friendlist = friendService.selectListFriend(memberCode);
 
 		model.addAttribute("FriendList", Friendlist);
 		List<Profile> profileList = new ArrayList<Profile>();
@@ -130,5 +130,7 @@ MemberService memberservice;
 	 * 
 	 * model.addAttribute("list",list); return list; }
 	 */
+	
+	
 
 }

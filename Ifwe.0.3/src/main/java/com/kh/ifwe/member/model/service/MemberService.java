@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Profile;
 
@@ -47,5 +48,15 @@ public interface MemberService {
 	Member checkId(String memberId);
 
 	List<Club> selectInterClub(String memberLike);
+
+	int insertMsgFriend(Map<String, Integer> map);
+
+	List<Member> selectFriendList(int memberCode);
+
+	int friendYes(int memberFrom);
+
+	Friend selectOneForFriend(int memberFrom);
+
+	int insertFriends(Friend friend);
 
 }

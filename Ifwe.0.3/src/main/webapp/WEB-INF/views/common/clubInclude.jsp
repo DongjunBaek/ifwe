@@ -153,7 +153,7 @@ $(function(){
                         	<c:if test="${clubMaster.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${clubMaster.memberCode}">${clubMaster.profileName }</a></span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${clubMaster.memberCode}">${clubMaster.profileName }</a></span>
                         </div>
                         <c:if test="${not empty clubMember }">
                         <c:forEach items="${clubMember }" var="cmember">
@@ -164,9 +164,7 @@ $(function(){
                         	<c:if test="${cmember.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile">
-                            <a href="${pageContext.request.contextPath }/profile/profileview.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a>
-                            </span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a></span>
                         </div>
                         
                         </c:forEach>
