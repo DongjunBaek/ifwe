@@ -150,16 +150,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deleteClubMember",param);
 	}
 
-	@Override
 
-	public int insertBoard(Board board) {
-		return sqlSession.insert("club.insertBoard", board);
-
-	}
-
-
-
-	}
 	public List<ClubBoard> selectBoardList(int clubCode) {
 		return sqlSession.selectList("club.selectBoardList", clubCode);
 

@@ -63,14 +63,9 @@ public interface ClubDAO {
 	int deleteClubMember(Map<String, Object> param);
 
 
-	int insertBoard(Board board);
 
 	List<ClubBoard> selectBoardList(int clubCode);
 
-
-	int insertBoard(Board board);
-
-	List<ClubBoard> selectBoardList(int clubCode);
 
 
 

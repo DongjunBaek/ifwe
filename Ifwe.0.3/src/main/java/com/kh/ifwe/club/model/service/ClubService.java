@@ -55,8 +55,6 @@ public interface ClubService {
 	int deleteClubMember(Map<String, Object> param);
 
 
-	int insertBoard(Board board);
-
 	List<ClubBoard> selectBoardList(int clubCode);
 
 
