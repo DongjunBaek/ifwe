@@ -43,10 +43,15 @@
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
 --drop sequence seq_club_no;    -- 소모임 번호 
+--drop sequence seq_msg_code;   -- 메세지 번호
+--drop sequence seq_order_code; -- 구매기록 번호
+--drop sequence seq_contents_code; -- 컨텐츠 번호
 --=================================================================
 --select
 --=================================================================
 --select * from tab; -- 전체 테이블 조회
+select * from member;
+select * from member_profile;
 --=================================================================
 --TABLE
 --=================================================================
@@ -154,7 +159,7 @@ CREATE TABLE  MEMBER_REPORT  (
 );
 -- 6.회원 메세지 카테고리 테이블
 CREATE TABLE  MSG_CATEGORY  (
-	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. c1-> 소모임 신청 f1 -> 친구신
+	 msg_cate_code 	VARCHAR2(100)   PRIMARY KEY, -- 메세지 카테고리 분류 명. c1-> 소모임 신청
 	 msg_cate_info 	VARCHAR2(100)		NULL -- 메세지 카테고리 별 내용 
      
 );
@@ -175,7 +180,7 @@ CREATE TABLE  MEMBER_MSG  (
           CONSTRAINT fk_msg_cateCode foreign key(msg_cate_code)
                                                         REFERENCES MSG_CATEGORY(msg_cate_code)                                                    
                                                         on delete cascade,
-          constraint ck_msg_msgView check(msg_view in ('y','n')),--member-from fk
+          constraint ck_msg_msgView check(msg_view in ('y','n'))--member-from fk
 );
 -- 8.회원 친구 목록
 CREATE TABLE  friend  (
@@ -228,13 +233,13 @@ CREATE TABLE  BOARD  (
 );
 -- 13.게시판 댓글테이블 --
 CREATE TABLE  BOARD_COMMENT  (
-	 comment_no 	NUMBER		NOT NULL,
-	 member_code 	NUMBER		NOT NULL,
-	 board_no 	NUMBER		NOT NULL,
-	 comment_content 	VARCHAR2(500)		NULL,
-	 comment_date 	DATE		NULL,
-	 comment_level 	NUMBER		NULL,
-	 comment_no_ref 	NUMBER		NULL
+    comment_no    NUMBER      PRIMARY key,
+    member_code    NUMBER      NOT NULL,
+    board_no    NUMBER      NOT NULL,
+    comment_content    VARCHAR2(500)      NULL,
+    comment_date    DATE      NULL,
+    comment_level    NUMBER      NULL,
+    comment_no_ref    NUMBER      NULL
 );
 
 -- 14.검색어 기록
@@ -288,27 +293,31 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
-	 club_boardname 	varchar2(30)		NOT NULL,
-	 club_code 	NUMBER		NOT NULL,
-	 board_name 	VARCHAR2(50)		NULL,
-     constraint pk_club_boardname primary key(club_boardname),
+    club_boardlist_no    number   NOT NULL,
+    club_code    NUMBER      NOT NULL,
+    board_name    VARCHAR2(50)      NULL,
+     constraint pk_club_boardlist_no primary key(club_boardlist_no),
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
+
+select * from club_boardlist;
+
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
-	 board_no 	NUMBER		primary key ,
-	 club_code 	NUMBER		NOT NULL,
-	 member_code 	NUMBER		NOT NULL,
-	 club_boardname 	VARCHAR2(50)		NOT NULL,
-	 board_content 	VARCHAR2(2000)		NULL,
-	 board_date 	DATE		NULL,
-	 board_heart 	NUMBER		NULL,
-	 board_cate_code 	VARCHAR2(200)		NULL,
-	 board_del 	CHAR(1)		NULL, -- y or n
-	 cate_code 	VARCHAR2(100)		NOT NULL,
+    board_no    NUMBER      primary key ,
+    club_code    NUMBER      NOT NULL,
+    member_code    NUMBER      NOT NULL,
+    club_boardlist_no    number   NOT NULL,
+     board_title varchar2(100) null,
+    board_content    VARCHAR2(2000)      NULL,
+    board_date    DATE   default sysdate,
+    board_heart    NUMBER      NULL,
+    board_cate_code    VARCHAR2(200)      NULL,
+    board_del    CHAR(1)      NULL, -- y or n
+     board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boarddname_board foreign key (club_boardname) references CLUB_BOARDLIST (club_boardname)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
@@ -352,7 +361,7 @@ CREATE TABLE  CLUB_HISTORY  (
 	 club_code 	NUMBER		NOT NULL,
 	 club_count 	NUMBER		NULL,
 	 club_boardcnt 	NUMBER		NULL,
-	 club_usedate 	DATE		default sydate,
+	 club_usedate 	DATE		default sysdate,
 	 member_code 	NUMBER		NOT NULL
 );
 -- 26.소모임 일정정보 저장 테이블
@@ -379,18 +388,13 @@ CREATE TABLE  CALENDAR  (
 --=================================================================
 create sequence seq_member_no;  -- 회원 번호 
 create sequence seq_board_no;   -- 게시글 번호
+create sequence seq_board_comment_no; -- 게시글 답변 번호
 create sequence seq_club_no;    -- 소모임 번호 
-<<<<<<< HEAD
-create sequence seq_msg_code; -- 메시지 번호
-create sequence seq_order_code; --구매기록 번호
-
---select * from member_msg;
-
-=======
 create sequence seq_msg_code;   -- 메세지 번호
 create sequence seq_order_code; -- 구매기록 번호
 create sequence seq_contents_code; -- 컨텐츠 번호
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
+create sequence seq_club_board_no;  --클럽게시판번호
+create sequence seq_club_boardlist_no; --클럽게시판목록번호
 --=================================================================
 --TRIGGER
 --=================================================================
@@ -407,14 +411,56 @@ begin
 end;
 /
 
+create or replace trigger tri_board_level
+    after       
+    insert on board_comment 
+    for each row 
+begin    
+    update board set board.board_level= '1'
+    where board_no = :new.board_no;
+end;
+/
+
+create or replace trigger tri_board_level_del
+    after       
+    delete on board_comment 
+    for each row 
+begin    
+    update board set board.board_level= '0'
+    where board_no = :old.board_no;
+end;
+/
+
+create or replace trigger trig_club_boardlist
+after
+insert on club
+for each row
+begin
+
+    insert into club_boardlist
+    values(seq_club_boardlist_no.nextval, :new.club_code, '공지사항');
+    
+    insert into club_boardlist
+    values(seq_club_boardlist_no.nextval, :new.club_code, '자유게시판');
+    
+end;
+/
 --=================================================================
 --MEMBER DUMMY
 --=================================================================
 --관리자 계정
-insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
+--insert into member values(seq_member_no.nextval,'admin1234','$2a$10$gjA.1nKhR2SNMW8RvdMabuVjrh5cZpoL5aAOUqXoTlbffj1ytQc9i','관리자',NULL,'경기','admin1234@ifwe.com',to_date('06/20/1990 00:00:00', 'mm/dd/yyyy hh24:mi:ss'),'m','경기 성남시 분당구 대왕판교로606번길 45',default,null,'member',0,'공연전시,스터디,음악댄스');
+--insert into member_profile values(
+--      1,null,null,null,null,'0','m',null
+--
+--      );
 --id : admin1234
 --password : admin1234!
 COMMIT;
+-- 사용자 계정
+
+
+
 --=============================================
 -- board_cate dummy
 --=============================================
@@ -447,23 +493,4 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'report','테스트5','<p>테스트5</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
-commit;
-
-select * from club_members;
-select * from friend;
-insert into friend values(2,'test2222','나야나');
-select * from member;
-select * from member_msg;
-
-select* from club_members;
-insert into club_members values(1,3,'member',sysdate);
-select * from member_profile;
-select* from club;
-
-insert into msg_category values('c1','가입신청');
-
-select * from msg_category;
-
-
-
 commit;

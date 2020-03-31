@@ -23,9 +23,10 @@ $(function(){
     $(".addbtn").on('click', function(){
     	$(".membership-third").css("display","block");
     	
-    	 let checkval = $(".choice input[type=checkbox]:checked").val();
+    	let checkval = $(".choice input[type=checkbox]:checked").val();
     	console.log(checkval); 
-    	
+    	let checkvalCode = $(".choice input[type=checkbox]:checked").parent().children().eq(2).val(); 
+    	console.log(checkvalCode);
     	let premiumbtncolor = $("#premiumbtn").css("background-color")
 	    let goldbtncolor = 	$("#goldbtn").css("background-color");
 	    let silverbtncolor = $("#siverbtn").css("background-color");
@@ -37,12 +38,14 @@ $(function(){
     		let div = $(".payment-lists");
     		
     		div.append('<div class="payment-list font-kor">'+
-    	            	'<div class="name-checkbox bold">'+
-                   		'<input type="checkbox" name="gold-membership" id="gold-membership"><label for="gold-membership" >골드 GOLD</label>'+
+    	            	'<div class="name-checkbox bold">골드 GOLD'+
+                   		'<input type="hidden" name="gold-membership" id="gold-membership" value="gold">'+
                			'</div>'+
 		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+		               	'<input type="hidden" class="myclubCode" name="myclubCode" value="'+checkvalCode+'">'+
 		               	'<div class="list-duration "><p>무제한</p></div>'+
 		               	'<div class="list-price bold"><p >5900원</p></div>'+
+		               	'<div class=""><i class="far fa-trash-alt theDeleteMemberShip"></i></div>'+		               	
 		         		'</div>');
 		    		
     	}
@@ -53,12 +56,14 @@ $(function(){
 		    		let div = $(".payment-lists");
 		    		
 		    		div.append('<div class="payment-list font-kor">'+
-		    	            	'<div class="name-checkbox bold">'+
-		                   		'<input type="checkbox" name="pre-membership" id="pre-membership"><label for="pre-membership" >프리미엄 PREMIUM</label>'+
+		    	            	'<div class="name-checkbox bold">프리미엄 PREMIUM'+
+		                   		'<input type="hidden" name="pre-membership" id="pre-membership" value="premium">'+
 		               			'</div>'+
 				               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+				               	'<input type="hidden" class="myclubCode" name="myclubCode" value="'+checkvalCode+'">'+
 				               	'<div class="list-duration "><p>무제한</p></div>'+
 				               	'<div class="list-price bold"><p >9900원</p></div>'+
+				               	'<div class=""><i class="far fa-trash-alt theDeleteMemberShip"></i></div>'+
 				         		'</div>');
 				    		
 		    	}
@@ -69,12 +74,14 @@ $(function(){
 			let div = $(".payment-lists");
 			
 			div.append('<div class="payment-list font-kor">'+
-		            	'<div class="name-checkbox bold">'+
-		           		'<input type="checkbox" name="silver-membership" id="silver-membership"><label for="silver-membership" >실버 SILVER</label>'+
+		            	'<div class="name-checkbox bold">실버 SILVER'+
+		           		'<input type="hidden" name="silver-membership" id="silver-membership" value="silver">'+
 		       			'</div>'+
 		               	'<div class="list-club bold"><p >'+checkval+'</p></div>'+
+		               	'<input type="hidden" class="myclubCode" name="myclubCode" value="'+checkvalCode+'">'+
 		               	'<div class="list-duration "><p>무제한</p></div>'+
 		               	'<div class="list-price bold"><p >3900원</p></div>'+
+		               	'<div class=""><i class="far fa-trash-alt theDeleteMemberShip"></i></div>'+
 		               	'</div>');
 		    		
 		}
@@ -97,7 +104,15 @@ $(function(){
 			}
 			
 		});
-    	
+		
+		/* 0331 멤버십 구매 수정 백동준 */
+		
+	    $(".theDeleteMemberShip").click(function(){
+	    	/* console.log(this); */
+	    	console.log($(this).parent().parent().parent());
+	    	$(this).parent().parent().remove();
+	    	
+	    });
     });
     
     $(".choice input[type=checkbox]").click(function(){
@@ -108,7 +123,7 @@ $(function(){
     	
     });
     
-    
+
   	     
     	
   })
@@ -146,8 +161,8 @@ $(function(){
                  	<c:if test="${not empty list }">
                    <c:forEach items="${list }" var="l" varStatus="vs">
 	                   <div class="choice-checkbox font-kor">
-	                       <input type="checkbox" name="membership-club" id="membership-club${vs.index }" value="${l.clubTitle }" ><label for="membership-club${vs.index }" >${l.clubTitle }</label>
-	                      	<input type="hidden" id ="clubCode" value="${l.clubCode }">
+	                      <input type="checkbox" name="membership-club" id="membership-club${vs.index }" value="${l.clubTitle }" ><label for="membership-club${vs.index }" >${l.clubTitle }</label>
+	                      <input type="hidden" name ="clubCode" value="${l.clubCode }">
 	                   </div>
                    </c:forEach>
                    </c:if>
@@ -224,18 +239,39 @@ $(function(){
 <script type="text/javascript">
 $(".paymentbtn").click(function(){
 	
+	var clubCode = $(".myclubCode");// 소모임 번호	
+	var memberCode= ${memberLoggedIn.memberCode};// 구매한 회원 번호
 	
-	var membershipName = $(".name-checkbox input[type=checkbox] + label").text()=="프리미엄 PREMIUM"?"premium":$(".name-checkbox input[type=checkbox] + label").text()=="골드 GOLD"?"gold":"silver";
-	var clubCode = $("#clubCode").val();
-	var price = $(".list-price").text()=="9900원"?9000:$(".list-price").text()=="5900원"?5900:3900;
-	var memberCode= ${memberLoggedIn.memberCode};
+	var memberrshipName=$(".name-checkbox");
+	var prices = $(".list-price");
 	
-	$.ajax({
+	for(var i =0; i < memberrshipName.length; i++){
+		console.log($(memberrshipName[i]).children().eq(0).val());		
+		console.log($(prices[i]).text().substring(0,4));		
+		console.log($(clubCode[i]).val());
+		/* 구매 가능 유효성 검사 */
+/* 		$.ajax({
+			url :"",
+			data : {
+				clubCode : clubCode,
+				membershipName : $(memberrshipName[i]).children().eq(0).val()
+			},
+			type : "POST",
+			success : function(data){
+				
+			},
+			error : function(x,s,e){
+				console.log(x,s,e)
+			}
+		}); */
+		/* 구매 가능 유효성 검사 */
+		
+  		$.ajax({
 		url: "${pageContext.request.contextPath}/member/membershipPay.do",
 		data: {
-			membershipName : membershipName,
-			clubCode : clubCode,
-			price : price,
+			membershipName : $(memberrshipName[i]).children().eq(0).val(),
+			clubCode : $(clubCode[i]).val(),
+			price : $(prices[i]).text().substring(0,4),
 			memberCode : memberCode
 		},
 		type: "POST",
@@ -243,11 +279,13 @@ $(".paymentbtn").click(function(){
 			console.log(data);
 		},
 		error: function(x,s,e){
-			
+			console.log(x,s,e);
 		}
 		
-		})
-	})
+		});
+	}
+	
+	}); 
 </script>
 
 

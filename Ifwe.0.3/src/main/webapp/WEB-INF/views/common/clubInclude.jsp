@@ -34,7 +34,15 @@ $(function(){
 	$("#managementbutton").click(function(){
 		location.href="${pageContext.request.contextPath }/club/management.do";
 	});
+	$("#logoutbutton").click(function(){
+		location.href="${pageContext.request.contextPath }/member/logout.do";
+	});
+    $(".aside-member-container").click(function(){
+    	location.href="${pageContext.request.contextPath }/club/secession.do";
+    });
     
+	
+	
 	
 })
 
@@ -52,7 +60,7 @@ $(function(){
                         <i class="fas fa-sort-down fa-2x"></i>
                     </div>
                     <div class="nav-clubimg">
-						<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
+						<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${club.clubImgRe}" alt="" />
                     </div>
                         <div class="nav-right-leader">
 
@@ -79,16 +87,28 @@ $(function(){
                     <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
-                <c:if test="${clubMaster.memberCode != memberLoggedIn.memberCode}">
-                <div class="aside-join" id="enrollbutton">
-                    <p>가입하기</p>
-                </div>
-                </c:if>
+
                 <c:if test="${clubMaster.memberCode == memberLoggedIn.memberCode}">
                 <div class="aside-join" id="managementbutton">
                     <p>관리하기</p>
                 </div>
                 </c:if>
+				
+				<c:if test="${clubLoggedIn.clubGrade == null}">
+                <div class="aside-join" id="enrollbutton">
+                    <p>가입하기</p>
+                </div>
+				</c:if>
+                
+                <c:if test="${clubLoggedIn.clubGrade == 'member' || clubLoggedIn.clubGrade == 'nm' }">
+                <div class="aside-member-container">
+                   	<div class="aside-member-box">
+                   	<p>${memberLoggedIn.profileName }</p><i class="fas fa-cog"></i>
+                   	<span>${memberLoggedIn.memberId }</span>
+                   	</div>
+                </div>
+                </c:if>
+                
                 
          <div class="aside-scroll-box">
           	<div id="aside-scroll">
@@ -99,18 +119,26 @@ $(function(){
 						<span><a href="${pageContext.request.contextPath }/club/clubMain.do?clubCode=${club.clubCode}">전체보기</a></span>
                 	</li>
                 	<li>
-                      <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
-						<span><a href="${pageContext.request.contextPath }/club/notice.do">공지사항</a></span>
-                	</li>
-                	<li>
                         <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
 						<span><a href="${pageContext.request.contextPath }/club/calendar.do">일정캘린더</a></span>
                 	
                 	</li>
-                   	<li>
+                   	<c:if test="${not empty clubBoardList}">
+                   	<c:forEach items="${ clubBoardList}" var="boardList">
+	                
+	                <li>
                         <i class="fas fa-circle" style="font-size: 10px;color:#ffc862"></i>
-						<span><a href="${pageContext.request.contextPath }/club/freeboard.do">자유게시판</a></span>
-                   	</li>
+						<span><a href="${pageContext.request.contextPath }/club/freeboard.do?clubBoardlistNo=${boardList.clubBoardlistNo}">${boardList.boardName }</a></span>
+                   	</li>   	
+                   	
+                   	</c:forEach>
+                   	</c:if>
+                   	
+                   	
+                   	
+                   	
+                   	
+                   	
                 </ul>
                 </div>
                 <div class="aside-friend-box">

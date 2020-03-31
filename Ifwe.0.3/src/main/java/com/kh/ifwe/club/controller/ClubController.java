@@ -24,10 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -38,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList"})
 public class ClubController {
 	
 	@Autowired
@@ -166,25 +169,30 @@ public class ClubController {
 	//보라,형철 소모임 메인페이지 출력
 	@GetMapping("/clubMain.do")
 	public ModelAndView clubMain(@RequestParam("clubCode") int clubCode,ModelAndView mav,
-								 @SessionAttribute("memberLoggedIn") MemberLoggedIn member,
+								 @SessionAttribute("memberLoggedIn") MemberLoggedIn memberLoggedIn,
 								 HttpServletRequest request) {
 		
 		
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("clubMember");
+		session.removeAttribute("clubLoggedIn");
+		session.removeAttribute("clubBoardList");
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("clubCode", clubCode);
+		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
-		log.debug("clubCode = {}",clubCode);
 		
 		Club club = clubService.selectOne(clubCode);
 		
-		log.debug("club = {}",club);
-		
+		ClubLoggedIn clubLoggedIn = clubService.selectClubLoggedIn(param);
 		
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
 		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
+		
+		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
@@ -196,6 +204,13 @@ public class ClubController {
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
+		log.debug("clubLoggedIn={}",clubLoggedIn);
+		log.debug("clubBoardList={}",clubBoardList);
+		
+		
+		
+		mav.addObject("clubBoardList",clubBoardList);
+		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
@@ -253,15 +268,15 @@ public class ClubController {
 		return "club/clubcalendar";
 	}
 	
-	@GetMapping("/notice.do")
-	public String notice() {
-		return "club/clubNotice";
-	}
+//	@GetMapping("/notice.do")
+//	public String notice() {
+//		return "club/clubNotice";
+//	}
 	
-	@GetMapping("/freeboard.do")
-	public String freeboard() {
-		return "club/clubFreeBoard";
-	}
+//	@GetMapping("/freeboard.do")
+//	public String freeboard() {
+//		return "club/clubFreeBoard";
+//	}
 	
 	@GetMapping("/management.do")
 	public String management() {
@@ -431,10 +446,98 @@ public class ClubController {
 		return mav;
 	}
 	
+	//0329 형철 회원탈퇴페이지
+	@GetMapping("/secession.do")
+	public ModelAndView secession(ModelAndView mav) {
+		
+		
+		mav.setViewName("club/clubSecession");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/secessionEnd.do")
+	public ModelAndView secession(ModelAndView mav,
+								  @SessionAttribute("clubLoggedIn") ClubLoggedIn clubLoggedIn,
+								  @RequestParam("clubCode") int clubCode) {
+		
+		int memberCode = clubLoggedIn.getMemberCode();
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberCode", memberCode);
+		param.put("clubCode", clubCode);
+		
+		int result = clubService.deleteClubMember(param);
+		
+		
+		mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/memberDelete.do")
+	public ModelAndView memberDelete(ModelAndView mav,
+									 @RequestParam("memberCode") int memberCode,
+									 @SessionAttribute("club") Club club,
+									 HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("clubMember");
+		
+		int clubCode = club.getClubCode();
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberCode", memberCode);
+		param.put("clubCode", clubCode);
+		
+		int result = clubService.deleteClubMember(param);
+		
+		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
+		List<ClubMember> clubMember = null;
+		
+		if(!clubMemberCode.isEmpty()) {
+			clubMember = clubService.selectClubMember(clubMemberCode);
+		}
+		
+		mav.addObject("clubMember",clubMember);
+		mav.setViewName("redirect:/club/mngmember.do");
+		
+		
+		return mav;
+	}
 	
 	
+	@GetMapping("/clubInsertBoard")
+	public String clubInsertBoard() {
+		return "club/clubInsertBoard";
+	}
+	@GetMapping("/clubInsertNotice")
+	public String clubInsertBoardNotice() {
+		return "club/clubInsertBoardNotice";
+	}
+	@GetMapping("/clubInsertBoardFree")
+	public String clubInsertBoardFree() {
+		return "club/clubInsertBoardFree";
+	}
 	
 	
+	@PostMapping("/clubInsertBoardFrm")
+	public ModelAndView clubInsertBoardFrm(ModelAndView mav,Board board) {
+		
+		log.debug("board = {}",board);
+		
+		int result = clubService.insertBoard(board);
+		
+		if (result > 0) {
+			log.debug("Board @ insertBoard.do : 글 등록 성공");
+		}else
+			log.debug("Board @ insertBoard.do : 글 등록 실패");
+		
+		mav.setViewName("/club/clubMain"); 
+		
+		return mav;
+		
+	}
 	
 	
 }
