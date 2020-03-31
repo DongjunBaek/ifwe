@@ -317,7 +317,7 @@ CREATE TABLE  CLUB_BOARD  (
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
