@@ -63,7 +63,7 @@ $(function(){
                               <div class="article1-curcle"></div>
                               <div class="article1-curcle"></div>
                           </div>
-                      </div>
+                      </div>			
                       <p class="article1-boardmenu">자유게시판</p>
                       <div class="article1-bard-content">
 			                          이번주 금요일 정모합니다! <br>

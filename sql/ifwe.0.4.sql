@@ -293,27 +293,34 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
-	 club_boardname 	varchar2(30)		NOT NULL,
+	 club_boardlist_no 	number	NOT NULL,
 	 club_code 	NUMBER		NOT NULL,
 	 board_name 	VARCHAR2(50)		NULL,
-     constraint pk_club_boardname primary key(club_boardname),
+     constraint pk_club_boardlist_no primary key(club_boardlist_no),
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
+
+select * from club_boardlist
+order by club_boardlist_no;
+select *
+ from club
+ where club_code = 9999;
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
 	 board_no 	NUMBER		primary key ,
 	 club_code 	NUMBER		NOT NULL,
 	 member_code 	NUMBER		NOT NULL,
-	 club_boardname 	VARCHAR2(50)		NOT NULL,
+	 club_boardlist_no 	number	NOT NULL,
+     board_title varchar2(100) null,
 	 board_content 	VARCHAR2(2000)		NULL,
-	 board_date 	DATE		NULL,
+	 board_date 	DATE	default sysdate,
 	 board_heart 	NUMBER		NULL,
 	 board_cate_code 	VARCHAR2(200)		NULL,
 	 board_del 	CHAR(1)		NULL, -- y or n
-	 cate_code 	VARCHAR2(100)		NOT NULL,
+     board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boarddname_board foreign key (club_boardname) references CLUB_BOARDLIST (club_boardname)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
@@ -326,8 +333,10 @@ CREATE TABLE  CLUB_BOARD_COMMENT  (
 	 comment_date 	DATE		NULL,
 	 comment_level 	NUMBER		NULL,
 	 comment_del 	CHAR(1)		NULL,
-	 comment_ref 	NUMBER		NULL
+	 comment_ref 	NUMBER		NULL,
+     comment_report char(1) null  --y or n
 );
+
 
 -- 22.소모임 게시판 이미지 테이블
 CREATE TABLE  BOARD_IMG  (
@@ -388,6 +397,8 @@ create sequence seq_club_no;    -- 소모임 번호
 create sequence seq_msg_code;   -- 메세지 번호
 create sequence seq_order_code; -- 구매기록 번호
 create sequence seq_contents_code; -- 컨텐츠 번호
+create sequence seq_club_board_no;  --클럽게시판번호
+create sequence seq_club_boardlist_no; --클럽게시판목록번호
 --=================================================================
 --TRIGGER
 --=================================================================
