@@ -90,6 +90,8 @@ public class ProfileController {
 	}
 	
 	
+	
+	
 	@Autowired
 	private MemberService memberService;
 	

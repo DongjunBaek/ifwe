@@ -29,7 +29,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.friend.model.service.FriendService;
+import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.service.MemberService;
+import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
@@ -51,6 +54,9 @@ public class MemberController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private FriendService friendService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -206,14 +212,35 @@ public class MemberController {
 //	}
 
 	// 문보라
+	//20200330 마이페이지 친구리스트 뿌리기  
 	@GetMapping("/mypage.do")
-	public void mypage(@RequestParam("memberId") String memberId) {
-
+	public String mypage(@RequestParam("memberId") String memberId,
+						Model model) {
+		Member member = memberService.selectOne(memberId);
+		log.debug("member={}",member);
+		
+		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
+		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
+		
+		log.debug("friendList={}",friendList);
+		log.debug("friends={}",friends);
+		model.addAttribute("friendList",friendList);
+		model.addAttribute("friends",friends);
+		
+		return "member/mypage";
 	}
-
+	
+	//0330 상대 프로필 조회 
 	@GetMapping("/profile.do")
-	public String profile() {
-
+	public String profile(@RequestParam("memberCode") int memberCode
+							,Model model) {
+		Member member = memberService.memberSelectOneCode(memberCode);
+		Profile profile =profileservice.selectOneProfileWithCode(memberCode);
+		
+		log.debug("profile={}",profile);
+		log.debug("member= {}",member);
+		model.addAttribute("member",member);
+		model.addAttribute("profile",profile);
 		return "member/profile";
 	}
 
@@ -603,7 +630,38 @@ public class MemberController {
 		return member;
 	}
 	
+	//20200330 친구신청메시
 	
+	
+	@RequestMapping("/insertMsgFriend.do")
+	public String insertMsg(@RequestParam("memberCode") int memberCode,
+							@RequestParam("fromMember") int fromMember) {
+		Map<String,Integer> map = new HashMap();
+		map.put("memberCode", memberCode);
+		map.put("fromMember",fromMember);
+		log.debug("map = {}",map);
+		
+		int result = memberService.insertMsgFriend(map);
+		return "/";
+	}
+	
+	//20200330 친구신청 수락
+	@RequestMapping("/friendYes.do")
+	public String friendYes(@RequestParam("memberFrom") int memberFrom
+							,@RequestParam("memberId") String memberId) {
+		log.debug("memberId={}",memberId);
+		int result = memberService.friendYes(memberFrom);
+		log.debug("memberFrom={}",memberFrom);
+		if(result>0) {
+			Friend friend = memberService.selectOneForFriend(memberFrom);
+			log.debug("friend={}",friend);
+			
+			int friendResult = memberService.insertFriends(friend);
+			log.debug("friend={}",friend);
+		}
+		
+		return "redirect:/member/mypage.do?memberId="+memberId;
+	}
 	
 	
 
