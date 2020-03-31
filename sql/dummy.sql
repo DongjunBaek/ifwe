@@ -57,7 +57,7 @@ Insert into IFWE.CLUB_CATEGORY (CLUB_CODE,CLUB_CATE) values (1,'햄버거');
 Insert into IFWE.CLUB_CATEGORY (CLUB_CODE,CLUB_CATE) values (1,'피자');
 Insert into IFWE.CLUB_CATEGORY (CLUB_CODE,CLUB_CATE) values (1,'타코야끼');
 Insert into IFWE.CLUB (CLUB_CODE,CLUB_MASTER,CLUB_TITLE,CLUB_IMG_ORI,CLUB_IMG_RE,CLUB_CURRENT,CLUB_MAX,CLUB_DATE,CLUB_CONTENT,CLUB_CATECODE,CLUB_LOCATION,PREMIUM_CODE) values (9999,10000,'먹방','sample0328.jpg','sample0328.jpg',1,25,to_date('20/03/28','RR/MM/DD'),'먹어',null,null,null);
-Insert into IFWE.CLUB_MEMBERS (CLUB_CODE,MEMBER_CODE,CLUB_GRADE,CLUB_ENROLLDATE) values (9999,10000,'master',to_date('20/03/28','RR/MM/DD'));
+
 
 insert into msg_category values('c1','가입신청');
 commit;

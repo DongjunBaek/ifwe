@@ -317,7 +317,7 @@ CREATE TABLE  CLUB_BOARD  (
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
@@ -443,6 +443,16 @@ begin
     insert into club_boardlist
     values(seq_club_boardlist_no.nextval, :new.club_code, '자유게시판');
     
+end;
+/
+
+-- 0331 프리미엄 구매시 자동으로 CLUB 프리미엄이 변경됨.
+create or replace trigger trig_update_clubPremium
+after
+insert on PREMIUM_ORDER
+for each row
+begin    
+    update club set PREMIUM_CODE = :new.premium_code where club_code= :new.club_code;
 end;
 /
 --=================================================================
