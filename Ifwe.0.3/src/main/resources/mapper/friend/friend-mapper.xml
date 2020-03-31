@@ -35,13 +35,16 @@ update
 </update>
 
 
-<select id="selectListFriend" resultMap="ListFriend">
-
-select * from 
-	friend
-	where member_code=#{memberCode}
+<select id="selectListFriend" resultType= "friendList">
+	select 
+		F.*,P.profile_img_re
+	from 
+		friend F left join member_profile P
+	on 
+		F.friend_code = P.member_code
+	where 
+		F.member_code = #{memberCode}
 </select>
 
-<resultMap type="Friend" id="ListFriend"></resultMap>
 
 </mapper>

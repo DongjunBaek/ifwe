@@ -225,7 +225,7 @@ $(document).ready(function() {
 				$("#boardImgOri").val(data[0]);
 				$("#boardImgRe").val(data[1]);
 				$(el).summernote('editor.insertImage', data[2]);
-				$('summernote').append('<img src="'+data[2]+'" width = "400", height = "auto" />');
+				$('summernote').append('<img src="'+data[2]+'" width = "100", height = "auto" />');
 			},
 			error : function(x,h,r){
 				console.log(x,h,r);
@@ -249,11 +249,15 @@ $(document).ready(function() {
           <div class="article-insertboard-notice">
      
           
-    <form action="${pageContext.request.contextPath }/club/clubInsertBoardFrm" id="clubtag-form" method="POST">
+    <form action="${pageContext.request.contextPath }/clubboard/clubInsertBoardFrm" id="clubtag-form" method="POST">
 			<div class="select-boxssss">
-	              <select name="boardCate" id="searchBoard">
-	                    <option value="notice">공지사항</option>
-	                     <option value="report">자유게시판</option>
+	              <select name="clubBoardlistNo" id="searchBoard">
+	              	<c:if test="${not empty clubBoardList }">
+	              	<c:forEach items="${clubBoardList }" var="list">
+	                    <option value="${list.clubBoardlistNo }" >${list.boardName }</option>
+	              	</c:forEach>
+	                    
+	              	</c:if>
 	               </select>
 	      </div>
 	         <br />
@@ -261,11 +265,14 @@ $(document).ready(function() {
               		제목 : <input type="text" class="input-text" name="boardTitle"/>
               		<div class="insertboard-writer font-kor">작성자 :${memberLoggedIn.memberId }
               		<input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" /></div>
+              		<input type="hidden" name="clubCode" value="${club.clubCode }" />
+              
+              		
               	</div>
               <br />
               
               	<div class="insertboard-content">
-              	<input type="hidden" value="" name="cateCode" id="rdTag" />
+              	<input type="hidden" value="" name="boardCateCode" id="rdTag" />
              	내용 &nbsp; <input type="text" class="input-text" placeholder="해시태그입력" id="tag" name="clubtag" style="padding-left:1%;"/>
 				<ul id="tag-list" style="padding-left:5%;margin-bottom:2%;">
        				    </ul><br />

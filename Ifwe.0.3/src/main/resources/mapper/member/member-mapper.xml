@@ -171,7 +171,75 @@
 		where 
 			club_catecode = #{memberLike}
 	</select>
-
+	
+	<insert id="insertMsgFriend" >
+		insert into
+			member_msg
+		values(
+			seq_msg_code.nextval,
+			#{memberCode},
+			'f1',
+			'친구',
+			default,
+			default,
+			#{fromMember},
+			0
+		) 
+	</insert>
+	
+	<select id="selectFriendList" resultType="message" >
+		select 
+			F.*,M.member_name
+		from
+			member_msg F left join member M
+		on
+			F.member_from = M.member_code
+		where
+			F.member_code = #{memberCode}
+		and
+			msg_cate_code = 'f1'
+	</select>
+	
+	<update id="friendYes">
+		update
+			member_msg
+		set
+			msg_view = 'y'
+		where
+			member_from = #{memberFrom}
+	</update>
+	
+	<select id="selectOneForFriend" resultMap="friendMap">
+		select 
+			Me.member_code,Me.member_from friend_code,M.member_id,P.profile_name member_pname
+		from
+			member_msg Me left join member_profile P
+		on 
+			Me.member_from = P.member_code
+			left join member M
+		on 
+			Me.member_from = M.member_code
+		where 
+			Me.member_from = #{memberFrom}
+	</select>
+	<resultMap type="friend" id="friendMap">
+		<id column="member_code" property="memberCode"/>
+		<result column="friend_code" property="friendCode"/>
+		<result column="member_Id" property="memberId"/>
+		<result column="member_pname" property="memberPname"/>
+	</resultMap>
+	
+	<insert id="insertFriends">
+		insert into
+			friend 
+		values(
+			#{memberCode},
+			#{friendCode},
+			#{memberId},
+			#{memberPname}
+			)
+		
+	</insert>
 
 </mapper>
 

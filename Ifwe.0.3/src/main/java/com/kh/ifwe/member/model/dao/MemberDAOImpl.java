@@ -1,16 +1,5 @@
 package com.kh.ifwe.member.model.dao;
 
-import java.util.Map;
-
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import com.kh.ifwe.member.model.vo.Member;
-import com.kh.ifwe.member.model.vo.MemberLoggedIn;
-import com.kh.ifwe.member.model.vo.Profile;
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Repository
@@ -103,6 +94,33 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Club> selectInterClub(String memberLike) {
 		return sqlSession.selectList("member.selectInterClub",memberLike);
 	}
+
+	@Override
+	public int insertMsgFriend(Map<String, Integer> map) {
+		return sqlSession.insert("member.insertMsgFriend",map);
+	}
+
+	@Override
+	public List<Member> selectFriendList(int memberCode) {
+		return sqlSession.selectList("member.selectFriendList",memberCode);
+	}
+
+	@Override
+	public int friendYes(int memberFrom) {
+		return sqlSession.update("member.friendYes",memberFrom);
+	}
+
+	@Override
+	public Friend selectOneForFriend(int memberFrom) {
+		return sqlSession.selectOne("member.selectOneForFriend",memberFrom);
+		
+	}
+
+	@Override
+	public int insertFriends(Friend friend) {
+		return sqlSession.insert("member.insertFriends",friend);
+	}
+
 	
 	
 	

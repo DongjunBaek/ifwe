@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -98,6 +99,32 @@ public class MemberServiceImpl implements MemberService {
 	public List<Club> selectInterClub(String memberLike) {
 		return memberDAO.selectInterClub(memberLike);
 	}
+
+	@Override
+	public int insertMsgFriend(Map<String, Integer> map) {
+		return memberDAO.insertMsgFriend(map);
+	}
+
+	@Override
+	public List<Member> selectFriendList(int memberCode) {
+		return memberDAO.selectFriendList(memberCode);
+	}
+
+	@Override
+	public int friendYes(int memberFrom) {
+		return memberDAO.friendYes(memberFrom);
+	}
+
+	@Override
+	public Friend selectOneForFriend(int memberFrom) {
+		return memberDAO.selectOneForFriend(memberFrom);
+	}
+
+	@Override
+	public int insertFriends(Friend friend) {
+		return memberDAO.insertFriends(friend);
+	}
+
 
 	
 }

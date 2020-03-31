@@ -15,6 +15,7 @@ import lombok.ToString;
 @Getter
 public class Friend {
 private int memberCode;
+private int friendCode;
 private String memberId;
 private String memberPname;
 
