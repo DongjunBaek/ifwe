@@ -11,9 +11,7 @@
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<script>
-console.log(${adminEvent.eventTitle});
-</script>
+
 </head>
 <body>
 
@@ -48,6 +46,9 @@ console.log(${adminEvent.eventTitle});
                 <div class="content_img_wrap">
                     <label for="upfile">파일첨부</label>
                     <input type="file" name="upFile" id="upFile">
+                    <span id="fileName">${adminEvent.eventImgOri!=null?adminEvent.eventImgOri:""}</span>
+                   <input type="hidden" name="eventImgOri" value="${adminEvent.eventImgOri!=null?adminEvent.eventImgOri:''}">
+                   <input type="hidden" name="eventImgRe" value="${adminEvent.eventImgRe!=null?adminEvent.eventImgRe :''}"> 
                 </div>
                 <div class="btn_event_wrap">
                 	<input type="hidden" name="eventCode" value="${adminEvent.eventCode }"/>

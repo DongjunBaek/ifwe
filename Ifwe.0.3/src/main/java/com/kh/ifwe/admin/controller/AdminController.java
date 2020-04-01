@@ -349,7 +349,7 @@ public class AdminController {
 
 		List<AdminEvent> eventList = adminService.selectEventList();
 		
-		String viewName = "redirect:/admin/adminEvent";
+		String viewName = "/admin/adminEvent";
 		
 		mav.addObject("eventList", eventList);
 		mav.setViewName(viewName);
@@ -361,12 +361,14 @@ public class AdminController {
 	 @PostMapping("/adminEventDel.do")
 	 public ModelAndView eventDel(@RequestParam("eventCode") int eventCode, ModelAndView mav) {
 	  log.debug("이벤트 삭제 페이지");
-	 
+	
 	  int result= adminService.deleteEvent(eventCode);
-	  
+	
 	  if(result>0) { log.debug("삭제 성공"); }
 	  else { log.debug("삭제 실패"); }
-	  
+	  List<AdminEvent> eventList = adminService.selectEventList();
+		
+	  mav.addObject("eventList", eventList);
 	  mav.setViewName("/admin/adminEvent");
 	  
 	  return mav; 
@@ -389,8 +391,6 @@ public class AdminController {
 				RedirectAttributes redirectAttributes) {
 		 log.debug("이벤트 업데이트 등록 페이지");
 		
-	
-		 
 			if (!upFile.isEmpty()) {
 				String originalFileName = upFile.getOriginalFilename();
 				String renamedFileName = com.kh.ifwe.common.util.Utils.getRenamedFileName(originalFileName);
@@ -417,24 +417,5 @@ public class AdminController {
 	 }
 	 
 
-	/*
-	 * @GetMapping("/adminBoardList.do")
-	 * 
-	 * @ResponseBody public List<Board>
-	 * boardList(@RequestParam(value="cPage",defaultValue="1")int
-	 * cPage, @RequestParam(value="boardCategory", required=false,
-	 * defaultValue="notice")String boardCategory){ log.debug("회원목록 페이지");
-	 * 
-	 * final int numPerPage = 10;
-	 * 
-	 * //업무로직 처리 List<Board> boardList = adminService.selectMemberList(cPage,
-	 * numPerPage, boardCategory);
-	 * 
-	 * log.debug("boardList{}="+boardList);
-	 * 
-	 * return boardList;
-	 * 
-	 * }
-	 */
 
 }
