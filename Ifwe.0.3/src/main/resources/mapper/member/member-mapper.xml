@@ -133,11 +133,16 @@
 	</select>
 	
 	<select id="selectClubList" resultType="club">
-		
-		select * 
-			from club
+		select 
+			* 
+		from 
+			club C
+		left join 
+			club_members M
+		on 
+			C.club_code = M.club_code 
 		where 
-			club_master = #{memberCode}
+			M.member_code = #{memberCode}
 	
 	</select>
 	
