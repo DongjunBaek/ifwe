@@ -22,18 +22,15 @@ public class ClubBoardProfile extends ClubBoard implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String profileName;
 	private String profileImgRe;
-
-	
-	
 	public ClubBoardProfile(int boardNo, int clubCode, int memberCode, int clubBoardlistNo, String boardTitle,
 			String boardContent, Date boardDate, int boardHeart, String[] boardCateCode, String boardDel,
-			String boardReport, String boardName) {
-		super(boardNo, clubCode, memberCode, clubBoardlistNo, boardTitle, boardContent, boardDate, boardHeart, boardCateCode,
-				boardDel, boardReport, boardName);
-		this.profileImgRe = profileImgRe;
+			String boardReport, String boardImgyn, String boardName, String profileName, String profileImgRe) {
+		super(boardNo, clubCode, memberCode, clubBoardlistNo, boardTitle, boardContent, boardDate, boardHeart,
+				boardCateCode, boardDel, boardReport, boardImgyn, boardName);
 		this.profileName = profileName;
-		
+		this.profileImgRe = profileImgRe;
 	}
+
 	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.clubBoard.model.dao.ClubBoardDAO;
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 
 @Service
@@ -40,6 +41,26 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 	@Override
 	public List<ClubBoard> selectClubBoardList(int clubBoardlistNo) {
 		return clubBoardDAO.selectClubBoardList(clubBoardlistNo);
+	}
+
+	@Override
+	public List<BoardImg> selectClubBoardNo(int clubBoardlistNo) {
+		return clubBoardDAO.selectClubBoardNo(clubBoardlistNo);
+	}
+
+	@Override
+	public List<BoardImg> selectClubBoardImg(List<BoardImg> boardNo) {
+		return clubBoardDAO.selectClubBoardImg(boardNo);
+	}
+
+	@Override
+	public List<BoardImg> selectBoardImgajax(int boardNo) {
+		return clubBoardDAO.selectBoardImgajax(boardNo);
+	}
+
+	@Override
+	public int updateBoardImg(int boardNo) {
+		return clubBoardDAO.updateBoardImg(boardNo);
 	}
 
 
