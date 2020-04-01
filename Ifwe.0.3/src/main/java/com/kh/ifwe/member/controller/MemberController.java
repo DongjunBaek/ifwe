@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.admin.model.service.AdminService;
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
@@ -57,7 +59,10 @@ public class MemberController {
 	
 	@Autowired
 	private FriendService friendService;
-
+	
+	@Autowired
+	private AdminService adminService;
+	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
@@ -177,6 +182,14 @@ public class MemberController {
 				List<Club> interClub = memberService.selectInterClub(member.getMemberLike());
 				log.debug("interCLub= {}",interClub);
 				model.addAttribute("interClub", interClub);
+				
+				//이벤트 배너 불러오기
+				//2020-04-01
+				//여주
+				 List<AdminEvent> eventList = adminService.selectEventList();
+				 log.debug("eventList{}=",eventList);
+				 
+				 model.addAttribute("eventList",eventList);
 				
 				
 				int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());

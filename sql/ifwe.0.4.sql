@@ -293,17 +293,43 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
+<<<<<<< HEAD
+	 club_boardlist_no 	number	NOT NULL,
+	 club_code 	NUMBER		NOT NULL,
+	 board_name 	VARCHAR2(50)		NULL,
+=======
     club_boardlist_no    number   NOT NULL,
     club_code    NUMBER      NOT NULL,
     board_name    VARCHAR2(50)      NULL,
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      constraint pk_club_boardlist_no primary key(club_boardlist_no),
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
+select * from club_boardlist
+order by club_boardlist_no;
+select *
+ from club
+ where club_code = 9999;
+=======
 select * from club_boardlist;
 
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
+<<<<<<< HEAD
+	 board_no 	NUMBER		primary key ,
+	 club_code 	NUMBER		NOT NULL,
+	 member_code 	NUMBER		NOT NULL,
+	 club_boardlist_no 	number	NOT NULL,
+     board_title varchar2(100) null,
+	 board_content 	VARCHAR2(2000)		NULL,
+	 board_date 	DATE	default sysdate,
+	 board_heart 	NUMBER		NULL,
+	 board_cate_code 	VARCHAR2(200)		NULL,
+	 board_del 	CHAR(1)		NULL, -- y or n
+=======
     board_no    NUMBER      primary key ,
     club_code    NUMBER      NOT NULL,
     member_code    NUMBER      NOT NULL,
@@ -314,6 +340,7 @@ CREATE TABLE  CLUB_BOARD  (
     board_heart    NUMBER      NULL,
     board_cate_code    VARCHAR2(200)      NULL,
     board_del    CHAR(1)      NULL, -- y or n
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
@@ -330,8 +357,10 @@ CREATE TABLE  CLUB_BOARD_COMMENT  (
 	 comment_date 	DATE		NULL,
 	 comment_level 	NUMBER		NULL,
 	 comment_del 	CHAR(1)		NULL,
-	 comment_ref 	NUMBER		NULL
+	 comment_ref 	NUMBER		NULL,
+     comment_report char(1) null  --y or n
 );
+
 
 -- 22.소모임 게시판 이미지 테이블
 CREATE TABLE  BOARD_IMG  (
@@ -339,6 +368,7 @@ CREATE TABLE  BOARD_IMG  (
 	 img_ori 	VARCHAR2(100)		NULL,
 	 img_re 	VARCHAR2(100)		NULL
 );
+
 
 
 

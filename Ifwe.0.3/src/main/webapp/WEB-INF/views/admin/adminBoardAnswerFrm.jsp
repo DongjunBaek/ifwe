@@ -14,7 +14,11 @@
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
-
+<script>
+function boardCommentValidate(){
+	return true;
+}
+</script>
 </head>
 <body>
 	<section>
@@ -35,12 +39,14 @@
         </div>
          <div class="boardRepleBack">
             <h3>답변</h3>
-            <form id="boardRepleFrm">
-                    <textarea id="boardReple" class="boardReple" row="40" cols="40"></textarea>
+            <form id="boardRepleFrm" action="${pageContext.request.contextPath }/admin/boardRepleInsert.do?boardNo=${board.boardNo}" method="post" onsubmit="return boardCommentValidate();">
+				<input type="hidden" name = "boardNo" value = "${board.boardNo }" /> 
+                <input type="hidden" name="memberCode" id="memberCode" value="${board.memberCode }">
+				<textarea id="boardReple" name="commentContent" class="boardReple" row="40" cols="40"></textarea>
                 <div class="btn_reple_wrap">
-                    <input type="button" id="board_reple_btn" class="btn_boardReple" value="답변등록">
+                    <input type="submit" id="board_reple_btn" class="btn_boardReple" value="답변등록">
                 </div>
-                </form>
+            </form>
         </div>
     </section>
     

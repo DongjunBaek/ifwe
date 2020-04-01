@@ -28,7 +28,10 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
@@ -45,8 +48,13 @@ public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
+	
 	@Autowired
 	private MemberService memberService;	
+	
+	@Autowired
+	private ClubBoardService clubBoardService;
+	
 	
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
@@ -198,6 +206,10 @@ public class ClubController {
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
 		log.debug("msgCount={}",msgCount);
 		
+		//전체 게시글 
+		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
+	
+		
 		if(!clubMemberCode.isEmpty()) {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
@@ -215,8 +227,13 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
+<<<<<<< HEAD
 		mav.addObject("msgCount",msgCount);
+=======
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 		mav.setViewName("/club/clubMain");
+		
 		
 		return mav;
 	}
@@ -277,6 +294,7 @@ public class ClubController {
 	
 //	@GetMapping("/freeboard.do")
 //	public String freeboard() {
+//		
 //		return "club/clubFreeBoard";
 //	}
 	
@@ -513,33 +531,26 @@ public class ClubController {
 	public String clubInsertBoard() {
 		return "club/clubInsertBoard";
 	}
-	@GetMapping("/clubInsertNotice")
-	public String clubInsertBoardNotice() {
-		return "club/clubInsertBoardNotice";
-	}
+
 	@GetMapping("/clubInsertBoardFree")
 	public String clubInsertBoardFree() {
 		return "club/clubInsertBoardFree";
 	}
 	
 	
-	@PostMapping("/clubInsertBoardFrm")
-	public ModelAndView clubInsertBoardFrm(ModelAndView mav,Board board) {
+	
+	
+	/**
+	 * 0331 membership 구매 기능 관련. 
+	 * 동준
+	 */
+	
+	@GetMapping("/selectOneClub")
+	@ResponseBody
+	public Club selectOneClub(@RequestParam(value="clubCode") int clubCode) {
 		
-		log.debug("board = {}",board);
+		Club club = clubService.selectOne(clubCode);
 		
-		int result = clubService.insertBoard(board);
-		
-		if (result > 0) {
-			log.debug("Board @ insertBoard.do : 글 등록 성공");
-		}else
-			log.debug("Board @ insertBoard.do : 글 등록 실패");
-		
-		mav.setViewName("/club/clubMain"); 
-		
-		return mav;
-		
+		return club;
 	}
-	
-	
 }

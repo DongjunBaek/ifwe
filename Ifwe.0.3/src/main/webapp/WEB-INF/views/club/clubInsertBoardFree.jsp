@@ -209,7 +209,7 @@ $(document).ready(function() {
 		$.ajax({
 			data : Frmdata,
 			type : 'POST',
-			url : '${pageContext.request.contextPath}/board/insertBoardImg.do',
+			url : '${pageContext.request.contextPath}/clubboard/insertBoardImg.do',
 			cache : false,
 			contentType : false,
 			enctype : 'multipart/form-data',
@@ -224,8 +224,14 @@ $(document).ready(function() {
 				*/
 				$("#boardImgOri").val(data[0]);
 				$("#boardImgRe").val(data[1]);
-				$(el).summernote('editor.insertImage', data[2]);
-				$('summernote').append('<img src="'+data[2]+'" width = "400", height = "auto" />');
+				//$(el).summernote('editor.insertImage', data[2]);
+				$('.summernote-images').append('<img src="'+data[2]+'" width = "200", height = "100px" />');
+				console.log(data[1]);
+				console.log(data[2]);
+				$('.summernote-images').append('<input type="hidden" value='+'"'+data[0]+'"'+ ' name = "summernote-images" />');
+				$('.summernote-images').append('<input type="hidden" value='+'"'+data[1]+'"'+ ' name = "summernote-images-re" />');
+				
+				
 			},
 			error : function(x,h,r){
 				console.log(x,h,r);
@@ -239,6 +245,8 @@ $(document).ready(function() {
 		return true;
 	}
 </script>
+<style>
+.summernote-images{border:1px solid black; width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}</style>
 </head>
 <body style="background-color:rgba(246,246,246,0.5);;">
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
@@ -249,26 +257,30 @@ $(document).ready(function() {
           <div class="article-insertboard-notice">
      
           
-    <form action="${pageContext.request.contextPath }/club/clubInsertBoardFrm" id="clubtag-form" method="POST">
+    <form action="${pageContext.request.contextPath }/clubboard/clubInsertBoardFrm" id="clubtag-form" method="POST">
 			<div class="select-boxssss">
-	             <h3 style="padding-left:3%;padding-top:2%;">자유게시판</h3>
+	             <h3 style="padding-left:3%;padding-top:2%;">${cb.boardName }</h3>
 	      </div>
 	         <br />
               	<div class="article-insertboard-notice-title">
               		제목 : <input type="text" class="input-text" name="boardTitle"/>
               		<div class="insertboard-writer font-kor">작성자 :${memberLoggedIn.memberId }
               		<input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" /></div>
+              		<input type="hidden" name="clubCode" value="${club.clubCode }" />
+              		<input type="hidden" name="clubBoardlistNo" value="${cb.clubBoardlistNo }" />
+              		
               	</div>
               <br />
               
               	<div class="insertboard-content">
-              	<input type="hidden" value="" name="cateCode" id="rdTag" />
+              	<input type="hidden" value="" name="boardCateCode" id="rdTag" />
              	내용 &nbsp; <input type="text" class="input-text" placeholder="해시태그입력" id="tag" name="clubtag" style="padding-left:1%;"/>
 				<ul id="tag-list" style="padding-left:5%;margin-bottom:2%;">
        				    </ul><br />
        				    
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>	
               	</div>
+              	<div class="summernote-images"></div>
               	
               	<input type="submit" value="등록" class="btnClass" />
                </form>
