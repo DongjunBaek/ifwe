@@ -2,7 +2,9 @@ package com.kh.ifwe.admin.model.service;
 
 import java.util.List;
 
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.vo.Board;
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
 
 public interface AdminService {
@@ -28,6 +30,24 @@ public interface AdminService {
 	int updateBoard(int boardNo);
 
 	int deleteBoard(int boardNo);
+
+	int insertBoardComment(BoardComment boardComment);
+
+	BoardComment selectBoardComment(int boardNo);
+
+	int deleteBoardComment(int boardNo);
+
+	int UpdateBoardComment(BoardComment boardComment);
+
+	int insertEvent(AdminEvent adminEvent);
+
+	List<AdminEvent> selectEventList();
+
+	int deleteEvent(int eventCode);
+
+	AdminEvent selectOneEvent(int eventCode);
+
+	int updateEvent(AdminEvent adminEvent);
 
 
 
