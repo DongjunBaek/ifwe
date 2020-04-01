@@ -240,11 +240,20 @@ public class ClubController {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
+		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
+		List<BoardImg> boardImg = null;
+		
+		if(boardNo!=null && !boardNo.isEmpty() && boardNo.size()!=0) {
+			boardImg = clubBoardService.selectClubBoardImg(boardNo);
+		}
+		
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
 		log.debug("clubLoggedIn={}",clubLoggedIn);
 		log.debug("clubBoardList={}",clubBoardList);
+		log.debug("clubBoardProfileList={}",clubBoardProfileList);
+		log.debug("boardImg={}",boardImg);
 		
 		
 		
@@ -254,6 +263,8 @@ public class ClubController {
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+		mav.addObject("boardImg",boardImg);
+		
 		mav.setViewName("/club/clubMain");
 		
 		
