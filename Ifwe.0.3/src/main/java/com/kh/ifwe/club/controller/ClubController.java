@@ -262,6 +262,8 @@ public class ClubController {
 
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 
+		mav.addObject("msgCount",msgCount);
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.setViewName("/club/clubMain");
 		
 		
