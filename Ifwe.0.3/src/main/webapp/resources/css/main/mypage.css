@@ -21,6 +21,7 @@ p{
     float: left;
 }
 .mypage-third{
+	display: none;
     width: 250px;
     height: 745px;
     float: left;
