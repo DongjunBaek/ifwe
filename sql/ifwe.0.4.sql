@@ -52,6 +52,7 @@
 --select * from tab; -- 전체 테이블 조회
 select * from member;
 select * from member_profile;
+select* from club_members;
 --=================================================================
 --TABLE
 --=================================================================
@@ -124,15 +125,16 @@ CREATE TABLE  MEMBER_PROFILE  (
                                                         on delete cascade
                                                         --on delete set null
 );
--- 3.회원 이벤트 테이블 - 미사용 테이블
+-- 3.회원 이벤트 테이블 - 0402 update
 CREATE TABLE  TBL_EVENT  (
-	 event_code 	NUMBER		primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
-	 event_title 	VARCHAR2(100)		NULL, -- 이벤트 제목
-	 event_content 	VARCHAR2(2000)		NULL, -- 이벤트 내용
-	 event_start 	DATE		NULL, -- 이벤트 시작일
-	 event_end 	DATE		NULL,     -- 이벤트 종료일
-	 event_pic 	VARCHAR2(100)		NULL, -- 이벤트 담당관리자 명
-	 event_pid 	VARCHAR2(100)		NULL  -- 이벤트 담당부서
+    event_code    NUMBER      primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
+    event_title    VARCHAR2(100)      NULL, -- 이벤트 제목
+    event_content    VARCHAR2(2000)      NULL, -- 이벤트 내용
+    event_start    DATE      NULL, -- 이벤트 시작일
+    event_end    DATE      NULL,     -- 이벤트 종료일
+     member_code NUMBER NOT NULL,
+     event_img_ori varchar2(200) NULL,
+     event_img_re varchar2(200) NULL
 );
 -- 4.회원 이벤트 참가기록 테이블 - 미사용 테이블
 CREATE TABLE  MEMBER_EVENT  (
