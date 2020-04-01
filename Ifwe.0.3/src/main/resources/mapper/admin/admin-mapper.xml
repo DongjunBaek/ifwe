@@ -186,7 +186,7 @@
 	 	from
 	 		tbl_event
 	 	where
-	 		member_code='1'
+	 		member_code=1
 	 </select>
 	 
 	<update id="EventDel">

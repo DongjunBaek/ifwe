@@ -8,9 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.ifwe.admin.model.service.AdminService;
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.service.BoardService;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.common.util.Utils;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.net.aso.f;
 
 @Controller
 @Slf4j
@@ -34,6 +33,8 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	AdminService adminService;
 	
 	@GetMapping("/insertBoard.do")
 	public String insertBoard() {
@@ -189,6 +190,22 @@ public class BoardController {
 		mav.addObject("boardNo", board.getBoardNo() );
 		mav.setViewName("board/boardDetail");
 		
+		
+		return mav;
+	}
+	
+	/**0401 여주 이벤트 상세페이지 보여주기*/
+	@GetMapping("/mainEvent.do")
+	public ModelAndView eventDetail(ModelAndView mav, @RequestParam("eventCode") int eventCode) {
+		
+		log.debug("이벤트 상세페이지");
+		
+		AdminEvent adminEvent = adminService.selectOneEvent(eventCode);
+		
+		log.debug("adminEvent{}=",adminEvent);
+		
+		mav.addObject("adminEvent",adminEvent);
+		mav.setViewName("board/EventDetail");
 		
 		return mav;
 	}

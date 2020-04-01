@@ -26,6 +26,9 @@
 				location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
 			});
 		});
+function eventView(eventCode){
+	location.href="${pageContext.request.contextPath}/board/mainEvent.do?eventCode="+eventCode;
+} 
 	</script>
 	  <section style="margin:0;">
         <div class="container">
@@ -58,16 +61,13 @@
                             </div>
                           </div>
                         </li>
+                   <c:forEach items="${eventList }" var="List">
                       <li>
-                        <div class="li-content">
-                            <img src="${pageContext.request.contextPath }/resources/images/main/banner.png" alt="">
+                        <div class="li-content" id="eventBanner" onclick="eventView(${List.eventCode})">
+                            <img src="${pageContext.request.contextPath }/resources/upload/admin/event/${List.eventImgRe}" alt="">
                         </div>
                       </li>
-                      <li>
-                        <div class="li-content">
-                            <img src="${pageContext.request.contextPath }/resources/images/main/banner.png" alt="">
-                        </div>
-                      </li>
+                   </c:forEach> 
                     </ul>
                     <p class="bullet">
                       <label for="pos1">1</label>
