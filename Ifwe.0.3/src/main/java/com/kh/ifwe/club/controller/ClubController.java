@@ -2,6 +2,7 @@ package com.kh.ifwe.club.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,11 +29,13 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
@@ -44,11 +45,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList","msgCount"})
 public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private MemberService memberService;	
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
@@ -60,8 +64,8 @@ public class ClubController {
 	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
 										    @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
-									      @RequestParam(value = "clubLocation", required = false) String clubLocation
-										  ) {
+									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
+										  @RequestParam("memberCode")int memberCode) {
 		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubLocation = {}",clubLocation);
@@ -70,24 +74,30 @@ public class ClubController {
 		
 		String keyWord ="%"+clubSearchKeyword+"%";
 		
-		Map<String,String> param = new HashMap<>();
+		Map<String,Object> param = new HashMap<>();
 		param.put("searchType", searchType);
 		param.put("keyWord", keyWord);
 		param.put("clubLocation", clubLocation);
+		param.put("memberCode",memberCode);
+		param.put("clubSearchKeyword",clubSearchKeyword);
 		
 		log.debug("param = {}",param);
 		
 		List<ClubMaster> searchListResult = null;
+		//검색했을때 검색어를 검색어 테이블에 insert
+		int result = 0;
 		
 		if(searchType.equals("hashtag")) {
 			//해쉬태그 검색
 			log.debug("해쉬태그 검색");
 			searchListResult = clubService.searchClubByHashtag(param);
+			result = clubService.insertSearchKeyword(param);
 			
 		}else {
 			//모임명 검색
 			log.debug("모임명 검색");
 			searchListResult = clubService.selectListByName(param);
+			result = clubService.insertSearchKeyword(param);
 		}
 
 		
@@ -109,7 +119,29 @@ public class ClubController {
 		List<ClubMaster> clubList = clubService.clubSearch();
 		log.debug("clubList = {}",clubList);
 		
+		List<Integer> clubCode = new ArrayList<Integer>();
 		
+		if(clubList != null) {
+			for(int i=0; i<clubList.size();i++) {
+				clubCode.add(clubList.get(i).getClubCode());
+			}
+		}
+		
+		log.debug("clubCode = {}",clubCode);
+		//남녀비율
+		List<Integer> maleList = clubService.selectMaleCount(clubCode);
+		log.debug("maleList = {}",maleList);
+		
+		//평균나이
+		List<Count> ageList = clubService.selectAge(clubCode);
+		log.debug("ageList = {}",ageList);
+		
+		for(int i=0;i<ageList.size();i++) {
+			 log.debug(" = {}",ageList.get(i).getAge());
+		}
+		
+		mav.addObject("ageList",ageList);
+		mav.addObject("maleList", maleList);
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
 		
@@ -201,6 +233,8 @@ public class ClubController {
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
+		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+		log.debug("msgCount={}",msgCount);
 		
 		//전체 게시글 
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
@@ -223,7 +257,11 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
+<<<<<<< HEAD
+		mav.addObject("msgCount",msgCount);
+=======
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 		mav.setViewName("/club/clubMain");
 		
 		
@@ -480,7 +518,9 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		
 		int result = clubService.deleteClubMember(param);
-		
+		//메세지보기전에 탈퇴하면 delete
+		int msgResult = clubService.deleteMsg(param);
+		log.debug("msgResult = {}",msgResult);
 		
 		mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode);
 		

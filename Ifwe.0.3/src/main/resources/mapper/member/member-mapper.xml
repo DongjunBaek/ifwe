@@ -133,11 +133,16 @@
 	</select>
 	
 	<select id="selectClubList" resultType="club">
-		
-		select * 
-			from club
+		select 
+			* 
+		from 
+			club C
+		left join 
+			club_members M
+		on 
+			C.club_code = M.club_code 
 		where 
-			club_master = #{memberCode}
+			M.member_code = #{memberCode}
 	
 	</select>
 	
@@ -240,6 +245,31 @@
 			)
 		
 	</insert>
+	
+	<insert id="insertOtherFriend">
+		insert into
+			friend 
+		values(
+			#{memberCode},
+			#{friendCode},
+			#{memberId},
+			#{memberPname}
+			)
+	</insert>
+	
+	<select id="selectMsgCount" resultType = "_int">
+		select 
+			count(*) 
+		from 
+			member_msg
+		<where> 
+			msg_cate_code = 'f1' 
+		and 
+			msg_view = 'n'
+		and
+			member_code = #{memberCode}
+		</where>
+	</select>
 
 </mapper>
 

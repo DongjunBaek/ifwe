@@ -26,6 +26,9 @@
 				location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
 			});
 		});
+function eventView(eventCode){
+	location.href="${pageContext.request.contextPath}/board/mainEvent.do?eventCode="+eventCode;
+} 
 	</script>
 	  <section style="margin:0;">
         <div class="container">
@@ -58,16 +61,13 @@
                             </div>
                           </div>
                         </li>
+                   <c:forEach items="${eventList }" var="List">
                       <li>
-                        <div class="li-content">
-                            <img src="${pageContext.request.contextPath }/resources/images/main/banner.png" alt="">
+                        <div class="li-content" id="eventBanner" onclick="eventView(${List.eventCode})">
+                            <img src="${pageContext.request.contextPath }/resources/upload/admin/event/${List.eventImgRe}" alt="">
                         </div>
                       </li>
-                      <li>
-                        <div class="li-content">
-                            <img src="${pageContext.request.contextPath }/resources/images/main/banner.png" alt="">
-                        </div>
-                      </li>
+                   </c:forEach> 
                     </ul>
                     <p class="bullet">
                       <label for="pos1">1</label>
@@ -84,7 +84,7 @@
                             <p style="padding: 7%;margin-left: 10%; color: white;">내 소모임</p> 
                         </div>
                         <div class="list">
-                            <ul class="font-kor list-ul" style="margin-left: 20%;padding:0;">
+                            <ul class="font-kor list-ul" style="margin-left: 20%;">
                         	<c:if test="${not empty clubList }">
                         	<c:forEach items="${clubList }" var="list">
                                 <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p>${list.clubTitle }</p> </li>

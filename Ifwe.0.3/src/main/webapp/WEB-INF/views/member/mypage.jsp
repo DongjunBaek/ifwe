@@ -19,7 +19,7 @@ overflow:auto;
         <article class="mypage-first">
             <div class="intro-div">
                 <div class="img-div">
-              	  <img src="${pageContext.request.contextPath }/resources/upload/proifle/ alt="" width="100px"/>
+              	  <img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe!=null?memberLoggedIn.profileImgRe:'' }" width="100px"/>
                 </div>
                 <div class="myname-div font-kor">
                     <div style="font-size: 25px;margin:0 auto;max-width: fit-content;">@${memberLoggedIn.memberId }</div>
@@ -52,14 +52,23 @@ overflow:auto;
             <div class="notice-container">
                 <div class="notice-title font-kor">
                     <i class="fas fa-bell" style="font-size:25px;color: #2756a6;margin:5% 5% 2% 0;"></i><span style="font-size:25px;">알림</span></div>
-                <div class="contents">
+                <div class="contents" style="overflow:auto;">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
                         <c:if test="${not empty friendList }">
-                        <c:forEach items="${friendList }" var="fl" varStatus="vs" >
-                        <p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다. <input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
-                        																									onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberId=${memberLoggedIn.memberId }'"></p>
-                        </c:forEach>
+                        	<c:forEach items="${friendList }" var="fl" varStatus="vs" >
+                        		
+                        		<c:if test="${fl.msgView == 'n' }">
+                        		<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
+	                        	<input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
+			                        onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'"></p>
+	                        	</c:if> 
+	                        	<c:if test="${fl.msgView == 'y' }">
+	                        	<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
+	                        	<input type="button" value="수락완료"class="friend-btn font-kor" style="padding:0"></p>	
+	                        	</c:if>
+	                        	
+	                        </c:forEach>
                         </c:if>
                     </div>
                 </div>
@@ -137,20 +146,12 @@ overflow:auto;
                     </div>
                     </c:forEach>
                     </c:if>
-                    <%-- <div class="friend-list">
-                        <div class="friend-img">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />	
-                        </div>
-                        <div class="friend-name font-kor friend-name-profile">신형철</div>
-                    </div>
-                    <div class="friend-list">
-                        <div class="friend-img">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                        </div>
-                        <div class="friend-name font-kor friend-name-profile">백동준</div>
-                    </div> --%>
+					                  
                 </div>
             </div>
         </article>
     </section>
+    <script >
+    
+	</script>
 </body>

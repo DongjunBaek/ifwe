@@ -209,7 +209,7 @@ $(document).ready(function() {
 		$.ajax({
 			data : Frmdata,
 			type : 'POST',
-			url : '${pageContext.request.contextPath}/board/insertBoardImg.do',
+			url : '${pageContext.request.contextPath}/clubBoard/insertBoardImg.do',
 			cache : false,
 			contentType : false,
 			enctype : 'multipart/form-data',

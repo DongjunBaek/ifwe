@@ -13,6 +13,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -73,12 +74,12 @@ public class ClubDAOImpl implements ClubDAO {
 	
 
 	@Override
-	public List<ClubMaster> searchClubByHashtag(Map<String, String> param) {
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param) {
 		return sqlSession.selectList("club.searchClubByHashtag", param);
 	}
 
 	@Override
-	public List<ClubMaster> selectListByName(Map<String, String> param) {
+	public List<ClubMaster> selectListByName(Map<String, Object> param) {
 		return sqlSession.selectList("club.selectListByName", param);
 	}
 
@@ -161,6 +162,26 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<ClubBoardProfile> selectclubBoardProfileList(int clubCode) {
 		return sqlSession.selectList("club.selectclubBoardProfileList", clubCode);
+	}
+
+	@Override
+	public int deleteMsg(Map<String, Object> param) {
+		return sqlSession.delete("club.deleteMsg", param);
+	}
+
+	@Override
+	public int insertSearchKeyword(Map<String, Object> param) {
+		return sqlSession.insert("club.insertSearchKeyword", param);
+	}
+
+	@Override
+	public List<Integer> selectMaleCount(List<Integer> clubMemberCode) {
+		return sqlSession.selectList("club.selectMaleCount",clubMemberCode);
+	}
+
+	@Override
+	public List<Count> selectAge(List<Integer> clubCode) {
+		return sqlSession.selectList("club.selectAge",clubCode);
 	}
 
 

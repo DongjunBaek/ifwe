@@ -14,6 +14,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -80,13 +81,13 @@ public class ClubServiceImpl implements ClubService {
 
 	//소모임 검색 해쉬태그로 0325
 	@Override
-	public List<ClubMaster> searchClubByHashtag(Map<String, String> param) {
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param) {
 		return clubDAO.searchClubByHashtag(param);
 	}
 
 
 	@Override
-	public List<ClubMaster> selectListByName(Map<String, String> param) {
+	public List<ClubMaster> selectListByName(Map<String, Object> param) {
 		return clubDAO.selectListByName(param);
 	}
 
@@ -187,6 +188,32 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectclubBoardProfileList(clubCode);
 	}
 
+
+	@Override
+	public int deleteMsg(Map<String, Object> param) {
+		return clubDAO.deleteMsg(param);
+	}
+
+
+	@Override
+	public int insertSearchKeyword(Map<String, Object> param) {
+		return clubDAO.insertSearchKeyword(param);
+	}
+
+
+	@Override
+	public List<Integer> selectMaleCount(List<Integer> clubCode) {
+		return clubDAO.selectMaleCount(clubCode);
+	}
+
+
+	@Override
+	public List<Count> selectAge(List<Integer> clubCode) {
+		return clubDAO.selectAge(clubCode);
+	}
+
+
+	
 
 
 

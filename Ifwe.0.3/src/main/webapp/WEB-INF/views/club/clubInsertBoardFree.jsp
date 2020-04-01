@@ -209,7 +209,7 @@ $(document).ready(function() {
 		$.ajax({
 			data : Frmdata,
 			type : 'POST',
-			url : '${pageContext.request.contextPath}/board/insertBoardImg.do',
+			url : '${pageContext.request.contextPath}/clubboard/insertBoardImg.do',
 			cache : false,
 			contentType : false,
 			enctype : 'multipart/form-data',
@@ -225,11 +225,11 @@ $(document).ready(function() {
 				$("#boardImgOri").val(data[0]);
 				$("#boardImgRe").val(data[1]);
 				//$(el).summernote('editor.insertImage', data[2]);
-				$('.summernote-images').append('<img src="'+data[2]+'" width = "300", height = "100px" />');
+				$('.summernote-images').append('<img src="'+data[2]+'" width = "200", height = "100px" />');
 				console.log(data[1]);
 				console.log(data[2]);
-				$('.summernote-images').append('<input type="hidden" value='+' " '+data[0]+' " '+ ' name = "summernote-images" />');
-				$('.summernote-images').append('<input type="hidden" value='+' " '+data[1]+' " '+ ' name = "summernote-images-re" />');
+				$('.summernote-images').append('<input type="hidden" value='+'"'+data[0]+'"'+ ' name = "summernote-images" />');
+				$('.summernote-images').append('<input type="hidden" value='+'"'+data[1]+'"'+ ' name = "summernote-images-re" />');
 				
 				
 			},

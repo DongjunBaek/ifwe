@@ -3,6 +3,7 @@ package com.kh.ifwe.clubBoard.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 
 public interface ClubBoardService {
@@ -16,5 +17,13 @@ public interface ClubBoardService {
 	int insertBoardImages(Map<String, Object> param);
 
 	List<ClubBoard> selectClubBoardList(int clubBoardlistNo);
+
+	List<BoardImg> selectClubBoardNo(int clubBoardlistNo);
+
+	List<BoardImg> selectClubBoardImg(List<BoardImg> boardNo);
+
+	List<BoardImg> selectBoardImgajax(int boardNo);
+
+	int updateBoardImg(int boardNo);
 
 }

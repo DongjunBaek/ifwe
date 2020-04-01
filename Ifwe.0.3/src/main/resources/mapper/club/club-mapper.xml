@@ -113,9 +113,9 @@
 	</select>
 	
 	<select id="selectClubMaster2" resultType="clubMember">
-		select M.*,p.profile_name,p.profile_img_re
-		from member M join member_profile P 
-            on M.member_code = P.member_code
+		select M.*,p.profile_name,p.profile_img_re,H.club_grade
+		from member M join member_profile P on M.member_code = P.member_code
+                      join club_members H on M.member_code=H.member_code
         where M.member_code = #{clubMaster}
      </select> 
         
@@ -270,6 +270,66 @@
 		<result column="board_cate_code" property="boardCateCode" typeHandler="strArrTypeHandler"/>
 	</resultMap>
 	
+	
+	<delete id="deleteMsg">
+		delete from member_msg
+		where club_code = #{clubCode} and member_from = #{memberCode} and msg_cate_code = 'c1'
+	</delete>
+	
+	<insert id="insertSearchKeyword">
+		insert into
+			tbl_search
+		values (
+			seq_search_no.nextval, 
+			#{clubSearchKeyword}, 
+			default, 
+			#{memberCode}
+		)
+	</insert>
+	
+	<select id="selectMaleCount" resultMap="maleCount">
+		select 
+			count(*) as cnt,C.club_code 
+		from 
+			club_members C 
+		left join 
+			member M 
+		on 
+			C.member_code = M.member_code 
+		where 
+			C.club_code in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach> 
+		and
+			M.member_gender='m' 
+		group by
+			C.club_code 
+	</select>
+	
+	<resultMap type="count" id="maleCount">
+		 <result property="maleCount" column="cnt"/>
+		 <result property="clubCode" column="club_code"/>
+		 <result property="age" column="profile_age"/>
+	</resultMap>
+	
+	<select id="selectAge" resultMap="maleCount">
+		select 
+			C.club_code,M.profile_age 
+		from 
+			club_members C 
+		left join 
+			member_profile M 
+		on 
+			C.member_code = M.member_code 
+		where 
+			c.club_code in 
+		<foreach collection="list" item="item" open="(" close = ")" separator=",">
+			#{item}
+		</foreach>
+		order by 
+			c.club_code
+	</select>
 </mapper>
 
 
