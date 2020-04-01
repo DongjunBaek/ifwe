@@ -50,6 +50,7 @@ p{
 }
 .img-div img{
 	width:195px;
+	height:100%;
 }
 .myname-div{
     margin:10%;
@@ -111,6 +112,7 @@ p{
 }
 .friend-img img{
 	width:40px;
+	height:100%;
 }
 .friend-name{
     float: left;

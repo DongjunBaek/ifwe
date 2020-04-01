@@ -46,5 +46,13 @@ update
 		F.member_code = #{memberCode}
 </select>
 
+<select id="selectOneFriend" resultType= "friend">
+	select
+		*
+	from
+		friend
+	where
+		friend_code = #{memberCode}
+</select>
 
 </mapper>

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +35,7 @@ import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
@@ -46,11 +45,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList","msgCount"})
 public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private MemberService memberService;	
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
@@ -231,6 +233,8 @@ public class ClubController {
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
+		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+		log.debug("msgCount={}",msgCount);
 		
 		//전체 게시글 
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
@@ -253,7 +257,11 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
+<<<<<<< HEAD
+		mav.addObject("msgCount",msgCount);
+=======
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+>>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 		mav.setViewName("/club/clubMain");
 		
 		

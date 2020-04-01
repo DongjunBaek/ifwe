@@ -43,7 +43,7 @@
    				<p>ifwe 프로필</p>
    			</div>
    			<div class="profile-img-div">
-   				<img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt=""/>
+   				<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt=""/>
    			</div>
    			<div class="profile-nickname-div">
    				<div class="profile-nickname-div-title bold-kor">닉네임:</div>
