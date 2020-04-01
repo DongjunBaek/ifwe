@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
@@ -111,6 +112,31 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int updateBoardComment(BoardComment boardComment) {
 		return sqlSession.update("admin.updateBoardComment", boardComment);
+	}
+
+	@Override
+	public int insertEvent(AdminEvent adminEvent) {
+		return sqlSession.insert("admin.EventInsert", adminEvent);
+	}
+
+	@Override
+	public List<AdminEvent> selectList() {
+		return sqlSession.selectList("admin.EventList");
+	}
+
+	@Override
+	public int deleteEvent(int eventCode) {
+		return sqlSession.update("admin.EventDel",eventCode);
+	}
+
+	@Override
+	public AdminEvent selectOneEvent(int eventCode) {
+		return sqlSession.selectOne("admin.EventSelectOne",eventCode);
+	}
+
+	@Override
+	public int updateEvent(AdminEvent adminEvent) {
+		return sqlSession.update("admin.EventUpdate", adminEvent);
 	}
 
 

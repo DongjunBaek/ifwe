@@ -164,5 +164,57 @@
 	 	where board_no = #{boardNo}
 	 </update>
 	 
+	 
+	 <insert id="EventInsert">
+	 	insert into
+	 		tbl_event
+	 	values(
+	 		seq_event_no.nextval,
+	 		#{eventTitle},
+	 		#{eventContent},
+	 		#{eventStart},
+	 		#{eventEnd},
+	 		'1',
+	 		#{eventImgOri},
+	 		#{eventImgRe}
+	 	)
+	 </insert>
+	 
+	 <select id="EventList" resultType="AdminEvent">
+	 	select
+	 		*
+	 	from
+	 		tbl_event
+	 	where
+	 		member_code='1'
+	 </select>
+	 
+	<update id="EventDel">
+		update tbl_event set
+		member_code = '2'
+		where event_code = #{eventCode}
+	</update>
+	 
+	 <select id="EventSelectOne" resultType="AdminEvent">
+	 	select 
+	 		*
+	 	from
+	 		tbl_event
+	 	where
+	 		event_code = #{eventCode}
+	 </select>
+	 
+	 <update id="EventUpdate">
+	 	update tbl_event set
+		 	event_title = #{eventTitle},
+		 	event_content = #{eventContent},
+		 	event_start = #{eventStart},
+		 	event_end = #{eventEnd},
+		 	event_img_ori = #{eventImgOri},
+		 	event_img_re = #{eventImgRe}
+	 	where
+	 		event_code = #{eventCode}
+	 </update>
+	 
 </mapper>
 

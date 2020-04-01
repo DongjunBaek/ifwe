@@ -22,12 +22,13 @@ import lombok.ToString;
 @Getter
 public class AdminEvent {
 
-	private int eventNo;
+	private int eventCode;
 	private String eventTitle;
 	private String eventContent;
 	private Date eventStart;
 	private Date eventEnd;
-	private String eventPic;
-	private String eventPid;
+	private int memberCode;
+	private String eventImgOri;
+	private String eventImgRe;
 	
 }

@@ -22,8 +22,8 @@ function boardContentDel(){
 	location.href="${pageContext.request.contextPath}/admin/boardCommentDelete.do?boardNo="+${board.boardNo};
 }
 function boardCommentValidate(){
-	console.log($("#boardReple").val());
-	return ;
+	console.log($("#boardReple").text());
+	return true;
 	
 }
 /* function boardContentUpdate(){

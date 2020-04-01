@@ -2,6 +2,7 @@ package com.kh.ifwe.admin.model.dao;
 
 import java.util.List;
 
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
@@ -37,6 +38,16 @@ public interface AdminDAO {
 	int deleteBoardComment(int boardNo);
 
 	int updateBoardComment(BoardComment boardComment);
+
+	int insertEvent(AdminEvent adminEvent);
+
+	List<AdminEvent> selectList();
+
+	int deleteEvent(int eventCode);
+
+	AdminEvent selectOneEvent(int eventCode);
+
+	int updateEvent(AdminEvent adminEvent);
 
 
 
