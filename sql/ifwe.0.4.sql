@@ -249,8 +249,8 @@ CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
 	 search_date 	DATE		default sysdate, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL, -- 검색한 회원 번호 --pk
-	 cate_code 	VARCHAR2(100)		NOT NULL -- 검색어 분류 -- 어디서검색하는지로할지
+	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --fk
+	 
 );
 
 
