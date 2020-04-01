@@ -8,6 +8,7 @@ import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -32,9 +33,9 @@ public interface ClubDAO {
 
 	Member selectClubMaster(int clubMaster);
 
-	List<ClubMaster> searchClubByHashtag(Map<String, String> param);
+	List<ClubMaster> searchClubByHashtag(Map<String, Object> param);
 
-	List<ClubMaster> selectListByName(Map<String, String> param);
+	List<ClubMaster> selectListByName(Map<String, Object> param);
 
 	List<Member> selectMemberCode(int clubCode);
 
@@ -69,6 +70,14 @@ public interface ClubDAO {
 	List<ClubBoard> selectBoardList(int clubCode);
 
 	List<ClubBoardProfile> selectclubBoardProfileList(int clubCode);
+
+	int deleteMsg(Map<String, Object> param);
+
+	int insertSearchKeyword(Map<String, Object> param);
+
+	List<Integer> selectMaleCount(List<Integer> clubCode);
+
+	List<Count> selectAge(List<Integer> clubCode);
 
 
 

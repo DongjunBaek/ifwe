@@ -84,7 +84,7 @@
                             <p style="padding: 7%;margin-left: 10%; color: white;">내 소모임</p> 
                         </div>
                         <div class="list">
-                            <ul class="font-kor list-ul" style="margin-left: 20%;padding:0;">
+                            <ul class="font-kor list-ul" style="margin-left: 20%;">
                         	<c:if test="${not empty clubList }">
                         	<c:forEach items="${clubList }" var="list">
                                 <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p>${list.clubTitle }</p> </li>
