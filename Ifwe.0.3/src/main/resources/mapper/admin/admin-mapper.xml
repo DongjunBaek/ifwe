@@ -174,7 +174,7 @@
 	 		#{eventContent},
 	 		#{eventStart},
 	 		#{eventEnd},
-	 		'1',
+	 		'10000',
 	 		#{eventImgOri},
 	 		#{eventImgRe}
 	 	)
