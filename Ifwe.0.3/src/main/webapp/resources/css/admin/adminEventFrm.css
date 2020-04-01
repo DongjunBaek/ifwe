@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+.event2_title{
+    margin-left: 400px;
+    width: 1400px;
+    margin-top: 50px;
+}
+.event2_title h2{
+    font-size: 30px;
+    text-align: center;
+}
+
+.board_content_wrap{
+    border: 1px solid white;
+    margin-left: 400px;
+    width: 1400px;
+    background-color: white;
+    margin-top: 30px;
+    height: 530px;
+}
+.board_content_wrap::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.content_title_wrap{
+    /* border: 1px solid blue; */
+    height: 50px;
+    margin-top: 30px;
+}
+.content_title_wrap::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.content_title_wrap h3{
+    float: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-right: 30px;
+    /* border: 1px solid orange; */
+    
+}
+.content_title_wrap .content_title{
+    float: left;
+    background-color: #ebebeb;
+    width: 945px;
+    height: 45px;
+    border-radius: 20px;
+    padding-left: 20px;
+    outline: none;
+    /* border: 1px solid green; */
+}
+.content_title_wrap p{
+    float: right;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+.content_wrap{
+    /* border: 1px solid blue; */
+    margin-top: 30px;
+    height: 300px;
+}
+.content_wrap::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.content_wrap h3{
+    float: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-right: 30px;
+}
+.board_content{
+    float: left;
+    background-color: #ebebeb;
+    width: 1260px;
+    height: 300px;
+    border-radius: 20px;
+    padding-left: 20px;
+    outline: none;
+    padding-top: 20px;
+}
+.event_date_wrap{
+    float: right;
+    margin-right: 50px;
+}
+.event_date_wrap i{
+    margin-right: 10px;
+    color: #3b3b3b;
+}
+.event_date_wrap label{
+    margin-right: 10px;
+}
+.content_img_wrap{
+    margin-top: 50px;
+}
+.content_img_wrap label{
+    margin: 0 30px 0 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.btn_event_wrap{
+
+    margin-top: 100px;
+    text-align: center;
+}
+.btn_event{
+    width: 160px;
+    height: 40px;
+    background-color: #ffc862;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+.btn_event:hover{
+    background-color: #fab32f;
+    font-weight: bold;
+}

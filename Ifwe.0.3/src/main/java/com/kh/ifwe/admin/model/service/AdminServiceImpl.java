@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.admin.model.dao.AdminDAO;
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.vo.Board;
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.member.model.vo.Member;
 
 @Service
@@ -69,6 +71,52 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteBoard(int boardNo) {
 		return adminDAO.deleteBoard(boardNo);
 	}
+
+	@Override
+	public int insertBoardComment(BoardComment boardComment) {
+		return adminDAO.insertBoardComment(boardComment);
+	}
+
+	@Override
+	public BoardComment selectBoardComment(int boardNo) {
+		return adminDAO.selectBoardComment(boardNo);
+	}
+
+	@Override
+	public int deleteBoardComment(int boardNo) {
+		return adminDAO.deleteBoardComment(boardNo);
+	}
+
+	@Override
+	public int UpdateBoardComment(BoardComment boardComment) {
+		return adminDAO.updateBoardComment(boardComment);
+	}
+
+	@Override
+	public int insertEvent(AdminEvent adminEvent) {
+		return adminDAO.insertEvent(adminEvent);
+	}
+
+	@Override
+	public List<AdminEvent> selectEventList() {
+		return adminDAO.selectList();
+	}
+
+	@Override
+	public int deleteEvent(int eventCode) {
+		return adminDAO.deleteEvent(eventCode);
+	}
+
+	@Override
+	public AdminEvent selectOneEvent(int eventCode) {
+		return adminDAO.selectOneEvent(eventCode);
+	}
+
+	@Override
+	public int updateEvent(AdminEvent adminEvent) {
+		return adminDAO.updateEvent(adminEvent);
+	}
+
 
 
 

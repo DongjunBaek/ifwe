@@ -16,6 +16,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 <script>
 function boardCommentValidate(){
+	console.log(보내기);
 	return true;
 }
 </script>
@@ -39,7 +40,7 @@ function boardCommentValidate(){
         </div>
          <div class="boardRepleBack">
             <h3>답변</h3>
-            <form id="boardRepleFrm" action="${pageContext.request.contextPath }/admin/boardRepleInsert.do?boardNo=${board.boardNo}" method="post" onsubmit="return boardCommentValidate();">
+            <form id="boardRepleFrm">
 				<input type="hidden" name = "boardNo" value = "${board.boardNo }" /> 
                 <input type="hidden" name="memberCode" id="memberCode" value="${board.memberCode }">
 				<textarea id="boardReple" name="commentContent" class="boardReple" row="40" cols="40"></textarea>

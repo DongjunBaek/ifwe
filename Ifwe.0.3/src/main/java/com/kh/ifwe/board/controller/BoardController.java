@@ -55,6 +55,7 @@ public class BoardController {
 		log.debug("viewName {}", viewName);
 		int result = boardService.insertBoard(board);
 		
+		
 		if (result > 0) {
 			log.debug("Board @ insertBoard.do : 글 등록 성공");
 		}else
