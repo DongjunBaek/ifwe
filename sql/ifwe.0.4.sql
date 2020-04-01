@@ -295,32 +295,17 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
-<<<<<<< HEAD
-	 club_boardlist_no 	number	NOT NULL,
-	 club_code 	NUMBER		NOT NULL,
-	 board_name 	VARCHAR2(50)		NULL,
-=======
+
     club_boardlist_no    number   NOT NULL,
     club_code    NUMBER      NOT NULL,
     board_name    VARCHAR2(50)      NULL,
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      constraint pk_club_boardlist_no primary key(club_boardlist_no),
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
 
-<<<<<<< HEAD
-select * from club_boardlist
-order by club_boardlist_no;
-select *
- from club
- where club_code = 9999;
-=======
-select * from club_boardlist;
-
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
-<<<<<<< HEAD
+
 	 board_no 	NUMBER		primary key ,
 	 club_code 	NUMBER		NOT NULL,
 	 member_code 	NUMBER		NOT NULL,
@@ -331,18 +316,6 @@ CREATE TABLE  CLUB_BOARD  (
 	 board_heart 	NUMBER		NULL,
 	 board_cate_code 	VARCHAR2(200)		NULL,
 	 board_del 	CHAR(1)		NULL, -- y or n
-=======
-    board_no    NUMBER      primary key ,
-    club_code    NUMBER      NOT NULL,
-    member_code    NUMBER      NOT NULL,
-    club_boardlist_no    number   NOT NULL,
-     board_title varchar2(100) null,
-    board_content    VARCHAR2(2000)      NULL,
-    board_date    DATE   default sysdate,
-    board_heart    NUMBER      NULL,
-    board_cate_code    VARCHAR2(200)      NULL,
-    board_del    CHAR(1)      NULL, -- y or n
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
@@ -462,7 +435,7 @@ begin
     where board_no = :old.board_no;
 end;
 /
-
+select * from club_boardlist;
 create or replace trigger trig_club_boardlist
 after
 insert on club
@@ -526,3 +499,19 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
+insert into club
+		values(
+			seq_club_no.nextval,
+			9997,
+			'숫자',
+			'baekcook.JPG',
+			'20200402_013506707_595.JPG',
+			1,
+			25,
+			default,
+			'슷자',
+			'공연전시',
+			'경기',
+			null
+			);
+            
