@@ -1,3 +1,5 @@
+<%@page import="com.kh.ifwe.club.model.vo.Count"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -53,11 +55,12 @@ $(function(){
 		let searchType = $("[name=searchType]").val();
 		let clubSearchKeyword = $("[name=clubSearchKeyword]").val();
 		let clubLocation = $("[name=clubLocation]").val();
-		console.log(searchType,clubSearchKeyword,clubLocation);
+		let memberCode = ${memberLoggedIn.memberCode};
+		console.log(searchType,clubSearchKeyword,clubLocation,memberCode);
 		
 		
 		console.log("dkdkdkdkdk");
-	    var allData = {"searchType": searchType, "clubSearchKeyword": clubSearchKeyword, "clubLocation":clubLocation };
+	    var allData = {"searchType": searchType, "clubSearchKeyword": clubSearchKeyword, "clubLocation":clubLocation,"memberCode":memberCode };
 		
 		console.log(searchType);
 		
@@ -177,14 +180,31 @@ $(function(){
                             <div class="information-box">
                                     <br>
                                     <p class="people-title font-hk">남여비율</p>
-                                    <span class="information-fontsize">23</span>
+                                    <c:if test="${not empty maleList }">
+                                    <c:forEach items="${maleList }" var = "mList">
+                                    <c:if test="${mList.clubCode eq list.clubCode }">
+                                    <span class="information-fontsize"><fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/> </span>
                                     <span class="information-fontsize2">:</span>
-                                    <span class="information-fontsize3">4</span>
+                                    <span class="information-fontsize3"><fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/></span>
+                                    </c:if>
+                                    </c:forEach>
+                                    </c:if>
                             </div>
                             <div class="information-box lastbox">
                                     <br>
                                     <p class="people-title font-hk">평균나이</p>
-                                    <span class="information-fontsize">28세</span>
+                                    
+                                    <span class="information-fontsize">
+                                    <c:set var = "total" value = "0" />
+                                    <c:forEach items="${ageList }" var="a">
+                                    <c:if test="${a.clubCode eq list.clubCode }">
+                                    	<c:set var="age" value="${a.age }"/>
+                                    	<c:set var="total" value="${total+a.age}"/>
+                                    </c:if>
+                                    </c:forEach>
+                                    	<fmt:formatNumber value="${total/list.clubCurrent }" pattern="#"/>
+                                    세</span>
+                                    
                             </div>
                             <button class="information-botton font-hk" name="goclub" data-clubCode=${list.clubCode }>자세히 보기</button>
                         </div>
