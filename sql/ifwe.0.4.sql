@@ -189,6 +189,7 @@ CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL, -- 회원 코드
 	 member_id 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 아이디
 	 member_pname 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 프로필 명
+     FRIEND_CODE number,
             CONSTRAINT fk_friend_memberCode foreign key(member_code)
                                                       REFERENCES member(member_code)                                                    
                                                       on delete cascade
@@ -319,7 +320,7 @@ CREATE TABLE  CLUB_BOARD  (
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
@@ -499,19 +500,4 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
-insert into club
-		values(
-			seq_club_no.nextval,
-			9997,
-			'숫자',
-			'baekcook.JPG',
-			'20200402_013506707_595.JPG',
-			1,
-			25,
-			default,
-			'슷자',
-			'공연전시',
-			'경기',
-			null
-			);
-            
+select * from club_board;
