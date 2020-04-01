@@ -24,12 +24,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -46,6 +50,8 @@ public class ClubController {
 	@Autowired
 	private ClubService clubService;
 	
+	@Autowired
+	private ClubBoardService clubBoardService;
 	
 	
 	//소모임 검색 0325 문보라
@@ -196,6 +202,10 @@ public class ClubController {
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
 		
+		//전체 게시글 
+		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
+	
+		
 		if(!clubMemberCode.isEmpty()) {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
@@ -213,7 +223,9 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.setViewName("/club/clubMain");
+		
 		
 		return mav;
 	}
@@ -274,6 +286,7 @@ public class ClubController {
 	
 //	@GetMapping("/freeboard.do")
 //	public String freeboard() {
+//		
 //		return "club/clubFreeBoard";
 //	}
 	
@@ -506,6 +519,29 @@ public class ClubController {
 	}
 	
 	
+	@GetMapping("/clubInsertBoard")
+	public String clubInsertBoard() {
+		return "club/clubInsertBoard";
+	}
+
+	@GetMapping("/clubInsertBoardFree")
+	public String clubInsertBoardFree() {
+		return "club/clubInsertBoardFree";
+	}
 	
 	
+	
+	
+	/**
+	 * 0331 membership 구매 기능 관련. 
+	 * 동준
+	 */
+	
+	@GetMapping("/selectOneClub")
+	public Club selectOneClub(@RequestParam(value="clubCode") int clubCode) {
+		
+		Club club = clubService.selectOne(clubCode);
+		
+		return club;
+	}
 }

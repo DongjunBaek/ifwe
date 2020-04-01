@@ -13,6 +13,96 @@
 	</insert>
 	
 	
+	<select id="selectOne" resultType="clubBoard">
+		select 
+			* 
+		from
+			club_boardlist 
+		where
+			club_boardlist_no = #{clubBoardlistNo}
+	</select>	
+	
+	<insert id="insertBoard">
+		insert 
+			into 
+		club_board 
+			values(
+				seq_board_no.nextval, 
+				#{clubCode}, 
+				#{memberCode}, 
+				#{clubBoardlistNo}, 
+				#{boardTitle}, 
+				#{boardContent}, 
+				default, 
+				0, 
+				#{boardCateCode, typeHandler=StrArrTypeHandler}, 
+				'n', 
+				'n',
+				default
+			)
+			
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			select seq_board_no.currval from dual
+		</selectKey>
+		
+	</insert>
+	
+	<insert id="insertBoardImages">
+		insert into board_img values(#{boardNo},#{summernoteImages},#{summernoteImagesRe})
+	</insert>
+	
+	<select id="selectClubBoardList" resultMap="clubBoardProfileMap">
+		select 
+			C.*,L.*,M.profile_name, M.profile_img_re
+		from 
+			club_board C 
+		left join 
+			club_boardlist L 
+		on 
+			C.club_boardlist_no = l.club_boardlist_no 
+		left join 
+			member_profile M 
+		on 
+            C.member_code = M.member_code 
+		where 
+			L.club_boardlist_no = #{clubBoardlistNo} 
+		order by 
+			C.board_no desc
+	</select>
+	
+	<resultMap type="clubBoardProfile" id="clubBoardProfileMap">
+		<result column="board_cate_code" property="boardCateCode" typeHandler="strArrTypeHandler"/>
+	</resultMap>
+	
+	<select id="selectClubBoardNo" resultType="boardImg">
+		select board_no from club_board
+		where
+		club_boardlist_no = #{clubBoardlistNo}
+	
+	</select>
+	
+	<select id="selectClubBoardImg" resultType="boardImg">
+		select * from board_img
+		where
+		board_no in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item.boardNo}
+		</foreach>
+	
+	</select>
+	
+	<select id="selectBoardImgajax" resultType="boardImg">
+		select * from board_img
+		where board_no = #{boardNo}
+	</select>
+	
+	<update id="updateBoardImg">
+		update club_board set board_imgyn = 'y'
+		where board_no = #{boardNo}
+	
+	</update>
+	
+	
 	
 	
 </mapper>

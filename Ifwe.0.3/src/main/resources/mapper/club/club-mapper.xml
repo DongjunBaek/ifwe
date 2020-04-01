@@ -113,9 +113,9 @@
 	</select>
 	
 	<select id="selectClubMaster2" resultType="clubMember">
-		select M.*,p.profile_name,p.profile_img_re
-		from member M join member_profile P 
-            on M.member_code = P.member_code
+		select M.*,p.profile_name,p.profile_img_re,H.club_grade
+		from member M join member_profile P on M.member_code = P.member_code
+                      join club_members H on M.member_code=H.member_code
         where M.member_code = #{clubMaster}
      </select> 
         
@@ -233,15 +233,43 @@
 	
 	</delete>	
 	
+
+	<insert id="insertBoard">
+		inert
+	</insert>
+
 	<select id="selectBoardList" resultType="clubBoard">
 		select * from club_boardlist
 		where club_code = #{clubCode}
 		order by club_boardlist_no
 		
 	</select>
+
 	
+	<select id="selectclubBoardProfileList" resultMap="clubBoardProfileMap">
+		select 
+			C.*,L.*,M.profile_name, M.profile_img_re
+		from 
+			club_board C 
+		left join 
+			club_boardlist L 
+		on 
+			C.club_boardlist_no = l.club_boardlist_no 
+		left join 
+			member_profile M 
+		on 
+            C.member_code = M.member_code 
+		where 
+			C.club_code = #{clubCode}
+		order by 
+			C.board_no desc
+	</select>
+
 	
-		
+	<resultMap type="clubBoardProfile" id="clubBoardProfileMap">
+		<result column="board_cate_code" property="boardCateCode" typeHandler="strArrTypeHandler"/>
+	</resultMap>
+	
 </mapper>
 
 

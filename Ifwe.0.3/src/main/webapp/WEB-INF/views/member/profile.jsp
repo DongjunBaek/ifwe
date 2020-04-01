@@ -41,7 +41,7 @@
 
 </body>
 <script>
-$(()=>{
+<%-- $(()=>{
 	
 
 
@@ -89,7 +89,15 @@ console.log("onload On");
 		});
 
 
-)};
+}); --%>
+$(".section-friendbutton").click(function(){
+	var memberCode = ${member.memberCode};
+	var fromMember = ${memberLoggedIn.memberCode}
+	
+	if(memberCode != fromMember){
+		location.href = "${pageContext.request.contextPath}/member/insertMsgFriend.do?memberCode=${member.memberCode}&fromMember=${memberLoggedIn.memberCode}";
+	}
+})
 
 </script>
 

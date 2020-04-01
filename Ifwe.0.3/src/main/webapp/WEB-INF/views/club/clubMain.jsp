@@ -23,7 +23,9 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
     
-
+    $(".section-block-right").click(function(){
+    	location.href = "${pageContext.request.contextPath}/club/clubInsertBoard"
+    });
 });
 
 </script>
@@ -45,16 +47,17 @@ $(function(){
       </div>
       <article class="article1 flotclass">
 		
-		<!-- 게시물카드시작 -->
+		<c:if test="${not empty clubBoardProfileList }">
+		<c:forEach items="${clubBoardProfileList }" var = "cbl">
+
           <div class="article-board-notice">
               <div class="article-board-wrapper">
                   <div class="article1-board-frofile">
                       <div class="article1-frofile-img">
-                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/${cbl.profileImgRe}" alt="" />
                       </div>
                           <div class="article1-frofile-name">
-                              <p >@ ${clubMaster.memberId }</p>
-                              <p class="article1-leader-name friend-name-profile">${member.memberName }</p>
+                              <p class="article1-leader-name">${cbl.profileName }</p>
                           </div>
                           <div class="article1-curcle-box">
                               <div class="article1-curcle"></div>
@@ -62,17 +65,24 @@ $(function(){
                               <div class="article1-curcle"></div>
                           </div>
                       </div>
-                      <p class="article1-boardmenu">공지사항</p>
+                      <p class="article1-boardmenu">${cbl.boardTitle }</p>
                       <div class="article1-bard-content">
-			                          이번주 금요일 정모합니다! <br>
-			                          주소는 강남역 윙스터디 앞입니다
+			                  ${cbl.boardContent }
                       </div>
                       <div class="article1-hashtag-container">
-                          <div class="article1-hashtag-box">#공지</div>
-                          <div class="article1-hashtag-box">#공지사항</div>
-                          <div class="article1-hashtag-box">#공지어기면강퇴</div>
+                      	<c:forEach items="${cbl.boardCateCode }" var="hash">
+                          <div class="article1-hashtag-box"># ${hash }</div>
+                      	</c:forEach>
                       </div>
                       <div class="article1-line"></div>
+                      <%-- <c:if test="${cbl.imgRe != null }">아아
+                      	<div class="clubBoardImages">
+                      	<c:forEach items="${cbl.imgRe }" var = "img">
+                      		<img src="${pageContext.request.contextPath}/resources/upload/admin/board/${img}">
+                      	</c:forEach>
+	                      </div>
+                      	<div class="article1-line"></div>
+                      </c:if> --%>
                       <div class="article1-comment-box">
                           <input type="text" name="comment" id="commnet" placeholder="댓글입력">
                           <div class="comment-input">입력</div>
@@ -89,7 +99,7 @@ $(function(){
                               	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                               </div>
                               <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">신형철</div>
+                          <div class="comment-frofile-name">신형철</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -103,7 +113,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">백동준</div>
+                          <div class="comment-frofile-name">백동준</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -117,7 +127,7 @@ $(function(){
                           	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                           </div>
                           <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">문보라</div>
+                          <div class="comment-frofile-name">문보라</div>
                           <p>확인했습니다!</p>
                           <div class="comment-right-box">
                               <p>신고</p>
@@ -128,92 +138,11 @@ $(function(){
                   </div>
               </div>
           </div>
-          
+          </c:forEach>
+         </c:if>
           <!-- 게시물카드끝-->
-          
-          <div class="article-board-notice">
-              <div class="article-board-wrapper">
-                  <div class="article1-board-frofile">
-                      <div class="article1-frofile-img">
-                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                      </div>
-                          <div class="article1-frofile-name">
-                              <p >@wingStudy_02</p>
-                              <p class="article1-leader-name friend-name-profile">스테파니</p>
-                          </div>
-                          <div class="article1-curcle-box">
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                          </div>
-                      </div>
-                      <p class="article1-boardmenu">공지사항</p>
-                      <div class="article1-bard-content">
-			                          이번주 금요일 정모합니다! <br>
-			                          주소는 강남역 윙스터디 앞입니다
-                      </div>
-                      <div class="article1-hashtag-container">
-                          <div class="article1-hashtag-box">#공지</div>
-                          <div class="article1-hashtag-box">#공지사항</div>
-                          <div class="article1-hashtag-box">#공지어기면강퇴</div>
-                      </div>
-                      <div class="article1-line"></div>
-                      <div class="article1-comment-box">
-                          <input type="text" name="comment" id="commnet" placeholder="댓글입력">
-                          <div class="comment-input">입력</div>
-                      </div>
-                      <div class="article1-comment-count">
-                          <div class="comment-sliderbutton">
-                              	댓글 2개&nbsp;&nbsp;<i class="fas fa-sort-down" style="font-size: 18px;"></i>
-                          </div>
-                      </div>
-                      <div class="comment-hiddenbox">
-
-                          <div class="article1-commnet-container">
-                              <div class="comment-frofile-img">
-                              	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                              </div>
-                              <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">신형철</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-
-                      </div>
-                      <div class="article1-commnet-container">
-                          <div class="comment-frofile-img">
-                          	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                          </div>
-                          <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">백동준</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-                          
-                      </div>
-                      <div class="article1-commnet-container">
-                          <div class="comment-frofile-img">
-                          	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                          </div>
-                          <div class="comment-block"></div>
-                          <div class="comment-frofile-name friend-name-profile">문보라</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          
+		
+                    
           
           
           
