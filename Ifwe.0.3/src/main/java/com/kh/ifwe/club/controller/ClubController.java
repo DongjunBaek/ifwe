@@ -257,11 +257,8 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
-<<<<<<< HEAD
 		mav.addObject("msgCount",msgCount);
-=======
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 		mav.setViewName("/club/clubMain");
 		
 		
