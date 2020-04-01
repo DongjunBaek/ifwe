@@ -3,9 +3,14 @@ package com.kh.ifwe.club.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
 
@@ -46,6 +51,17 @@ public interface ClubService {
 	int updateClubCurrent(int clubCode);
 
 	int updateClub(Club newClub);
+
+	ClubLoggedIn selectClubLoggedIn(Map<String, Object> param);
+
+	int deleteClubMember(Map<String, Object> param);
+
+
+	List<ClubBoard> selectBoardList(int clubCode);
+
+	List<ClubBoardProfile> selectclubBoardProfileList(int clubCode);
+
+
 
 
 }

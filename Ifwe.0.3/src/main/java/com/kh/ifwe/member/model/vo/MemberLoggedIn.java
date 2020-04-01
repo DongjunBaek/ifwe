@@ -30,8 +30,7 @@ public class MemberLoggedIn extends Member implements Serializable{
 		this.profileName = profileName;
 		this.profileImgRe = profileImgRe;
 	}
-	
-	
+
 	
 	
 	

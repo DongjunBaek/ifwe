@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.friend.model.dao.FriendDAO;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.member.model.vo.FriendList;
+import com.kh.ifwe.member.model.vo.Member;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -37,10 +39,10 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public List<Friend> selectListFriend(int memberCode) {
+	public List<FriendList> selectListFriend(int memberCode) {
 		// TODO Auto-generated method stub
 		return friendDAO.selectListFreind(memberCode);
 	}
-	
+
 	
 }

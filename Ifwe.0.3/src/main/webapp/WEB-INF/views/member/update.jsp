@@ -60,9 +60,11 @@
    		</div>
    		<div class="update-list-div">
    			<ul class="mypage-p-class" style="color:#2756a6;margin-left: 5%;">
-   				<li><span class="update-li-p-class">윙스터디 모임1</span><i class="far fa-times-circle update-li-i-class"></i></li>
-   				<li><span class="update-li-p-class">윙스터디 모임2</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
-   				<li><span class="update-li-p-class">윙스터디 모임3</span><i class="far fa-times-circle update-li-i-class" style="color:#cbcbcb"></i></li>
+   				<c:if test="${not empty clubList }">
+   				<c:forEach items="${clubList }" var="list">
+   				<li><span class="update-li-p-class">${list.clubTitle }</span><i class="far fa-times-circle update-li-i-class"></i></li>
+   				</c:forEach>
+   				</c:if>
    			</ul>
    		</div>
 

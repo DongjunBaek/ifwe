@@ -30,6 +30,7 @@ $(function(){
     function addTag (value) {
         tag[counter] = value; // 태그를 Object 안에 추가
         counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+        
     }
 
     // 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
@@ -43,7 +44,9 @@ $(function(){
     $("#tag-form").on("submit", function (e) {
         var value = marginTag(); // return array
         $("#boradtitlehidden").val(value); 
-
+		
+        console.log($("#boradtitlehidden").val());
+        
         $(this).submit();
     });
 
@@ -55,6 +58,7 @@ $(function(){
 
             var tagValue = self.val(); // 값 가져오기
             var reg = /^[가-힣]{1,8}$/;
+            console.log(tagValue);
             // 값이 없으면 동작 ㄴㄴ
             if (tagValue !== "" && reg.test(tagValue)) {
                     
@@ -68,6 +72,7 @@ $(function(){
                     $("#board-ul").append("<li><i class='fas fa-circle circleicon'></i><span class='newboardlistspan'>"+tagValue+"</span><span class='del-btn' idx='"+counter+"'>x</span></li>");
                     addTag(tagValue);
                     self.val("");
+                   	console.log(tag[counter]);
                 } else {
                     alert("태그값이 중복됩니다.");
                 }
@@ -113,7 +118,11 @@ $(function(){
              <input type="button" value="추가 +" class="boardplusbtn" id="boardplusbtn">
              <p>게시판 관리</p>
 			
-			
+			<form action="${pageContext.request.contextPath }/clubboard/insertlist.do" id="tag-form" 
+				  method="post" autocomplete="off">
+				  
+				  
+				  <input type="hidden" name="clubCode" value="${club.clubCode }" />
              <div class="shc-boardlist-box">
                  <ul id="board-ul">
                      <li>
@@ -126,18 +135,28 @@ $(function(){
                      </li>
                      <li>
                          <i class="fas fa-circle circleicon"></i>
-                         <span class="boardlistspan">자유게시판</span><br>
+                         <span class="boardlistspan">자유게시판</span>
                      </li>
-                     
+                   	<c:if test="${not empty clubBoardList}">
+                   	<c:forEach items="${ clubBoardList}" var="boardList">
+	                
+	                <li>
+                        <i class="fas fa-circle circleicon"></i>
+                         <span class="boardlistspan">${boardList.boardName }</span>
+                   	</li>   	
+                   	
+                   	</c:forEach>
+                   	</c:if>
                      
                      
                  </ul>
              </div>
-             <input type="hidden" name="" id="boradtitlehidden">
+             <input type="hidden" name="boardTitleList" id="boradtitlehidden">
              <div class="btncenter">
-                 <input type="button" value="저장하기" class="shc-savebtn">
+                 <input type="submit" value="저장하기" class="shc-savebtn">
              </div>
 
+			</form>
 
          </div>
      </section>

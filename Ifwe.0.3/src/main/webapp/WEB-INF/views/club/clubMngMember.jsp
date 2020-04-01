@@ -19,6 +19,10 @@
 <script>
 $(function(){
 	$(".member-ranking").selectric();
+	
+	
+	
+	
 });
 
 </script>
@@ -45,7 +49,6 @@ $(function(){
                       <th>사진</th>
                       <th>닉네임</th>
                       <th>등급</th>
-                      <th>신고</th>
                       <th>탈퇴</th>
                   </tr>
                     <c:if test="${not empty clubMember }">
@@ -56,20 +59,19 @@ $(function(){
 	                              <img src="${pageContext.request.contextPath }/resources/upload/profile/${cmember.profileImgRe}" alt="">
 	                          </div>
 	                      </td>
-	                      <td>${cmember.memberName }</td>
+	                      <td>${cmember.profileName }</td>
 	                      <td>
 	                          <div class="table-selectsize-div">
 	                              <select name="" id="" class="member-ranking">
 	                                  <option value="master" ${cmember.clubGrade=='master'?'selected':'' }>마스터</option>
-	                                  <option value="nomal" ${cmember.clubGrade=='member'?'selected':'' }>일반회원</option>
+	                                  <option value="member" ${cmember.clubGrade=='member'?'selected':'' }>일반회원</option>
+	                                  <option value="nomal" ${cmember.clubGrade=='nm'?'selected':'' }>준회원</option>
 	                              </select>
 	                          </div>
 	                      </td>
 	                      <td>
-	                          <button type="button" class="table-declaration">신고</button>
-	                      </td>
-	                      <td>
-	                          <button type="button" class="table-secession">탈퇴</button>
+	                          <button type="button" class="table-secession" 
+	                          onclick="location.href='${pageContext.request.contextPath}/club/memberDelete.do?memberCode=${cmember.memberCode }'">탈퇴</button>
 	                      </td>
 	                  </tr>
                 

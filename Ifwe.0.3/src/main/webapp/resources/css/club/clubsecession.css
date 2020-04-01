@@ -1,0 +1,63 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.section-wrapper p{
+    font-size:24px;
+    font-weight: bold;
+}
+.shc-section-memberinfo{
+    height:300px;
+    width:1350px;;
+    background-color: white;
+    padding:60px 50px;
+
+}
+.memberinfo-profilename{
+    font-size:35px;
+    font-weight: bold;
+}
+.memberinfo-grade{
+    font-size:24px;
+    margin-top:40px;
+    margin-bottom: 25px;
+}
+.memberinfo-enroll{
+    font-size: 24px;
+}
+.deletebtn{
+    float: right;
+    width:280px;
+    height:60px;
+    background-color: #fe4646;
+    color: white;
+    font-size: 24px;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    margin-top:30px;
+}
+.modal-title{
+	font-weight: bold;
+}
+.modal-body-span{
+	font-weight: bold;
+	font-size:18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
