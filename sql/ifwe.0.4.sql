@@ -185,6 +185,7 @@ CREATE TABLE  MEMBER_MSG  (
 -- 8.회원 친구 목록
 CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL, -- 회원 코드
+     FRIEND_CODE number not null, --친구의 회원 코드
 	 member_id 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 아이디
 	 member_pname 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 프로필 명
             CONSTRAINT fk_friend_memberCode foreign key(member_code)
