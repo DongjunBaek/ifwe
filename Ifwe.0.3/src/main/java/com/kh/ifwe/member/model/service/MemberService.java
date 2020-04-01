@@ -59,4 +59,8 @@ public interface MemberService {
 
 	int insertFriends(Friend friend);
 
+	int insertOtherFriend(Map<String, Object> map);
+
+	int selectMsgCount(int memberCode);
+
 }

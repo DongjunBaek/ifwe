@@ -44,5 +44,10 @@ public class FriendServiceImpl implements FriendService {
 		return friendDAO.selectListFreind(memberCode);
 	}
 
+	@Override
+	public Friend selectOneFriend(int memberCode) {
+		return friendDAO.selectOneFriend(memberCode);
+	}
+
 	
 }
