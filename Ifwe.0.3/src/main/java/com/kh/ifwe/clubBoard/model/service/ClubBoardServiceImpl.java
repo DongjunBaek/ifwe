@@ -63,6 +63,11 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.updateBoardImg(boardNo);
 	}
 
+	@Override
+	public List<BoardImg> selectClubBoardNoList(int clubCode) {
+		return clubBoardDAO.selectClubBoardNoList(clubCode);
+	}
+
 
 	
 	

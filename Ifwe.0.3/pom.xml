@@ -232,8 +232,9 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.9.8</version>
 		</dependency>
-	       	
-			<!-- ##. web crawling jsoup -->
+	      	
+	      	<!-- 0402 jsoup 추가 동준 -->
+   			<!-- ##. web crawling jsoup -->
 			<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
 		    <groupId>org.jsoup</groupId>
@@ -248,8 +249,6 @@
 		    <version>2.9.8</version>
 		</dependency>
 	       
-	       
-
 	</dependencies>
     <build>
         <plugins>

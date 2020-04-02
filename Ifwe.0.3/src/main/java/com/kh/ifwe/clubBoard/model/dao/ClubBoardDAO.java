@@ -25,6 +25,8 @@ public interface ClubBoardDAO {
 	List<BoardImg> selectBoardImgajax(int boardNo);
 
 	int updateBoardImg(int boardNo);
+
+	List<BoardImg> selectClubBoardNoList(int clubCode);
 	
 	
 }

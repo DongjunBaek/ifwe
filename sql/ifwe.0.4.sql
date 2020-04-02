@@ -52,6 +52,7 @@
 --select * from tab; -- 전체 테이블 조회
 select * from member;
 select * from member_profile;
+select* from club_members;
 --=================================================================
 --TABLE
 --=================================================================
@@ -124,15 +125,16 @@ CREATE TABLE  MEMBER_PROFILE  (
                                                         on delete cascade
                                                         --on delete set null
 );
--- 3.회원 이벤트 테이블 - 미사용 테이블
+-- 3.회원 이벤트 테이블 - 0402 update
 CREATE TABLE  TBL_EVENT  (
-	 event_code 	NUMBER		primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
-	 event_title 	VARCHAR2(100)		NULL, -- 이벤트 제목
-	 event_content 	VARCHAR2(2000)		NULL, -- 이벤트 내용
-	 event_start 	DATE		NULL, -- 이벤트 시작일
-	 event_end 	DATE		NULL,     -- 이벤트 종료일
-	 event_pic 	VARCHAR2(100)		NULL, -- 이벤트 담당관리자 명
-	 event_pid 	VARCHAR2(100)		NULL  -- 이벤트 담당부서
+    event_code    NUMBER      primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
+    event_title    VARCHAR2(100)      NULL, -- 이벤트 제목
+    event_content    VARCHAR2(2000)      NULL, -- 이벤트 내용
+    event_start    DATE      NULL, -- 이벤트 시작일
+    event_end    DATE      NULL,     -- 이벤트 종료일
+     member_code NUMBER NOT NULL,
+     event_img_ori varchar2(200) NULL,
+     event_img_re varchar2(200) NULL
 );
 -- 4.회원 이벤트 참가기록 테이블 - 미사용 테이블
 CREATE TABLE  MEMBER_EVENT  (
@@ -187,6 +189,7 @@ CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL, -- 회원 코드
 	 member_id 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 아이디
 	 member_pname 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 프로필 명
+     FRIEND_CODE number,
             CONSTRAINT fk_friend_memberCode foreign key(member_code)
                                                       REFERENCES member(member_code)                                                    
                                                       on delete cascade
@@ -293,32 +296,17 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
-<<<<<<< HEAD
-	 club_boardlist_no 	number	NOT NULL,
-	 club_code 	NUMBER		NOT NULL,
-	 board_name 	VARCHAR2(50)		NULL,
-=======
+
     club_boardlist_no    number   NOT NULL,
     club_code    NUMBER      NOT NULL,
     board_name    VARCHAR2(50)      NULL,
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      constraint pk_club_boardlist_no primary key(club_boardlist_no),
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
 
-<<<<<<< HEAD
-select * from club_boardlist
-order by club_boardlist_no;
-select *
- from club
- where club_code = 9999;
-=======
-select * from club_boardlist;
-
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
-<<<<<<< HEAD
+
 	 board_no 	NUMBER		primary key ,
 	 club_code 	NUMBER		NOT NULL,
 	 member_code 	NUMBER		NOT NULL,
@@ -329,22 +317,10 @@ CREATE TABLE  CLUB_BOARD  (
 	 board_heart 	NUMBER		NULL,
 	 board_cate_code 	VARCHAR2(200)		NULL,
 	 board_del 	CHAR(1)		NULL, -- y or n
-=======
-    board_no    NUMBER      primary key ,
-    club_code    NUMBER      NOT NULL,
-    member_code    NUMBER      NOT NULL,
-    club_boardlist_no    number   NOT NULL,
-     board_title varchar2(100) null,
-    board_content    VARCHAR2(2000)      NULL,
-    board_date    DATE   default sysdate,
-    board_heart    NUMBER      NULL,
-    board_cate_code    VARCHAR2(200)      NULL,
-    board_del    CHAR(1)      NULL, -- y or n
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
      board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
-     constraint fk_club_boardlist_no foreign key (boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
+     constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
 
@@ -460,7 +436,7 @@ begin
     where board_no = :old.board_no;
 end;
 /
-
+select * from club_boardlist;
 create or replace trigger trig_club_boardlist
 after
 insert on club
@@ -524,3 +500,4 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
+select * from club_board;
