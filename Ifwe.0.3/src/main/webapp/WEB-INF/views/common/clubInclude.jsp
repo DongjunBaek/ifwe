@@ -63,7 +63,7 @@ $(function(){
                         <i class="fas fa-sort-down fa-2x"></i>
                     </div>
                     <div class="nav-clubimg">
-						<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${club.clubImgRe}" alt="" />
+						<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
                     </div>
                         <div class="nav-right-leader">
 
