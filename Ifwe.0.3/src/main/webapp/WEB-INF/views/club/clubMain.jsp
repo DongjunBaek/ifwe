@@ -232,7 +232,7 @@ function showSlides(n) {
       <article class="article1 flotclass">
 		
 		<c:if test="${not empty clubBoardProfileList }">
-		<c:forEach items="${clubBoardProfileList }" var = "cbl">
+		<c:forEach items="${clubBoardProfileList }" var = "cbl" varStatus="vs">
           <div class="article-board-notice">
           	  <p><i class="fas fa-chevron-left"></i>${cbl.boardName }<i class="fas fa-chevron-right"></i></p>
               <div class="article-board-wrapper">
@@ -255,7 +255,7 @@ function showSlides(n) {
 			                  ${cbl.boardContent }
                       </div>
                       
-                    <label for="readmore${vs.index }"></label>
+                      <label for="readmore${vs.index }"></label>
                       <div class="article1-hashtag-container">
                           <ul>
                       	<c:forEach items="${cbl.boardCateCode }" var="tag">

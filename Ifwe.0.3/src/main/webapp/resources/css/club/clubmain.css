@@ -117,6 +117,7 @@ section{
 .article1-hashtag-container{
     margin-bottom: 30px;
     min-height: 64px;
+    transition:all .3s ease;
     position: relative;
 }
 .article1-hashtag-box{
