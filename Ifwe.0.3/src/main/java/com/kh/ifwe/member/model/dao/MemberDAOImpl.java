@@ -121,6 +121,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.insertFriends",friend);
 	}
 
+	@Override
+	public int insertOtherFriend(Map<String, Object> map) {
+		return sqlSession.insert("member.insertOtherFriend",map);
+	}
+
+	@Override
+	public int selectMsgCount(int memberCode) {
+		return sqlSession.selectOne("member.selectMsgCount",memberCode);
+	}
+
 	
 	
 	

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 
 @Repository
@@ -38,6 +39,31 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 	@Override
 	public List<ClubBoard> selectClubBoardList(int clubBoardlistNo) {
 		return sqlSession.selectList("clubBoard.selectClubBoardList", clubBoardlistNo);
+	}
+
+	@Override
+	public List<BoardImg> selectClubBoardNo(int clubBoardlistNo) {
+		return sqlSession.selectList("clubBoard.selectClubBoardNo",clubBoardlistNo);
+	}
+
+	@Override
+	public List<BoardImg> selectClubBoardImg(List<BoardImg> boardNo) {
+		return sqlSession.selectList("clubBoard.selectClubBoardImg",boardNo);
+	}
+
+	@Override
+	public List<BoardImg> selectBoardImgajax(int boardNo) {
+		return sqlSession.selectList("clubBoard.selectBoardImgajax",boardNo);
+	}
+
+	@Override
+	public int updateBoardImg(int boardNo) {
+		return sqlSession.update("clubBoard.updateBoardImg",boardNo);
+	}
+
+	@Override
+	public List<BoardImg> selectClubBoardNoList(int clubCode) {
+		return sqlSession.selectList("clubBoard.selectClubBoardNoList",clubCode);
 	}
 
 

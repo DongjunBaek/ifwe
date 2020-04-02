@@ -34,6 +34,7 @@
 }
 .section-frofileimg img{
     width:200px;
+    height:100%;
 }
 .frofile-id{
     margin-top:40px;

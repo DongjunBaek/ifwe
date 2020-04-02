@@ -78,6 +78,7 @@ header {
 .nav-clubimg img{
 	width:55px;
 	z-index:1;
+	height:100%;
 }
 .nav-right-icon1 {
     width: 50px;
@@ -94,9 +95,20 @@ header {
     float: right;
     color: white;
     margin-top: 10%;
+    position:relative;
 }
 .fa-bell {
     margin-left: 30%;
+}
+.bell-count{
+	background-color: #fa3e3e;
+  	border-radius: 2px;
+  	color: white;
+  	padding: 1px 3px;
+  	font-size: 10px;
+  	position: absolute; 
+  	top: 0;
+  	right: 0;
 }
 .nav-myfrofile-box{
     background-image: url("../../images/club/navbox.png");

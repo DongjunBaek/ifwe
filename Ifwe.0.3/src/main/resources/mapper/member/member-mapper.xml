@@ -245,6 +245,31 @@
 			)
 		
 	</insert>
+	
+	<insert id="insertOtherFriend">
+		insert into
+			friend 
+		values(
+			#{memberCode},
+			#{friendCode},
+			#{memberId},
+			#{memberPname}
+			)
+	</insert>
+	
+	<select id="selectMsgCount" resultType = "_int">
+		select 
+			count(*) 
+		from 
+			member_msg
+		<where> 
+			msg_cate_code = 'f1' 
+		and 
+			msg_view = 'n'
+		and
+			member_code = #{memberCode}
+		</where>
+	</select>
 
 </mapper>
 

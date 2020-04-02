@@ -29,6 +29,7 @@ public class ClubBoard implements Serializable {
 	private String[] boardCateCode; 
 	private String boardDel;
 	private String boardReport;
+	private String boardImgyn;
 	private String boardName;
 	
 	

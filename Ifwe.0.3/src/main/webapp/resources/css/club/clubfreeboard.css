@@ -49,6 +49,13 @@ section{
     min-height: 420px;
     margin-bottom: 50px;
 }
+.article-board-notice>p{
+	font-size:20px;
+	width:150px;
+	margin-left:35px;
+	font-weight: bold;
+	color:#2756a6;
+}
 .article-board-wrapper{
     width:750px;
     min-height: 420px;
@@ -106,6 +113,8 @@ section{
     font-size:20px;
     margin-top:30px;
     margin-bottom: 30px;
+    transition:all .3s ease;
+    min-height:50px;
 }
 .article1-hashtag-container{
     margin-bottom: 30px;
@@ -113,7 +122,6 @@ section{
     position: relative;
 }
 .article1-hashtag-box{
-    height:18px;
     border-radius: 20px;
     background-color: #beceea;
     font-size: 18px;
@@ -125,9 +133,6 @@ section{
     margin-bottom: 10px;
 
 }   
-.article1-hashtag-box:last-child{
-    margin-bottom: 20px;
-}
 .article1-hashtag-block{
     border:1px solid black;
     width:100%;
@@ -259,13 +264,175 @@ section{
     position: absolute;
 }
 
+.article1-imgbox{
+    width:720px;
+    height:110px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+}
+.article1-imgcontainer{
+    border: 5px solid white;
+    width:170px;
+    height:100px;
+    float: left;
 
+}
+.article1-imgcontainer img{
+    width:170px;
+    height:100%;
+    float: left;
+}
+.article-imgfilter{
+    background-color: rgba(0,0,0,0.5);
+    width:170px;
+    height:100px;
+    position: absolute;
+    right:5px;
+    top:5px;
+}
+.article-imgfilter p{
+    color:white;
+    width:80px;
+    margin:0 auto;
+    margin-top:20%;
+    font-size:24px;
+    font-weight: bold;
+}
 
+body{
+	position: relative;
+	
+}
+.wrapper{
+	position:absolute;
+}
 
+.filter-container-container{
+    box-sizing: border-box;
+    display: none;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top:3%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:10;
+}
+/* Position the image container (needed to position the left and right arrows) */
+.filter-container {
+    width:800px;
+    height:1000px;
+    position: relative;
+    margin:0 auto;
+}
 
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
 
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
 
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+article1-bard-content + label{
+	display:none;
+}
+
+.article-board-wrapper input[type="checkbox"] {
+     display:none;
+}
+
+.article-board-wrapper label {
+     color:blue;
+     text-decoration:underline;
+     margin-top:10px;
+     cursor:pointer;
+     display:none;
+}
+
+.article-board-wrapper label:after {
+     content:"더보기";  
+}
+
+.article-board-wrapper input:checked ~ label:after {
+     content:"접기";  
+}
+
+.article1-hashtag-container ul{
+	list-style: none;
+}
 
 
 
