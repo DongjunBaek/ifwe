@@ -35,6 +35,8 @@ public interface ClubBoardDAO {
 	List<ClubBoardComment> selectBoardComment(int clubCode);
 
 	int updateClubBoard(int boardRef);
+
+	List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo);
 	
 	
 }

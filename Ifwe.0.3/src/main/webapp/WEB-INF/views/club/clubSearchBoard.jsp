@@ -7,14 +7,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Club Main</title>
+<title>Club SearchBoard</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubfreeboard.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmain.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
 <script>
 $(function(){
+	
 	
 	
 	$(".comment-sliderbutton").click(function(){
@@ -33,22 +34,24 @@ $(function(){
 	});
     
 	
-	
-	
-    $(".section-block-right").click(function(){
-    	location.href = "${pageContext.request.contextPath}/club/clubInsertBoardFree"
-    })
+	var count = $(".article-board-notice").length;
+    console.log("테스트",count);
+	if(count<1){
+		$(".search-zero").css("display","block");
+	}
     
- 
- 
- 
-    //형철 이미지 더보기 클릭시 기능구현
+    
+	$(".friend-name-profile").click(function(){
+		location.href="${pageContext.request.contextPath }/member/profile.do"
+	});
+    
+    $(".section-block-right").click(function(){
+    	location.href = "${pageContext.request.contextPath}/club/clubInsertBoard"
+    });
+    
     $(".article1-imgbox").click(function(e){
         $(".filter-container-container").css("display","inline-block");
         var boardNo = $(this).children("#boardNohide").val();
-        
-        
-        console.log("boardNo"+boardNo);
         
         $.ajax({
         	data : {boardNo:boardNo},
@@ -132,7 +135,6 @@ $(function(){
     
 
 	var imgcontainer=$(".article-board-notice").find(".article1-imgbox");
-    console.log("imgcontainer1",imgcontainer);
     
     for(var i=0; i<imgcontainer.length; i++){
     	
@@ -164,7 +166,6 @@ $(function(){
     	
     	var checkbox = $(item).siblings('input[type=checkbox]');
     	var chkid = "#"+checkbox.attr('id');
-		console.log(chkid);    	
     	
     	$(chkid).change(function(){
     		
@@ -187,7 +188,9 @@ $(function(){
     
     
     
-
+    
+    
+    
     
     
 });
@@ -225,17 +228,8 @@ function showSlides(n) {
 	  captionText.innerHTML = dots[slideIndex-1].alt;
 	}
 
-
-
 </script>
 
-<style>
-.section-boradall{
-	font-family: 'GmarketSansMedium';
-	font-weight: bold;
-}
-
-</style>
 
 </head>
 <body>
@@ -243,55 +237,53 @@ function showSlides(n) {
   <section class="flotclass">
       <div class="section-block">
           <div class="section-wrapper">
-              <p class="section-boradall">${cb.boardName }</p>
-              <div class="section-block-right">
-                  <p>글쓰기</p>
-                  <i class="fas fa-pencil-alt"></i>
-              </div>
+              <p class="section-boradall">검색게시판</p>
           </div>
           
       </div>
+       <div class="search-zero">
+			 <i class="far fa-file-excel"></i>
+			 <p>해당 해쉬태그의 게시물이 없습니다.</p>
+		  </div>
       <article class="article1 flotclass">
 		
-		<!-- 게시물카드시작 -->
-		<c:if test="${not empty clubBoardListboard }">
-		<c:forEach items="${clubBoardListboard }" var = "cl" varStatus="vs">
-		
-	
+		<c:if test="${not empty clubBoardProfileList }">
+		<c:forEach items="${clubBoardProfileList }" var = "cbl" varStatus="vs">
           <div class="article-board-notice">
-          <p><i class="fas fa-chevron-left"></i>${cl.boardName }<i class="fas fa-chevron-right"></i></p>
+          	  <p><i class="fas fa-chevron-left"></i>${cbl.boardName }<i class="fas fa-chevron-right"></i></p>
               <div class="article-board-wrapper">
                   <div class="article1-board-frofile">
                       <div class="article1-frofile-img">
-                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/${cl.profileImgRe}" alt="" />
+                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/${cbl.profileImgRe}" alt="" />
                       </div>
-                       <div class="article1-frofile-name">
-                           <p class="article1-leader-name">${cl.profileName }</p>
-                       </div>
-                      <div class="article1-curcle-box">
-                          <div class="article1-curcle"></div>
-                          <div class="article1-curcle"></div>
-                          <div class="article1-curcle"></div>
+                          <div class="article1-frofile-name">
+                              <p class="article1-leader-name">${cbl.profileName }</p>
+                          </div>
+                          <div class="article1-curcle-box">
+                              <div class="article1-curcle"></div>
+                              <div class="article1-curcle"></div>
+                              <div class="article1-curcle"></div>
+                          </div>
                       </div>
-                      </div>
-                      <p class="article1-boardmenu">${cl.boardTitle }</p>
+                      <p class="article1-boardmenu">${cbl.boardTitle }</p>
                       <input type="checkbox" id="readmore${vs.index }"/>
                       <div class="article1-bard-content">
-			                  ${cl.boardContent }
+			                  ${cbl.boardContent }
                       </div>
-                      <label for="readmore${vs.index }"> </label>
+                      
+                      <label for="readmore${vs.index }"></label>
                       <div class="article1-hashtag-container">
-                    	 <ul>
-	                      	<c:forEach items="${cl.boardCateCode }" var="tag">
-	                          	<li class="article1-hashtag-box"># ${tag }</li>
-	                      	</c:forEach>
+                          <ul>
+                      	<c:forEach items="${cbl.boardCateCode }" var="tag">
+                          	<li class="article1-hashtag-box"># ${tag }</li>
+                      	</c:forEach>
                           </ul>
                       </div>
-                      <c:if test="${not empty boardImg && cl.boardImgyn=='y'}">
+                      <c:if test="${not empty boardImg && cbl.boardImgyn=='y'}">
 	                     <div class="article1-imgbox" id="imgbox">
-	                     	  <input type="hidden" id="boardNohide" value="${cl.boardNo }" />
+	                     	  <input type="hidden" id="boardNohide" value="${cbl.boardNo }" />
 		                      <c:forEach items="${boardImg }" var="img">
-		                      <c:if test='${cl.boardNo == img.boardNo  }'>
+		                      <c:if test='${cbl.boardNo == img.boardNo  }'>
 		                            <div class="article1-imgcontainer" id="imgcontainer">
 		                                <img src="${pageContext.request.contextPath }/resources/upload/club/boardImg/${img.imgRe}" alt="">
 		                            </div>
@@ -299,12 +291,11 @@ function showSlides(n) {
 		                      </c:forEach>
 	                     </div>
                       </c:if>
-                          
+                      
                       <div class="article1-line"></div>
-                      <form action="${pageContext.request.contextPath }/clubboard/insertComment.do" method="post" >
+                      <form action="${pageContext.request.contextPath }/clubboard/insertmainComment.do" method="post" >
                       <div class="article1-comment-box">
-                      	  <input type="hidden" name="clubBoardlistNo" value="${cl.clubBoardlistNo }" />
-                      	  <input type="hidden" name="boardRef" value="${cl.boardNo }" />
+                      	  <input type="hidden" name="boardRef" value="${cbl.boardNo }" />
                       	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
                           <input type="text" name="commentContent" placeholder="댓글입력">
@@ -312,86 +303,43 @@ function showSlides(n) {
                       </div>
                       </form>
                       
+                      <c:if test="${cbl.boardCommentYn =='y'}">
                       
-                      <c:if test="${cl.boardCommentYn =='y'}">
+                      <div class="article1-comment-count">
+                          <div class="comment-sliderbutton">
+                              	<i class="fas fa-sort-down" style="font-size: 18px;"></i>
+                          </div>
+                      </div>
                       
-	                      <div class="article1-comment-count">
-	                          <div class="comment-sliderbutton">
-	                              	<i class="fas fa-sort-down" style="font-size: 18px;"></i>
+                      <div class="comment-hiddenbox">
+					  
+                      <c:forEach items="${clubBoardComment }" var="comment">
+                      <c:if test='${comment.boardRef == cbl.boardNo }'>
+                          <div class="article1-commnet-container">
+                           	  <div class="comment-frofile-img">
+                              	<img src="${pageContext.request.contextPath }/resources/upload/profile/${comment.profileImgRe}" alt="" />
+                              </div>
+                              <div class="comment-block"></div>
+	                          <div class="comment-frofile-name">${comment.profileName }</div>
+	                          <p class="comment-content">
+		                          ${comment.commentContent }
+	                          </p>
+	                          <div class="comment-right-box">
+	                              <p>신고</p>
 	                          </div>
-	                      </div>
-	                      
-	                      <div class="comment-hiddenbox">
-						  
-	                      <c:forEach items="${clubBoardComment }" var="comment">
-		                      <c:if test='${comment.boardRef == cl.boardNo }'>
-		                          <div class="article1-commnet-container">
-		                           	  <div class="comment-frofile-img">
-		                              	<img src="${pageContext.request.contextPath }/resources/upload/profile/${comment.profileImgRe}" alt="" />
-	                              	  </div>
-		                              <div class="comment-block"></div>
-			                          <div class="comment-frofile-name">${comment.profileName }</div>
-			                          <p class="comment-content">
-				                          ${comment.commentContent }
-			                          </p>
-			                          <div class="comment-right-box">
-			                              <p>신고</p>
-			                          </div>
-		                     		</div>
-		                      </c:if>
-	               		  </c:forEach> 
-	                     </div>
+                     		</div>
+                      </c:if>
+               		</c:forEach> 
+                     </div>
                     </c:if> 
+                      
+                  </div>
               </div>
-          </div>
           </c:forEach>
          </c:if>
+         </article>
           <!-- 게시물카드끝-->
- 
-      </article>
-      <article class="article2 flotclass">
-              <div class="article2-title">
-                  <p>이런건 어때요?</p>
-              </div>
-
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-
-      </article>
-      
+         
   </section>
   
 <div class="filter-container-container">
@@ -400,8 +348,36 @@ function showSlides(n) {
 
 	
 	</div>
-</div>
-    
+</div>  
+
+
+
+<style>
+.search-zero{
+	width:100%;
+	height:400px;
+	border-radius:20px;
+	margin:0 auto;
+	margin-top:50px;
+	padding-top:200px;
+	text-align: center;
+	display:none; 
+	background-color:white;
+}
+.search-zero>p{
+	font-size:40px;
+	color:#7d7d7d;
+	font-weight: bold;
+}
+.fa-file-excel{
+	font-size:90px;
+	color:#7d7d7d;
+}
+
+
+</style>
+
+
 
 </body>
 </html>

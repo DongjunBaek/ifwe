@@ -136,6 +136,18 @@
 		where board_no = #{boardRef}
 	</update>
 	
+	<select id="selectFreeboardCmt" resultType="clubBoardComment">
+		select C.*,P.profile_name,P.profile_img_re
+		from club_board_comment C join club_board B
+                                  on B.board_no = C.board_ref
+                                  join member_profile P
+                                  on C.member_code = P.member_code
+		where B.club_boardlist_no = #{clubBoardlistNo}
+		order by C.comment_date
+	
+	</select>
+	
+	
 	
 </mapper>
 
