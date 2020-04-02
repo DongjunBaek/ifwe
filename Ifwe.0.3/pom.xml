@@ -249,6 +249,14 @@
 		    <version>2.9.8</version>
 		</dependency>
 	       
+
+	       
+	    <dependency>
+	      <groupId>com.nexmo</groupId>
+	      <artifactId>client</artifactId>
+	      <version>5.2.1</version>
+		</dependency>   
+
 	</dependencies>
     <build>
         <plugins>
