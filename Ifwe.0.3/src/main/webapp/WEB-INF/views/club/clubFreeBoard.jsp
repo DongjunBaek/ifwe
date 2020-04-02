@@ -27,23 +27,11 @@ $(function(){
     	location.href = "${pageContext.request.contextPath}/club/clubInsertBoardFree"
     })
     
-    var ele = document.getElementsByClassName('numbertext');
-    console.log(ele);
-    var eleCount = ele.length;
-	
-    console.log(eleCount);
-	
-    if(eleCount>4){
-        var imgcnt = eleCount-4;
-        $("#imgbox").append('<div class="article-imgfilter">'+
-                            '<p>+ '+imgcnt+'장</p>'+
-                            '</div>')
-    }else{
-	
-    }
-    
+ 
+ 
+ 
     //형철 이미지 더보기 클릭시 기능구현
-    $("#imgbox").click(function(e){
+    $(".article1-imgbox").click(function(e){
         $(".filter-container-container").css("display","inline-block");
         var boardNo = $(this).children("#boardNohide").val();
         
@@ -95,17 +83,6 @@ $(function(){
 				var slid = $(".mySlides")
 				slid.eq(0).css("display","block");
 
-				var imgcntall = slid.length;
-				console.log("imgcntall",imgcntall);
-				
-				if(imgcntall>4){
-			        var imgcnt = imgcntall-4;
-			        
-			        $(".scroll-container").empty();
-			        $("#imgbox").append('<div class="article-imgfilter">'+
-			                            '<p>+ '+imgcnt+'장</p>'+
-			                            '</div>')
-			    }
 				
 				
 			},error : function(x,h,r){
@@ -141,8 +118,64 @@ $(function(){
         }
     }); 
     
-    
 
+	var imgcontainer=$(".article-board-notice").find(".article1-imgbox");
+    console.log("imgcontainer1",imgcontainer);
+    
+    for(var i=0; i<imgcontainer.length; i++){
+    	
+	    var imgCnt = imgcontainer[i].childElementCount-1;
+    	
+    	if(imgCnt>4){
+    		imgCnt = imgCnt-4;
+    		
+			var imgfilter = "<div class='article-imgfilter'><p>+  "+imgCnt+"장</p></div>";
+    		imgcontainer[i].append($(imgfilter)[0]);
+    	}
+    	
+    }
+    
+    
+    
+    
+    var height = 0;
+    
+    $(".article1-bard-content").each(function(index,item){
+    	
+    	height = $(item).height();
+    	
+    	if(height>90){
+    		$(item).siblings('label').css("display","inline-block");
+    		$(item).css("overflow","hidden");
+    		$(item).css("max-height","100px");
+    	}
+    	
+    	var checkbox = $(item).siblings('input[type=checkbox]');
+    	var chkid = "#"+checkbox.attr('id');
+		console.log(chkid);    	
+    	
+    	$(chkid).change(function(){
+    		
+    		console.log("야야야");
+    		
+    		if($(checkbox).is(":checked")){
+                 $(item).css("max-height",height+"px");
+            }else{
+                 $(item).css("max-height","100px");
+                 
+            }
+    		
+        })
+    	
+    });
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     
@@ -176,7 +209,6 @@ function showSlides(n) {
 	  for (i = 0; i < dots.length; i++) {
 	    dots[i].className = dots[i].className.replace(" active", "");
 	  }
-	  
 	  slides[slideIndex-1].style.display = "block";
 	  dots[slideIndex-1].className += " active";
 	  captionText.innerHTML = dots[slideIndex-1].alt;
@@ -212,39 +244,44 @@ function showSlides(n) {
 		
 		<!-- 게시물카드시작 -->
 		<c:if test="${not empty clubBoardListboard }">
-		<c:forEach items="${clubBoardListboard }" var = "cl">
+		<c:forEach items="${clubBoardListboard }" var = "cl" varStatus="vs">
 		
 	
           <div class="article-board-notice">
+          <p><i class="fas fa-chevron-left"></i>${cl.boardName }<i class="fas fa-chevron-right"></i></p>
               <div class="article-board-wrapper">
                   <div class="article1-board-frofile">
                       <div class="article1-frofile-img">
                       	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/${cl.profileImgRe}" alt="" />
                       </div>
-                          <div class="article1-frofile-name">
-                              <p class="article1-leader-name">${cl.profileName }</p>
-                          </div>
-                          <div class="article1-curcle-box">
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                          </div>
+                       <div class="article1-frofile-name">
+                           <p class="article1-leader-name">${cl.profileName }</p>
+                       </div>
+                      <div class="article1-curcle-box">
+                          <div class="article1-curcle"></div>
+                          <div class="article1-curcle"></div>
+                          <div class="article1-curcle"></div>
+                      </div>
                       </div>
                       <p class="article1-boardmenu">${cl.boardTitle }</p>
+                      <input type="checkbox" id="readmore${vs.index }"/>
                       <div class="article1-bard-content">
 			                  ${cl.boardContent }
                       </div>
+                      <label for="readmore${vs.index }"> </label>
                       <div class="article1-hashtag-container">
-                      	<c:forEach items="${cl.boardCateCode }" var="tag">
-                          <div class="article1-hashtag-box"># ${tag }</div>
-                      	</c:forEach>
+                    	 <ul>
+	                      	<c:forEach items="${cl.boardCateCode }" var="tag">
+	                          	<li class="article1-hashtag-box"># ${tag }</li>
+	                      	</c:forEach>
+                          </ul>
                       </div>
-                      <c:if test="${not empty boardImg }">
+                      <c:if test="${not empty boardImg && cl.boardImgyn=='y'}">
 	                     <div class="article1-imgbox" id="imgbox">
 	                     	  <input type="hidden" id="boardNohide" value="${cl.boardNo }" />
 		                      <c:forEach items="${boardImg }" var="img">
 		                      <c:if test='${cl.boardNo == img.boardNo  }'>
-		                            <div class="article1-imgcontainer">
+		                            <div class="article1-imgcontainer" id="imgcontainer">
 		                                <img src="${pageContext.request.contextPath }/resources/upload/club/boardImg/${img.imgRe}" alt="">
 		                            </div>
 		                      </c:if>
@@ -365,14 +402,6 @@ function showSlides(n) {
 	
 	</div>
 </div>
-    
-<script>
-
-
-
-
-
-</script>        
     
 
 </body>

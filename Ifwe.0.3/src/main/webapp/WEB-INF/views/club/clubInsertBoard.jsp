@@ -200,38 +200,44 @@ $(document).ready(function() {
 	});
 });
 	
-	function sendUpLoadImgFile(file, el){
-		console.log("이미지 로드 함수");
-		var Frmdata = new FormData();
-		console.log("이미지 로드 변수 생성");
-		Frmdata.append('file',file);
-		console.log("이미지 로드 변수 초기화");
-		$.ajax({
-			data : Frmdata,
-			type : 'POST',
-			url : '${pageContext.request.contextPath}/clubBoard/insertBoardImg.do',
-			cache : false,
-			contentType : false,
-			enctype : 'multipart/form-data',
-			processData : false,
-			success : function(data) {
-				console.log("img up load success");
-				
-				/*
-				console.log("url originalFileName",data[0]);
-				console.log("url renamedFileName",data[1]);
-				console.log("el", data[1]); 
-				*/
-				$("#boardImgOri").val(data[0]);
-				$("#boardImgRe").val(data[1]);
-				$(el).summernote('editor.insertImage', data[2]);
-				$('summernote').append('<img src="'+data[2]+'" width = "100", height = "auto" />');
-			},
-			error : function(x,h,r){
-				console.log(x,h,r);
-			}
-		});
-	}
+function sendUpLoadImgFile(file, el){
+	console.log("이미지 로드 함수");
+	var Frmdata = new FormData();
+	console.log("이미지 로드 변수 생성");
+	Frmdata.append('file',file);
+	console.log("이미지 로드 변수 초기화");
+	$.ajax({
+		data : Frmdata,
+		type : 'POST',
+		url : '${pageContext.request.contextPath}/clubboard/insertBoardImg.do',
+		cache : false,
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			console.log("img up load success");
+			
+			/*
+			console.log("url originalFileName",data[0]);
+			console.log("url renamedFileName",data[1]);
+			console.log("el", data[1]); 
+			*/
+			$("#boardImgOri").val(data[0]);
+			$("#boardImgRe").val(data[1]);
+			//$(el).summernote('editor.insertImage', data[2]);
+			$('.summernote-images').append('<img src="'+data[2]+'" width = "200", height = "100px" />');
+			console.log(data[1]);
+			console.log(data[2]);
+			$('.summernote-images').append('<input type="hidden" value='+'"'+data[0]+'"'+ ' name = "summernote-images" />');
+			$('.summernote-images').append('<input type="hidden" value='+'"'+data[1]+'"'+ ' name = "summernote-images-re" />');
+			
+			
+		},
+		error : function(x,h,r){
+			console.log(x,h,r);
+		}
+	});
+}
 	
 	
 	function boardValidate(){
@@ -279,6 +285,7 @@ $(document).ready(function() {
        				    
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>	
               	</div>
+              	<div class="summernote-images"></div>
               	
               	<input type="submit" value="등록" class="btnClass" />
                </form>

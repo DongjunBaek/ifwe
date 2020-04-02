@@ -49,6 +49,13 @@ section{
     min-height: 420px;
     margin-bottom: 50px;
 }
+.article-board-notice>p{
+	font-size:20px;
+	width:150px;
+	margin-left:35px;
+	font-weight: bold;
+	color:#2756a6;
+}
 .article-board-wrapper{
     width:750px;
     min-height: 420px;
@@ -106,6 +113,8 @@ section{
     font-size:20px;
     margin-top:30px;
     margin-bottom: 30px;
+    transition:all .3s ease;
+    min-height:50px;
 }
 .article1-hashtag-container{
     margin-bottom: 30px;
@@ -113,7 +122,6 @@ section{
     position: relative;
 }
 .article1-hashtag-box{
-    height:18px;
     border-radius: 20px;
     background-color: #beceea;
     font-size: 18px;
@@ -125,9 +133,6 @@ section{
     margin-bottom: 10px;
 
 }   
-.article1-hashtag-box:last-child{
-    margin-bottom: 20px;
-}
 .article1-hashtag-block{
     border:1px solid black;
     width:100%;
@@ -401,10 +406,33 @@ body{
   opacity: 1;
 }
 
+article1-bard-content + label{
+	display:none;
+}
 
+.article-board-wrapper input[type="checkbox"] {
+     display:none;
+}
 
+.article-board-wrapper label {
+     color:blue;
+     text-decoration:underline;
+     margin-top:10px;
+     cursor:pointer;
+     display:none;
+}
 
+.article-board-wrapper label:after {
+     content:"더보기";  
+}
 
+.article-board-wrapper input:checked ~ label:after {
+     content:"접기";  
+}
+
+.article1-hashtag-container ul{
+	list-style: none;
+}
 
 
 
