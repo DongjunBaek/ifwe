@@ -13,6 +13,17 @@ margin:0;
 .content{
 overflow:auto;
 }
+.friend-btn{
+margin-left:24%;
+}
+.add-msglist{
+background-color:white;
+margin:0 auto;
+text-align:center;
+font-size:2em;
+
+}
+
 </style>
 <!-- 문보라 수정 03.20  -->
 	<section class="mypage-section">
@@ -61,7 +72,9 @@ overflow:auto;
                         		<c:if test="${fl.msgView == 'n' }">
                         		<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
 	                        	<input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
-			                        onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'"></p>
+			                        onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'">
+			                    <input type="button" value="거부" class="friend-nobtn font-kor" style="padding:0"> 
+			                    </p>
 	                        	</c:if> 
 	                        	<c:if test="${fl.msgView == 'y' }">
 	                        	<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
@@ -72,6 +85,10 @@ overflow:auto;
                         </c:if>
                     </div>
                 </div>
+            </div>
+            <div class="add-msglist">
+            <span><i class="fas fa-arrow-down" style="color:#2756a6;"></i></span>
+            <button type="button" style="background-color:#ebebeb; width:100%; height:10px;"></button>
             </div>
             <div class="board-div">
                 <div class="board-title">
