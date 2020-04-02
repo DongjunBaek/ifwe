@@ -35,6 +35,7 @@ import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.vo.Member;
@@ -218,7 +219,7 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
-	
+		
 		
 		Club club = clubService.selectOne(clubCode);
 		
@@ -253,6 +254,11 @@ public class ClubController {
 			boardImg = clubBoardService.selectClubBoardImg(boardNo);
 		}
 		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
@@ -260,9 +266,10 @@ public class ClubController {
 		log.debug("clubBoardList={}",clubBoardList);
 		log.debug("clubBoardProfileList={}",clubBoardProfileList);
 		log.debug("boardImg={}",boardImg);
+		log.debug("clubBoardComment={}",clubBoardComment);
 		
 		
-		
+		mav.addObject("clubBoardComment",clubBoardComment);
 		mav.addObject("clubBoardList",clubBoardList);
 		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
