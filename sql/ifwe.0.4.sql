@@ -42,10 +42,15 @@
 --DROP TABLE  TBL_EVENT CASCADE CONSTRAINT;
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
+--drop sequence seq_board_comment_no; -- 게시글 답변 번호
 --drop sequence seq_club_no;    -- 소모임 번호 
 --drop sequence seq_msg_code;   -- 메세지 번호
 --drop sequence seq_order_code; -- 구매기록 번호
 --drop sequence seq_contents_code; -- 컨텐츠 번호
+--drop sequence seq_club_board_no;  --클럽게시판번호
+--drop sequence seq_club_boardlist_no; --클럽게시판목록번호
+--drop sequence seq_search_no; -- 검색용 시퀀스
+--drop sequence seq_club_board_comment_no; --클럽게시판댓글번호
 --=================================================================
 --select
 --=================================================================
@@ -250,8 +255,7 @@ CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
 	 search_date 	DATE		default sysdate, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL, -- 검색한 회원 번호 --pk
-	 cate_code 	VARCHAR2(100)		NOT NULL -- 검색어 분류 -- 어디서검색하는지로할지
+	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --pk
 );
 
 
@@ -326,14 +330,12 @@ CREATE TABLE  CLUB_BOARD  (
 
 -- 21.소모임 게시판 댓글 테이블
 CREATE TABLE  CLUB_BOARD_COMMENT  (
-	 coment_no 	NUMBER		NOT NULL, -- 댓글 시퀀스 or 게시판 시퀀스 
-	 board_ref 	NUMBER		NOT NULL, -- 댓글이 달린 원 게시물 번호
-	 member_code 	NUMBER		NOT NULL,
-	 comment_content 	VARCHAR2(500)		NULL,
-	 comment_date 	DATE		NULL,
-	 comment_level 	NUMBER		NULL,
-	 comment_del 	CHAR(1)		NULL,
-	 comment_ref 	NUMBER		NULL,
+    coment_no    NUMBER      NOT NULL, -- 댓글 시퀀스 or 게시판 시퀀스 
+    board_ref    NUMBER      NOT NULL, -- 댓글이 달린 원 게시물 번호
+    member_code    NUMBER      NOT NULL,
+    comment_content    VARCHAR2(500)      NULL,
+    comment_date    DATE default sysdate,
+    comment_del    CHAR(1)      NULL,
      comment_report char(1) null  --y or n
 );
 
@@ -401,6 +403,8 @@ create sequence seq_order_code; -- 구매기록 번호
 create sequence seq_contents_code; -- 컨텐츠 번호
 create sequence seq_club_board_no;  --클럽게시판번호
 create sequence seq_club_boardlist_no; --클럽게시판목록번호
+create sequence seq_search_no; -- 검색용 시퀀스
+create sequence seq_club_board_comment_no; --클럽게시판댓글번호
 --=================================================================
 --TRIGGER
 --=================================================================
