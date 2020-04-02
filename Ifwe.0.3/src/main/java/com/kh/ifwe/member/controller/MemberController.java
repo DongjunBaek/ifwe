@@ -673,7 +673,8 @@ public class MemberController {
 	//20200330 친구신청 수락
 	@RequestMapping("/friendYes.do")
 	public String friendYes(@RequestParam("memberFrom") int memberFrom
-							,@RequestParam("memberCode") int memberCode) {
+							,@RequestParam("memberCode") int memberCode,
+							Model model) {
 		log.debug("memberCode={}",memberCode);
 		int result = memberService.friendYes(memberFrom);
 		log.debug("memberFrom={}",memberFrom);
@@ -695,6 +696,9 @@ public class MemberController {
 			log.debug("map={}",map);
 			
 			int otherFriend  = memberService.insertOtherFriend(map);
+			int msgCount = memberService.selectMsgCount(memberCode);
+			log.debug("msgCount={}",msgCount);
+			model.addAttribute("msgCount",msgCount);
 		}
 		
 		return "redirect:/member/mypage.do?memberCode="+memberCode;

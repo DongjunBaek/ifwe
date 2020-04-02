@@ -116,7 +116,7 @@
 		select M.*,p.profile_name,p.profile_img_re,H.club_grade
 		from member M join member_profile P on M.member_code = P.member_code
                       join club_members H on M.member_code=H.member_code
-        where M.member_code = #{clubMaster}
+        where M.member_code = #{masterCode} and H.club_code = #{clubCode}
      </select> 
         
         

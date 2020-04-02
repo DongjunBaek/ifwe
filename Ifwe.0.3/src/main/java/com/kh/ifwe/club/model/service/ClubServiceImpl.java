@@ -154,8 +154,8 @@ public class ClubServiceImpl implements ClubService {
 
 	}
 
-	public ClubMember selectClubMaster2(int clubMaster) {
-		return clubDAO.selectClubMaster2(clubMaster);
+	public ClubMember selectClubMaster2(Map<String, Object> param2) {
+		return clubDAO.selectClubMaster2(param2);
 	}
 
 
