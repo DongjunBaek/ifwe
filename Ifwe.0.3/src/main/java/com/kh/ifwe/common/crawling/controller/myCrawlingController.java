@@ -73,7 +73,7 @@ public class myCrawlingController {
 		return mapStudy;
 	}
 	
-//	@PostConstruct
+	@PostConstruct
 	public Map<Integer,myCrawling > mapSong() {
 		try {
 			System.out.println("Chart Song Ranking");
@@ -167,7 +167,7 @@ public class myCrawlingController {
 		}
 	}
 	
-	@PostConstruct
+//	@PostConstruct
 	public void mapPlays() {
 		mapMusical = new HashMap<Integer, myCrawling>();
 		mapConcert = new HashMap<Integer, myCrawling>();
@@ -259,7 +259,7 @@ public class myCrawlingController {
 		}
 	}
 	
-	@PostConstruct
+//	@PostConstruct
 	public void mapBooks() {
 		try {
 			System.out.println("Book Info Ranking");
