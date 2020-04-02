@@ -26,4 +26,6 @@ public interface ClubBoardService {
 
 	int updateBoardImg(int boardNo);
 
+	List<BoardImg> selectClubBoardNoList(int clubCode);
+
 }

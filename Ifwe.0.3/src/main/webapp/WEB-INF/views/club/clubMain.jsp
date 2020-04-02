@@ -26,7 +26,191 @@ $(function(){
     $(".section-block-right").click(function(){
     	location.href = "${pageContext.request.contextPath}/club/clubInsertBoard"
     });
+    
+    $(".article1-imgbox").click(function(e){
+        $(".filter-container-container").css("display","inline-block");
+        var boardNo = $(this).children("#boardNohide").val();
+        
+        
+        console.log("boardNo"+boardNo);
+        
+        $.ajax({
+        	data : {boardNo:boardNo},
+			type : 'GET',
+			url : '${pageContext.request.contextPath}/clubboard/selectBoardImg.do',
+			success : function(data){
+				
+			    var imgcontainerstart = '<div class="filter-container">';				
+				
+			    var imgcontainermideum='<a class="prev" onclick="plusSlides(-1)">&#10094;</a>'+
+								       '<a class="next" onclick="plusSlides(1)">&#10095;</a>'+
+								       '<div class="row">';
+				
+			    var imgcontainerend='</div>'+
+		    						'</div>';
+		    	var bigimg = "";
+		    	var smallimg= "";
+		    	
+		    	for(var i=0; i<data.length; i++){
+				
+					bigimg +='<div class="mySlides">'+
+				             '<div class="numbertext">'+(i+1)+' / '+data.length+'</div>'+
+				             '<img src="${pageContext.request.contextPath}/resources/upload/club/boardImg/'+data[i].imgRe+'" style="width:100%;max-height:600px;">'+
+				             '</div>';
+						
+					smallimg +=	'<div class="column">'+
+					            '<img class="demo cursor" src="${pageContext.request.contextPath}/resources/upload/club/boardImg/'+data[i].imgRe+'" style="width:100%;height:140px;" onclick="currentSlide('+(i+1)+')">'+
+						      	'</div>';
+		    	};
+		    	
+		    	var length = 6-data.length;
+		    	
+		    	if(data.length <6){
+		    		for(var i=0; i<length; i++){
+		    			smallimg += '<div class="column">'+
+						            '<img class="demo" src="${pageContext.request.contextPath}/resources/images/club/basicimg.jpg" style="width:100%;height:140px;">'+
+							      	'</div>';
+		    		}
+		    	}
+				
+		    	$(".scroll-container").empty();
+				$(".scroll-container").append(imgcontainerstart+bigimg+imgcontainermideum+smallimg+imgcontainerend);
+				
+				var slid = $(".mySlides")
+				slid.eq(0).css("display","block");
+
+				
+				
+			},error : function(x,h,r){
+				console.log(x,h,r);
+			}
+        	
+        });
+        
+        
+        jQuery(".scroll-container").css("position", "absolute").css("position", "absolute")
+        .css("top",jQuery(window).scrollTop()+100+"px")
+        .css("left","50%").css("transform","translate(-50%)");
+        
+       
+        
+    });
+    	
+    
+    
+    $(".filter-container-container").click(function(e){
+        if($(e.target).is(".filter-container-container")){
+            $(".filter-container-container").css("display","none");
+        }
+
+    })
+
+
+    $(window).scroll(function(event){
+        if(jQuery(window).scrollTop() > jQuery(".filter-container-container").offset().top) {
+        
+            jQuery(".scroll-container").css("position", "absolute").css("top",jQuery(window).scrollTop()+100+"px");
+            jQuery(".scroll-container").css("left","50%").css("transform","translate(-50%)");
+        }
+    }); 
+    
+
+	var imgcontainer=$(".article-board-notice").find(".article1-imgbox");
+    console.log("imgcontainer1",imgcontainer);
+    
+    for(var i=0; i<imgcontainer.length; i++){
+    	
+	    var imgCnt = imgcontainer[i].childElementCount-1;
+    	
+    	if(imgCnt>4){
+    		imgCnt = imgCnt-4;
+    		
+			var imgfilter = "<div class='article-imgfilter'><p>+  "+imgCnt+"장</p></div>";
+    		imgcontainer[i].append($(imgfilter)[0]);
+    	}
+    	
+    }
+    
+    
+    
+    
+    var height = 0;
+    
+    $(".article1-bard-content").each(function(index,item){
+    	
+    	height = $(item).height();
+    	
+    	if(height>90){
+    		$(item).siblings('label').css("display","inline-block");
+    		$(item).css("overflow","hidden");
+    		$(item).css("max-height","100px");
+    	}
+    	
+    	var checkbox = $(item).siblings('input[type=checkbox]');
+    	var chkid = "#"+checkbox.attr('id');
+		console.log(chkid);    	
+    	
+    	$(chkid).change(function(){
+    		
+    		console.log("야야야");
+    		
+    		if($(checkbox).is(":checked")){
+                 $(item).css("max-height",height+"px");
+            }else{
+                 $(item).css("max-height","100px");
+                 
+            }
+    		
+        })
+    	
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 });
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+	 }
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+
+
+function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("demo");
+	  var captionText = document.getElementById("caption");
+	  if (n > slides.length) {slideIndex = 1}
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+	    slides[i].style.display = "none";
+	  }
+	  for (i = 0; i < dots.length; i++) {
+	    dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";
+	  dots[slideIndex-1].className += " active";
+	  captionText.innerHTML = dots[slideIndex-1].alt;
+	}
 
 </script>
 
@@ -49,8 +233,8 @@ $(function(){
 		
 		<c:if test="${not empty clubBoardProfileList }">
 		<c:forEach items="${clubBoardProfileList }" var = "cbl">
-
           <div class="article-board-notice">
+          	  <p><i class="fas fa-chevron-left"></i>${cbl.boardName }<i class="fas fa-chevron-right"></i></p>
               <div class="article-board-wrapper">
                   <div class="article1-board-frofile">
                       <div class="article1-frofile-img">
@@ -66,23 +250,33 @@ $(function(){
                           </div>
                       </div>
                       <p class="article1-boardmenu">${cbl.boardTitle }</p>
+                      <input type="checkbox" id="readmore${vs.index }"/>
                       <div class="article1-bard-content">
 			                  ${cbl.boardContent }
                       </div>
+                      
+                    <label for="readmore${vs.index }"></label>
                       <div class="article1-hashtag-container">
-                      	<c:forEach items="${cbl.boardCateCode }" var="hash">
-                          <div class="article1-hashtag-box"># ${hash }</div>
+                          <ul>
+                      	<c:forEach items="${cbl.boardCateCode }" var="tag">
+                          	<li class="article1-hashtag-box"># ${tag }</li>
                       	</c:forEach>
+                          </ul>
                       </div>
+                      <c:if test="${not empty boardImg && cbl.boardImgyn=='y'}">
+	                     <div class="article1-imgbox" id="imgbox">
+	                     	  <input type="hidden" id="boardNohide" value="${cbl.boardNo }" />
+		                      <c:forEach items="${boardImg }" var="img">
+		                      <c:if test='${cbl.boardNo == img.boardNo  }'>
+		                            <div class="article1-imgcontainer" id="imgcontainer">
+		                                <img src="${pageContext.request.contextPath }/resources/upload/club/boardImg/${img.imgRe}" alt="">
+		                            </div>
+		                      </c:if>
+		                      </c:forEach>
+	                     </div>
+                      </c:if>
+                      
                       <div class="article1-line"></div>
-                      <%-- <c:if test="${cbl.imgRe != null }">아아
-                      	<div class="clubBoardImages">
-                      	<c:forEach items="${cbl.imgRe }" var = "img">
-                      		<img src="${pageContext.request.contextPath}/resources/upload/admin/board/${img}">
-                      	</c:forEach>
-	                      </div>
-                      	<div class="article1-line"></div>
-                      </c:if> --%>
                       <div class="article1-comment-box">
                           <input type="text" name="comment" id="commnet" placeholder="댓글입력">
                           <div class="comment-input">입력</div>
@@ -191,6 +385,14 @@ $(function(){
       </article>
       
   </section>
+  
+<div class="filter-container-container">
+	<div class="scroll-container">
+
+
+	
+	</div>
+</div>  
 
 
 </body>
