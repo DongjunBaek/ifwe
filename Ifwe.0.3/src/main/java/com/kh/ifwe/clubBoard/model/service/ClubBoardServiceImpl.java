@@ -85,6 +85,11 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.updateClubBoard(boardRef);
 	}
 
+	@Override
+	public List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo) {
+		return clubBoardDAO.selectFreeboardCmt(clubBoardlistNo);
+	}
+
 
 	
 	

@@ -200,13 +200,16 @@ $(function(){
 
                     </div>
                 </div>
+                <form action="${pageContext.request.contextPath }/club/searchBoard.do" method="get">
                 <div class="header-search-box">
                     <div class="header-icon">
                         <i class="fas fa-search" style="font-size:35px;"></i>
                     </div>
+                    	<input type="hidden" name="clubCode" value="${club.clubCode }" />
                         <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
                 </div>
                 
+                </form>
                 
             </header>
 

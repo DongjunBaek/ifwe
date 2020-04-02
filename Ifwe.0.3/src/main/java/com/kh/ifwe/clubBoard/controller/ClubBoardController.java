@@ -27,6 +27,7 @@ import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -84,11 +85,13 @@ public class ClubBoardController {
 			boardImg = clubBoardService.selectClubBoardImg(boardNo);
 		}
 		
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectFreeboardCmt(clubBoardlistNo);
 		
 		log.debug("cb = {}",cb);
 		log.debug("clubBoardList = {}",clubBoardListboard);
 		log.debug("boardImg = {}",boardImg);
 		
+		mav.addObject("clubBoardComment",clubBoardComment);
 		mav.addObject("boardImg",boardImg);
 		mav.addObject("clubBoardListboard", clubBoardListboard);
 		mav.addObject("cb", cb);
@@ -204,9 +207,25 @@ public class ClubBoardController {
 	
 	
 	
+	@PostMapping("/insertComment.do")
+	public ModelAndView insertBoardComment(ModelAndView mav,ClubBoardComment boardComment,
+			  							   @RequestParam("clubCode") int clubCode,
+			  							   @RequestParam("clubBoardlistNo") int clubBoardlistNo) {
+
+		int result = clubBoardService.insertComment(boardComment);
+		
+		if(result >0) {
+			
+			int updateResult = clubBoardService.updateClubBoard(boardComment.getBoardRef());
+		}
+		
+		mav.setViewName("redirect:/clubboard/freeboard.do?clubBoardlistNo="+clubBoardlistNo);
+		
+		return mav;
+	}
 	
 	
-	
+
 	
 	
 	

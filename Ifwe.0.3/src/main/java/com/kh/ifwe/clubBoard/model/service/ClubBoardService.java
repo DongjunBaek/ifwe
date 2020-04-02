@@ -36,4 +36,6 @@ public interface ClubBoardService {
 
 	int updateClubBoard(int boardRef);
 
+	List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo);
+
 }

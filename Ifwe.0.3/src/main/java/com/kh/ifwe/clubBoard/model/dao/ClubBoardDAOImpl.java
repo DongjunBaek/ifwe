@@ -83,6 +83,11 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.update("clubBoard.updateClubBoard",boardRef);
 	}
 
+	@Override
+	public List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo) {
+		return sqlSession.selectList("clubBoard.selectFreeboardCmt",clubBoardlistNo);
+	}
+
 
 	
 	

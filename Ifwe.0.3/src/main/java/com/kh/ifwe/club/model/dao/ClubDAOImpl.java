@@ -184,6 +184,11 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectList("club.selectAge",clubCode);
 	}
 
+	@Override
+	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
+		return sqlSession.selectList("club.selectclubBoardSearch",param);
+	}
+
 
 	
 	

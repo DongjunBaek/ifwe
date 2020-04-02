@@ -79,6 +79,8 @@ public interface ClubDAO {
 
 	List<Count> selectAge(List<Integer> clubCode);
 
+	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
+
 
 
 }

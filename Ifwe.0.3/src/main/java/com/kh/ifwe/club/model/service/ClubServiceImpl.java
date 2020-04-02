@@ -213,6 +213,12 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	@Override
+	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
+		return clubDAO.selectclubBoardSearch(param);
+	}
+
+
 	
 
 

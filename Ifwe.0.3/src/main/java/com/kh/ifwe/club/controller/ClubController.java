@@ -606,4 +606,47 @@ public class ClubController {
 		
 		return club;
 	}
+	
+	//0403형철 소모임검색
+	@GetMapping("/searchBoard.do")
+	public ModelAndView searchBoard(ModelAndView mav,@RequestParam("clubCode") int clubCode,
+									@RequestParam("search") String searchTag) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("clubCode", clubCode);
+		param.put("searchTag", searchTag);
+		
+		
+		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardSearch(param);
+		
+		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
+		List<BoardImg> boardImg = null;
+		
+		if(boardNo!=null && !boardNo.isEmpty() && boardNo.size()!=0) {
+			boardImg = clubBoardService.selectClubBoardImg(boardNo);
+		}
+		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
+		mav.addObject("clubBoardComment",clubBoardComment);
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+		mav.addObject("boardImg",boardImg);
+		
+		
+		mav.setViewName("club/clubSearchBoard");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
