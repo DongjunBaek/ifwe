@@ -218,6 +218,7 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
+	
 		
 		Club club = clubService.selectOne(clubCode);
 		
@@ -225,7 +226,12 @@ public class ClubController {
 		
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
-		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
+		
+		Map<String, Object> param2 = new HashMap<String, Object>();
+		param2.put("clubCode", clubCode);
+		param2.put("masterCode", club.getClubMaster());
+		
+		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
 		
