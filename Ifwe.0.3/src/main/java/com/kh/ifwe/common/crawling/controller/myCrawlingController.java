@@ -212,7 +212,7 @@ public class myCrawlingController {
 		}
 	}
 	
-//	@PostConstruct
+	@PostConstruct
 	public void mapBooks() {
 		try {
 			System.out.println("Book Info Ranking");
@@ -238,6 +238,7 @@ public class myCrawlingController {
 				if(idx == 19)
 					break;
 			}
+			imgCrawlerForBooks(crawlingURL);
 						
 			
 		} catch (IOException e) {
@@ -246,4 +247,27 @@ public class myCrawlingController {
 		
 	}
 	
+	
+	public void imgCrawlerForBooks(String urls) {
+		Document doc;
+		
+		try {
+			doc = Jsoup.connect(urls).get();
+			String folder = "books";
+			Elements elements = doc.select(".imgBdr a img");			
+			int page = 0;
+			for (Element e : elements) {
+				String url = e.getElementsByAttribute("src").attr("src");
+				
+				URL imgUrl = new URL(url);
+				BufferedImage jpg = ImageIO.read(imgUrl);
+				File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + page + ".jpg");
+				ImageIO.write(jpg, "jpg", file);
+				page += 1;
+				
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 }
