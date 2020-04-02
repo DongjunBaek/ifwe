@@ -42,16 +42,22 @@
 --DROP TABLE  TBL_EVENT CASCADE CONSTRAINT;
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
+--drop sequence seq_board_comment_no; -- 게시글 답변 번호
 --drop sequence seq_club_no;    -- 소모임 번호 
 --drop sequence seq_msg_code;   -- 메세지 번호
 --drop sequence seq_order_code; -- 구매기록 번호
 --drop sequence seq_contents_code; -- 컨텐츠 번호
+--drop sequence seq_club_board_no;  --클럽게시판번호
+--drop sequence seq_club_boardlist_no; --클럽게시판목록번호
+--drop sequence seq_search_no; -- 검색용 시퀀스
+--drop sequence seq_club_board_comment_no; --클럽게시판댓글번호
 --=================================================================
 --select
 --=================================================================
 --select * from tab; -- 전체 테이블 조회
 select * from member;
 select * from member_profile;
+select* from club_members;
 --=================================================================
 --TABLE
 --=================================================================
@@ -124,13 +130,13 @@ CREATE TABLE  MEMBER_PROFILE  (
                                                         on delete cascade
                                                         --on delete set null
 );
--- 3.회원 이벤트 테이블 - 미사용 테이블
+-- 3.회원 이벤트 테이블 - 0402 update
 CREATE TABLE  TBL_EVENT  (
-	 event_code 	NUMBER		primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
-	 event_title 	VARCHAR2(100)		NULL, -- 이벤트 제목
-	 event_content 	VARCHAR2(2000)		NULL, -- 이벤트 내용
-	 event_start 	DATE		NULL, -- 이벤트 시작일
-	 event_end 	DATE		NULL,     -- 이벤트 종료일
+    event_code    NUMBER      primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
+    event_title    VARCHAR2(100)      NULL, -- 이벤트 제목
+    event_content    VARCHAR2(2000)      NULL, -- 이벤트 내용
+    event_start    DATE      NULL, -- 이벤트 시작일
+    event_end    DATE      NULL,     -- 이벤트 종료일
      member_code NUMBER NOT NULL,
      event_img_ori varchar2(200) NULL,
      event_img_re varchar2(200) NULL
@@ -186,9 +192,9 @@ CREATE TABLE  MEMBER_MSG  (
 -- 8.회원 친구 목록
 CREATE TABLE  friend  (
 	 member_code 	NUMBER		NOT NULL, -- 회원 코드
-     FRIEND_CODE number not null, --친구의 회원 코드
 	 member_id 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 아이디
 	 member_pname 	VARCHAR2(50)		NULL, -- 친구 등록된 회원의 프로필 명
+     FRIEND_CODE number,
             CONSTRAINT fk_friend_memberCode foreign key(member_code)
                                                       REFERENCES member(member_code)                                                    
                                                       on delete cascade
@@ -249,8 +255,7 @@ CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
 	 search_date 	DATE		default sysdate, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --fk
-	 
+	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --pk
 );
 
 
@@ -295,6 +300,7 @@ CREATE TABLE  CLUB  (
 );
 -- 19.소모임 게시판 목록 테이블
 CREATE TABLE  CLUB_BOARDLIST  (
+
     club_boardlist_no    number   NOT NULL,
     club_code    NUMBER      NOT NULL,
     board_name    VARCHAR2(50)      NULL,
@@ -302,22 +308,20 @@ CREATE TABLE  CLUB_BOARDLIST  (
      constraint fk_club_code foreign key (club_code) references club (club_code)ON DELETE CASCADE
 );
 
-select * from club_boardlist;
-
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
-    board_no    NUMBER      primary key ,
-    club_code    NUMBER      NOT NULL,
-    member_code    NUMBER      NOT NULL,
-    club_boardlist_no    number   NOT NULL,
-    board_title varchar2(100) null,
-    board_content    VARCHAR2(2000)      NULL,
-    board_date    DATE   default sysdate,
-    board_heart    NUMBER      NULL,
-    board_cate_code    VARCHAR2(200)      NULL,
-    board_del    CHAR(1)      NULL, -- y or n
-    board_report char(1) null , --y or n
-    board_imgyn char(1) default 'n',
+
+	 board_no 	NUMBER		primary key ,
+	 club_code 	NUMBER		NOT NULL,
+	 member_code 	NUMBER		NOT NULL,
+	 club_boardlist_no 	number	NOT NULL,
+     board_title varchar2(100) null,
+	 board_content 	VARCHAR2(2000)		NULL,
+	 board_date 	DATE	default sysdate,
+	 board_heart 	NUMBER		NULL,
+	 board_cate_code 	VARCHAR2(200)		NULL,
+	 board_del 	CHAR(1)		NULL, -- y or n
+     board_report char(1) null , --y or n
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
      constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
@@ -326,15 +330,15 @@ CREATE TABLE  CLUB_BOARD  (
 
 -- 21.소모임 게시판 댓글 테이블
 CREATE TABLE  CLUB_BOARD_COMMENT  (
-	 coment_no 	NUMBER		NOT NULL, -- 댓글 시퀀스 or 게시판 시퀀스 
-	 board_ref 	NUMBER		NOT NULL, -- 댓글이 달린 원 게시물 번호
-	 member_code 	NUMBER		NOT NULL,
-	 comment_content 	VARCHAR2(500)		NULL,
-	 comment_date 	DATE		NULL,
-	 comment_level 	NUMBER		NULL,
-	 comment_del 	CHAR(1)		NULL,
-	 comment_ref 	NUMBER		NULL
+    coment_no    NUMBER      NOT NULL, -- 댓글 시퀀스 or 게시판 시퀀스 
+    board_ref    NUMBER      NOT NULL, -- 댓글이 달린 원 게시물 번호
+    member_code    NUMBER      NOT NULL,
+    comment_content    VARCHAR2(500)      NULL,
+    comment_date    DATE default sysdate,
+    comment_del    CHAR(1)      NULL,
+     comment_report char(1) null  --y or n
 );
+
 
 -- 22.소모임 게시판 이미지 테이블
 CREATE TABLE  BOARD_IMG  (
@@ -342,6 +346,7 @@ CREATE TABLE  BOARD_IMG  (
 	 img_ori 	VARCHAR2(100)		NULL,
 	 img_re 	VARCHAR2(100)		NULL
 );
+
 
 
 
@@ -396,10 +401,10 @@ create sequence seq_club_no;    -- 소모임 번호
 create sequence seq_msg_code;   -- 메세지 번호
 create sequence seq_order_code; -- 구매기록 번호
 create sequence seq_contents_code; -- 컨텐츠 번호
-create sequence seq_board_comment_no;
 create sequence seq_club_board_no;  --클럽게시판번호
 create sequence seq_club_boardlist_no; --클럽게시판목록번호
-create sequence seq_event_no; -- 이벤트 번호
+create sequence seq_search_no; -- 검색용 시퀀스
+create sequence seq_club_board_comment_no; --클럽게시판댓글번호
 --=================================================================
 --TRIGGER
 --=================================================================
@@ -435,7 +440,7 @@ begin
     where board_no = :old.board_no;
 end;
 /
-
+select * from club_boardlist;
 create or replace trigger trig_club_boardlist
 after
 insert on club
@@ -448,16 +453,6 @@ begin
     insert into club_boardlist
     values(seq_club_boardlist_no.nextval, :new.club_code, '자유게시판');
     
-end;
-/
-
--- 0331 프리미엄 구매시 자동으로 CLUB 프리미엄이 변경됨.
-create or replace trigger trig_update_clubPremium
-after
-insert on PREMIUM_ORDER
-for each row
-begin    
-    update club set PREMIUM_CODE = :new.premium_code where club_code= :new.club_code;
 end;
 /
 --=================================================================
@@ -509,18 +504,4 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
-insert into board_comment values(seq_board_comment_no.nextval,'1','13','dcdcd',sysdate,'1','1');
-select * from board_comment;
-delete board_comment where member_code = '1';
-
-create or replace trigger tri_board_level
-    after          --주  DML문 이전(before), 이후 (after) 실행 결정
-    insert on board_comment
-    for each row -- 문장/행 레벨 트리거(없으면 문장레벨 있으면 행레벨)
-begin    
-    update board set board_level= '1'
-end;
-/
- 
-drop trigger tri_board_level;
-
+select * from club_board;

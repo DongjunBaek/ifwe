@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +35,7 @@ import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
@@ -46,11 +45,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/club")
-@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList"})
+@SessionAttributes(value= {"clubMaster","club","clubMember","clubLoggedIn","clubBoardList","msgCount"})
 public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private MemberService memberService;	
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
@@ -218,6 +220,7 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
+	
 		
 		Club club = clubService.selectOne(clubCode);
 		
@@ -225,12 +228,19 @@ public class ClubController {
 		
 		Member clubMaster2 = clubService.selectClubMaster(club.getClubMaster());
 		
-		ClubMember clubMaster = clubService.selectClubMaster2(club.getClubMaster());
+		
+		Map<String, Object> param2 = new HashMap<String, Object>();
+		param2.put("clubCode", clubCode);
+		param2.put("masterCode", club.getClubMaster());
+		
+		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
 		
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
+		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+		log.debug("msgCount={}",msgCount);
 		
 		//전체 게시글 
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
@@ -240,11 +250,20 @@ public class ClubController {
 			clubMember = clubService.selectClubMember(clubMemberCode);
 		}
 		
+		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
+		List<BoardImg> boardImg = null;
+		
+		if(boardNo!=null && !boardNo.isEmpty() && boardNo.size()!=0) {
+			boardImg = clubBoardService.selectClubBoardImg(boardNo);
+		}
+		
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
 		log.debug("clubLoggedIn={}",clubLoggedIn);
 		log.debug("clubBoardList={}",clubBoardList);
+		log.debug("clubBoardProfileList={}",clubBoardProfileList);
+		log.debug("boardImg={}",boardImg);
 		
 		
 		
@@ -253,7 +272,10 @@ public class ClubController {
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
+		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+		mav.addObject("boardImg",boardImg);
+		
 		mav.setViewName("/club/clubMain");
 		
 		

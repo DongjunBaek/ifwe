@@ -37,7 +37,8 @@
 				0, 
 				#{boardCateCode, typeHandler=StrArrTypeHandler}, 
 				'n', 
-				'n'
+				'n',
+				default
 			)
 			
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
@@ -72,6 +73,43 @@
 	<resultMap type="clubBoardProfile" id="clubBoardProfileMap">
 		<result column="board_cate_code" property="boardCateCode" typeHandler="strArrTypeHandler"/>
 	</resultMap>
+	
+	<select id="selectClubBoardNo" resultType="boardImg">
+		select board_no from club_board
+		where
+		club_boardlist_no = #{clubBoardlistNo}
+	
+	</select>
+	
+	<select id="selectClubBoardImg" resultType="boardImg">
+		select * from board_img
+		where
+		board_no in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		#{item.boardNo}
+		</foreach>
+	
+	</select>
+	
+	<select id="selectBoardImgajax" resultType="boardImg">
+		select * from board_img
+		where board_no = #{boardNo}
+	</select>
+	
+	<update id="updateBoardImg">
+		update club_board set board_imgyn = 'y'
+		where board_no = #{boardNo}
+	
+	</update>
+	
+	<select id="selectClubBoardNoList" resultType="boardImg">
+		select board_no from club_board
+		where
+		club_code = #{clubCode}
+	
+	</select>
+	
+	
 	
 </mapper>
 
