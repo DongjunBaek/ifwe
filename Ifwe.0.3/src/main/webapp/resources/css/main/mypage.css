@@ -149,7 +149,17 @@ p{
     font-weight: bolder;
     background-color: #2756a6;
     border-radius: 20px;
-    margin-left: 40%;
+    margin-left:18%;
+}
+.friend-nobtn{
+    height: 35px;
+    width: 90px;
+    color: white;
+    font-size: 20px;
+    outline: 0;
+    font-weight: bolder;
+    background-color: red;
+    border-radius: 20px;
 }
 .board-div{
     margin-top: 5%;
