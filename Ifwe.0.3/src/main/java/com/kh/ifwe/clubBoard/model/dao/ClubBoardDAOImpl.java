@@ -61,6 +61,11 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.update("clubBoard.updateBoardImg",boardNo);
 	}
 
+	@Override
+	public List<BoardImg> selectClubBoardNoList(int clubCode) {
+		return sqlSession.selectList("clubBoard.selectClubBoardNoList",clubCode);
+	}
+
 
 	
 	
