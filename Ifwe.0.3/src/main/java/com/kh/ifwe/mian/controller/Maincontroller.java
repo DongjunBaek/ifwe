@@ -5,19 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.SessionAttributes;
-=======
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.club.model.service.ClubService;
-<<<<<<< HEAD
 import com.kh.ifwe.member.model.service.MemberService;
-=======
->>>>>>> branch 'master' of https://github.com/DongjunBaek/ifwe.git
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 
