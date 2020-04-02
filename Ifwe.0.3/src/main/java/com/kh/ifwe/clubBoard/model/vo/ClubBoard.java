@@ -30,8 +30,8 @@ public class ClubBoard implements Serializable {
 	private String boardDel;
 	private String boardReport;
 	private String boardImgyn;
-	private String boardCommentYn;
 	private String boardName;
+	
 	
 	
 	

@@ -21,12 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.ifwe.board.model.vo.Board;
-import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.club.controller.ClubController;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
-import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 import com.kh.ifwe.common.util.Utils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -184,37 +182,6 @@ public class ClubBoardController {
 		
 		return boardImg;
 	}
-	
-	@PostMapping("/insertmainComment.do")
-	public ModelAndView insertComment(ModelAndView mav,ClubBoardComment boardComment,
-									  @RequestParam("clubCode") int clubCode) {
-		
-		log.debug("boardComment={}",boardComment);
-		
-		int result = clubBoardService.insertComment(boardComment);
-		
-		if(result >0) {
-			int updateResult = clubBoardService.updateClubBoard(boardComment.getBoardRef());
-		}
-		
-		mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode);
-		
-		return mav;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

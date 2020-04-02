@@ -78,7 +78,6 @@ section{
 }
 .article1-frofile-img img{
 	width:75px;
-	height:100%;
 }
 .article1-frofile-name{
     float: left;
@@ -118,7 +117,6 @@ section{
 .article1-hashtag-container{
     margin-bottom: 30px;
     min-height: 64px;
-    transition:all .3s ease;
     position: relative;
 }
 .article1-hashtag-box{
@@ -150,7 +148,7 @@ section{
     height:60px;
     margin-top:3%
 }
-.article1-comment-box input[type=text]{
+.article1-comment-box input{
     width:640px;
     height:40px;
     font-size:15px;
@@ -159,20 +157,16 @@ section{
     background-color: #ebebeb;
     outline: none;
 }
-.article1-comment-box input[type=submit]{
-	float: right;
-    height:40px;
-    font-size: 14px;
+.comment-input{
+    float: right;
+    height:15px;
+    font-size: 15px;
     border-radius: 20px;
-    padding:0 20px;
+    padding:11px 20px;
     color: white;
     font-weight: bold;
     background-color: #2756a6;
-    outline: none;
 }
-
-
-
 .article1-comment-count{
     font-size: 18px;
     height: 46px;
@@ -193,7 +187,6 @@ section{
 }
 .comment-frofile-img img{
 	width:35px;
-	height:35px;
 }
 .comment-sliderbutton{
     width:100px;
@@ -206,22 +199,16 @@ section{
 }
 .comment-hiddenbox{
     width:750px;
-    display: none; 
-}
-.comment-sliderbutton .fa-sort-down{
-	float:right;
+    display: none;
 }
 .comment-frofile-name{
     font-weight: bold;
-    width: 110px;
+    width: 90px;
     float: left;
     margin-left:2%;
 }
 .article1-commnet-container p{
     float: left;
-}
-.comment-content{
-	width:500px;
 }
 .comment-right-box{
     width: 82px;
@@ -231,7 +218,6 @@ section{
 .comment-right-box p{
     float: right;
     margin-left: 6%;
-    cursor:pointer;
 }
 .comment-right-box p:first-child{
     color: red;

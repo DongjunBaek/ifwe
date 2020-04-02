@@ -7,10 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
-import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 
 @Repository
 public class ClubBoardDAOImpl implements ClubBoardDAO {
@@ -66,21 +64,6 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 	@Override
 	public List<BoardImg> selectClubBoardNoList(int clubCode) {
 		return sqlSession.selectList("clubBoard.selectClubBoardNoList",clubCode);
-	}
-
-	@Override
-	public int insertComment(ClubBoardComment boardComment) {
-		return sqlSession.insert("clubBoard.insertComment",boardComment);
-	}
-
-	@Override
-	public List<ClubBoardComment> selectBoardComment(int clubCode) {
-		return sqlSession.selectList("clubBoard.selectBoardCommentMain",clubCode);
-	}
-
-	@Override
-	public int updateClubBoard(int boardRef) {
-		return sqlSession.update("clubBoard.updateClubBoard",boardRef);
 	}
 
 

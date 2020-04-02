@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.board.model.vo.Board;
-import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.clubBoard.model.dao.ClubBoardDAO;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
-import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 
 @Service
 public class ClubBoardServiceImpl implements ClubBoardService {
@@ -68,21 +66,6 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 	@Override
 	public List<BoardImg> selectClubBoardNoList(int clubCode) {
 		return clubBoardDAO.selectClubBoardNoList(clubCode);
-	}
-
-	@Override
-	public int insertComment(ClubBoardComment boardComment) {
-		return clubBoardDAO.insertComment(boardComment);
-	}
-
-	@Override
-	public List<ClubBoardComment> selectBoardComment(int clubCode) {
-		return clubBoardDAO.selectBoardComment(clubCode);
-	}
-
-	@Override
-	public int updateClubBoard(int boardRef) {
-		return clubBoardDAO.updateClubBoard(boardRef);
 	}
 
 
