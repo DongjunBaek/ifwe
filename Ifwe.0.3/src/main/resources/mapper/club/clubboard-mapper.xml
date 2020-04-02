@@ -102,6 +102,12 @@
 	
 	</update>
 	
+	<select id="selectClubBoardNoList" resultType="boardImg">
+		select board_no from club_board
+		where
+		club_code = #{clubCode}
+	
+	</select>
 	
 	
 	
