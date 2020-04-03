@@ -110,8 +110,10 @@ public class MemberController {
 		String msg = "";
 		if (result > 0) {
 			msg = "회원가입 성공!! 로그인해주세요";
+			mav.setViewName("redirect:/member/enrollsuccess.do?memberId="+member.getMemberId());
 		} else {
 			msg = "회원가입실패";
+			mav.setViewName("redirect:/");
 		}
 
 
@@ -122,7 +124,6 @@ public class MemberController {
 		int insertProfileResult =memberService.insertProfile(serchMember); 
 		
 		redirectAttributes.addFlashAttribute("msg", msg);
-		mav.setViewName("redirect:/");
 
 		return mav;
 	}
@@ -637,7 +638,7 @@ public class MemberController {
 	@GetMapping("/profileUpdate.do")
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		System.out.println("memberController 되나");
+		
 	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
@@ -704,6 +705,19 @@ public class MemberController {
 		return "redirect:/member/mypage.do?memberCode="+memberCode;
 	}
 	
+	
+	//0403형철 회원가입성공페이지
+	@GetMapping("/enrollsuccess.do")
+	public ModelAndView enrollsuccess(ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Member member = memberService.selectOne(memberId);
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+
+		mav.addObject("memberLoggedIn",memberLoggedIn);
+		mav.setViewName("main/enrollSuccess");
+		
+		return mav;
+	}
 	
 
 }
