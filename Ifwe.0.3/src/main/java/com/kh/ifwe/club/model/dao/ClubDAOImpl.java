@@ -134,11 +134,6 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public int updateClubCurrent(int clubCode) {
-		return sqlSession.update("club.updateClubCurrent",clubCode);
-	}
-
-	@Override
 	public int updateClub(Club newClub) {
 		return sqlSession.update("club.updateClub",newClub);
 	}
@@ -182,6 +177,11 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<Count> selectAge(List<Integer> clubCode) {
 		return sqlSession.selectList("club.selectAge",clubCode);
+	}
+
+	@Override
+	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
+		return sqlSession.selectList("club.selectclubBoardSearch",param);
 	}
 
 

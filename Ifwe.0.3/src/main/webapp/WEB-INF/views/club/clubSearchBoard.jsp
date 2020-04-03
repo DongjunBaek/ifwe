@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Club Main</title>
+<title>Club SearchBoard</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmain.css">
@@ -33,8 +33,12 @@ $(function(){
 		$(item).prev().children().append("<span>댓글 "+cnt+"개</span>");
 	});
     
-    
-    
+	
+	var count = $(".article-board-notice").length;
+    console.log("테스트",count);
+	if(count<1){
+		$(".search-zero").css("display","block");
+	}
     
     
 	$(".friend-name-profile").click(function(){
@@ -233,14 +237,14 @@ function showSlides(n) {
   <section class="flotclass">
       <div class="section-block">
           <div class="section-wrapper">
-              <p class="section-boradall">전체보기</p>
-              <div class="section-block-right">
-                  <p>글쓰기</p>
-                  <i class="fas fa-pencil-alt"></i>
-              </div>
+              <p class="section-boradall">검색게시판</p>
           </div>
           
       </div>
+       <div class="search-zero">
+			 <i class="far fa-file-excel"></i>
+			 <p>해당 해쉬태그의 게시물이 없습니다.</p>
+		  </div>
       <article class="article1 flotclass">
 		
 		<c:if test="${not empty clubBoardProfileList }">
@@ -333,56 +337,9 @@ function showSlides(n) {
               </div>
           </c:forEach>
          </c:if>
+         </article>
           <!-- 게시물카드끝-->
-		
-                    
-          
-          
-          
-      </article>
-      <article class="article2 flotclass">
-              <div class="article2-title">
-                  <p>이런건 어때요?</p>
-              </div>
-
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-
-      </article>
-      
+         
   </section>
   
 <div class="filter-container-container">
@@ -392,6 +349,34 @@ function showSlides(n) {
 	
 	</div>
 </div>  
+
+
+
+<style>
+.search-zero{
+	width:100%;
+	height:400px;
+	border-radius:20px;
+	margin:0 auto;
+	margin-top:50px;
+	padding-top:200px;
+	text-align: center;
+	display:none; 
+	background-color:white;
+}
+.search-zero>p{
+	font-size:40px;
+	color:#7d7d7d;
+	font-weight: bold;
+}
+.fa-file-excel{
+	font-size:90px;
+	color:#7d7d7d;
+}
+
+
+</style>
+
 
 
 </body>

@@ -194,14 +194,6 @@
 			msg_code = #{msgCode}
 	</update>
 	
-	<update id="updateClubCurrent">
-		update 
-			club 
-		set 
-			club_current = club_current+1 
-		where 
-			club_code = #{clubCode}
-	</update>
 	
 	<update id="updateClub">
 		update
@@ -330,6 +322,26 @@
 		order by 
 			c.club_code
 	</select>
+	
+	<select id="selectclubBoardSearch" resultMap="clubBoardProfileMap">
+		select 
+			C.*,L.*,M.profile_name, M.profile_img_re
+		from 
+			club_board C 
+		left join 
+			club_boardlist L 
+		on 
+			C.club_boardlist_no = l.club_boardlist_no 
+		left join 
+			member_profile M 
+		on 
+            C.member_code = M.member_code 
+		where 
+			C.club_code = #{clubCode} and C.board_cate_code like '%'||#{searchTag}||'%'
+		order by 
+			C.board_no desc
+	</select>
+	
 </mapper>
 
 

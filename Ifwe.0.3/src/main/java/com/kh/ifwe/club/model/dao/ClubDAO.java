@@ -57,7 +57,6 @@ public interface ClubDAO {
 
 	int updateMsgView(int msgCode);
 
-	int updateClubCurrent(int clubCode);
 
 	int updateClub(Club newClub);
 
@@ -78,6 +77,8 @@ public interface ClubDAO {
 	List<Integer> selectMaleCount(List<Integer> clubCode);
 
 	List<Count> selectAge(List<Integer> clubCode);
+
+	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
 
 

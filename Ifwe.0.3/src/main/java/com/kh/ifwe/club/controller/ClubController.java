@@ -33,6 +33,7 @@ import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.service.MemberService;
@@ -220,7 +221,7 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
-	
+		
 		
 		Club club = clubService.selectOne(clubCode);
 		
@@ -257,6 +258,11 @@ public class ClubController {
 			boardImg = clubBoardService.selectClubBoardImg(boardNo);
 		}
 		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
@@ -264,9 +270,10 @@ public class ClubController {
 		log.debug("clubBoardList={}",clubBoardList);
 		log.debug("clubBoardProfileList={}",clubBoardProfileList);
 		log.debug("boardImg={}",boardImg);
+		log.debug("clubBoardComment={}",clubBoardComment);
 		
 		
-		
+		mav.addObject("clubBoardComment",clubBoardComment);
 		mav.addObject("clubBoardList",clubBoardList);
 		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
@@ -420,8 +427,6 @@ public class ClubController {
 		param.put("msgCode",msgCode);
 		
 		int result = clubService.updateMembersGrade(param);
-		//가입수락을 누르면 club_current +1 update
-		int plusResult = clubService.updateClubCurrent(clubCode);
 		
 		log.debug("result = {}",result);
 		
@@ -599,4 +604,47 @@ public class ClubController {
 		
 		return club;
 	}
+	
+	//0403형철 소모임검색
+	@GetMapping("/searchBoard.do")
+	public ModelAndView searchBoard(ModelAndView mav,@RequestParam("clubCode") int clubCode,
+									@RequestParam("search") String searchTag) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("clubCode", clubCode);
+		param.put("searchTag", searchTag);
+		
+		
+		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardSearch(param);
+		
+		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
+		List<BoardImg> boardImg = null;
+		
+		if(boardNo!=null && !boardNo.isEmpty() && boardNo.size()!=0) {
+			boardImg = clubBoardService.selectClubBoardImg(boardNo);
+		}
+		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
+		mav.addObject("clubBoardComment",clubBoardComment);
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+		mav.addObject("boardImg",boardImg);
+		
+		
+		mav.setViewName("club/clubSearchBoard");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

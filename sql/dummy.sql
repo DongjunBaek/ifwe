@@ -60,5 +60,6 @@ Insert into IFWE.CLUB (CLUB_CODE,CLUB_MASTER,CLUB_TITLE,CLUB_IMG_ORI,CLUB_IMG_RE
 
 
 insert into msg_category values('c1','가입신청');
+insert into msg_category values('f1','가입신청'); 
 commit;
 --rollback;

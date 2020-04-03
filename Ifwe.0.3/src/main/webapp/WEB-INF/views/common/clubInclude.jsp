@@ -20,7 +20,7 @@ $(function(){
     });
     
     $("#mypagebutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/member/mypage.do?memberId=${memberLoggedIn.memberId}";
+    	location.href="${pageContext.request.contextPath }/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
     });
     
     $(".logo-box").click(function(){
@@ -63,7 +63,7 @@ $(function(){
                         <i class="fas fa-sort-down fa-2x"></i>
                     </div>
                     <div class="nav-clubimg">
-						<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${club.clubImgRe}" alt="" />
+						<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
                     </div>
                         <div class="nav-right-leader">
 
@@ -200,13 +200,16 @@ $(function(){
 
                     </div>
                 </div>
+                <form action="${pageContext.request.contextPath }/club/searchBoard.do" method="get">
                 <div class="header-search-box">
                     <div class="header-icon">
                         <i class="fas fa-search" style="font-size:35px;"></i>
                     </div>
+                    	<input type="hidden" name="clubCode" value="${club.clubCode }" />
                         <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
                 </div>
                 
+                </form>
                 
             </header>
 
