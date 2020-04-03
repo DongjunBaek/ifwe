@@ -96,7 +96,9 @@ text-decoration: none;
                     <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
                 </div>
                 <div class="nav-clubimg">
+
                 	<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
+
                 </div>
                 <!-- 문보라수정 -->
                 <div class="nav-right-leader font-kor">

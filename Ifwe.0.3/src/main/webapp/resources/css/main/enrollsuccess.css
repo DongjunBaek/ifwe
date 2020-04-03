@@ -1,0 +1,82 @@
+@font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+*{
+    margin:0;
+    padding:0;
+}
+.esc-allwrapper{
+    font-family: "GmarketSansLight";
+    width:1920px;
+    height:1280px;
+    margin:0 auto;
+}
+.esc-centerwrapper{
+    width:1660px;
+    height:100%;
+    margin:0 auto;
+    position: relative;
+}
+.esc-logobox{
+    width:70px;
+    height:30px;
+    margin-top:120px;
+}
+.esc-logobox img{
+    width:70px;
+    height:30px;
+}
+.esc-line{
+    width:140px;
+    height:10px;
+    background-color: #2756a6;
+    margin-top:110px;
+}
+.esc-number{
+    font-family: 'GmarketSansMedium';
+    font-size: 110px;
+    font-weight: bold;
+    color:#2756a6;
+    margin-top:40px;
+}
+.esc-centerwrapper > p{
+    font-size: 24px;
+}
+.esc-centerimgbox{
+    width:680px;
+    height:650px;
+    position: absolute;
+    left:55%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.esc-center-img{
+    width:330px;
+    height:330px;
+    margin:0 auto;
+}
+.esc-center-img img{
+    width:330px;
+    height:330px;
+}
+.firstp{
+    font-size: 35px;
+    margin-top:75px;
+    font-weight: bold;
+}
+.secondp{
+    font-size: 35px;
+    margin-top:20px;
+}
+.myprofilebtn{
+    font-family: 'GmarketSansMedium';
+    width:410px;
+    height:80px;
+    border-radius: 20px;
+    background-color: #2756a6;
+    color:white;
+    font-size: 24px;
+    margin-top:45px;
+    outline: none;
+}
