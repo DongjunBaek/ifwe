@@ -457,6 +457,20 @@ begin
     
 end;
 /
+
+--클럽 가입하기 누르면 club_current숫자 +1
+create trigger club_members_tri
+after insert on club_members for each row
+begin update club set club_current = club_current+1 where club_code = :new.club_code;
+end;
+/
+
+--클럽 탈퇴하면 club_current-1
+create or replace trigger club_members_tri_mi
+after delete on club_members for each row
+begin update club set club_current = club_current-1 where club_code = :old.club_code;
+end;
+/
 --=================================================================
 --MEMBER DUMMY
 --=================================================================
