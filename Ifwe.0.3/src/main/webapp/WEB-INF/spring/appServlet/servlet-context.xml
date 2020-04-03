@@ -51,4 +51,14 @@
 		<beans:property name="maxUploadSizePerFile" value="10485760" /> <!-- 파일하나당 최대용량은 10MB이다. 기본값: -1(제한없음) -->
 	</beans:bean>
 
+
+	<!-- 0403 dongjun 추가 -->
+		<!-- #13.1 jsonView Bean 및 viewResolver 등록 -->
+	<!-- 요청한 viewName과 실제bean이름을 매핑해주는 BeanNameViewResolver를 사용함. -->
+    <!-- bean아이디는 viewResolver로 반드시 지정. 처리순서를 1로 우선처리되도록함. -->
+    <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <beans:property name="order" value="1"/>
+    </beans:bean>   
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+
 </beans:beans>

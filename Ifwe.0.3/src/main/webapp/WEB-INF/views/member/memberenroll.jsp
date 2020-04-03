@@ -93,7 +93,7 @@ function sample6_execDaumPostcode() {
     	
     	
     });
-    $(".phone-btn-container").click(function(){
+    $(".phone-btn").click(function(){
         alert('본인인증성공!')
         $(".enroll-article-second>.enroll-hyphen").css('background-color','lightgrey');
         $(".enroll-article-second>.enroll-container-number").css('color','lightgrey');
@@ -414,10 +414,27 @@ function maxLengtYear(object){
                 <p class="phone-post">본인인증을 해주십쇼.</p>
             </div>
             <div class="phone-btn-container">
-                <div class="phone-btn">
-                    <p class="bold-kor phone-btn-p">휴대폰 인증</p>
+                <div class="phone-btn" id="sendSMS">
+                <script>
+                $(function(){
+                	$("#sendSMS").click(function(){
+                		let phoneNum = $("#phoneNumber").val();
+                		console.log(phoneNum);
+            			window.open("${pageContext.request.contextPath}/member/updatePhonePUPUP.do", "a", "width=500, height=400, left=300, top=200"); 
+
+                		
+                		
+                	})
+                })
+                </script>
+                    <p class="bold-kor phone-btn-p" >휴대폰 인증</p>
                     <p class="font-kor phone-btn-p" style="font-size: 15px;">본인인증 기관을 통해 본인인증 후 회원가입</p>
                 </div>
+                <br />
+                    <!-- <div class="writePhonenum">
+                    	<input type="text" name="phoneNumber" id="phoneNumber" style="border:1px solid red;" />
+                    	<input type="text" name="phoneNumber" id="phoneNumber" style="border:1px solid red;" placeholder="인증번호" />
+                    </div> -->
             </div>
         </article>
 

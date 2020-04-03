@@ -129,11 +129,24 @@ public class BoardController {
 	public List<Board> mainBoardList(ModelAndView mav, @RequestParam( 
 																value = "boardCategory",
 																required = false, 
-																defaultValue = "notice") String boardCategory) {
+																defaultValue = "notice") String boardCategory,
+														@RequestParam(value="cPage", defaultValue="1") int cPage) {
+		
+		final int numPerPage = 10;
+		
 		log.debug("boardCategory = ",boardCategory);
-		List<Board> boardList = boardService.selectOne(boardCategory);
+		List<Board> boardList = boardService.selectOne2(boardCategory,numPerPage,cPage);
+		
+		int totalContents = boardService.selectBoardTotalContents(boardCategory);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
+		
+		
 		
 		log.debug("mainBoardList @ boardController {}", boardList);
+		log.debug("totalContents={}",totalContents);
+		mav.addObject("cPage",cPage);
+		mav.addObject("totalContents",totalContents);
+		mav.setViewName("board/mainBoard");
 		
 		return boardList;
 	}

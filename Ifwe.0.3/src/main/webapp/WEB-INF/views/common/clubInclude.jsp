@@ -20,11 +20,11 @@ $(function(){
     });
     
     $("#mypagebutton").click(function(){
-    	location.href="${pageContext.request.contextPath }/member/mypage.do?memberId=${memberLoggedIn.memberId}";
+    	location.href="${pageContext.request.contextPath }/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
     });
     
     $(".logo-box").click(function(){
-    	location.href="${pageContext.request.contextPath }/main/mainPage.do";
+    	location.href="${pageContext.request.contextPath }/main/mainPage.do?memberCode=${memberLoggedIn.memberCode}";
     })
     
     $("#enrollbutton").click(function(){
@@ -55,6 +55,9 @@ $(function(){
                 <div class="nav-content-right">
                     <div class="nav-right-icon2">
                         <i class="fas fa-bell" style="font-size:35px;"></i>
+                        <c:if test="${msgCount!=0 }">
+                    	<span class="bell-count">${msgCount }</span>
+                    </c:if>
                     </div>
                     <div class="nav-right-icon1" id="nav-arrowicon">
                         <i class="fas fa-sort-down fa-2x"></i>
