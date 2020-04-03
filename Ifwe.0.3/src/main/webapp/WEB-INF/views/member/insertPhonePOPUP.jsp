@@ -32,7 +32,34 @@
    
    }
 </style>
-
+<script>
+	$(function(){
+		let rNum ;
+		
+		$("#search-id-btn-num").click(function(){
+			console.log("12312312312");
+			$.ajax({
+				url:"${pageContext.request.contextPath}/sms/sms.do",
+				method:"POST",
+				data: {"phoneNum" : $("#member_phone").val()},
+				async:false,
+				success: function(data){
+					console.log("성공",data);
+					rNum = data;
+					console.log(rNum);
+				},
+				error:function(x,s,e){
+					console.log(x,s,e);
+				}
+			});
+		});
+		
+		$("#search-btn-check").click(function(){
+			console.log(rNum);
+		});
+		
+	});
+</script>
 </head>
 <body>
 <header>
@@ -44,11 +71,11 @@
 <section>
 	<article class="updatePassword-artical">
 		<div class="form-title font-kor">
-			<span>등록/변경하실 휴대폰 번호를 입력하고 인증하기 버튼을 눌러주세요.</span><br />
+			<span>등록하실 휴대폰 번호를 입력하고 인증하기 버튼을 눌러주세요.</span><br />
 			<p>휴대폰으로 전송된 인증번호를 확인 후 입력해주시면 정보변경이 완료됩니다.</p>
 		</div>
 		
-		<form method="post" action="${pageContext.request.contextPath }/member/updatePhoneFrm.do">
+		
 		 <div class="search-id-div updatePhone-container" id="search-id-div">
 	                <div class="login-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
@@ -69,7 +96,7 @@
             </div>
             <input type="hidden" name="memberId" value="${memberLoggedIn.memberId }" />
             
-		</form>
+		
                
 	</article>
 </section>

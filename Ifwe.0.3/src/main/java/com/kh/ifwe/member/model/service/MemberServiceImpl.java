@@ -125,6 +125,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertFriends(friend);
 	}
 
+	@Override
+	public int insertOtherFriend(Map<String, Object> map) {
+		return memberDAO.insertOtherFriend(map);
+	}
+
+	@Override
+	public int selectMsgCount(int memberCode) {
+		return memberDAO.selectMsgCount(memberCode);
+	}
+
 
 	
 }

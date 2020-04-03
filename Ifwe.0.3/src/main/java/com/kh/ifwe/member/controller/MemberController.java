@@ -42,7 +42,7 @@ import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub" })
+@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -193,6 +193,12 @@ public class MemberController {
 				 model.addAttribute("eventList",eventList);
 				
 				
+				int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+				log.debug("msgCount={}",msgCount);
+				model.addAttribute("msgCount",msgCount);
+				
+				
+				
 				return "main/mainPage";
 
 			} else {
@@ -229,9 +235,9 @@ public class MemberController {
 	// 문보라
 	//20200330 마이페이지 친구리스트 뿌리기  
 	@GetMapping("/mypage.do")
-	public String mypage(@RequestParam("memberId") String memberId,
+	public String mypage(@RequestParam("memberCode") int memberCode,
 						Model model) {
-		Member member = memberService.selectOne(memberId);
+		Member member = memberService.memberSelectOneCode(memberCode);
 		log.debug("member={}",member);
 		
 		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
@@ -247,15 +253,20 @@ public class MemberController {
 	
 	//0330 상대 프로필 조회 
 	@GetMapping("/profile.do")
-	public String profile(@RequestParam("memberCode") int memberCode
-							,Model model) {
+	public String profile(@RequestParam("memberCode") int memberCode,
+							Model model) {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		Profile profile =profileservice.selectOneProfileWithCode(memberCode);
+		Friend friend = friendService.selectOneFriend(memberCode);
 		
 		log.debug("profile={}",profile);
 		log.debug("member= {}",member);
+		log.debug("friend={}",friend);
+		
+		model.addAttribute("friend",friend);
 		model.addAttribute("member",member);
 		model.addAttribute("profile",profile);
+		
 		return "member/profile";
 	}
 
@@ -657,14 +668,15 @@ public class MemberController {
 		log.debug("map = {}",map);
 		
 		int result = memberService.insertMsgFriend(map);
-		return "/";
+		return "redirect:/club/clubMain.do";
 	}
 	
 	//20200330 친구신청 수락
 	@RequestMapping("/friendYes.do")
 	public String friendYes(@RequestParam("memberFrom") int memberFrom
-							,@RequestParam("memberId") String memberId) {
-		log.debug("memberId={}",memberId);
+							,@RequestParam("memberCode") int memberCode,
+							Model model) {
+		log.debug("memberCode={}",memberCode);
 		int result = memberService.friendYes(memberFrom);
 		log.debug("memberFrom={}",memberFrom);
 		if(result>0) {
@@ -673,9 +685,24 @@ public class MemberController {
 			
 			int friendResult = memberService.insertFriends(friend);
 			log.debug("friend={}",friend);
+			
+			MemberLoggedIn member = memberService.selectMemberLogin(memberCode);
+			
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("memberCode", friend.getFriendCode());
+			map.put("friendCode", member.getMemberCode());
+			map.put("memberId", member.getMemberId());
+			map.put("memberPname", member.getProfileName());
+			
+			log.debug("map={}",map);
+			
+			int otherFriend  = memberService.insertOtherFriend(map);
+			int msgCount = memberService.selectMsgCount(memberCode);
+			log.debug("msgCount={}",msgCount);
+			model.addAttribute("msgCount",msgCount);
 		}
 		
-		return "redirect:/member/mypage.do?memberId="+memberId;
+		return "redirect:/member/mypage.do?memberCode="+memberCode;
 	}
 	
 	

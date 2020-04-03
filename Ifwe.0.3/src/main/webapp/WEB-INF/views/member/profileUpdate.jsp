@@ -165,7 +165,7 @@ input#inputProfileName {
             
       </article>
       </form>
-      <article class="mypage-third">
+      <!-- <article class="mypage-third">
          <div class="friend-container">
             <div class="friend-title font-kor">
                <p
@@ -176,7 +176,7 @@ input#inputProfileName {
                
             </div>
          </div>
-      </article>
+      </article> -->
       
 
 </section>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,14 +37,12 @@ $(function(){
     });
    
    $("#mypagebutton").click(function(){
-	   location.href="${pageContext.request.contextPath }/member/mypage.do?memberId=${memberLoggedIn.memberId}";
+	   location.href="${pageContext.request.contextPath }/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
    });
    
    $(".logo-box").click(function(){
-   	location.href="${pageContext.request.contextPath }/main/mainPage.do";
-   	
-   });
-   <input type="hidden" name="" />
+   	location.href="${pageContext.request.contextPath }/main/mainPage.do?memberCode=${memberLoggedIn.memberCode}";
+   })
    
    $("#somoim-create").click(function(){
 	   location.href = "${pageContext.request.contextPath}/club/clubCreate.do";
@@ -63,6 +64,12 @@ $(function(){
 	   location.href = "${pageContext.request.contextPath}/member/logout.do";
    });
    
+   $(".nav-right-icon2").click(function(){
+	   location.href = "${pageContext.request.contextPath}/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
+   })
+   var msgCount = ${msgCount}
+   console.log(msgCount)
+   
 });
 </script>
 <style>
@@ -81,12 +88,17 @@ text-decoration: none;
             <div class="nav-content-right">
                 <div class="nav-right-icon2">
                     <i class="fas fa-bell" style="font-size:35px;color: white;" ></i>
+                    <c:if test="${msgCount!=0 }">
+                    	<span class="bell-count">${msgCount }</span>
+                    </c:if>
                 </div>
                 <div class="nav-right-icon1">
                     <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
                 </div>
                 <div class="nav-clubimg">
-                	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+
+                	<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
+
                 </div>
                 <!-- 문보라수정 -->
                 <div class="nav-right-leader font-kor">
