@@ -84,6 +84,7 @@ text-decoration: none;
                     <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
                 </div>
                 <div class="nav-clubimg">
+                	<input type="hidden" name="test" />
                 	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
                 </div>
                 <!-- 문보라수정 -->

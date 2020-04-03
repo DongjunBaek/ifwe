@@ -177,6 +177,7 @@ $(function(){
                                 <p class="people-title font-hk">정원수 </p>
                                 <span class="information-fontsize">${list.clubCurrent }</span>/${list.clubMax }
                             </div>
+                           
                             <div class="information-box">
                                     <br>
                                     <p class="people-title font-hk">남여비율</p>
@@ -190,6 +191,7 @@ $(function(){
                                     </c:forEach>
                                     </c:if>
                             </div>
+                           
                             <div class="information-box lastbox">
                                     <br>
                                     <p class="people-title font-hk">평균나이</p>
