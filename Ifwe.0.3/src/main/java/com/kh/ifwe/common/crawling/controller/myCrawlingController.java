@@ -73,7 +73,7 @@ public class myCrawlingController {
 		return mapStudy;
 	}
 	
-	@PostConstruct
+//	@PostConstruct
 	public Map<Integer,myCrawling > mapSong() {
 		try {
 			System.out.println("Chart Song Ranking");
