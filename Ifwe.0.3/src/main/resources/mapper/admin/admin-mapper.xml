@@ -90,6 +90,8 @@
 			board		
 		where BOARD_CATE like #{boardCategory} and
 			  board_del = 'N'
+		order 
+			by board_date desc
 	</select>
 
 	<select id="selectBoardDetail" resultType="board">
@@ -215,6 +217,10 @@
 	 	where
 	 		event_code = #{eventCode}
 	 </update>
+	 
+	 <select id="selectBoardTotalContents" resultType="_int">
+	 select count(*) from board where board_cate like #{boardCategory} and board_del = 'N'
+	 </select>
 	 
 </mapper>
 

@@ -44,6 +44,20 @@ public class BoardServiceImpl implements BoardService {
 	public int updateBoardOne(Board board) {
 		return boardDAO.updateBoardOne(board);
 	}
+
+	@Override
+	public List<Board> selectOne2(String boardCategory,int numPerPage,int cPage) {
+		return boardDAO.selectOne2(boardCategory, numPerPage, cPage); 
+	}
+
+	@Override
+	public int selectBoardTotalContents(String boardCategory) {
+		return boardDAO.selectBoardTotalContents(boardCategory);
+	}
+	
+	
+
+
 	
 	
 }

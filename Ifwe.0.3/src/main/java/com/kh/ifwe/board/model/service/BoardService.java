@@ -16,5 +16,9 @@ public interface BoardService {
 
 	int updateBoardOne(Board board);
 
+	List<Board> selectOne2(String boardCategory, int numPerPage, int cPage);
+
+	int selectBoardTotalContents(String boardCategory);
+
 
 }

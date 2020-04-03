@@ -12,12 +12,11 @@
          $(".section-boardcate-button").click(function(){
              $(".section-boardcate-button").css("background-color","#beceea");
              $(this).css("background-color","#2756a6");
-             var boardCategory = $(this).attr("id");             
+             var boardCategory = $(this).attr("id");   
              $.ajax({
             	url : "${pageContext.request.contextPath}/board/mainBoardList.do",
             	data : {boardCategory : boardCategory},
             	success : data =>{
-            		 
             		 $parentDiv = $(".sction-board-center");
             		 $parentDiv.empty();
             		 $.each(data, function(idx, value){
@@ -50,7 +49,6 @@
          $(".section-block-right").click(function(){
         	 location.href="${pageContext.request.contextPath }/board/insertBoard.do";
          });
-         
          
          $("#notice").trigger("click");
          

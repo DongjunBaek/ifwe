@@ -212,6 +212,8 @@
 			msg_view = 'y'
 		where
 			member_from = #{memberFrom}
+		order by 
+			msg_date desc
 	</update>
 	
 	<select id="selectOneForFriend" resultMap="friendMap">
