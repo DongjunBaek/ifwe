@@ -36,12 +36,39 @@ let boardCategory;
  	                     
  	                     
             		 });
-            		 	cPage = data[0];
-             			var tPage = data[1];
+            		 
+            		cPage = data[0];
+          			var tPage = data[1];
+          			var pageBarSize = 5;
+          			var pageStart = ((cPage-1)/pageBarSize) * pageBarSize+1; 
+          			var pageEnd = pageStart+pageBarSize-1;
+   			
+           			$children4 = $("<div class='section-boardfooter-box'></div>");
+           			if(cPage == 1){
+           				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">Back</button>"));
+           			}else{
+           				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">Back</button>"));
+           			}
+           			
+           			for( var i = 1; i <= tPage;i++){
+           				if(i == cPage){
+           					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
+           				}else{
+           					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+           				}
+
+           			}
+           			
+           			if(cPage == tPage){
+           				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(tPage)+")' value="+(tPage)+">Next</button>"));
+           			}else{
+           				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">Next</button>"));
+           			}
+           			$parentDiv.append($children4);
+                 				
+                 				
              			
-             			for(var i = 1; i <= tPage;i++){
-             				$parentDiv.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+i+")' value="+i+">"+i+"</button>"));
-             			}
+             			$parentDiv.append($children4);
              			
             		 
             	 },
@@ -101,7 +128,7 @@ let boardCategory;
 
 <script>
 function reloadFunctionToAjax(no){
-		console.log("버튼클릭");
+		/* console.log("버튼클릭"); */
 		cPage = no;
 		
 		$.ajax({
@@ -125,12 +152,36 @@ function reloadFunctionToAjax(no){
 	                     
 	                     
         		 });
-        		 	cPage = data[0];
-         			var tPage = data[1];
-         			
-         			for(var i = 1; i <= tPage;i++){
-         				$parentDiv.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+i+")' value="+i+">"+i+"</button>"));
-         			}
+     		 	cPage = data[0];
+     			var tPage = data[1];
+     			var pageBarSize = 5;
+     			var pageStart = ((cPage-1)/pageBarSize) * pageBarSize+1; 
+     			var pageEnd = pageStart+pageBarSize-1;
+     			var pageNo = pageStart;
+     			
+      			$children4 = $("<div class='section-boardfooter-box'></div>");
+       			if(cPage == 1){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">Back</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">Back</button>"));
+       			}
+       			
+       			for( var i = 1; i <= tPage;i++){
+       				if(i == cPage){
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
+       				}else{
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+       				}
+
+       			}
+       			
+       			if(cPage == tPage){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(tPage)+")' value="+(tPage)+">Next</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">Next</button>"));
+       			}
+      				
+       			$parentDiv.append($children4);
          			
         		 
         	 },
@@ -142,4 +193,32 @@ function reloadFunctionToAjax(no){
 };
 	
 </script>
+<style>
+/* 0404 mainboard css add dongjun */
+.section-boardfooter-box{
+	display: flex;
+	width : 40%;
+	border-radius: 50px;
+	height : 100px;
+  	justify-content: center;
+	align-content: center;
+	border: 1.5px solid #0288D1;
+	margin : 0 auto;
+	
+}
+
+.listForBoard{
+	display : block;
+	border: none;
+	outline : none;
+	background-color: white;
+	align-content: center;
+	font-size: 20px;
+	margin-right: 4%;
+	height: 60px;
+	border-radius: 50px;
+	line-height: 97px;
+}
+
+</style>
 </html>
