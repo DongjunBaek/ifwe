@@ -427,8 +427,6 @@ public class ClubController {
 		param.put("msgCode",msgCode);
 		
 		int result = clubService.updateMembersGrade(param);
-		//가입수락을 누르면 club_current +1 update
-		int plusResult = clubService.updateClubCurrent(clubCode);
 		
 		log.debug("result = {}",result);
 		
