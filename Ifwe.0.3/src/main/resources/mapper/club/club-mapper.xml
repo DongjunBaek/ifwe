@@ -194,14 +194,6 @@
 			msg_code = #{msgCode}
 	</update>
 	
-	<update id="updateClubCurrent">
-		update 
-			club 
-		set 
-			club_current = club_current+1 
-		where 
-			club_code = #{clubCode}
-	</update>
 	
 	<update id="updateClub">
 		update

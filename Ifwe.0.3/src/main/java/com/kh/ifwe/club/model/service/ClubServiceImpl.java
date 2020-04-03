@@ -148,11 +148,6 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
-	@Override
-	public int updateClubCurrent(int clubCode) {
-		return clubDAO.updateClubCurrent(clubCode);
-
-	}
 
 	public ClubMember selectClubMaster2(Map<String, Object> param2) {
 		return clubDAO.selectClubMaster2(param2);

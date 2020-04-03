@@ -57,7 +57,6 @@ public interface ClubDAO {
 
 	int updateMsgView(int msgCode);
 
-	int updateClubCurrent(int clubCode);
 
 	int updateClub(Club newClub);
 
