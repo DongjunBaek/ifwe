@@ -333,11 +333,7 @@ public class ClubController {
 		return mav;
 	}
 	
-	@GetMapping("/calendar.do")
-	public String calendar() {
-		return "club/clubcalendar";
-	}
-	
+
 //	@GetMapping("/notice.do")
 //	public String notice() {
 //		return "club/clubNotice";
@@ -641,6 +637,14 @@ public class ClubController {
 	
 	
 	
+	
+	
+	/** 20200403 풀캘린더 insert 김원재
+	 */
+	@GetMapping("/calendar.do")
+	public String calendar() {
+		return "club/fc";
+	}
 	
 	
 	
