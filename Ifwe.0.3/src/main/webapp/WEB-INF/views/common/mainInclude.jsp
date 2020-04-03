@@ -39,7 +39,9 @@ $(function(){
    
    $(".logo-box").click(function(){
    	location.href="${pageContext.request.contextPath }/main/mainPage.do";
-   })
+   	
+   });
+   <input type="hidden" name="" />
    
    $("#somoim-create").click(function(){
 	   location.href = "${pageContext.request.contextPath}/club/clubCreate.do";

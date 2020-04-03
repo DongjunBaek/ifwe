@@ -25,6 +25,7 @@ $(function(){
     
     $(".logo-box").click(function(){
     	location.href="${pageContext.request.contextPath }/main/mainPage.do";
+    	<input type="hidden" name="" />
     })
     
     $("#enrollbutton").click(function(){

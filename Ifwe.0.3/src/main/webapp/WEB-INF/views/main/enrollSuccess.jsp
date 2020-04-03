@@ -32,7 +32,6 @@
                 <p class="secondp">마이프로필 등록 후 ifwe를 이용하세요</p>
                 <button class="myprofilebtn" onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do?memberCode=${memberLoggedIn.memberCode }'">마이프로필 등록하기</button>
             </div>
-
         </div>
     </div>
 
