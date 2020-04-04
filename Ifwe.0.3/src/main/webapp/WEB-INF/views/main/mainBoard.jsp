@@ -72,10 +72,7 @@ let boardCategory;
            				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">Next</button>"));
            			}
            			$parentDiv.append($children4);
-                 				
-                 				
-             			
-             			$parentDiv.append($children4);
+           			hoverBtnForPageBar();
              			
             		 
             	 },
@@ -191,7 +188,7 @@ function reloadFunctionToAjax(no){
        			}
       				
        			$parentDiv.append($children4);
-         			
+       			hoverBtnForPageBar();
         		 
         	 },
         	 error : function(x,h,r){
@@ -200,33 +197,49 @@ function reloadFunctionToAjax(no){
          });
 				
 };
-	
+function hoverBtnForPageBar(){
+	$(".listForBoard").hover(function(){
+		$(this).css("color","white").css("background-color","rgb(39, 86, 166)");
+			
+		if(cPage == $(this).val()){
+			$(this).children().css("color","white");
+		}
+	}, function(){
+		$(this).css("color","rgb(39, 86, 166)").css("background-color","white");
+		
+		if(cPage == $(this).val()){
+			$(this).children().css("color","rgb(39, 86, 166)");
+		}
+	});
+}
 </script>
 <style>
 /* 0404 mainboard css add dongjun */
 .section-boardfooter-box{
 	display: flex;
-	width : 40%;
+	width : 43%;
 	border-radius: 50px;
 	height : 100px;
   	justify-content: center;
 	align-content: center;
-	border: 1.5px solid #0288D1;
+	/* border: 1.5px solid #0288D1; */
 	margin : 0 auto;
 	
 }
 
 .listForBoard{
-	display : block;
-	border: none;
-	outline : none;
-	background-color: white;
-	align-content: center;
-	font-size: 20px;
-	margin-right: 4%;
-	height: 60px;
-	border-radius: 50px;
-	line-height: 97px;
+    display: block;
+    border: none;
+    outline: none;
+    background-color: white;
+    align-content: center;
+    font-size: 20px;
+    margin-right: 4%;
+    height: 60px;
+    border-radius: 50px;
+    line-height: 60px;
+    margin-top: 3%;
+    width: 15%;
 }
 
 </style>
