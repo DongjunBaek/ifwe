@@ -51,6 +51,7 @@
 --drop sequence seq_club_boardlist_no; --클럽게시판목록번호
 --drop sequence seq_search_no; -- 검색용 시퀀스
 --drop sequence seq_club_board_comment_no; --클럽게시판댓글번호
+
 --=================================================================
 --select
 --=================================================================
@@ -255,7 +256,7 @@ CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
 	 search_date 	DATE		default sysdate, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --pk
+	 member_code 	NUMBER		NOT NULL-- 검색한 회원 번호 --pk
 );
 
 
@@ -440,7 +441,46 @@ begin
     where board_no = :old.board_no;
 end;
 /
+
+
+
+create or replace trigger tri_search_count
+    before
+    insert on tbl_search
+    for each row
+begin
+    update tbl_search set keyword_count = keyword_count+1
+    where search_keyword like search_keyword;
+end;
+/
+    
+drop trigger tri_search_count;    
+    
+select * from (select count(*) RANK, search_keyword from tbl_search group by search_keyword order by RANK desc) where rownum <=5;
+--select rownum, K.kearch_keyword from (select count(*) RANK from tbl_search group by search_keyword order by RANK desc)K where rownum > 6;
+
+select count(*) num, member_enrolldate from member group by date_format(member_enrolldate, 'rr/mm/dd')  order by member_enrolldate desc;
+select * from member;
+
+		select
+			count(*) RANK, search_keyword
+		from
+			tbl_search
+		group by
+			search_keyword
+		order by
+			RANK desc;
+
+
+delete tbl_search;
+insert into tbl_search values('15','노래',default,'2');
+
+select * from tbl_search;
+    
+commit;    
+    
 select * from club_boardlist;
+
 create or replace trigger trig_club_boardlist
 after
 insert on club
@@ -505,3 +545,11 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
 select * from club_board;
+
+select * from member;
+select * from club;
+select * from tbl_search;
+
+select count(*) from (select *from tbl_search where search_keyword = '영화'); 
+
+select * from club_members;

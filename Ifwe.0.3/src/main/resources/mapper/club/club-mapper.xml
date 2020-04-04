@@ -330,6 +330,51 @@
 		order by 
 			c.club_code
 	</select>
+	
+	<select id="selectClubCateList" resultType="club">
+		select
+			*
+		from
+			club
+		where
+			club_catecode like #{clubCatecode}
+	</select>
+	
+	<!-- <select id="selectSearchKeywordList" resultType="SearchKeyword">
+		<![CDATA[
+		select * 
+			from 
+			(
+			select 
+				count(*) RANK, search_keyword 
+			from 
+				tbl_search 
+			group by 
+				search_keyword 
+			order by 
+				RANK DESC
+			) S
+		where S.rownum > 6
+		  ]]>
+	</select> -->
+	
+	<select id="selectSearchKeywordList" resultType="SearchKeyword">
+	<!-- 	select
+			*
+		from
+		( -->
+		select
+			count(*) RANK, search_keyword
+		from
+			tbl_search
+		group by
+			search_keyword
+		order by
+			RANK desc
+<!-- 		) -->
+		
+	</select>
+	
 </mapper>
 
 

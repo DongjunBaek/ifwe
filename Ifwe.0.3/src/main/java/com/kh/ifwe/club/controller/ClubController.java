@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -39,6 +38,7 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,7 +62,7 @@ public class ClubController {
 	@GetMapping("/clubSearchKeyword.do")
 	@ResponseBody
 	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
-										    @RequestParam("searchType") String searchType,
+										  @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
 									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
 										  @RequestParam("memberCode")int memberCode) {
@@ -108,6 +108,22 @@ public class ClubController {
 		
 		return searchListResult;
 		
+	}
+	
+	@GetMapping("/searchKeywordList.do")
+	@ResponseBody
+	public List<SearchKeyword> searchKeyword(){
+		log.debug("키워드 리스트 페이지");
+		
+		List<SearchKeyword> searchKeywordList = clubService.selectSearchKeywordList();
+
+		/*
+		 * Map<String, String> param = new HashMap<>();
+		 * param.put("searchKeyword",searchKeyword);
+		 */
+		log.debug("searchKeyword{}=",searchKeywordList);
+		
+		return searchKeywordList;
 	}
 	
 	
@@ -604,4 +620,22 @@ public class ClubController {
 		
 		return club;
 	}
+	
+	/**
+	 * 0402 clubCateCode List 가져오기
+	 * 여주
+	 */
+	@GetMapping("/clubCateList.do")
+	@ResponseBody
+	public List<Club> clubCateList(@RequestParam("clubCatecode") String clubCatecode){
+		
+		log.debug("소모임 카테고리 별 리스트 페이지");
+		
+		List<Club> clubCateList  = clubService.selectClubCateList(clubCatecode);
+		
+		log.debug("clubCateList{}=",clubCateList);
+		
+		return clubCateList;
+	}
+	
 }

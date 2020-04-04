@@ -49,6 +49,8 @@ public interface AdminService {
 
 	int updateEvent(AdminEvent adminEvent);
 
+	List<Member> memberEnrollList();
+
 
 
 }

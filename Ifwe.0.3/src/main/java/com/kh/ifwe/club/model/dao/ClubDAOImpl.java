@@ -19,6 +19,7 @@ import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -182,6 +183,16 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<Count> selectAge(List<Integer> clubCode) {
 		return sqlSession.selectList("club.selectAge",clubCode);
+	}
+
+	@Override
+	public List<Club> selectClubCateList(String clubCatecode) {
+		return sqlSession.selectList("club.selectClubCateList",clubCatecode);
+	}
+
+	@Override
+	public List<SearchKeyword> selectSearchKeywordList() {
+		return sqlSession.selectList("club.selectSearchKeywordList");
 	}
 
 

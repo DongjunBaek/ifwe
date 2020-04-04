@@ -139,6 +139,11 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.update("admin.EventUpdate", adminEvent);
 	}
 
+	@Override
+	public List<Member> selctMemberEnrollList() {
+		return sqlSession.selectList("admin.MemberEnrollList");
+	}
+
 
 
 	
