@@ -242,12 +242,17 @@ public class MemberController {
 		
 		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
 		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
 		
 		log.debug("friendList={}",friendList);
 		log.debug("friends={}",friends);
 		model.addAttribute("friendList",friendList);
 		model.addAttribute("friends",friends);
-		
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/mypage";
 	}
 	
@@ -472,7 +477,7 @@ public class MemberController {
 	@PostMapping("/profileUpdate.do")
 	public String updatetProfile(Profile profile,
 			@RequestParam(value = "upFile", required = false) MultipartFile upFile, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
 		try {
 			log.debug("controller@profile={}", profile);
 
@@ -522,6 +527,11 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 //		mav.setViewName(viewName);
 		// return "redirect:/member/profile";
+		/**
+		 * 0404 memberLoggeIn Session 새로고침 dongjun
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(profile.getMemberCode());
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 
@@ -639,9 +649,15 @@ public class MemberController {
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		
-	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
+		Profile profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(memberCode);
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 	
