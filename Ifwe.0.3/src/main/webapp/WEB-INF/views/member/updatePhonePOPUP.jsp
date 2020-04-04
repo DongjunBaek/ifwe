@@ -7,6 +7,7 @@
 <title>휴대전화 번경</title>
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/index/login.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <style>
 @font-face { font-family: 'GmarketSansMedium'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal; }

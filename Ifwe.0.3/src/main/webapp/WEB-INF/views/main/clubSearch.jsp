@@ -68,6 +68,7 @@ $(function(){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/club/clubSearchKeyword.do",
 			data: allData,
+			dataType:"json",
 			success:data => {
 				console.log(data);	
 				
@@ -90,8 +91,12 @@ $(function(){
 		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
 		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+data[i].memberId+'</p><p class="club-name-search font-hk">'+data[i].clubTitle+'</p>'+
 		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+data[i].clubLocation+'</p>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">1</span>/'+data[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">23</span><span class="information-fontsize2">:</span><span class="information-fontsize3">4</span></div>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+data[i].clubCurrent+'</span>/'+data[i].clubMax+'</div>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
+		                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
+		                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+data[i].clubCode+'>자세히 보기</button></div></div>'
 								);
@@ -177,6 +182,7 @@ $(function(){
                                 <p class="people-title font-hk">정원수 </p>
                                 <span class="information-fontsize">${list.clubCurrent }</span>/${list.clubMax }
                             </div>
+                           
                             <div class="information-box">
                                     <br>
                                     <p class="people-title font-hk">남여비율</p>
@@ -190,6 +196,7 @@ $(function(){
                                     </c:forEach>
                                     </c:if>
                             </div>
+                           
                             <div class="information-box lastbox">
                                     <br>
                                     <p class="people-title font-hk">평균나이</p>

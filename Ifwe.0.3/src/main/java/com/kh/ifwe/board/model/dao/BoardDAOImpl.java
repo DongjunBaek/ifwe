@@ -2,6 +2,7 @@ package com.kh.ifwe.board.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,8 +28,9 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> selectOne(String BoardCategory) {
-		return sqlSession.selectList("admin.selectOneBoard",BoardCategory);
+	public List<Board> selectOne(String boardCategory) {
+		
+		return sqlSession.selectList("admin.selectOneBoard",boardCategory);
 	}
 
 	@Override
@@ -45,4 +47,20 @@ public class BoardDAOImpl implements BoardDAO{
 	public int updateBoardOne(Board board) {
 		return sqlSession.update("admin.updateBoardOne", board);
 	}
+
+
+	@Override
+	public List<Board> selectOne2(String boardCategory, int numPerPage, int cPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("admin.selectOneBoard",boardCategory,rowBounds);
+	}
+
+	@Override
+	public int selectBoardTotalContents(String boardCategory) {
+		return sqlSession.selectOne("admin.selectBoardTotalContents",boardCategory);
+	}
+
 }

@@ -3,8 +3,10 @@ package com.kh.ifwe.clubBoard.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.ifwe.board.model.vo.BoardComment;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 
 public interface ClubBoardDAO {
 
@@ -27,6 +29,14 @@ public interface ClubBoardDAO {
 	int updateBoardImg(int boardNo);
 
 	List<BoardImg> selectClubBoardNoList(int clubCode);
+
+	int insertComment(ClubBoardComment boardComment);
+
+	List<ClubBoardComment> selectBoardComment(int clubCode);
+
+	int updateClubBoard(int boardRef);
+
+	List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo);
 	
 	
 }

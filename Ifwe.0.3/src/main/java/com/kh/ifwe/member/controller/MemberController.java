@@ -110,8 +110,10 @@ public class MemberController {
 		String msg = "";
 		if (result > 0) {
 			msg = "회원가입 성공!! 로그인해주세요";
+			mav.setViewName("redirect:/member/enrollsuccess.do?memberId="+member.getMemberId());
 		} else {
 			msg = "회원가입실패";
+			mav.setViewName("redirect:/");
 		}
 
 
@@ -122,7 +124,6 @@ public class MemberController {
 		int insertProfileResult =memberService.insertProfile(serchMember); 
 		
 		redirectAttributes.addFlashAttribute("msg", msg);
-		mav.setViewName("redirect:/");
 
 		return mav;
 	}
@@ -241,12 +242,17 @@ public class MemberController {
 		
 		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
 		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
 		
 		log.debug("friendList={}",friendList);
 		log.debug("friends={}",friends);
 		model.addAttribute("friendList",friendList);
 		model.addAttribute("friends",friends);
-		
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/mypage";
 	}
 	
@@ -471,7 +477,7 @@ public class MemberController {
 	@PostMapping("/profileUpdate.do")
 	public String updatetProfile(Profile profile,
 			@RequestParam(value = "upFile", required = false) MultipartFile upFile, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
 		try {
 			log.debug("controller@profile={}", profile);
 
@@ -521,6 +527,11 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 //		mav.setViewName(viewName);
 		// return "redirect:/member/profile";
+		/**
+		 * 0404 memberLoggeIn Session 새로고침 dongjun
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(profile.getMemberCode());
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 
@@ -637,10 +648,16 @@ public class MemberController {
 	@GetMapping("/profileUpdate.do")
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		System.out.println("memberController 되나");
-	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
+		
+		Profile profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(memberCode);
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 	
@@ -704,6 +721,19 @@ public class MemberController {
 		return "redirect:/member/mypage.do?memberCode="+memberCode;
 	}
 	
+	
+	//0403형철 회원가입성공페이지
+	@GetMapping("/enrollsuccess.do")
+	public ModelAndView enrollsuccess(ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Member member = memberService.selectOne(memberId);
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+
+		mav.addObject("memberLoggedIn",memberLoggedIn);
+		mav.setViewName("main/enrollSuccess");
+		
+		return mav;
+	}
 	
 
 }

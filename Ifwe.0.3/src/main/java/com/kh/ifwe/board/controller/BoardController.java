@@ -3,7 +3,9 @@ package com.kh.ifwe.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -126,16 +128,33 @@ public class BoardController {
 	
 	@GetMapping("/mainBoardList.do")
 	@ResponseBody
-	public List<Board> mainBoardList(ModelAndView mav, @RequestParam( 
+	public Map<Integer, Object> mainBoardList(ModelAndView mav, @RequestParam( 
 																value = "boardCategory",
 																required = false, 
-																defaultValue = "notice") String boardCategory) {
+																defaultValue = "notice") String boardCategory,
+														@RequestParam(value="cPage", defaultValue="1") int cPage) {
+		
+		final int numPerPage = 10;
+		
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		
 		log.debug("boardCategory = ",boardCategory);
-		List<Board> boardList = boardService.selectOne(boardCategory);
+		log.debug("cPage {}", cPage);
+		List<Board> boardList = boardService.selectOne2(boardCategory,numPerPage,cPage);
+		
+		int totalContents = boardService.selectBoardTotalContents(boardCategory);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
+		
+		
 		
 		log.debug("mainBoardList @ boardController {}", boardList);
+		log.debug("totalContents={}",totalContents);
+
+		map.put(0, cPage);
+		map.put(1, totalPage);
+		map.put(2, boardList);
 		
-		return boardList;
+		return map;
 	}
 	
 	@GetMapping("/boardDetail")

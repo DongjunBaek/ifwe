@@ -45,6 +45,7 @@ $(function(){
              return word !== "";
          });
      }
+     
  
      // 서버에 넘기기
      $("#tag-form").on("submit", function (e) {
@@ -53,6 +54,7 @@ $(function(){
          console.log($("#rdTag").val());
          $(this).submit();
      });
+     
 
      $("#tag").on("keypress", function (e) {
          var self = $(this);

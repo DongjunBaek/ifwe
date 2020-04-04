@@ -16,12 +16,24 @@
 <script>
 $(function(){
 	
+	
+	$(".comment-sliderbutton").click(function(){
+		console.log($(this).parent().next()[0]);
+		$(this).parent().next().slideToggle(300);
+		
+	});
+	
+
+	
+    
+	$(".comment-hiddenbox").each(function(idx,item){
+		
+		var cnt = $(item).children().length;
+		$(item).prev().children().append("<span>댓글 "+cnt+"개</span>");
+	});
     
 	
 	
-    $(".comment-sliderbutton").click(function(){
-        $(this).parent().nextAll(".comment-hiddenbox").slideToggle(300);
-    })
 	
     $(".section-block-right").click(function(){
     	location.href = "${pageContext.request.contextPath}/club/clubInsertBoardFree"
@@ -156,7 +168,6 @@ $(function(){
     	
     	$(chkid).change(function(){
     		
-    		console.log("야야야");
     		
     		if($(checkbox).is(":checked")){
                  $(item).css("max-height",height+"px");
@@ -290,59 +301,47 @@ function showSlides(n) {
                       </c:if>
                           
                       <div class="article1-line"></div>
+                      <form action="${pageContext.request.contextPath }/clubboard/insertComment.do" method="post" >
                       <div class="article1-comment-box">
-                          <input type="text" name="comment" id="commnet" placeholder="댓글입력">
-                          <div class="comment-input">입력</div>
+                      	  <input type="hidden" name="clubBoardlistNo" value="${cl.clubBoardlistNo }" />
+                      	  <input type="hidden" name="boardRef" value="${cl.boardNo }" />
+                      	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
+                      	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
+                          <input type="text" name="commentContent" placeholder="댓글입력">
+                          <input type="submit" value="입력" />
                       </div>
-                      <div class="article1-comment-count">
-                          <div class="comment-sliderbutton">
-                              	댓글 2개&nbsp;&nbsp;<i class="fas fa-sort-down" style="font-size: 18px;"></i>
-                          </div>
-                      </div>
-                      <div class="comment-hiddenbox">
-
-                          <div class="article1-commnet-container">
-                              <div class="comment-frofile-img">
-                              	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                              </div>
-                              <div class="comment-block"></div>
-                          <div class="comment-frofile-name">신형철</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-
-                      </div>
-                      <div class="article1-commnet-container">
-                          <div class="comment-frofile-img">
-                          	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                          </div>
-                          <div class="comment-block"></div>
-                          <div class="comment-frofile-name">백동준</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-                          
-                      </div>
-                      <div class="article1-commnet-container">
-                          <div class="comment-frofile-img">
-                          	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
-                          </div>
-                          <div class="comment-block"></div>
-                          <div class="comment-frofile-name">문보라</div>
-                          <p>확인했습니다!</p>
-                          <div class="comment-right-box">
-                              <p>신고</p>
-                              <p>|</p>
-                              <p>답글</p>
-                          </div>
-                      </div>
-                  </div>
+                      </form>
+                      
+                      
+                      <c:if test="${cl.boardCommentYn =='y'}">
+                      
+	                      <div class="article1-comment-count">
+	                          <div class="comment-sliderbutton">
+	                              	<i class="fas fa-sort-down" style="font-size: 18px;"></i>
+	                          </div>
+	                      </div>
+	                      
+	                      <div class="comment-hiddenbox">
+						  
+	                      <c:forEach items="${clubBoardComment }" var="comment">
+		                      <c:if test='${comment.boardRef == cl.boardNo }'>
+		                          <div class="article1-commnet-container">
+		                           	  <div class="comment-frofile-img">
+		                              	<img src="${pageContext.request.contextPath }/resources/upload/profile/${comment.profileImgRe}" alt="" />
+	                              	  </div>
+		                              <div class="comment-block"></div>
+			                          <div class="comment-frofile-name">${comment.profileName }</div>
+			                          <p class="comment-content">
+				                          ${comment.commentContent }
+			                          </p>
+			                          <div class="comment-right-box">
+			                              <p>신고</p>
+			                          </div>
+		                     		</div>
+		                      </c:if>
+	               		  </c:forEach> 
+	                     </div>
+                    </c:if> 
               </div>
           </div>
           </c:forEach>

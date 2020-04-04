@@ -109,6 +109,44 @@
 	
 	</select>
 	
+	<insert id="insertComment">
+		insert into CLUB_BOARD_COMMENT
+		values(seq_club_boardlist_no.nextval,
+			   #{boardRef},
+			   #{memberCode},
+			   #{commentContent},
+			   default,
+			   'n','n')
+	</insert>
+	
+	<select id="selectBoardCommentMain" resultType="clubBoardComment">
+		
+		select C.*,P.profile_name,P.profile_img_re
+		from club_board_comment C join club_board B
+                                  on B.board_no = C.board_ref
+                                  join member_profile P
+                                  on C.member_code = P.member_code
+		where B.club_code = #{clubCode}
+		order by C.comment_date
+	
+	</select>
+	
+	<update id="updateClubBoard">
+		update club_board set board_comment_yn = 'y'
+		where board_no = #{boardRef}
+	</update>
+	
+	<select id="selectFreeboardCmt" resultType="clubBoardComment">
+		select C.*,P.profile_name,P.profile_img_re
+		from club_board_comment C join club_board B
+                                  on B.board_no = C.board_ref
+                                  join member_profile P
+                                  on C.member_code = P.member_code
+		where B.club_boardlist_no = #{clubBoardlistNo}
+		order by C.comment_date
+	
+	</select>
+	
 	
 	
 </mapper>

@@ -311,23 +311,25 @@ CREATE TABLE  CLUB_BOARDLIST  (
 
 -- 20.소모임 게시판 테이블
 CREATE TABLE  CLUB_BOARD  (
-
-	 board_no 	NUMBER		primary key ,
-	 club_code 	NUMBER		NOT NULL,
-	 member_code 	NUMBER		NOT NULL,
-	 club_boardlist_no 	number	NOT NULL,
-     board_title varchar2(100) null,
-	 board_content 	VARCHAR2(2000)		NULL,
-	 board_date 	DATE	default sysdate,
-	 board_heart 	NUMBER		NULL,
-	 board_cate_code 	VARCHAR2(200)		NULL,
-	 board_del 	CHAR(1)		NULL, -- y or n
-     board_report char(1) null , --y or n
+    board_no    NUMBER      primary key ,
+    club_code    NUMBER      NOT NULL,
+    member_code    NUMBER      NOT NULL,
+    club_boardlist_no    number   NOT NULL,
+    board_title varchar2(100) null,
+    board_content    VARCHAR2(2000)      NULL,
+    board_date    DATE   default sysdate,
+    board_heart    NUMBER      NULL,
+    board_cate_code    VARCHAR2(200)      NULL,
+    board_del    CHAR(1)      NULL, -- y or n
+    board_report char(1) null , --y or n
+    board_imgyn char(1) default 'n',
+    board_comment_yn char(1) default 'n',
      constraint fk_club_code_board foreign key (club_code) references club (club_code)ON DELETE CASCADE,
      constraint fk_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE,
      constraint fk_club_boardlist_no foreign key (club_boardlist_no) references CLUB_BOARDLIST (club_boardlist_no)ON DELETE CASCADE
      
 );
+
 
 -- 21.소모임 게시판 댓글 테이블
 CREATE TABLE  CLUB_BOARD_COMMENT  (
@@ -493,6 +495,20 @@ begin
     insert into club_boardlist
     values(seq_club_boardlist_no.nextval, :new.club_code, '자유게시판');
     
+end;
+/
+
+--클럽 가입하기 누르면 club_current숫자 +1
+create trigger club_members_tri
+after insert on club_members for each row
+begin update club set club_current = club_current+1 where club_code = :new.club_code;
+end;
+/
+
+--클럽 탈퇴하면 club_current-1
+create or replace trigger club_members_tri_mi
+after delete on club_members for each row
+begin update club set club_current = club_current-1 where club_code = :old.club_code;
 end;
 /
 --=================================================================

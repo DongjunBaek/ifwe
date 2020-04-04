@@ -50,7 +50,6 @@ public interface ClubService {
 
 	int updateMsgView(int msgCode);
 
-	int updateClubCurrent(int clubCode);
 
 	int updateClub(Club newClub);
 
@@ -71,9 +70,12 @@ public interface ClubService {
 
 	List<Count> selectAge(List<Integer> clubCode);
 
+
 	List<Club> selectClubCateList(String clubCatecode);
 
 	List<SearchKeyword> selectSearchKeywordList();
+
+	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
 
 

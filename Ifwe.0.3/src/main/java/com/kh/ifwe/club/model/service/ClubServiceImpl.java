@@ -149,11 +149,6 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
-	@Override
-	public int updateClubCurrent(int clubCode) {
-		return clubDAO.updateClubCurrent(clubCode);
-
-	}
 
 	public ClubMember selectClubMaster2(Map<String, Object> param2) {
 		return clubDAO.selectClubMaster2(param2);
@@ -215,22 +210,24 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
+	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
+		return clubDAO.selectclubBoardSearch(param);
+	}
+	
+	@Override
 	public List<Club> selectClubCateList(String clubCatecode) {
 		return clubDAO.selectClubCateList(clubCatecode);
 	}
-
 
 	@Override
 	public List<SearchKeyword> selectSearchKeywordList() {
 		return clubDAO.selectSearchKeywordList();
 	}
 
-
-	
-
+}	
 
 
+
 	
 	
 	
-}

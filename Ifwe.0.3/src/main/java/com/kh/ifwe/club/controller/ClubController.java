@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -32,13 +33,13 @@ import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoardComment;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.common.util.Utils;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
-import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,7 +63,7 @@ public class ClubController {
 	@GetMapping("/clubSearchKeyword.do")
 	@ResponseBody
 	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
-										  @RequestParam("searchType") String searchType,
+										    @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
 									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
 										  @RequestParam("memberCode")int memberCode) {
@@ -108,22 +109,6 @@ public class ClubController {
 		
 		return searchListResult;
 		
-	}
-	
-	@GetMapping("/searchKeywordList.do")
-	@ResponseBody
-	public List<SearchKeyword> searchKeyword(){
-		log.debug("키워드 리스트 페이지");
-		
-		List<SearchKeyword> searchKeywordList = clubService.selectSearchKeywordList();
-
-		/*
-		 * Map<String, String> param = new HashMap<>();
-		 * param.put("searchKeyword",searchKeyword);
-		 */
-		log.debug("searchKeyword{}=",searchKeywordList);
-		
-		return searchKeywordList;
 	}
 	
 	
@@ -236,7 +221,7 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("memberCode", memberLoggedIn.getMemberCode());
 		
-	
+		
 		
 		Club club = clubService.selectOne(clubCode);
 		
@@ -273,6 +258,11 @@ public class ClubController {
 			boardImg = clubBoardService.selectClubBoardImg(boardNo);
 		}
 		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
 		log.debug("club={}",club);
 		log.debug("clubMaster={}",clubMaster);
 		log.debug("clubMember={}",clubMember);
@@ -280,19 +270,15 @@ public class ClubController {
 		log.debug("clubBoardList={}",clubBoardList);
 		log.debug("clubBoardProfileList={}",clubBoardProfileList);
 		log.debug("boardImg={}",boardImg);
+		log.debug("clubBoardComment={}",clubBoardComment);
 		
 		
-		
+		mav.addObject("clubBoardComment",clubBoardComment);
 		mav.addObject("clubBoardList",clubBoardList);
 		mav.addObject("clubLoggedIn",clubLoggedIn);
 		mav.addObject("clubMember",clubMember);
 		mav.addObject("club", club);
 		mav.addObject("clubMaster", clubMaster);
-
-		mav.addObject("msgCount",msgCount);
-
-		mav.addObject("clubBoardProfileList", clubBoardProfileList);
-
 		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.addObject("boardImg",boardImg);
@@ -347,11 +333,7 @@ public class ClubController {
 		return mav;
 	}
 	
-	@GetMapping("/calendar.do")
-	public String calendar() {
-		return "club/clubcalendar";
-	}
-	
+
 //	@GetMapping("/notice.do")
 //	public String notice() {
 //		return "club/clubNotice";
@@ -441,8 +423,6 @@ public class ClubController {
 		param.put("msgCode",msgCode);
 		
 		int result = clubService.updateMembersGrade(param);
-		//가입수락을 누르면 club_current +1 update
-		int plusResult = clubService.updateClubCurrent(clubCode);
 		
 		log.debug("result = {}",result);
 		
@@ -621,6 +601,52 @@ public class ClubController {
 		return club;
 	}
 	
+	//0403형철 소모임검색
+	@GetMapping("/searchBoard.do")
+	public ModelAndView searchBoard(ModelAndView mav,@RequestParam("clubCode") int clubCode,
+									@RequestParam("search") String searchTag) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("clubCode", clubCode);
+		param.put("searchTag", searchTag);
+		
+		
+		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardSearch(param);
+		
+		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
+		List<BoardImg> boardImg = null;
+		
+		if(boardNo!=null && !boardNo.isEmpty() && boardNo.size()!=0) {
+			boardImg = clubBoardService.selectClubBoardImg(boardNo);
+		}
+		
+		//메인페이지 게시물 댓글리스트
+		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
+		
+		
+		
+		mav.addObject("clubBoardComment",clubBoardComment);
+		mav.addObject("clubBoardProfileList", clubBoardProfileList);
+		mav.addObject("boardImg",boardImg);
+		
+		
+		mav.setViewName("club/clubSearchBoard");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	/** 20200403 풀캘린더 insert 김원재
+	 */
+	@GetMapping("/calendar.do")
+	public String calendar() {
+		return "club/fc";
+	}
+	
+	
 	/**
 	 * 0402 clubCateCode List 가져오기
 	 * 여주
@@ -638,4 +664,9 @@ public class ClubController {
 		return clubCateList;
 	}
 	
+
+	
+	
+	
 }
+

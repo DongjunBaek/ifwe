@@ -10,21 +10,51 @@
 p{
 margin:0;
 }
-.content{
-overflow:auto;
-}
 .friend-btn{
 margin-left:24%;
+}
+.msglist-container{
+background-color:white;
 }
 .add-msglist{
 background-color:white;
 margin:0 auto;
 text-align:center;
-font-size:2em;
+font-size:1.5em;
+border-top:1px solid #2b2b2b;
+height:24px;
+width:720px;
 
 }
 
 </style>
+<script >
+	$(function(){
+		
+		$(".add-msglist").click(function(){
+			console.log("작동")
+			var height = $(".contents").css("height");			
+			console.log(height);
+			if(height == "200px"){
+				$(".contents").css("height","1000px");
+				$(".notice-container").css("min-height","1000px");
+				$(".board-div").css("display","none")
+				$(".fa-arrow-down").css("display","none")
+				$(".fa-arrow-up").css("display","block")
+			}else{
+				$(".contents").css("height","200px");
+				$(".notice-container").css("height","300px")
+									.css("min-height",0);
+				$(".board-div").css("display","block")
+				$(".fa-arrow-down").css("display","block")
+				$(".fa-arrow-up").css("display","none")
+			}
+			
+		});
+		
+	})
+</script>
+
 <!-- 문보라 수정 03.20  -->
 	<section class="mypage-section">
         <article class="mypage-first">
@@ -34,7 +64,7 @@ font-size:2em;
                 </div>
                 <div class="myname-div font-kor">
                     <div style="font-size: 25px;margin:0 auto;max-width: fit-content;">@${memberLoggedIn.memberId }</div>
-                    <div style="margin:0 auto;font-size:30px;font-weight: 900;max-width: fit-content;" >${memberLoggedIn.memberName }</div>
+                    <div style="margin:0 auto;font-size:30px;font-weight: 900;max-width: fit-content;" >${memberLoggedIn.profileName }</div>
                 </div>
             </div>
             <div class="btn-div">
@@ -78,7 +108,7 @@ font-size:2em;
 	                        	</c:if> 
 	                        	<c:if test="${fl.msgView == 'y' }">
 	                        	<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
-	                        	<input type="button" value="수락완료"class="friend-btn font-kor" style="padding:0"></p>	
+	                        	<input type="button" value="수락완료"class="friend-btn font-kor" style="padding:0;"></p>	
 	                        	</c:if>
 	                        	
 	                        </c:forEach>
@@ -86,10 +116,12 @@ font-size:2em;
                     </div>
                 </div>
             </div>
-            <div class="add-msglist">
-            <span><i class="fas fa-arrow-down" style="color:#2756a6;"></i></span>
-            <button type="button" style="background-color:#ebebeb; width:100%; height:10px;"></button>
-            </div>
+           		<div class="msglist-container">
+		            <div class="add-msglist">
+		            	<i class="fas fa-arrow-down" style="color:#2756a6;"></i>
+		            	<i class="fas fa-arrow-up" style="color:#2756a6; display:none;"></i>
+		            </div>
+	            </div>
             <div class="board-div">
                 <div class="board-title">
                     <i class="fas fa-pencil-alt" style="font-size:25px;color: #2756a6;margin:5% 4% 2% 0;"></i><span class="font-kor" style="font-size:25px;">내가 쓴 게시글</span>
