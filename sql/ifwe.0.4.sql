@@ -58,7 +58,7 @@
 --select * from tab; -- 전체 테이블 조회
 select * from member;
 select * from member_profile;
-select* from club_members;
+select * from club_members;
 --=================================================================
 --TABLE
 --=================================================================
@@ -455,33 +455,8 @@ begin
     where search_keyword like search_keyword;
 end;
 /
-    
-drop trigger tri_search_count;    
-    
-select * from (select count(*) RANK, search_keyword from tbl_search group by search_keyword order by RANK desc) where rownum <=5;
---select rownum, K.kearch_keyword from (select count(*) RANK from tbl_search group by search_keyword order by RANK desc)K where rownum > 6;
 
-select count(*) num, member_enrolldate from member group by date_format(member_enrolldate, 'rr/mm/dd')  order by member_enrolldate desc;
-select * from member;
-
-		select
-			count(*) RANK, search_keyword
-		from
-			tbl_search
-		group by
-			search_keyword
-		order by
-			RANK desc;
-
-
-delete tbl_search;
-insert into tbl_search values('15','노래',default,'2');
-
-select * from tbl_search;
-    
 commit;    
-    
-select * from club_boardlist;
 
 create or replace trigger trig_club_boardlist
 after
@@ -560,12 +535,3 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
-select * from club_board;
-
-select * from member;
-select * from club;
-select * from tbl_search;
-
-select count(*) from (select *from tbl_search where search_keyword = '영화'); 
-
-select * from club_members;
