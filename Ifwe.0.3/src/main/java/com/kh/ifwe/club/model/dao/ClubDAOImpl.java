@@ -90,8 +90,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<ClubMember> selectClubMember(List<Member> clubMemberCode_) {
-		return sqlSession.selectList("club.selectClubMember", clubMemberCode_);
+	public List<ClubMember> selectClubMember(Map<String, Object> param2) {
+		return sqlSession.selectList("club.selectClubMember", param2);
 	}
 
 	@Override
