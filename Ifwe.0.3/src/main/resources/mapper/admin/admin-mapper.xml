@@ -228,7 +228,7 @@
 			to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') 
 		order by 
 			to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') desc
-
+	</select>
 	 <select id="selectBoardTotalContents" resultType="_int">
 	 select count(*) from board where board_cate like #{boardCategory} and board_del = 'N'
 

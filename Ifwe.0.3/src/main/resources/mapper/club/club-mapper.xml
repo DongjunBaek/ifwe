@@ -365,7 +365,7 @@
 		order by
 			RANK desc
 <!-- 		) -->
-		
+		</select>
 
 	<select id="selectclubBoardSearch" resultMap="clubBoardProfileMap">
 		select 

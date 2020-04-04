@@ -189,7 +189,10 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<SearchKeyword> selectSearchKeywordList() {
 		return sqlSession.selectList("club.selectSearchKeywordList");
+	}
+	
 
+	@Override
 	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
 		return sqlSession.selectList("club.selectclubBoardSearch",param);
 
