@@ -51,7 +51,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public List<Board> selectOne2(String boardCategory, int numPerPage, int cPage) {
-		int offset = ((cPage-1)-numPerPage);
+		int offset = ((cPage-1)*numPerPage);
 		int limit = numPerPage;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
