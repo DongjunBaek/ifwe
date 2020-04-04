@@ -14,6 +14,7 @@ import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 public interface ClubService {
 
@@ -68,6 +69,11 @@ public interface ClubService {
 	List<Integer> selectMaleCount(List<Integer> clubCode);
 
 	List<Count> selectAge(List<Integer> clubCode);
+
+
+	List<Club> selectClubCateList(String clubCatecode);
+
+	List<SearchKeyword> selectSearchKeywordList();
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
