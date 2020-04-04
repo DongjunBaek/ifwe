@@ -107,9 +107,10 @@
                       join club_members H on M.member_code=H.member_code
 		where 
 		M.member_code in
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		<foreach collection="clubMemberCode" item="item" open="(" close=")" separator=",">
 		#{item.memberCode}
 		</foreach>
+		and H.club_code = #{clubCode}
 	</select>
 	
 	<select id="selectClubMaster2" resultType="clubMember">

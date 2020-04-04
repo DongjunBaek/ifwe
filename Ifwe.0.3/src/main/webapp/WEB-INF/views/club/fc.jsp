@@ -216,9 +216,7 @@ border: 1px solid #ebebeb;
 		         url:"<%=request.getContextPath()%>/club/checkmaster",
 		         type: "GET", 
 		          data:{"memberCode":${memberLoggedIn.memberCode },
-		        	  	"clubCode":${club.clubCode}
-		        	  	
-		          },
+		        	  	"clubCode":${club.clubCode}},
 	
 		         beforeSend: function(){
 		            console.log("beforeSend");
@@ -227,7 +225,7 @@ border: 1px solid #ebebeb;
 		            
 		            console.log("success");
 		            console.log("data :", data);          
-		            )
+		            
 		            
 		         },
 		         error: function(jqxhr, textStatus, errorThrown){
