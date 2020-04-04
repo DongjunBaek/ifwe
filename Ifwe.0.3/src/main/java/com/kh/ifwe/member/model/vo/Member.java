@@ -35,6 +35,7 @@ public class Member implements Serializable {
 	private String memberRole;
 	private int memberMsg;
 	private String memberLike;
+	private int num;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -647,8 +647,26 @@ public class ClubController {
 	}
 	
 	
+	/**
+	 * 0402 clubCateCode List 가져오기
+	 * 여주
+	 */
+	@GetMapping("/clubCateList.do")
+	@ResponseBody
+	public List<Club> clubCateList(@RequestParam("clubCatecode") String clubCatecode){
+		
+		log.debug("소모임 카테고리 별 리스트 페이지");
+		
+		List<Club> clubCateList  = clubService.selectClubCateList(clubCatecode);
+		
+		log.debug("clubCateList{}=",clubCateList);
+		
+		return clubCateList;
+	}
 	
+
 	
 	
 	
 }
+

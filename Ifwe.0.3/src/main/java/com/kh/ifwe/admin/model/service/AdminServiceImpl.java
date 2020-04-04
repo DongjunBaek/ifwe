@@ -117,6 +117,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.updateEvent(adminEvent);
 	}
 
+	@Override
+	public List<Member> memberEnrollList() {
+		return adminDAO.selctMemberEnrollList();
+	}
+
 
 
 

@@ -1,21 +1,21 @@
 package com.kh.ifwe.mian.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.admin.model.service.AdminService;
-import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,6 +55,7 @@ public class Maincontroller {
 	}
 
 	
+
 	@GetMapping("/index/mainpage.do")
 	public String index() {
 		return "redirect:/";

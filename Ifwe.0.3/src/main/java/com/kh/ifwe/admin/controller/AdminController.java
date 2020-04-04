@@ -417,5 +417,16 @@ public class AdminController {
 	 }
 	 
 
+	 @GetMapping("/memberEnrollList.do")
+	 @ResponseBody
+	 public List<Member> memberEnrollList(){
+		 log.debug("회원가입 수 목록 페이지");
+		 
+		 List<Member> memberEnrollList = adminService.memberEnrollList();
+		 
+		 log.debug("memberEnrollList{}=",memberEnrollList);
+		 
+		 return memberEnrollList;
+	 }
 
 }

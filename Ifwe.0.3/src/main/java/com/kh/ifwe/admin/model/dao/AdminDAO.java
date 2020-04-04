@@ -49,6 +49,8 @@ public interface AdminDAO {
 
 	int updateEvent(AdminEvent adminEvent);
 
+	List<Member> selctMemberEnrollList();
+
 
 
 }
