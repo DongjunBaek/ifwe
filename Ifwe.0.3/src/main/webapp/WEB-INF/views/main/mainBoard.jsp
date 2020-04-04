@@ -38,23 +38,30 @@ let boardCategory;
             		 });
             		 
             		cPage = data[0];
-          			var tPage = data[1];
-          			var pageBarSize = 5;
-          			var pageStart = ((cPage-1)/pageBarSize) * pageBarSize+1; 
-          			var pageEnd = pageStart+pageBarSize-1;
+         			var tPage = data[1];
+         			var pageBarSize = 5;
+         			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
+         			var pageEnd = pageStart+pageBarSize-1;
+         			var pageNo = pageStart;
+         			console.log(pageStart);
    			
            			$children4 = $("<div class='section-boardfooter-box'></div>");
-           			if(cPage == 1){
+           			if(cPage <= 1){
            				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">Back</button>"));
            			}else{
            				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">Back</button>"));
            			}
-           			
-           			for( var i = 1; i <= tPage;i++){
+           			console.log(pageStart);
+           			for( var i = pageStart; i <= pageEnd;i++){
+           				
            				if(i == cPage){
            					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
            				}else{
            					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+           				}
+           				
+           				if(i == tPage){
+           					break;
            				}
 
            			}
@@ -155,24 +162,26 @@ function reloadFunctionToAjax(no){
      		 	cPage = data[0];
      			var tPage = data[1];
      			var pageBarSize = 5;
-     			var pageStart = ((cPage-1)/pageBarSize) * pageBarSize+1; 
+     			var pageStart = Math.floor((cPage-1)/pageBarSize)*pageBarSize+1; 
      			var pageEnd = pageStart+pageBarSize-1;
      			var pageNo = pageStart;
-     			
+     			console.log(pageStart);
       			$children4 = $("<div class='section-boardfooter-box'></div>");
-       			if(cPage == 1){
+       			if(cPage <= 1){
        				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">Back</button>"));
        			}else{
        				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">Back</button>"));
        			}
        			
-       			for( var i = 1; i <= tPage;i++){
+       			for( var i = pageStart; i <= pageEnd;i++){
        				if(i == cPage){
        					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
        				}else{
        					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
        				}
-
+       				if(i == tPage){
+       					break;
+       				}
        			}
        			
        			if(cPage == tPage){
