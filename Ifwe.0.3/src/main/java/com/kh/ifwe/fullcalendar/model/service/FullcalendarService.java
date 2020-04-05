@@ -8,7 +8,7 @@ public interface FullcalendarService {
 
 	void addFullcalendar(Fullcalendar fullcalendar);
 
-	List<Fullcalendar> selectList();
+	List<Fullcalendar> selectList(String clubCode);
 
 	int updateFC(Fullcalendar fc);
 

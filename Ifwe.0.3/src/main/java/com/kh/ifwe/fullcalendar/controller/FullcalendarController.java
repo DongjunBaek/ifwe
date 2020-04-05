@@ -38,13 +38,12 @@ public class FullcalendarController {
 	@Autowired
 	ResourceLoader resourceLoader;
 
-	@GetMapping("/add.do")
+	@PostMapping("/add.do")
 	@ResponseBody
 	public void addFullcalendar(Model model, @ModelAttribute Fullcalendar fullcalendar, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 
 		log.debug(fullcalendar.toString());
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 		fullcalendarservice.addFullcalendar(fullcalendar);
 	}
@@ -53,15 +52,16 @@ public class FullcalendarController {
 	@GetMapping("/getfc")
 	@ResponseBody
 	public List<Fullcalendar> SelectFCList(Model model, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
-		
-				List<Fullcalendar> FC = fullcalendarservice.selectList();
+			RedirectAttributes redirectAttributes, String clubCode) {
+		System.out.println("컨트롤러 클럽코드="+clubCode);
+				List<Fullcalendar> FC = fullcalendarservice.selectList(clubCode);
 //		ModelAndView mav= new ModelAndView("jsonView");
 //		mav.addObject("array",FC);
 //		model.addAttribute("array",FC);
 //		mav.setViewName("/");
 //	  Fullcalendar FCT=	FC.get(0);
 //		return mav;
+			
 				return FC;
 		
 	}

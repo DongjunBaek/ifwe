@@ -22,9 +22,9 @@ public class FullcalendarDAOImpl implements FullcalendarDAO {
 	}
 
 	@Override
-	public List<Fullcalendar> selectList() {
+	public List<Fullcalendar> selectList(String clubCode) {
 		// TODO Auto-generated method stub
-		return sqlsessiontemplate.selectList("fullcalendar.selectFcList");
+		return sqlsessiontemplate.selectList("fullcalendar.selectFcList",clubCode);
 	}
 
 	@Override

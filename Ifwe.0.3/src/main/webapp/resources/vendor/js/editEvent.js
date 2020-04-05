@@ -84,7 +84,7 @@ var editEvent = function (event, element, view) {
         //일정 업데이트
         $.ajax({
             type: "post",
-            url: "/spring/fullcalendar/updatefc",
+            url: "/ifwe/fullcalendar/updatefc",
             data: {
                 //...  	
              	fullId: event._id,
@@ -119,7 +119,7 @@ $('#deleteEvent').on('click', function () {
     //삭제시
     $.ajax({
         type: "post",
-        url: "/spring/fullcalendar/deletefc",
+        url: "/ifwe/fullcalendar/deletefc",
         data: {
          	fullId:$(this).data('id'),
           	title: $(this).data('title'),

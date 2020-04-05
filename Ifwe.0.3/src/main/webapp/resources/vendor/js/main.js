@@ -193,9 +193,10 @@ var calendar = $('#calendar').fullCalendar({
         	backgroundColor: array.fullBackgroundColor,
         	textColor:array.fullTextColor,
         	allDay: array.fullAllDay,
-        	fullNo:array.fullNo
+        	fullNo:array.fullNo,
+        	clubCode:clubCCode
+        	
         	}
-//       	console.log(array);
       	events.push(evt);
         	/*callback(events);
         	*/

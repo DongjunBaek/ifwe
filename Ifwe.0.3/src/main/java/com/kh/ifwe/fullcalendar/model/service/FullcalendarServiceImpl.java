@@ -23,10 +23,10 @@ public class FullcalendarServiceImpl implements FullcalendarService {
 	}
 
 	@Override
-	public List<Fullcalendar> selectList() {
+	public List<Fullcalendar> selectList(String clubCode) {
 
 		
-		return fullcalendardao.selectList();
+		return fullcalendardao.selectList(clubCode);
 	}
 
 	@Override
