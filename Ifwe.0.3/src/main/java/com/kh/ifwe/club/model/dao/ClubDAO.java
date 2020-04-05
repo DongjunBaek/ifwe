@@ -85,6 +85,8 @@ public interface ClubDAO {
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
+	List<ClubMaster> clubSearch(int cPage, int numPerPage);
+
 
 
 

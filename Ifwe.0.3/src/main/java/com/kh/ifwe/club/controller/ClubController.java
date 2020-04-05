@@ -113,12 +113,17 @@ public class ClubController {
 	
 	
 	@GetMapping("/clubSearch")
-	public ModelAndView clubSearch(ModelAndView mav) {
+	public ModelAndView clubSearch(ModelAndView mav, @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("소모임 검색");
 		
-		List<ClubMaster> clubList = clubService.clubSearch();
+		final int numPerPage = 3;
+		log.debug("cPage {}",cPage);
+		List<ClubMaster> clubList = clubService.clubSearch(cPage,numPerPage);
 		log.debug("clubList = {}",clubList);
+
+		int totalContents = clubService.clubSearch().size();
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
 		List<Integer> clubCode = new ArrayList<Integer>();
 		
@@ -127,6 +132,8 @@ public class ClubController {
 				clubCode.add(clubList.get(i).getClubCode());
 			}
 		}
+		
+
 		
 		log.debug("clubCode = {}",clubCode);
 		//남녀비율
@@ -145,7 +152,8 @@ public class ClubController {
 		mav.addObject("maleList", maleList);
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
-		
+		mav.addObject("cPage", cPage);
+		mav.addObject("tPage", totalPage);
 		return mav;
 	}
 	

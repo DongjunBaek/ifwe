@@ -224,6 +224,12 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectSearchKeywordList();
 	}
 
+	//0406 dongjun pageBar 
+	@Override
+	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
+		return clubDAO.clubSearch(cPage,numPerPage);
+	}
+
 }	
 
 

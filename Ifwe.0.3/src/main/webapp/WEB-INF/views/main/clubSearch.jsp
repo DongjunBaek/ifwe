@@ -15,6 +15,34 @@
 .classify-menu{
 	color:white;
 }
+/* 0405 club_pagebar_btn css add dongjun */
+.club_pageBar_btn{
+	display: flex;
+	width: 60%;
+	height: 150px;
+	border-radius: 50px;
+  	justify-content: center;
+	align-content: center;
+	/* border: 1.5px solid #0288D1; */
+	margin : 0 auto;
+	
+}
+
+.list-club-pagebtn{
+    display: block;
+    border: none;
+    outline: none;
+   	background-color: rgba(0,0,0,0);
+    align-content: center;
+    font-size: 20px;
+    margin-right: 4%;
+    height: 60px;
+    border-radius: 50px;
+    line-height: 60px;
+    margin-top: 3%;
+    width: 100px;
+}
+
 </style>
 <script>
 $(function(){
@@ -37,9 +65,17 @@ $(function(){
 	$(".friend-name-profile").click(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
-    
-    
+
+	$(".list-club-pagebtn").hover(function(){
+		$(this).css("color","white").css("background","#ffc862");
+	},function(){
+		$(this).css("color","#3b3b3b").css("background","rgba(0,0,0,0)");
+	});
 });
+function pageBar_btn(cPageNo){
+	console.log(cPageNo);
+	location.href = "${pageContext.request.contextPath}/club/clubSearch?cPage="+cPageNo;
+}
 
 </script>
 <style>
@@ -69,6 +105,7 @@ $(function(){
 			url:"${pageContext.request.contextPath}/club/clubSearchKeyword.do",
 			data: allData,
 			dataType:"json",
+			asyn: false,
 			success:data => {
 				console.log(data);	
 				
@@ -102,6 +139,12 @@ $(function(){
 								);
 						
 					}
+				    $("[name=goclub]").click(function(){
+				    	let clubCode = $(this).attr("data-clubCode");
+				    	console.log(clubCode);
+				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
+				    });
+					
 					$("[name=searchType]").val('');
 					$("[name=clubSearchKeyword]").val('');
 					$("[name=clubLocation]").val('');
@@ -170,7 +213,7 @@ $(function(){
                         	<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${list.clubImgRe}" alt="" />
                         </div>
                         <div class="club-leader">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" />
+                        	<img src="${pageContext.request.contextPath }/resources/upload/profile/ex2.jpg" alt="" />
                         </div>
                         <div class="information-container">
                             <p class="club-leader-name font-hk friend-name-profile">@ ${list.memberId}</p>
@@ -218,14 +261,35 @@ $(function(){
                     </div>
                    
                 </c:forEach>
-                </c:if>    
+                </c:if>
     
                 </div>
                 
                	<div class="card-wrapper" id="searchSomoimDivContainer">
                	</div>
                 
-                
+                <div class= "club_pageBar_btn">
+                	<c:if test="${tPage != 0 }">
+                		<c:forEach var="i" begin="1" end="${tPage }" varStatus="vs">
+                			<c:if test="${cPage == 1 && i == 1 }">
+    	           				<button onclick="pageBar_btn(1);" value="1" class="list-club-pagebtn">Back</button>
+                			</c:if>
+                			<c:if test="${cPage != 1 && i == 1 }">
+    	           				<button onclick="pageBar_btn('${i-1}');" value="${i-1 }" class="list-club-pagebtn">Back</button>
+                			</c:if>
+                			
+                			<button onclick="pageBar_btn('${i }');" value="${i }" class="list-club-pagebtn">${i }</button>
+                			
+                			<c:if test="${cPage == tPage && i == tPage}">
+                				<button onclick="pageBar_btn('${tPage }');" value="${tPage }" class="list-club-pagebtn">Next</button>
+                			</c:if>
+	               			<c:if test="${cPage != tPage && i == tPage}">
+	               				<button onclick="pageBar_btn('${cPage+1 }');" value="${cPage+1}" class="list-club-pagebtn">Next</button>
+	               			</c:if>
+	               			
+                		</c:forEach>
+                	</c:if>
+                </div>
             </div>
     </section>
 
