@@ -19,6 +19,7 @@ var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
  *  새로운 일정 생성
  * ************** */
 var newEvent = function (start, end, eventType) {
+if(checkMaster==1){
 
     $("#contextMenu").hide(); //메뉴 숨김
 
@@ -107,4 +108,5 @@ var newEvent = function (start, end, eventType) {
             }
         });
     });
+}//checkmaster if
 };

@@ -31,7 +31,8 @@
 	href="${pageContext.request.contextPath }/resources/css/main.css">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
-
+<script
+   src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <style>
 textarea, input,select{
 border: 1px solid #ebebeb;
@@ -63,10 +64,10 @@ border: 1px solid #ebebeb;
 			<ul class="dropdown-menu dropNewEvent" role="menu"
 				aria-labelledby="dropdownMenu"
 				style="display: block; position: static; margin-bottom: 5px;">
-				<li><a tabindex="-1" href="#">카테고리1</a></li>
-				<li><a tabindex="-1" href="#">카테고리2</a></li>
+				<li><a tabindex="-1" href="#">일정추가</a></li>
+		<!-- 		<li><a tabindex="-1" href="#">카테고리2</a></li>
 				<li><a tabindex="-1" href="#">카테고리3</a></li>
-				<li><a tabindex="-1" href="#">카테고리4</a></li>
+				<li><a tabindex="-1" href="#">카테고리4</a></li> -->
 				<li class="divider"></li>
 				<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 			</ul>
@@ -118,7 +119,7 @@ border: 1px solid #ebebeb;
 									class="inputModal" type="text" name="edit-end" id="edit-end" />
 							</div>
 						</div>
-						<div class="row">
+					<!-- 	<div class="row">
 							<div class="col-xs-12">
 								<label class="col-xs-4" for="edit-type">구분</label> <select
 									class="inputModal" type="text" name="edit-type" id="edit-type">
@@ -128,7 +129,7 @@ border: 1px solid #ebebeb;
 									<option value="카테고리4">카테고리4</option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 						<div class="row">
 							<div class="col-xs-12">
 								<label class="col-xs-4" for="edit-color">색상</label> <select
@@ -183,16 +184,58 @@ border: 1px solid #ebebeb;
                 
                 
             </section>
+    
+    
+    
+    		<script>
+var checkMaster= 0;
+    		/* 
+    		console.log("쳌마스터"+checkMaster); */
+	  $(function(){
+			
+	   console.log("onload On");
+		 
+		      var a = ${memberLoggedIn.memberCode };
+		      $.ajax({
+		         url:"<%=request.getContextPath()%>/fullcalendar/checkmaster",
+		         type: "GET", 
+		          data:{"memberCode":${memberLoggedIn.memberCode },
+		        	  	"clubCode":${club.clubCode}
+		          },
+	
+		         beforeSend: function(){
+		            console.log("beforeSend");
+		         },
+		         success: function(data){
+		            
+		            console.log("success");
+		            console.log("data :", data);        
+					if("master"==data){
+						console.log("checkMaster");
+					checkMaster=1;}
+		            
+		            
+		         },
+		         error: function(jqxhr, textStatus, errorThrown){
+		      
+		            console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
+		         }, 
+		         complete: function(){
+		      
+		            console.log("complete");
+		            
+		         }
+		         
+		      });
+				});
+		</script>
+    
+    
             
-<script>
-	//	console.log("클럽코드="+${club.clubCode});
+	<script>
 		var clubCCode =${club.clubCode};
-//		console.log("클럽코드="+clubCCode);
 		</script>
 		
-		<script>
-		console.log("클럽마스터="+${clubmaster.clubmaster});
-		</script>
 	<script
 		src="${pageContext.request.contextPath }/resources/vendor/js/jquery.min.js"></script>
 	<script
@@ -216,43 +259,6 @@ border: 1px solid #ebebeb;
 		src="${pageContext.request.contextPath }/resources/js/etcSetting.js"></script>
 		
 		
-		<%-- 
-		<script>
 
-		$(()=>{
-			
-		
-		   console.log("onload On");
-		 
-		      var a = ${memberLoggedIn.memberCode };
-		      $.ajax({
-		         url:"<%=request.getContextPath()%>/club/checkmaster",
-		         type: "GET", 
-		          data:{"memberCode":${memberLoggedIn.memberCode },
-		        	  	"clubCode":${club.clubCode}},
-	
-		         beforeSend: function(){
-		            console.log("beforeSend");
-		         },
-		         success: function(data){
-		            
-		            console.log("success");
-		            console.log("data :", data);          
-		            
-		            
-		         },
-		         error: function(jqxhr, textStatus, errorThrown){
-		      
-		            console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
-		         }, 
-		         complete: function(){
-		      
-		            console.log("complete");
-		            
-		         }
-		         
-		      });
-		   
-		</script> --%>
 </body>
 </html>
