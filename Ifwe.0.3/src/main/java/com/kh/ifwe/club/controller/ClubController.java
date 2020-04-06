@@ -62,11 +62,12 @@ public class ClubController {
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
 	@ResponseBody
-	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
+	public Map<Integer,Object> clubSearchKeyword(ModelAndView mav,
 										    @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
 									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
-										  @RequestParam("memberCode")int memberCode) {
+										  @RequestParam("memberCode")int memberCode,
+										  @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubLocation = {}",clubLocation);
@@ -88,6 +89,11 @@ public class ClubController {
 		//검색했을때 검색어를 검색어 테이블에 insert
 		int result = 0;
 		
+		final int numPerPage = 3;
+		int totalContents = 0;
+		
+		
+		
 		if(searchType.equals("hashtag")) {
 			//해쉬태그 검색
 			log.debug("해쉬태그 검색");
@@ -104,10 +110,14 @@ public class ClubController {
 		
 		
 		log.debug("list1231321321 ={}",searchListResult);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
-		
-		
-		return searchListResult;
+		/* List<ClubMaster> */
+		Map<Integer, Object> resultMapClub = new HashMap<Integer, Object>();
+		resultMapClub.put(1, searchListResult);
+		resultMapClub.put(2, totalPage);
+		resultMapClub.put(3, cPage);
+		return resultMapClub;
 		
 	}
 	

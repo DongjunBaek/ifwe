@@ -109,7 +109,8 @@ $(function(){
 			success:data => {
 				console.log(data);	
 				
-				
+				console.log(data[1]);
+				var listForClub = data[1];
 				if(data.length == 0){
 					alert("검색결과가 없습니다.");
 					$("[name=searchType]").val('');
@@ -120,22 +121,22 @@ $(function(){
 					$("#allSomoimDivContainer").css('display','none');
 					$("#searchSomoimDivContainer").css('display','');
 					$("#searchSomoimDivContainer").html(" ");
-					for(let i=0;i<data.length;i++){
-						console.log(data[i]);
+					for(let i=0;i<listForClub.length;i++){
+						console.log(listForClub[i]);
 						
 						$("#searchSomoimDivContainer").append(
-								'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+data[i].clubImgRe+'" alt="" /></div>'+
+								'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
 		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
-		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+data[i].memberId+'</p><p class="club-name-search font-hk">'+data[i].clubTitle+'</p>'+
-		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+data[i].clubLocation+'</p>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+data[i].clubCurrent+'</span>/'+data[i].clubMax+'</div>'+
+		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
+		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
 		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
 		                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
 		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
 		                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
 		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
-		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+data[i].clubCode+'>자세히 보기</button></div></div>'
+		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
 								);
 						
 					}
@@ -149,12 +150,20 @@ $(function(){
 					$("[name=clubSearchKeyword]").val('');
 					$("[name=clubLocation]").val('');
 					
+					/* 
+						0406 ajax pageBar button
+						
+					*/
+					
+					
+					/* $(".club_pageBar_btn").append("<button onclick="pageBar_btn('${i }');" value="${i }" class="list-club-pagebtn">${i }</button>"); */
+					
 					
 				}
 			
 			},
 			error:(x,s,e) =>{
-				console.log("에러 ㅡㅡ ");
+				console.log("Error Search Club");
 				console.log(x,s,e);
 			}
 		});
