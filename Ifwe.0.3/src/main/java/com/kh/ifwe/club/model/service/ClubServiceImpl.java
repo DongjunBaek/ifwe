@@ -100,8 +100,8 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
-	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
-		return clubDAO.selectClubMember(clubMemberCode);
+	public List<ClubMember> selectClubMember(Map<String, Object> param2) {
+		return clubDAO.selectClubMember(param2);
 	}
 
 	//0326문보라 가입요청 메세지 보내기

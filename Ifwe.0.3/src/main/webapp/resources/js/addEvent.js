@@ -19,6 +19,7 @@ var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
  *  새로운 일정 생성
  * ************** */
 var newEvent = function (start, end, eventType) {
+if(checkMaster==1){
 
     $("#contextMenu").hide(); //메뉴 숨김
 
@@ -49,7 +50,8 @@ var newEvent = function (start, end, eventType) {
             username: '사나',
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
-            allDay: false
+            allDay: false,
+            clubCode:$('input[name=clubCode]').val()
         };
 
         if (eventData.start > eventData.end) {
@@ -81,8 +83,8 @@ var newEvent = function (start, end, eventType) {
 
         //새로운 일정 저장
         $.ajax({
-        	type: "get",
-            url: "/spring/fullcalendar/add.do",
+        	type: "post",
+            url: "/ifwe/fullcalendar/add.do",
             data: {
  
             	
@@ -95,7 +97,8 @@ var newEvent = function (start, end, eventType) {
             	 FullUsername:eventData.username,              
             	 fullBackgroundColor:eventData.backgroundColor,       
             	 fullTextColor:eventData.textColor,             
-            	 fullAllDay:eventData.allDay                
+            	 fullAllDay:eventData.allDay,
+            	 clubCode:eventData.clubCode                
             
             },
             success: function (response) {
@@ -105,4 +108,5 @@ var newEvent = function (start, end, eventType) {
             }
         });
     });
+}//checkmaster if
 };

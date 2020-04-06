@@ -256,17 +256,18 @@ public class ClubController {
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
 		
-		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
-		List<ClubMember> clubMember = null;
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
-		log.debug("msgCount={}",msgCount);
+		
 		
 		//전체 게시글 
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
 	
+		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
+		List<ClubMember> clubMember = null;
+		param2.put("clubMemberCode", clubMemberCode);
 		
 		if(!clubMemberCode.isEmpty()) {
-			clubMember = clubService.selectClubMember(clubMemberCode);
+			clubMember = clubService.selectClubMember(param2);
 		}
 		
 		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
@@ -580,8 +581,10 @@ public class ClubController {
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
 		
+		param.put("clubMemberCode", clubMemberCode);
+		
 		if(!clubMemberCode.isEmpty()) {
-			clubMember = clubService.selectClubMember(clubMemberCode);
+			clubMember = clubService.selectClubMember(param);
 		}
 		
 		mav.addObject("clubMember",clubMember);

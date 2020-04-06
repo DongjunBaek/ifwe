@@ -32,7 +32,7 @@ public interface ClubService {
 
 	List<Member> selectMemberCode(int clubCode);
 
-	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
+	List<ClubMember> selectClubMember(Map<String, Object> param2);
 
 	ClubMember selectClubMaster2(Map<String, Object> param2);
 

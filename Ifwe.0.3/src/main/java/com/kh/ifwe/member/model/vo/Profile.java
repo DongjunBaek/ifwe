@@ -16,6 +16,7 @@ import lombok.ToString;
 @ToString
 public class Profile implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int memberCode;
 	private String profileName;
 	private String profileImgOri;
@@ -24,4 +25,8 @@ public class Profile implements Serializable {
 	private int profileAge;
 	private String profileGender;
 	private String[] contentsCateCodes;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
