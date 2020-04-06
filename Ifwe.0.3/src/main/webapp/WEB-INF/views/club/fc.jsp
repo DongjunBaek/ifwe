@@ -41,6 +41,11 @@ border: 1px solid #ebebeb;
 
 <body>
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
+
+
+
+				<input type="hidden" name="clubCode2" id="clubCode2" value="${club.clubCode}" />
+				<input type="hidden" name="clubCode" value="${club.clubCode}" />
       <section class="flotclass">
         <div class="section-block">
           <div class="section-wrapper">
@@ -156,7 +161,7 @@ border: 1px solid #ebebeb;
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
 						<button type="button" class="btn btn-primary" id="updateEvent">저장</button>
-						<input hidden="clubCode" value="${club.clubCode}" />
+					
 					</div>
 				</div>
 				<!-- /.modal-content -->
@@ -179,7 +184,15 @@ border: 1px solid #ebebeb;
                 
             </section>
             
-
+<script>
+	//	console.log("클럽코드="+${club.clubCode});
+		var clubCCode =${club.clubCode};
+//		console.log("클럽코드="+clubCCode);
+		</script>
+		
+		<script>
+		console.log("클럽마스터="+${clubmaster.clubmaster});
+		</script>
 	<script
 		src="${pageContext.request.contextPath }/resources/vendor/js/jquery.min.js"></script>
 	<script
@@ -203,7 +216,7 @@ border: 1px solid #ebebeb;
 		src="${pageContext.request.contextPath }/resources/js/etcSetting.js"></script>
 		
 		
-		
+		<%-- 
 		<script>
 
 		$(()=>{
@@ -240,6 +253,6 @@ border: 1px solid #ebebeb;
 		         
 		      });
 		   
-		</script>
+		</script> --%>
 </body>
 </html>

@@ -27,6 +27,7 @@
 
 	<select id="selectFcList" resultMap="selectListFC">
 	select * from fullcalendar
+	where clubCode=#{clubCode}
 	</select>
 	
 		<resultMap type="Fullcalendar" id="selectListFC">
