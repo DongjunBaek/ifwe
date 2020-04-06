@@ -62,11 +62,12 @@ public class ClubController {
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
 	@ResponseBody
-	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
+	public Map<Integer,Object> clubSearchKeyword(ModelAndView mav,
 										    @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
 									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
-										  @RequestParam("memberCode")int memberCode) {
+										  @RequestParam("memberCode")int memberCode,
+										  @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubLocation = {}",clubLocation);
@@ -88,37 +89,53 @@ public class ClubController {
 		//검색했을때 검색어를 검색어 테이블에 insert
 		int result = 0;
 		
+		final int numPerPage = 9;
+		int totalContents = 0;
+		
 		if(searchType.equals("hashtag")) {
 			//해쉬태그 검색
 			log.debug("해쉬태그 검색");
-			searchListResult = clubService.searchClubByHashtag(param);
+			totalContents = clubService.searchClubByHashtag(param).size();
+			searchListResult = clubService.searchClubByHashtag(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 			
 		}else {
 			//모임명 검색
 			log.debug("모임명 검색");
-			searchListResult = clubService.selectListByName(param);
+			totalContents = clubService.selectListByName(param).size();
+			searchListResult = clubService.selectListByName(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 		}
 
 		
-		
+		String showKeyword = clubSearchKeyword;
 		log.debug("list1231321321 ={}",searchListResult);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
-		
-		
-		return searchListResult;
+		/* List<ClubMaster> */
+		Map<Integer, Object> resultMapClub = new HashMap<Integer, Object>();
+		resultMapClub.put(1, searchListResult);
+		resultMapClub.put(2, totalPage);
+		resultMapClub.put(3, cPage);
+		resultMapClub.put(4, showKeyword);
+		resultMapClub.put(5, clubLocation);
+		return resultMapClub;
 		
 	}
 	
 	
 	@GetMapping("/clubSearch")
-	public ModelAndView clubSearch(ModelAndView mav) {
+	public ModelAndView clubSearch(ModelAndView mav, @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("소모임 검색");
 		
-		List<ClubMaster> clubList = clubService.clubSearch();
+		final int numPerPage = 9;
+		log.debug("cPage {}",cPage);
+		List<ClubMaster> clubList = clubService.clubSearch(cPage,numPerPage);
 		log.debug("clubList = {}",clubList);
+
+		int totalContents = clubService.clubSearch().size();
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
 		List<Integer> clubCode = new ArrayList<Integer>();
 		
@@ -127,6 +144,8 @@ public class ClubController {
 				clubCode.add(clubList.get(i).getClubCode());
 			}
 		}
+		
+
 		
 		log.debug("clubCode = {}",clubCode);
 		//남녀비율
@@ -145,7 +164,8 @@ public class ClubController {
 		mav.addObject("maleList", maleList);
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
-		
+		mav.addObject("cPage", cPage);
+		mav.addObject("tPage", totalPage);
 		return mav;
 	}
 	

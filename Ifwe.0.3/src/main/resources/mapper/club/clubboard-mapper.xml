@@ -38,6 +38,7 @@
 				#{boardCateCode, typeHandler=StrArrTypeHandler}, 
 				'n', 
 				'n',
+				default,
 				default
 			)
 			

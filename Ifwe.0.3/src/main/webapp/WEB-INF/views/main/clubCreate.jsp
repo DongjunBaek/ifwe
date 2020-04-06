@@ -48,12 +48,19 @@ $(function(){
      
  
      // 서버에 넘기기
-     $("#tag-form").on("submit", function (e) {
+     /* $("#tag-form").on("submit", function (e) {
          var value = marginTag(); // return array
          $("#rdTag").val(value); 
          console.log($("#rdTag").val());
          $(this).submit();
+     }); */
+     $("#form-submit-btn").click(function(){
+    	 var value = marginTag(); // return array
+         $("#rdTag").val(value); 
+         console.log($("#rdTag").val());
+         $("#tag-form").submit();
      });
+     
      
 
      $("#tag").on("keypress", function (e) {
@@ -423,7 +430,7 @@ function clubDuplicate(){
                     </div>
                 </div>
                 <div id="create-btn" class="inputs">
-                    <input type="submit" value="소모임 생성" class="font-kor c-btn">
+                    <input type="submit" value="소모임 생성" class="font-kor c-btn" id="form-submit-btn">
                 </div>
             </form>
         </div>
