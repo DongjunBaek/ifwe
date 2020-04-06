@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.fullcalendar.model.vo.Fullcalendar;
 
 @Repository
@@ -37,6 +38,12 @@ public class FullcalendarDAOImpl implements FullcalendarDAO {
 	public int deleteFC(Fullcalendar fc) {
 		// TODO Auto-generated method stub
 		return sqlsessiontemplate.delete("fullcalendar.deleteFC",fc);
+	}
+
+	@Override
+	public Club checkMaster(String clubCode) {
+		// TODO Auto-generated method stub
+		return sqlsessiontemplate.selectOne("fullcalendar.checkMaster",clubCode);
 	}
 
 }

@@ -56,4 +56,9 @@
 	delete from fullcalendar
 	where full_id=#{fullId}
 	</delete>
+	
+	<select id="checkMaster" resultType="club">
+	select * from club
+	where club_code=#{clubCode}
+	</select>
 </mapper>
