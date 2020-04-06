@@ -108,15 +108,13 @@ public class FullcalendarController {
 		}
 		return "notMaster";
 	}
-	/*
-	 * @Scheduled(cron="
-	 */30*****")
-
+	
+	@Scheduled(cron="*/30 * * * * *")
 	public void sleepMemberCheck() {
 		System.out.println("스케쥴체크");
 
 
-	}*/
+	}
 
 
 	
