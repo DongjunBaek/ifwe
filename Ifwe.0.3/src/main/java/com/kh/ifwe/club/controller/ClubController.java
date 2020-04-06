@@ -89,26 +89,26 @@ public class ClubController {
 		//검색했을때 검색어를 검색어 테이블에 insert
 		int result = 0;
 		
-		final int numPerPage = 3;
+		final int numPerPage = 9;
 		int totalContents = 0;
-		
-		
 		
 		if(searchType.equals("hashtag")) {
 			//해쉬태그 검색
 			log.debug("해쉬태그 검색");
-			searchListResult = clubService.searchClubByHashtag(param);
+			totalContents = clubService.searchClubByHashtag(param).size();
+			searchListResult = clubService.searchClubByHashtag(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 			
 		}else {
 			//모임명 검색
 			log.debug("모임명 검색");
-			searchListResult = clubService.selectListByName(param);
+			totalContents = clubService.selectListByName(param).size();
+			searchListResult = clubService.selectListByName(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 		}
 
 		
-		
+		String showKeyword = clubSearchKeyword;
 		log.debug("list1231321321 ={}",searchListResult);
 		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
@@ -117,6 +117,8 @@ public class ClubController {
 		resultMapClub.put(1, searchListResult);
 		resultMapClub.put(2, totalPage);
 		resultMapClub.put(3, cPage);
+		resultMapClub.put(4, showKeyword);
+		resultMapClub.put(5, clubLocation);
 		return resultMapClub;
 		
 	}
@@ -127,7 +129,7 @@ public class ClubController {
 		
 		log.debug("소모임 검색");
 		
-		final int numPerPage = 3;
+		final int numPerPage = 9;
 		log.debug("cPage {}",cPage);
 		List<ClubMaster> clubList = clubService.clubSearch(cPage,numPerPage);
 		log.debug("clubList = {}",clubList);

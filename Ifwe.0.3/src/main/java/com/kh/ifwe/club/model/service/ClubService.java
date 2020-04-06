@@ -79,6 +79,10 @@ public interface ClubService {
 
 	List<ClubMaster> clubSearch(int cPage, int numPerPage);
 
+	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
+
+	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
+
 
 
 

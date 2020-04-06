@@ -45,6 +45,7 @@
 
 </style>
 <script>
+let checkCurrentPage = 1;
 $(function(){
     $("#search1").selectric();
     $("#search2").selectric();
@@ -73,9 +74,9 @@ $(function(){
 	});
 });
 function pageBar_btn(cPageNo){
-	console.log(cPageNo);
 	location.href = "${pageContext.request.contextPath}/club/clubSearch?cPage="+cPageNo;
 }
+
 
 </script>
 <style>
@@ -84,6 +85,22 @@ function pageBar_btn(cPageNo){
 }
 </style>
 <script>
+
+function hoverBtnForPageBar(){
+	$(".list-club-pagebtn").hover(function(){
+		
+		$(this).css("color","white").css("background","#ffc862");
+		if($(this).text() == checkCurrentPage){
+			$(this).children().css("color","white").css("background","#ffc862");
+		}
+		
+	},function(){
+		$(this).css("color","#3b3b3b").css("background","rgba(0,0,0,0)");
+		if($(this).text() == checkCurrentPage){
+			$(this).children().css("color","#3b3b3b").css("background","rgba(0,0,0,0)");
+		}
+	});
+}
 $(function(){
 	
 	$("[name=somoim-search-btn]").click(function(){
@@ -146,17 +163,56 @@ $(function(){
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
 				    });
 					
-					$("[name=searchType]").val('');
-					$("[name=clubSearchKeyword]").val('');
-					$("[name=clubLocation]").val('');
+
+					
 					
 					/* 
 						0406 ajax pageBar button
 						
 					*/
+					var tPage = data[2];
+					var cPage = data[3];
+					var pageBarSize = 5;
+         			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
+         			var pageEnd = pageStart+pageBarSize-1;
+         			var pageNo = pageStart;
+         			console.log("tpage",tPage);
+         			console.log("cPage",cPage);
+         			console.log("pageStart",pageStart);
+         			console.log("pageEnd",pageEnd);
+         			console.log("pageNo",pageNo);
+         			
+					$parentDIV = $(".club_pageBar_btn");
+					$parentDIV.empty();
 					
+					if(cPage <= 1){
+						$parentDIV.append("<button onclick='pageBar_search_btn(1);' value="+1+" class='list-club-pagebtn'>Back</button>");	
+					}else{
+						$parentDIV.append("<button onclick='pageBar_search_btn("+(cPage-1)+");' value="+(cPage-1)+" class='list-club-pagebtn'>Back</button>");
+					}
 					
-					/* $(".club_pageBar_btn").append("<button onclick="pageBar_btn('${i }');" value="${i }" class="list-club-pagebtn">${i }</button>"); */
+					for( var i = pageStart; i <= pageEnd; i++){
+						
+						if(i == cPage){
+							$parentDIV.append("<button onclick='pageBar_search_btn("+(i)+");' value="+(i)+" class='list-club-pagebtn'><strong>"+i+"</strong></button>");
+						}else{
+							$parentDIV.append("<button onclick='pageBar_search_btn("+(i)+");' value="+(i)+" class='list-club-pagebtn'>"+i+"</button>");
+						}
+						
+						if(i == tPage){
+							break;
+						}
+					}
+					
+					if(cPage == tPage){
+						$parentDIV.append("<button onclick='pageBar_search_btn("+tPage+");' value="+tPage+" class='list-club-pagebtn'>Next</button>");	
+					}else{
+						$parentDIV.append("<button onclick='pageBar_search_btn("+(cPage+1)+");' value="+(cPage+1)+" class='list-club-pagebtn'>Next</button>");
+					}
+					checkCurrentPage = cPage;
+					hoverBtnForPageBar();
+					
+					$("#club-search").val(data[4]);
 					
 					
 				}
@@ -175,6 +231,137 @@ $(function(){
 	
 	
 });
+
+
+
+function pageBar_search_btn(cPageNo){
+	
+	$("#searchSomoimDivContainer").css('display','none');
+	let searchType_ = $("[name=searchType]").val();
+	let clubSearchKeyword_ = $("[name=clubSearchKeyword]").val();
+	let clubLocation_ = $("[name=clubLocation]").val();
+	let memberCode_ = ${memberLoggedIn.memberCode};
+	console.log("서치후 페이지바");
+	console.log(searchType_,clubSearchKeyword_,clubLocation_,memberCode_);
+	
+	
+	
+    var allData = {
+    		"searchType": searchType_,
+    		"clubSearchKeyword": clubSearchKeyword_,
+    		"clubLocation":clubLocation_,
+    		"memberCode":memberCode_,
+    		"cPage":cPageNo};
+	
+	
+	
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath}/club/clubSearchKeyword.do",
+		data: allData,
+		dataType:"json",
+		asyn: false,
+		success:data => {
+			
+			console.log(data);	
+			$("#searchSomoimDivContainer").empty();
+			console.log(data[1]);
+			var listForClub = data[1];
+			if(data.length == 0){
+				alert("검색결과가 없습니다.");
+				$("[name=searchType]").val('');
+				$("[name=clubSearchKeyword]").val('');
+				$("[name=clubLocation]").val('');
+				$("#allSomoimDivContainer").css('display','');
+			}else{
+				$("#allSomoimDivContainer").css('display','none');
+				$("#searchSomoimDivContainer").css('display','');
+				$("#searchSomoimDivContainer").html(" ");
+				for(let i=0;i<listForClub.length;i++){
+					console.log(listForClub[i]);
+					
+					$("#searchSomoimDivContainer").append(
+							'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
+	                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
+	                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
+	                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
+	                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
+	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
+	                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+	                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
+	                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+	                        '</span></div>'+
+	                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
+	                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
+							);
+					
+				}
+			    $("[name=goclub]").click(function(){
+			    	let clubCode = $(this).attr("data-clubCode");
+			    	console.log(clubCode);
+			    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
+			    });
+
+				
+				/* 
+					0406 ajax pageBar button
+					
+				*/
+				var tPage = data[2];
+				var cPage = data[3];
+				var pageBarSize = 5;
+     			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
+     			var pageEnd = pageStart+pageBarSize-1;
+     			var pageNo = pageStart;
+     			console.log("tpage",tPage);
+     			console.log("cPage",cPage);
+     			console.log("pageStart",pageStart);
+     			console.log("pageEnd",pageEnd);
+     			console.log("pageNo",pageNo);
+     			
+				$parentDIV = $(".club_pageBar_btn");
+				$parentDIV.empty();
+				
+				if(cPage <= 1){
+					$parentDIV.append("<button onclick='pageBar_search_btn(1);' value="+1+" class='list-club-pagebtn'>Back</button>");	
+				}else{
+					$parentDIV.append("<button onclick='pageBar_search_btn("+(cPage-1)+");' value="+(cPage-1)+" class='list-club-pagebtn'>Back</button>");
+				}
+				
+				for( var i = pageStart; i <= pageEnd; i++){
+					
+					if(i == cPage){
+						$parentDIV.append("<button onclick='pageBar_search_btn("+(i)+");' value="+(i)+" class='list-club-pagebtn'><strong>"+i+"</strong></button>");
+					}else{
+						$parentDIV.append("<button onclick='pageBar_search_btn("+(i)+");' value="+(i)+" class='list-club-pagebtn'>"+i+"</button>");
+					}
+					
+					if(i == tPage){
+						break;
+					}
+				}
+				
+				if(cPage == tPage){
+					$parentDIV.append("<button onclick='pageBar_search_btn("+tPage+");' value="+tPage+" class='list-club-pagebtn'>Next</button>");	
+				}else{
+					$parentDIV.append("<button onclick='pageBar_search_btn("+(cPage+1)+");' value="+(cPage+1)+" class='list-club-pagebtn'>Next</button>");
+				}
+				checkCurrentPage = cPage;
+				hoverBtnForPageBar();
+				
+				$("#club-search").val(data[4]);
+				
+				
+			}
+		
+		},
+		error:(x,s,e) =>{
+			console.log("Error Search Club");
+			console.log(x,s,e);
+		}
+	});
+	
+}
 </script>
 	    <section>
             <div class="wrapper-right container-clubsearch">
