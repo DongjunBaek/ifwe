@@ -57,7 +57,7 @@ $(function(){
 
     });
     
-    $("[name=goclub]").click(function(){
+    $("[name=goclub]").on("click",function(){
     	let clubCode = $(this).attr("data-clubCode");
     	console.log(clubCode);
     	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
@@ -66,6 +66,7 @@ $(function(){
 	$(".friend-name-profile").click(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
+
 
 	$(".list-club-pagebtn").hover(function(){
 		$(this).css("color","white").css("background","#ffc862");
@@ -102,7 +103,7 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
-	
+
 	$("[name=somoim-search-btn]").click(function(){
 		$("#searchSomoimDivContainer").css('display','none');
 		let searchType = $("[name=searchType]").val();
@@ -144,24 +145,26 @@ $(function(){
 						$("#searchSomoimDivContainer").append(
 								'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
 		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
-		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
-		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
-		                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
-		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-		                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+data[i].memberId+'</p><p class="club-name-search font-hk">'+data[i].clubTitle+'</p>'+
+		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+data[i].clubLocation+'</p>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+data[i].clubCurrent+'</span>/'+data[i].clubMax+'</div>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+
+		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'+
 		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
 								);
 						
 					}
-				    $("[name=goclub]").click(function(){
-				    	let clubCode = $(this).attr("data-clubCode");
+					$("[name=searchType]").val('');
+					$("[name=clubSearchKeyword]").val('');
+					$("[name=clubLocation]").val('');
+					$("[name=goclub]").click(function(){
+						let clubCode = $(this).attr("data-clubCode");
 				    	console.log(clubCode);
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
-				    });
+					});
+				   
 					
 
 					
@@ -230,6 +233,7 @@ $(function(){
 	
 	
 	
+    
 });
 
 
@@ -362,7 +366,13 @@ function pageBar_search_btn(cPageNo){
 	});
 	
 }
+  
 </script>
+<style>
+.card-container:nth-child(n+4) {
+	margin-top:3%;
+}
+</style>
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">

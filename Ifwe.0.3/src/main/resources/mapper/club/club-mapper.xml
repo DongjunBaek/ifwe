@@ -254,6 +254,7 @@
             C.member_code = M.member_code 
 		where 
 			C.club_code = #{clubCode}
+		and C.board_report in ('n','d')
 		order by 
 			C.board_no desc
 	</select>
@@ -388,6 +389,14 @@
 
 	</select>
 	
+	
+	<select id="selectReportBoardList" resultType="clubBoardProfile">
+		select * from CLUB_BOARD C left join member_profile M on c.member_code = M.member_code where club_code=#{clubCode} and board_report = 'd'
+	</select>
+	
+	<update id="blindBoard">
+		update club_board set board_report = 'y' where board_no = #{boardNo}
+	</update>
 </mapper>
 
 

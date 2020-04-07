@@ -67,6 +67,7 @@
             C.member_code = M.member_code 
 		where 
 			L.club_boardlist_no = #{clubBoardlistNo} 
+		and C.board_report in ('n','d')
 		order by 
 			C.board_no desc
 	</select>
@@ -148,6 +149,14 @@
 	
 	</select>
 	
+	<update id="reportBoard">
+		update 
+			club_board 
+		set 
+			board_report = 'd' 
+		where 
+			board_no=#{boardNo}
+	</update>
 	
 	
 </mapper>

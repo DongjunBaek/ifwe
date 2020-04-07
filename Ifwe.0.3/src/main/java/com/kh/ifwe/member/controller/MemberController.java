@@ -735,5 +735,10 @@ public class MemberController {
 		return mav;
 	}
 	
+	@GetMapping("/insertPhonePOPUP.do")
+	public String insertPhonePopU(){
+		
+		return "member/insertPhonePOPUP";
+	}
 
 }

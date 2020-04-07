@@ -38,4 +38,6 @@ public interface ClubBoardService {
 
 	List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo);
 
+	int reportBoard(int boardNo);
+
 }

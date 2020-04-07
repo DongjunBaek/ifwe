@@ -33,6 +33,43 @@
    }
 </style>
 
+<script>
+$(function(){
+	let rNum ;
+	
+	$("#search-id-btn-num").click(function(){
+		console.log("12312312312");
+		$.ajax({
+			url:"${pageContext.request.contextPath}/sms/sms.do",
+			method:"POST",
+			data: {"phoneNum" : $("#member_phone").val()},
+			async:false,
+			success: function(data){
+				console.log("성공",data);
+				rNum = data;
+				console.log(rNum);
+			},
+			error:function(x,s,e){
+				console.log(x,s,e);
+			}
+		});
+	});
+	
+	$("#search-btn-check").click(function(){
+		console.log($("#number").val());
+		console.log(rNum);
+		if($("#number").val() != rNum){
+			alert("인증번호가 맞지않습니다.");
+			$("#number").val('');
+		}else{
+			alert("본인인증에 성공하셨습니다.")
+			window.close();
+		}
+	});
+	
+});
+</script>
+
 </head>
 <body>
 <header>
@@ -62,7 +99,7 @@
 		                 </div>
 		                 <div class="number-input">
 		                 	<i class="fas fa-mobile-alt index-i-class"></i>
-		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
+		                 	<input class="input-box" type="text" name="number" id="number" placeholder="인증번호">	
 		                 	<input type="submit" value="확인" class="index-search-btn" id="search-btn-check"/>	
 		                 </div>
 	             </div>
