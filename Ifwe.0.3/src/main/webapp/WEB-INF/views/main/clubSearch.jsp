@@ -59,7 +59,7 @@ $(function(){
 
     });
     
-    $("[name=goclub]").click(function(){
+    $("[name=goclub]").on("click",function(){
     	let clubCode = $(this).attr("data-clubCode");
     	console.log(clubCode);
     	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
@@ -102,7 +102,6 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
-	
 	$("[name=somoim-search-btn]").click(function(){
 		$("#searchSomoimDivContainer").css('display','none');
 		let searchType = $("[name=searchType]").val();
@@ -153,8 +152,7 @@ $(function(){
 		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
 		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
 		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(listForGender[i].maleCount/listForClub[i].clubCurrent)*10+
-		                        
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(listForGender[i].maleCount/listForClub[i].clubCurrent)*10+		                        
 		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
 		                        +(1-(listForGender[i].maleCount/listForClub[i].clubCurrent))*10+
 		                        '</span></div>'+
@@ -163,11 +161,22 @@ $(function(){
 								);
 						
 					}
+
+					$("[name=searchType]").val('');
+					$("[name=clubSearchKeyword]").val('');
+					$("[name=clubLocation]").val('');
+					$("[name=goclub]").click(function(){
+						let clubCode = $(this).attr("data-clubCode");
+				    	console.log(clubCode);
+				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
+					})
+
 				    $("[name=goclub]").click(function(){
 				    	let clubCode = $(this).attr("data-clubCode");
 				    	console.log(clubCode);
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
 				    }); 
+
 					
 
 					
@@ -236,7 +245,9 @@ $(function(){
 	
 	
 	
+    
 });
+
 
 
 
@@ -377,7 +388,13 @@ function pageBar_search_btn(cPageNo){
 	});
 	
 }
+
 </script>
+<style>
+.card-container:nth-child(n+4) {
+	margin-top:3%;
+}
+</style>
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">

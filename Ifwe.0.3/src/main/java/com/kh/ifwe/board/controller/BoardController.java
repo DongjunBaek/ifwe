@@ -146,7 +146,6 @@ public class BoardController {
 		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
 		
-		
 		log.debug("mainBoardList @ boardController {}", boardList);
 		log.debug("totalContents={}",totalContents);
 

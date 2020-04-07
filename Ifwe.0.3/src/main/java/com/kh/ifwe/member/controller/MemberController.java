@@ -164,7 +164,19 @@ public class MemberController {
 			// 1.memberId로 member 객체 조회
 			Member member = memberService.selectOne(memberId);
 			log.debug("member@selectone={}", member);
-
+			
+			
+			//0407 여주
+			//휴면계정 로그인 시 
+			if("h".equals(member.getMemberRole())) {
+				log.debug("휴면계정확인");
+				
+				model.addAttribute("member",member);
+				
+				return "main/Login_dormantMember";
+			}
+			
+			
 			// 2.member.password와 사용자가 입력한 password를 비교해서 로그인처리
 			// bcryptPasswordEncoder를 이용한 비교
 			// 로그인한 경우, session에 member객체 저장
@@ -204,10 +216,11 @@ public class MemberController {
 				model.addAttribute("msgCount",msgCount);
 				
 				
-				
 				return "main/mainPage";
-
-			} else {
+			
+				} 
+			
+			else {
 				// 로그인 실패
 				redirectAttributes.addFlashAttribute("msg", "입력한 아이디 또는 비밀번호가 일치하지 않습니다.");
 			}
@@ -741,6 +754,7 @@ public class MemberController {
 		return mav;
 	}
 	
+
 	/**
 	 * 0408 dongjun 나이구하기 profile insert 관련 메소드
 	 */
@@ -760,6 +774,11 @@ public class MemberController {
 	         return age;
 	 }
 
-	
+	@GetMapping("/insertPhonePOPUP.do")
+	public String insertPhonePopU(){
+		
+		return "member/insertPhonePOPUP";
+	}
+
 
 }

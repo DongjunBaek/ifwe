@@ -26,6 +26,8 @@
 		from
 			member
 		where member_role like #{memberRole}
+		order by
+			member_enrolldate desc
 	</select>
 	
 	<select id="selectDropMemberList" resultType="member">
@@ -102,16 +104,6 @@
 		where board_no = #{boardNo}
 	</select>
 	
-<!-- 	<update id="updateBoard">
-		update 
-			board
-		set 
-			board_title = #{boardTitle},
-			board_content = #{boardContent}
-		where
-			board_no = #{boardNo}
-	</update>
-	 -->
 	
 	<!-- 0326 동준 작업 게시글 삭제-->
 	<update id="deleteBoard">
@@ -167,7 +159,24 @@
 	 </update>
 	 
 	 
-	 <insert id="EventInsert">
+	 
+	 <insert id="insertDormantNotice">
+		insert into board values (
+    seq_board_no.nextval,
+    #{memberCode},
+    'report',
+    '휴면해지신청',
+    '휴면해지 신청합니다',
+    null,
+    null,
+    default,
+    default,
+    default,
+    default    
+	)
+	 </insert>
+	 
+	 	 <insert id="EventInsert">
 	 	insert into
 	 		tbl_event
 	 	values(
@@ -221,17 +230,26 @@
 
 	 <select id="MemberEnrollList" resultType="member">
 		select 
-			count(*),to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') 
+			count(*) num ,to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') Day
 		from 
 			member 
 		group by 
 			to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') 
 		order by 
-			to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') desc
+			to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') desc		
 	</select>
+	
 	 <select id="selectBoardTotalContents" resultType="_int">
 	 select count(*) from board where board_cate like #{boardCategory} and board_del = 'N'
-
+	 </select>
+	 
+	 <select id="selectMemberCount" resultType="_int">
+	 	select
+	 		count(*)
+	 	from
+	 		member 
+	 	where
+			member_role like #{memberRole}
 	 </select>
 	 
 </mapper>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.board.model.vo.BoardComment;
@@ -224,11 +226,61 @@ public class ClubBoardController {
 		return mav;
 	}
 	
+	@PostMapping("/report.do")
+	public String report(@RequestParam("clubCode")int clubCode, @RequestParam("boardNo")int boardNo, @RequestParam("memberCode")int memberCode,
+						 RedirectAttributes redirectAttributes,@RequestParam("reportReason")String reportReason,@RequestParam("clubBoardListNo")int clubBoardListNo) {
+		
+		
+		log.debug("clubCode = {}",clubCode);
+		log.debug("boardNo = {}",boardNo);
+		log.debug("reportReason = {}",reportReason);
+		log.debug("memberCode = {}",memberCode);
+		log.debug("clubBoardListNo = {}",clubBoardListNo);
+		
+		int result = clubBoardService.reportBoard(boardNo);
+		
+		String msg = result>0?"신고완료":"실패";
+		redirectAttributes.addFlashAttribute("msg",msg);
+		
+		return "redirect:freeboard.do?clubBoardlistNo="+clubBoardListNo;
+	}
 	
+	@GetMapping("/heart.do")
+	@ResponseBody
+	public int heart(@RequestParam("boardNo")int boardNo, @RequestParam("memberCode")int memberCode) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer>param = new HashMap<String, Integer>();
+		
+		param.put("boardNo", boardNo);
+		param.put("memberCode", memberCode);
+		
+		int result = clubBoardService.insertHeart(param);		
+		int heartCount = clubBoardService.selectBoard(boardNo);
+		
+		log.debug("result = {}",result);
+		log.debug("heartCount = {}",heartCount);
+		
+		return heartCount;
 
-	
-	
-	
+	}
+
+	@GetMapping("/heartMinus.do")
+	@ResponseBody
+	public int heartMinus(@RequestParam("boardNo")int boardNo, @RequestParam("memberCode")int memberCode) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer>param = new HashMap<String, Integer>();
+		
+		param.put("boardNo", boardNo);
+		param.put("memberCode", memberCode);
+		
+		int result = clubBoardService.deleteHeart(param);
+		int heartCount = clubBoardService.selectBoard(boardNo);
+		
+		return heartCount;
+		
+	}
 	
 	
 	

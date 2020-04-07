@@ -76,6 +76,29 @@
 		return true;
 	}
 </script>
+<style>
+.wrap_1 {
+    height: 50px;
+    padding-top: 10px;
+}
+
+.wrap_1 input {
+    line-height: normal;
+    width: 1000px;
+    height: 50px;
+    outline : none;
+}
+
+.wrap_1 label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    /* font-weight: 700; */
+    padding-left: 25px;
+    margin-right: 25px;
+    font-size: 20px;
+}
+</style>
 </head>
 <body>
 	
@@ -97,9 +120,9 @@
 	                        </select> -->
 	                    </div>
 					<div class="wrap_1">
-						<label id="main_title">제목</label> 
+						<label for="title">제목</label> 
 						<input type="text" id="title" class="no-border" name="boardTitle">
-						<h3 class="writer">작성자 : ${memberLoggedIn.memberId}</h3>
+	<%-- 					<h3 class="writer">작성자 : ${memberLoggedIn.memberId}</h3> --%>
 					</div>
 					<hr>
 					<h3 class="main_content">내용</h3>

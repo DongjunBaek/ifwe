@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
@@ -41,6 +41,7 @@ import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
 import com.kh.ifwe.member.model.vo.Profile;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,8 +59,7 @@ public class ClubController {
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
-	
-	
+
 	
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
@@ -312,7 +312,8 @@ public class ClubController {
 		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
-		
+		List<Heart> heartMember = clubService.selectHeartMember();
+		log.debug("heartMember = {}",heartMember);
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
 		
 		
@@ -358,6 +359,7 @@ public class ClubController {
 		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.addObject("boardImg",boardImg);
+		mav.addObject("heartMember",heartMember);
 		
 		mav.setViewName("/club/clubMain");
 		
@@ -743,8 +745,40 @@ public class ClubController {
 	}
 	
 
+	@GetMapping("/searchKeywordList.do")
+	@ResponseBody
+	public List<SearchKeyword> searchKeywordList(){
+		log.debug("검색어 키워드 리스트");
+		
+		List<SearchKeyword> searchkeywordList = clubService.selectSearchKeywordList();
+		
+		log.debug("searchKeywordList{}=",searchkeywordList);
+		
+		return searchkeywordList;
+	}
 	
 	
+	//신고된 게시글 보기
+	@GetMapping("/mngreport.do")
+	public ModelAndView mngReport(@RequestParam("clubCode")int clubCode,ModelAndView mav) {
+		List<ClubBoard> list = clubService.selectReportBoardList(clubCode);
+		log.debug("clubList = {}",list);
+		
+		mav.setViewName("club/clubMngReport");
+		mav.addObject("reportList", list);
+		return mav;
+	}
 	
+	@PostMapping("/blind.do")
+	public String blind(@RequestParam("clubCode")int clubCode,@RequestParam("boardNo")int boardNo,RedirectAttributes redirectAttributes) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("clubCode = {}",clubCode);
+		
+		int result = clubService.blindBoard(boardNo);
+		String msg = result>0?"블라인드처리되었습니다":"실패";
+		redirectAttributes.addFlashAttribute("msg", msg);
+		
+		return "redirect:mngreport.do?clubCode="+clubCode;
+	}
 }
 

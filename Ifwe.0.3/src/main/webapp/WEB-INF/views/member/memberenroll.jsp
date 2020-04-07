@@ -417,10 +417,9 @@ function maxLengtYear(object){
                 <div class="phone-btn" id="sendSMS">
                 <script>
                 $(function(){
+                	var phoneNum;
                 	$("#sendSMS").click(function(){
-                		let phoneNum = $("#phoneNumber").val();
-                		console.log(phoneNum);
-            			window.open("${pageContext.request.contextPath}/member/updatePhonePUPUP.do", "a", "width=500, height=400, left=300, top=200"); 
+                		window.open("${pageContext.request.contextPath}/member/insertPhonePOPUP.do", "a", "width=500, height=400, left=300, top=200"); 
 
                 		
                 		
@@ -517,6 +516,7 @@ function maxLengtYear(object){
                             <input type="submit" value="회원가입" class="enroll-btn bold-kor">
                         </div>
                     </div>
+                    <input type="hidden" name="memberPhone" id="memberPhone" />
                 </form>
             </div>
         </article>

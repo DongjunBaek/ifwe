@@ -18,6 +18,7 @@ section{
 .section-boradall{
     float: left;
     font-size: 19px;
+    font-family: 'GmarketSansMedium';
 }
 .section-block-right{
     float: right;

@@ -27,9 +27,9 @@ public class ClubMember extends Member implements Serializable{
 	public ClubMember(int memberCode, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberLoc, String memberEmail, Date memberBirth, String memberGender, String memberAddr,
 			Date memberEnrolldate, String memberSuspension, String memberRole, int memberMsg, String memberLike,
-			String profileName, String profileImgRe, String clubGrade) {
+			String profileName, String profileImgRe, String clubGrade, Date Day) {
 		super(memberCode, memberId, memberPwd, memberName, memberPhone, memberLoc, memberEmail, memberBirth,
-				memberGender, memberAddr, memberEnrolldate, memberSuspension, memberRole, memberMsg, memberLike, memberMsg);
+				memberGender, memberAddr, memberEnrolldate, memberSuspension, memberRole, memberMsg, memberLike, memberMsg, Day);
 		this.profileName = profileName;
 		this.profileImgRe = profileImgRe;
 		this.clubGrade = clubGrade;
