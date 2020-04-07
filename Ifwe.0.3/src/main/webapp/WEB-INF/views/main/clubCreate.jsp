@@ -410,13 +410,13 @@ function clubDuplicate(){
                         <div class="select-boxs">
                      <select name="clubMax" id="search2">
                          <option value="전체" disabled selected>전체</option>
-                         <option value="10">10</option>
-                         <option value="15">15</option>
-                         <option value="20">20</option>
                          <option value="25">25</option>
+                         <option value="50">50</option>
+                         <option value="75">75</option>
+                         <option value="100">100</option>
                      </select>
                 	</div>
-                        <span class="font-kor thin-font span-people">최대 25명</span>
+                        <span class="font-kor thin-font span-people">최대 100명</span>
                     </div>
                 </div>
                 <div id="seventh" class="info-container">

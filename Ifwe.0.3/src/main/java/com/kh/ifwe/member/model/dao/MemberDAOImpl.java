@@ -131,6 +131,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.selectMsgCount",memberCode);
 	}
 
+	@Override
+	public Profile selectProfileByMemberCode(int clubMaster) {
+		return sqlSession.selectOne("profile.selectProfileByMemberCode",clubMaster);
+	}
+
 	
 	
 	
