@@ -2,7 +2,9 @@ package com.kh.ifwe.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -62,18 +64,29 @@ public class AdminController {
 	 */
 	@GetMapping("/memberList.do")
 	@ResponseBody
-	public List<Member> memberList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
+	public Map<Integer, Object> memberList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "memberRole", required = false, defaultValue = "member") String memberRole) {
 		log.debug("회원목록 페이지");
 
 		final int numPerPage = 10;
-
+		
 		// 업무로직 처리
-		List<Member> list = adminService.selectMemberList(cPage, numPerPage, memberRole);
-
-		log.debug("list=" + list);
-
-		return list;
+		
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		
+		List<Member> memberlist = adminService.selectMemberList(cPage, numPerPage, memberRole);
+		
+		int totalContents = adminService.selectMemberCount(memberRole);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
+		
+		log.debug("memberlist{}=" + memberlist);
+		log.debug("totalContents={}", totalContents);
+		
+		map.put(0, cPage);
+		map.put(1, totalPage);
+		map.put(2, memberlist);
+		
+		return map;
 	}
 
 	@GetMapping("/cancel.do")
@@ -119,18 +132,30 @@ public class AdminController {
 
 	@GetMapping("/adminBoardList.do")
 	@ResponseBody
-	public List<Board> boardList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
+	public Map<Integer, Object> boardList(@RequestParam(value = "cPage", defaultValue = "1") int cPage,
 			@RequestParam(value = "boardCategory", required = false, defaultValue = "member") String boardCategory) {
 		log.debug("회원목록 페이지");
 
 		final int numPerPage = 10;
-
+		
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		
 		// 업무로직 처리
 		List<Board> boardList = adminService.selectOneBoard(cPage, numPerPage, boardCategory);
 
+		int totalContents = adminService.selectNoticeCount(boardCategory);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
+		
+		log.debug("boardlist{}=" + boardList);
+		log.debug("totalContents={}", totalContents);
+		
+		map.put(0, cPage);
+		map.put(1, totalPage);
+		map.put(2, boardList);
+		
 		log.debug("boardList{}=" + boardList);
 
-		return boardList;
+		return map;
 	}
 
 	@GetMapping("/boardForm.do")
@@ -429,4 +454,19 @@ public class AdminController {
 		 return memberEnrollList;
 	 }
 
+	 @PostMapping("/dormantNotice.do")
+	 public ModelAndView dormantNoticeInsert(ModelAndView mav, @RequestParam("memberCode") int memberCode) {
+		 log.debug("휴면계정 게시판 insert 페이지");
+		 
+		 int result = adminService.insertDormantNotice(memberCode);
+		 
+		 if (result>0) log.debug("휴면요청 게시글 등록 성공");
+		 else log.debug("휴면요청 게시글 등록 실패");
+
+		 mav.setViewName("/");
+		 
+		 return mav;
+	 }
+	 
+	 
 }

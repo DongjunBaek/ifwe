@@ -37,6 +37,9 @@
 textarea, input,select{
 border: 1px solid #ebebeb;
 }
+.section-boradmenu{
+	font-family: 'GmarketSansMedium';
+}
 </style>
 </head>
 

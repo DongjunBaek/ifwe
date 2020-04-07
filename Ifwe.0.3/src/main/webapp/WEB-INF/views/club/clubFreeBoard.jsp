@@ -256,7 +256,6 @@ function close_pop(flag) {
 <style>
 .section-boradall{
 	font-family: 'GmarketSansMedium';
-	font-weight: bold;
 }
 .click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px;}
 .under-click-three-dots{width:200px;max-height: max-content;}

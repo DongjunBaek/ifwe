@@ -2,8 +2,8 @@ package com.kh.ifwe.member.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +36,9 @@ public class Member implements Serializable {
 	private int memberMsg;
 	private String memberLike;
 	private int num;
+
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date Day;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
