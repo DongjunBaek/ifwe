@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -199,6 +200,7 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
+
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return sqlSession.selectList("club.selectReportBoardList",clubCode);
 	}
@@ -208,6 +210,33 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.update("club.blindBoard", boardNo);
 	}
 
+@Override
+	public List<ClubMaster> clubSearch(int cPage,int numPerPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("club.clubSearch",null,rowBounds);
+	}
+
+	@Override
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("club.searchClubByHashtag", param,rowBounds);
+	}
+
+	@Override
+	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("club.selectListByName", param, rowBounds);
+	}
 
 	
 	

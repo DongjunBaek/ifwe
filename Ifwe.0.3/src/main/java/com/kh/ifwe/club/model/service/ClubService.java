@@ -77,9 +77,17 @@ public interface ClubService {
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
+
 	List<ClubBoard> selectReportBoardList(int clubCode);
 
 	int blindBoard(int boardNo);
+
+	List<ClubMaster> clubSearch(int cPage, int numPerPage);
+
+	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
+
+	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
+
 
 
 

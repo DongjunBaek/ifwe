@@ -38,7 +38,8 @@
 				#{boardCateCode, typeHandler=StrArrTypeHandler}, 
 				'n', 
 				'n',
-				default,default
+				default,
+				default
 			)
 			
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">

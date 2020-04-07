@@ -225,15 +225,33 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+
 	@Override
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return clubDAO.selectReportBoardList(clubCode);
+
+	//0406 dongjun pageBar 
+	@Override
+	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
+		return clubDAO.clubSearch(cPage,numPerPage);
+	}
+
+	//0406 dongjun pageBar 
+	@Override
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
+		return clubDAO.searchClubByHashtag(param,numPerPage,cPage);
+
 	}
 
 
 	@Override
+
 	public int blindBoard(int boardNo) {
 		return clubDAO.blindBoard(boardNo);
+	}
+	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
+		return clubDAO.selectListByName(param, numPerPage, cPage);
+
 	}
 
 }	

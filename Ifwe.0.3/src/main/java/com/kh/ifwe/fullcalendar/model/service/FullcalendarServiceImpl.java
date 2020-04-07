@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.fullcalendar.model.dao.FullcalendarDAO;
 import com.kh.ifwe.fullcalendar.model.vo.Fullcalendar;
 
@@ -23,10 +24,10 @@ public class FullcalendarServiceImpl implements FullcalendarService {
 	}
 
 	@Override
-	public List<Fullcalendar> selectList() {
+	public List<Fullcalendar> selectList(String clubCode) {
 
 		
-		return fullcalendardao.selectList();
+		return fullcalendardao.selectList(clubCode);
 	}
 
 	@Override
@@ -39,6 +40,12 @@ public class FullcalendarServiceImpl implements FullcalendarService {
 	public int deleteFC(Fullcalendar fc) {
 		// TODO Auto-generated method stub
 		return fullcalendardao.deleteFC(fc);
+	}
+
+	@Override
+	public Club checkMaster(String clubCode) {
+		// TODO Auto-generated method stub
+		return fullcalendardao.checkMaster(clubCode);
 	}
 
 }
