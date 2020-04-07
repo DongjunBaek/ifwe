@@ -88,7 +88,9 @@ public interface ClubService {
 
 	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
 
+
 	List<Heart> selectHeartMember();
+
 
 
 
