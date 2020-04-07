@@ -102,7 +102,6 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
-	
 	$("[name=somoim-search-btn]").click(function(){
 		$("#searchSomoimDivContainer").css('display','none');
 		let searchType = $("[name=searchType]").val();
@@ -156,7 +155,6 @@ $(function(){
 						
 					}
 
-
 					$("[name=searchType]").val('');
 					$("[name=clubSearchKeyword]").val('');
 					$("[name=clubLocation]").val('');
@@ -170,7 +168,8 @@ $(function(){
 				    	let clubCode = $(this).attr("data-clubCode");
 				    	console.log(clubCode);
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
-				    });
+					});
+				   
 					
 
 					
@@ -373,6 +372,7 @@ function pageBar_search_btn(cPageNo){
 	});
 	
 }
+
 </script>
 <style>
 .card-container:nth-child(n+4) {

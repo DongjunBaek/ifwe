@@ -245,13 +245,21 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
-
 	public int blindBoard(int boardNo) {
 		return clubDAO.blindBoard(boardNo);
 	}
+	@Override
 	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
 		return clubDAO.selectListByName(param, numPerPage, cPage);
-
+	}
+	@Override
+	public int blindBoard(int boardNo) {
+		return clubDAO.blindBoard(boardNo);
+  	}
+  
+    @Override
+	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
+		return clubDAO.selectListByName(param, numPerPage, cPage);
 	}
 
 }	

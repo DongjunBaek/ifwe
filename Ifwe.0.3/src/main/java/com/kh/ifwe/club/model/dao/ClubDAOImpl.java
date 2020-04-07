@@ -200,7 +200,6 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return sqlSession.selectList("club.selectReportBoardList",clubCode);
 	}
@@ -210,7 +209,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.update("club.blindBoard", boardNo);
 	}
 
-@Override
+	@Override
 	public List<ClubMaster> clubSearch(int cPage,int numPerPage) {
 		int offset = ((cPage-1)*numPerPage);
 		int limit = numPerPage;
