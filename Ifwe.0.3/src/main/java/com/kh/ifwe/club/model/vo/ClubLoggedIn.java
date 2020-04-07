@@ -28,10 +28,10 @@ public class ClubLoggedIn extends MemberLoggedIn implements Serializable {
 	public ClubLoggedIn(int memberCode, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberLoc, String memberEmail, Date memberBirth, String memberGender, String memberAddr,
 			Date memberEnrolldate, String memberSuspension, String memberRole, int memberMsg, String memberLike,
-			String profileName, String profileImgRe, String clubGrade, Date clubEnrolldate) {
+			String profileName, String profileImgRe, String clubGrade, Date clubEnrolldate, Date Day) {
 		super(memberCode, memberId, memberPwd, memberName, memberPhone, memberLoc, memberEmail, memberBirth,
 				memberGender, memberAddr, memberEnrolldate, memberSuspension, memberRole, memberMsg, memberLike,
-				profileName, profileImgRe);
+				profileName, profileImgRe, Day);
 		this.clubGrade = clubGrade;
 		this.clubEnrolldate = clubEnrolldate;
 	}

@@ -51,6 +51,11 @@ public interface AdminDAO {
 
 	List<Member> selctMemberEnrollList();
 
+	int selectMemberCount(String memberRole);
+
+	int selectNoticeCount(String boardCategory);
+
+	int insertDormantNotice(int memberCode);
 
 
 }
