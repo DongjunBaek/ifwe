@@ -316,7 +316,22 @@ $(".paymentbtn").click(function(){
 	
 	}); 
 </script>
+<style>
+.choice-container{
+	background-color:  #fafafa;
+}
+.choice{
+	background-color: white;
+    padding-left: 8%;
+    padding-bottom: 5%;
+    margin-bottom: 10%;
+    padding-top: 5%;
+}
+.choice-title{
+	margin : 0;
+}
 
+</style>
 
 
 

@@ -164,13 +164,15 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
+	  console.log("클럽코드"+clubCCode);
 	  
     $.ajax({
       type: "get",
-      url: "/spring/fullcalendar/getfc",
+      url: "/ifwe/fullcalendar/getfc",
         data: {
         	start:start.format(),
-        	end: end.format()
+        	end: end.format(),
+        	clubCode:clubCCode
         	
         },
         dataType:'json',
@@ -193,7 +195,8 @@ var calendar = $('#calendar').fullCalendar({
         	backgroundColor: array.fullBackgroundColor,
         	textColor:array.fullTextColor,
         	allDay: array.fullAllDay,
-        	fullNo:array.fullNo
+        	fullNo:array.fullNo,
+        	clubCode:clubCCode
         	}
 //       	console.log(array);
       	events.push(evt);
@@ -225,11 +228,11 @@ var calendar = $('#calendar').fullCalendar({
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
-
+	
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "post",
-      url:"/spring/fullcalendar/updatefc",
+      url:"/ifwe/fullcalendar/updatefc",
       data: {
         //id: event._id,
         //....
@@ -283,7 +286,7 @@ var calendar = $('#calendar').fullCalendar({
     //드롭한 일정 업데이트
     $.ajax({
       type: "post",
-      url: "/spring/fullcalendar/updatefc",
+      url: "/ifwe/fullcalendar/updatefc",
       data: {
         
 
