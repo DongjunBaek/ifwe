@@ -239,6 +239,11 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return sqlSession.selectOne("club.selectAgeAvg",clubCode);
+	}
+	
+	@Override
 	public List<Heart> selectHeartMember() {
 		return sqlSession.selectList("club.selectHeartMember");
 	}

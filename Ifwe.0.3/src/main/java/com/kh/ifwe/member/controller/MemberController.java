@@ -3,6 +3,7 @@ package com.kh.ifwe.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,11 +119,16 @@ public class MemberController {
 
 
 		
-		Member serchMember = memberService.selectOne(member.getMemberId());
+		Member searchMember = memberService.selectOne(member.getMemberId());
 		
 		
-		int insertProfileResult =memberService.insertProfile(serchMember); 
-		
+		int insertProfileResult =memberService.insertProfile(searchMember); 
+		if(insertProfileResult > 0) {
+			Profile profile = memberService.selectProfileByMemberCode(searchMember.getMemberCode()); 
+			profile.setProfileAge(getAge(year, month, day));
+			int insertAge = memberService.updateProfile(profile); 
+			log.debug("insertAge@membercontroller insert ProfileAge {}",insertAge);
+		}
 		redirectAttributes.addFlashAttribute("msg", msg);
 
 		return mav;
@@ -748,10 +754,31 @@ public class MemberController {
 		return mav;
 	}
 	
+
+	/**
+	 * 0408 dongjun 나이구하기 profile insert 관련 메소드
+	 */
+	
+	 public int getAge(int birthYear, int birthMonth, int birthDay)
+	 {
+	         Calendar current = Calendar.getInstance();
+	         int currentYear  = current.get(Calendar.YEAR);
+	         int currentMonth = current.get(Calendar.MONTH) + 1;
+	         int currentDay   = current.get(Calendar.DAY_OF_MONTH);
+	        
+	         int age = currentYear - birthYear;
+	         // 생일 안 지난 경우 -1
+	         if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay)  
+	             age--;
+	        
+	         return age;
+	 }
+
 	@GetMapping("/insertPhonePOPUP.do")
 	public String insertPhonePopU(){
 		
 		return "member/insertPhonePOPUP";
 	}
+
 
 }

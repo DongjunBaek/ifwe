@@ -63,4 +63,6 @@ public interface MemberService {
 
 	int selectMsgCount(int memberCode);
 
+	Profile selectProfileByMemberCode(int clubMaster);
+
 }

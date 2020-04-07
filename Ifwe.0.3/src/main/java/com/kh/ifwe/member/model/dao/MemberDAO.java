@@ -62,5 +62,7 @@ public interface MemberDAO {
 
 	int selectMsgCount(int memberCode);
 
+	Profile selectProfileByMemberCode(int clubMaster);
+
 
 }

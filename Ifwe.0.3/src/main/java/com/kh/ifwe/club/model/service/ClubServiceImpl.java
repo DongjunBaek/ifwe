@@ -257,6 +257,11 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return clubDAO.selectAgeAvg(clubCode);
+	}
+	
+	@Override
 	public List<Heart> selectHeartMember() {
 		return clubDAO.selectHeartMember();
 	}

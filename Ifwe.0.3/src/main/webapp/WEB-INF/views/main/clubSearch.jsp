@@ -42,7 +42,9 @@
     margin-top: 3%;
     width: 100px;
 }
-
+.friend-name-profile{
+	cursor: text;	
+}
 </style>
 <script>
 let checkCurrentPage = 1;
@@ -63,9 +65,7 @@ $(function(){
     	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
     });
     
-	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do"
-	});
+
 
 	$(".list-club-pagebtn").hover(function(){
 		$(this).css("color","white").css("background","#ffc862");
@@ -110,8 +110,7 @@ $(function(){
 		let memberCode = ${memberLoggedIn.memberCode};
 		console.log(searchType,clubSearchKeyword,clubLocation,memberCode);
 		
-		
-		console.log("dkdkdkdkdk");
+		console.log("onLoadclubList open");
 	    var allData = {"searchType": searchType, "clubSearchKeyword": clubSearchKeyword, "clubLocation":clubLocation,"memberCode":memberCode };
 		
 		console.log(searchType);
@@ -123,10 +122,17 @@ $(function(){
 			dataType:"json",
 			asyn: false,
 			success:data => {
-				console.log(data);	
-				
-				console.log(data[1]);
+
 				var listForClub = data[1];
+				var listForProfile= data[6];
+				var listForGender = data[7];
+				var listForAge = data[8];
+				
+				console.log('data7',listForGender);
+				console.log('data8',listForAge);
+
+				
+				
 				if(data.length == 0){
 					alert("검색결과가 없습니다.");
 					$("[name=searchType]").val('');
@@ -142,14 +148,15 @@ $(function(){
 						
 						$("#searchSomoimDivContainer").append(
 								'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
-		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
-		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+data[i].memberId+'</p><p class="club-name-search font-hk">'+data[i].clubTitle+'</p>'+
-		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+data[i].clubLocation+'</p>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+data[i].clubCurrent+'</span>/'+data[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+
-		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'+
+		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/profile/'+listForProfile[i].profileImgRe+'" alt="" /></div>'+
+		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
+		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(listForGender[i].maleCount/listForClub[i].clubCurrent)*10+		                        
+		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
+		                        +(1-(listForGender[i].maleCount/listForClub[i].clubCurrent))*10+
 		                        '</span></div>'+
-		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
+		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
 								);
 						
@@ -168,8 +175,8 @@ $(function(){
 				    	let clubCode = $(this).attr("data-clubCode");
 				    	console.log(clubCode);
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
-					});
-				   
+				    }); 
+
 					
 
 					
@@ -178,7 +185,7 @@ $(function(){
 						0406 ajax pageBar button
 						
 					*/
-					var tPage = data[2];
+				 	var tPage = data[2];
 					var cPage = data[3];
 					var pageBarSize = 5;
          			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
@@ -230,7 +237,7 @@ $(function(){
 				console.log("Error Search Club");
 				console.log(x,s,e);
 			}
-		});
+		}); 
 		
 		
 	});
@@ -277,6 +284,15 @@ function pageBar_search_btn(cPageNo){
 			$("#searchSomoimDivContainer").empty();
 			console.log(data[1]);
 			var listForClub = data[1];
+			var listForProfile= data[6];
+			var listForGender = data[7];
+			var listForAge = data[8];
+			
+			console.log('data7',listForGender);
+			console.log('data8',listForAge);
+
+			
+			
 			if(data.length == 0){
 				alert("검색결과가 없습니다.");
 				$("[name=searchType]").val('');
@@ -292,16 +308,16 @@ function pageBar_search_btn(cPageNo){
 					
 					$("#searchSomoimDivContainer").append(
 							'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
-	                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/ex2.jpg" alt="" /></div>'+
+	                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/profile/'+listForProfile[i].profileImgRe+'" alt="" /></div>'+
 	                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
 	                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
 	                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
-	                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(listForGender[i].maleCount/listForClub[i].clubCurrent)*10+
+	                        
 	                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-	                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+	                        +(1-(listForGender[i].maleCount/listForClub[i].clubCurrent))*10+
 	                        '</span></div>'+
-	                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
+	                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 	                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
 							);
 					
@@ -310,7 +326,7 @@ function pageBar_search_btn(cPageNo){
 			    	let clubCode = $(this).attr("data-clubCode");
 			    	console.log(clubCode);
 			    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
-			    });
+			    }); 
 
 				
 				/* 
@@ -419,13 +435,13 @@ function pageBar_search_btn(cPageNo){
                 </div>
                 <div class="card-wrapper" id="allSomoimDivContainer">
                 <c:if test="${not empty clubList }">
-                <c:forEach items="${clubList }" var="list">
+                <c:forEach items="${clubList }" var="list" varStatus="vs">
                     <div class="card-container">
                         <div class="club-img">
                         	<img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${list.clubImgRe}" alt="" />
                         </div>
                         <div class="club-leader">
-                        	<img src="${pageContext.request.contextPath }/resources/upload/profile/ex2.jpg" alt="" />
+                        	<img src="${pageContext.request.contextPath }/resources/upload/profile/${profile[vs.index].profileImgRe}" alt="" />
                         </div>
                         <div class="information-container">
                             <p class="club-leader-name font-hk friend-name-profile">@ ${list.memberId}</p>

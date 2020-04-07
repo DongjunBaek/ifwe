@@ -38,7 +38,7 @@ $(function(){
     
     
 	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do"
+		location.href="${pageContext.request.contextPath }/member/profile.do?memberCode="+${clubMaster.memberCode};
 	});
     
     $(".section-block-right").click(function(){
