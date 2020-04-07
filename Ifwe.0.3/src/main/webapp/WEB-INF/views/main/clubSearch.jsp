@@ -67,7 +67,6 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
 
-
 	$(".list-club-pagebtn").hover(function(){
 		$(this).css("color","white").css("background","#ffc862");
 	},function(){
@@ -103,7 +102,6 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
-
 	$("[name=somoim-search-btn]").click(function(){
 		$("#searchSomoimDivContainer").css('display','none');
 		let searchType = $("[name=searchType]").val();
@@ -156,11 +154,18 @@ $(function(){
 								);
 						
 					}
+
 					$("[name=searchType]").val('');
 					$("[name=clubSearchKeyword]").val('');
 					$("[name=clubLocation]").val('');
 					$("[name=goclub]").click(function(){
 						let clubCode = $(this).attr("data-clubCode");
+				    	console.log(clubCode);
+				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
+					})
+
+				    $("[name=goclub]").click(function(){
+				    	let clubCode = $(this).attr("data-clubCode");
 				    	console.log(clubCode);
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
 					});
@@ -235,6 +240,7 @@ $(function(){
 	
     
 });
+
 
 
 
@@ -366,7 +372,7 @@ function pageBar_search_btn(cPageNo){
 	});
 	
 }
-  
+
 </script>
 <style>
 .card-container:nth-child(n+4) {
