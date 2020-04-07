@@ -146,7 +146,6 @@
                                   on C.member_code = P.member_code
 		where B.club_boardlist_no = #{clubBoardlistNo}
 		order by C.comment_date
-	
 	</select>
 	
 	<update id="reportBoard">

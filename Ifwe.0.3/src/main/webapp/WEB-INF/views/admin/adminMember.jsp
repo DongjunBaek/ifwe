@@ -14,19 +14,22 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 
 <script>
-$(document).ready(function(){
-
-		var memberRole = "member";
+let cPage = 1;
+var memberRole;
+$(document).ready(function(){	
+		memberRole = "member";
 		$.ajax({
 			url : "${pageContext.request.contextPath }/admin/memberList.do",
 			data : {memberRole : memberRole},
+			asyn:false,
 			success : data =>{
 			
-				console.log(data);
+				console.log(data[0]);
 /* 				console.log(data[cnt]); */
 				$parentDiv = $("#appendList");
 				$parentDiv.empty();
-				$.each(data, function(idx, value){
+				$(".pageBar_appendList").empty();
+				$.each(data[2], function(idx, value){
 					
 					console.log(idx);
 					console.log(value);
@@ -37,9 +40,43 @@ $(document).ready(function(){
 						+"<td>"+value.memberAddr+"</td>"+"<td>"+value.memberSuspension+"</td>"
 						+"<td>"+moment("/Date("+value.memberEnrolldate+")/").format("YYYY-MM-DD").toString()+"</td>"
 						+"<td><form id='dropFrm' action='${pageContext.request.contextPath }/admin/drop.do' method='get'><input type='hidden' name='memberCode' value='"+value.memberCode+"'><input type='submit' id='drop' class='drop' value='탈퇴' onclick='deleteNotice();'></form></td></tr>");
-	
 				});
 				
+			 	cPage = data[0];
+     			var tPage = data[1];
+     			var pageBarSize = 5;
+     			var pageStart = Math.floor((cPage-1)/pageBarSize)*pageBarSize+1; 
+     			var pageEnd = pageStart+pageBarSize-1;
+     			var pageNo = pageStart;
+     			console.log(pageStart);
+     			console.log(tPage);
+      			$children4 = $("<div class='pageBar_memberList'></div>");
+       			if(cPage <= 1){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">[이전]</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">[이전]</button>"));
+       			}
+       			
+       			for( var i = pageStart; i <= pageEnd;i++){
+       				if(i == cPage){
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
+       				}else{
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+       				}
+       				if(i == tPage){
+       					break;
+       				}
+       			}
+       			
+       			if(cPage == tPage){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(tPage)+")' value="+(tPage)+">[다음]</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">[다음]</button>"));
+       			}
+      				
+       			$(".pageBar_appendList").append($children4);
+       		/* 	hoverBtnForPageBar();
+        	 */
 				
 			},
 		 	error : function(x,h,r){
@@ -52,7 +89,7 @@ $(document).ready(function(){
 
 $(function(){
 	$(".btn_member").click(function(){
-		var memberRole = $(this).attr("id");
+		memberRole = $(this).attr("id");
 		/* var cnt = 0; */
 		$.ajax({
 			url : "${pageContext.request.contextPath }/admin/memberList.do",
@@ -63,10 +100,13 @@ $(function(){
 /* 				console.log(data[cnt]); */
 				$parentDiv = $("#appendList");
 				$parentDiv.empty();
-				$.each(data, function(idx, value){
+				$(".pageBar_appendList").empty();
+				$.each(data[2], function(idx, value){
 					
 					console.log(idx);
 					console.log(value);
+					
+					console.log("data[2]",data[2]);
 					
 				$parentDiv.append("<tr><td>"+value.memberId+"</td>"+"<td>"+value.memberName+"</td>"
 						+"<td>"+moment("/Date("+value.memberBirth+")/").format("YYYY-MM-DD").toString()+"</td>"
@@ -77,6 +117,42 @@ $(function(){
 													  :"<form id='dropFrm' action='${pageContext.request.contextPath }/admin/drop.do' method='get'><input type='hidden' name='memberCode' value='"+value.memberCode+"'><input type='submit' id='drop' class='drop' value='탈퇴' onclick='dropMember();'>")+"</td></form></tr>");
 	
 				});
+				
+			 	cPage = data[0];
+     			var tPage = data[1];
+     			var pageBarSize = 5;
+     			var pageStart = Math.floor((cPage-1)/pageBarSize)*pageBarSize+1; 
+     			var pageEnd = pageStart+pageBarSize-1;
+     			var pageNo = pageStart;
+     			console.log(pageStart);
+     			console.log(tPage);
+      			$children4 = $("<div class='pageBar_memberList'></div>");
+       			if(cPage <= 1){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">[이전]</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">[이전]</button>"));
+       			}
+       			
+       			for( var i = pageStart; i <= pageEnd;i++){
+       				if(i == cPage){
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
+       				}else{
+       					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+       				}
+       				if(i == tPage){
+       					break;
+       				}
+       			}
+       			
+       			if(cPage == tPage){
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(tPage)+")' value="+(tPage)+">[다음]</button>"));
+       			}else{
+       				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">[다음]</button>"));
+       			}
+      				
+       			$(".pageBar_appendList").append($children4);
+       	/* 		hoverBtnForPageBar();
+		 */		 
 				
 				
 			},
@@ -130,11 +206,13 @@ $(function(){
 		}
 	});
 });
+
+
 $(function(){
 	$("#membersrh").click(function(){
-		
 		var memberName = $("#memberNameInput").val();
 			
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath }/admin/searchMember.do",
 			data : {memberName : memberName},
@@ -157,17 +235,17 @@ $(function(){
 													  :"<form id='dropFrm' action='${pageContext.request.contextPath }/admin/drop.do' method='get'><input type='hidden' name='memberCode' value='"+value.memberCode+"'><input type='submit' id='drop' class='drop' value='탈퇴' onclick='dropMember();'>")+"</td></form></tr>");
 	
 				});
-				
-				
 			},
-		 	error : function(x,h,r){
-        		console.log(x,h,r);
-        	}
-			
-		});
+        	 error : function(x,h,r){
+        		 console.log(x,h,r);
+        	 }
+         });
+				
 		
 	});
 });
+
+
 function dropMember(){
 	if(!confirm("해당 회원을 탈퇴 처리하시겠습니까?")) 
 		return;
@@ -183,6 +261,28 @@ function cancelMember(){
 	
 }
 </script>
+
+<style>
+
+.pageBar_memberList{
+	display: flex;
+  	justify-content: center;
+	align-content: center;
+	margin : 0 auto;
+	margin-top : 30px;
+}
+
+.listForBoard{
+    display: block;
+    border: none;
+    outline: none;
+    align-content: center;
+    font-size: 20px;
+    margin-right: 30px;
+    margin-top: 3%;
+    cursor : pointer;
+}
+</style>
 
 </head>
 <body>
@@ -219,24 +319,107 @@ function cancelMember(){
                     </thead>
                    <tbody id="appendList">
                    </tbody>
-            <%--       <<c:if test="${not empty searchList }">
-	                   	<c:forEach items="${searchList }" var="searchMember">
-	                   		<tr>
-	                   			<td>${searchMember.memberId }</td>
-	                   			<td>${searchMember.memberName }</td>
-	                   			<td>${searchMember.memberBirth }</td>
-	                   			<td>${searchMember.memberEmail }</td>
-	                   			<td>${searchMember.memberPhone }</td>
-	                   			<td>${searchMember.memberAddr }</td>
-	                   			<td>${searchMember.memberSuspension }</td>
-	                   			<td>${searchMember.memberEnrolldate }</td>
-	                   			<td>${searchMember.memberRole =="h"?:}
-	                   		</tr>
-	                   	</c:forEach>
-	                </c:if> --%>
-                </table>
+                   </table>
+                   <div class="pageBar_appendList">
+                   </div>
             </div>
     </section>
-
 </body>
+
+
+<script>
+function reloadFunctionToAjax(no){
+	/* console.log("버튼클릭"); */
+	cPage = no;
+	
+	$.ajax({
+    	url : "${pageContext.request.contextPath}/admin/memberList.do",
+    	data : {memberRole : memberRole,
+    			cPage : cPage},
+    	asyn:false,
+    	success : data =>{
+    		console.log(data[0]);
+     		 $parentDiv = $("#appendList");
+    		 $parentDiv.empty();
+    		 $(".pageBar_appendList").empty();
+ 			$.each(data[2], function(idx, value){
+				
+				console.log(idx);
+				console.log(value);
+				
+				console.log("data[2]",data[2]);
+				
+			$parentDiv.append("<tr><td>"+value.memberId+"</td>"+"<td>"+value.memberName+"</td>"
+					+"<td>"+moment("/Date("+value.memberBirth+")/").format("YYYY-MM-DD").toString()+"</td>"
+					+"<td>"+value.memberEmail+"</td>"+"<td>"+value.memberPhone+"</td>"
+					+"<td>"+value.memberAddr+"</td>"+"<td>"+value.memberSuspension+"</td>"
+					+"<td>"+moment("/Date("+value.memberEnrolldate+")/").format("YYYY-MM-DD").toString()+"</td>"
+					+"<td>"+(value.memberRole == "h"?"<form id='cancelFrm' action='${pageContext.request.contextPath }/admin/cancel.do' method='get'><input type='hidden' name='memberCode' value='"+value.memberCode+"'><input type='submit' id='quit' class='quit' value='휴면해지' onclick='cancelMember();'>"
+												  :"<form id='dropFrm' action='${pageContext.request.contextPath }/admin/drop.do' method='get'><input type='hidden' name='memberCode' value='"+value.memberCode+"'><input type='submit' id='drop' class='drop' value='탈퇴' onclick='dropMember();'>")
+					+"</td></form></tr>");
+	
+    			    
+                     
+    		 });
+ 		 	cPage = data[0];
+ 			var tPage = data[1];
+ 			var pageBarSize = 5;
+ 			var pageStart = Math.floor((cPage-1)/pageBarSize)*pageBarSize+1; 
+ 			var pageEnd = pageStart+pageBarSize-1;
+ 			var pageNo = pageStart;
+ 			console.log(pageStart);
+ 			console.log(tPage);
+  			$children4 = $("<div class='pageBar_memberList'></div>");
+   			if(cPage <= 1){
+   				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(1)+")' value="+(1)+">[이전]</button>"));
+   			}else{
+   				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage-1)+")' value="+(cPage-1)+">[이전]</button>"));
+   			}
+   			for( var i = pageStart; i <= pageEnd;i++){
+   				if(i == cPage){
+   					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+"><strong>"+i+"</strong></button>"));
+   				}else{
+   					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
+   				}
+   				if(i == tPage){
+   					break;
+   				}
+   			}
+   			
+   			if(cPage == tPage){
+   				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(tPage)+")' value="+(tPage)+">[다음]</button>"));
+   			}else{
+   				$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(cPage+1)+")' value="+(cPage+1)+">[다음]</button>"));
+   			}
+  				
+   			$(".pageBar_appendList").append($children4);
+   			/* hoverBtnForPageBar();
+    		 */ 
+    	 },
+    	 error : function(x,h,r){
+    		 console.log(x,h,r);
+    	 }
+     });
+			
+};
+
+
+/* function hoverBtnForPageBar(){
+	$(".listForBoard").hover(function(){
+		$(this).css("color","white").css("background-color","rgb(39, 86, 166)");
+			
+		if(cPage == $(this).val()){
+			$(this).children().css("color","white");
+		}
+	}, function(){
+		$(this).css("color","rgb(39, 86, 166)").css("background-color","white");
+		
+		if(cPage == $(this).val()){
+			$(this).children().css("color","rgb(39, 86, 166)");
+		}
+	});
+} */
+
+</script>
+
 </html>

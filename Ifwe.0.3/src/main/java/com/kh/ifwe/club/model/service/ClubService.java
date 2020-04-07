@@ -70,7 +70,6 @@ public interface ClubService {
 
 	List<Count> selectAge(List<Integer> clubCode);
 
-
 	List<Club> selectClubCateList(String clubCatecode);
 
 	List<SearchKeyword> selectSearchKeywordList();
@@ -86,8 +85,5 @@ public interface ClubService {
 	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
 
 	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
-
-
-
 
 }

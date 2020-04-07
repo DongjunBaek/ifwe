@@ -87,14 +87,9 @@ function searchKeywordList(){
 				/* console.log(idx);
 				console.log(value);
 				 */
-				 console.log(value.rank);
+
 				 rankArr[idx] = value.rank;
 				 searchKeywordArr[idx] = value.searchKeyword;
-				 
-			/* 	 console.log(value.searchKeywordArr);
-				 console.log(rank);
-				 console.log(searchKeyword); */
-				 
 				 
 				 
 			}); 
@@ -108,6 +103,9 @@ function searchKeywordList(){
 	
 	
 }
+ 	
+	var numArr = new Array(); 	 
+	var DayArr = new Array(); 	 
  	 
  	function memberEnrollList(){
  		var num =  "";
@@ -116,14 +114,18 @@ function searchKeywordList(){
  			data : {num : num}, 
  			async: false,
  			success : data =>{
- 				console.log(data); 
- 				 
- 					
- 				/* $.each(data, function(idx,value){
- 					 
- 					 
+ 			
+ 				$.each(data, function(idx,value){
+ 						 console.log(value.num);
+ 						 console.log(value.Day);
+
+ 					  numArr[idx] = value.num;
+ 					  DayArr[idx] = value.Day;
+ 					  
+ 					  	console.log(numArr[idx]);
+ 					  	console.log(DayArr[idx]);
+ 					  
  				}); 
- 				 */
  				
  			},
  			error : function(x,h,r){
@@ -191,6 +193,8 @@ searchKeywordList();
 				}
 		
 		
+		memberEnrollList();
+	
 		
 		google.charts.load('current', {'packages':['bar']});
 	 	 
@@ -198,21 +202,22 @@ searchKeywordList();
 	 	
 	    function drawStuff() {
 	        var data = new google.visualization.arrayToDataTable([
-	          ['Opening Move', 'Percentage'],
-	          ["King's pawn (e4)", 44],
-	          ["Queen's pawn (d4)", 31],
-	          ["Knight to King 3 (Nf3)", 12],
-	          ["Queen's bishop pawn (c4)", 10],
-	          ['Other', 3],
-	          ['Other', 3]
+	          ['EnrollDate', 'number'],
+	          [''+DayArr[0], numArr[0]],
+	          [''+DayArr[1], numArr[1]],
+	          [''+DayArr[2], numArr[2]],
+	          [''+DayArr[3], numArr[3]],
+	          [''+DayArr[4], numArr[4]],
+	          [''+DayArr[5], numArr[5]],
+	          [''+DayArr[6], numArr[6]]
 	        ]);
 
 	        var options = {
-	          title: 'Chess opening moves',
+	          title: 'memberEnrollDate List',
 	          width: 1250,
 	          legend: { position: 'none' },
-	          chart: { title: 'Chess opening moves',
-	                   subtitle: 'popularity by percentage' },
+	          chart: { title: 'memberEnrollDate',
+	                   subtitle: 'number' },
 	          bars: 'horizontal', // Required for Material Bar Charts.
 	          axes: {
 	            x: {
@@ -224,6 +229,8 @@ searchKeywordList();
 
 	        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
 	        chart.draw(data, options);
+	        
+	        
 	      };
 		
 		

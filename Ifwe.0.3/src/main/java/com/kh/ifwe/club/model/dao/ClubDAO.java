@@ -65,8 +65,6 @@ public interface ClubDAO {
 
 	int deleteClubMember(Map<String, Object> param);
 
-
-
 	List<ClubBoard> selectBoardList(int clubCode);
 
 	List<ClubBoardProfile> selectclubBoardProfileList(int clubCode);
@@ -85,7 +83,6 @@ public interface ClubDAO {
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
-
 	List<ClubBoard> selectReportBoardList(int clubCode);
 
 	int blindBoard(int boardNo);
@@ -95,9 +92,6 @@ public interface ClubDAO {
 	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
 
 	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
-
-
-
 
 
 }

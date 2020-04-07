@@ -122,6 +122,21 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selctMemberEnrollList();
 	}
 
+	@Override
+	public int selectMemberCount(String memberRole) {
+		return adminDAO.selectMemberCount(memberRole);
+	}
+
+	@Override
+	public int selectNoticeCount(String boardCategory) {
+		return adminDAO.selectNoticeCount(boardCategory);
+	}
+
+	@Override
+	public int insertDormantNotice(int memberCode) {
+		return adminDAO.insertDormantNotice(memberCode);
+	}
+
 
 
 
