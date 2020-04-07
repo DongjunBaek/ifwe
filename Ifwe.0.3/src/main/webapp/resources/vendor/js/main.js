@@ -167,7 +167,7 @@ var calendar = $('#calendar').fullCalendar({
 	  
     $.ajax({
       type: "get",
-      url: "/spring/fullcalendar/getfc",
+      url: "/ifwe/fullcalendar/getfc",
         data: {
         	start:start.format(),
         	end: end.format()
@@ -193,9 +193,10 @@ var calendar = $('#calendar').fullCalendar({
         	backgroundColor: array.fullBackgroundColor,
         	textColor:array.fullTextColor,
         	allDay: array.fullAllDay,
-        	fullNo:array.fullNo
+        	fullNo:array.fullNo,
+        	clubCode:clubCCode
+        	
         	}
-//       	console.log(array);
       	events.push(evt);
         	/*callback(events);
         	*/
@@ -229,7 +230,7 @@ var calendar = $('#calendar').fullCalendar({
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "post",
-      url:"/spring/fullcalendar/updatefc",
+      url:"/ifwe/fullcalendar/updatefc",
       data: {
         //id: event._id,
         //....
@@ -283,7 +284,7 @@ var calendar = $('#calendar').fullCalendar({
     //드롭한 일정 업데이트
     $.ajax({
       type: "post",
-      url: "/spring/fullcalendar/updatefc",
+      url: "/ifwe/fullcalendar/updatefc",
       data: {
         
 

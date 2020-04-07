@@ -90,6 +90,11 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.selectFreeboardCmt(clubBoardlistNo);
 	}
 
+	@Override
+	public int reportBoard(int boardNo) {
+		return clubBoardDAO.reportBoard(boardNo);
+	}
+
 
 	
 	

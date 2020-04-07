@@ -100,8 +100,8 @@ public class ClubServiceImpl implements ClubService {
 
 
 	@Override
-	public List<ClubMember> selectClubMember(List<Member> clubMemberCode) {
-		return clubDAO.selectClubMember(clubMemberCode);
+	public List<ClubMember> selectClubMember(Map<String, Object> param2) {
+		return clubDAO.selectClubMember(param2);
 	}
 
 	//0326문보라 가입요청 메세지 보내기
@@ -222,6 +222,36 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<SearchKeyword> selectSearchKeywordList() {
 		return clubDAO.selectSearchKeywordList();
+	}
+
+
+
+	@Override
+	public List<ClubBoard> selectReportBoardList(int clubCode) {
+		return clubDAO.selectReportBoardList(clubCode);
+
+	//0406 dongjun pageBar 
+	@Override
+	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
+		return clubDAO.clubSearch(cPage,numPerPage);
+	}
+
+	//0406 dongjun pageBar 
+	@Override
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
+		return clubDAO.searchClubByHashtag(param,numPerPage,cPage);
+
+	}
+
+
+	@Override
+	public int blindBoard(int boardNo) {
+		return clubDAO.blindBoard(boardNo);
+  }
+  
+    @Override
+	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
+		return clubDAO.selectListByName(param, numPerPage, cPage);
 	}
 
 }	

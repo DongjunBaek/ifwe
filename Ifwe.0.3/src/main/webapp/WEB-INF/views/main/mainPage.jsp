@@ -86,8 +86,10 @@ function eventView(eventCode){
                         <div class="list">
                             <ul class="font-kor list-ul" style="margin-left: 20%;">
                         	<c:if test="${not empty clubList }">
-                        	<c:forEach items="${clubList }" var="list">
-                                <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p>${list.clubTitle }</p> </li>
+                        	<c:forEach items="${clubList }" var="list" varStatus="vs">
+                                <c:if test="${vs.count < 4 }">
+	                                <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p>${list.clubTitle }</p> </li>
+                                </c:if>
                         	</c:forEach>
                         	</c:if>
                             </ul>
@@ -139,21 +141,22 @@ function eventView(eventCode){
                     <div class="three-content font-kor">
                         <div class="three-container">
                         	<c:if test="${not empty interClub }">
-                        	<c:forEach items="${interClub }" var = "list">
-                            <div class="three-div">
-                                <div class="three-img">
-                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
-                                </div>
-                                <div class="three-posts">
-                                    <div class="three-post1">@${list.memberId }</div>
-                                    <div class="three-post2">${list.clubTitle }</div>
-                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${list.clubLocation }</div>
-                                </div>
-                                <div class="three-btn">
-                                    <input type="button" value="자세히 보기" class="font-kor" id="clubMainBtn" data-clubCode=${list.clubCode }>
-                                </div>
-                            </div>
-                        	</c:forEach>
+	                        	<c:forEach items="${interClub }" var = "list" varStatus="vs">
+	                        	
+	                            <div class="three-div">
+	                                <div class="three-img">
+	                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
+	                                </div>
+	                                <div class="three-posts">
+	                                    <div class="three-post1">@${list.memberId }</div>
+	                                    <div class="three-post2">${list.clubTitle }</div>
+	                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${list.clubLocation }</div>
+	                                </div>
+	                                <div class="three-btn">
+	                                    <input type="button" value="자세히 보기" class="font-kor" id="clubMainBtn" data-clubCode=${list.clubCode }>
+	                                </div>
+	                            </div>
+	                        	</c:forEach>
                         	</c:if>
                            
                             
@@ -164,4 +167,15 @@ function eventView(eventCode){
         </div>
     </section>
 </body>
+<style>
+.list-ul li{
+	cursor: pointer;
+}
+.list{
+	height: 225px;
+}
+.three-content, .three-container{
+	overflow: hidden;
+}
+</style>
 </html>

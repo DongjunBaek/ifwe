@@ -27,6 +27,7 @@
 
 	<select id="selectFcList" resultMap="selectListFC">
 	select * from fullcalendar
+	where clubCode=#{clubCode}
 	</select>
 	
 		<resultMap type="Fullcalendar" id="selectListFC">
@@ -55,4 +56,9 @@
 	delete from fullcalendar
 	where full_id=#{fullId}
 	</delete>
+	
+	<select id="checkMaster" resultType="club">
+	select * from club
+	where club_code=#{clubCode}
+	</select>
 </mapper>

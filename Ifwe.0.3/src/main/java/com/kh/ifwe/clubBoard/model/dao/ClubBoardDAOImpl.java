@@ -88,6 +88,11 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.selectList("clubBoard.selectFreeboardCmt",clubBoardlistNo);
 	}
 
+	@Override
+	public int reportBoard(int boardNo) {
+		return sqlSession.update("clubBoard.reportBoard", boardNo);
+	}
+
 
 	
 	

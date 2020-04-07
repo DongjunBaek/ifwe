@@ -10,11 +10,17 @@
 <script>
 let cPage = 1;
 let boardCategory;
+
      $(function(){
          $(".section-boardcate-button").click(function(){
              $(".section-boardcate-button").css("background-color","#beceea");
              $(this).css("background-color","#2756a6");
-             	boardCategory = $(this).attr("id");   
+             boardCategory = $(this).attr("id");
+             if(boardCategory == "qna"){
+            	 $(".section-block-right").css("display","block");
+             }else{
+            	 $(".section-block-right").css("display","none");
+             }
              $.ajax({
             	url : "${pageContext.request.contextPath}/board/mainBoardList.do",
             	data : {boardCategory : boardCategory},
@@ -210,6 +216,7 @@ function hoverBtnForPageBar(){
 		}
 	});
 }
+
 </script>
 <style>
 /* 0404 mainboard css add dongjun */
@@ -241,4 +248,5 @@ function hoverBtnForPageBar(){
 }
 
 </style>
+
 </html>

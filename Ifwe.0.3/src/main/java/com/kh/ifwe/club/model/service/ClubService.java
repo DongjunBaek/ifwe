@@ -32,7 +32,7 @@ public interface ClubService {
 
 	List<Member> selectMemberCode(int clubCode);
 
-	List<ClubMember> selectClubMember(List<Member> clubMemberCode);
+	List<ClubMember> selectClubMember(Map<String, Object> param2);
 
 	ClubMember selectClubMaster2(Map<String, Object> param2);
 
@@ -76,5 +76,14 @@ public interface ClubService {
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
-	
+
+	List<ClubBoard> selectReportBoardList(int clubCode);
+
+	int blindBoard(int boardNo);
+	List<ClubMaster> clubSearch(int cPage, int numPerPage);
+
+	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
+
+	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
+
 }

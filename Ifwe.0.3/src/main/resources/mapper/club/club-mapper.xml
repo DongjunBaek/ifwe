@@ -107,9 +107,10 @@
                       join club_members H on M.member_code=H.member_code
 		where 
 		M.member_code in
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
+		<foreach collection="clubMemberCode" item="item" open="(" close=")" separator=",">
 		#{item.memberCode}
 		</foreach>
+		and H.club_code = #{clubCode}
 	</select>
 	
 	<select id="selectClubMaster2" resultType="clubMember">
@@ -253,6 +254,7 @@
             C.member_code = M.member_code 
 		where 
 			C.club_code = #{clubCode}
+		and C.board_report in ('n','d')
 		order by 
 			C.board_no desc
 	</select>
@@ -387,6 +389,14 @@
 
 	</select>
 	
+	
+	<select id="selectReportBoardList" resultType="clubBoardProfile">
+		select * from CLUB_BOARD C left join member_profile M on c.member_code = M.member_code where club_code=#{clubCode} and board_report = 'd'
+	</select>
+	
+	<update id="blindBoard">
+		update club_board set board_report = 'y' where board_no = #{boardNo}
+	</update>
 </mapper>
 
 

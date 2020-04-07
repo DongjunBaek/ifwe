@@ -205,7 +205,7 @@ public class MemberController {
 				 model.addAttribute("eventList",eventList);
 				
 				
-				int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+				int msgCount = memberService.selectMsgCount(member.getMemberCode());
 				log.debug("msgCount={}",msgCount);
 				model.addAttribute("msgCount",msgCount);
 				
@@ -748,5 +748,10 @@ public class MemberController {
 		return mav;
 	}
 	
+	@GetMapping("/insertPhonePOPUP.do")
+	public String insertPhonePopU(){
+		
+		return "member/insertPhonePOPUP";
+	}
 
 }

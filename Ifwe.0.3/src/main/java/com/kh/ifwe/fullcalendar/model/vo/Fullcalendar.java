@@ -2,6 +2,7 @@ package com.kh.ifwe.fullcalendar.model.vo;
 
 
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -15,8 +16,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Fullcalendar {
+public class Fullcalendar implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
+	
 	String fullId;
 	String title;
 	String   fullStart;
@@ -28,5 +32,9 @@ public class Fullcalendar {
 	String fullTextColor;
 	String fullAllDay;
 	String fullNo;
-	String clubCode;
+	int clubCode;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

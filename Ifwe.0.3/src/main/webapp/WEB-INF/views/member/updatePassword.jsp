@@ -49,6 +49,45 @@ $(function(){
 		console.log($("#password-old").val());
 	});
 	
+	
+	
+	
+});
+
+
+$(function(){
+	let rNum ;
+	
+	$("#search-id-btn-num").click(function(){
+		console.log("12312312312");
+		$.ajax({
+			url:"${pageContext.request.contextPath}/sms/sms.do",
+			method:"POST",
+			data: {"phoneNum" : $("#member_phone").val()},
+			async:false,
+			success: function(data){
+				console.log("성공",data);
+				rNum = data;
+				console.log(rNum);
+			},
+			error:function(x,s,e){
+				console.log(x,s,e);
+			}
+		});
+	});
+	
+	$("#search-btn-check").click(function(){
+		console.log($("#number").val());
+		console.log(rNum);
+		if($("#number").val() != rNum){
+			alert("인증번호가 맞지않습니다.");
+			$("#number").val('');
+		}else{
+			alert("본인인증에 성공하셨습니다.")
+			window.close();
+		}
+	});
+	
 });
 
 function passwordCheck(){
