@@ -229,7 +229,8 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return clubDAO.selectReportBoardList(clubCode);
-
+	}
+	
 	//0406 dongjun pageBar 
 	@Override
 	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
