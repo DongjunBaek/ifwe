@@ -59,7 +59,6 @@ let boardCategory;
            				}else{
            					$children4.append($("<button class='listForBoard' onclick='reloadFunctionToAjax("+(i)+")' value="+(i)+">"+i+"</button>"));
            				}
-           				
            				if(i == tPage){
            					break;
            				}
@@ -73,7 +72,6 @@ let boardCategory;
            			}
            			$parentDiv.append($children4);
            			hoverBtnForPageBar();
-             			
             		 
             	 },
             	 error : function(x,h,r){

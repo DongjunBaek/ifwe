@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -40,6 +39,7 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,6 +57,8 @@ public class ClubController {
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
+	
+	
 	
 	
 	//소모임 검색 0325 문보라
@@ -665,6 +667,17 @@ public class ClubController {
 	}
 	
 
+	@GetMapping("/searchKeywordList.do")
+	@ResponseBody
+	public List<SearchKeyword> searchKeywordList(){
+		log.debug("검색어 키워드 리스트");
+		
+		List<SearchKeyword> searchkeywordList = clubService.selectSearchKeywordList();
+		
+		log.debug("searchKeywordList{}=",searchkeywordList);
+		
+		return searchkeywordList;
+	}
 	
 	
 	

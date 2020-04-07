@@ -51,6 +51,10 @@ public interface AdminService {
 
 	List<Member> memberEnrollList();
 
+	int selectMemberCount(String memberRole);
 
+	int selectNoticeCount(String boardCategory);
+
+	int insertDormantNotice(int memberCode);
 
 }

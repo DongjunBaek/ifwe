@@ -65,8 +65,6 @@ public interface ClubDAO {
 
 	int deleteClubMember(Map<String, Object> param);
 
-
-
 	List<ClubBoard> selectBoardList(int clubCode);
 
 	List<ClubBoardProfile> selectclubBoardProfileList(int clubCode);
@@ -84,8 +82,6 @@ public interface ClubDAO {
 	List<SearchKeyword> selectSearchKeywordList();
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
-
-
 
 
 }
