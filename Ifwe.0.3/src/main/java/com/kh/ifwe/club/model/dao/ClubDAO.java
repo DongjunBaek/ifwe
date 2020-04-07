@@ -9,6 +9,7 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -95,6 +96,8 @@ public interface ClubDAO {
 	List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage);
 
 	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
+
+	List<Heart> selectHeartMember();
 
 
 

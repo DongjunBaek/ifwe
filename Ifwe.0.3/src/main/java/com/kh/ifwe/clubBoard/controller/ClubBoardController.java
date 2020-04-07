@@ -245,8 +245,42 @@ public class ClubBoardController {
 		return "redirect:freeboard.do?clubBoardlistNo="+clubBoardListNo;
 	}
 	
+	@GetMapping("/heart.do")
+	@ResponseBody
+	public int heart(@RequestParam("boardNo")int boardNo, @RequestParam("memberCode")int memberCode) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer>param = new HashMap<String, Integer>();
+		
+		param.put("boardNo", boardNo);
+		param.put("memberCode", memberCode);
+		
+		int result = clubBoardService.insertHeart(param);		
+		int heartCount = clubBoardService.selectBoard(boardNo);
+		
+		log.debug("result = {}",result);
+		log.debug("heartCount = {}",heartCount);
+		
+		return heartCount;
 
+	}
 
+	@GetMapping("/heartMinus.do")
+	@ResponseBody
+	public int heartMinus(@RequestParam("boardNo")int boardNo, @RequestParam("memberCode")int memberCode) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("memberCode = {}",memberCode);
+		Map<String, Integer>param = new HashMap<String, Integer>();
+		
+		param.put("boardNo", boardNo);
+		param.put("memberCode", memberCode);
+		
+		int result = clubBoardService.deleteHeart(param);
+		int heartCount = clubBoardService.selectBoard(boardNo);
+		
+		return heartCount;
+		
+	}
 	
 	
 	

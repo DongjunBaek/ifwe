@@ -368,13 +368,79 @@ width: 550px;
 		                      </c:forEach>
 	                     </div>
                       </c:if>
+                     
+                      <script>
+                      	$(function(){
+                      		 $("#heart").click(function(){
+                      		    if($("#heart").hasClass("liked")){
+                      		      $("#heart").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                      		      $("#heart").removeClass("liked");
+                      		      deleteHeart();
+                      		    }else{
+                      		      $("#heart").html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                      		      $("#heart").addClass("liked");
+                      		      updateHeart();
+                      		    }
+                      		  });
+                      	});
+                      	
+                      	function updateHeart(){
+                      		let memberCode = $("[name=memberCode]").val();
+                      		let boardNo = $("[name=boardNo]").val();
+                      		var data = {"memberCode" :memberCode, "boardNo":boardNo}
+                     		$.ajax({
+                      		    	  url:"${pageContext.request.contextPath}/clubboard/heart.do",
+                      		    	  data : data,
+                      		    	  success : function(data){
+                      		    		  console.log(data);
+                      		    		  $("#count").html("좋아요"+data);
+                      		    	  },
+                      		    	  error:function(x,s,e){
+                      		    		  console.log(x,s,e);
+                      		    	  }
+                      		     });
+                      	}
+                      	function deleteHeart(){
+                      		let memberCode = $("[name=memberCode]").val();
+                      		let boardNo = $("[name=boardNo]").val();
+                      		var data = {"memberCode" :memberCode, "boardNo":boardNo}
+                      		$.ajax({
+                		    	  url:"${pageContext.request.contextPath}/clubboard/heartMinus.do",
+                		    	  data : data,
+                		    	  success : function(data){
+                		    		  console.log(data);
+                		    		  $("#count").html("좋아요"+data);
+                		    	  },
+                		    	  error:function(x,s,e){
+                		    		  console.log(x,s,e);
+                		    	  }
+                		     });
+                      	}
+                      </script>
+                      <style>
+                      .fa-heart-o {
+  						color: red;
+  						cursor: pointer;
+						}			
+
+						.fa-heart {
+						  color: red;
+						  cursor: pointer;
+						}
+					</style>
                       
                       <div class="article1-line"></div>
                       <form action="${pageContext.request.contextPath }/clubboard/insertmainComment.do" method="post" >
                       <div class="article1-comment-box">
+                      
                       	  <input type="hidden" name="boardRef" value="${cbl.boardNo }" />
                       	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
+                      	  <input type="hidden" name="boardNo" value="${cbl.boardNo }"/>
+                      	  <span id ="heart" style="font-size:30px;margin-bottom:10px;">
+                      	  	<i class="fa fa-heart-o" aria-hidden="true" ></i> 
+                      	  </span>
+                      	  	<span style="font-size:16px;" id="count">좋아요${cbl.boardHeart }</span>
                           <input type="text" name="commentContent" placeholder="댓글입력">
                           <input type="submit" value="입력" />
                       </div>

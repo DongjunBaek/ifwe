@@ -159,6 +159,20 @@
 	</update>
 	
 	
+	<insert id="insertHeart">
+		insert into board_heart_tbl
+		values (#{boardNo},#{memberCode})
+	</insert>
+	
+	<select id="selectBoard" resultType="_int">
+		select board_heart from club_board where board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteHeart">
+		delete from board_heart_tbl where board_no = #{boardNo} and member_code = #{memberCode}
+	</delete>
+	
+
 </mapper>
 
 

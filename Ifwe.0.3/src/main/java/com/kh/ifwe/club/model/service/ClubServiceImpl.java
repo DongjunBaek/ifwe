@@ -15,6 +15,7 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -229,6 +230,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return clubDAO.selectReportBoardList(clubCode);
+	}
 
 	//0406 dongjun pageBar 
 	@Override
@@ -240,27 +242,25 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
 		return clubDAO.searchClubByHashtag(param,numPerPage,cPage);
-
 	}
-
+	
 
 	@Override
 	public int blindBoard(int boardNo) {
 		return clubDAO.blindBoard(boardNo);
 	}
+	
 	@Override
 	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
 		return clubDAO.selectListByName(param, numPerPage, cPage);
 	}
+
+
 	@Override
-	public int blindBoard(int boardNo) {
-		return clubDAO.blindBoard(boardNo);
-  	}
-  
-    @Override
-	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
-		return clubDAO.selectListByName(param, numPerPage, cPage);
+	public List<Heart> selectHeartMember() {
+		return clubDAO.selectHeartMember();
 	}
+	
 
 }	
 

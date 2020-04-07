@@ -30,6 +30,7 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
@@ -257,7 +258,8 @@ public class ClubController {
 		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
-		
+		List<Heart> heartMember = clubService.selectHeartMember();
+		log.debug("heartMember = {}",heartMember);
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
 		
 		
@@ -303,6 +305,7 @@ public class ClubController {
 		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.addObject("boardImg",boardImg);
+		mav.addObject("heartMember",heartMember);
 		
 		mav.setViewName("/club/clubMain");
 		
