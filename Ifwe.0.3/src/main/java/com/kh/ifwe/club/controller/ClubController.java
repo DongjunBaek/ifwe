@@ -667,9 +667,27 @@ public class ClubController {
 		return clubCateList;
 	}
 	
-
+	//신고된 게시글 보기
+	@GetMapping("/mngreport.do")
+	public ModelAndView mngReport(@RequestParam("clubCode")int clubCode,ModelAndView mav) {
+		List<ClubBoard> list = clubService.selectReportBoardList(clubCode);
+		log.debug("clubList = {}",list);
+		
+		mav.setViewName("club/clubMngReport");
+		mav.addObject("reportList", list);
+		return mav;
+	}
 	
-	
-	
+	@PostMapping("/blind.do")
+	public String blind(@RequestParam("clubCode")int clubCode,@RequestParam("boardNo")int boardNo,RedirectAttributes redirectAttributes) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("clubCode = {}",clubCode);
+		
+		int result = clubService.blindBoard(boardNo);
+		String msg = result>0?"블라인드처리되었습니다":"실패";
+		redirectAttributes.addFlashAttribute("msg", msg);
+		
+		return "redirect:mngreport.do?clubCode="+clubCode;
+	}
 }
 

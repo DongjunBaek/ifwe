@@ -28,7 +28,7 @@ $(function(){
 
     });
     
-    $("[name=goclub]").click(function(){
+    $("[name=goclub]").on("click",function(){
     	let clubCode = $(this).attr("data-clubCode");
     	console.log(clubCode);
     	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
@@ -38,17 +38,6 @@ $(function(){
 		location.href="${pageContext.request.contextPath }/member/profile.do"
 	});
     
-    
-});
-
-</script>
-<style>
-.card-container:nth-child(n+4) {
-	margin-top:3%;
-}
-</style>
-<script>
-$(function(){
 	
 	$("[name=somoim-search-btn]").click(function(){
 		$("#searchSomoimDivContainer").css('display','none');
@@ -92,10 +81,8 @@ $(function(){
 		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+data[i].memberId+'</p><p class="club-name-search font-hk">'+data[i].clubTitle+'</p>'+
 		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+data[i].clubLocation+'</p>'+
 		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+data[i].clubCurrent+'</span>/'+data[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'
-		                        +<fmt:formatNumber value="${(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
-		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-		                        +<fmt:formatNumber value="${10-(mList.maleCount/list.clubCurrent)*10 }" pattern="#"/>+
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+
+		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'+
 		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">28세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+data[i].clubCode+'>자세히 보기</button></div></div>'
@@ -105,7 +92,11 @@ $(function(){
 					$("[name=searchType]").val('');
 					$("[name=clubSearchKeyword]").val('');
 					$("[name=clubLocation]").val('');
-					
+					$("[name=goclub]").click(function(){
+						let clubCode = $(this).attr("data-clubCode");
+				    	console.log(clubCode);
+				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
+					})
 					
 				}
 			
@@ -122,8 +113,15 @@ $(function(){
 	
 	
 	
+    
 });
+
 </script>
+<style>
+.card-container:nth-child(n+4) {
+	margin-top:3%;
+}
+</style>
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">

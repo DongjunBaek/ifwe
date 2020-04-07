@@ -29,7 +29,9 @@ $(function(){
 		location.href="${pageContext.request.contextPath}/club/mngboard.do";
 	});
 	
-	
+	$("#mng-report").click(function(){
+		location.href="${pageContext.request.contextPath}/club/mngreport.do?clubCode=${club.clubCode}";
+	});
 	
 	
 	
@@ -91,6 +93,16 @@ $(function(){
                      <i class="fas fa-chevron-right" style="font-size: 50px;"></i>
                  </div>
              </div>
+             
+               <div class="shc-section-leftbox shcbox" id="mng-report">
+                 <div class="shc-section-centerbox">
+                     <div class="shc-section-boxline"></div>
+                     <p class="shc-centerboxp1">신고된 게시글 관리</p>
+                     <p class="shc-centerboxp2">신고된 게시글 삭제 / 수정</p>
+                     <i class="fas fa-chevron-right" style="font-size: 50px;"></i>
+                 </div>
+             </div>
+             
          </div>
      </section>
 

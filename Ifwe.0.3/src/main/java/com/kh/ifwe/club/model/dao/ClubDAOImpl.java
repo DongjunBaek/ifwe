@@ -198,6 +198,16 @@ public class ClubDAOImpl implements ClubDAO {
 
 	}
 
+	@Override
+	public List<ClubBoard> selectReportBoardList(int clubCode) {
+		return sqlSession.selectList("club.selectReportBoardList",clubCode);
+	}
+
+	@Override
+	public int blindBoard(int boardNo) {
+		return sqlSession.update("club.blindBoard", boardNo);
+	}
+
 
 	
 	

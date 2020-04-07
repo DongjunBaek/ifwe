@@ -224,6 +224,18 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectSearchKeywordList();
 	}
 
+
+	@Override
+	public List<ClubBoard> selectReportBoardList(int clubCode) {
+		return clubDAO.selectReportBoardList(clubCode);
+	}
+
+
+	@Override
+	public int blindBoard(int boardNo) {
+		return clubDAO.blindBoard(boardNo);
+	}
+
 }	
 
 

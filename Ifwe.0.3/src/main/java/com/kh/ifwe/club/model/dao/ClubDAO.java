@@ -85,6 +85,10 @@ public interface ClubDAO {
 
 	List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param);
 
+	List<ClubBoard> selectReportBoardList(int clubCode);
+
+	int blindBoard(int boardNo);
+
 
 
 
