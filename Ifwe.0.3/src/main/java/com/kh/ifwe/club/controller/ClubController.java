@@ -140,10 +140,15 @@ public class ClubController {
 		List<Integer> maleList = clubService.selectMaleCount(clubCode);
 		log.debug("maleList = {}",maleList);
 		
-		//평균나이
+		//평균나이 가져오기
 		List<Count> ageList = clubService.selectAge(clubCode);
 		log.debug("ageList = {}",ageList);
-		
+		Map<Integer,Integer> ageMap = new HashMap<Integer, Integer>();
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				ageMap.put(i,clubService.selectAgeAvg(searchListResult.get(i).getClubCode()));
+			}
+		}
 		
 		/* List<ClubMaster> */
 		Map<Integer, Object> resultMapClub = new HashMap<Integer, Object>();
@@ -154,7 +159,7 @@ public class ClubController {
 		resultMapClub.put(5, clubLocation);
 		resultMapClub.put(6, clubmasterProfile);
 		resultMapClub.put(7, maleList);//남자비율
-		resultMapClub.put(8, ageList);//평균나이
+		resultMapClub.put(8, ageMap);//평균나이
 		
 		return resultMapClub;
 		

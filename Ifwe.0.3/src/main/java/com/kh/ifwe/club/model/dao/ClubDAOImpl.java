@@ -227,6 +227,11 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectList("club.selectListByName", param, rowBounds);
 	}
 
+	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return sqlSession.selectOne("club.selectAgeAvg",clubCode);
+	}
+
 	
 	
 	

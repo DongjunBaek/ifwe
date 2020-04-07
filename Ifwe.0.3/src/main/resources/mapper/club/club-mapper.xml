@@ -387,7 +387,21 @@
 			C.board_no desc
 
 	</select>
+	<select id="selectAgeAvg" resultType="_int">
+		select 
+		sum(M.profile_age )
+		from 
+			club_members C 
+		left join 
+			member_profile M 
+		on 
+			C.member_code = M.member_code 
+		where 
+			c.club_code = #{clubCode}
+        group by c.club_code
 	
+	
+	</select>
 </mapper>
 
 

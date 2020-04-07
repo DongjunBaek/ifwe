@@ -242,6 +242,12 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectListByName(param, numPerPage, cPage);
 	}
 
+
+	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return clubDAO.selectAgeAvg(clubCode);
+	}
+
 }	
 
 

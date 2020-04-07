@@ -91,6 +91,8 @@ public interface ClubDAO {
 
 	List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage);
 
+	Integer selectAgeAvg(int clubCode);
+
 
 
 
