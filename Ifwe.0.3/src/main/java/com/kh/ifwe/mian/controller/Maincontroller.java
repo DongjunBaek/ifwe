@@ -1,5 +1,6 @@
 package com.kh.ifwe.mian.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.board.model.service.BoardService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
@@ -28,6 +31,9 @@ public class Maincontroller {
 	private ClubService clubService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private BoardService boardService; 
+	
 	
 	@GetMapping("/main/mainPage.do")
 	public String mainPage(@ModelAttribute("memberLoggedIn") Member member,RedirectAttributes redirectAttributes,
@@ -47,8 +53,11 @@ public class Maincontroller {
 		model.addAttribute("msgCount",msgCount);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		
-		
-
+		/**
+		 * 0408 dongjun 공지사항 불러오기
+		 */
+		List<Board> boardList = boardService.selectOne2("notice",3,1);
+		model.addAttribute("boardListNoice",boardList);
  
 
 		return "main/mainPage";

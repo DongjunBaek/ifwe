@@ -105,30 +105,30 @@ function eventView(eventCode){
                 </div>
                 <div class="two">
                     <div class="two-title font-kor">
-                        <p style="color: white; margin-left:5%; font-size: 20px;padding: 4%;">주간 베스트글 </p>
+                        <p style="color: white; margin-left:5%; font-size: 20px;padding: 4%;">공지 사항 </p>
                     </div>
                     <div class="two-content font-kor">
                         <div class="post-container">
                             <div class="number font-kor">01</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페추천드려요</p>
+                                    <p class="post1">${boardListNoice[0].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[0].boardDate }</p>
                                 </div>
                         </div>
                         <hr class="two-hr" noshade>
                         <div class="post-container">
                             <div class="number font-kor">02</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페 추천드려요</p>
+                                    <p class="post1">${boardListNoice[1].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[1].boardDate }</p>
                                 </div>
                         </div>
                         <hr class="two-hr" noshade>
                         <div class="post-container">
                             <div class="number font-kor">03</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페 추천드려요</p>
+                                    <p class="post1">${boardListNoice[2].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[2].boardDate }</p>
                                 </div>
                         </div>
                     </div>

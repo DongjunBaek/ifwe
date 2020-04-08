@@ -283,7 +283,16 @@ public class ClubBoardController {
 	}
 	
 	
-	
+	@GetMapping("/checkHeart.do")
+	@ResponseBody
+	public List<Integer> checkHeart(@RequestParam(value="memberCode") int memberCode){
+		
+		List<Integer> myHeartList = null;
+		
+		myHeartList = clubBoardService.selectMyHeartList(memberCode);
+		
+		return myHeartList;
+	}
 	
 	
 	
