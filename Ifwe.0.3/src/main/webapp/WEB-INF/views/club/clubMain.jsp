@@ -193,6 +193,7 @@ $(function(){
 	    }
 	});
 		 });
+		$("#myContentsInfo-1").trigger("click");
 	} 
 	 if(catecode =="공연전시"){
 		 $("#musical-btn").click(function(){
@@ -954,11 +955,11 @@ function checkMyHeart(){
 			  $boardNo = $(".article1-comment-box [name=boardNo]");
 			  
 			  $.each(data,function(idx,boardno){
-				  console.log(boardno);
+				  /* console.log(boardno); */
 				  $.each($boardNo,function(idx,elem){
-					  console.log(elem.value);
+					  /* console.log(elem.value); */
 					  if(boardno == elem.value){
-						  console.log($(elem).parent().children().eq(4));
+						  /* console.log($(elem).parent().children().eq(4)); */
 						  $(elem).parent().children().eq(4).addClass("liked");
 						  $(elem).parent().children().eq(4).empty();
 						  $(elem).parent().children().eq(4).append("<i class='fa fa-heart' aria-hidden='true'></i>")
