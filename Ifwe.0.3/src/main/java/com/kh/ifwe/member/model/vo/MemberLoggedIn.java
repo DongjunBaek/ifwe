@@ -24,9 +24,9 @@ public class MemberLoggedIn extends Member implements Serializable{
 	public MemberLoggedIn(int memberCode, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberLoc, String memberEmail, Date memberBirth, String memberGender, String memberAddr,
 			Date memberEnrolldate, String memberSuspension, String memberRole, int memberMsg, String memberLike,
-			String profileName, String profileImgRe, Date Day) {
+			String profileName, String profileImgRe) {
 		super(memberCode, memberId, memberPwd, memberName, memberPhone, memberLoc, memberEmail, memberBirth,
-				memberGender, memberAddr, memberEnrolldate, memberSuspension, memberRole, memberMsg, memberLike, memberMsg, Day);
+				memberGender, memberAddr, memberEnrolldate, memberSuspension, memberRole, memberMsg, memberLike, memberMsg);
 		this.profileName = profileName;
 		this.profileImgRe = profileImgRe;
 	}

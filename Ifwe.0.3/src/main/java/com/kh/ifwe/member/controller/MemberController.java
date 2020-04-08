@@ -30,6 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.admin.model.vo.AdminEvent;
+import com.kh.ifwe.board.model.service.BoardService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
@@ -67,6 +69,9 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	@Autowired
+	private BoardService boardService;
+	
 //	@GetMapping("/member/memberenroll.do")
 //	public String memberEnroll() {
 //		
@@ -81,7 +86,7 @@ public class MemberController {
 	@PostMapping("/enroll.do")
 	public ModelAndView insertMember(ModelAndView mav, Member member, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-
+		log.debug("회원가입 메소드 실행");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		int day = Integer.parseInt(request.getParameter("day"));
@@ -215,6 +220,11 @@ public class MemberController {
 				log.debug("msgCount={}",msgCount);
 				model.addAttribute("msgCount",msgCount);
 				
+				/**
+				 * 0408 dongjun 공지사항 불러오기
+				 */
+				List<Board> boardList = boardService.selectOne2("notice",3,1);
+				model.addAttribute("boardListNoice",boardList);
 				
 				return "main/mainPage";
 			
