@@ -13,9 +13,439 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmain.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+                    .wrapper-contentsInfo{
+                        width: 500px;
+                        min-height: 700px;
+                        padding-bottom:30px;
+                        background-color:white;
+                    }
+                    .wrapper-contentsInfo-title{
+                        width: 100%;
+                        height: 77px;
+                        background-color: rgba(246,246,246,0.5);
+                    }
+                    .title-icon{
+                        width:90px;
+                        float:left;
+                    }
+                    .contents-title{
+                        width:285px;
+                        float:left;
+                    }
+                    .top10{
+                        font-size:18px;
+                    }
+                    .rank-chart{
+                        font-size:23px;
+                    }
+                    
+                    #songListForClub{
+                        width: 450px;
+                        height: 100%;
+                        margin: 0 auto;
+                        border-collapse: collapse;
+
+                    }
+                    #songListForClub th{
+                        height:59px;
+                        margin-top: 30px;
+                    }
+                    thead th:nth-child(1){
+                        width:55px;
+                    }
+                    thead th:nth-child(2){
+                        width:195px;
+                        text-align:center;
+                    }
+                    #songListForClub td{
+                        height:122px;
+                        border-bottom: 1px solid #bebebe;
+                    }
+                    tbody td:nth-child(1){
+                        width:58px;
+                        font-size:24px;
+                    }
+                    tbody td:nth-child(2){
+                        width:115px;
+                    }
+                    tbody td:nth-child(3){
+                        font-size: 21px;
+                        
+                        
+                    }
+                    tbody td:nth-child(4){
+                        font-size: 21px;
+                        text-align: center;
+                        
+                    }
+                    #playListForClub{
+                        height:100%;
+                        width:450px;
+                        margin: 0 auto;
+                        border-collapse: collapse;
+                    }
+                   #playListForClub td{
+                        margin-top: 20px;
+                        border-bottom: 1px solid #bebebe;
+                   }
+                   tbody td:nth-child(1){
+                       height: 180px;
+                       width:37px;
+                       font-size: 22px;
+                   }
+                   tbody td:nth-child(2){
+                       width:115px;
+                   }
+                   .play-title{
+                       font-size:22px;
+                   }
+                   .play-end{
+                       margin-top:12px;
+                   }
+                  
+                    .wrapper-radio{
+                        margin-top: 20px;
+                        height: auto;
+                        text-align: center;
+                        background-color:white;
+                    }
+                    .wrapper-radio input{
+                        margin-top: 20px;
+                        text-align: center;
+                        
+                        display: none; 
+                    }
+                    .wrapper-radio input[name="myContentsInfo-1"]+label{
+                        display: inline;
+                        color: #6c6c6c;
+                        cursor:pointer;
+                    }
+                    .wrapper-radio input[name="myContentsInfo-2"]+label{
+                        display: inline;
+                        color: #6c6c6c;
+                        cursor:pointer;
+                    }
+                    .select-contents{
+                    	float:right;
+                    }
+                    .select-contents>button{
+                    	float:right;
+                    	width:120px;
+                    	height:35px;
+                    	border-radius:20px;
+                    	outline:none;
+                    	border:0;
+                    	color:white;
+                    	background-color:#ffc862;
+                    	font-size:14px;
+                    	cursor:pointer;
+                    	margin-top:14px;
+                    	
+                    }
+         
+                    </style>
 <script>
 $(function(){
 	
+	
+	var catecode = $("#category").val();
+	
+	 if(catecode == "음악댄스"){
+		 $("[name='myContentsInfo-1']").click(function(){
+		$.ajax({
+		    type:"GET",
+		    url:"${pageContext.request.contextPath}/myCrawling/song.do",
+		   success:function(data){
+		   console.log(data);
+		   var table ="<table id='songListForClub'>"
+		   var thead = "<thead ><tr><th>순위</th><th colspan='2'>제목</th><th>가수</th></tr></thead><tbody>";
+		   var tbody = "";
+		   var end ="</tbody></table>"
+		   var checkone = $("#myContentsInfo-1").prop("checked");
+		   var checktwo = $("#myContentsInfo-2").prop("checked");
+		   
+		   if(checkone == true){
+			   for(var i=1; i<=5; i++){
+				   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
+				  "<td><img src='${pageContext.request.contextPath}/resources/upload/song/song"+i+".jpg' width=66px; height=66px;></td>"+
+				  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
+				  "<td>"+data[i].contentsInfo+"</td></tr>"
+				  
+			   };
+			   
+		   }
+		   if(checktwo == true){
+			   for(var i=6; i<=10; i++){
+				   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
+				  "<td><img src='${pageContext.request.contextPath}/resources/upload/song/song"+i+".jpg' width=66px; height=66px;></td>"+
+				  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
+				  "<td>"+data[i].contentsInfo+"</td></tr>"
+				  
+			   };
+		   }
+		  $(".wrapper-listForClub").empty();
+		   $(".wrapper-listForClub").append(table+thead+tbody+end); 
+		   $(".rank-chart").text("네이버 뮤직 음원차트");
+	   },
+	    error:(xhr,status,error) =>{
+	        console.log(xhr,status,error);
+	    }
+	});
+		 });
+	} 
+	 if(catecode =="공연전시"){
+		 $("#musical-btn").click(function(){
+		 $.ajax({
+			    type:"GET",
+			    url:"${pageContext.request.contextPath}/myCrawling/musical.do",
+			   success:function(data){
+				   console.log(data);
+				   var table ="<table id='playListForClub'>"
+				   var tbody = "";
+				   var end ="</tbody></table>"
+					var checkone = $("#myContentsInfo-1").prop("checked");
+				   var checktwo = $("#myContentsInfo-2").prop("checked");
+					   for(var i=13; i<=22; i++){
+						   var index = i-12;
+						   tbody += "<tr  ><td >"+index+"</td>"+
+						   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
+	                           		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+	                               	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
+	                               "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
+	                               
+					   };
+	   		   
+				   $(".wrapper-listForClub").empty();
+				   $(".wrapper-listForClub").append(table+tbody+end);
+				   $(".rank-chart").text("뮤지컬 예매율 순위");
+				   $(".title-icon").html('<i class="fas fa-film" style="font-size: 4em;"></i>');
+				   $("#concert-btn").css("display","block");
+				   $("#theater-btn").css("display","none");
+				   $("#musical-btn").css("display","none");
+				   $(document).on("click","[name='myContentsInfo-1']",function(){
+					   var checkone = $("#myContentsInfo-1").prop("checked");
+					   if(checkone==true){
+						   $(".wrapper-listForClub tr").eq(0).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(1).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(2).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(3).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(4).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(5).css("display","none");
+						   $(".wrapper-listForClub tr").eq(6).css("display","none");
+						   $(".wrapper-listForClub tr").eq(7).css("display","none");
+						   $(".wrapper-listForClub tr").eq(8).css("display","none");
+						   $(".wrapper-listForClub tr").eq(9).css("display","none");
+					   }
+					   else{
+						   $(".wrapper-listForClub tr").eq(0).css("display","none");
+						   $(".wrapper-listForClub tr").eq(1).css("display","none");
+						   $(".wrapper-listForClub tr").eq(2).css("display","none");
+						   $(".wrapper-listForClub tr").eq(3).css("display","none");
+						   $(".wrapper-listForClub tr").eq(4).css("display","none");
+						   $(".wrapper-listForClub tr").eq(5).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(6).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(7).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(8).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(9).css("display","table-row");
+						   
+					   }
+					   
+				   })
+				   $("#myContentsInfo-1").trigger("click");
+			   },
+			    error:(xhr,status,error) =>{
+			        console.log(xhr,status,error);
+			    }
+			});
+		 	
+		 	
+		 });	
+		 
+		 
+		 
+		 $("#concert-btn").click(function(){
+		  $.ajax({
+			    type:"GET",
+			    url:"${pageContext.request.contextPath}/myCrawling/concert.do",
+			   success:function(data){
+				   console.log(data);
+				   var table ="<table id='playListForClub'>"
+				   var tbody = "";
+				   var end ="</tbody></table>"
+				   var checkone = $("#myContentsInfo-1").prop("checked");
+				   var checktwo = $("#myContentsInfo-2").prop("checked");
+				   
+					   for(var i=33; i<=42; i++){
+						   var index = i-32;
+						   tbody += "<tr  ><td >"+index+"</td>"+
+						   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
+	                        		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+	                            	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
+	                            "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
+						  
+					   };
+   
+				   $(".wrapper-listForClub").empty();
+				   $(".wrapper-listForClub").append(table+tbody+end);
+				   $(".rank-chart").text("콘서트 예매율 순위");
+				   $(".title-icon").html('<i class="fas fa-film" style="font-size: 4em;"></i>');
+				   $("#theater-btn").css("display","block");
+				   $("#concert-btn").css("display","none");
+				   $(document).on("click","[name='myContentsInfo-1']",function(){
+					   var checkone = $("#myContentsInfo-1").prop("checked");
+					   if(checkone==true){
+						   $(".wrapper-listForClub tr").eq(0).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(1).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(2).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(3).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(4).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(5).css("display","none");
+						   $(".wrapper-listForClub tr").eq(6).css("display","none");
+						   $(".wrapper-listForClub tr").eq(7).css("display","none");
+						   $(".wrapper-listForClub tr").eq(8).css("display","none");
+						   $(".wrapper-listForClub tr").eq(9).css("display","none");
+					   }
+					   else{
+						   $(".wrapper-listForClub tr").eq(0).css("display","none");
+						   $(".wrapper-listForClub tr").eq(1).css("display","none");
+						   $(".wrapper-listForClub tr").eq(2).css("display","none");
+						   $(".wrapper-listForClub tr").eq(3).css("display","none");
+						   $(".wrapper-listForClub tr").eq(4).css("display","none");
+						   $(".wrapper-listForClub tr").eq(5).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(6).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(7).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(8).css("display","table-row");
+						   $(".wrapper-listForClub tr").eq(9).css("display","table-row");
+						   
+					   }
+					   
+				   });
+				   $("#myContentsInfo-1").trigger("click");
+			   },
+			    error:(xhr,status,error) =>{
+			        console.log(xhr,status,error);
+			    }
+			 });
+		 });
+		 $("#theater-btn").click(function(){
+		  $.ajax({
+			    type:"GET",
+			    url:"${pageContext.request.contextPath}/myCrawling/theater.do",
+			   success:function(data){
+				   console.log(data);
+				   var table ="<table id='playListForClub'>"
+				   var tbody = "";
+				   var end ="</tbody></table>"
+				   var checkone = $("#myContentsInfo-1").prop("checked");
+				   var checktwo = $("#myContentsInfo-2").prop("checked");
+				   
+				   for(var i=53; i<=62; i++){
+					   var index = i-52;
+					   tbody += "<tr  ><td >"+index+"</td>"+
+					   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
+                     		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+                         	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
+                         "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
+					  
+				   };
+				  	
+				  	$(".wrapper-listForClub").empty();
+				    $(".rank-chart").text("연극 예매율 순위");
+				    $(".title-icon").html('<i class="fas fa-film" style="font-size: 4em;"></i>');
+				    $("#theater-btn").css("display","none");
+				    $("#musical-btn").css("display","block");
+				    $("#concert-btn").css("display","none");
+				    $(".wrapper-listForClub").append(table+tbody+end);
+				    $(document).on("click","[name='myContentsInfo-1']",function(){
+						   var checkone = $("#myContentsInfo-1").prop("checked");
+						   if(checkone==true){
+							   $(".wrapper-listForClub tr").eq(0).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(1).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(2).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(3).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(4).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(5).css("display","none");
+							   $(".wrapper-listForClub tr").eq(6).css("display","none");
+							   $(".wrapper-listForClub tr").eq(7).css("display","none");
+							   $(".wrapper-listForClub tr").eq(8).css("display","none");
+							   $(".wrapper-listForClub tr").eq(9).css("display","none");
+						   }
+						   else{
+							   $(".wrapper-listForClub tr").eq(0).css("display","none");
+							   $(".wrapper-listForClub tr").eq(1).css("display","none");
+							   $(".wrapper-listForClub tr").eq(2).css("display","none");
+							   $(".wrapper-listForClub tr").eq(3).css("display","none");
+							   $(".wrapper-listForClub tr").eq(4).css("display","none");
+							   $(".wrapper-listForClub tr").eq(5).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(6).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(7).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(8).css("display","table-row");
+							   $(".wrapper-listForClub tr").eq(9).css("display","table-row");
+							   
+						   }
+						   
+					   })
+					   $("#myContentsInfo-1").trigger("click");
+			   },
+			    error:(xhr,status,error) =>{
+			        console.log(xhr,status,error);
+			    }
+			}); 
+		  
+			 });
+		 $("#musical-btn").trigger("click");
+		 
+		 
+	 }
+	 
+	 if(catecode=="스터디"){
+		 $("[name='myContentsInfo-1']").click(function(){
+		
+		 $.ajax({
+			    type:"GET",
+			    url:"${pageContext.request.contextPath}/myCrawling/study.do",
+			   success:function(data){
+				   console.log(data);
+				   var table ="<table id='songListForClub'>"
+					   var thead = "<thead ><tr><th>순위</th><th colspan='2'>제목</th><th>저자</th></tr></thead><tbody>";
+					   var tbody = "";
+					   var end ="</tbody></table>"
+					   var checkone = $("#myContentsInfo-1").prop("checked");
+					   var checktwo = $("#myContentsInfo-2").prop("checked");
+					  if(checkone == true){
+						  for(var i=1; i<=5; i++){
+							   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
+							  "<td><img src='${pageContext.request.contextPath}/resources/upload/books/books"+i+".jpg' width=66px; height=66px;></td>"+
+							  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
+							  "<td>"+data[i].contentsInfo+"</td></tr>"
+							  
+						   };
+		  
+					  }
+					  if(checktwo == true){
+						  for(var i=6; i<=10; i++){
+							   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
+							  "<td><img src='${pageContext.request.contextPath}/resources/upload/books/books"+i+".jpg' width=66px; height=66px;></td>"+
+							  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
+							  "<td>"+data[i].contentsInfo+"</td></tr>"
+							  
+						   };
+						  
+					  }
+					  $(".wrapper-listForClub").empty();
+					   $(".wrapper-listForClub").append(table+thead+tbody+end);
+					   $(".rank-chart").text("도서 차트");
+			   },
+			    error:(xhr,status,error) =>{
+			        console.log(xhr,status,error);
+			    }
+			});
+	 	});
+		 $("#myContentsInfo-1").trigger("click");
+		 $("#musical-btn").trigger("click");
+	 }
+	 
 	
 	
 	$(".comment-sliderbutton").click(function(){
@@ -429,49 +859,34 @@ width: 550px;
           
           
       </article>
+      			
       <article class="article2 flotclass">
-              <div class="article2-title">
-                  <p>이런건 어때요?</p>
-              </div>
-
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
+             <div class="wrapper-contentsInfo">
+                        <div class="wrapper-contentsInfo-title">
+                          
+                            <div class="title-icon"></div>
+                            <div class="contents-title">
+                                <p class="top10">일간 TOP 10</p>
+                                <p class="rank-chart"></p>
+                            </div>
+                            <div class="select-contents">
+                            	<button id="musical-btn" style="display:none;">뮤지컬></button>
+                            	<button id="concert-btn" style="display:none;">콘서트></button>
+                            	<button id="theater-btn" style="display:none;">연극></button>
+                            </div>
+                        </div>
+                        <div class="wrapper-listForClub"></div>
+                        <div class="wrapper-radio">
+                             <input type="radio" name="myContentsInfo-1" id="myContentsInfo-1" value="1" > 
+                            <label for="myContentsInfo-1"><i class="fas fa-circle" style="font-size:12px;"></i></label> 
+                            <input type="radio" name="myContentsInfo-1" id="myContentsInfo-2" value="2"> 
+                            <label for="myContentsInfo-2"><i class="fas fa-circle" style="font-size:12px;"></i></label> 
+                            
+                        </div>
+                    </div>
 
       </article>
-      
+  	<input type="hidden" id="category" value=${club.clubCatecode }>    
   </section>
   
 <div class="filter-container-container">
