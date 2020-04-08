@@ -3,6 +3,7 @@ package com.kh.ifwe.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.admin.model.vo.AdminEvent;
+import com.kh.ifwe.board.model.service.BoardService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
@@ -66,6 +69,9 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	@Autowired
+	private BoardService boardService;
+	
 //	@GetMapping("/member/memberenroll.do")
 //	public String memberEnroll() {
 //		
@@ -80,7 +86,7 @@ public class MemberController {
 	@PostMapping("/enroll.do")
 	public ModelAndView insertMember(ModelAndView mav, Member member, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-
+		log.debug("회원가입 메소드 실행");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		int day = Integer.parseInt(request.getParameter("day"));
@@ -110,19 +116,25 @@ public class MemberController {
 		String msg = "";
 		if (result > 0) {
 			msg = "회원가입 성공!! 로그인해주세요";
+			mav.setViewName("redirect:/member/enrollsuccess.do?memberId="+member.getMemberId());
 		} else {
 			msg = "회원가입실패";
+			mav.setViewName("redirect:/");
 		}
 
 
 		
-		Member serchMember = memberService.selectOne(member.getMemberId());
+		Member searchMember = memberService.selectOne(member.getMemberId());
 		
 		
-		int insertProfileResult =memberService.insertProfile(serchMember); 
-		
+		int insertProfileResult =memberService.insertProfile(searchMember); 
+		if(insertProfileResult > 0) {
+			Profile profile = memberService.selectProfileByMemberCode(searchMember.getMemberCode()); 
+			profile.setProfileAge(getAge(year, month, day));
+			int insertAge = memberService.updateProfile(profile); 
+			log.debug("insertAge@membercontroller insert ProfileAge {}",insertAge);
+		}
 		redirectAttributes.addFlashAttribute("msg", msg);
-		mav.setViewName("redirect:/");
 
 		return mav;
 	}
@@ -157,7 +169,19 @@ public class MemberController {
 			// 1.memberId로 member 객체 조회
 			Member member = memberService.selectOne(memberId);
 			log.debug("member@selectone={}", member);
-
+			
+			
+			//0407 여주
+			//휴면계정 로그인 시 
+			if("h".equals(member.getMemberRole())) {
+				log.debug("휴면계정확인");
+				
+				model.addAttribute("member",member);
+				
+				return "main/Login_dormantMember";
+			}
+			
+			
 			// 2.member.password와 사용자가 입력한 password를 비교해서 로그인처리
 			// bcryptPasswordEncoder를 이용한 비교
 			// 로그인한 경우, session에 member객체 저장
@@ -192,15 +216,21 @@ public class MemberController {
 				 model.addAttribute("eventList",eventList);
 				
 				
-				int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
+				int msgCount = memberService.selectMsgCount(member.getMemberCode());
 				log.debug("msgCount={}",msgCount);
 				model.addAttribute("msgCount",msgCount);
 				
-				
+				/**
+				 * 0408 dongjun 공지사항 불러오기
+				 */
+				List<Board> boardList = boardService.selectOne2("notice",3,1);
+				model.addAttribute("boardListNoice",boardList);
 				
 				return "main/mainPage";
-
-			} else {
+			
+				} 
+			
+			else {
 				// 로그인 실패
 				redirectAttributes.addFlashAttribute("msg", "입력한 아이디 또는 비밀번호가 일치하지 않습니다.");
 			}
@@ -241,12 +271,17 @@ public class MemberController {
 		
 		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
 		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
 		
 		log.debug("friendList={}",friendList);
 		log.debug("friends={}",friends);
 		model.addAttribute("friendList",friendList);
 		model.addAttribute("friends",friends);
-		
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/mypage";
 	}
 	
@@ -471,7 +506,7 @@ public class MemberController {
 	@PostMapping("/profileUpdate.do")
 	public String updatetProfile(Profile profile,
 			@RequestParam(value = "upFile", required = false) MultipartFile upFile, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, Model model) {
 		try {
 			log.debug("controller@profile={}", profile);
 
@@ -521,6 +556,11 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 //		mav.setViewName(viewName);
 		// return "redirect:/member/profile";
+		/**
+		 * 0404 memberLoggeIn Session 새로고침 dongjun
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(profile.getMemberCode());
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 
@@ -637,10 +677,16 @@ public class MemberController {
 	@GetMapping("/profileUpdate.do")
 	public String profileUpdate(Model model, int memberCode, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		System.out.println("memberController 되나");
-	 Profile	profile=profileservice.selectOneProfileWithCode(memberCode);
+		
+		Profile profile=profileservice.selectOneProfileWithCode(memberCode);
 		
 		model.addAttribute("profile",profile);
+		/**
+		 * 0404 dongjun
+		 * MyPage button 멤버 로그드인 reload
+		 */
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(memberCode);
+		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		return "member/profileUpdate";
 	}
 	
@@ -705,5 +751,44 @@ public class MemberController {
 	}
 	
 	
+	//0403형철 회원가입성공페이지
+	@GetMapping("/enrollsuccess.do")
+	public ModelAndView enrollsuccess(ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Member member = memberService.selectOne(memberId);
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+
+		mav.addObject("memberLoggedIn",memberLoggedIn);
+		mav.setViewName("main/enrollSuccess");
+		
+		return mav;
+	}
+	
+
+	/**
+	 * 0408 dongjun 나이구하기 profile insert 관련 메소드
+	 */
+	
+	 public int getAge(int birthYear, int birthMonth, int birthDay)
+	 {
+	         Calendar current = Calendar.getInstance();
+	         int currentYear  = current.get(Calendar.YEAR);
+	         int currentMonth = current.get(Calendar.MONTH) + 1;
+	         int currentDay   = current.get(Calendar.DAY_OF_MONTH);
+	        
+	         int age = currentYear - birthYear;
+	         // 생일 안 지난 경우 -1
+	         if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay)  
+	             age--;
+	        
+	         return age;
+	 }
+
+	@GetMapping("/insertPhonePOPUP.do")
+	public String insertPhonePopU(){
+		
+		return "member/insertPhonePOPUP";
+	}
+
 
 }

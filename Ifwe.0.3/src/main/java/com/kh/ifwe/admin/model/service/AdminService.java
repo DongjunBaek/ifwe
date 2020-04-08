@@ -49,6 +49,12 @@ public interface AdminService {
 
 	int updateEvent(AdminEvent adminEvent);
 
+	List<Member> memberEnrollList();
 
+	int selectMemberCount(String memberRole);
+
+	int selectNoticeCount(String boardCategory);
+
+	int insertDormantNotice(int memberCode);
 
 }

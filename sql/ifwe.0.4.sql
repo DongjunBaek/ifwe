@@ -40,6 +40,7 @@
 --DROP TABLE  CLUB_CATEGORY CASCADE CONSTRAINT;
 --DROP TABLE  CLUB_HISTORY CASCADE CONSTRAINT;
 --DROP TABLE  TBL_EVENT CASCADE CONSTRAINT;
+--DROP TABLE fullcalendar CASCADE CONSTRAINT;
 --drop sequence seq_member_no;  -- 회원 번호 
 --drop sequence seq_board_no;   -- 게시글 번호
 --drop sequence seq_board_comment_no; -- 게시글 답변 번호
@@ -51,13 +52,14 @@
 --drop sequence seq_club_boardlist_no; --클럽게시판목록번호
 --drop sequence seq_search_no; -- 검색용 시퀀스
 --drop sequence seq_club_board_comment_no; --클럽게시판댓글번호
+--drop trigger tri_search_count;
 --=================================================================
 --select
 --=================================================================
 --select * from tab; -- 전체 테이블 조회
-select * from member;
-select * from member_profile;
-select* from club_members;
+--select * from member;
+--select * from member_profile;
+--select * from club_members;
 --=================================================================
 --TABLE
 --=================================================================
@@ -93,7 +95,7 @@ select* from club_members;
 -- 24.소모임 회원 목록 테이블
 -- 25.소모임 방문 기록 테이블
 -- 26.소모임 일정정보 저장 테이블
-
+-- 27. 좋아요 기록 테이블
 --======================================================================
 -- 1.회원
 CREATE TABLE MEMBER (
@@ -255,7 +257,7 @@ CREATE TABLE  TBL_SEARCH  (
 	 search_code 	NUMBER		PRIMARY KEY, -- 검색 넘버링 시퀀스
 	 search_keyword 	VARCHAR2(100)		NULL, -- 검색어
 	 search_date 	DATE		default sysdate, -- 검색날짜
-	 member_code 	NUMBER		NOT NULL -- 검색한 회원 번호 --pk
+	 member_code 	NUMBER		NOT NULL-- 검색한 회원 번호 --pk
 );
 
 
@@ -375,16 +377,28 @@ CREATE TABLE  CLUB_HISTORY  (
 	 member_code 	NUMBER		NOT NULL
 );
 -- 26.소모임 일정정보 저장 테이블
-CREATE TABLE  CALENDAR  (
-	 club_code 	NUMBER		NOT NULL,
-	 club_master 	NUMBER		NOT NULL,
-	 calendar_title 	VARCHAR2(300)		NULL,
-	 calendar_start 	DATE		NULL,
-	 calendar_end 	DATE		NULL,
-	 calendar_content 	VARCHAR2(500)		NULL
+CREATE TABLE fullcalendar (
+    full_id varchar(300)  null,
+    title varchar(400) not null,
+    full_start DATE null,
+    full_end DATE null,
+    full_description varchar2(300) null,
+    full_type varchar2(200) null,
+    full_username varchar2(200) null,
+    full_backgroundColor varchar2(200) null,
+    full_textColor varchar2(200) null,
+    full_allDay varchar2(200) null,
+    full_No number not null,
+    clubCode number not null
 );
 
-
+-- 27. 좋아요 기록 테이블
+create table board_heart_tbl(
+    board_no number,
+    member_code number,
+    constraint fk_heart_board_no foreign key (board_no) references club_board (board_no)ON DELETE CASCADE,
+    constraint fk_heart_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE
+);
 
 
 
@@ -442,7 +456,10 @@ begin
     where board_no = :old.board_no;
 end;
 /
-select * from club_boardlist;
+
+
+
+
 create or replace trigger trig_club_boardlist
 after
 insert on club
@@ -471,6 +488,20 @@ after delete on club_members for each row
 begin update club set club_current = club_current-1 where club_code = :old.club_code;
 end;
 /
+
+--좋아요 기능 트리거 -1
+  create or replace trigger noheart_tri
+ before delete on board_heart_tbl for each row
+ begin update club_board set board_heart = board_heart-1 where board_no = :old.board_no;
+ end;
+ /
+ 
+--좋아요 기능 트리거 +1 
+ create or replace trigger heart_tri
+ after insert on board_heart_tbl for each row
+ begin update club_board set board_heart = board_heart+1 where board_no = :new.board_no;
+ end;
+ /
 --=================================================================
 --MEMBER DUMMY
 --=================================================================
@@ -520,4 +551,10 @@ Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTEN
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,3,'notice','test Title','test Contents',null,null,to_date('20/03/22','RR/MM/DD'),0,0,'N');
 Insert into IFWE.BOARD (BOARD_NO,MEMBER_CODE,BOARD_CATE,BOARD_TITLE,BOARD_CONTENT,BOARD_IMG_ORI,BOARD_IMG_RE,BOARD_DATE,BOARD_READCOUNT,BOARD_LEVEL,BOARD_DEL) values (seq_board_no.nextval,1,'notice','공지사항_TEST_1','<p>반갑 습니다 이곳은 IF WE 공지사항 게시판 입니다....</p>',null,null,to_date('20/03/24','RR/MM/DD'),0,0,'N');
 commit;
-select * from club_board;
+
+
+-- msg_table 용 카테고리 생성
+insert into msg_category values('c1','가입신청');
+insert into msg_category values('f1','친구신청'); 
+
+

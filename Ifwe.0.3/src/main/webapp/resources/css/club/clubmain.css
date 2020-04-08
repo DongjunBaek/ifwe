@@ -1,3 +1,6 @@
+.wrapper{
+	margin:0 auto;
+}
 section{
     width:1350px;
     margin-left:45px;
@@ -15,6 +18,7 @@ section{
 .section-boradall{
     float: left;
     font-size: 19px;
+    font-family: 'GmarketSansMedium';
 }
 .section-block-right{
     float: right;

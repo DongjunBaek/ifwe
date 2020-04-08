@@ -139,7 +139,25 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.update("admin.EventUpdate", adminEvent);
 	}
 
+	@Override
+	public List<Member> selctMemberEnrollList() {
+		return sqlSession.selectList("admin.MemberEnrollList");
+	}
 
+	@Override
+	public int selectMemberCount(String memberRole) {
+		return sqlSession.selectOne("admin.selectMemberCount",memberRole);
+	}
+
+	@Override
+	public int selectNoticeCount(String boardCategory) {
+		return sqlSession.selectOne("admin.selectBoardTotalContents", boardCategory);
+	}
+
+	@Override
+	public int insertDormantNotice(int memberCode) {
+		return sqlSession.insert("admin.insertDormantNotice",memberCode);
+	}
 
 	
 }

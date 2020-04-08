@@ -29,7 +29,13 @@
 	where member_Code=#{memberCode}
 </select>
 
-	
+	<select id="selectProfileByMemberCode" resultMap="ProfileMap">
+	select 
+		*
+	from
+		member_profile
+	where member_code = #{clubMaster}
+	</select>
 </mapper>
 
 

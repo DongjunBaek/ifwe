@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,11 +15,13 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -89,8 +92,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<ClubMember> selectClubMember(List<Member> clubMemberCode_) {
-		return sqlSession.selectList("club.selectClubMember", clubMemberCode_);
+	public List<ClubMember> selectClubMember(Map<String, Object> param2) {
+		return sqlSession.selectList("club.selectClubMember", param2);
 	}
 
 	@Override
@@ -180,10 +183,70 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
-		return sqlSession.selectList("club.selectclubBoardSearch",param);
+
+	public List<Club> selectClubCateList(String clubCatecode) {
+		return sqlSession.selectList("club.selectClubCateList",clubCatecode);
 	}
 
+	@Override
+	public List<SearchKeyword> selectSearchKeywordList() {
+		return sqlSession.selectList("club.selectSearchKeywordList");
+	}
+	
+
+	@Override
+	public List<ClubBoardProfile> selectclubBoardSearch(Map<String, Object> param) {
+		return sqlSession.selectList("club.selectclubBoardSearch",param);
+
+	}
+
+	@Override
+	public List<ClubBoard> selectReportBoardList(int clubCode) {
+		return sqlSession.selectList("club.selectReportBoardList",clubCode);
+	}
+
+	@Override
+	public int blindBoard(int boardNo) {
+		return sqlSession.update("club.blindBoard", boardNo);
+	}
+
+	@Override
+	public List<ClubMaster> clubSearch(int cPage,int numPerPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("club.clubSearch",null,rowBounds);
+	}
+
+	@Override
+	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("club.searchClubByHashtag", param,rowBounds);
+	}
+
+	@Override
+	public List<ClubMaster> selectListByName(Map<String, Object> param, int numPerPage, int cPage) {
+		int offset = ((cPage-1)*numPerPage);
+		int limit = numPerPage;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("club.selectListByName", param, rowBounds);
+	}
+
+	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return sqlSession.selectOne("club.selectAgeAvg",clubCode);
+	}
+	
+	@Override
+	public List<Heart> selectHeartMember() {
+		return sqlSession.selectList("club.selectHeartMember");
+	}
 
 	
 	

@@ -64,7 +64,7 @@ width:720px;
                 </div>
                 <div class="myname-div font-kor">
                     <div style="font-size: 25px;margin:0 auto;max-width: fit-content;">@${memberLoggedIn.memberId }</div>
-                    <div style="margin:0 auto;font-size:30px;font-weight: 900;max-width: fit-content;" >${memberLoggedIn.memberName }</div>
+                    <div style="margin:0 auto;font-size:30px;font-weight: 900;max-width: fit-content;" >${memberLoggedIn.profileName }</div>
                 </div>
             </div>
             <div class="btn-div">

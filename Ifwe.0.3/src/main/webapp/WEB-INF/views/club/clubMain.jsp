@@ -468,7 +468,7 @@ $(function(){
     
     
 	$(".friend-name-profile").click(function(){
-		location.href="${pageContext.request.contextPath }/member/profile.do"
+		location.href="${pageContext.request.contextPath }/member/profile.do?memberCode="+${clubMaster.memberCode};
 	});
     
     $(".section-block-right").click(function(){
@@ -609,14 +609,19 @@ $(function(){
     
     
     
+    $("#three-dots").click(function(){
+    	console.log("신고신고신고");
+    	$(".click-three-dots").css("display","block");
+    
+    	
+    });
     
     
+    $("[name=board-report]").click(function(){
+    	$('#myModal').show();
+    })
     
-    
-    
-    
-    
-    
+    $(".click-three-dots").css("display","none");
     
     
 });
@@ -654,8 +659,48 @@ function showSlides(n) {
 	  captionText.innerHTML = dots[slideIndex-1].alt;
 	}
 
+function close_pop(flag) {
+    $('#myModal').hide();
+    $("[name=reportFrm]").submit();
+};
 </script>
+<style>
+.click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px;}
+.under-click-three-dots{width:200px;max-height: max-content;}
+.under-click-three-dots p{max-width:max-content; margin:12px auto;font-size:20px;}
+ /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+[name=reportReason]{
+width: 550px;
+    height: 40px;
+    font-size: 15px;
+    padding-left: 3%;
+    border-radius: 20px;
+    background-color: #ebebeb;
+    outline: none;
+}
 
+</style>
 
 </head>
 <body>
@@ -685,11 +730,20 @@ function showSlides(n) {
                           <div class="article1-frofile-name">
                               <p class="article1-leader-name">${cbl.profileName }</p>
                           </div>
-                          <div class="article1-curcle-box">
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                              <div class="article1-curcle"></div>
-                          </div>
+                         <div class="article1-curcle-box" id="three-dots">
+                          <div class="article1-curcle"></div>
+                          <div class="article1-curcle"></div>
+                          <div class="article1-curcle"></div>
+                      </div>
+                      <div class="click-three-dots">
+                      <c:if test="${cl.memberCode == memberLoggedIn.memberCode }">
+                      	<div class="under-click-three-dots"><p><i class="far fa-edit"></i>수정</p></div>
+                      	<div class="under-click-three-dots"><p><i class="far fa-trash-alt"></i>삭제</p></div>
+                      </c:if>
+                     <c:if test="${cl.memberCode != memberLoggedIn.memberCode }">
+                      	<div class="under-click-three-dots" name="board-report"><p><i class="far fa-angry"></i>신고</p></div>
+                     </c:if>
+                      </div>
                       </div>
                       <p class="article1-boardmenu">${cbl.boardTitle }</p>
                       <input type="checkbox" id="readmore${vs.index }"/>
@@ -705,6 +759,33 @@ function showSlides(n) {
                       	</c:forEach>
                           </ul>
                       </div>
+                           <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;"><i class="far fa-frown"></i> 게시글 신고</span></b></span></p>
+                <p style="text-align: center; line-height: 1.5;"><br />이 게시글을 신고하시는 이유는 무엇인가요?</p>
+                <form name="reportFrm" action="${pageContext.request.contextPath }/clubboard/report.do" method="POST">
+                <p><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /><input type="text" name="reportReason" id="board-reason" /></p>
+                <input type="hidden" name="boardNo" value="${cbl.boardNo }" />
+                <input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" />
+                <input type="hidden" name="clubCode" value="${cbl.clubCode}" />
+                <input type="hidden" name="clubBoardListNo" value="${cb.clubBoardlistNo}" />
+                </form>
+                <p><br /></p>
+                <p><br /></p>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#ED0000 ;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+                <span class="pop_bt" style="font-size: 13pt; color:white;" >
+                     신고하기
+                </span>
+            </div>
+      </div>
+ 
+    </div>
+        <!--End Modal-->
                       <c:if test="${not empty boardImg && cbl.boardImgyn=='y'}">
 	                     <div class="article1-imgbox" id="imgbox">
 	                     	  <input type="hidden" id="boardNohide" value="${cbl.boardNo }" />
@@ -717,13 +798,21 @@ function showSlides(n) {
 		                      </c:forEach>
 	                     </div>
                       </c:if>
+                     
+
                       
                       <div class="article1-line"></div>
                       <form action="${pageContext.request.contextPath }/clubboard/insertmainComment.do" method="post" >
                       <div class="article1-comment-box">
+                      
                       	  <input type="hidden" name="boardRef" value="${cbl.boardNo }" />
                       	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
+                      	  <input type="hidden" name="boardNo" value="${cbl.boardNo }"/>
+                      	  <span class ="boardHeart" style="font-size:30px;margin-bottom:10px;">
+                      	  	<i class="fa fa-heart-o" aria-hidden="true" ></i>
+                      	  </span>
+                      	  	<span style="font-size:16px;" id="count">좋아요${cbl.boardHeart }</span>
                           <input type="text" name="commentContent" placeholder="댓글입력">
                           <input type="submit" value="입력" />
                       </div>
@@ -810,4 +899,91 @@ function showSlides(n) {
 
 
 </body>
+<script>
+$(function(){
+	 $(".boardHeart").click(function(){
+	 	let $heart = $(this);
+	 	let memberCode=  ${memberLoggedIn.memberCode};
+	 	let boardNoForHeart = $(this).parent().children().eq(3).val();
+	 	console.log();
+	 	var data = {"memberCode" :memberCode, "boardNo":boardNoForHeart}
+	 	
+	      if($heart.hasClass("liked")){
+	    	  $heart.html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+	    	  $heart.removeClass("liked");
+	    		
+	    		$.ajax({
+	    			  url:"${pageContext.request.contextPath}/clubboard/heartMinus.do",
+	    			  data : data,
+	    			  success : function(data){
+	    				  console.log(data);
+	    				  $heart.next().text("좋아요"+data);
+	    			  },
+	    			  error:function(x,s,e){
+	    				  console.log(x,s,e);
+	    			  }
+	    		});
+	      }else{
+	    	  
+	    	  $.ajax({
+		    	  url:"${pageContext.request.contextPath}/clubboard/heart.do",
+		    	  data : data,
+		    	  success : function(data){
+		    		  console.log(data);
+		    		  $heart.next().text("좋아요"+data);
+		    	  },
+		    	  error:function(x,s,e){
+		    		  console.log(x,s,e);
+		    	  }
+		     });
+	    	  $heart.html('<i class="fa fa-heart" aria-hidden="true"></i>');
+	    	  $heart.addClass("liked");
+		      
+    	  }
+	  });
+	 
+});
+
+
+function checkMyHeart(){
+	var memberCodeForCheck = ${memberLoggedIn.memberCode};
+	 $.ajax({
+		  url:"${pageContext.request.contextPath}/clubboard/checkHeart.do",
+		  data : {memberCode : memberCodeForCheck},
+		  success : function(data){
+			  $boardNo = $(".article1-comment-box [name=boardNo]");
+			  
+			  $.each(data,function(idx,boardno){
+				  console.log(boardno);
+				  $.each($boardNo,function(idx,elem){
+					  console.log(elem.value);
+					  if(boardno == elem.value){
+						  console.log($(elem).parent().children().eq(4));
+						  $(elem).parent().children().eq(4).addClass("liked");
+						  $(elem).parent().children().eq(4).empty();
+						  $(elem).parent().children().eq(4).append("<i class='fa fa-heart' aria-hidden='true'></i>")
+					  }
+					  
+				  });
+			  });
+			  
+		  },
+		  error:function(x,s,e){
+			  console.log(x,s,e);
+		  }
+	});
+}
+checkMyHeart();
+</script>
+<style>
+.fa-heart-o {
+		color: red;
+		cursor: pointer;
+}			
+
+.fa-heart {
+  color: red;
+  cursor: pointer;
+}
+</style>
 </html>

@@ -96,7 +96,9 @@ text-decoration: none;
                     <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
                 </div>
                 <div class="nav-clubimg">
+
                 	<img src="${pageContext.request.contextPath }/resources/upload/profile/${memberLoggedIn.profileImgRe}" alt="" />
+
                 </div>
                 <!-- 문보라수정 -->
                 <div class="nav-right-leader font-kor">
@@ -132,6 +134,11 @@ text-decoration: none;
                     <div class="blue-back" id="buy-membership">
                     	<li><a href="${pageContext.request.contextPath }/member/membership.do?memberCode=${memberLoggedIn.memberCode}" class="font-black">멤버쉽 구매</a></li>
                     </div>
+                    <c:if test="${memberLoggedIn.memberCode == 10000 }">
+                    <div class="blue-back" id="buy-membership">
+                    <li><a href="${pageContext.request.contextPath }/admin/adminPage.do" class="font-black">관리자페이지</a></li>
+               		 </div>
+                    </c:if>
                 </ul>
             </div>
         </div>

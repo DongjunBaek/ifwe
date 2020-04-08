@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fullcalendar">
+	<insert id="insertFullcalendar">
+	insert into fullcalendar values(
+	#{fullId},
+	#{title},
+	to_date(#{fullStart},'yyyy-MM-dd HH24:mi'),
+	to_date(#{fullEnd},'yyyy-MM-dd HH24:mi'),
+	#{fullDescription},
+	#{fullType},
+	#{FullUsername},
+	#{fullBackgroundColor},
+	#{fullTextColor},
+	#{fullAllDay},	
+	seq_FC_no.nextval,
+	#{clubCode}
+	
+	
+	
+	
+	)
+	
+	</insert>
+
+	<select id="selectFcList" resultMap="selectListFC">
+	select * from fullcalendar
+	where clubCode=#{clubCode}
+	</select>
+	
+		<resultMap type="Fullcalendar" id="selectListFC">
+
+	</resultMap>
+	<update id="updateFC">
+	
+	update fullcalendar
+	set
+	  title=#{title} ,
+	  full_start=to_date(#{fullStart},'yyyy-MM-dd HH24:mi'),
+	  full_end =to_date(#{fullEnd},'yyyy-MM-dd HH24:mi'),
+	full_description = #{fullDescription},
+	full_type=#{fullType},
+	full_username=#{FullUsername},
+	full_backgroundColor=#{fullBackgroundColor},
+ 	full_textColor=#{fullTextColor},
+	full_allDay=#{fullAllDay}	  
+	where full_no=#{fullNo}
+
+
+	</update>
+	
+	
+	<delete id="deleteFC">
+	delete from fullcalendar
+	where full_id=#{fullId}
+	</delete>
+	
+	<select id="checkMaster" resultType="club">
+	select * from club
+	where club_code=#{clubCode}
+	</select>
+</mapper>

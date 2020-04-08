@@ -47,6 +47,7 @@
 					console.log("성공",data);
 					rNum = data;
 					console.log(rNum);
+					
 				},
 				error:function(x,s,e){
 					console.log(x,s,e);
@@ -55,7 +56,16 @@
 		});
 		
 		$("#search-btn-check").click(function(){
-			console.log(rNum);
+			console.log($("#number").val());
+			console.log("rNum = ",rNum);
+			if($("#number").val() != rNum){
+				alert("인증번호가 맞지않습니다.");
+				$("#number").val('');
+			}else{
+				alert("본인인증에 성공하셨습니다.");
+				opener.document.getElementById("memberPhone").value = document.getElementById("member_phone").value
+				window.close();
+			}
 		});
 		
 	});
@@ -89,15 +99,11 @@
 		                 </div>
 		                 <div class="number-input">
 		                 	<i class="fas fa-mobile-alt index-i-class"></i>
-		                 	<input class="input-box" type="text" name="birthday" id="userid" placeholder="인증번호">	
+		                 	<input class="input-box" type="text" name="number" id="number" placeholder="인증번호">	
 		                 	<input type="submit" value="확인" class="index-search-btn" id="search-btn-check"/>	
 		                 </div>
 	             </div>
             </div>
-            <input type="hidden" name="memberId" value="${memberLoggedIn.memberId }" />
-            
-		
-               
 	</article>
 </section>
 

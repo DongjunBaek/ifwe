@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
@@ -40,6 +40,8 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.member.model.vo.Profile;
+import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,16 +59,17 @@ public class ClubController {
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
-	
+
 	
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
 	@ResponseBody
-	public List<ClubMaster> clubSearchKeyword(ModelAndView mav,
+	public Map<Integer,Object> clubSearchKeyword(ModelAndView mav,
 										    @RequestParam("searchType") String searchType,
 									      @RequestParam("clubSearchKeyword")String clubSearchKeyword,
 									      @RequestParam(value = "clubLocation", required = false) String clubLocation,
-										  @RequestParam("memberCode")int memberCode) {
+										  @RequestParam("memberCode")int memberCode,
+										  @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("searchType = {}",searchType);
 		log.debug("clubLocation = {}",clubLocation);
@@ -88,37 +91,93 @@ public class ClubController {
 		//검색했을때 검색어를 검색어 테이블에 insert
 		int result = 0;
 		
+		final int numPerPage = 9;
+		int totalContents = 0;
+		
 		if(searchType.equals("hashtag")) {
 			//해쉬태그 검색
 			log.debug("해쉬태그 검색");
-			searchListResult = clubService.searchClubByHashtag(param);
+			totalContents = clubService.searchClubByHashtag(param).size();
+			searchListResult = clubService.searchClubByHashtag(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 			
 		}else {
 			//모임명 검색
 			log.debug("모임명 검색");
-			searchListResult = clubService.selectListByName(param);
+			totalContents = clubService.selectListByName(param).size();
+			searchListResult = clubService.selectListByName(param,numPerPage,cPage);
 			result = clubService.insertSearchKeyword(param);
 		}
 
 		
-		
+		String showKeyword = clubSearchKeyword;
 		log.debug("list1231321321 ={}",searchListResult);
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
+		/**
+		 * 0407 dongjun 소모임 장 프로필 사진불러오기
+		 */
+		List<Profile> clubmasterProfile = new ArrayList<Profile>();
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				Profile profile = memberService.selectProfileByMemberCode(searchListResult.get(i).getClubMaster());
+				clubmasterProfile.add(profile);
+			}
+		}
 		
+		/**
+		 * 0407 dongjun 소모임 별 남녀 비율 및 평균 나이
+		 */
+		List<Integer> clubCode = new ArrayList<Integer>();
 		
-		return searchListResult;
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				clubCode.add(searchListResult.get(i).getClubCode());
+			}
+		}
+		
+		//남녀비율
+		List<Integer> maleList = clubService.selectMaleCount(clubCode);
+		log.debug("maleList = {}",maleList);
+		
+		//평균나이 가져오기
+		List<Count> ageList = clubService.selectAge(clubCode);
+		log.debug("ageList = {}",ageList);
+		Map<Integer,Integer> ageMap = new HashMap<Integer, Integer>();
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				ageMap.put(i,clubService.selectAgeAvg(searchListResult.get(i).getClubCode()));
+			}
+		}
+		
+		/* List<ClubMaster> */
+		Map<Integer, Object> resultMapClub = new HashMap<Integer, Object>();
+		resultMapClub.put(1, searchListResult);
+		resultMapClub.put(2, totalPage);
+		resultMapClub.put(3, cPage);
+		resultMapClub.put(4, showKeyword);
+		resultMapClub.put(5, clubLocation);
+		resultMapClub.put(6, clubmasterProfile);
+		resultMapClub.put(7, maleList);//남자비율
+		resultMapClub.put(8, ageMap);//평균나이
+		
+		return resultMapClub;
 		
 	}
 	
 	
 	@GetMapping("/clubSearch")
-	public ModelAndView clubSearch(ModelAndView mav) {
+	public ModelAndView clubSearch(ModelAndView mav, @RequestParam(value="cPage", required = false, defaultValue = "1")int cPage) {
 		
 		log.debug("소모임 검색");
 		
-		List<ClubMaster> clubList = clubService.clubSearch();
+		final int numPerPage = 9;
+		log.debug("cPage {}",cPage);
+		List<ClubMaster> clubList = clubService.clubSearch(cPage,numPerPage);
 		log.debug("clubList = {}",clubList);
+
+		int totalContents = clubService.clubSearch().size();
+		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
 		List<Integer> clubCode = new ArrayList<Integer>();
 		
@@ -127,6 +186,8 @@ public class ClubController {
 				clubCode.add(clubList.get(i).getClubCode());
 			}
 		}
+		
+
 		
 		log.debug("clubCode = {}",clubCode);
 		//남녀비율
@@ -141,11 +202,27 @@ public class ClubController {
 			 log.debug(" = {}",ageList.get(i).getAge());
 		}
 		
+		/**
+		 * 0407 dongjun 소모임 장 프로필 사진불러오기
+		 */
+		List<Profile> clubmasterProfile = null;
+		if(clubList != null) {
+			clubmasterProfile = new ArrayList<Profile>();
+			for(int i=0; i<clubList.size();i++) {
+				
+				Profile profile = memberService.selectProfileByMemberCode(clubList.get(i).getClubMaster());
+				clubmasterProfile.add(profile);
+			}
+		}
+		
+		
 		mav.addObject("ageList",ageList);
 		mav.addObject("maleList", maleList);
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
-		
+		mav.addObject("cPage", cPage);
+		mav.addObject("tPage", totalPage);
+		mav.addObject("profile", clubmasterProfile);
 		return mav;
 	}
 	
@@ -237,18 +314,20 @@ public class ClubController {
 		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
-		
-		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
-		List<ClubMember> clubMember = null;
+		List<Heart> heartMember = clubService.selectHeartMember();
+		log.debug("heartMember = {}",heartMember);
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
-		log.debug("msgCount={}",msgCount);
+		
 		
 		//전체 게시글 
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardProfileList(clubCode);
 	
+		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
+		List<ClubMember> clubMember = null;
+		param2.put("clubMemberCode", clubMemberCode);
 		
 		if(!clubMemberCode.isEmpty()) {
-			clubMember = clubService.selectClubMember(clubMemberCode);
+			clubMember = clubService.selectClubMember(param2);
 		}
 		
 		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
@@ -282,6 +361,7 @@ public class ClubController {
 		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.addObject("boardImg",boardImg);
+		mav.addObject("heartMember",heartMember);
 		
 		mav.setViewName("/club/clubMain");
 		
@@ -333,11 +413,7 @@ public class ClubController {
 		return mav;
 	}
 	
-	@GetMapping("/calendar.do")
-	public String calendar() {
-		return "club/clubcalendar";
-	}
-	
+
 //	@GetMapping("/notice.do")
 //	public String notice() {
 //		return "club/clubNotice";
@@ -566,8 +642,10 @@ public class ClubController {
 		List<Member> clubMemberCode = clubService.selectMemberCode(clubCode);
 		List<ClubMember> clubMember = null;
 		
+		param.put("clubMemberCode", clubMemberCode);
+		
 		if(!clubMemberCode.isEmpty()) {
-			clubMember = clubService.selectClubMember(clubMemberCode);
+			clubMember = clubService.selectClubMember(param);
 		}
 		
 		mav.addObject("clubMember",clubMember);
@@ -643,8 +721,66 @@ public class ClubController {
 	
 	
 	
+	/** 20200403 풀캘린더 insert 김원재
+	 */
+	@GetMapping("/calendar.do")
+	public String calendar() {
+		return "club/fc";
+	}
 	
 	
+	/**
+	 * 0402 clubCateCode List 가져오기
+	 * 여주
+	 */
+	@GetMapping("/clubCateList.do")
+	@ResponseBody
+	public List<Club> clubCateList(@RequestParam("clubCatecode") String clubCatecode){
+		
+		log.debug("소모임 카테고리 별 리스트 페이지");
+		
+		List<Club> clubCateList  = clubService.selectClubCateList(clubCatecode);
+		
+		log.debug("clubCateList{}=",clubCateList);
+		
+		return clubCateList;
+	}
+	
+
+	@GetMapping("/searchKeywordList.do")
+	@ResponseBody
+	public List<SearchKeyword> searchKeywordList(){
+		log.debug("검색어 키워드 리스트");
+		
+		List<SearchKeyword> searchkeywordList = clubService.selectSearchKeywordList();
+		
+		log.debug("searchKeywordList{}=",searchkeywordList);
+		
+		return searchkeywordList;
+	}
 	
 	
+	//신고된 게시글 보기
+	@GetMapping("/mngreport.do")
+	public ModelAndView mngReport(@RequestParam("clubCode")int clubCode,ModelAndView mav) {
+		List<ClubBoard> list = clubService.selectReportBoardList(clubCode);
+		log.debug("clubList = {}",list);
+		
+		mav.setViewName("club/clubMngReport");
+		mav.addObject("reportList", list);
+		return mav;
+	}
+	
+	@PostMapping("/blind.do")
+	public String blind(@RequestParam("clubCode")int clubCode,@RequestParam("boardNo")int boardNo,RedirectAttributes redirectAttributes) {
+		log.debug("boardNo = {}",boardNo);
+		log.debug("clubCode = {}",clubCode);
+		
+		int result = clubService.blindBoard(boardNo);
+		String msg = result>0?"블라인드처리되었습니다":"실패";
+		redirectAttributes.addFlashAttribute("msg", msg);
+		
+		return "redirect:mngreport.do?clubCode="+clubCode;
+	}
 }
+
