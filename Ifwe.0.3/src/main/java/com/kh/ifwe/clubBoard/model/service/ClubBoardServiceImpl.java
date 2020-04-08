@@ -110,4 +110,9 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.deleteHeart(param);
 	}
 
+	@Override
+	public List<Integer> selectMyHeartList(int memberCode) {
+		return clubBoardDAO.selectMyHeartList(memberCode);
+	}
+
 }

@@ -108,6 +108,11 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.delete("clubBoard.deleteHeart", param);
 	}
 
+	@Override
+	public List<Integer> selectMyHeartList(int memberCode) {
+		return sqlSession.selectList("clubBoard.selectMyHeartList",memberCode);
+	}
+
 
 	
 	

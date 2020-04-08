@@ -46,4 +46,6 @@ public interface ClubBoardService {
 
 	int deleteHeart(Map<String, Integer> param);
 
+	List<Integer> selectMyHeartList(int memberCode);
+
 }

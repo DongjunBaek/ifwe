@@ -282,7 +282,12 @@ public class ClubBoardController {
 		
 	}
 	
-	
+	/**
+	 * 0409 heart for selet my heart boardlist 
+	 * by dongjun
+	 * @param memberCode
+	 * @return
+	 */
 	@GetMapping("/checkHeart.do")
 	@ResponseBody
 	public List<Integer> checkHeart(@RequestParam(value="memberCode") int memberCode){

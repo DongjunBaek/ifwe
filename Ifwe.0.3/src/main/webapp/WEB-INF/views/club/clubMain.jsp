@@ -527,17 +527,31 @@ $(function(){
     	  }
 	  });
 	 
-}
+});
 
 
-function() checkMyHeart(){
+function checkMyHeart(){
 	var memberCodeForCheck = ${memberLoggedIn.memberCode};
 	 $.ajax({
 		  url:"${pageContext.request.contextPath}/clubboard/checkHeart.do",
 		  data : {memberCode : memberCodeForCheck},
 		  success : function(data){
-			  console.log(success);
-			  console.log(data);
+			  $boardNo = $(".article1-comment-box [name=boardNo]");
+			  
+			  $.each(data,function(idx,boardno){
+				  console.log(boardno);
+				  $.each($boardNo,function(idx,elem){
+					  console.log(elem.value);
+					  if(boardno == elem.value){
+						  console.log($(elem).parent().children().eq(4));
+						  $(elem).parent().children().eq(4).addClass("liked");
+						  $(elem).parent().children().eq(4).empty();
+						  $(elem).parent().children().eq(4).append("<i class='fa fa-heart' aria-hidden='true'></i>")
+					  }
+					  
+				  });
+			  });
+			  
 		  },
 		  error:function(x,s,e){
 			  console.log(x,s,e);
