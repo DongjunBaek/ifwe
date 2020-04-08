@@ -127,7 +127,7 @@ public class myCrawlingController {
 					}
 			}
 
-			imgCrawlerForSong(crawlingURL);
+//			imgCrawlerForSong(crawlingURL);
 			
 
 		} catch (IOException e) {
@@ -152,7 +152,7 @@ public class myCrawlingController {
 					String url = element.attr("src");
 					URL imgUrl = new URL(url);
 					BufferedImage jpg = ImageIO.read(imgUrl);
-					File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + ++fileNameNum + ".jpg");
+					File file = new File(servletContext.getRealPath("/resources/upload/song/") +folder+ (++fileNameNum) + ".jpg") ;
 					ImageIO.write(jpg, "jpg", file);
 				}
 				if(fileNameNum >=10) {
@@ -203,19 +203,19 @@ public class myCrawlingController {
 						System.out.println("Crawling Veiw ="+myCrawling.getContentsName());
 						myCrawling.setContentsCode(idx);
 						mapMusical.put(idx, myCrawling);
-						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
+//						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
 					}else if(idx>32 && idx<43) {
 						//콘서트
 						System.out.println("Crawling Veiw ="+myCrawling.getContentsName());
 						myCrawling.setContentsCode(idx);
 						mapConcert.put(idx, myCrawling);
-						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
+//						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
 					}else if(idx>52 && idx < 63) {
 						//연극
 						System.out.println("Crawling Veiw ="+myCrawling.getContentsName());
 						myCrawling.setContentsCode(idx);
 						mapTheater.put(idx, myCrawling);
-						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
+//						imgCrawlerForPlays(myCrawling.getContentsHref(), idx);
 					}else if(idx>63)
 						break;		
 					else {
@@ -248,7 +248,7 @@ public class myCrawlingController {
 
 				URL imgUrl = new URL(url);
 				BufferedImage jpg = ImageIO.read(imgUrl);
-				File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + page + ".jpg");
+				File file = new File(servletContext.getRealPath("/resources/upload/plays/") + folder  + page + ".jpg");
 				ImageIO.write(jpg, "jpg", file);
 				page += 1;
 				
@@ -287,7 +287,7 @@ public class myCrawlingController {
 				if(idx == 19)
 					break;
 			}
-			imgCrawlerForBooks(crawlingURL);
+//			imgCrawlerForBooks(crawlingURL);
 						
 			
 		} catch (IOException e) {
@@ -310,7 +310,7 @@ public class myCrawlingController {
 				
 				URL imgUrl = new URL(url);
 				BufferedImage jpg = ImageIO.read(imgUrl);
-				File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + page + ".jpg");
+				File file = new File(servletContext.getRealPath("/resources/upload/books/") + folder + page + ".jpg");
 				ImageIO.write(jpg, "jpg", file);
 				page += 1;
 				if(page >10)
