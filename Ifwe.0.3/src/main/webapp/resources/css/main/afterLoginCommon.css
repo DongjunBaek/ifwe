@@ -96,6 +96,7 @@ header {
     color: white;
     margin-top: 10%;
     position:relative;
+    cursor:pointer;
 }
 .fa-bell {
     margin-left: 30%;
