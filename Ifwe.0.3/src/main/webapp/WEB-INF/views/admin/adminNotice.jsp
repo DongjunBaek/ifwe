@@ -31,6 +31,7 @@ $(document).ready(function(){
 					$.each(data[2], function(idx,value){
 					console.log(idx);
 					console.log(value);
+					console.log(value.memberCode);			
 					
 					$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardDetail.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[요청] ")+value.boardTitle+"</a></td>"
 							+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
@@ -110,10 +111,14 @@ $(document).ready(function(){
 					}else if(value.boardCate=='qna' && value.boardLevel == 0){						
 						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[요청] ")+value.boardTitle+"</a></td>"
 								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
+					}else if(value.boardCate=='report' && value.boardDel == 'd'){						
+						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardAnswer.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[요청] ")+value.boardTitle+"</a> <span class='answerSucess'>[요청완료]</span> </td>"
+								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
 					}
 					else{
 						$parentDiv.append("<tr><td><a href='${pageContext.request.contextPath}/admin/adminBoardReport.do?boardNo="+value.boardNo+"'>"+(value.boardCate == "notice"?"[공지] " : value.boardCate == "qna"?"[문의] ":"[요청] ")+value.boardTitle+"</a></td>"
 								+"<td>"+moment("/Date("+value.boardDate+")/").format("YYYY-MM-DD").toString()+"</td></tr>");				
+						
 					}
 					
 					}); 

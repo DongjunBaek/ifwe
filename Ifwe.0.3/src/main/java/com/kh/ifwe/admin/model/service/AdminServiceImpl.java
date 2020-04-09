@@ -137,6 +137,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.insertDormantNotice(memberCode);
 	}
 
+	@Override
+	public int selectReportOne(int memberCode) {
+		return adminDAO.updateReportNotice(memberCode);
+	}
+
 
 
 

@@ -35,10 +35,6 @@ public class Member implements Serializable {
 	private String memberRole;
 	private int memberMsg;
 	private String memberLike;
-	private int num;
-
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date Day;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;

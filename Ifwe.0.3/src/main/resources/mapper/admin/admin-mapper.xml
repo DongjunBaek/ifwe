@@ -85,23 +85,24 @@
 	</select>
 
 
-	<select id="selectOneBoard" resultType="board">
-		select 
-			*
-		from 
-			board		
-		where BOARD_CATE like #{boardCategory} and
-			  board_del = 'N'
-		order 
-			by board_date desc
+	<select id="selectOneBoard" resultType="board">		
+			select 
+				* 
+			from 
+				board
+			where 
+				BOARD_CATE like #{boardCategory} and  board_del in('d','N')
+			order by 
+				board_date desc
 	</select>
 
 	<select id="selectBoardDetail" resultType="board">
-		select
-			*
-		from
-			board
-		where board_no = #{boardNo}
+			select 
+				* 
+			from 
+				board 
+			where 
+				board_no = #{boardNo}
 	</select>
 	
 	
@@ -157,8 +158,7 @@
 	 	comment_content = #{commentContent}
 	 	where board_no = #{boardNo}
 	 </update>
-	 
-	 
+		 
 	 
 	 <insert id="insertDormantNotice">
 		insert into board values (
@@ -175,6 +175,15 @@
     default    
 	)
 	 </insert>
+	 
+	 <update id="updateReportNotice">
+	 	update
+	 		board
+	 	set
+	 		board_del='c'
+	 	where
+	 		member_code = #{memberCode}
+	 </update>
 	 
 	 	 <insert id="EventInsert">
 	 	insert into
@@ -228,7 +237,7 @@
 	 </update>
 	 
 
-	 <select id="MemberEnrollList" resultType="member">
+	 <select id="MemberEnrollList" resultType="MemberEnrollList">
 		select 
 			count(*) num ,to_char(MEMBER_ENROLLDATE,'YYYY-MM-DD') Day
 		from 

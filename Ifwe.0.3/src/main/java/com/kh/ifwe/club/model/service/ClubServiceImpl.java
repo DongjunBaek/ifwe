@@ -230,6 +230,8 @@ public class ClubServiceImpl implements ClubService {
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return clubDAO.selectReportBoardList(clubCode);
 
+	}
+	
 	//0406 dongjun pageBar 
 	@Override
 	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
@@ -242,7 +244,6 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.searchClubByHashtag(param,numPerPage,cPage);
 
 	}
-
 
 	@Override
 	public int blindBoard(int boardNo) {
