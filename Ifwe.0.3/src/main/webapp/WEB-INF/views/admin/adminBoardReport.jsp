@@ -14,6 +14,15 @@
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+<script>
+	function Memberdormant(){
+		if(!confirm("휴면 해지하시겠습니까?")) 
+			return;
+		
+		location.href="${pageContext.request.contextPath }/admin/cancel.do?memberCode="+${board.memberCode};
+	}
+	
+</script>
 </head>
 <body>
 	<section>
@@ -26,6 +35,7 @@
                 <h3>제목</h3>
                 <input type="text" id="content_title" class="content_title" value="${board.boardTitle }" readonly>
                 <p>${board.boardDate }</p>
+	            <p>${member.memberName }</p> 
             </div>
             <div class="content_wrap">
                 <h3>내용</h3>
@@ -33,7 +43,7 @@
             </div>
         </div>
         	 <div class="btn_reple_wrap">
-             	<input type="submit" id="board_reple_btn" class="btn_boardRepleDel" value="요청 처리" onclick="boardReport()">
+             	<input type="button" id="board_reple_btn" class="btn_boardRepleDel" value="요청 처리" onclick="Memberdormant()">
              </div>
     </section>
 
