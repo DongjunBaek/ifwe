@@ -24,10 +24,11 @@ public class FriendList extends Friend implements Serializable {
 	
 	private String profileImgRe;
 
-	public FriendList(int memberCode, int friendCode, String memberId, String memberPname) {
-		super(memberCode, friendCode, memberId, memberPname);
+	public FriendList(int memberCode, String memberId, String memberPname, int friendCode, String profileImgRe) {
+		super(memberCode, memberId, memberPname, friendCode);
 		this.profileImgRe = profileImgRe;
 	}
+
 
 		
 		

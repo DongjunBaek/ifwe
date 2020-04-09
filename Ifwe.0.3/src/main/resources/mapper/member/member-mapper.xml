@@ -272,6 +272,13 @@
 			member_code = #{memberCode}
 		</where>
 	</select>
+	
+	<select id="selectMsgFriend" resultType="friendList">
+		select F.*,P.profile_img_re
+		from friend F join member_profile P
+              		   on F.friend_code = P.member_code
+		where F.member_code=#{memberCode}
+	</select>
 
 </mapper>
 

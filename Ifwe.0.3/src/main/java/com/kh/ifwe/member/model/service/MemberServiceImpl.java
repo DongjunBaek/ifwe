@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -133,6 +134,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int selectMsgCount(int memberCode) {
 		return memberDAO.selectMsgCount(memberCode);
+	}
+
+	@Override
+	public List<SessionFriend> selectMsgFriend(int memberCode) {
+		return memberDAO.selectMsgFriend(memberCode);
 	}
 
 

@@ -33,6 +33,7 @@ import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
@@ -42,7 +43,7 @@ import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount" })
+@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount","friendList" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -184,7 +185,6 @@ public class MemberController {
 				log.debug("profile = {}",profile);
 				model.addAttribute("profile",profile);
 				
-				log.debug("메인페이지 들어옴 뿌려줄 거  = 내 소모임 목록, 이란 소모임은 어때요 (내 관심사에 맞는 소모임 뿌려주기), 주간베스트 글");
 				log.debug("memberLoggedId = {}", member);
 				
 				//내 소모임 목록
@@ -204,14 +204,18 @@ public class MemberController {
 				 
 				 model.addAttribute("eventList",eventList);
 				
+				 //Msg에 친구목록
+				 List<SessionFriend> friendList = memberService.selectMsgFriend(member.getMemberCode());
+				 log.debug("friendList={}",friendList);
 				
 				int msgCount = memberService.selectMsgCount(member.getMemberCode());
 				log.debug("msgCount={}",msgCount);
+				model.addAttribute("friendList",friendList);
 				model.addAttribute("msgCount",msgCount);
 				
 				
 				return "main/mainPage";
-			
+				
 				} 
 			
 			else {
