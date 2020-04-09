@@ -401,7 +401,7 @@ create table board_heart_tbl(
     constraint fk_heart_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE
 );
 
--- 28. 회원
+-- 28. 회원 로그인 기록
 CREATE TABLE LOGINRECORD (
 
    loginrecord_no  number not null,
