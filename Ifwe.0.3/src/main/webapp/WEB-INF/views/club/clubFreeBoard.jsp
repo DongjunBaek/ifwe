@@ -106,7 +106,6 @@ $(function(){
 				slid.eq(0).css("display","block");
 
 				
-				
 			},error : function(x,h,r){
 				console.log(x,h,r);
 			}

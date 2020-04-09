@@ -55,4 +55,24 @@ update
 		friend_code = #{memberCode}
 </select>
 
+	<select id="selectMsgList" resultType="message">
+		select * from member_msg
+		where member_code in(#{memberCode},#{friendCode}) 
+			  and member_from in (#{friendCode},#{memberCode})
+			  and msg_cate_code = 'm1'
+		order by msg_date desc
+	
+	</select>
+	<insert id="insertMsgSend">
+		insert into member_msg
+		values(seq_msg_code.nextval,#{memberCode},'m1',#{msgContent},default,default,#{memberFrom},null)
+	
+	</insert>
+	<update id="updateMsg">
+		update member_msg set msg_view='y'
+		where msg_code = #{msgCode}
+	</update>
+	
+	
+
 </mapper>

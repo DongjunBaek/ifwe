@@ -35,10 +35,258 @@ header {
     background-color: #2756a6;
     position: relative;
 }
-.nav-container {
-    width: 1660px;
-    height: 120px;
-    margin: 0 auto;
+.nav-container{
+    width:1660px;
+    height:120px;
+    margin:0 auto;
+    position: relative;
+}
+
+
+.nav-msg-cantainer{
+    width:1100px;
+    height: 1200px;
+    position: absolute;
+    right:0;
+    top: 130px;
+    z-index: 100;
+
+}
+.navmsg-friend-box{
+    width:250px;
+    height:100%;
+    float: left;
+    background-color: rgb(255, 255, 255,0.8 );
+}
+.navmsg-msg-box{
+    width:300px;
+    height:100%;
+    float: left;
+    background-color: rgb(255, 255, 255,0.8 );
+}
+.navmsg-sendmsg-box{
+    width:550px;
+    height: 100%;
+    float: left;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.receive-container{
+	position:absolute;
+	left:-500px;
+}
+.send-container{
+	position:absolute;
+	top:390px;
+	left:-500px;
+}
+.navmsg-friend-title{
+    width:100%;
+    height:60px;
+    background-color: #ffc862;
+    color: white;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 24px;
+    font-family: 'GmarketSansMedium';
+    margin-bottom: 15px;
+}
+.navmsg-friend-title span{
+    margin-left: 10px;
+    color: white;
+    
+}
+.fa-user-alt{
+    font-size: 30px;
+    color: white;
+}
+.navmsg-receive{
+	width:150px;
+	height:60px;
+	padding-top:15px;
+	text-align: center;
+	font-family: 'GmarketSansMedium';
+	margin-bottom: 15px;
+	background-color: #2756a6;
+	font-size: 24px;
+	cursor: pointer;
+	float: left;
+	color:white;
+	transition:all .5s ease;
+}
+.navmsg-send{
+	width:150px;
+	height:60px;
+	padding-top:15px;
+	text-align: center;
+	font-family: 'GmarketSansMedium';
+	background-color: #beceea;
+	margin-bottom: 15px;
+	font-size: 24px;
+	cursor: pointer;
+	float: left;
+	color:white;
+	transition:all .5s ease;
+}
+.navmsg-msglist-box{
+	width:300px;
+	height: 1140px;
+	float:left;
+}
+.fa-comments{
+	color: white;
+	font-size:26px;
+}
+.navmsg-friend-list{
+    height:65px;
+    width:200px;
+    margin:30px auto;
+    cursor: pointer;
+}
+.navmsg-friend-list p{
+    float: left;
+    font-size: 20px;
+    margin-top:25px;
+    margin-left:10px;
+    font-family: 'GmarketSansMedium';
+    
+}
+.navmsg-img{
+    width:65px;
+    height:65px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-image: url("../../images/main/basicfrofile.png");
+    background-size: cover;
+    float: left;
+
+}
+.navmsg-img img{
+    width:65px;
+    height:65px;
+    
+}
+.navmsg-msg-list{
+    width:240px;
+    height:40px;
+    margin:20px auto;
+    cursor: pointer;
+}
+.navmsg-msg-list .fa-circle{
+    color:#2756a6;
+    float: left;
+    margin-top:13px;
+    font-size: 10px;
+    margin-right:10px;
+}
+.navmsg-member{
+    float: left;
+    font-family: 'GmarketSansMedium';
+    font-size: 15px;
+    width:175px;
+}
+.navmsg-date{
+    width:175px;
+    float: left;
+}
+.navmsg-listimg-box{
+    float: right;
+    font-family: 'GmarketSansMedium';
+    width:30px;
+    height:13px;
+    margin-top:-10px;
+    color:red;
+    font-size: 10px;
+}
+.sendmsg-memberinfo{
+    width:480px;
+    height:75px;
+    margin:20px auto;
+}
+.sendmsg-memberinfo p{
+    font-size:20px;
+}
+.memberinfo-imgbox{
+    width:70px;
+    height:70px;
+    border:5px solid white;
+    border-radius: 50%;
+    float: left;
+    margin-right:15px;
+    background-image: url("../../images/main/basicfrofile.png");
+    background-size: cover;
+    overflow: hidden;
+}
+.memberinfo-imgbox img{
+    width:60px;
+    height:60px;
+}
+.memberinfoid{
+    padding-top:10px;
+    float: left;
+    margin-right: 200px;
+}
+.memberinfoname{
+    font-family: 'GmarketSansMedium';
+    margin-right: 200px;
+    float: left;
+}
+
+.sendmsg-content{
+    width:480px;
+    min-height:240px;
+    margin:0 auto;
+    background-color: white;
+    overflow:auto;
+    margin-bottom: 30px;
+    text-align: left;
+    font-size:24px;
+    font-family: 'GmarketSansLight';
+    white-space:pre;
+}
+
+.myinfo-imgbox{
+    float: right;
+    width:70px;
+    height:70px;
+    border:5px solid white;
+    border-radius: 50%;
+    margin-left: 15px;
+    background-image: url("../../images/main/basicfrofile.png");
+    background-size: cover;
+    overflow: hidden;
+}
+.myinfo-imgbox img{
+	width:60px;
+	height:60px;
+}
+.myinfoid{
+    padding-top:10px;
+    float: right;
+    margin-left:200px;
+}
+.myinfoname{
+    font-family: 'GmarketSansMedium';
+    margin-left:200px;
+    float: right;
+}
+.myinfo-textarea{
+    outline: none;
+    font-size: 20px;
+    resize: none;
+}
+.navmsg-btn{
+    width:145px;
+    background-color: #2756a6;
+    font-family: 'GmarketSansMedium';
+    border-radius: 20px;
+    color:white;
+    font-size: 18px;
+    padding:10px;
+    margin-top:15px;
+    outline: none;
 }
 .logo-box {
     float: left;
@@ -50,7 +298,7 @@ header {
     cursor:pointer;
 }
 .nav-content-right {
-    width: 390px;
+    width: 440px;
     height: 100px;
     float: right;
 }

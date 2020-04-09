@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Profile;
@@ -132,6 +133,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public List<SessionFriend> selectMsgFriend(int memberCode) {
+		return sqlSession.selectList("member.selectMsgFriend",memberCode);
+  }
+  
+  @Override
 	public Profile selectProfileByMemberCode(int clubMaster) {
 		return sqlSession.selectOne("profile.selectProfileByMemberCode",clubMaster);
 	}
