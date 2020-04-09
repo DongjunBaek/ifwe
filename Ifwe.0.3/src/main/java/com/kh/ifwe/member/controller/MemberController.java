@@ -136,6 +136,9 @@ public class MemberController {
 		}
 		redirectAttributes.addFlashAttribute("msg", msg);
 
+		//로그인 기록 추가
+		int insertLoginRecord = memberService.insertLoginRecord(searchMember.getMemberCode());
+		
 		return mav;
 	}
 
@@ -169,6 +172,13 @@ public class MemberController {
 			// 1.memberId로 member 객체 조회
 			Member member = memberService.selectOne(memberId);
 			log.debug("member@selectone={}", member);
+			
+			//0409 김원재
+			//로그인레코드 업데이트
+			int result = memberService.loginRecordUpdate(member.getMemberCode());
+			
+			
+			
 			
 			
 			//0407 여주
@@ -246,7 +256,8 @@ public class MemberController {
 	// 문보라로그아웃구현
 	@GetMapping("/logout.do")
 	public String logout(SessionStatus sessionStatus, @ModelAttribute("memberLoggedIn") Member member) {
-
+		int result = memberService.logoutRecordUpdate(member.getMemberCode());
+		
 		log.debug("[" + member.getMemberId() + "]가 로그아웃했습니다.");
 
 		if (!sessionStatus.isComplete())

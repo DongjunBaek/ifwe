@@ -274,6 +274,38 @@
 		</where>
 	</select>
 
+	<insert id="insertLoginRecord">
+	
+	insert into 
+		loginrecord 
+	values
+	(seq_loginrecord_no.nextval,#{memberCode},sysdate,'n')
+	</insert>
+
+	<update id="logoutRecordUpdate">
+	
+	update
+		 loginrecord 
+	set 
+		loginrecord_logout = 'y'
+	where
+		 member_code = #{memberCode}
+	
+	</update>
+
+
+	<update id="loginRecordUpdate">
+		
+		
+	insert into 
+		loginrecord 
+	values
+		(seq_loginrecord_no.nextval,#{memberCode},sysdate,'n')
+		
+	
+	
+	</update>
+
 </mapper>
 
 

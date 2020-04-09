@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="schedule">
+<select id="scheduleSelectMemberList" resultMap="schedulememberList">
+select * from member
+</select>
+<resultMap type="member" id="schedulememberList"></resultMap>
+
+
+<select id="sixmonthList" resultMap="LoginRecordList">
+select 
+	trunc(sysdate-loginrecord_lastlogin) sixmonth , member_code 
+	
+from (
+		SELECT * FROM 
+				(SELECT 
+					* 
+				FROM loginrecord 
+					where member_code=#{member_code} 
+						ORDER BY loginrecord_no desc)
+						 WHERE rownum = 1)
+
+</select>
+
+
+
+<resultMap type="SixmonthCheck" id="LoginRecordList"></resultMap>
+
+
+
+
+
+
+
+
+
+<select id="selectLastlogin">
+
+
+select * from loginrecord
+where member_code=#{memberCode}
+</select>
+
+
+<update id="loginRecordUpdate">
+
+update loginrecord 
+set loginrecord_logout= 'n'
+where member_code = #{memberCode}
+
+</update>
+
+
+<update id="logoutRecordUpdate">
+
+update loginrecord 
+set loginrecord_logout= 'y'
+where member_code = #{memberCode}
+
+
+</update>
+
+
+
+
+<update id="changeSleep">
+update member
+set member_role = 'h'
+where member_code = #{memberCode}
+
+
+</update>
+
+
+
+
+</mapper>
