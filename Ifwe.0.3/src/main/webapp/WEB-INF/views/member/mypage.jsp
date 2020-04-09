@@ -11,7 +11,7 @@ p{
 margin:0;
 }
 .friend-btn{
-margin-left:24%;
+margin-left:40%;
 }
 .msglist-container{
 background-color:white;
@@ -20,10 +20,10 @@ background-color:white;
 background-color:white;
 margin:0 auto;
 text-align:center;
-font-size:1.5em;
-border-top:1px solid #2b2b2b;
+font-size:2em;
 height:24px;
 width:720px;
+cursor:pointer;
 
 }
 
@@ -39,15 +39,15 @@ width:720px;
 				$(".contents").css("height","1000px");
 				$(".notice-container").css("min-height","1000px");
 				$(".board-div").css("display","none")
-				$(".fa-arrow-down").css("display","none")
-				$(".fa-arrow-up").css("display","block")
+				$(".fa-caret-down").css("display","none")
+				$(".fa-caret-up").css("display","block")
 			}else{
 				$(".contents").css("height","200px");
 				$(".notice-container").css("height","300px")
 									.css("min-height",0);
 				$(".board-div").css("display","block")
-				$(".fa-arrow-down").css("display","block")
-				$(".fa-arrow-up").css("display","none")
+				$(".fa-caret-down").css("display","block")
+				$(".fa-caret-up").css("display","none")
 			}
 			
 		});
@@ -103,7 +103,6 @@ width:720px;
                         		<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
 	                        	<input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
 			                        onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'">
-			                    <input type="button" value="거부" class="friend-nobtn font-kor" style="padding:0"> 
 			                    </p>
 	                        	</c:if> 
 	                        	<c:if test="${fl.msgView == 'y' }">
@@ -118,8 +117,8 @@ width:720px;
             </div>
            		<div class="msglist-container">
 		            <div class="add-msglist">
-		            	<i class="fas fa-arrow-down" style="color:#2756a6;"></i>
-		            	<i class="fas fa-arrow-up" style="color:#2756a6; display:none;"></i>
+		            	<i class="fas fa-caret-down" style="color:#2756a6;"></i>
+		            	<i class="fas fa-caret-up" style="color:#2756a6; display:none;"></i>
 		            </div>
 	            </div>
             <div class="board-div">

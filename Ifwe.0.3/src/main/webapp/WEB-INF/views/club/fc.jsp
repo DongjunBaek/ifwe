@@ -10,6 +10,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>FullCalendar Example</title>
+<script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <link rel=" shortcut icon"
 	href="${pageContext.request.contextPath }/resources/image/favicon.ico">
 
@@ -40,10 +41,13 @@ border: 1px solid #ebebeb;
 .section-boradmenu{
 	font-family: 'GmarketSansMedium';
 }
+.aside-leader-img{width:190px;height:190px;}
+.header-title-right>p{margin:0;}
+.aside-leader-allias{height:48px;}.aside-leader-id{height:22px;margin:0;}
 </style>
 </head>
 
-<body>
+<body style="padding:0;">
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
 
 

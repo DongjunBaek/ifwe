@@ -97,6 +97,8 @@ public class AdminController {
 
 		int result = adminService.cancelMember(member, memberCode);
 
+		int updateReport = adminService.selectReportOne(memberCode);
+		
 		redirectAttributes.addFlashAttribute("msg", result > 0 ? "변경성공" : "변경실패");
 
 		return "/admin/adminMember";
@@ -170,7 +172,12 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 
 		Board board = adminService.selectBoard(boardNo);
-
+		
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
+		mav.addObject("member",member);
 		mav.addObject("board", board);
 		mav.setViewName("/admin/adminBoardDetail");
 
@@ -184,7 +191,11 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 
 		Board board = adminService.selectBoard(boardNo);
-
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
+		mav.addObject("member",member);		
 		mav.addObject("board", board);
 		mav.setViewName("admin/adminBoardUpdateFrm");
 
@@ -224,7 +235,11 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 
 		Board board = adminService.selectBoard(boardNo);
-
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
+		mav.addObject("member",member);
 		mav.addObject("board", board);
 		mav.setViewName("/admin/adminBoardAnswerFrm");
 
@@ -240,7 +255,11 @@ public class AdminController {
 		log.debug("boardComment 페이지");
 
 		Board board = adminService.selectBoard(boardNo);
-
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
+		mav.addObject("member",member);	
 		int result = adminService.insertBoardComment(boardComment);
 
 		if (result > 0) {
@@ -287,10 +306,14 @@ public class AdminController {
 
 		log.debug("boardComment{}=", boardComment);
 		Board board = adminService.selectBoard(boardNo);
-
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
 		int result = adminService.UpdateBoardComment(boardComment);
 		boardComment = adminService.selectBoardComment(boardNo);
 
+		mav.addObject("member",member);		
 		mav.addObject("board", board);
 		mav.addObject("boardComment", boardComment);
 
@@ -307,6 +330,11 @@ public class AdminController {
 
 		Board board = adminService.selectBoard(boardNo);
 
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
+		mav.addObject("member",member);
 		mav.addObject("board", board);
 		mav.setViewName("/admin/adminBoardReport");
 
@@ -320,8 +348,13 @@ public class AdminController {
 
 		Board board = adminService.selectBoard(boardNo);
 
+		Member member = adminService.selectOne(board.getMemberCode());
+		
+		log.debug("member{}=",member);
+		
 		BoardComment boardComment = adminService.selectBoardComment(boardNo);
-
+		
+		mav.addObject("member",member);
 		mav.addObject("board", board);
 		mav.addObject("boardComment", boardComment);
 		mav.setViewName("/admin/adminBoardAnswer");
@@ -393,6 +426,7 @@ public class AdminController {
 	  else { log.debug("삭제 실패"); }
 	  List<AdminEvent> eventList = adminService.selectEventList();
 		
+	  
 	  mav.addObject("eventList", eventList);
 	  mav.setViewName("/admin/adminEvent");
 	  
@@ -458,12 +492,20 @@ public class AdminController {
 	 public ModelAndView dormantNoticeInsert(ModelAndView mav, @RequestParam("memberCode") int memberCode) {
 		 log.debug("휴면계정 게시판 insert 페이지");
 		 
+		 String msg = "";
 		 int result = adminService.insertDormantNotice(memberCode);
 		 
-		 if (result>0) log.debug("휴면요청 게시글 등록 성공");
-		 else log.debug("휴면요청 게시글 등록 실패");
-
-		 mav.setViewName("/");
+		 if (result>0) {
+			 log.debug("휴면요청 게시글 등록 성공");
+			 msg = "휴면 요청이 완료되었습니다. 휴면해지 완료는 2~3일 정도 소요됩니다";
+		 }
+		 else {
+			 log.debug("휴면요청 게시글 등록 실패");
+			 msg = "휴면 요청에 실패하였습니다. 재로그인 후 이용해주세요";
+		 }
+		 
+		 mav.addObject("msg",msg);
+		 mav.setViewName("redirect:/");
 		 
 		 return mav;
 	 }

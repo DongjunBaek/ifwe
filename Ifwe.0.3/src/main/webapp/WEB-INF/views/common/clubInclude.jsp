@@ -89,7 +89,7 @@ $(function(){
                 </div>
                 <div class="aside-leader-information">
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
-                    <p class="aside-leader-allias friend-name-profile">${clubMaster.profileName }</p>
+                    <p class="aside-leader-allias friend-name-profile" style="margin:0;">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
 
@@ -190,7 +190,7 @@ $(function(){
                 <div class="header-titleimg" style="background-image: url('${pageContext.request.contextPath }/resources/upload/club/maintitleimg/${club.clubImgRe}');">
                     <div class="header-titleimg-cover">
                         <div class="header-title-left">
-                            <p class="header-title1">${club.clubTitle}</p>
+                            <p class="header-title1" style="margin:0;height:48px;">${club.clubTitle}</p>
                             <p class="header-title2">${club.clubContent }</p>
                         </div>
                         <div class="header-title-right">

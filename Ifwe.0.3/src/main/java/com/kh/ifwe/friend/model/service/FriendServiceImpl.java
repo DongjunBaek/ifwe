@@ -1,6 +1,7 @@
 package com.kh.ifwe.friend.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.kh.ifwe.friend.model.dao.FriendDAO;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Message;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -45,8 +47,23 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public Friend selectOneFriend(int memberCode) {
+	public List<Friend> selectOneFriend(int memberCode) {
 		return friendDAO.selectOneFriend(memberCode);
+	}
+
+	@Override
+	public List<Message> selectMsgList(Map<String, Object> param) {
+		return friendDAO.selectMsgList(param);
+	}
+
+	@Override
+	public int insertMsgSend(Message message) {
+		return friendDAO.insertMsgSend(message);
+	}
+
+	@Override
+	public int updateMsg(int msgCode) {
+		return friendDAO.updateMsg(msgCode);
 	}
 
 	

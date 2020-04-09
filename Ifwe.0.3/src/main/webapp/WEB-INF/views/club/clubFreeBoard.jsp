@@ -106,7 +106,6 @@ $(function(){
 				slid.eq(0).css("display","block");
 
 				
-				
 			},error : function(x,h,r){
 				console.log(x,h,r);
 			}
@@ -325,6 +324,10 @@ function close_pop(flag) {
 </script>
 
 <style>
+html{
+margin:0 auto;
+width:1920px;
+height:1280px;}
 .section-boradall{
 	font-family: 'GmarketSansMedium';
 }

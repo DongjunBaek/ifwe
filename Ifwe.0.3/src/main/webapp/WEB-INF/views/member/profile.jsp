@@ -14,12 +14,13 @@
             </div>
             <p class="frofile-id">${member.memberId }</p>
             <p class="frofile-name">${profile.profileName }</p>
-            <c:if test="${memberLoggedIn.memberCode != friend.memberCode }">
+            <c:if test="${memberLoggedIn.memberCode != friend[0].memberCode}">
             <div class="section-friendbutton">친구요청</div> 
             </c:if>
-           <c:if test="${memberLoggedIn.memberCode == friend.memberCode }">
+           <c:if test="${memberLoggedIn.memberCode == friend[0].memberCode }">
             <div class="section-friendbutton">친구</div>
             </c:if>
+            
         </div>
         <div class="section-frofileinfo-box">
             <div class="section-frofileinfo-wrapper">
@@ -97,11 +98,8 @@ console.log("onload On");
 
 }); --%>
 $(".section-friendbutton").click(function(){
-	var memberCode = ${member.memberCode};
-	var fromMember = ${memberLoggedIn.memberCode};
-	var friendMember = ${friend.memberCode};
-	
-	if(memberCode != fromMember && fromMember != friendMember){
+	var btn = $(".section-friendbutton").text();
+	if(btn=="친구요청"){
 		location.href = "${pageContext.request.contextPath}/member/insertMsgFriend.do?memberCode=${member.memberCode}&fromMember=${memberLoggedIn.memberCode}";
 	}		
 })

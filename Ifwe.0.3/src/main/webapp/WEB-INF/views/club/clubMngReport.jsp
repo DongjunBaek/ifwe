@@ -156,9 +156,24 @@ $(function(){
          <div class="section-block">
              <div class="section-wrapper">
                  <p class="section-boradmenu">신고된 게시글 관리</p>
+                 <c:if test="${club.premiumCode == null }">
+                
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'premium' }">
                  <div class="shc-premiumbox">
                      <p>프리미엄 사용중</p>
                  </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'gold' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'sliver' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
              </div>
          </div>
          <div class="shc-section-board-container">

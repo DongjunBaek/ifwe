@@ -159,5 +159,10 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.insert("admin.insertDormantNotice",memberCode);
 	}
 
+	@Override
+	public int updateReportNotice(int memberCode) {
+		return sqlSession.update("admin.updateReportNotice",memberCode);
+	}
+
 	
 }

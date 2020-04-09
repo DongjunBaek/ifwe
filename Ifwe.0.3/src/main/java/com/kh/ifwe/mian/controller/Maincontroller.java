@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@SessionAttributes(value={"msgCount"})
+@SessionAttributes(value={"msgCount","friendList"})
 public class Maincontroller {
 	
 	@Autowired
@@ -54,9 +54,12 @@ public class Maincontroller {
 		int msgCount = memberService.selectMsgCount(member.getMemberCode());
 		log.debug("msgCount={}",msgCount);
 		
+		
+		
 		model.addAttribute("msgCount",msgCount);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		
+
 		/**
 		 * 0408 dongjun 공지사항 불러오기
 		 */

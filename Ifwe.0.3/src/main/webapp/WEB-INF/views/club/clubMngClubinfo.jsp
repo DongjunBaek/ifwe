@@ -33,6 +33,42 @@ $(function(){
 	
 });
 
+function checkClubMax(){
+	if(${club.premiumCode == 'premium' }){
+		console.log($("[name=clubMax]").val());
+		if($("[name=clubMax]").val()>2000) {
+			alert("최대 인원은 2000명입니다.");
+			$("[name=clubMax]").val('');
+			$("[name=clubMax]").focus();
+			return false;
+		}
+	}else if(${club.premiumCode == null }){
+		console.log($("[name=clubMax]").val());
+		if($("[name=clubMax]").val()>100) {
+			alert("최대 인원은 100명입니다.");
+			$("[name=clubMax]").val('');
+			$("[name=clubMax]").focus();
+			return false;
+		}
+	}else if(${club.premiumCode == 'gold' }){
+		console.log($("[name=clubMax]").val());
+		if($("[name=clubMax]").val()>1000) {
+			alert("최대 인원은 1000명입니다.");
+			$("[name=clubMax]").val('');
+			$("[name=clubMax]").focus();
+			return false;
+		}
+	}else if(${club.premiumCode == 'sliver'}){
+		console.log($("[name=clubMax]").val());
+		if($("[name=clubMax]").val()>500) {
+			alert("최대 인원은 500명입니다.");
+			$("[name=clubMax]").val('');
+			$("[name=clubMax]").focus();
+			return false;
+		}
+	}
+	return true;
+}
 
 </script>
 </head>
@@ -42,13 +78,28 @@ $(function(){
         <div class="section-block">
             <div class="section-wrapper">
                 <p class="section-boradmenu">소모임 관리</p>
-                <div class="shc-premiumbox">
-                    <p>프리미엄 사용중</p>
-                </div>
+              <c:if test="${club.premiumCode == null }">
+                
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'premium' }">
+                 <div class="shc-premiumbox">
+                     <p>프리미엄 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'gold' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'sliver' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>s
             </div>
         </div>
         <form action="${pageContext.request.contextPath }/club/mngclubinfo.do" method="post" 
-        	  enctype="multipart/form-data" autocomplete="off">
+        	  enctype="multipart/form-data" autocomplete="off" onsubmit="return checkClubMax()">
         	<input type="hidden" name="clubCode" value="${club.clubCode }" />
             <div class="shc-section-memberlist-container">
                 <p>소모임 정보 수정</p>
@@ -78,6 +129,24 @@ $(function(){
                             <option value="전남" ${club.clubLocation=='전남'?'selected':'' }>전라남도</option>
                             <option value="제주특별자치도" ${club.clubLocation=='제주특별자치도'?'selected':'' }>제주도</option>
                         </select>
+                    </div>
+                    <i class="fas fa-circle"></i>
+                    <span>인원수</span><br>
+                    <div class="inputDivDivs">
+                      	<input type="number" name="clubMax" class="clubnameinput" style=" width:200px; height:40px;" value="${club.clubMax }"/>
+                      	<c:if test="${club.premiumCode == 'premium' }">
+                      	<span style="color :#2756a6 ; font-size:16px;">최대 2000 명</span>
+						</c:if>
+                      	<c:if test="${club.premiumCode == 'gold' }">
+                      	<span style="color :#2756a6 ; font-size:16px;">최대 1000 명</span>
+						</c:if>
+                      	<c:if test="${club.premiumCode == 'sliver' }">
+                      	<span style="color :#2756a6 ; font-size:16px;">최대 500 명</span>
+						</c:if>
+                      	<c:if test="${club.premiumCode == null }">
+                      	<span style="color :#2756a6 ; font-size:16px;">최대 100 명</span>
+						</c:if>
+                      
                     </div>
                     <i class="fas fa-circle"></i>
                     <span>배너 이미지</span><br>

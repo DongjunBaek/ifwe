@@ -204,7 +204,8 @@
 			club_img_ori=#{clubImgOri},
 			club_img_re=#{clubImgRe},
 			club_location=#{clubLocation},
-			club_content=#{clubContent}
+			club_content=#{clubContent},
+			club_max=#{clubMax}
 		where
 			club_code=#{clubCode}
 			
