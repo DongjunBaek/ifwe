@@ -95,9 +95,24 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.reportBoard(boardNo);
 	}
 
+	@Override
+	public int insertHeart(Map<String, Integer> param) {
+		return clubBoardDAO.insertHeart(param);
+	}
 
-	
-	
-	
-	
+	@Override
+	public int selectBoard(int boardNo) {
+		return clubBoardDAO.selectBoard(boardNo);
+	}
+
+	@Override
+	public int deleteHeart(Map<String, Integer> param) {
+		return clubBoardDAO.deleteHeart(param);
+	}
+
+	@Override
+	public List<Integer> selectMyHeartList(int memberCode) {
+		return clubBoardDAO.selectMyHeartList(memberCode);
+	}
+
 }

@@ -203,12 +203,83 @@ $(function(){
     })
     
     
-    
+    /* 
+    	0409 좋아요 기능 구현  dongjun
+    */
+	 $(".boardHeart").click(function(){
+		 	let $heart = $(this);
+		 	let memberCode=  ${memberLoggedIn.memberCode};
+		 	let boardNoForHeart = $(this).parent().children().eq(1).val();
+		 	console.log($(this).parent().children().eq(1));
+		 	var data = {"memberCode" :memberCode, "boardNo":boardNoForHeart}
+		 	
+		      if($heart.hasClass("liked")){
+		    	  $heart.html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+		    	  $heart.removeClass("liked");
+		    		
+		    		$.ajax({
+		    			  url:"${pageContext.request.contextPath}/clubboard/heartMinus.do",
+		    			  data : data,
+		    			  success : function(data){
+		    				  console.log(data);
+		    				  $heart.next().text("좋아요"+data);
+		    			  },
+		    			  error:function(x,s,e){
+		    				  console.log(x,s,e);
+		    			  }
+		    		});
+		      }else{
+		    	  
+		    	  $.ajax({
+			    	  url:"${pageContext.request.contextPath}/clubboard/heart.do",
+			    	  data : data,
+			    	  success : function(data){
+			    		  console.log(data);
+			    		  $heart.next().text("좋아요"+data);
+			    	  },
+			    	  error:function(x,s,e){
+			    		  console.log(x,s,e);
+			    	  }
+			     });
+		    	  $heart.html('<i class="fa fa-heart" aria-hidden="true"></i>');
+		    	  $heart.addClass("liked");
+			      
+	    	  }
+		  });
 
     
     
 });
-
+function checkMyHeart(){
+	var memberCodeForCheck = ${memberLoggedIn.memberCode};
+	 $.ajax({
+		  url:"${pageContext.request.contextPath}/clubboard/checkHeart.do",
+		  data : {memberCode : memberCodeForCheck},
+		  success : function(data){
+			  $boardNo = $(".article1-comment-box [name=boardRef]");
+			  
+			  $.each(data,function(idx,boardno){
+				  console.log(boardno);
+				  $.each($boardNo,function(idx,elem){
+					  console.log(elem.value);
+					  if(boardno == elem.value){
+						  console.log($(elem).parent().children().eq(4));
+						  $(elem).parent().children().eq(4).addClass("liked");
+						  $(elem).parent().children().eq(4).empty();
+						  $(elem).parent().children().eq(4).append("<i class='fa fa-heart' aria-hidden='true'></i>")
+					  }
+					  
+				  });
+			  });
+			  
+		  },
+		  error:function(x,s,e){
+			  console.log(x,s,e);
+		  }
+	});
+}
+checkMyHeart();
+/* 좋아요 기능 구현 end */
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -255,6 +326,15 @@ function close_pop(flag) {
 <style>
 .section-boradall{
 	font-family: 'GmarketSansMedium';
+}
+.fa-heart-o {
+		color: red;
+		cursor: pointer;
+}			
+
+.fa-heart {
+  color: red;
+  cursor: pointer;
 }
 .click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px;}
 .under-click-three-dots{width:200px;max-height: max-content;}
@@ -399,6 +479,10 @@ width: 550px;
                       	  <input type="hidden" name="boardRef" value="${cl.boardNo }" />
                       	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
+            	          <span class ="boardHeart" style="font-size:30px;margin-bottom:10px;">
+                    	  		<i class="fa fa-heart-o" aria-hidden="true" ></i>
+                      	  </span>
+                      	  <span style="font-size:16px;" id="count">좋아요${cl.boardHeart}</span>
                           <input type="text" name="commentContent" placeholder="댓글입력">
                           <input type="submit" value="입력" />
                       </div>

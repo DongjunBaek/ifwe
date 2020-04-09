@@ -67,9 +67,9 @@ $(function(){
    
    $(".nav-right-icon2").click(function(){
 	   location.href = "${pageContext.request.contextPath}/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
-   })
-   var msgCount = ${msgCount}
-   console.log(msgCount)
+   });
+   /* var msgCount = ${msgCount}
+   console.log(msgCount) */
    
    
    $(".fa-comment-dots").click(function(){

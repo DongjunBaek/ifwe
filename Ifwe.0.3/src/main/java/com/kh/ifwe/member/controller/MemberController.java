@@ -3,6 +3,7 @@ package com.kh.ifwe.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.admin.model.vo.AdminEvent;
+import com.kh.ifwe.board.model.service.BoardService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
@@ -67,6 +70,9 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	@Autowired
+	private BoardService boardService;
+	
 //	@GetMapping("/member/memberenroll.do")
 //	public String memberEnroll() {
 //		
@@ -81,7 +87,7 @@ public class MemberController {
 	@PostMapping("/enroll.do")
 	public ModelAndView insertMember(ModelAndView mav, Member member, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-
+		log.debug("회원가입 메소드 실행");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		int day = Integer.parseInt(request.getParameter("day"));
@@ -119,13 +125,21 @@ public class MemberController {
 
 
 		
-		Member serchMember = memberService.selectOne(member.getMemberId());
+		Member searchMember = memberService.selectOne(member.getMemberId());
 		
 		
-		int insertProfileResult =memberService.insertProfile(serchMember); 
-		
+		int insertProfileResult =memberService.insertProfile(searchMember); 
+		if(insertProfileResult > 0) {
+			Profile profile = memberService.selectProfileByMemberCode(searchMember.getMemberCode()); 
+			profile.setProfileAge(getAge(year, month, day));
+			int insertAge = memberService.updateProfile(profile); 
+			log.debug("insertAge@membercontroller insert ProfileAge {}",insertAge);
+		}
 		redirectAttributes.addFlashAttribute("msg", msg);
 
+		//로그인 기록 추가
+		int insertLoginRecord = memberService.insertLoginRecord(searchMember.getMemberCode());
+		
 		return mav;
 	}
 
@@ -159,6 +173,13 @@ public class MemberController {
 			// 1.memberId로 member 객체 조회
 			Member member = memberService.selectOne(memberId);
 			log.debug("member@selectone={}", member);
+			
+			//0409 김원재
+			//로그인레코드 업데이트
+			int result = memberService.loginRecordUpdate(member.getMemberCode());
+			
+			
+			
 			
 			
 			//0407 여주
@@ -213,6 +234,11 @@ public class MemberController {
 				model.addAttribute("friendList",friendList);
 				model.addAttribute("msgCount",msgCount);
 				
+				/**
+				 * 0408 dongjun 공지사항 불러오기
+				 */
+				List<Board> boardList = boardService.selectOne2("notice",3,1);
+				model.addAttribute("boardListNoice",boardList);
 				
 				return "main/mainPage";
 				
@@ -234,7 +260,8 @@ public class MemberController {
 	// 문보라로그아웃구현
 	@GetMapping("/logout.do")
 	public String logout(SessionStatus sessionStatus, @ModelAttribute("memberLoggedIn") Member member) {
-
+		int result = memberService.logoutRecordUpdate(member.getMemberCode());
+		
 		log.debug("[" + member.getMemberId() + "]가 로그아웃했습니다.");
 
 		if (!sessionStatus.isComplete())
@@ -279,7 +306,7 @@ public class MemberController {
 							Model model) {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		Profile profile =profileservice.selectOneProfileWithCode(memberCode);
-		Friend friend = friendService.selectOneFriend(memberCode);
+		List<Friend> friend = friendService.selectOneFriend(memberCode);
 		
 		log.debug("profile={}",profile);
 		log.debug("member= {}",member);
@@ -288,7 +315,7 @@ public class MemberController {
 		model.addAttribute("friend",friend);
 		model.addAttribute("member",member);
 		model.addAttribute("profile",profile);
-		
+		log.debug("profileTestEnd ");
 		return "member/profile";
 	}
 
@@ -752,10 +779,31 @@ public class MemberController {
 		return mav;
 	}
 	
+
+	/**
+	 * 0408 dongjun 나이구하기 profile insert 관련 메소드
+	 */
+	
+	 public int getAge(int birthYear, int birthMonth, int birthDay)
+	 {
+	         Calendar current = Calendar.getInstance();
+	         int currentYear  = current.get(Calendar.YEAR);
+	         int currentMonth = current.get(Calendar.MONTH) + 1;
+	         int currentDay   = current.get(Calendar.DAY_OF_MONTH);
+	        
+	         int age = currentYear - birthYear;
+	         // 생일 안 지난 경우 -1
+	         if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay)  
+	             age--;
+	        
+	         return age;
+	 }
+
 	@GetMapping("/insertPhonePOPUP.do")
 	public String insertPhonePopU(){
 		
 		return "member/insertPhonePOPUP";
 	}
+
 
 }

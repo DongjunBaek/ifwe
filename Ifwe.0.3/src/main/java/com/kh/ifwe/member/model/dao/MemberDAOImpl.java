@@ -135,6 +135,29 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<SessionFriend> selectMsgFriend(int memberCode) {
 		return sqlSession.selectList("member.selectMsgFriend",memberCode);
+  }
+  
+  @Override
+	public Profile selectProfileByMemberCode(int clubMaster) {
+		return sqlSession.selectOne("profile.selectProfileByMemberCode",clubMaster);
+	}
+
+	@Override
+	public int insertLoginRecord(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("member.insertLoginRecord",memberCode);
+	}
+
+	@Override
+	public int logoutRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.logoutRecordUpdate",memberCode);
+	}
+
+	@Override
+	public int loginRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.loginRecordUpdate",memberCode);
 	}
 
 	

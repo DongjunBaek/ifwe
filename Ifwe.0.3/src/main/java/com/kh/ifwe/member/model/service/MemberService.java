@@ -65,5 +65,13 @@ public interface MemberService {
 	int selectMsgCount(int memberCode);
 
 	List<SessionFriend> selectMsgFriend(int memberCode);
+  
+	Profile selectProfileByMemberCode(int clubMaster);
+
+	int insertLoginRecord(int memberCode);
+
+	int logoutRecordUpdate(int memberCode);
+
+	int loginRecordUpdate(int memberCode);
 
 }

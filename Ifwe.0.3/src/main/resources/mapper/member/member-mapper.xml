@@ -212,8 +212,7 @@
 			msg_view = 'y'
 		where
 			member_from = #{memberFrom}
-		order by 
-			msg_date desc
+		
 	</update>
 	
 	<select id="selectOneForFriend" resultMap="friendMap">
@@ -228,6 +227,8 @@
 			Me.member_from = M.member_code
 		where 
 			Me.member_from = #{memberFrom}
+		order by 
+			msg_date desc
 	</select>
 	<resultMap type="friend" id="friendMap">
 		<id column="member_code" property="memberCode"/>
@@ -279,6 +280,38 @@
               		   on F.friend_code = P.member_code
 		where F.member_code=#{memberCode}
 	</select>
+
+	<insert id="insertLoginRecord">
+	
+	insert into 
+		loginrecord 
+	values
+	(seq_loginrecord_no.nextval,#{memberCode},sysdate,'n')
+	</insert>
+
+	<update id="logoutRecordUpdate">
+	
+	update
+		 loginrecord 
+	set 
+		loginrecord_logout = 'y'
+	where
+		 member_code = #{memberCode}
+	
+	</update>
+
+
+	<update id="loginRecordUpdate">
+		
+		
+	insert into 
+		loginrecord 
+	values
+		(seq_loginrecord_no.nextval,#{memberCode},sysdate,'n')
+		
+	
+	
+	</update>
 
 </mapper>
 

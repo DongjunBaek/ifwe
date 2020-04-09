@@ -57,4 +57,6 @@ public interface AdminService {
 
 	int insertDormantNotice(int memberCode);
 
+	int selectReportOne(int memberCode);
+
 }

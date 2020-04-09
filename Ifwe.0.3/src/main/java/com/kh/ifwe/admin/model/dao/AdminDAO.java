@@ -57,5 +57,7 @@ public interface AdminDAO {
 
 	int insertDormantNotice(int memberCode);
 
+	int updateReportNotice(int memberCode);
+
 
 }
