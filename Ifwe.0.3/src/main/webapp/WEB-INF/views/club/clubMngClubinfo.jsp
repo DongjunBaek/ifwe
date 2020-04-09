@@ -58,7 +58,7 @@ function checkClubMax(){
 			$("[name=clubMax]").focus();
 			return false;
 		}
-	}else if(${club.premiumCode == 'sliver'}){
+	}else if(${club.premiumCode == 'silver'}){
 		console.log($("[name=clubMax]").val());
 		if($("[name=clubMax]").val()>500) {
 			alert("최대 인원은 500명입니다.");
@@ -140,7 +140,7 @@ function checkClubMax(){
                       	<c:if test="${club.premiumCode == 'gold' }">
                       	<span style="color :#2756a6 ; font-size:16px;">최대 1000 명</span>
 						</c:if>
-                      	<c:if test="${club.premiumCode == 'sliver' }">
+                      	<c:if test="${club.premiumCode == 'silver' }">
                       	<span style="color :#2756a6 ; font-size:16px;">최대 500 명</span>
 						</c:if>
                       	<c:if test="${club.premiumCode == null }">

@@ -192,7 +192,13 @@ $(document).ready(function() {
 			lang : 'ko-KR',
 			callbacks : {
 				onImageUpload : function(files, editor){
-					sendUpLoadImgFile(files[0], this);
+					var filesLength =files.length; 
+					console.log(files);
+					console.log(filesLength);
+					for(var i = 0; i < filesLength;i++){
+						sendUpLoadImgFile(files[i], this);	
+					}
+					
 				}
 			}
 		});

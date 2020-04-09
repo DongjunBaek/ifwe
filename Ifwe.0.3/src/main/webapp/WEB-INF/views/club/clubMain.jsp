@@ -872,7 +872,7 @@ width: 550px;
   						color: red;
   						cursor: pointer;
 						}			
-
+					</style>
 
                       
                       <div class="article1-line"></div>
