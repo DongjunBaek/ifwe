@@ -317,7 +317,7 @@ $(".paymentbtn").click(function(){
 		      		$.ajax({
 		    		url: "${pageContext.request.contextPath}/member/membershipPay.do",
 		    		data: {
-		    			membershipName : $(membershipName[i]).children().eq(0).val(),
+		    			membershipName : $(memberrshipName[i]).children().eq(0).val(),
 		    			clubCode : $(clubCode[i]).val(),
 		    			price : $(prices[i]).text().substring(0,4),
 		    			memberCode : memberCode
