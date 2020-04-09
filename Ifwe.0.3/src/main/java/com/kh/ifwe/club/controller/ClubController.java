@@ -529,7 +529,8 @@ public class ClubController {
 							        @RequestParam(value="upFile",required=false) MultipartFile upFile,
 							        Club newClub,
 							        HttpServletRequest request,
-							        @SessionAttribute("club") Club oldClub) {
+							        @SessionAttribute("club") Club oldClub,
+							        @RequestParam("clubMax")int clubMax) {
 		
 			log.debug(upFile.getName());
 		
@@ -578,6 +579,7 @@ public class ClubController {
 			e.printStackTrace();
 		}
 		
+		newClub.setClubMax(clubMax);
 		int result = clubService.updateClub(newClub);
 		
 		log.debug("result @ updateClub= {}", result);

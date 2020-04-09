@@ -254,6 +254,10 @@ function close_pop(flag) {
 </script>
 
 <style>
+html{
+margin:0 auto;
+width:1920px;
+height:1280px;}
 .section-boradall{
 	font-family: 'GmarketSansMedium';
 }

@@ -19,7 +19,7 @@ $(function(){
     $("#boardplusbtn").click(function(){
         $("#board-ul").append("<li><i class='fas fa-circle circleicon'></i><input type='text' class='boardtitleinput'></li>");
 
-    })
+    });
 
 
 
@@ -40,16 +40,25 @@ $(function(){
         });
     }
 
+    $("#submitBtn").click(function(){
+    	 var value = marginTag(); // return array
+         $("#boradtitlehidden").val(value); 
+ 		console.log($("#boradtitlehidden").val());
+    	$("#tag-form").submit();
+    });
+    
     // 서버에 넘기기
-    $("#tag-form").on("submit", function (e) {
+    $("#tag-form").on("", function (e) {
         var value = marginTag(); // return array
         $("#boradtitlehidden").val(value); 
+		console.log($("#boradtitlehidden").val());
 		
-        console.log($("#boradtitlehidden").val());
         
         $(this).submit();
+      
     });
 
+    
     $(document).on("keypress",".boardtitleinput", function (e) {
         var self = $(this);
 
@@ -95,7 +104,47 @@ $(function(){
     });
     
 
-})
+});
+
+
+function boardListSize(){
+	console.log($("#boradtitlehidden").val());
+	var values = $("#boradtitlehidden").val()
+	
+	var value = values.split(",");
+	console.log("ㅂㅕㄴ경후 = ",value);
+	console.log(value.length);
+	if(${club.premiumCode == null }){
+		if(value.length>2) {
+			if(confirm("일반등급은 2개까지만 추가가 가능합니다. 등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership.do?memberCode="+${memberLoggedIn.memberCode};
+			}
+			return false;
+		}
+	}else if(${club.premiumCode == 'silver' }){
+		if(value.length>4) {
+			if(confirm("실버등급은 4개까지만 추가가 가능합니다. 등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership?memberCode="+${memberLoggedIn.memberCode};
+			}
+			return false;
+		}
+	}else if(${club.premiumCode == 'gold' }){
+		if(value.length>6) {
+			if(confirm("골드등급은 6개까지만 추가가 가능합니다. 등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership?memberCode="+${memberLoggedIn.memberCode};
+			}
+			return false;
+		}
+	}else if(${club.premiumCode == 'premium' }){
+		if(value.length>10) {
+			alert("게시판은 최대 추가 10개까지만 가능합니다.")
+			return false;
+		}
+	}
+	
+	return true;
+} 
+
 
 
 </script>
@@ -109,9 +158,24 @@ $(function(){
          <div class="section-block">
              <div class="section-wrapper">
                  <p class="section-boradmenu">소모임 관리</p>
+                <c:if test="${club.premiumCode == null }">
+                
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'premium' }">
                  <div class="shc-premiumbox">
                      <p>프리미엄 사용중</p>
                  </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'gold' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'sliver' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
              </div>
          </div>
          <div class="shc-section-board-container">
@@ -119,24 +183,12 @@ $(function(){
              <p>게시판 관리</p>
 			
 			<form action="${pageContext.request.contextPath }/clubboard/insertlist.do" id="tag-form" 
-				  method="post" autocomplete="off">
+				  method="post" autocomplete="off" onsubmit="return boardListSize();">
 				  
 				  
 				  <input type="hidden" name="clubCode" value="${club.clubCode }" />
              <div class="shc-boardlist-box">
                  <ul id="board-ul">
-                     <li>
-                         <i class="fas fa-circle circleicon"></i>
-                         <span class="boardlistspan">공지사항</span>
-                     </li>
-                     <li>
-                         <i class="fas fa-circle circleicon"></i>
-                         <span class="boardlistspan">일정캘린더</span>
-                     </li>
-                     <li>
-                         <i class="fas fa-circle circleicon"></i>
-                         <span class="boardlistspan">자유게시판</span>
-                     </li>
                    	<c:if test="${not empty clubBoardList}">
                    	<c:forEach items="${ clubBoardList}" var="boardList">
 	                
@@ -147,13 +199,15 @@ $(function(){
                    	
                    	</c:forEach>
                    	</c:if>
-                     
-                     
+                     <li>
+                         <i class="fas fa-circle circleicon"></i>
+                         <span class="boardlistspan">일정캘린더</span>
+                     </li>
                  </ul>
              </div>
              <input type="hidden" name="boardTitleList" id="boradtitlehidden">
              <div class="btncenter">
-                 <input type="submit" value="저장하기" class="shc-savebtn">
+                 <input type="button" value="저장하기" class="shc-savebtn" id="submitBtn">
              </div>
 
 			</form>

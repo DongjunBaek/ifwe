@@ -34,9 +34,24 @@ $(function(){
       <div class="section-block">
           <div class="section-wrapper">
               <p class="section-boradmenu">소모임 관리</p>
-              <div class="shc-premiumbox">
-                  <p>프리미엄 사용중</p>
-              </div>
+             <c:if test="${club.premiumCode == null }">
+                
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'premium' }">
+                 <div class="shc-premiumbox">
+                     <p>프리미엄 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'gold' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
+                 <c:if test="${club.premiumCode == 'sliver' }">
+                 <div class="shc-premiumbox">
+                     <p>골드 사용중</p>
+                 </div>
+                 </c:if>
           </div>
       </div>
 

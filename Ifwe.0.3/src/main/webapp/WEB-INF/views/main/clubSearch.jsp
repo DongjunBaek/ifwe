@@ -102,7 +102,9 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
-	$("[name=somoim-search-btn]").click(function(){
+	$("[name=clubSearchKeyword]").keydown(function(key){
+		if(key.keyCode == 13) {
+			alert("엔터");
 		$("#searchSomoimDivContainer").css('display','none');
 		let searchType = $("[name=searchType]").val();
 		let clubSearchKeyword = $("[name=clubSearchKeyword]").val();
@@ -239,6 +241,7 @@ $(function(){
 			}
 		}); 
 		
+			}
 		
 	});
 	
@@ -424,14 +427,14 @@ function pageBar_search_btn(cPageNo){
                         <i class="fas fa-search"></i>
                     </div>
                         <input type="text" name="clubSearchKeyword" id="club-search" placeholder="검색어를 입력하세요">
-                        <input type="button" value="검색" name="somoim-search-btn" />          
+                        <!-- <input type="button" value="검색" name="somoim-search-btn" />           -->
                 </div>
-                <p class="cate-title font-hk">스터디</p>
+                <p class="cate-title font-hk"> </p>
                 <div class="cate-Classify" id="cate-Classify">
-                    <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
-                    <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
-                    <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
-                    <div class="classify-menu-box"><p class="classify-menu font-hk">#영어모임</p></div>
+                   <!--  <div class="classify-menu-box"><p class="classify-menu font-hk"></p></div>
+                    <div class="classify-menu-box"><p class="classify-menu font-hk"></p></div>
+                    <div class="classify-menu-box"><p class="classify-menu font-hk"></p></div>
+                    <div class="classify-menu-box"><p class="classify-menu font-hk"></p></div> -->
                 </div>
                 <div class="card-wrapper" id="allSomoimDivContainer">
                 <c:if test="${not empty clubList }">
