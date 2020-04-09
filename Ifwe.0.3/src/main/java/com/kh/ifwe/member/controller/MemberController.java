@@ -34,6 +34,8 @@ import com.kh.ifwe.board.model.service.BoardService;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
+import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.friend.model.service.FriendService;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.service.MemberService;
@@ -71,6 +73,9 @@ public class MemberController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ClubBoardService clubBoardService;
 	
 //	@GetMapping("/member/memberenroll.do")
 //	public String memberEnroll() {
@@ -276,12 +281,20 @@ public class MemberController {
 		 * MyPage button 멤버 로그드인 reload
 		 */
 		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
-		
+		/**
+		 * 0409 dongjun
+		 * MyPage button mypage my club board
+		 * select * from club_board where member_code = 1 
+		 */
+		List<ClubBoard> clubBoard = clubBoardService.selectMyClubBoard(member.getMemberCode());
+			
+				
 		log.debug("friendList={}",friendList);
 		log.debug("friends={}",friends);
 		model.addAttribute("friendList",friendList);
 		model.addAttribute("friends",friends);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
+		model.addAttribute("clubBoard",clubBoard);
 		return "member/mypage";
 	}
 	
@@ -561,7 +574,7 @@ public class MemberController {
 		 */
 		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(profile.getMemberCode());
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
-		return "member/profileUpdate";
+		return "redirect:/member/mypage.do?memberCode="+memberLoggedIn.getMemberCode();
 	}
 
 	// 아이디 찾기 처리 문보라

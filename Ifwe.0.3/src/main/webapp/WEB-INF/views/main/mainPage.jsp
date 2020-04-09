@@ -186,5 +186,8 @@ setInterval(function(){
 .three-content, .three-container{
 	overflow: hidden;
 }
+.li-content{
+	overflow: hidden;
+}
 </style>
 </html>

@@ -48,4 +48,6 @@ public interface ClubBoardService {
 
 	List<Integer> selectMyHeartList(int memberCode);
 
+	List<ClubBoard> selectMyClubBoard(int memberCode);
+
 }
