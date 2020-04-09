@@ -171,6 +171,17 @@
 		delete from board_heart_tbl where board_no = #{boardNo} and member_code = #{memberCode}
 	</delete>
 	
+	<!-- 0409 dongjun 좋아요 - 내가좋아요한게시물불러오기 -->
+	<select id="selectMyHeartList" resultType="_int">
+		select 
+		    board_no 
+		from 
+    		board_heart_tbl
+   		<where>
+   			member_code = #{memberCode}
+   		</where>
+	
+	</select>
 
 </mapper>
 

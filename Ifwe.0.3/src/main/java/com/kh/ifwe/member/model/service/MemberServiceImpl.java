@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
@@ -136,8 +137,31 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Profile selectProfileByMemberCode(int clubMaster) {
+	public List<SessionFriend> selectMsgFriend(int memberCode) {
+		return memberDAO.selectMsgFriend(memberCode);
+  }
+  
+  @Override
+  public Profile selectProfileByMemberCode(int clubMaster) {
 		return memberDAO.selectProfileByMemberCode(clubMaster);
+	}
+
+	@Override
+	public int insertLoginRecord(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.insertLoginRecord(memberCode);
+	}
+
+	@Override
+	public int logoutRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.logoutRecordUpdate(memberCode);
+	}
+
+	@Override
+	public int loginRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.loginRecordUpdate(memberCode);
 	}
 
 

@@ -30,10 +30,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ifwe.admin.model.service.AdminService;
 import com.kh.ifwe.admin.model.vo.AdminEvent;
+import com.kh.ifwe.board.model.service.BoardService;
+import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.service.FriendService;
 import com.kh.ifwe.friend.model.vo.Friend;
+import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
@@ -43,7 +46,7 @@ import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount" })
+@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount","friendList" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -67,6 +70,9 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	@Autowired
+	private BoardService boardService;
+	
 //	@GetMapping("/member/memberenroll.do")
 //	public String memberEnroll() {
 //		
@@ -81,7 +87,7 @@ public class MemberController {
 	@PostMapping("/enroll.do")
 	public ModelAndView insertMember(ModelAndView mav, Member member, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-
+		log.debug("회원가입 메소드 실행");
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		int day = Integer.parseInt(request.getParameter("day"));
@@ -131,6 +137,9 @@ public class MemberController {
 		}
 		redirectAttributes.addFlashAttribute("msg", msg);
 
+		//로그인 기록 추가
+		int insertLoginRecord = memberService.insertLoginRecord(searchMember.getMemberCode());
+		
 		return mav;
 	}
 
@@ -165,6 +174,13 @@ public class MemberController {
 			Member member = memberService.selectOne(memberId);
 			log.debug("member@selectone={}", member);
 			
+			//0409 김원재
+			//로그인레코드 업데이트
+			int result = memberService.loginRecordUpdate(member.getMemberCode());
+			
+			
+			
+			
 			
 			//0407 여주
 			//휴면계정 로그인 시 
@@ -190,7 +206,6 @@ public class MemberController {
 				log.debug("profile = {}",profile);
 				model.addAttribute("profile",profile);
 				
-				log.debug("메인페이지 들어옴 뿌려줄 거  = 내 소모임 목록, 이란 소모임은 어때요 (내 관심사에 맞는 소모임 뿌려주기), 주간베스트 글");
 				log.debug("memberLoggedId = {}", member);
 				
 				//내 소모임 목록
@@ -210,14 +225,23 @@ public class MemberController {
 				 
 				 model.addAttribute("eventList",eventList);
 				
+				 //Msg에 친구목록
+				 List<SessionFriend> friendList = memberService.selectMsgFriend(member.getMemberCode());
+				 log.debug("friendList={}",friendList);
 				
 				int msgCount = memberService.selectMsgCount(member.getMemberCode());
 				log.debug("msgCount={}",msgCount);
+				model.addAttribute("friendList",friendList);
 				model.addAttribute("msgCount",msgCount);
 				
+				/**
+				 * 0408 dongjun 공지사항 불러오기
+				 */
+				List<Board> boardList = boardService.selectOne2("notice",3,1);
+				model.addAttribute("boardListNoice",boardList);
 				
 				return "main/mainPage";
-			
+				
 				} 
 			
 			else {
@@ -236,7 +260,8 @@ public class MemberController {
 	// 문보라로그아웃구현
 	@GetMapping("/logout.do")
 	public String logout(SessionStatus sessionStatus, @ModelAttribute("memberLoggedIn") Member member) {
-
+		int result = memberService.logoutRecordUpdate(member.getMemberCode());
+		
 		log.debug("[" + member.getMemberId() + "]가 로그아웃했습니다.");
 
 		if (!sessionStatus.isComplete())
@@ -281,7 +306,7 @@ public class MemberController {
 							Model model) {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		Profile profile =profileservice.selectOneProfileWithCode(memberCode);
-		Friend friend = friendService.selectOneFriend(memberCode);
+		List<Friend> friend = friendService.selectOneFriend(memberCode);
 		
 		log.debug("profile={}",profile);
 		log.debug("member= {}",member);
@@ -290,7 +315,7 @@ public class MemberController {
 		model.addAttribute("friend",friend);
 		model.addAttribute("member",member);
 		model.addAttribute("profile",profile);
-		
+		log.debug("profileTestEnd ");
 		return "member/profile";
 	}
 

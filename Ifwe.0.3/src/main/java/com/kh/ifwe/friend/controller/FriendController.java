@@ -1,7 +1,9 @@
 package com.kh.ifwe.friend.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,6 +23,7 @@ import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
+import com.kh.ifwe.member.model.vo.Message;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.profile.model.service.ProfileService;
 import com.kh.ifwe.profile.model.vo.FriendProfile;
@@ -131,6 +135,41 @@ MemberService memberservice;
 	 * model.addAttribute("list",list); return list; }
 	 */
 	
+	//0409형철 메세지기능
+	@GetMapping("/msgList.do")
+	@ResponseBody
+	public List<Message> msgList(@RequestParam("friendCode") int friendCode,
+								 @RequestParam("memberCode") int memberCode){
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("friendCode", friendCode);
+		param.put("memberCode", memberCode);
+		
+		List<Message> messageList = friendService.selectMsgList(param);
+		
+		log.debug("messageList={}",messageList);
+		
+		return messageList;
+	}
+	
+	@PostMapping("/insertfriendmsg.do")
+	@ResponseBody
+	public int insertfriendmsg(Message message) {
+	
+		int result = friendService.insertMsgSend(message);
+		log.debug("result=",result);
+		
+		return result;
+	}
+	
+	@PostMapping("/updatefriendmsg.do")
+	@ResponseBody
+	public int updatefriendmsg(@RequestParam("msgCode") int msgCode) {
+		
+		int result = friendService.updateMsg(msgCode);
+		
+		return result;
+	}
 	
 
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 	<jsp:param value="멤버쉽 구매" name="pageTitle"/>
 </jsp:include>
@@ -281,8 +282,73 @@ $(function(){
         		</div>
     </article>
 </section>
-<script type="text/javascript">
+<script>
+$(function(){
+	IMP.init('imp01233033');
+	
 $(".paymentbtn").click(function(){
+	var clubCode = $(".myclubCode");// 소모임 번호	
+	var memberCode= ${memberLoggedIn.memberCode};// 구매한 회원 번호
+	var memberrshipName=$(".name-checkbox");
+	var prices = $(".list-price");
+	let total= 0;
+	for(var i =0; i < memberrshipName.length; i++){
+		total += Number($(prices[i]).text().substring(0,4));
+	}
+	console.log(total);
+
+		 IMP.request_pay({
+		    pg : 'html5_inicis', // version 1.1.0부터 지원.
+		    pay_method : 'vbank',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount: total,
+		    buyer_name : "${memberLoggedIn.memberName}" ,
+		    buyer_tel : "01032628496",
+		    buyer_email:"${memberLoggedIn.memberEmail}",
+		    buyer_addr :"${memberLoggedIn.memberAddr}" 
+		}, function (rsp) {
+		    if ( rsp.success ) {
+		    	for(var i =0; i < memberrshipName.length; i++){
+		    		console.log($(memberrshipName[i]).children().eq(0).val());		
+		    		console.log($(prices[i]).text().substring(0,4));		
+		    		console.log($(clubCode[i]).val());
+		    		
+		      		$.ajax({
+		    		url: "${pageContext.request.contextPath}/member/membershipPay.do",
+		    		data: {
+		    			membershipName : $(membershipName[i]).children().eq(0).val(),
+		    			clubCode : $(clubCode[i]).val(),
+		    			price : $(prices[i]).text().substring(0,4),
+		    			memberCode : memberCode
+		    		},
+		    		type: "POST",
+		    		success: function(data){
+		    			console.log(data);
+		    		},
+		    		error: function(x,s,e){
+		    			console.log(x,s,e);
+		    		}
+		    		
+		    		});
+		    	}
+        var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+        
+        
+    } else {
+        var msg = '결제에 실패하였습니다.';
+        msg += '에러내용 : ' + rsp.error_msg;
+    }
+    alert(msg);
+		});
+}); 
+});
+</script>
+ <%-- (".paymentbtn").click(function(){
 	
 	var clubCode = $(".myclubCode");// 소모임 번호	
 	var memberCode= ${memberLoggedIn.memberCode};// 구매한 회원 번호
@@ -314,8 +380,8 @@ $(".paymentbtn").click(function(){
 		});
 	}
 	
-	}); 
-</script>
+	});   --%>
+
 <style>
 .choice-container{
 	background-color:  #fafafa;

@@ -152,7 +152,7 @@ public class myCrawlingController {
 					String url = element.attr("src");
 					URL imgUrl = new URL(url);
 					BufferedImage jpg = ImageIO.read(imgUrl);
-					File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + ++fileNameNum + ".jpg");
+					File file = new File(servletContext.getRealPath("/resources/upload/song/") + folder  + (++fileNameNum) + ".jpg");
 					ImageIO.write(jpg, "jpg", file);
 				}
 				if(fileNameNum >=10) {
@@ -248,7 +248,7 @@ public class myCrawlingController {
 
 				URL imgUrl = new URL(url);
 				BufferedImage jpg = ImageIO.read(imgUrl);
-				File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + page + ".jpg");
+				File file = new File(servletContext.getRealPath("/resources/upload/plays/") + folder  + page + ".jpg");
 				ImageIO.write(jpg, "jpg", file);
 				page += 1;
 				
@@ -310,7 +310,7 @@ public class myCrawlingController {
 				
 				URL imgUrl = new URL(url);
 				BufferedImage jpg = ImageIO.read(imgUrl);
-				File file = new File(servletContext.getRealPath("/resources/upload/") + folder + "\\" + page + ".jpg");
+				File file = new File(servletContext.getRealPath("/resources/upload/books/") + folder  + page + ".jpg");
 				ImageIO.write(jpg, "jpg", file);
 				page += 1;
 				if(page >10)

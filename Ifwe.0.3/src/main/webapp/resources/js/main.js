@@ -183,7 +183,10 @@ var calendar = $('#calendar').fullCalendar({
         		// 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
         		array.fullEnd = moment(array.fullEnd).add(1, 'days');
         	}   */   
-        	console.log(array.fullNo);
+        /*	console.log(array.fullNo);
+        	console.log("스타트날자"+array.fullStart);
+        	console.log(array.tostring);*/
+        	console.log(array);
         	var evt={
         	_id:  array.fullId,
         	title: array.title,
@@ -395,7 +398,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment('2020-04'), //실제 사용시 삭제
+//  defaultDate: moment('2020-04'), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,

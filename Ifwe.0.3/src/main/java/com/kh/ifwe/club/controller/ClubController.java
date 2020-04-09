@@ -205,9 +205,11 @@ public class ClubController {
 		/**
 		 * 0407 dongjun 소모임 장 프로필 사진불러오기
 		 */
-		List<Profile> clubmasterProfile = new ArrayList<Profile>();
+		List<Profile> clubmasterProfile = null;
 		if(clubList != null) {
+			clubmasterProfile = new ArrayList<Profile>();
 			for(int i=0; i<clubList.size();i++) {
+				
 				Profile profile = memberService.selectProfileByMemberCode(clubList.get(i).getClubMaster());
 				clubmasterProfile.add(profile);
 			}
