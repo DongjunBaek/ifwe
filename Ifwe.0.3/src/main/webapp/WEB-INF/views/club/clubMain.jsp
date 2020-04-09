@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Club Main</title>
+<style>
+html{
+	width:1920px;
+	height:1280px;
+	margin:0 auto;
+}
+</style>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmain.css">
@@ -146,6 +153,64 @@
          
                     </style>
 <script>
+let num = 0;
+
+
+                      	$(function(){
+                      		 $(".heart").click(function(){
+                      		    if($(this).hasClass("liked")){
+                      		      console.log($(this),000);
+                      		      $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                      		      $(this).removeClass("liked");
+                      		      deleteHeart($(this).prev().val());
+                      		      $(this).next().html("좋아요 "+num);
+                      		    }else{
+                      		    	console.log($(this),111);
+                      		      $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                      		      $(this).addClass("liked");
+                      		      updateHeart($(this).prev().val());
+                      		    $(this).next().html("좋아요 "+num);
+                      		    }
+                      		  });
+                      	});
+                      	
+                      	function updateHeart(boardNo){
+                      		let memberCode = $("[name=memberCode]").val();
+                      		/*let boardNo = $("[name=boardNo]").val();*/
+                      		var data = {"memberCode" :memberCode, "boardNo":boardNo}
+                      		console.log(boardNo);
+                     		$.ajax({
+                      		    	  url:"${pageContext.request.contextPath}/clubboard/heart.do",
+                      		    	  data : data,
+                      		    	  async: false,
+                      		    	  success : function(data){
+                      		    		  console.log(data);
+                      		    		  num = data;
+                      		    	  },
+                      		    	  error:function(x,s,e){
+                      		    		  console.log(x,s,e);
+                      		    	  }
+                      		     });
+                      	}
+                      	function deleteHeart(boardNo){
+                      		let memberCode = $("[name=memberCode]").val();
+                      		/* let boardNo = $("[name=boardNo]").val(); */
+                      		var data = {"memberCode" :memberCode, "boardNo":boardNo}
+                      		console.log(boardNo);
+                      		$.ajax({
+                		    	  url:"${pageContext.request.contextPath}/clubboard/heartMinus.do",
+                		    	  data : data,
+                		    	  async: false,
+                		    	  success : function(data){
+                		    		  console.log(data);
+                		    		  num = data;
+                		    	  },
+                		    	  error:function(x,s,e){
+                		    		  console.log(x,s,e);
+                		    	  }
+                		     });
+                      	}
+
 $(function(){
 	
 	
@@ -611,11 +676,10 @@ $(function(){
     
     
     
-    $("#three-dots").click(function(){
+    $(".three-dots").click(function(){
     	console.log("신고신고신고");
-    	$(".click-three-dots").css("display","block");
-    
-    	
+    	$(".click-three-dots").css("display","none");
+    	$(this).next().css("display","block");
     });
     
     
@@ -640,8 +704,6 @@ function plusSlides(n) {
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
-
-
 
 function showSlides(n) {
 	  var i;
@@ -722,6 +784,8 @@ width: 550px;
 		
 		<c:if test="${not empty clubBoardProfileList }">
 		<c:forEach items="${clubBoardProfileList }" var = "cbl" varStatus="vs">
+		
+
           <div class="article-board-notice">
           	  <p><i class="fas fa-chevron-left"></i>${cbl.boardName }<i class="fas fa-chevron-right"></i></p>
               <div class="article-board-wrapper">
@@ -732,17 +796,17 @@ width: 550px;
                           <div class="article1-frofile-name">
                               <p class="article1-leader-name">${cbl.profileName }</p>
                           </div>
-                         <div class="article1-curcle-box" id="three-dots">
+                       <div class="article1-curcle-box three-dots" >
                           <div class="article1-curcle"></div>
                           <div class="article1-curcle"></div>
                           <div class="article1-curcle"></div>
                       </div>
                       <div class="click-three-dots">
-                      <c:if test="${cl.memberCode == memberLoggedIn.memberCode }">
+                      <c:if test="${cbl.memberCode == memberLoggedIn.memberCode }">
                       	<div class="under-click-three-dots"><p><i class="far fa-edit"></i>수정</p></div>
                       	<div class="under-click-three-dots"><p><i class="far fa-trash-alt"></i>삭제</p></div>
                       </c:if>
-                     <c:if test="${cl.memberCode != memberLoggedIn.memberCode }">
+                     <c:if test="${cbl.memberCode != memberLoggedIn.memberCode }">
                       	<div class="under-click-three-dots" name="board-report"><p><i class="far fa-angry"></i>신고</p></div>
                      </c:if>
                       </div>
@@ -803,6 +867,14 @@ width: 550px;
                      
 
                       
+                      <style>
+                      .fa-heart-o {
+  						color: red;
+  						cursor: pointer;
+						}			
+
+
+                      
                       <div class="article1-line"></div>
                       <form action="${pageContext.request.contextPath }/clubboard/insertmainComment.do" method="post" >
                       <div class="article1-comment-box">
@@ -811,10 +883,40 @@ width: 550px;
                       	  <input type="hidden" name="clubCode" value="${club.clubCode }" />
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
                       	  <input type="hidden" name="boardNo" value="${cbl.boardNo }"/>
+
+                      	  <c:if test="${not empty heartMember }">
+                      	  <c:forEach items="${heartMember }" var="h">
+                      	 	<c:if test="${h.boardNo == cbl.boardNo }">
+	                      	 	<c:if test="${h.memberCode == memberLoggedIn.memberCode }">
+		                      	  <span class="heart" style="font-size:30px;margin-bottom:10px;">
+		                      	  	<i class="fa fa-heart" aria-hidden="true" ></i> 
+		                      	  </span>
+		               			<span style="font-size:16px;" id="count">좋아요 ${cbl.boardHeart }</span>
+	                      	 	</c:if>
+	                      	 	<c:if test="${h.memberCode != memberLoggedIn.memberCode }">
+	                      	 	 <span class="heart" style="font-size:30px;margin-bottom:10px;">
+		                      	  	<i class="fa fa-heart-o" aria-hidden="true" ></i> 
+		                      	  </span>
+	                      	  	<span style="font-size:16px;" id="count">좋아요 ${cbl.boardHeart }</span>
+	                      	 	</c:if>
+	                     
+                      	 	</c:if>
+                      	</c:forEach>
+                      	  </c:if>
+                      	  
+                      	  <c:if test="${empty heartMember }">
+                      	  <span class="heart" style="font-size:30px;margin-bottom:10px;">
+		                      	  	<i class="fa fa-heart-o" aria-hidden="true" ></i> 
+		                      	  </span>
+		               			<span style="font-size:16px;" id="count">좋아요 ${cbl.boardHeart }</span>
+                      	  </c:if>
+                      	
+
                       	  <span class ="boardHeart" style="font-size:30px;margin-bottom:10px;">
                       	  	<i class="fa fa-heart-o" aria-hidden="true" ></i>
                       	  </span>
                       	  	<span style="font-size:16px;" id="count">좋아요${cbl.boardHeart }</span>
+
                           <input type="text" name="commentContent" placeholder="댓글입력">
                           <input type="submit" value="입력" />
                       </div>
@@ -852,6 +954,7 @@ width: 550px;
                       
                   </div>
               </div>
+         	
           </c:forEach>
          </c:if>
           <!-- 게시물카드끝-->
