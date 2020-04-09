@@ -93,6 +93,26 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.update("clubBoard.reportBoard", boardNo);
 	}
 
+	@Override
+	public int insertHeart(Map<String, Integer> param) {
+		return sqlSession.insert("clubBoard.insertHeart",param);
+	}
+
+	@Override
+	public int selectBoard(int boardNo) {
+		return sqlSession.selectOne("clubBoard.selectBoard",boardNo);
+	}
+
+	@Override
+	public int deleteHeart(Map<String, Integer> param) {
+		return sqlSession.delete("clubBoard.deleteHeart", param);
+	}
+
+	@Override
+	public List<Integer> selectMyHeartList(int memberCode) {
+		return sqlSession.selectList("clubBoard.selectMyHeartList",memberCode);
+	}
+
 
 	
 	

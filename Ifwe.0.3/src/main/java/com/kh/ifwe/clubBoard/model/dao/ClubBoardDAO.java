@@ -39,6 +39,16 @@ public interface ClubBoardDAO {
 	List<ClubBoardComment> selectFreeboardCmt(int clubBoardlistNo);
 
 	int reportBoard(int boardNo);
+
+	int insertHeart(Map<String, Integer> param);
+
+	int selectBoard(int boardNo);
+
+	int deleteHeart(Map<String, Integer> param);
+
+	List<Integer> selectMyHeartList(int memberCode);
+
+
 	
 	
 }

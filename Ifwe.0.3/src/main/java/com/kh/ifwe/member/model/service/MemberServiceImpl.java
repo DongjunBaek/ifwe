@@ -135,6 +135,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectMsgCount(memberCode);
 	}
 
+	@Override
+	public Profile selectProfileByMemberCode(int clubMaster) {
+		return memberDAO.selectProfileByMemberCode(clubMaster);
+	}
+
 
 	
 }

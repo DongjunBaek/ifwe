@@ -15,6 +15,7 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
@@ -209,6 +210,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.update("club.blindBoard", boardNo);
 	}
 
+	@Override
 	public List<ClubMaster> clubSearch(int cPage,int numPerPage) {
 		int offset = ((cPage-1)*numPerPage);
 		int limit = numPerPage;
@@ -234,6 +236,16 @@ public class ClubDAOImpl implements ClubDAO {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return sqlSession.selectList("club.selectListByName", param, rowBounds);
+	}
+
+	@Override
+	public Integer selectAgeAvg(int clubCode) {
+		return sqlSession.selectOne("club.selectAgeAvg",clubCode);
+	}
+	
+	@Override
+	public List<Heart> selectHeartMember() {
+		return sqlSession.selectList("club.selectHeartMember");
 	}
 
 	

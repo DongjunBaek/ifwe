@@ -326,6 +326,7 @@ $(".paymentbtn").click(function(){
     padding-bottom: 5%;
     margin-bottom: 10%;
     padding-top: 5%;
+    margin-left :0;
 }
 .choice-title{
 	margin : 0;

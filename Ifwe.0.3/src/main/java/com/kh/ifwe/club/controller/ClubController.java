@@ -29,6 +29,7 @@ import com.kh.ifwe.club.model.vo.ClubLoggedIn;
 import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
+import com.kh.ifwe.club.model.vo.Heart;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
@@ -39,6 +40,7 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +59,7 @@ public class ClubController {
 	
 	@Autowired
 	private ClubBoardService clubBoardService;
-	
-	
-	
+
 	
 	//소모임 검색 0325 문보라
 	@GetMapping("/clubSearchKeyword.do")
@@ -114,6 +114,42 @@ public class ClubController {
 		log.debug("list1231321321 ={}",searchListResult);
 		int totalPage = (int)Math.ceil((double)totalContents/numPerPage);
 		
+		/**
+		 * 0407 dongjun 소모임 장 프로필 사진불러오기
+		 */
+		List<Profile> clubmasterProfile = new ArrayList<Profile>();
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				Profile profile = memberService.selectProfileByMemberCode(searchListResult.get(i).getClubMaster());
+				clubmasterProfile.add(profile);
+			}
+		}
+		
+		/**
+		 * 0407 dongjun 소모임 별 남녀 비율 및 평균 나이
+		 */
+		List<Integer> clubCode = new ArrayList<Integer>();
+		
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				clubCode.add(searchListResult.get(i).getClubCode());
+			}
+		}
+		
+		//남녀비율
+		List<Integer> maleList = clubService.selectMaleCount(clubCode);
+		log.debug("maleList = {}",maleList);
+		
+		//평균나이 가져오기
+		List<Count> ageList = clubService.selectAge(clubCode);
+		log.debug("ageList = {}",ageList);
+		Map<Integer,Integer> ageMap = new HashMap<Integer, Integer>();
+		if(searchListResult != null) {
+			for(int i=0; i<searchListResult.size();i++) {
+				ageMap.put(i,clubService.selectAgeAvg(searchListResult.get(i).getClubCode()));
+			}
+		}
+		
 		/* List<ClubMaster> */
 		Map<Integer, Object> resultMapClub = new HashMap<Integer, Object>();
 		resultMapClub.put(1, searchListResult);
@@ -121,6 +157,10 @@ public class ClubController {
 		resultMapClub.put(3, cPage);
 		resultMapClub.put(4, showKeyword);
 		resultMapClub.put(5, clubLocation);
+		resultMapClub.put(6, clubmasterProfile);
+		resultMapClub.put(7, maleList);//남자비율
+		resultMapClub.put(8, ageMap);//평균나이
+		
 		return resultMapClub;
 		
 	}
@@ -162,12 +202,27 @@ public class ClubController {
 			 log.debug(" = {}",ageList.get(i).getAge());
 		}
 		
+		/**
+		 * 0407 dongjun 소모임 장 프로필 사진불러오기
+		 */
+		List<Profile> clubmasterProfile = null;
+		if(clubList != null) {
+			clubmasterProfile = new ArrayList<Profile>();
+			for(int i=0; i<clubList.size();i++) {
+				
+				Profile profile = memberService.selectProfileByMemberCode(clubList.get(i).getClubMaster());
+				clubmasterProfile.add(profile);
+			}
+		}
+		
+		
 		mav.addObject("ageList",ageList);
 		mav.addObject("maleList", maleList);
 		mav.setViewName("main/clubSearch");
 		mav.addObject("clubList", clubList);
 		mav.addObject("cPage", cPage);
 		mav.addObject("tPage", totalPage);
+		mav.addObject("profile", clubmasterProfile);
 		return mav;
 	}
 	
@@ -259,7 +314,8 @@ public class ClubController {
 		ClubMember clubMaster = clubService.selectClubMaster2(param2);
 		
 		List<ClubBoard> clubBoardList = clubService.selectBoardList(clubCode);
-		
+		List<Heart> heartMember = clubService.selectHeartMember();
+		log.debug("heartMember = {}",heartMember);
 		int msgCount = memberService.selectMsgCount(memberLoggedIn.getMemberCode());
 		
 		
@@ -305,6 +361,7 @@ public class ClubController {
 		mav.addObject("msgCount",msgCount);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);
 		mav.addObject("boardImg",boardImg);
+		mav.addObject("heartMember",heartMember);
 		
 		mav.setViewName("/club/clubMain");
 		

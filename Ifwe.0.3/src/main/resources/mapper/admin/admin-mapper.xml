@@ -180,7 +180,7 @@
 	 	update
 	 		board
 	 	set
-	 		board_del='c'
+	 		board_del='d'
 	 	where
 	 		member_code = #{memberCode}
 	 </update>

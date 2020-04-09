@@ -6,7 +6,7 @@
 	<jsp:include page="/WEB-INF/views/common/mainInclude.jsp">
 		<jsp:param value="메인페이지" name="pageTitle"/>
 	</jsp:include>
-	<script>
+<script>
 		$(function(){
 			
 			$("#search-somoim").click(function(){
@@ -29,7 +29,16 @@
 function eventView(eventCode){
 	location.href="${pageContext.request.contextPath}/board/mainEvent.do?eventCode="+eventCode;
 } 
-	</script>
+var cnt = 1;
+setInterval(function(){
+	if(cnt == 4){
+		cnt = 1;
+	}
+	$('[for="pos'+cnt+'"]').trigger("click");
+	cnt++;
+}, 4000);
+
+</script>
 	  <section style="margin:0;">
         <div class="container">
             <article class="mainpage-first">
@@ -46,13 +55,13 @@ function eventView(eventCode){
                                 <img src="${pageContext.request.contextPath }/resources/images/main/banner.png" alt="">
                                 <div class="search font-kor">
                                     <div class="search-title">
-                                        <p style="font-size: 40px;">나와 관심사가 같은 친구,</p>
+                                        <p style="font-size: 40px;">새로운 사람을 만나다.</p>
                                         <p style="font-size:50px;font-weight: 3000;" class="font-eng">ifwe에서 만나보세요</p>
                                     </div>
                                     <div class="search-content font-kor">
-                                        <p class="p-class">회원님의 관심사 어쩌고</p>
-                                        <p class="p-class">회원님의 관심사 어쩌고</p>
-                                        <p class="p-class">회원님의 관심사 어쩌고</p>
+                                        <p class="p-class">뮤지컬보고 영화도 보고</p>
+                                        <p class="p-class">맛있는 저녁식사와 여유를</p>
+                                        <p class="p-class">ifwe에서 만나보세요</p>
                                     </div>
                                     <div class="search-btn font-kor" style="margin-top: 10%;">
                                         <button class="font-kor" id="search-somoim">소모임 검색하기</button>
@@ -105,30 +114,30 @@ function eventView(eventCode){
                 </div>
                 <div class="two">
                     <div class="two-title font-kor">
-                        <p style="color: white; margin-left:5%; font-size: 20px;padding: 4%;">주간 베스트글 </p>
+                        <p style="color: white; margin-left:5%; font-size: 20px;padding: 4%;">공지 사항 </p>
                     </div>
                     <div class="two-content font-kor">
                         <div class="post-container">
                             <div class="number font-kor">01</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페추천드려요</p>
+                                    <p class="post1">${boardListNoice[0].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[0].boardDate }</p>
                                 </div>
                         </div>
                         <hr class="two-hr" noshade>
                         <div class="post-container">
                             <div class="number font-kor">02</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페 추천드려요</p>
+                                    <p class="post1">${boardListNoice[1].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[1].boardDate }</p>
                                 </div>
                         </div>
                         <hr class="two-hr" noshade>
                         <div class="post-container">
                             <div class="number font-kor">03</div>
                                 <div class="posts">
-                                    <p class="post1">망고스터디</p>
-                                    <p class="post2">스터디 카페 추천드려요</p>
+                                    <p class="post1">${boardListNoice[2].boardTitle }</p>
+                                    <p class="post2">${boardListNoice[2].boardDate }</p>
                                 </div>
                         </div>
                     </div>

@@ -41,7 +41,9 @@ $(function(){
     	location.href="${pageContext.request.contextPath }/club/secession.do";
     });
     
-	
+    $(".nav-right-icon2").click(function(){
+ 	   location.href = "${pageContext.request.contextPath}/member/mypage.do?memberCode=${memberLoggedIn.memberCode}";
+    });
 	
 	
 })

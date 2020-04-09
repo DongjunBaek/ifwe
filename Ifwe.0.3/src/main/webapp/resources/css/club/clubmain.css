@@ -18,6 +18,7 @@ section{
 .section-boradall{
     float: left;
     font-size: 19px;
+    font-family: 'GmarketSansMedium';
 }
 .section-block-right{
     float: right;
@@ -244,7 +245,6 @@ section{
 .article2{
     width:500px;
     margin-left: 20px;
-    background-color: white;
 }
 .article2-title{
     width: 100%;
