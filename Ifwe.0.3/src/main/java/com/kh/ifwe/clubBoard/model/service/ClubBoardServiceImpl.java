@@ -115,4 +115,9 @@ public class ClubBoardServiceImpl implements ClubBoardService {
 		return clubBoardDAO.selectMyHeartList(memberCode);
 	}
 
+	@Override
+	public List<ClubBoard> selectMyClubBoard(int memberCode) {
+		return clubBoardDAO.selectMyClubBoard(memberCode);
+	}
+
 }

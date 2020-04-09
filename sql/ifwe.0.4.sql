@@ -52,6 +52,7 @@
 --drop sequence seq_club_boardlist_no; --클럽게시판목록번호
 --drop sequence seq_search_no; -- 검색용 시퀀스
 --drop sequence seq_club_board_comment_no; --클럽게시판댓글번호
+--drop sequence seq_loginrecord_no;  -- 로그인 기록 시퀀스
 --drop trigger tri_search_count;
 --=================================================================
 --select
@@ -400,8 +401,14 @@ create table board_heart_tbl(
     constraint fk_heart_member_code foreign key (member_code) references member (member_code)ON DELETE CASCADE
 );
 
+-- 28. 회원 로그인 기록
+CREATE TABLE LOGINRECORD (
 
-
+   loginrecord_no  number not null,
+   member_code   NUMBER      NOT NULL,
+   loginrecord_lastlogin   DATE      NULL,
+   loginrecord_logout   CHAR(1)      NULL
+);
 
 
 
@@ -421,6 +428,7 @@ create sequence seq_club_board_no;  --클럽게시판번호
 create sequence seq_club_boardlist_no; --클럽게시판목록번호
 create sequence seq_search_no; -- 검색용 시퀀스
 create sequence seq_club_board_comment_no; --클럽게시판댓글번호
+create sequence seq_loginrecord_no;  -- 로그인 기록 시퀀스
 --=================================================================
 --TRIGGER
 --=================================================================
@@ -556,7 +564,7 @@ commit;
 -- msg_table 용 카테고리 생성
 insert into msg_category values('c1','가입신청');
 insert into msg_category values('f1','친구신청'); 
-
+insert into msg_category values('m1','메세지');
 
 
 

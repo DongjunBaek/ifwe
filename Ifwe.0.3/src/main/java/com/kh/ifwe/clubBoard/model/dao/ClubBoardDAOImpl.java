@@ -113,6 +113,11 @@ public class ClubBoardDAOImpl implements ClubBoardDAO {
 		return sqlSession.selectList("clubBoard.selectMyHeartList",memberCode);
 	}
 
+	@Override
+	public List<ClubBoard> selectMyClubBoard(int memberCode) {
+		return sqlSession.selectList("clubBoard.selectMyClubBoard", memberCode);
+	}
+
 
 	
 	

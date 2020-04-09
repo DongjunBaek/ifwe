@@ -430,7 +430,7 @@ nav{
 }
 .blue-back{
     width: 270px;
-    border:1px solid rgba(246,246,246,0.5);
+    border:1px solid rgba(246,246,246,0);
     height: 65px;
     margin-top: 15%;
     cursor:pointer;

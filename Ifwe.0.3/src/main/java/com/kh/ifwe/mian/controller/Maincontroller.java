@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ifwe.admin.model.service.AdminService;
+import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.service.BoardService;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
+import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
@@ -34,7 +37,8 @@ public class Maincontroller {
 	private MemberService memberService;
 	@Autowired
 	private BoardService boardService; 
-	
+	@Autowired
+	private AdminService adminService;
 	
 	@GetMapping("/main/mainPage.do")
 	public String mainPage(@ModelAttribute("memberLoggedIn") Member member,RedirectAttributes redirectAttributes,
@@ -62,7 +66,25 @@ public class Maincontroller {
 		 */
 		List<Board> boardList = boardService.selectOne2("notice",3,1);
 		model.addAttribute("boardListNoice",boardList);
- 
+		/**
+		 * 0409 실시간 변경 내용 반영해서 불러오기
+		 */
+		//내 소모임 목록
+		List<Club> clubList = memberService.selectClubList(member.getMemberCode());
+		model.addAttribute("clubList", clubList);
+		
+		//내 관심사 소모임목록 (가입 안되어있는 거 )
+		List<Club> interClub = memberService.selectInterClub(member.getMemberLike());
+		log.debug("interCLub= {}",interClub);
+		model.addAttribute("interClub", interClub);
+		
+		//이벤트 배너 불러오기
+		//2020-04-01
+		//여주
+		 List<AdminEvent> eventList = adminService.selectEventList();
+		 log.debug("eventList{}=",eventList);
+		 
+		 model.addAttribute("eventList",eventList);
 
 		return "main/mainPage";
 	}

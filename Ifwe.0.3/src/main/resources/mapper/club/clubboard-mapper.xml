@@ -182,6 +182,15 @@
    		</where>
 	
 	</select>
+	<!-- 0409 donjun 내가 쓴 소모임 게시물 -->
+	<select id="selectMyClubBoard" resultType="clubBoard">
+		select 
+			* 
+		from 
+			club_board 
+		where member_code = #{memberCode}
+		order by club_date desc
+	</select>
 
 </mapper>
 

@@ -445,4 +445,9 @@ $(function(){
 
 </script>
 </body>
+<style>
+.yellow-label-span label{
+	margin-top : 5px;
+}
+</style>
 </html>

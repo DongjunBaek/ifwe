@@ -45,6 +45,10 @@
 .friend-name-profile{
 	cursor: text;	
 }
+.club-leader img{
+	width: 155px;
+	height: 100%;
+}
 </style>
 <script>
 let checkCurrentPage = 1;

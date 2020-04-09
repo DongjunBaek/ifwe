@@ -97,7 +97,7 @@ input#inputProfileName {
             <div class="btn-div">
                <input type="button" value="회원정보 수정" class="update-btn font-kor" onclick="location.href='${pageContext.request.contextPath}/member/update.do'">
             </div>
-            <div class="list-div">
+          <!--   <div class="list-div">
                <div class="list-title">
                   <p
                      style="color: white; font-size: 20px; font-weight: bold; padding: 6%;"
@@ -110,7 +110,7 @@ input#inputProfileName {
                      </ul>
                   </div>
                </div>
-            </div>
+            </div> -->
          </article>
 
          <article class="makeProfile-article font-kor">

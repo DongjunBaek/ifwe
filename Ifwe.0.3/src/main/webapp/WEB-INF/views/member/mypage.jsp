@@ -35,7 +35,7 @@ cursor:pointer;
 			console.log("작동")
 			var height = $(".contents").css("height");			
 			console.log(height);
-			if(height == "200px"){
+			if(height <= "200px"){
 				$(".contents").css("height","1000px");
 				$(".notice-container").css("min-height","1000px");
 				$(".board-div").css("display","none")
@@ -73,14 +73,14 @@ cursor:pointer;
                 <input type="button" value="프로필 카드" class="update-btn font-kor" 
                 		onclick="location.href='${pageContext.request.contextPath}/member/profileUpdate.do?memberCode='+${memberLoggedIn.memberCode }">
             </div>
-            <div class="list-div">
+            <div class="list-div"> 
                 <div class="list-title">
                     <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
                     <div class="list-ul-container">
                         <ul class="font-kor mypage-list-ul" style="padding: 0;">
                             <c:if test="${not empty clubList }">
                         	<c:forEach items="${clubList }" var="list">
-                                <li class="clubListLi" data-clubCode=${list.clubCode }><p class="mypage-p-class">${list.clubTitle }</p> </li>
+                                <li class="clubListLi" data-clubCode=${list.clubCode }><p class="mypage-p-class"><a href="${pageContext.request.contextPath  }/club/clubMain.do?clubCode=${list.clubCode }">${list.clubTitle }</a></p> </li>
                         	</c:forEach>
                         	</c:if>
                         </ul>
@@ -127,54 +127,26 @@ cursor:pointer;
                 </div>
                 <div class="board-contents font-kor">
                     <ul style="font-size: 30px;margin-left: 9%;">
+                    <c:forEach items="${clubBoard }" var="clubBoard" varStatus="vs">
+                    
                         <li style="color: #2756a6;">
                             <div class="board-content">
                                 <div class="board-con">
-                                    <p class="p-board" style="color: #2756a6; font-weight: bolder;">윙스터디 모임</p>
-                                    <p class="p-board bold-font" >이번주 금요일 스터디 일정입니다.</p>
-                                    <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
-                                </div>
-                                <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
-                                </div>
-                            </div>
-                        </li>
-                        <li style="color: #2756a6;">
-                            <div class="board-content">
-                                <div class="board-con">
-                                    <p class="p-board" style="color: #2756a6; font-weight: bolder;">윙스터디 모임</p>
-                                    <p class="p-board bold-font" >이번주 금요일 스터디 일정입니다.</p>
-                                    <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
-                                </div>
-                                <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
+                                    <p class="p-board" style="color: #2756a6; font-weight: bolder;">
+        	                           	<c:forEach items="${clubList }" var="clubList" varStatus="vs">
+	                                    	<c:if test="${clubList.clubCode == clubBoard.clubCode}">
+    	                                		${clubList.clubTitle}
+                                    		</c:if> 
+                                    	</c:forEach> 
+                               		</p>
+                                    <p class="p-board bold-font" >${clubBoard.boardTitle}</p>
+                                    <p class="p-board" style="font-size: 15px; padding-top: 2%;">${clubBoard.boardDate }</p>
                                 </div>
                             </div>
                         </li>
-                        <li style="color: #2756a6;">
-                            <div class="board-content">
-                                <div class="board-con">
-                                    <p class="p-board" style="color: #2756a6; font-weight: bolder;">윙스터디 모임</p>
-                                    <p class="p-board bold-font">이번주 금요일 스터디 일정입니다.</p>
-                                    <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
-                                </div>
-                                <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
-                                </div>
-                            </div>
-                        </li>
-                        <li style="color: #2756a6;">
-                            <div class="board-content">
-                                <div class="board-con">
-                                    <p class="p-board" style="color: #2756a6; font-weight: bolder;">윙스터디 모임</p>
-                                    <p class="p-board bold-font" >이번주 금요일 스터디 일정입니다.</p>
-                                    <p class="p-board" style="font-size: 15px; padding-top: 2%;">작성일 : 2020-20-20</p>
-                                </div>
-                                <div class="board-btn">
-                                    <input type="button" value="댓글보기" class="reply-btn font-kor" style="padding:0">
-                                </div>
-                            </div>
-                        </li>
+                        
+                    </c:forEach>
+               
                     </ul>
                 </div>
             </div>
