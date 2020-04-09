@@ -1,6 +1,5 @@
 package com.kh.ifwe.club.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.dao.ClubDAO;
 import com.kh.ifwe.club.model.vo.Club;
 import com.kh.ifwe.club.model.vo.ClubLoggedIn;
@@ -16,7 +14,6 @@ import com.kh.ifwe.club.model.vo.ClubMaster;
 import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.club.model.vo.Count;
 import com.kh.ifwe.club.model.vo.Heart;
-import com.kh.ifwe.clubBoard.model.vo.BoardImg;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
@@ -225,14 +222,11 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectSearchKeywordList();
 	}
 
-
-
 	@Override
 	public List<ClubBoard> selectReportBoardList(int clubCode) {
 		return clubDAO.selectReportBoardList(clubCode);
 	}
 
-	
 	//0406 dongjun pageBar 
 	@Override
 	public List<ClubMaster> clubSearch(int cPage, int numPerPage) {
@@ -244,6 +238,7 @@ public class ClubServiceImpl implements ClubService {
 	public List<ClubMaster> searchClubByHashtag(Map<String, Object> param, int numPerPage, int cPage) {
 		return clubDAO.searchClubByHashtag(param,numPerPage,cPage);
 	}
+	
 
 	@Override
 	public int blindBoard(int boardNo) {
@@ -273,4 +268,4 @@ public class ClubServiceImpl implements ClubService {
 
 	
 	
-	
+

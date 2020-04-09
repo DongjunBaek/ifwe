@@ -558,3 +558,37 @@ insert into msg_category values('c1','가입신청');
 insert into msg_category values('f1','친구신청'); 
 
 
+
+
+
+
+
+
+
+
+
+
+
+--로그인 레코드 생성
+
+CREATE TABLE LOGINRECORD (
+
+   loginrecord_no  number not null,
+   member_code   NUMBER      NOT NULL,
+   loginrecord_lastlogin   DATE      NULL,
+   loginrecord_logout   CHAR(1)      NULL
+);
+
+
+
+ALTER TABLE LOGINRECORD ADD CONSTRAINT "PK_LOGINRECORD" PRIMARY KEY (
+   member_code
+);
+
+ALTER TABLE LOGINRECORD ADD CONSTRAINT "FK_MEMBER_TO_LOGINRECORD_1" FOREIGN KEY (
+	member_code
+)
+REFERENCES MEMBER (
+	member_code
+);
+

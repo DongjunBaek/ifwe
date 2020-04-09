@@ -65,4 +65,10 @@ public interface MemberService {
 
 	Profile selectProfileByMemberCode(int clubMaster);
 
+	int insertLoginRecord(int memberCode);
+
+	int logoutRecordUpdate(int memberCode);
+
+	int loginRecordUpdate(int memberCode);
+
 }

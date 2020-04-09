@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,12 +110,13 @@ public class FullcalendarController {
 		return "notMaster";
 	}
 	
-	@Scheduled(cron="*/30 * * * * *")
-	public void sleepMemberCheck() {
-		System.out.println("스케쥴체크");
-
-
-	}
+	/*
+	 * @Scheduled(fixedDelay = 1000) public void sleepMemberCheck() {
+	 * System.out.println("스케쥴체크");
+	 * 
+	 * 
+	 * }
+	 */
 
 
 	
