@@ -140,6 +140,24 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectProfileByMemberCode(clubMaster);
 	}
 
+	@Override
+	public int insertLoginRecord(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.insertLoginRecord(memberCode);
+	}
+
+	@Override
+	public int logoutRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.logoutRecordUpdate(memberCode);
+	}
+
+	@Override
+	public int loginRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return memberDAO.loginRecordUpdate(memberCode);
+	}
+
 
 	
 }

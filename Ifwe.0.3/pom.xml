@@ -267,6 +267,15 @@
 	    </dependency>
 
 
+		<!-- crontab,일정 시간마다 클래스 실행되게 만드는 설정 관련 -->
+			<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+			
+
 	</dependencies>
     <build>
         <plugins>

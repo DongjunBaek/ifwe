@@ -136,6 +136,24 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("profile.selectProfileByMemberCode",clubMaster);
 	}
 
+	@Override
+	public int insertLoginRecord(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("member.insertLoginRecord",memberCode);
+	}
+
+	@Override
+	public int logoutRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.logoutRecordUpdate",memberCode);
+	}
+
+	@Override
+	public int loginRecordUpdate(int memberCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.loginRecordUpdate",memberCode);
+	}
+
 	
 	
 	
