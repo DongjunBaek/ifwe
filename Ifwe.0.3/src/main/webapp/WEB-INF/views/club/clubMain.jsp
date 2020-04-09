@@ -193,6 +193,7 @@ $(function(){
 	    }
 	});
 		 });
+
 		$("#myContentsInfo-1").trigger("click");
 	} 
 	 if(catecode =="공연전시"){
@@ -211,7 +212,7 @@ $(function(){
 						   var index = i-12;
 						   tbody += "<tr  ><td >"+index+"</td>"+
 						   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
-	                           		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+	                           		"<td><a href='"+data[i].contentsHref+"'><p class='play-title'>"+data[i].contentsName+"</p></a>"+
 	                               	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
 	                               "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
 	                               
@@ -281,7 +282,7 @@ $(function(){
 						   var index = i-32;
 						   tbody += "<tr  ><td >"+index+"</td>"+
 						   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
-	                        		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+	                        		"<td><a href='"+data[i].contentsHref+"'><p class='play-title'>"+data[i].contentsName+"</p></a>"+
 	                            	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
 	                            "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
 						  
@@ -345,7 +346,7 @@ $(function(){
 					   var index = i-52;
 					   tbody += "<tr  ><td >"+index+"</td>"+
 					   			"<td><img src='${pageContext.request.contextPath}/resources/upload/plays/plays"+data[i].contentsCode+".jpg' width=96px; height=122px;></td>"+
-                     		"<td><p class='play-title'>"+data[i].contentsName+"</p>"+
+                     		"<td><a href='"+data[i].contentsHref+"'><p class='play-title'>"+data[i].contentsName+"</p></a>"+
                          	"<p class='play-start'>일시: "+data[i].contentsInfo.substring(0,12)+"</p>"+
                          "<p class='play-end'>"+data[i].contentsInfo.substring(12)+"</p></td></tr>"
 					  

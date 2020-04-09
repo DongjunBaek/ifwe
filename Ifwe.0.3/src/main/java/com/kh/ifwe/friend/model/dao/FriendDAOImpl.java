@@ -40,8 +40,8 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public Friend selectOneFriend(int memberCode) {
-		return sqlsession.selectOne("friend.selectOneFriend",memberCode);
+	public List<Friend> selectOneFriend(int memberCode) {
+		return sqlsession.selectList("friend.selectOneFriend",memberCode);
 	}
 
 	

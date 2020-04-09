@@ -302,7 +302,7 @@ public class MemberController {
 							Model model) {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		Profile profile =profileservice.selectOneProfileWithCode(memberCode);
-		Friend friend = friendService.selectOneFriend(memberCode);
+		List<Friend> friend = friendService.selectOneFriend(memberCode);
 		
 		log.debug("profile={}",profile);
 		log.debug("member= {}",member);
@@ -311,7 +311,7 @@ public class MemberController {
 		model.addAttribute("friend",friend);
 		model.addAttribute("member",member);
 		model.addAttribute("profile",profile);
-		
+		log.debug("profileTestEnd ");
 		return "member/profile";
 	}
 
