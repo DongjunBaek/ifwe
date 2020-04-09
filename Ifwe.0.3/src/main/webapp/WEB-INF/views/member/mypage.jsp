@@ -26,21 +26,26 @@ width:720px;
 cursor:pointer;
 
 }
-
+.board-con{
+	transform: translateY(-40%);
+}
+	
+}
 </style>
 <script >
+var ynFormsg = 0;
 	$(function(){
-		
 		$(".add-msglist").click(function(){
 			console.log("작동")
-			var height = $(".contents").css("height");			
+			var height = $(".contents").css("height");
 			console.log(height);
-			if(height <= "200px"){
+			if(ynFormsg == 0){
 				$(".contents").css("height","1000px");
 				$(".notice-container").css("min-height","1000px");
 				$(".board-div").css("display","none")
 				$(".fa-caret-down").css("display","none")
 				$(".fa-caret-up").css("display","block")
+				ynFormsg = 1;
 			}else{
 				$(".contents").css("height","200px");
 				$(".notice-container").css("height","300px")
@@ -48,6 +53,7 @@ cursor:pointer;
 				$(".board-div").css("display","block")
 				$(".fa-caret-down").css("display","block")
 				$(".fa-caret-up").css("display","none")
+				ynFormsg = 0;
 			}
 			
 		});
