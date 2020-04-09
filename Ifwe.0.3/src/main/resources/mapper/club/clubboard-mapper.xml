@@ -189,7 +189,7 @@
 		from 
 			club_board 
 		where member_code = #{memberCode}
-		order by club_date desc
+		order by board_date desc
 	</select>
 
 </mapper>
