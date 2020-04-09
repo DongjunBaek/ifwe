@@ -212,8 +212,7 @@
 			msg_view = 'y'
 		where
 			member_from = #{memberFrom}
-		order by 
-			msg_date desc
+		
 	</update>
 	
 	<select id="selectOneForFriend" resultMap="friendMap">
@@ -228,6 +227,8 @@
 			Me.member_from = M.member_code
 		where 
 			Me.member_from = #{memberFrom}
+		order by 
+			msg_date desc
 	</select>
 	<resultMap type="friend" id="friendMap">
 		<id column="member_code" property="memberCode"/>

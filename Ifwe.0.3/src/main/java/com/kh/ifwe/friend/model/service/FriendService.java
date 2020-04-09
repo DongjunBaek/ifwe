@@ -16,7 +16,7 @@ public interface FriendService {
 
 	List<FriendList> selectListFriend(int memberCode);
 
-	Friend selectOneFriend(int memberCode);
+	List<Friend> selectOneFriend(int memberCode);
 
 
 }

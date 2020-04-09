@@ -18,6 +18,6 @@ public interface FriendDAO {
 
 	List<FriendList> selectListFreind(int memberCode);
 
-	Friend selectOneFriend(int memberCode);
+	List<Friend> selectOneFriend(int memberCode);
 
 }

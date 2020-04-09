@@ -46,7 +46,7 @@ update
 		F.member_code = #{memberCode}
 </select>
 
-<select id="selectOneFriend" resultType= "friend">
+<select id="selectOneFriend" resultType= "Friend" >
 	select
 		*
 	from
