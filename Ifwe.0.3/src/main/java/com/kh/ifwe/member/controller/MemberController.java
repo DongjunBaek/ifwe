@@ -3,6 +3,7 @@ package com.kh.ifwe.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -244,7 +245,17 @@ public class MemberController {
 				 */
 				List<Board> boardList = boardService.selectOne2("notice",3,1);
 				model.addAttribute("boardListNoice",boardList);
-				
+				/**
+				 * 0411 추천 소모임 소모임 장 이미지 불러오기
+				 */
+				List<Profile> clubmasterProfile = new ArrayList<Profile>();
+				if(interClub != null) {
+					for(int i=0; i<interClub.size();i++) {
+						Profile Masterprofile = memberService.selectProfileByMemberCode(interClub.get(i).getClubMaster());
+						clubmasterProfile.add(Masterprofile);
+					}
+					model.addAttribute("clubmasterProfile", clubmasterProfile);
+				}
 				return "main/mainPage";
 				
 				} 
