@@ -2,7 +2,9 @@ package com.kh.ifwe.fullcalendar.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 
 import javax.annotation.PostConstruct;
@@ -56,9 +58,25 @@ public class FullcalendarController {
 	@GetMapping("/getfc")
 	@ResponseBody
 	public List<Fullcalendar> SelectFCList(Model model, HttpServletRequest request,
-			RedirectAttributes redirectAttributes, String clubCode) {
+			RedirectAttributes redirectAttributes, String clubCode,String memberCode) {
 		System.out.println("컨트롤러 클럽코드="+clubCode);
 				List<Fullcalendar> FC = fullcalendarservice.selectList(clubCode);
+				int checkMember = 0;
+				
+				System.out.println("멤버코드="+memberCode);
+				
+				Map<String,String> ClubMemberCheck= new HashMap<String, String>(); 
+				
+				ClubMemberCheck.put("memberCode", memberCode);
+				ClubMemberCheck.put("clubCode", clubCode);
+		
+				int result=fullcalendarservice.selectClubMember(ClubMemberCheck);
+			
+				
+				
+				
+				
+				System.out.println("컨트롤러인서트"+result);
 //		ModelAndView mav= new ModelAndView("jsonView");
 //		mav.addObject("array",FC);
 //		model.addAttribute("array",FC);
@@ -66,7 +84,10 @@ public class FullcalendarController {
 //	  Fullcalendar FCT=	FC.get(0);
 //		return mav;
 			
-				return FC;
+				if(result==1) 
+					return FC;
+				else 
+					return null;
 		
 	}
 	
