@@ -18,7 +18,7 @@
 /* 0405 club_pagebar_btn css add dongjun */
 .club_pageBar_btn{
 	display: flex;
-	width: 60%;
+	width: 100%;
 	height: 150px;
 	border-radius: 50px;
   	justify-content: center;
@@ -113,7 +113,7 @@ $(function(){
 		let clubSearchKeyword = $("[name=clubSearchKeyword]").val();
 		let clubLocation = $("[name=clubLocation]").val();
 		let memberCode = ${memberLoggedIn.memberCode};
-		console.log(searchType,clubSearchKeyword,clubLocation,memberCode);
+		/* console.log(searchType,clubSearchKeyword,clubLocation,memberCode); */
 
 		console.log("onLoadclubList open");
 	    var allData = {"searchType": searchType, "clubSearchKeyword": clubSearchKeyword, "clubLocation":clubLocation,"memberCode":memberCode };
@@ -134,8 +134,8 @@ $(function(){
 				var listForGender = data[7];
 				var listForAge = data[8];
 				
-				console.log('data7',listForGender);
-				console.log('data8',listForAge);
+				/* console.log('data7',listForGender);
+				console.log('data8',listForAge); */
 
 				
 				
@@ -150,18 +150,23 @@ $(function(){
 					$("#searchSomoimDivContainer").css('display','');
 					$("#searchSomoimDivContainer").html(" ");
 					for(let i=0;i<listForClub.length;i++){
-						console.log(
-								(listForClub[i].maleCount == undefined?0:1)
-										);
+						var maleCnt = 0;
+						$.each(listForGender,function(idx,elem){
+							if(listForClub[i].clubCode == elem.clubCode){
+								maleCnt = elem.maleCount;
+							}
+						});
+						
+						
 						$("#searchSomoimDivContainer").append(
 								'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
 		                        '<div class="club-leader"><img src="${pageContext.request.contextPath }/resources/upload/profile/'+listForProfile[i].profileImgRe+'" alt="" /></div>'+
 		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
 		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
 		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+((listForClub[i].maleCount == undefined?0:1)/listForClub[i].clubCurrent)*10+		                        
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(maleCnt/listForClub[i].clubCurrent)*10+		                        
 		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-		                        +(1-((listForClub[i].maleCount == undefined?0:1)/listForClub[i].clubCurrent))*10+
+		                        +(1-(maleCnt/listForClub[i].clubCurrent))*10+
 		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
@@ -174,7 +179,7 @@ $(function(){
 					$("[name=clubLocation]").val('');
 					$("[name=goclub]").click(function(){
 						let clubCode = $(this).attr("data-clubCode");
-				    	console.log(clubCode);
+				    	/* console.log(clubCode); */
 				    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
 					})
 
@@ -198,11 +203,11 @@ $(function(){
          			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
          			var pageEnd = pageStart+pageBarSize-1;
          			var pageNo = pageStart;
-         			console.log("tpage",tPage);
+/*          			console.log("tpage",tPage);
          			console.log("cPage",cPage);
          			console.log("pageStart",pageStart);
          			console.log("pageEnd",pageEnd);
-         			console.log("pageNo",pageNo);
+         			console.log("pageNo",pageNo); */
          			
 					$parentDIV = $(".club_pageBar_btn");
 					$parentDIV.empty();
@@ -266,8 +271,7 @@ function pageBar_search_btn(cPageNo){
 	let clubSearchKeyword_ = $("[name=clubSearchKeyword]").val();
 	let clubLocation_ = $("[name=clubLocation]").val();
 	let memberCode_ = ${memberLoggedIn.memberCode};
-	console.log("서치후 페이지바");
-	console.log(searchType_,clubSearchKeyword_,clubLocation_,memberCode_);
+/* 	console.log(searchType_,clubSearchKeyword_,clubLocation_,memberCode_); */
 	
 	
 	
@@ -288,16 +292,16 @@ function pageBar_search_btn(cPageNo){
 		asyn: false,
 		success:data => {
 			
-			console.log(data);	
+			/* console.log(data); */	
 			$("#searchSomoimDivContainer").empty();
-			console.log(data[1]);
+			/* console.log(data[1]); */
 			var listForClub = data[1];
 			var listForProfile= data[6];
 			var listForGender = data[7];
 			var listForAge = data[8];
 			
-			console.log('data7',listForGender);
-			console.log('data8',listForAge);
+/* 			console.log('data7',listForGender);
+			console.log('data8',listForAge); */
 
 			
 			
@@ -312,7 +316,15 @@ function pageBar_search_btn(cPageNo){
 				$("#searchSomoimDivContainer").css('display','');
 				$("#searchSomoimDivContainer").html(" ");
 				for(let i=0;i<listForClub.length;i++){
-					console.log(listForClub[i]);
+					/* console.log(listForClub[i]); */
+					
+					var maleCnt = 0;
+					$.each(listForGender,function(idx,elem){
+						if(listForClub[i].clubCode == elem.clubCode){
+							maleCnt = elem.maleCount;
+						}
+					});
+					
 					
 					$("#searchSomoimDivContainer").append(
 							'<div class="card-container"><div class="club-img"><img src="${pageContext.request.contextPath }/resources/upload/club/maintitleimg/'+listForClub[i].clubImgRe+'" alt="" /></div>'+
@@ -320,10 +332,10 @@ function pageBar_search_btn(cPageNo){
 	                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
 	                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
 	                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+((listForClub[i].maleCount == undefined?0:1)/listForClub[i].clubCurrent)*10+
+	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(maleCnt/listForClub[i].clubCurrent)*10+
 	                        
 	                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-	                        +(1-((listForClub[i].maleCount == undefined?0:1)/listForClub[i].clubCurrent))*10+
+	                        +(1-(maleCnt/listForClub[i].clubCurrent))*10+
 	                        '</span></div>'+
 	                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 	                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
@@ -332,7 +344,7 @@ function pageBar_search_btn(cPageNo){
 				}
 			    $("[name=goclub]").click(function(){
 			    	let clubCode = $(this).attr("data-clubCode");
-			    	console.log(clubCode);
+			    	/* console.log(clubCode); */
 			    	location.href="${pageContext.request.contextPath }/club/clubMain.do?clubCode="+clubCode;
 			    }); 
 
@@ -347,11 +359,11 @@ function pageBar_search_btn(cPageNo){
      			var pageStart = (Math.floor((cPage-1)/pageBarSize))*pageBarSize+1;  
      			var pageEnd = pageStart+pageBarSize-1;
      			var pageNo = pageStart;
-     			console.log("tpage",tPage);
+/*      			console.log("tpage",tPage);
      			console.log("cPage",cPage);
      			console.log("pageStart",pageStart);
      			console.log("pageEnd",pageEnd);
-     			console.log("pageNo",pageNo);
+     			console.log("pageNo",pageNo); */
      			
 				$parentDIV = $(".club_pageBar_btn");
 				$parentDIV.empty();

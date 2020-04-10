@@ -120,7 +120,7 @@ setInterval(function(){
                         <div class="post-container">
                             <div class="number font-kor">01</div>
                                 <div class="posts">
-                                    <p class="post1">${boardListNoice[0].boardTitle }</p>
+                                    <p class="post1"><a href="${pageContext.request.contextPath }/board/boardDetail?boardNo=${boardListNoice[0].boardNo}">${boardListNoice[0].boardTitle }</a></p>
                                     <p class="post2">${boardListNoice[0].boardDate }</p>
                                 </div>
                         </div>
@@ -128,7 +128,7 @@ setInterval(function(){
                         <div class="post-container">
                             <div class="number font-kor">02</div>
                                 <div class="posts">
-                                    <p class="post1">${boardListNoice[1].boardTitle }</p>
+                                    <p class="post1"><a href="${pageContext.request.contextPath }/board/boardDetail?boardNo=${boardListNoice[1].boardNo}">${boardListNoice[1].boardTitle }</a></p>
                                     <p class="post2">${boardListNoice[1].boardDate }</p>
                                 </div>
                         </div>
@@ -136,7 +136,7 @@ setInterval(function(){
                         <div class="post-container">
                             <div class="number font-kor">03</div>
                                 <div class="posts">
-                                    <p class="post1">${boardListNoice[2].boardTitle }</p>
+                                    <p class="post1"><a href="${pageContext.request.contextPath }/board/boardDetail?boardNo=${boardListNoice[2].boardNo}">${boardListNoice[2].boardTitle }</a></p>
                                     <p class="post2">${boardListNoice[2].boardDate }</p>
                                 </div>
                         </div>
@@ -149,12 +149,12 @@ setInterval(function(){
                     </div>
                     <div class="three-content font-kor">
                         <div class="three-container">
-                        	<c:if test="${not empty interClub }">
+                        	<c:if test="${not empty interClub && not empty clubmasterProfile}">
 	                        	<c:forEach items="${interClub }" var = "list" varStatus="vs">
 	                        	
 	                            <div class="three-div">
 	                                <div class="three-img">
-	                                    <img src="${pageContext.request.contextPath }/resources/images/club/ex2.jpg" alt="" width="120px" height="120px" style="border-radius: 75px;">
+	                                    <img src="${pageContext.request.contextPath }/resources/upload/profile/${clubmasterProfile[vs.index].profileImgRe}" alt="" width="120px" height="120px" style="border-radius: 75px;">
 	                                </div>
 	                                <div class="three-posts">
 	                                    <div class="three-post1">@${list.memberId }</div>
