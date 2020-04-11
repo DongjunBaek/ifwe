@@ -36,6 +36,10 @@ html{
                         width:90px;
                         float:left;
                     }
+                    .title-icon>img{
+                    	width:100%;
+                    	height:100%;
+                    }
                     .contents-title{
                         width:285px;
                         float:left;
@@ -252,6 +256,7 @@ $(function(){
 		  $(".wrapper-listForClub").empty();
 		   $(".wrapper-listForClub").append(table+thead+tbody+end); 
 		   $(".rank-chart").text("네이버 뮤직 음원차트");
+		   $(".title-icon").html("<img src='${pageContext.request.contextPath}/resources/images/club/musicplayer.png'>")
 	   },
 	    error:(xhr,status,error) =>{
 	        console.log(xhr,status,error);

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Message;
 import com.kh.ifwe.member.model.vo.Profile;
 
 
@@ -52,7 +53,7 @@ public interface MemberService {
 
 	int insertMsgFriend(Map<String, Integer> map);
 
-	List<Member> selectFriendList(int memberCode);
+	List<Message> selectFriendList(int memberCode);
 
 	int friendYes(int memberFrom);
 
@@ -73,5 +74,9 @@ public interface MemberService {
 	int logoutRecordUpdate(int memberCode);
 
 	int loginRecordUpdate(int memberCode);
+
+	int friendNo(int memberFrom);
+
+	int selectFriendMsgCount(int memberCode);
 
 }
