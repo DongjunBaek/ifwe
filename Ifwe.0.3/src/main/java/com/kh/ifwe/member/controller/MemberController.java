@@ -43,12 +43,13 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.FriendList;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Message;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.profile.model.service.ProfileService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount","friendList" })
+@SessionAttributes(value = { "memberLoggedIn","profile","clubList","interClub","msgCount","friendList","friendMsgCount" })
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -234,8 +235,12 @@ public class MemberController {
 				 List<SessionFriend> friendList = memberService.selectMsgFriend(member.getMemberCode());
 				 log.debug("friendList={}",friendList);
 				
+				 //메시지 카운
 				int msgCount = memberService.selectMsgCount(member.getMemberCode());
+				int friendMsgCount = memberService.selectFriendMsgCount(member.getMemberCode());
+				
 				log.debug("msgCount={}",msgCount);
+				model.addAttribute("friendMsgCount",friendMsgCount);
 				model.addAttribute("friendList",friendList);
 				model.addAttribute("msgCount",msgCount);
 				
@@ -289,7 +294,7 @@ public class MemberController {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		log.debug("member={}",member);
 		
-		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
+		List<Message> friendMessage = memberService.selectFriendList(member.getMemberCode());
 		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
 		/**
 		 * 0404 dongjun
@@ -304,9 +309,9 @@ public class MemberController {
 		List<ClubBoard> clubBoard = clubBoardService.selectMyClubBoard(member.getMemberCode());
 			
 				
-		log.debug("friendList={}",friendList);
+		log.debug("friendList={}",friendMessage);
 		log.debug("friends={}",friends);
-		model.addAttribute("friendList",friendList);
+		model.addAttribute("friendMessage",friendMessage);
 		model.addAttribute("friends",friends);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		model.addAttribute("clubBoard",clubBoard);
@@ -734,14 +739,17 @@ public class MemberController {
 	
 	@RequestMapping("/insertMsgFriend.do")
 	public String insertMsg(@RequestParam("memberCode") int memberCode,
-							@RequestParam("fromMember") int fromMember) {
+							@RequestParam("fromMember") int fromMember,
+							@RequestParam("clubCode") int clubCode) {
 		Map<String,Integer> map = new HashMap();
 		map.put("memberCode", memberCode);
 		map.put("fromMember",fromMember);
 		log.debug("map = {}",map);
 		
 		int result = memberService.insertMsgFriend(map);
-		return "redirect:/club/clubMain.do";
+		
+		
+		return "redirect:/club/clubMain.do?clubCode="+clubCode ;
 	}
 	
 	//20200330 친구신청 수락
@@ -774,6 +782,19 @@ public class MemberController {
 			log.debug("msgCount={}",msgCount);
 			model.addAttribute("msgCount",msgCount);
 		}
+		
+		return "redirect:/member/mypage.do?memberCode="+memberCode;
+	}
+	//친구거절
+	@RequestMapping("/friendNo.do")
+	public String friendNo (@RequestParam("memberFrom") int memberFrom
+							,@RequestParam("memberCode") int memberCode,
+							Model model) {
+		int result = memberService.friendNo(memberFrom);
+		int msgCount = memberService.selectMsgCount(memberCode);
+		
+		model.addAttribute("msgCount",msgCount);
+		
 		
 		return "redirect:/member/mypage.do?memberCode="+memberCode;
 	}

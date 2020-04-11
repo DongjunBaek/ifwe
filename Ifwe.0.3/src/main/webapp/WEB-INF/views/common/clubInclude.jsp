@@ -169,7 +169,7 @@ $(function(){
                         	<c:if test="${cmember.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a></span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${cmember.memberCode}&clubCode=${club.clubCode}">${cmember.profileName}</a></span>
                         </div>
                         
                         </c:forEach>

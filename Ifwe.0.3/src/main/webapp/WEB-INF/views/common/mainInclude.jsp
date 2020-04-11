@@ -73,9 +73,26 @@ $(function(){
    
    
    $(".fa-comment-dots").click(function(){
-	  $(".nav-msg-cantainer").slideToggle(500);
-	   
+	   $(".nav-msg-cantainer").slideToggle(500,function(){
+		  $.ajax({
+				data:{
+					  "memberCode" : ${memberLoggedIn.memberCode}
+			 		  },
+	        	url:"${pageContext.request.contextPath}/friend/selectfriendmsg.do",
+	        	type:"GET",
+	        	success:function(data){
+	        		if(data>0){
+	        			console.log(data);
+	        			
+	        			};
+	        	},
+	        	error: function(jqxhr, textStatus, errorThrown){
+	        		
+	        	}
+	   		});
+	  }); 
    });
+	   
    
    $(".navmsg-receive").click(function(){
 	  $(".navmsg-receive").css("background-color","#2756a6"); 
@@ -300,10 +317,22 @@ text-decoration: none;
     float: right;
     color:white;
     font-size: 40px;
-    margin-top: 40px;
+    margin-top: 45px;
     margin-left: 30px;
     cursor: pointer;
+    position:relative;
 }
+.talk-count{
+	background-color: #fa3e3e;
+    border-radius: 2px;
+    color: white;
+    padding: 1px 3px;
+    font-size: 10px;
+    position: absolute;
+    top: 45px;
+    right:-7px;
+}
+
 
 .myinfo-textarea{
     outline: none;
@@ -325,14 +354,18 @@ text-decoration: none;
             <div class="logo-box"></div>
             <div class="nav-content-right">
             <i class="fas fa-comment-dots"></i>
+            <c:if test="${not empty friendMsgCount && friendMsgCount!= 0 }">
+             <span class="talk-count">${friendMsgCount }</span>
+             </c:if>
                 <div class="nav-right-icon2">
-                    <i class="fas fa-bell" style="font-size:35px;color: white;" ></i>
-                    <c:if test="${msgCount!=0 }">
+                    <i class="fas fa-bell" style="font-size:40px;color: white;" ></i>
+                    <c:if test="${not empty msgCount && msgCount != 0}">
                     	<span class="bell-count">${msgCount }</span>
                     </c:if>
                 </div>
                 <div class="nav-right-icon1">
                     <i class="fas fa-sort-down fa-2x" id="nav-arrowicon" style="color: white;"></i>
+                   
                 </div>
                 <div class="nav-clubimg">
 
