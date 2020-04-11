@@ -1,6 +1,8 @@
 package com.kh.ifwe.fullcalendar.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,15 @@ public class FullcalendarServiceImpl implements FullcalendarService {
 	public Club checkMaster(String clubCode) {
 		// TODO Auto-generated method stub
 		return fullcalendardao.checkMaster(clubCode);
+	}
+
+	
+
+	@Override
+	public int selectClubMember(Map<String, String> ClubMemberCheck) {
+		// TODO Auto-generated method stub
+
+		return fullcalendardao.selectClubMember(ClubMemberCheck);
 	}
 
 }

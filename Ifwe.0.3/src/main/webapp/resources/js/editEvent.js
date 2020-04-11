@@ -38,7 +38,7 @@ var editEvent = function (event, element, view) {
     //업데이트 버튼 클릭시
     $('#updateEvent').unbind();
     $('#updateEvent').on('click', function () {
-
+  	  if(checkMaster==1){
         if (editStart.val() > editEnd.val()) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
             return false;
@@ -107,7 +107,7 @@ var editEvent = function (event, element, view) {
                 alert('수정되었습니다.')
             }
         });
-
+    }//clubMemberCheck
     });
 };
 

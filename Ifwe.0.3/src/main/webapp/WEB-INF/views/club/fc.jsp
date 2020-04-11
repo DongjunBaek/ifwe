@@ -202,7 +202,8 @@ var checkMaster= 0;
 			
 	   console.log("onload On");
 		 
-		      var a = ${memberLoggedIn.memberCode };
+		      
+		  
 		      $.ajax({
 		         url:"<%=request.getContextPath()%>/fullcalendar/checkmaster",
 		         type: "GET", 
@@ -241,6 +242,7 @@ var checkMaster= 0;
             
 	<script>
 		var clubCCode =${club.clubCode};
+		var memberCCode = ${memberLoggedIn.memberCode };
 		</script>
 		
 	<script

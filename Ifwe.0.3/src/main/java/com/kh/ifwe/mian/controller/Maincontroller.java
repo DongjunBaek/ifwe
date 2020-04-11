@@ -1,5 +1,6 @@
 package com.kh.ifwe.mian.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +80,17 @@ public class Maincontroller {
 		List<Club> interClub = memberService.selectInterClub(member.getMemberLike());
 		log.debug("interCLub= {}",interClub);
 		model.addAttribute("interClub", interClub);
+		/**
+		 * 0411 추천 소모임 소모임 장 이미지 불러오기
+		 */
+		List<Profile> clubmasterProfile = new ArrayList<Profile>();
+		if(interClub != null) {
+			for(int i=0; i<interClub.size();i++) {
+				Profile profile = memberService.selectProfileByMemberCode(interClub.get(i).getClubMaster());
+				clubmasterProfile.add(profile);
+			}
+			model.addAttribute("clubmasterProfile", clubmasterProfile);
+		}
 		
 		//이벤트 배너 불러오기
 		//2020-04-01

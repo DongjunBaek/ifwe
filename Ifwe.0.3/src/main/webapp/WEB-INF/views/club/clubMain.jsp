@@ -869,17 +869,7 @@ width: 550px;
 		                      </c:forEach>
 	                     </div>
                       </c:if>
-                     
 
-                      
-                      <style>
-                      .fa-heart-o {
-  						color: red;
-  						cursor: pointer;
-						}			
-					</style>
-
-                      
                       <div class="article1-line"></div>
                       <form action="${pageContext.request.contextPath }/clubboard/insertmainComment.do" method="post" >
                       <div class="article1-comment-box">
@@ -889,7 +879,7 @@ width: 550px;
                       	  <input type="hidden" name="memberCode" value="${clubLoggedIn.memberCode }" />
                       	  <input type="hidden" name="boardNo" value="${cbl.boardNo }"/>
 
-                      	  <c:if test="${not empty heartMember }">
+                      	<%--   <c:if test="${not empty heartMember }">
                       	  <c:forEach items="${heartMember }" var="h">
                       	 	<c:if test="${h.boardNo == cbl.boardNo }">
 	                      	 	<c:if test="${h.memberCode == memberLoggedIn.memberCode }">
@@ -906,15 +896,15 @@ width: 550px;
 	                      	 	</c:if>
 	                     
                       	 	</c:if>
-                      	</c:forEach>
-                      	  </c:if>
+                     		</c:forEach>
+                      	  </c:if> --%>
                       	  
-                      	  <c:if test="${empty heartMember }">
+<%--                       	  <c:if test="${empty heartMember }">
                       	  <span class="heart" style="font-size:30px;margin-bottom:10px;">
 		                      	  	<i class="fa fa-heart-o" aria-hidden="true" ></i> 
 		                      	  </span>
 		               			<span style="font-size:16px;" id="count">좋아요 ${cbl.boardHeart }</span>
-                      	  </c:if>
+                      	  </c:if> --%>
                       	
 
                       	  <span class ="boardHeart" style="font-size:30px;margin-bottom:10px;">
@@ -1095,5 +1085,9 @@ checkMyHeart();
   color: red;
   cursor: pointer;
 }
+.fa-heart-o {
+	color: red;
+  	: pointer;
+}	
 </style>
 </html>

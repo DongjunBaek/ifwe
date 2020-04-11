@@ -108,7 +108,7 @@
 
 
 		insert into member_profile values(
-		#{memberCode},null,null,null,null,'0',#{memberGender},null
+		#{memberCode},'닉네임없음',null,null,null,'0',#{memberGender},null
 
 		)
 
