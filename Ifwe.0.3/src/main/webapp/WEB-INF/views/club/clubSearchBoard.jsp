@@ -152,13 +152,13 @@ $(function(){
     
     
     
-    var height = 0;
-    
+    var height = {};
+    var idx = 0;
     $(".article1-bard-content").each(function(index,item){
-    	
-    	height = $(item).height();
-    	
-    	if(height>90){
+
+    	height[idx] = $(item).height();
+    	console.log(height[idx]);
+    	if(height[idx]>90){
     		$(item).siblings('label').css("display","inline-block");
     		$(item).css("overflow","hidden");
     		$(item).css("max-height","100px");
@@ -167,20 +167,18 @@ $(function(){
     	var checkbox = $(item).siblings('input[type=checkbox]');
     	var chkid = "#"+checkbox.attr('id');
     	
-    	$(chkid).change(function(){
-    		
-    		
+     	$(chkid).change(function(){
+    		var cgheight = $(chkid).siblings(".article1-bard-content").height();
+    		var idxnum = chkid.slice(-1);
     		if($(checkbox).is(":checked")){
-                 $(item).css("max-height",height+"px");
+                 $(item).css("max-height",height[idxnum]+"px");
             }else{
                  $(item).css("max-height","100px");
                  
             }
-    		
         })
-    	
+        idx++;
     });
-    
     
     
     
@@ -254,7 +252,7 @@ function showSlides(n) {
               <div class="article-board-wrapper">
                   <div class="article1-board-frofile">
                       <div class="article1-frofile-img">
-                      	<img src="${pageContext.request.contextPath }/resources/upload/member/frofileimg/${cbl.profileImgRe}" alt="" />
+                      	<img src="${pageContext.request.contextPath }/resources/upload/profile/${cbl.profileImgRe}" alt="" />
                       </div>
                           <div class="article1-frofile-name">
                               <p class="article1-leader-name">${cbl.profileName }</p>

@@ -794,6 +794,13 @@ public class MemberController {
 			model.addAttribute("msgCount",msgCount);
 		}
 		
+		//형철 친구수락시 친구목록 다시조회
+		List<SessionFriend> friendList = memberService.selectMsgFriend(memberCode);
+		
+		model.addAttribute("friendList",friendList);
+		
+		
+		
 		return "redirect:/member/mypage.do?memberCode="+memberCode;
 	}
 	//친구거절
