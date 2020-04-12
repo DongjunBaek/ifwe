@@ -90,7 +90,7 @@ MemberService memberservice;
 		List<Profile> profileList = new ArrayList<Profile>();
 		Profile pro = new Profile();
 
-	FriendProfile	FP= new FriendProfile();
+		FriendProfile	FP= new FriendProfile();
 		
 		
 		System.out.println("listSize"+Friendlist.size());

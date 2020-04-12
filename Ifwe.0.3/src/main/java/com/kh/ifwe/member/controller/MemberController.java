@@ -289,7 +289,7 @@ public class MemberController {
 		Member member = memberService.memberSelectOneCode(memberCode);
 		log.debug("member={}",member);
 		
-		List<Member> friendList = memberService.selectFriendList(member.getMemberCode()	);
+		List<Member> friendLists = memberService.selectFriendList(member.getMemberCode()	);
 		List<FriendList> friends = friendService.selectListFriend(member.getMemberCode());
 		/**
 		 * 0404 dongjun
@@ -304,9 +304,9 @@ public class MemberController {
 		List<ClubBoard> clubBoard = clubBoardService.selectMyClubBoard(member.getMemberCode());
 			
 				
-		log.debug("friendList={}",friendList);
+		log.debug("friendLists={}",friendLists);
 		log.debug("friends={}",friends);
-		model.addAttribute("friendList",friendList);
+		model.addAttribute("friendLists",friendLists);
 		model.addAttribute("friends",friends);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
 		model.addAttribute("clubBoard",clubBoard);

@@ -226,7 +226,7 @@
 		on 
 			Me.member_from = M.member_code
 		where 
-			Me.member_from = #{memberFrom}
+			Me.member_from = #{memberFrom} and Me.msg_cate_code = 'f1'
 		order by 
 			msg_date desc
 	</select>
@@ -242,9 +242,9 @@
 			friend 
 		values(
 			#{memberCode},
-			#{friendCode},
 			#{memberId},
-			#{memberPname}
+			#{memberPname},
+			#{friendCode}
 			)
 		
 	</insert>
@@ -254,9 +254,9 @@
 			friend 
 		values(
 			#{memberCode},
-			#{friendCode},
 			#{memberId},
-			#{memberPname}
+			#{memberPname},
+			#{friendCode}
 			)
 	</insert>
 	

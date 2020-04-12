@@ -102,8 +102,8 @@ var ynFormsg = 0;
                 <div class="contents" style="overflow:auto;">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <c:if test="${not empty friendList }">
-                        	<c:forEach items="${friendList }" var="fl" varStatus="vs" >
+                        <c:if test="${not empty friendLists }">
+                        	<c:forEach items="${friendLists }" var="fl" varStatus="vs" >
                         		
                         		<c:if test="${fl.msgView == 'n' }">
                         		<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.

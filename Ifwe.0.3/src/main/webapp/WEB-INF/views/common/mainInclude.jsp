@@ -178,6 +178,7 @@ $(function(){
 	        			});
 	        		
 			 	 	}); 
+				  
 	        	   $(".navmsg-send").click(function(){
 	        		   $("#msglistbox").empty();
 	        			$(data).each(function(idx,msglist){
@@ -229,10 +230,12 @@ $(function(){
 			 
 			 });
 			 
+				 
 			 
 			 $("#navmsgsubmit-btn").click(function(){
 				 var sendcontent = $("#sendContent").val();
 				 
+			 if(sendcontent != '' && sendcontent != null){
 				 $.ajax({
 					data:{
 						  "memberCode":friendCode,
@@ -242,14 +245,14 @@ $(function(){
 		        	url:"${pageContext.request.contextPath}/friend/insertfriendmsg.do",
 		        	type:"POST",
 		        	success:function(data){
-		        		
+		        		console.log("여러번테스트");
 		        		if(data > 0){
 		        			$(".receive-container").animate({left:"-500px"},1000);
 		        			$(".send-container").animate({left:"-500px"},1000,function(){
 			        			$("#sendContent").val('');
 		        			});
-		        			$(item).trigger("click");
 		        		}
+					    $(item).trigger("click");
 		        		
 		        		
 		        	},
@@ -261,10 +264,11 @@ $(function(){
 					 
 					 
 				 });
+			     $("#sendContent").val('');
 				 
 				 
+			 }
 			 });
-			 
 			 
 			 
 			 
