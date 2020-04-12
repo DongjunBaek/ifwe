@@ -106,7 +106,8 @@ var ynFormsg = 0;
                 <div class="contents" style="overflow:auto;">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <c:if test="${not empty friendMessage  }">
+                     
+                      <c:if test="${not empty friendMessage  }">
                         	<c:forEach items="${friendMessage }" var="fl" varStatus="vs" >
                         		
                         		<c:if test="${fl.msgView == 'n' }">

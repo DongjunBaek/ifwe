@@ -30,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@SessionAttributes(value={"msgCount","friendList","friendMsgCount"})
+@SessionAttributes(value={"msgCount","friendMsgCount"})
+
 public class Maincontroller {
 	
 	@Autowired
