@@ -411,7 +411,7 @@ function maxLengtYear(object){
             <div class="enroll-container-number bold-kor">02</div>
             <div class="phone-posts font-kor">
                 <p class="phone-post">안전한 회원가입을 위해</p>
-                <p class="phone-post">본인인증을 해주십쇼.</p>
+                <p class="phone-post">본인인증을 해주십시오.</p>
             </div>
             <div class="phone-btn-container">
                 <div class="phone-btn" id="sendSMS">
@@ -441,7 +441,7 @@ function maxLengtYear(object){
             <div class="enroll-hyphen"></div>
             <div class="enroll-container-number bold-kor">03</div>
             <div class="font-kor info-posts">
-                <p class="phone-post">회원님의 정보를 입력헤주세요.</p>
+                <p class="phone-post">회원님의 정보를 입력해주세요.</p>
             </div>
             <div class="enroll-form">
                 <form action="${pageContext.request.contextPath }/member/enroll.do" method="post"
