@@ -4,6 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
+<style>
+#masterIdInclude{
+	width: 100%;
+}
+</style>
 <script>
 $(function(){
     $("#nav-arrowicon").click(function(){
@@ -89,7 +94,7 @@ $(function(){
                 </div>
                 <div class="aside-leader-information">
                     <i class="fas fa-crown" style="font-size:20pt;"></i>
-                    <p class="aside-leader-allias friend-name-profile" style="margin:0;">${clubMaster.profileName }</p>
+                    <p class="aside-leader-allias friend-name-profile" id="masterIdInclude" style="margin:0;">${clubMaster.profileName }</p>
                     <p class="aside-leader-id">@ ${clubMaster.memberId }</p>
                 </div>
 
@@ -169,7 +174,7 @@ $(function(){
                         	<c:if test="${cmember.memberGender=='m' }">
                         	<i class="fas fa-male"></i>
                         	</c:if>
-                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${cmember.memberCode}">${cmember.profileName}</a></span>
+                            <span class="friendname friend-name-profile"><a href="${pageContext.request.contextPath }/member/profile.do?memberCode=${cmember.memberCode}&clubCode=${club.clubCode}">${cmember.profileName}</a></span>
                         </div>
                         
                         </c:forEach>

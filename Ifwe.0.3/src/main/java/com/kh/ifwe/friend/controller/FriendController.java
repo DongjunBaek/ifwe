@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class FriendController {
 
 	@Autowired
 	FriendService friendService;
-
+	
 	@PostMapping("/insertFriendRequest")
 	@ResponseBody
 	public Model insertFriendRequest(Model model, Friend friend, HttpServletRequest request,
@@ -169,6 +170,20 @@ MemberService memberservice;
 		int result = friendService.updateMsg(msgCode);
 		
 		return result;
+	}
+	
+	@GetMapping("/selectfriendmsg.do")
+	@ResponseBody
+	public int selectfriendmsg(@RequestParam("memberCode") int memberCode,
+								HttpServletRequest request,
+								Model model) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("friendMsgCount");
+		int friendMsgCount = memberservice.selectFriendMsgCount(memberCode);
+		log.debug("friendMsgCount=",friendMsgCount);
+		model.addAttribute("friendMsgCount",friendMsgCount);
+		
+		return friendMsgCount;
 	}
 	
 

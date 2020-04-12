@@ -128,7 +128,7 @@
     font-size: 20px;
     padding: 3%;
 }
-.friend-btn{
+/* .friend-btn{
     height: 35px;
     width: 90px;
     color: white;
@@ -138,7 +138,7 @@
     background-color: #2756a6;
     border-radius: 20px;
     margin-left: 40%;
-}
+} */
 .board-div{
     margin-top: 5%;
     min-height:min-content;

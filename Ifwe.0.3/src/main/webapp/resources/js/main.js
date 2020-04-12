@@ -164,7 +164,9 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
-	  console.log("클럽코드"+clubCCode);
+	 /* console.log("클럽코드"+clubCCode);
+	  console.log("클럽코드="+clubCCode);
+	  console.log("멤버코드="+memberCCode);*/
 	  
     $.ajax({
       type: "get",
@@ -172,11 +174,14 @@ var calendar = $('#calendar').fullCalendar({
         data: {
         	start:start.format(),
         	end: end.format(),
-        	clubCode:clubCCode
-        	
+        	clubCode:clubCCode,
+        	memberCode:memberCCode
         },
         dataType:'json',
       success: function (response) {
+/*    	  console.log("클럽코드="+clubCCode);
+    	  console.log("멤버코드="+memberCCode);*/
+    	  
     	  var events=[];
         var fixedDate = response.map(function (array) {	
         /*	if (array.fullAllDay && array.fullStart !== array.fullend) {
@@ -272,6 +277,7 @@ var calendar = $('#calendar').fullCalendar({
 
   //일정 드래그앤드롭
   eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+	  if(checkMaster==1){
     $('.popover.fade.top').remove();
 
     //주,일 view일때 종일 <-> 시간 변경불가
@@ -316,7 +322,11 @@ var calendar = $('#calendar').fullCalendar({
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
       }
     });
-
+  }//checkMaster if
+	  else{alert('일정 변경은 클럽장만 가능합니다.')
+		  $('#calendar').fullCalendar('refetchEvents');
+	  }
+  
   },
 
   select: function (startDate, endDate, jsEvent, view) {

@@ -12,6 +12,7 @@ import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.dao.MemberDAO;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
+import com.kh.ifwe.member.model.vo.Message;
 import com.kh.ifwe.member.model.vo.Profile;
 
 @Service
@@ -107,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> selectFriendList(int memberCode) {
+	public List<Message> selectFriendList(int memberCode) {
 		return memberDAO.selectFriendList(memberCode);
 	}
 
@@ -162,6 +163,16 @@ public class MemberServiceImpl implements MemberService {
 	public int loginRecordUpdate(int memberCode) {
 		// TODO Auto-generated method stub
 		return memberDAO.loginRecordUpdate(memberCode);
+	}
+
+	@Override
+	public int friendNo(int memberFrom) {
+		return memberDAO.friendNo(memberFrom);
+	}
+
+	@Override
+	public int selectFriendMsgCount(int memberCode) {
+		return memberDAO.selectFriendMsgCount(memberCode);
 	}
 
 

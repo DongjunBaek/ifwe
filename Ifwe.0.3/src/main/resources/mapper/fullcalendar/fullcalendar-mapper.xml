@@ -61,4 +61,8 @@
 	select * from club
 	where club_code=#{clubCode}
 	</select>
+	
+	<select id="selectClubMember" resultType="clubMember">
+	select * from CLUB_MEMBERS where CLUB_CODE=#{clubCode} and MEMBER_CODE = #{memberCode}
+	</select>
 </mapper>

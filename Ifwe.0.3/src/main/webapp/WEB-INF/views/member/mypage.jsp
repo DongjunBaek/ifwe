@@ -10,9 +10,13 @@
 p{
 margin:0;
 }
-.friend-btn{
-margin-left:40%;
+.friend-reject-btn{
+float:right;
 }
+.friend-btn{
+float:right;
+}
+
 .msglist-container{
 background-color:white;
 }
@@ -102,19 +106,18 @@ var ynFormsg = 0;
                 <div class="contents" style="overflow:auto;">
                     <div class="content font-kor">
                         <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
-                        <c:if test="${not empty friendList }">
-                        	<c:forEach items="${friendList }" var="fl" varStatus="vs" >
+                        <c:if test="${not empty friendMessage  }">
+                        	<c:forEach items="${friendMessage }" var="fl" varStatus="vs" >
                         		
                         		<c:if test="${fl.msgView == 'n' }">
-                        		<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
-	                        	<input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
+                        		<p class="mypage-p-content"><span class="friend-name-profile">${fl.memberName }님에게 친구신청이 왔습니다.</span>
+	                        	
+			                     <input type="button" value="거절" class="friend-reject-btn font-kor" style="padding:0" 
+			                        onclick="location.href='${pageContext.request.contextPath}/member/friendNo.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'">
+			                        <input type="button" value="수락" class="friend-btn font-kor" style="padding:0" 
 			                        onclick="location.href='${pageContext.request.contextPath}/member/friendYes.do?memberFrom=${fl.memberFrom }&memberCode=${memberLoggedIn.memberCode }'">
 			                    </p>
 	                        	</c:if> 
-	                        	<c:if test="${fl.msgView == 'y' }">
-	                        	<p class="mypage-p-content"><span class="friend-name-profile"></span>${fl.memberName }님에게 친구신청이 왔습니다.
-	                        	<input type="button" value="수락완료"class="friend-btn font-kor" style="padding:0;"></p>	
-	                        	</c:if>
 	                        	
 	                        </c:forEach>
                         </c:if>

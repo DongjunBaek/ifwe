@@ -108,7 +108,7 @@
 
 
 		insert into member_profile values(
-		#{memberCode},null,null,null,null,'0',#{memberGender},null
+		#{memberCode},'닉네임없음',null,null,null,'0',#{memberGender},null
 
 		)
 
@@ -194,7 +194,7 @@
 	
 	<select id="selectFriendList" resultType="message" >
 		select 
-			F.*,M.member_name
+			F.*,M.member_name,M.member_id
 		from
 			member_msg F left join member M
 		on
@@ -202,7 +202,7 @@
 		where
 			F.member_code = #{memberCode}
 		and
-			msg_cate_code = 'f1'
+			msg_cate_code = 'f1' 
 	</select>
 	
 	<update id="friendYes">
@@ -212,6 +212,20 @@
 			msg_view = 'y'
 		where
 			member_from = #{memberFrom}
+		and
+			msg_cate_code = 'f1'
+		
+	</update>
+	
+	<update id="friendNo">
+		update
+			member_msg
+		set
+			msg_view = 'y'
+		where
+			member_from = #{memberFrom}
+		and
+			msg_cate_code = 'f1'
 		
 	</update>
 	
@@ -226,7 +240,7 @@
 		on 
 			Me.member_from = M.member_code
 		where 
-			Me.member_from = #{memberFrom}
+			Me.member_from = #{memberFrom} and Me.msg_cate_code = 'f1'
 		order by 
 			msg_date desc
 	</select>
@@ -242,9 +256,9 @@
 			friend 
 		values(
 			#{memberCode},
-			#{friendCode},
 			#{memberId},
-			#{memberPname}
+			#{memberPname},
+			#{friendCode}
 			)
 		
 	</insert>
@@ -254,9 +268,10 @@
 			friend 
 		values(
 			#{memberCode},
-			#{friendCode},
 			#{memberId},
-			#{memberPname}
+			#{memberPname},
+			#{friendCode}
+			
 			)
 	</insert>
 	
@@ -312,6 +327,19 @@
 	
 	
 	</update>
+	<select id="selectFriendMsgCount" resultType="_int">
+		select 
+			count(*) 
+		from 
+			member_msg
+		<where> 
+			msg_cate_code = 'm1' 
+		and 
+			msg_view = 'n'
+		and
+			member_code = #{memberCode}
+		</where>
+	</select>
 
 </mapper>
 
