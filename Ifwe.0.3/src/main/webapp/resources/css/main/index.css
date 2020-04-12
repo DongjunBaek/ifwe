@@ -129,10 +129,10 @@
 .main-section article:first-child div:nth-child(2) {    
     margin-top: 5.2%;
 }
-.main-section article:first-child div:nth-child(2) p{    
+/* .main-section article:first-child div:nth-child(2) p{    
     font-size: 40px;
     font-weight: bold;
-}
+} */
 .main-section article:first-child div:nth-child(3){
     margin-top: 5.2%;
 }
@@ -156,6 +156,7 @@
     border: none;
     font-weight: bold;    
     cursor: pointer;
+    font-family: 'GmarketSansMedium';
 }
 
 /* article box right*/
