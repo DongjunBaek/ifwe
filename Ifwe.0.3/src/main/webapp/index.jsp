@@ -263,6 +263,28 @@ $(function(){
 
 
 </script>
+<style>
+.index_maintitle h2{
+font-size : 35px;
+font-weight: 300;
+margin-bottom: 5px;
+}
+.index_maintitle h1{
+font-size : 45px;
+margin-top :13px;
+font-family: 'GmarketSansMedium';
+}
+.index_maintitle img{
+margin-top : 10px;
+float :left;
+margin-right : 5px;
+}
+.index_maintitle2 p{
+font-size : 20px;
+line-height: 1.6;
+}
+
+</style>
 <body>
     <div class="main-body main-kor">
         <div class="wrapper-main">    
@@ -279,15 +301,18 @@ $(function(){
             </header>
             <section class="main-section">
                 <article>
-                    <div><p>나와 관심사가 같은 친구,</p></div>                    
-                    <div><p><img src="resources/images/index/logo_black.png" 
-                    		style="width:115px; height:50px;" alt=""> 에서 만나보세요</p></div>                    
-                    <div>
-                    	<a href="${pageContext.request.contextPath }/main/mainPage.do">메인페이지</a>
-                    	<a href="${pageContext.request.contextPath }/admin/adminPage.do">관리자페이지</a>
-                        <p>회원님의 관심사에 맞는 친구모임을</p>
-                        <p>찾아보세요. 나와 같은 취미의 친구들과</p>
-                        <p>즐거운 시간을 if we에서 보내보세요.</p>
+                    <div class="index_maintitle">
+	                    <h2>나와 관심사가 같은 친구,</h2>
+	                    <img src="resources/images/index/logo_black.png" 
+	                    		style="width:115px; height:50px;" alt="">  
+	                    <h1> 에서 만나보세요</h1>
+                    </div>                    
+                    <div class="index_maintitle2">
+                    	<%-- <a href="${pageContext.request.contextPath }/main/mainPage.do">메인페이지</a>
+                    	<a href="${pageContext.request.contextPath }/admin/adminPage.do">관리자페이지</a> --%>
+                        <p>회원님의 관심사에 맞는 친구모임을<br>
+                        	찾아보세요. 나와 같은 취미의 친구들과<br>
+                        	즐거운 시간을 if we에서 보내보세요.</p>
                     </div>                    
                     <div><button type="button" class="main-btn-start" id="startbutton">시작하기</button></div>                                                                                
                 </article>

@@ -150,9 +150,8 @@ p{
     font-weight: bolder;
     background-color: #2756a6;
     border-radius: 20px;
-    margin-left:18%;
 }
-.friend-nobtn{
+.friend-reject-btn{
     height: 35px;
     width: 90px;
     color: white;
