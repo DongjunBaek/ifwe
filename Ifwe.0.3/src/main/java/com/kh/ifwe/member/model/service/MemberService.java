@@ -57,7 +57,7 @@ public interface MemberService {
 
 	int friendYes(int memberFrom);
 
-	Friend selectOneForFriend(int memberFrom);
+	Friend selectOneForFriend(Map<String, Integer> param);
 
 	int insertFriends(Friend friend);
 
@@ -78,5 +78,8 @@ public interface MemberService {
 	int friendNo(int memberFrom);
 
 	int selectFriendMsgCount(int memberCode);
+
+	int selectOneMsg(Map<String, Integer> map);
+
 
 }

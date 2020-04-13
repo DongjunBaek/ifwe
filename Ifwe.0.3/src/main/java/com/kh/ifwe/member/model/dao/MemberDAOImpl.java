@@ -113,8 +113,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Friend selectOneForFriend(int memberFrom) {
-		return sqlSession.selectOne("member.selectOneForFriend",memberFrom);
+	public Friend selectOneForFriend(Map<String, Integer> param) {
+		return sqlSession.selectOne("member.selectOneForFriend",param);
 		
 	}
 
@@ -169,6 +169,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int selectFriendMsgCount(int memberCode) {
 		return sqlSession.selectOne("member.selectFriendMsgCount",memberCode);
+	}
+
+	@Override
+	public int selectOneMsg(Map<String, Integer> map) {
+		return sqlSession.selectOne("member.selectOneMsg",map);
 	}
 
 	

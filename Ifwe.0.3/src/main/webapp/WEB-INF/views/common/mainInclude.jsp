@@ -73,8 +73,10 @@ $(function(){
    
    
    $(".fa-comment-dots").click(function(){
-	   $(".nav-msg-cantainer").slideToggle(500,function(){
-		  $.ajax({
+	   var display = $(".nav-msg-cantainer").css("display");
+	   console.log(display);
+	   if(display=="block"){
+		   $.ajax({
 				data:{
 					  "memberCode" : ${memberLoggedIn.memberCode}
 			 		  },
@@ -83,14 +85,21 @@ $(function(){
 	        	success:function(data){
 	        		if(data>0){
 	        			console.log(data);
-	        			
+	        			$(".talk-count").text(data);
 	        			};
 	        	},
 	        	error: function(jqxhr, textStatus, errorThrown){
 	        		
 	        	}
 	   		});
-	  }); 
+		   $(".talk-count").css("display","inline-block");
+	   }
+	   else{
+		   $(".talk-count").css("display","none");
+	   }
+	   
+	   $(".nav-msg-cantainer").slideToggle(500)
+		  
    });
 	   
    
