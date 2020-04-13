@@ -16,7 +16,7 @@
 				location.href="${pageContext.request.contextPath }/club/clubCreate.do";
 			});
 			
-			$("#clubMainBtn").click(function(){
+			$(".clubMainBtn").click(function(){
 				let clubCode = $(this).attr("data-clubCode");
 				location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
 			});
@@ -162,7 +162,7 @@ setInterval(function(){
 	                                    <div class="three-post3"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;${list.clubLocation }</div>
 	                                </div>
 	                                <div class="three-btn">
-	                                    <input type="button" value="자세히 보기" class="font-kor" id="clubMainBtn" data-clubCode=${list.clubCode }>
+	                                    <input type="button" value="자세히 보기" class="font-kor clubMainBtn" data-clubCode=${list.clubCode }>
 	                                </div>
 	                            </div>
 	                        	</c:forEach>

@@ -452,11 +452,12 @@ public class MemberController {
 		log.debug("reslt = {}", result);
 		if (result > 0) {
 			msg = "전화번호가 변경되었습니다.";
-			mav.addObject("memberLoggedIn", member);
 		} else {
 			msg = "전화번호가 번경되지않았습니다.";
 		}
-
+		
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+	    mav.addObject("memberLoggedIn",memberLoggedIn);
 		close = "close";
 		mav.addObject("msg", msg);
 		mav.setViewName("/member/updateEmailPhone");
@@ -495,11 +496,11 @@ public class MemberController {
 		log.debug("reslt = {}", result);
 		if (result > 0) {
 			msg = "이메일 주소가 변경되었습니다.";
-			mav.addObject("memberLoggedIn", member);
 		} else {
 			msg = "이메일 주소가 번경되지않았습니다.";
 		}
-
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+	      mav.addObject("memberLoggedIn",memberLoggedIn);
 		close = "close";
 		mav.addObject("msg", msg);
 		mav.setViewName("/member/updateEmailPhone");
