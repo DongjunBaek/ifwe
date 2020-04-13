@@ -81,6 +81,7 @@
 				and club_location = #{clubLocation}
 			</if>
 		</where>
+		order by cc.club_code
 	</select>
 	
 	<select id="selectListByName" resultType="clubMaster">
@@ -92,6 +93,7 @@
 				and club_location = #{clubLocation}
 			</if>
 		</where>
+		order by C.club_code
 	</select>
 	
 	<select id="selectMemberCode" resultType="member" parameterType="_int">
