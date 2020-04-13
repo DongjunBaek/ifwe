@@ -180,7 +180,12 @@ $(function(){
         idx++;
     });
     
-    
+    $(".three-dots").each(function(idx,item){
+    	$(item).click(function(){
+    		$(item).next(".click-three-dots").slideToggle(300);
+    		
+    	});
+    });
     
     
     
@@ -227,7 +232,13 @@ function showSlides(n) {
 	}
 
 </script>
+<style>
+.click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px; display: none;}
+.under-click-three-dots{width:200px;max-height: max-content;}
+.under-click-three-dots p{max-width:max-content; margin:12px auto;font-size:20px;}
 
+
+</style>
 
 </head>
 <body>
@@ -262,6 +273,15 @@ function showSlides(n) {
                               <div class="article1-curcle"></div>
                               <div class="article1-curcle"></div>
                           </div>
+                          <div class="click-three-dots">
+		                      <c:if test="${cl.memberCode == memberLoggedIn.memberCode }">
+		                      	<div class="under-click-three-dots"><p><i class="far fa-edit"></i>수정</p></div>
+		                      	<div class="under-click-three-dots"><p><i class="far fa-trash-alt"></i>삭제</p></div>
+		                      </c:if>
+		                     <c:if test="${cl.memberCode != memberLoggedIn.memberCode }">
+		                      	<div class="under-click-three-dots" name="board-report"><p><i class="far fa-angry"></i>신고</p></div>
+		                     </c:if>
+                      </div>
                       </div>
                       <p class="article1-boardmenu">${cbl.boardTitle }</p>
                       <input type="checkbox" id="readmore${vs.index }"/>

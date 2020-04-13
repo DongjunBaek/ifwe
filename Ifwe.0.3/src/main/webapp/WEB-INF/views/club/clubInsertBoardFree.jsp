@@ -9,10 +9,10 @@
 <meta charset="UTF-8">
 <title>Club Main</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/selectric.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubinclude.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/club/clubmain.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.selectric.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/selectric.css">
 <script src="https://kit.fontawesome.com/5e1e16b3f4.js" crossorigin="anonymous"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -178,6 +178,10 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
          background-color: #feba3b;
          color: #fff;
      }.aside-boardmenu{height:244px;}.aside-boardmenu li{height:26px;}.friend-name-profile{height:46px;}.aside-leader-id{height:23px;}.aside-friend-list{margin-top:50px;}
+     
+         .nav-myfrofile-box{
+    	height:140px;
+    } 
 </style>
 <script>
 $(document).ready(function() {
@@ -251,7 +255,7 @@ $(document).ready(function() {
 	}
 </script>
 <style>
-.summernote-images{border:1px solid black; width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}</style>
+.summernote-images{border:1px solid #ebebeb; width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}</style>
 </head>
 <body style="background-color:rgba(246,246,246,0.5);;">
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
