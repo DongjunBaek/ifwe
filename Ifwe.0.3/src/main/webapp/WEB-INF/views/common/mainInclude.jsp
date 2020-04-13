@@ -83,7 +83,7 @@ $(function(){
 	        	url:"${pageContext.request.contextPath}/friend/selectfriendmsg.do",
 	        	type:"GET",
 	        	success:function(data){
-	        		if(data>0){
+	        		if(data>=0){
 	        			console.log(data);
 	        			$(".talk-count").text(data);
 	        			};
