@@ -76,6 +76,7 @@ public class Maincontroller {
 		//내 소모임 목록
 		List<Club> clubList = memberService.selectClubList(member.getMemberCode());
 		model.addAttribute("clubList", clubList);
+		member = memberService.memberSelectOneCode(member.getMemberCode());
 		
 		//내 관심사 소모임목록 (가입 안되어있는 거 )
 		List<Club> interClub = memberService.selectInterClub(member.getMemberLike());

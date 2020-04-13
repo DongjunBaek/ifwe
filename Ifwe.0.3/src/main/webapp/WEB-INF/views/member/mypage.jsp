@@ -31,9 +31,11 @@ cursor:pointer;
 
 }
 .board-con{
-	transform: translateY(-40%);
+	transform: translateY(-10%);
 }
 	
+.p-board{
+	width : 100%;
 }
 </style>
 <script >
