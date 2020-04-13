@@ -215,7 +215,6 @@ $(function(){
                     	<input type="hidden" name="clubCode" value="${club.clubCode }" />
                         <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
                 </div>
-                
                 </form>
                 
             </header>
