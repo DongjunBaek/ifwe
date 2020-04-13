@@ -524,7 +524,6 @@ $(function(){
 	
 	
 	$(".comment-sliderbutton").click(function(){
-		console.log($(this).parent().next()[0]);
 		$(this).parent().next().slideToggle(300);
 		
 	});
