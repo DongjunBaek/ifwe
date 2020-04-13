@@ -241,8 +241,7 @@ public class ClubBoardController {
 		
 		String msg = result>0?"신고완료":"실패";
 		redirectAttributes.addFlashAttribute("msg",msg);
-		
-		return "redirect:freeboard.do?clubBoardlistNo="+clubBoardListNo;
+		return "redirect:/clubboard/freeboard.do?clubBoardlistNo="+clubBoardListNo;
 	}
 	
 	@GetMapping("/heart.do")

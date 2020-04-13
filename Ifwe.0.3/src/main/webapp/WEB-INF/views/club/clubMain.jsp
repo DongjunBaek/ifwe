@@ -852,7 +852,7 @@ width: 550px;
                 <input type="hidden" name="boardNo" value="${cbl.boardNo }" />
                 <input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" />
                 <input type="hidden" name="clubCode" value="${cbl.clubCode}" />
-                <input type="hidden" name="clubBoardListNo" value="${cb.clubBoardlistNo}" />
+                <input type="hidden" name="clubBoardListNo" value="${cbl.clubBoardlistNo}" />
                 </form>
                 <p><br /></p>
                 <p><br /></p>
