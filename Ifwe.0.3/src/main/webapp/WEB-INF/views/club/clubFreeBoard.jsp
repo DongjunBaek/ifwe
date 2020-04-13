@@ -25,8 +25,6 @@
 <script>
 $(function(){
 	
-	$(".click-three-dots").css("display","none");
-	
 	$(".comment-sliderbutton").click(function(){
 		console.log($(this).parent().next()[0]);
 		$(this).parent().next().slideToggle(300);
@@ -188,11 +186,11 @@ $(function(){
     });
     
     
-    $("#three-dots").click(function(){
-    	console.log("신고신고신고");
-    	$(".click-three-dots").css("display","block");
-    
-    	
+    $(".three-dots").each(function(idx,item){
+    	$(item).click(function(){
+    		$(item).next(".click-three-dots").slideToggle(300);
+    		
+    	});
     });
     
     
@@ -338,7 +336,7 @@ height:1280px;}
   color: red;
   cursor: pointer;
 }
-.click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px;}
+.click-three-dots{width:200px;max-height: max-content;border:3px solid #cbcbcb;float:right; position: relative;top: 50px; display: none;}
 .under-click-three-dots{width:200px;max-height: max-content;}
 .under-click-three-dots p{max-width:max-content; margin:12px auto;font-size:20px;}
  /* The Modal (background) */
@@ -406,7 +404,7 @@ width: 550px;
                        <div class="article1-frofile-name">
                            <p class="article1-leader-name">${cl.profileName }</p>
                        </div>
-                      <div class="article1-curcle-box" id="three-dots">
+                      <div class="article1-curcle-box three-dots">
                           <div class="article1-curcle"></div>
                           <div class="article1-curcle"></div>
                           <div class="article1-curcle"></div>
@@ -530,45 +528,6 @@ width: 550px;
  
       </article>
       <article class="article2 flotclass">
-              <div class="article2-title">
-                  <p>이런건 어때요?</p>
-              </div>
-
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
-              <div class="article2-container">
-                  <div class="article2-box">
-                      <p>망고스터디</p>
-                      <p>스터디 카페 추천해드려요</p>
-                      <div class="article2-line"></div>
-                  </div>
-              </div>
 
       </article>
       

@@ -178,6 +178,13 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
          background-color: #feba3b;
          color: #fff;
      }.aside-boardmenu{height:244px;}.aside-boardmenu li{height:26px;}.friend-name-profile{height:46px;}.aside-leader-id{height:23px;}.aside-friend-list{margin-top:50px;}
+     
+    .nav-myfrofile-box{
+    	height:140px;
+    } 
+     
+     
+     
 </style>
 <script>
 $(document).ready(function() {
