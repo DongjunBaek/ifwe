@@ -292,8 +292,11 @@ $(".paymentbtn").click(function(){
 	var memberrshipName=$(".name-checkbox");
 	var prices = $(".list-price");
 	let total= 0;
+	let grade = "";
 	for(var i =0; i < memberrshipName.length; i++){
+		console.log(grade)
 		total += Number($(prices[i]).text().substring(0,4));
+		 grade += $(memberrshipName[i]).children().eq(0).val()
 	}
 	console.log(total);
 
@@ -301,7 +304,7 @@ $(".paymentbtn").click(function(){
 		    pg : 'html5_inicis', // version 1.1.0부터 지원.
 		    pay_method : 'vbank',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:결제테스트',
+		    name : '주문명: '+ grade.toUpperCase() ,
 		    amount: total,
 		    buyer_name : "${memberLoggedIn.memberName}" ,
 		    buyer_tel : "01032628496",
@@ -325,6 +328,7 @@ $(".paymentbtn").click(function(){
 		    		type: "POST",
 		    		success: function(data){
 		    			console.log(data);
+		    			location.href = "${pageContext.request.contextPath}/main/mainPage.do";
 		    		},
 		    		error: function(x,s,e){
 		    			console.log(x,s,e);
@@ -332,12 +336,12 @@ $(".paymentbtn").click(function(){
 		    		
 		    		});
 		    	}
-        var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
-        msg += '상점 거래ID : ' + rsp.merchant_uid;
-        msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num;
-        
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        
         
     } else {
         var msg = '결제에 실패하였습니다.';

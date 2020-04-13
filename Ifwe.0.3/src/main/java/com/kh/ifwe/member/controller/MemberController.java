@@ -452,11 +452,12 @@ public class MemberController {
 		log.debug("reslt = {}", result);
 		if (result > 0) {
 			msg = "전화번호가 변경되었습니다.";
-			mav.addObject("memberLoggedIn", member);
 		} else {
 			msg = "전화번호가 번경되지않았습니다.";
 		}
-
+		
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+	    mav.addObject("memberLoggedIn",memberLoggedIn);
 		close = "close";
 		mav.addObject("msg", msg);
 		mav.setViewName("/member/updateEmailPhone");
@@ -495,11 +496,11 @@ public class MemberController {
 		log.debug("reslt = {}", result);
 		if (result > 0) {
 			msg = "이메일 주소가 변경되었습니다.";
-			mav.addObject("memberLoggedIn", member);
 		} else {
 			msg = "이메일 주소가 번경되지않았습니다.";
 		}
-
+		MemberLoggedIn memberLoggedIn = memberService.selectMemberLogin(member.getMemberCode());
+	      mav.addObject("memberLoggedIn",memberLoggedIn);
 		close = "close";
 		mav.addObject("msg", msg);
 		mav.setViewName("/member/updateEmailPhone");
@@ -696,7 +697,7 @@ public class MemberController {
 	@ResponseBody
 	public int membershipPay(@RequestParam("membershipName") String membershipName ,
 								@RequestParam("clubCode") String clubCode,
-								@RequestParam("memberCode") String memberCode) {
+								@RequestParam("memberCode") String memberCode,ModelAndView mav) {
 		log.debug("membershipName = {}",membershipName);
 		log.debug("clubName = {}",clubCode);
 		log.debug("memberCode = {}",memberCode);
@@ -749,18 +750,31 @@ public class MemberController {
 	
 	
 	@RequestMapping("/insertMsgFriend.do")
-	public String insertMsg(@RequestParam("memberCode") int memberCode,
+	public ModelAndView insertMsg(@RequestParam("memberCode") int memberCode,
 							@RequestParam("fromMember") int fromMember,
-							@RequestParam("clubCode") int clubCode) {
+							@RequestParam("clubCode") int clubCode,
+							RedirectAttributes redirectAttributes) {
+		ModelAndView mav = new ModelAndView();
 		Map<String,Integer> map = new HashMap();
 		map.put("memberCode", memberCode);
 		map.put("fromMember",fromMember);
 		log.debug("map = {}",map);
+		int msghave = memberService.selectOneMsg(map);
+		log.debug("msghave ={}",msghave);
+		String msg = "";
 		
-		int result = memberService.insertMsgFriend(map);
+		if(msghave == 0) {
+			int result = memberService.insertMsgFriend(map);
+			mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode+"");
+		}else {
+			msg="이미 친구신청을 하셨습니다.";
+			mav.setViewName("redirect:/club/clubMain.do?clubCode="+clubCode+"");
+			redirectAttributes.addFlashAttribute("msg",msg);
+		}
 		
 		
-		return "redirect:/club/clubMain.do?clubCode="+clubCode ;
+		
+		return mav ;
 	}
 	
 	//20200330 친구신청 수락
@@ -772,7 +786,11 @@ public class MemberController {
 		int result = memberService.friendYes(memberFrom);
 		log.debug("memberFrom={}",memberFrom);
 		if(result>0) {
-			Friend friend = memberService.selectOneForFriend(memberFrom);
+			Map <String,Integer> param = new HashMap<String, Integer>();
+			param.put("memberCode", memberCode);
+			param.put("memberFrom", memberFrom);
+			
+			Friend friend = memberService.selectOneForFriend(param);
 			log.debug("friend={}",friend);
 			
 			int friendResult = memberService.insertFriends(friend);
