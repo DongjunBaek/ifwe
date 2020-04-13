@@ -261,6 +261,7 @@ aside{
 	font-weight: bold;
 	float:left;
 	margin-bottom: 0;
+	width:127px;
 }
 .aside-member-box span{
 	font-size:16px;

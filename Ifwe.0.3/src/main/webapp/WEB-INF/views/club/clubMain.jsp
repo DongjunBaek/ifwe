@@ -680,11 +680,19 @@ $(function(){
     
     
     
-    $(".three-dots").click(function(){
+    $(".three-dots").each(function(idx,item){
+    	$(item).click(function(){
+    		$(item).next(".click-three-dots").slideToggle(300);
+    		
+    	});
+    });
+    
+    
+/*     $(".three-dots").click(function(){
     	console.log("신고신고신고");
     	$(".click-three-dots").css("display","none");
     	$(this).next().css("display","block");
-    });
+    }); */
     
     
     $("[name=board-report]").click(function(){
