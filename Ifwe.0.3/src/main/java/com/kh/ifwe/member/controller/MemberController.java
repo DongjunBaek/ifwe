@@ -318,10 +318,11 @@ public class MemberController {
 		 * select * from club_board where member_code = 1 
 		 */
 		List<ClubBoard> clubBoard = clubBoardService.selectMyClubBoard(member.getMemberCode());
-			
+		List<Club> clubList = memberService.selectClubList(member.getMemberCode());
 				
 		log.debug("friendList={}",friendMessage);
 		log.debug("friends={}",friends);
+		model.addAttribute("clubList", clubList);
 		model.addAttribute("friendMessage",friendMessage);
 		model.addAttribute("friends",friends);
 		model.addAttribute("memberLoggedIn",memberLoggedIn);
@@ -613,7 +614,7 @@ public class MemberController {
 	@PostMapping("/searchId")
 	@ResponseBody
 	public Member searchId(@RequestParam("memberName") String memberName, @RequestParam("birthday") String birthday,
-			@RequestParam("phone") String phone, ModelAndView mav) {
+			@RequestParam("member_phone") String phone, ModelAndView mav) {
 
 		log.debug("memberName ={}", memberName);
 		log.debug("birthday ={}", birthday);

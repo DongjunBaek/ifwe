@@ -34,9 +34,9 @@ cursor:pointer;
 	transform: translateY(-10%);
 }
 	
-.p-board{
+/* .p-board{
 	width : 100%;
-}
+} */
 </style>
 <script >
 var ynFormsg = 0;
@@ -62,6 +62,10 @@ var ynFormsg = 0;
 				ynFormsg = 0;
 			}
 			
+		});
+		$(".clubListLi").click(function(){
+			let clubCode = $(this).attr("data-clubCode");
+			location.href="${pageContext.request.contextPath}/club/clubMain.do?clubCode="+clubCode;
 		});
 		
 	})
@@ -89,10 +93,12 @@ var ynFormsg = 0;
                 <div class="list-title">
                     <p style="color: white;font-size: 20px;font-weight: bold; padding: 6%;" class="font-kor">소모임 목록</p>
                     <div class="list-ul-container">
-                        <ul class="font-kor mypage-list-ul" style="padding: 0;">
-                            <c:if test="${not empty clubList }">
-                        	<c:forEach items="${clubList }" var="list">
-                                <li class="clubListLi" data-clubCode=${list.clubCode }><p class="mypage-p-class"><a href="${pageContext.request.contextPath  }/club/clubMain.do?clubCode=${list.clubCode }">${list.clubTitle }</a></p> </li>
+                        <ul class="font-kor mypage-list-ul" style="padding: 0;margin-left:15%;">
+                           <c:if test="${not empty clubList }">
+                        	<c:forEach items="${clubList }" var="list" varStatus="vs">
+                                <c:if test="${vs.count < 4 }">
+	                                <li style="margin:0" class="clubListLi" data-clubCode=${list.clubCode }><p style="font-size:20px;">${list.clubTitle }</p> </li>
+                                </c:if>
                         	</c:forEach>
                         	</c:if>
                         </ul>

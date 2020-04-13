@@ -49,7 +49,11 @@
 	width: 155px;
 	height: 100%;
 }
+.card-container:nth-child(n+4) {
+	margin-top:3%;
+}
 </style>
+
 <script>
 let checkCurrentPage = 1;
 $(function(){
@@ -82,14 +86,6 @@ function pageBar_btn(cPageNo){
 }
 
 
-</script>
-<style>
-.card-container:nth-child(n+4) {
-	margin-top:3%;
-}
-</style>
-<script>
-
 function hoverBtnForPageBar(){
 	$(".list-club-pagebtn").hover(function(){
 		
@@ -106,6 +102,8 @@ function hoverBtnForPageBar(){
 	});
 }
 $(function(){
+	
+	
 	$("[name=clubSearchKeyword]").keydown(function(key){
 		if(key.keyCode == 13) {
 		$("#searchSomoimDivContainer").css('display','none');
@@ -411,11 +409,7 @@ function pageBar_search_btn(cPageNo){
 }
 
 </script>
-<style>
-.card-container:nth-child(n+4) {
-	margin-top:3%;
-}
-</style>
+
 	    <section>
             <div class="wrapper-right container-clubsearch">
                 <div class="search-box">
