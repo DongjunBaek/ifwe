@@ -694,7 +694,6 @@ public class ClubController {
 		param.put("clubCode", clubCode);
 		param.put("searchTag", searchTag);
 		
-		
 		List<ClubBoardProfile> clubBoardProfileList = clubService.selectclubBoardSearch(param);
 		
 		List<BoardImg> boardNo = clubBoardService.selectClubBoardNoList(clubCode);
@@ -706,8 +705,6 @@ public class ClubController {
 		
 		//메인페이지 게시물 댓글리스트
 		List<ClubBoardComment> clubBoardComment = clubBoardService.selectBoardComment(clubCode);
-		
-		
 		
 		mav.addObject("clubBoardComment",clubBoardComment);
 		mav.addObject("clubBoardProfileList", clubBoardProfileList);

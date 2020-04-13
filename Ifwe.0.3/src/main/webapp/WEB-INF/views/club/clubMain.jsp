@@ -35,10 +35,13 @@ html{
                     .title-icon{
                         width:90px;
                         float:left;
+                        
+                        
                     }
                     .title-icon>img{
                     	width:100%;
                     	height:100%;
+                    	transform: translateY(-12%);
                     }
                     .contents-title{
                         width:285px;
@@ -521,7 +524,6 @@ $(function(){
 	
 	
 	$(".comment-sliderbutton").click(function(){
-		console.log($(this).parent().next()[0]);
 		$(this).parent().next().slideToggle(300);
 		
 	});
