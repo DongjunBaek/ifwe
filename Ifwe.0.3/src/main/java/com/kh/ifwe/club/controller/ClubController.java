@@ -521,7 +521,7 @@ public class ClubController {
 		
 		int result = clubService.deleteMembers(param);
 		log.debug("result = {}",result);
-		return "club/clubManagementt";
+		return "club/clubManagement";
 		
 	}
 	

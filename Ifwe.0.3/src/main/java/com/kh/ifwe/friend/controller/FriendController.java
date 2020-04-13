@@ -31,7 +31,7 @@ import com.kh.ifwe.profile.model.vo.FriendProfile;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes(value = { "memberLoggedIn" })
+@SessionAttributes(value = { "memberLoggedIn","friendMsgCount" })
 @Slf4j
 @Controller
 @RequestMapping("/friend")
@@ -180,7 +180,7 @@ MemberService memberservice;
 		HttpSession session = request.getSession();
 		session.removeAttribute("friendMsgCount");
 		int friendMsgCount = memberservice.selectFriendMsgCount(memberCode);
-		log.debug("friendMsgCount=",friendMsgCount);
+		log.debug("friendMsgCount={}",friendMsgCount);
 		model.addAttribute("friendMsgCount",friendMsgCount);
 		
 		return friendMsgCount;

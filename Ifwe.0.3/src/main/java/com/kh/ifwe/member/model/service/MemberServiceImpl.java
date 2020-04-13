@@ -118,8 +118,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Friend selectOneForFriend(int memberFrom) {
-		return memberDAO.selectOneForFriend(memberFrom);
+	public Friend selectOneForFriend(Map<String, Integer> param) {
+		return memberDAO.selectOneForFriend(param);
 	}
 
 	@Override
@@ -174,6 +174,12 @@ public class MemberServiceImpl implements MemberService {
 	public int selectFriendMsgCount(int memberCode) {
 		return memberDAO.selectFriendMsgCount(memberCode);
 	}
+
+	@Override
+	public int selectOneMsg(Map<String, Integer> map) {
+		return memberDAO.selectOneMsg(map);
+	}
+
 
 
 	

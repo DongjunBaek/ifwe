@@ -105,7 +105,7 @@ var ynFormsg = 0;
                     <i class="fas fa-bell" style="font-size:25px;color: #2756a6;margin:5% 5% 2% 0;"></i><span style="font-size:25px;">알림</span></div>
                 <div class="contents" style="overflow:auto;">
                     <div class="content font-kor">
-                        <p class="mypage-p-content">윙 스터디에 가입신청이 승인되었습니다.</p>
+						                    
                      
                       <c:if test="${not empty friendMessage  }">
                         	<c:forEach items="${friendMessage }" var="fl" varStatus="vs" >

@@ -241,6 +241,7 @@
 			Me.member_from = M.member_code
 		where 
 			Me.member_from = #{memberFrom} and Me.msg_cate_code = 'f1'
+			and Me.member_code = #{memberCode}
 		order by 
 			msg_date desc
 	</select>
@@ -337,6 +338,20 @@
 			msg_view = 'n'
 		and
 			member_code = #{memberCode}
+		</where>
+	</select>
+	
+	<select id="selectOneMsg" resultType="_int">
+		select 
+			count(*)
+		from
+			member_msg
+		<where>
+			msg_cate_code = 'f1'
+		and
+			member_code = #{memberCode}
+		and
+			member_from = #{fromMember}
 		</where>
 	</select>
 
