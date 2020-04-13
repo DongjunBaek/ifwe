@@ -18,6 +18,7 @@
             <c:if test="${memberLoggedIn.memberCode != friend[0].memberCode}">
             <div class="section-friendbutton">친구요청</div> 
             </c:if>
+           
            <c:if test="${memberLoggedIn.memberCode == friend[0].memberCode }">
             <div class="section-friendbutton">친구</div>
             </c:if>
@@ -49,7 +50,14 @@
 
 
 </body>
+<c:if test="${not empty msg }">
 <script>
+	$(()=>{
+		alert("${msg}");
+		console.log("${msg}")
+	});
+</script>
+</c:if>
 <%-- $(()=>{
 	
 
@@ -99,13 +107,17 @@ console.log("onload On");
 
 
 }); --%>
-$(".section-friendbutton").click(function(){
-	var btn = $(".section-friendbutton").text();
-	if(btn=="친구요청"){
-		location.href = "${pageContext.request.contextPath}/member/insertMsgFriend.do?memberCode=${member.memberCode}&fromMember=${memberLoggedIn.memberCode}&clubCode=${club.clubCode}";
-	}		
-})
 
+
+<script>
+	$(".section-friendbutton").click(function(){
+		var btn = $(".section-friendbutton").text();
+		var count = $("#msghave").val();
+		console.log(count)
+		if(btn=="친구요청" ){
+			location.href = "${pageContext.request.contextPath}/member/insertMsgFriend.do?memberCode=${member.memberCode}&fromMember=${memberLoggedIn.memberCode}&clubCode=${club.clubCode}";
+		}		
+	});
 </script>
 
 </html>

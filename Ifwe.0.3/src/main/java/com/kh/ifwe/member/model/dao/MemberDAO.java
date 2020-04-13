@@ -56,7 +56,7 @@ public interface MemberDAO {
 
 	int friendYes(int memberFrom);
 
-	Friend selectOneForFriend(int memberFrom);
+	Friend selectOneForFriend(Map<String, Integer> param);
 
 	int insertFriends(Friend friend);
 
@@ -77,6 +77,9 @@ public interface MemberDAO {
 	int friendNo(int memberFrom);
 
 	int selectFriendMsgCount(int memberCode);
+
+	int selectOneMsg(Map<String, Integer> map);
+
 
 
 }
