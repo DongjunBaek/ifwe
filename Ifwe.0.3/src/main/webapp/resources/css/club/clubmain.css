@@ -279,7 +279,7 @@ section{
     bottom:0%;
     position: absolute;
 }
-.summernote-images{border:1px solid black; width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}
+.summernote-images{width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}
 
 .article1-imgbox{
     width:720px;

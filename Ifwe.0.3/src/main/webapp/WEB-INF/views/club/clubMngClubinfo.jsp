@@ -45,7 +45,9 @@ function checkClubMax(){
 	}else if(${club.premiumCode == null }){
 		console.log($("[name=clubMax]").val());
 		if($("[name=clubMax]").val()>100) {
-			alert("최대 인원은 100명입니다.");
+			if(confirm("기본등급의 최대 인원은 100명입니다.등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership.do?memberCode="+${memberLoggedIn.memberCode};
+			}
 			$("[name=clubMax]").val('');
 			$("[name=clubMax]").focus();
 			return false;
@@ -53,7 +55,9 @@ function checkClubMax(){
 	}else if(${club.premiumCode == 'gold' }){
 		console.log($("[name=clubMax]").val());
 		if($("[name=clubMax]").val()>1000) {
-			alert("최대 인원은 1000명입니다.");
+			if(confirm("골드등급의 최대 인원은 1000명입니다.등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership.do?memberCode="+${memberLoggedIn.memberCode};
+			}
 			$("[name=clubMax]").val('');
 			$("[name=clubMax]").focus();
 			return false;
@@ -61,7 +65,9 @@ function checkClubMax(){
 	}else if(${club.premiumCode == 'silver'}){
 		console.log($("[name=clubMax]").val());
 		if($("[name=clubMax]").val()>500) {
-			alert("최대 인원은 500명입니다.");
+			if(confirm("실버등급의 최대 인원은 500명입니다.등급을 올리시겠습니까?")){
+				location.href = "${pageContext.request.contextPath}/member/membership.do?memberCode="+${memberLoggedIn.memberCode};
+			}
 			$("[name=clubMax]").val('');
 			$("[name=clubMax]").focus();
 			return false;

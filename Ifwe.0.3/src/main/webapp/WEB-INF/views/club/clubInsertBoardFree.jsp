@@ -182,6 +182,7 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
 <script>
 $(document).ready(function() {
 	
+	$(".summernote-images").css('display','none');
 	$("#searchBoard").selectric();
 	$(document).ready(function() {
 		$('#summernote').summernote({
@@ -192,6 +193,7 @@ $(document).ready(function() {
 			lang : 'ko-KR',
 			callbacks : {
 				onImageUpload : function(files, editor){
+					$(".summernote-images").css('display','');
 					var filesLength =files.length; 
 					console.log(files);
 					console.log(filesLength);
@@ -251,9 +253,9 @@ $(document).ready(function() {
 	}
 </script>
 <style>
-.summernote-images{border:1px solid black; width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}</style>
+.summernote-images{ width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}</style>
 </head>
-<body style="background-color:rgba(246,246,246,0.5);;">
+<body style="background-color:rgba(246,246,246,0.5); width:1920px; margin:0 auto;">
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
   <section class="flotclass">
       <article class=" flotclass">

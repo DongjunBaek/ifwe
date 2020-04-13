@@ -19,8 +19,16 @@ html{
     width: 1920px;
     height: 1280px;
     color: #3b3b3b;
+    margin: 0 auto;
 
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.enroll-btn{
+border:0;}
 header{
     width: 1660px;
     height: 40px;

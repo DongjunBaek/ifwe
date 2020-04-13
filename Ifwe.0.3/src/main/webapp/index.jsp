@@ -104,7 +104,9 @@ $(function(){
 		$(".searchId-result").css('display','none');
 	});
 	
+	var rNum;
 	$("#search-id-btn-num").click(function(){
+		
 		if($("#memberName").val()==''){
 			alert('이름을 입력해주세요.');
 			$("#memberName").focus();
@@ -122,9 +124,25 @@ $(function(){
 			$("#birthday").focus();
 		}
 		if($("#memberName").val()!='' && $("#birthday").val()!='' && $("#phone").val()!='' && $("#birthday").val().length==8){
-		$("#search-number-container-id").css('display','');			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/sms/sms.do",
+				method:"POST",
+				data: {"phoneNum" : $("#member_phone").val()},
+				async:false,
+				success: function(data){
+					console.log("성공",data);
+					rNum = data;
+					console.log(rNum);
+				},
+				error:function(x,s,e){
+					console.log(x,s,e);
+				}
+			});
+			$("#search-number-container-id").css('display','');			
 		}
 	});
+	
+	var pwdNum;
 	$("#search-pwd-btn-num").click(function(){
 		if($("#memberId").val()==''){
 			alert('아이디 입력해주세요.');
@@ -147,6 +165,20 @@ $(function(){
 			$("#phone_").focus();
 		}
 		if($("#memberName_").val()!='' && $("#birthday_").val()!='' && $("#phone_").val()!='' && $("#memberId").val()!='' && $("#birthday_").val().length==8){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/sms/sms.do",
+				method:"POST",
+				data: {"phoneNum" : $("#phone_").val()},
+				async:false,
+				success: function(data){
+					console.log("성공",data);
+					pwdNum = data;
+					console.log(rNum);
+				},
+				error:function(x,s,e){
+					console.log(x,s,e);
+				}
+			});
 			$("#search-number-container-pwd").css('display','');
 		}
 	});
@@ -155,7 +187,13 @@ $(function(){
 	
 	
 	$("#search-btn-check-id").click(function(){
-		$.ajax({
+		console.log("rNUm", rNum);
+		
+		if($("#pd-number").val()!=rNum){
+			console.log("인증번호가 맞지않습니다.")
+		}else{
+			console.log(123);
+		 $.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/member/searchId",
 			data: $("[name=searchIdForm]").serialize(),
@@ -163,7 +201,7 @@ $(function(){
 				if(data ==""){
 					alert("회원이 존재하지 않습니다.");
 					$("#memberName").val('');
-					$("#phone").val('');
+					$("#member_phone").val('');
 					$("#birthday").val('');
 					$("#search-number-container-id").css('display','none');
 				}else{
@@ -173,7 +211,7 @@ $(function(){
 					$(".searchId-result-content").text(data.memberId);
 					$(".searchId-result").css('display','');
 					$("#memberName").val('');
-					$("#phone").val('');
+					$("#member_phone").val('');
 					$("#birthday").val('');
 				}
 			
@@ -181,13 +219,21 @@ $(function(){
 			error:(xhr,status,error) =>{
 				console.log(xhr,status,error);
 			}
-		});
+		}); 
+			
+		}
 	});
 	
 	
 	
 	$("#search-btn-check-pwd").click(function(){
-		console.log("5845835803245");
+		
+		console.log("pwdNum",pwdNum);
+		if($("#pwd-number").val() != pwdNum ){
+			alert("인증번호가 맞지않습니다.");
+			$("#pwd-number").focus();
+		}else{
+			
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/member/searchPwd.do",
@@ -220,6 +266,7 @@ $(function(){
 				console.log(xhr,status,error);
 			}
 		});
+		}
 	});
 	
 	
@@ -379,7 +426,7 @@ line-height: 1.6;
 	                </div>
 	                <div class="login-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
-	                	<input class="input-box" type="text" name="phone" id="phone" placeholder="전화번호">
+	                	<input class="input-box" type="text" name="member_phone" id="member_phone" placeholder="전화번호">
 	                	<input type="button" value="인증번호받기" class="index-search-btn" id="search-id-btn-num"/>
 	                </div>
 	                 <div class="search-number-container" id="search-number-container-id" >

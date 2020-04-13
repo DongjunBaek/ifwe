@@ -20,8 +20,8 @@ $(function(){
 	});
 	 
 	 $(".back1").click(function(){
-		 console.log("!11");
-		 location.href = "${pageContext.request.contextPath}/index/mainpage.do";
+		 let memberCode = $(this).attr("data-memberCode");
+		 location.href = "${pageContext.request.contextPath}/main/mainPage.do?memberCode="+memberCode;
 	 });
 });
 </script>
@@ -40,7 +40,7 @@ $(function(){
                 <h1 class="title_4">event</h1>
             </div>
             <div class="hover_wrap">
-            	<div class="back1" style="height:55px;"></div>
+            	<div class="back1" style="height:55px;" data-memberCode = "${memberLoggedIn.memberCode }"></div>
                 <div class="white_back1"></div>
                 <div class="white_back2"></div>
                 <div class="white_back3"></div>

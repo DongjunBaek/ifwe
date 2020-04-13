@@ -255,6 +255,7 @@ $(function(){
         </div>
       
     </article>
+
     <article class="membership-third" style="display:none;">
         <div class="payment-container" >
             <div class="list-container">
@@ -282,6 +283,13 @@ $(function(){
         		</div>
     </article>
 </section>
+<style>
+.membership-third-div{
+height:100px;
+width:1920px;
+border:1px solid black;
+}
+</style>
 <script>
 $(function(){
 	IMP.init('imp01233033');
