@@ -178,17 +178,17 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
          background-color: #feba3b;
          color: #fff;
      }.aside-boardmenu{height:244px;}.aside-boardmenu li{height:26px;}.friend-name-profile{height:46px;}.aside-leader-id{height:23px;}.aside-friend-list{margin-top:50px;}
+
      
     .nav-myfrofile-box{
     	height:140px;
     } 
-     
-     
-     
+
 </style>
 <script>
 $(document).ready(function() {
 	
+	$(".summernote-images").css('display','none');
 	$("#searchBoard").selectric();
 	$(document).ready(function() {
 		$('#summernote').summernote({
@@ -199,6 +199,7 @@ $(document).ready(function() {
 			lang : 'ko-KR',
 			callbacks : {
 				onImageUpload : function(files, editor){
+					$(".summernote-images").css('display','');
 					var filesLength =files.length; 
 					console.log(files);
 					console.log(filesLength);
@@ -259,7 +260,7 @@ function sendUpLoadImgFile(file, el){
 	}
 </script>
 </head>
-<body style="background-color:rgba(246,246,246,0.5);;">
+<body style="background-color:rgba(246,246,246,0.5);width: 1920px; margin: 0 auto;">
 <jsp:include page="/WEB-INF/views/common/clubInclude.jsp"></jsp:include>
   <section class="flotclass">
       <article class=" flotclass">

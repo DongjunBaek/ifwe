@@ -1092,9 +1092,6 @@ checkMyHeart();
   color: red;
   cursor: pointer;
 }
-.fa-heart-o {
-	color: red;
-  	: pointer;
-}	
+	
 </style>
 </html>

@@ -8,22 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1,2,3</title>
+<title>회원가입</title>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/enrollpage.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style>
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.enroll-btn{
-border:0;}
-</style>
 <script>
 let idchecker = false;
 console.log(idchecker)
@@ -96,7 +87,6 @@ function sample6_execDaumPostcode() {
     	
     });
     $(".phone-btn").click(function(){
-        alert('본인인증성공!')
         $(".enroll-article-second>.enroll-hyphen").css('background-color','lightgrey');
         $(".enroll-article-second>.enroll-container-number").css('color','lightgrey');
     	$('.enroll-article-third').css('display','inline-block');
@@ -252,13 +242,17 @@ $(function(){
 	});
 	
 	
+	var phoneNum;
+	$("#sendSMS").click(function(){
+		window.open("${pageContext.request.contextPath}/member/insertPhonePOPUP.do", "a", "width=500, height=400, left=300, top=200"); 
+	});
+	
+	
 	
 	
 	
 	
 });
-
-
 
 function duplicate(){
 	let memberId = $("#memberId").val();
@@ -429,17 +423,6 @@ function maxLengtYear(object){
             </div>
             <div class="phone-btn-container">
                 <div class="phone-btn" id="sendSMS">
-                <script>
-                $(function(){
-                	var phoneNum;
-                	$("#sendSMS").click(function(){
-                		window.open("${pageContext.request.contextPath}/member/insertPhonePOPUP.do", "a", "width=500, height=400, left=300, top=200"); 
-
-                		
-                		
-                	})
-                })
-                </script>
                     <p class="bold-kor phone-btn-p" >휴대폰 인증</p>
                     <p class="font-kor phone-btn-p" style="font-size: 15px;">본인인증 기관을 통해 본인인증 후 회원가입</p>
                 </div>
