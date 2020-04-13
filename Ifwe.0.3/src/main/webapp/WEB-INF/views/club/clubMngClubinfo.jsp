@@ -101,7 +101,7 @@ function checkClubMax(){
                  <div class="shc-premiumbox">
                      <p>골드 사용중</p>
                  </div>
-                 </c:if>s
+                 </c:if>
             </div>
         </div>
         <form action="${pageContext.request.contextPath }/club/mngclubinfo.do" method="post" 

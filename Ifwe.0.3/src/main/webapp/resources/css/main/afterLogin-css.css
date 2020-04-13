@@ -143,6 +143,9 @@ background-color: white;
 margin:5% 5% 0 5%;
 float: left;
 }
+.three-posts{
+	width:180px;
+}
 .posts p:first-child{
 padding-bottom:5%;
 }
@@ -153,6 +156,14 @@ margin: 4%;
 }
 .three-post2{
 font-size: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 180px;
+  height: 35px;
+
+
+
 }
 .three-post3{
 font-size: 25px;

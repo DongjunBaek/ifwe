@@ -26,7 +26,7 @@ $(function(){
     
     $(".addbtn").on('click', function(){
     	$(".membership-third").css("display","block");
-    	
+    	$("body").css("height","2000px")
     	let checkval = $(".choice input[type=checkbox]:checked").val();
     	/* console.log(checkval); */ 
     	let checkvalCode = $(".choice input[type=checkbox]:checked").parent().children().eq(2).val(); 
@@ -268,13 +268,13 @@ $(function(){
               	<div class="payment-lists">
                
                    
-                </div>                
-                <div class="result-container">
+                </div>
+                <!-- <div class="result-container">
                     <div class="payment-border"><hr></div>
                         <div class="payment-result">
                             <p class="result-name font-kor"  >프리미엄 PREMIUM/ <span id="countMembership"></span></p><p class="result-price bold" id="totalprice" ></p>
                         </div>
-                </div>
+                </div> -->
         
          	</div>  
         </div>
@@ -336,7 +336,7 @@ $(".paymentbtn").click(function(){
 		    		type: "POST",
 		    		success: function(data){
 		    			console.log(data);
-		    			location.href = "${pageContext.request.contextPath}/main/mainPage.do";
+		    			location.href = "${pageContext.request.contextPath}/main/mainPage.do?memberCode=${memberLoggedIn.memberCode}";
 		    		},
 		    		error: function(x,s,e){
 		    			console.log(x,s,e);

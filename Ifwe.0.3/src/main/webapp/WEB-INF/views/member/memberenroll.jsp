@@ -16,6 +16,8 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/enrollpage.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+let idchecker = false;
+console.log(idchecker)
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -90,30 +92,38 @@ function sample6_execDaumPostcode() {
     	$('.enroll-article-third').css('display','inline-block');
     });
    });
+   
 $(function(){
-	
+		
 	$("#memberId").blur(function(){
 		let memberId = $("#memberId").val();
 		
 		let msg = "";
 		let regex = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,11}$/;
-		
+		//정규표현식에 적합한 아이디를 입력했는지 검사한다.
 		if(!regex.test(memberId) || memberId ==''){
 			msg = "5~20자의 영문소문자,숫자와 특수기호만 사용 가능합니다.";
 			$("#memberIdChk").text(msg).css("color","rgb(235, 42, 14)");
 		}else{
+		//db에 같은 memberId의 값이 존재하는지 확인한다.
 			$.ajax({
 				type:"GET",
 				url:"${pageContext.request.contextPath}/member/checkId.do",
 				data: {memberId: memberId},
+				async:false,
 				success: function(data){
 					console.log(data);
+					//db에 존재하는 결과 
 					if( data != ""){
 						$("#memberIdChk").text("중복된 아이디입니다.").css("color","rgb(235, 42, 14)");
+						idchecker = false;
+						console.log(idchecker)
 					}
+					//db에 존재하지 않는 결과 
 					else{
 						$("#memberIdChk").text("훌륭한 아이디군요!").css("color","#4EC407");
-						
+						idchecker = true;
+						console.log(idchecker)
 					}
 						
 				},
@@ -296,6 +306,10 @@ function duplicate(){
 	else if(email.trim()=="" || checkemail=="올바른 형식이아닙니다."){
 		$("#memberEmail").focus();
 		return false;
+	}else if(idchecker==false){
+		$("#memberId").focus();
+		return false;
+		
 	}
 	else{
 		return true;

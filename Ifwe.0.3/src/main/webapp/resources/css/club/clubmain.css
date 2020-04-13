@@ -101,6 +101,7 @@ section{
     width: 8px;
     height:36px;
     margin-top:1%;
+    cursor: pointer;
 }
 .article1-curcle{
     border-radius: 50%;
@@ -281,6 +282,7 @@ section{
 }
 .summernote-images{width:1250px;margin:0 auto;height:100px;margin-bottom:20px;}
 
+
 .article1-imgbox{
     width:720px;
     height:110px;
@@ -325,6 +327,8 @@ body{
 }
 .wrapper{
 	position:absolute;
+	left: 50%;
+	transform: translate(-50%);
 }
 
 .filter-container-container{

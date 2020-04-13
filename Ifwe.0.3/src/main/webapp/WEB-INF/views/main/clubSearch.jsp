@@ -162,13 +162,14 @@ $(function(){
 		                        '<div class="information-container"><p class="club-leader-name font-hk friend-name-profile">@ '+listForClub[i].memberId+'</p><p class="club-name-search font-hk">'+listForClub[i].clubTitle+'</p>'+
 		                        '<p class="club-location font-hk"><i class="fas fa-map-marker-alt"></i>'+listForClub[i].clubLocation+'</p>'+
 		                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
-		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+(maleCnt/listForClub[i].clubCurrent)*10+		                        
-		                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
-		                        +(1-(maleCnt/listForClub[i].clubCurrent))*10+
+		                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+Math.trunc((maleCnt/listForClub[i].clubCurrent)*10)+
+		                        
+		                        '</span><span class="information-fontsize2"> : </span><span class="information-fontsize3">'
+		                        +Math.ceil((1-(maleCnt/listForClub[i].clubCurrent))*10)+
 		                        '</span></div>'+
 		                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 		                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
-								);
+						);
 						
 					}
 
@@ -332,12 +333,12 @@ function pageBar_search_btn(cPageNo){
 	                        '<div class="information-box"><br><p class="people-title font-hk">정원수 </p><span class="information-fontsize">'+listForClub[i].clubCurrent+'</span>/'+listForClub[i].clubMax+'</div>'+
 	                        '<div class="information-box"><br><p class="people-title font-hk">남여비율</p><span class="information-fontsize">'+Math.trunc((maleCnt/listForClub[i].clubCurrent)*10)+
 	                        
-	                        '</span><span class="information-fontsize2">:</span><span class="information-fontsize3">'
+	                        '</span><span class="information-fontsize2"> : </span><span class="information-fontsize3">'
 	                        +Math.ceil((1-(maleCnt/listForClub[i].clubCurrent))*10)+
 	                        '</span></div>'+
 	                        '<div class="information-box lastbox"><br><p class="people-title font-hk">평균나이</p><span class="information-fontsize">'+Math.floor(listForAge[i]/listForClub[i].clubCurrent)+'세</span></div>'+
 	                        '<button class="information-botton font-hk" name="goclub" data-clubCode='+listForClub[i].clubCode+'>자세히 보기</button></div></div>'
-							);
+					);
 					
 				}
 			    $("[name=goclub]").click(function(){
