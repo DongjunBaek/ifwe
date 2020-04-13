@@ -328,7 +328,7 @@ $(".paymentbtn").click(function(){
 		    		type: "POST",
 		    		success: function(data){
 		    			console.log(data);
-		    			location.href = "${pageContext.request.contextPath}/main/mainPage.do";
+		    			location.href = "${pageContext.request.contextPath}/main/mainPage.do?memberCode=${memberLoggedIn.memberCode}";
 		    		},
 		    		error: function(x,s,e){
 		    			console.log(x,s,e);
