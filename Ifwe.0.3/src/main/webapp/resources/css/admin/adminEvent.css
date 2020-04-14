@@ -62,18 +62,16 @@ section{
      height: 45px;
      font-family: 'Noto Sans KR', sans-serif;
      color: #3b3b3b;
-     text-align: left;
      padding-left: 20px;
  }
  th:last-child{
-     text-align: right;
-     padding-right: 70px;
+     text-align: center;
  }
  td{
      height: 45px;
      font-family: 'Noto Sans KR', sans-serif;
      color: #3b3b3b;
-     text-align: left;
+     text-align: center;
      padding-left: 20px;
      background-color: white;
      padding-top: 10px;
@@ -81,8 +79,7 @@ section{
      border-bottom: 1px solid #f1f2f2;
  }
  td:last-child{
-     text-align: right;
-     padding-right: 20px;
+     text-align: center;
  }
  .modify{
      width: 80px;
