@@ -18,6 +18,7 @@ import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoardProfile;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.member.model.vo.MsgPro;
 import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
 import lombok.extern.slf4j.Slf4j;
@@ -117,7 +118,7 @@ public class ClubServiceImpl implements ClubService {
 
 	//0326문보라 가입요청 메세지 뿌려주기 
 	@Override
-	public Message selectMsgOne(int msgCode) {
+	public MsgPro selectMsgOne(int msgCode) {
 		return clubDAO.selectMsgOne(msgCode);
 	}
 
