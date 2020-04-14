@@ -207,6 +207,10 @@ $(function(){
 .toggleClassForOption{
 	height: 100px;
 }
+#boardWriteProfile{
+	width: 100%;
+	border-radius: 50px;
+}
 </style>
 	
 	<section class="boardDetail_bgcolor">
@@ -231,14 +235,14 @@ $(function(){
 		<div class="boardDetail-div-title titlebox2">
 			<div class="boardDetail-div-title-2-1">
 				<div id="boardDetal-profile-img">
-					
+					<img id="boardWriteProfile" src="${pageContext.request.contextPath}/resources/upload/profile/${boardWriteProfile.profileImgRe}" alt="" />
 				</div>
 			
 			</div>
 			<div class="boardDetail-div-title-2-2">
 				<div class="title-2-2-title">${board.boardTitle }</div>
 				<div class="boardDetail-div-writerBox">
-					<p> 작성자 </p>
+					<p> 작성자 : ${boardWriteProfile.profileName }</p>
 				</div>
 			</div>		
 		</div>

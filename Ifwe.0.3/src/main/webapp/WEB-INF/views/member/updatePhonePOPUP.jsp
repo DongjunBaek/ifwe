@@ -62,7 +62,8 @@ $(function(){
 			alert("인증번호가 맞지않습니다.");
 			$("#number").val('');
 		}else{
-			alert("본인인증에 성공하셨습니다.")
+			alert("본인인증에 성공하셨습니다.");
+			$("[name=updatePhoneFrm]").submit();
 			window.close();
 		}
 	});
@@ -85,7 +86,7 @@ $(function(){
 			<p>휴대폰으로 전송된 인증번호를 확인 후 입력해주시면 정보변경이 완료됩니다.</p>
 		</div>
 		
-		<form method="post" action="${pageContext.request.contextPath }/member/updatePhoneFrm.do">
+		<form method="post" action="${pageContext.request.contextPath }/member/updatePhoneFrm.do" name="updatePhoneFrm">
 		 <div class="search-id-div updatePhone-container" id="search-id-div">
 	                <div class="login-input">
 	                	<i class="fas fa-phone-alt index-i-class"></i>
@@ -100,7 +101,7 @@ $(function(){
 		                 <div class="number-input">
 		                 	<i class="fas fa-mobile-alt index-i-class"></i>
 		                 	<input class="input-box" type="text" name="number" id="number" placeholder="인증번호">	
-		                 	<input type="submit" value="확인" class="index-search-btn" id="search-btn-check"/>	
+		                 	<input type="button" value="확인" class="index-search-btn" id="search-btn-check"/>	
 		                 </div>
 	             </div>
             </div>

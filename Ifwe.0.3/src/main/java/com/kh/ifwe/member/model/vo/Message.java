@@ -40,7 +40,7 @@ public class Message implements Serializable {
 	private int clubCode;
 	private String memberName;
 	private String memberId;
-	
+
 	
 	
 	

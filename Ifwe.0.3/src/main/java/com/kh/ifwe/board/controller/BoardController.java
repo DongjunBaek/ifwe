@@ -24,6 +24,8 @@ import com.kh.ifwe.admin.model.vo.AdminEvent;
 import com.kh.ifwe.board.model.service.BoardService;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.common.util.Utils;
+import com.kh.ifwe.member.model.service.MemberService;
+import com.kh.ifwe.member.model.vo.Profile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +39,10 @@ public class BoardController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	private MemberService memberService;
+	
 	
 	@GetMapping("/insertBoard.do")
 	public String insertBoard() {
@@ -162,9 +168,13 @@ public class BoardController {
 		
 		Board board = boardService.selectBoardDetail(boardNo);
 		/**
+		 * 0414 dongjun 프로필 불러오기
 		 * 이곳에 이미지 첨부 사용 할 것.
 		 */
+		
+		Profile boardWriteProfile = memberService.selectProfileByMemberCode(board.getMemberCode());
 		mav.addObject("board",board);
+		mav.addObject("boardWriteProfile", boardWriteProfile);
 		mav.setViewName("board/boardDetail");
 		
 		return mav;
