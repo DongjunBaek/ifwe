@@ -32,11 +32,15 @@ cursor:pointer;
 }
 .board-con{
 	transform: translateY(-10%);
+	width: 100%;
 }
 	
-/* .p-board{
+.p-board{
 	width : 100%;
-} */
+} 
+.mypage-list-ul li p{
+	cursor: pointer;
+}
 </style>
 <script >
 var ynFormsg = 0;
