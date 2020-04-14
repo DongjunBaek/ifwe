@@ -40,6 +40,7 @@ import com.kh.ifwe.member.model.service.MemberService;
 import com.kh.ifwe.member.model.vo.Member;
 import com.kh.ifwe.member.model.vo.MemberLoggedIn;
 import com.kh.ifwe.member.model.vo.Message;
+import com.kh.ifwe.member.model.vo.MsgPro;
 import com.kh.ifwe.member.model.vo.Profile;
 import com.kh.ifwe.mian.model.vo.SearchKeyword;
 
@@ -476,13 +477,17 @@ public class ClubController {
 									ModelAndView mav) {
 		log.debug("msgCode = {}", msgCode);
 		
-		Message msg = clubService.selectMsgOne(msgCode);
+		MsgPro msg = clubService.selectMsgOne(msgCode);
 		//메서지 확인여부를 update
 		int result = clubService.updateMsgView(msgCode);
+		Profile profile = memberService.selectProfileByMemberCode(msg.getMemberCode());
 		
+		
+		log.debug("profile = {}",profile);
 		log.debug("result = {}",result);
 		log.debug("msg = {}",msg);
 		mav.addObject("msg", msg);
+		mav.addObject("profile", profile);
 		mav.setViewName("club/clubMngEnrollEnd");
 		
 		

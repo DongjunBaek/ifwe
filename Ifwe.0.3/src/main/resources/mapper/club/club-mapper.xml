@@ -152,15 +152,19 @@
 			club_code = #{clubCode} and msg_view = 'n'
 	</select>
 	
-	<select id="selectMsgOne" resultType="message">
-		select 
-			M.*, Me.member_name ,ME.member_id
+	<select id="selectMsgOne" resultType="msgPro">
+		 select 
+			M.*, Me.member_name ,ME.member_id,P.profile_img_re
 		from 
 			member_msg M 
 		left join 
 			member ME 
 		on 
 			M.member_from = ME.member_code
+        left join 
+            member_profile P 
+        on 
+            ME.member_code = P.member_Code
 		where
 			msg_code = #{msgCode}
 	</select>

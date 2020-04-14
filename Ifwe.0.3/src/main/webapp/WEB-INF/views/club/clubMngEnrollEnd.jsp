@@ -37,7 +37,7 @@ $(function(){
          <div class="shc-section-container">
              <div class="shc-section-centerbox">
                  <div class="shc-enrollmemberimg">
-                     <img src="#" alt="">
+                     <img src="${pageContext.request.contextPath}/resources/upload/profile/${msg.profileImgRe}" alt="">
                  </div>
                  <div class="shc-enrollmemberinfo">
                      <p class="enroll-date">${msg.msgDate }</p>
