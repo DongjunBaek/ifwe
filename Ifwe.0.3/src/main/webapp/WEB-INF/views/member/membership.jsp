@@ -204,12 +204,10 @@ $(function(){
                    <div class="choice-title bold" >적용할 소모임 선택</div>
                  	<c:if test="${not empty list }">
                    <c:forEach items="${list }" var="l" varStatus="vs">
-                   		<c:if test="${l.premiumCode != 'premium'}">
 		                   <div class="choice-checkbox font-kor">
 		                      <input type="checkbox" name="membership-club" id="membership-club${vs.index }" value="${l.clubTitle }" ><label for="membership-club${vs.index }" >${l.clubTitle }</label>
 		                      <input type="hidden" name ="clubCode" value="${l.clubCode }">
 		                   </div>
-	                   </c:if>
                    </c:forEach>
                    </c:if>
                    <!-- <div class="choice-checkbox font-kor">
@@ -345,10 +343,7 @@ $(".paymentbtn").click(function(){
 		    		});
 		    	}
 		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		        
         
     } else {
