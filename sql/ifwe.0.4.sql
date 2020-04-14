@@ -133,6 +133,7 @@ CREATE TABLE  MEMBER_PROFILE  (
                                                         on delete cascade
                                                         --on delete set null
 );
+
 -- 3.회원 이벤트 테이블 - 0402 update
 CREATE TABLE  TBL_EVENT  (
     event_code    NUMBER      primary key, -- 이벤트 생성 코드 시퀀스 사용 예정
@@ -600,3 +601,15 @@ REFERENCES MEMBER (
 	member_code
 );
 
+create or replace trigger tri_buy_premium
+after 
+insert on premium_order
+for each row
+begin    
+    update club set premium_code = :new.premium_code where club_code = :new.club_code;    
+end;
+/
+
+
+
+commit;

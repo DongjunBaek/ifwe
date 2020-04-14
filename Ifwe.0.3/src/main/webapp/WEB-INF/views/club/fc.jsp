@@ -44,6 +44,9 @@ border: 1px solid #ebebeb;
 .aside-leader-img{width:190px;height:190px;}
 .header-title-right>p{margin:0;}
 .aside-leader-allias{height:48px;}.aside-leader-id{height:22px;margin:0;}
+.nav-myfrofile-box{
+	height:140px;
+}
 </style>
 </head>
 
