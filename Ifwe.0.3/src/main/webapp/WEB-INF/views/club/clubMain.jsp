@@ -483,7 +483,7 @@ $(function(){
 			   success:function(data){
 				   console.log(data);
 				   var table ="<table id='songListForClub'>"
-					   var thead = "<thead ><tr><th>순위</th><th colspan='2'>제목</th><th>저자</th></tr></thead><tbody>";
+					   var thead = "<thead ><tr><th>순위</th><th colspan='2'>제목</th></tr></thead><tbody>";
 					   var tbody = "";
 					   var end ="</tbody></table>"
 					   var checkone = $("#myContentsInfo-1").prop("checked");
@@ -493,7 +493,7 @@ $(function(){
 							   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
 							  "<td><img src='${pageContext.request.contextPath}/resources/upload/books/books"+i+".jpg' width=66px; height=66px;></td>"+
 							  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
-							  "<td>"+data[i].contentsInfo+"</td></tr>"
+							  "</tr>"
 							  
 						   };
 		  
@@ -503,7 +503,7 @@ $(function(){
 							   tbody += "<tr ><td>"+data[i].contentsCode+"</td>"+
 							  "<td><img src='${pageContext.request.contextPath}/resources/upload/books/books"+i+".jpg' width=66px; height=66px;></td>"+
 							  "<td><a href='"+data[i].contentsHref+"'>"+data[i].contentsName+"</a></td>"+
-							  "<td>"+data[i].contentsInfo+"</td></tr>"
+							  "</tr>"
 							  
 						   };
 						  
@@ -1094,6 +1094,12 @@ checkMyHeart();
   color: red;
   cursor: pointer;
 }
-	
+.wrapper-listForClub table a{
+	text-decoration:  none;
+	color : #2756a6;
+}
+.wrapper-listForClub table a:visited{
+	color : #2756a6;
+} 
 </style>
 </html>
