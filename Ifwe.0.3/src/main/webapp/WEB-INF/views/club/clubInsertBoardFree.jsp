@@ -121,7 +121,7 @@ ul,p{margin:0;}
 
     margin-top:4%;
     width: 1300px;
-    min-height: 500px;
+    min-height: 800px;
     margin-bottom: 50px;
 }
 .article-insertboard-notice-title{
