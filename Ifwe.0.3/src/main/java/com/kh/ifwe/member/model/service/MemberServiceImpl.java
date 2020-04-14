@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.dao.MemberDAO;
@@ -179,6 +180,12 @@ public class MemberServiceImpl implements MemberService {
 	public int selectOneMsg(Map<String, Integer> map) {
 		return memberDAO.selectOneMsg(map);
 	}
+
+	@Override
+	public List<Club> selectClubList2(int memberCode) {
+		return memberDAO.selectClubList2(memberCode);
+	}
+
 
 
 

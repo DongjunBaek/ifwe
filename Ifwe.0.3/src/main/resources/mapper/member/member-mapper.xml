@@ -354,7 +354,22 @@
 			member_from = #{fromMember}
 		</where>
 	</select>
-
+	
+	<select id="selectClubList2" resultType="club">
+		select 
+			* 
+		from 
+			club C
+		left join 
+			club_members M
+		on 
+			C.club_code = M.club_code 
+		where 
+			M.member_code = #{memberCode}
+		and
+			C.club_master = #{memberCode}
+	</select>
+	
 </mapper>
 
 

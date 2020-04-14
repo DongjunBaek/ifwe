@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.friend.model.vo.Friend;
 import com.kh.ifwe.friend.model.vo.SessionFriend;
 import com.kh.ifwe.member.model.vo.Member;
@@ -79,6 +80,9 @@ public interface MemberDAO {
 	int selectFriendMsgCount(int memberCode);
 
 	int selectOneMsg(Map<String, Integer> map);
+
+	List<Club> selectClubList2(int memberCode);
+
 
 
 

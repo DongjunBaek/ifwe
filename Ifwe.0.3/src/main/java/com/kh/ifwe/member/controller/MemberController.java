@@ -35,6 +35,7 @@ import com.kh.ifwe.board.model.service.BoardService;
 import com.kh.ifwe.board.model.vo.Board;
 import com.kh.ifwe.club.model.service.ClubService;
 import com.kh.ifwe.club.model.vo.Club;
+import com.kh.ifwe.club.model.vo.ClubMember;
 import com.kh.ifwe.clubBoard.model.service.ClubBoardService;
 import com.kh.ifwe.clubBoard.model.vo.ClubBoard;
 import com.kh.ifwe.friend.model.service.FriendService;
@@ -362,7 +363,7 @@ public class MemberController {
 	@GetMapping("/membership.do")
 	public String membership(@RequestParam("memberCode") int memberCode,
 								Model model) {
-		List<Club> list = memberService.selectClubList(memberCode);
+		List<Club> list = memberService.selectClubList2(memberCode);
 		
 		log.debug("list = {}" ,list);
 		
