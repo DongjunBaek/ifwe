@@ -164,6 +164,13 @@ let num = 0;
 
 
                       	$(function(){
+                      		
+                      		$("#myModal").click(function(e){
+                      			if($(e.target).is("#myModal")){
+                      				$("#myModal").css("display","none");
+                      			}
+                      		});
+                      		
                       		 $(".heart").click(function(){
                       		    if($(this).hasClass("liked")){
                       		      console.log($(this),000);

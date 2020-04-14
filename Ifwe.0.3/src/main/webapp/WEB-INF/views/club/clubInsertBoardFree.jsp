@@ -80,7 +80,7 @@ $(function(){
 	             
 	                 // 태그 중복 검사
 	                 if (result.length == 0) { 
-	                     $("#tag-list").append("<li class='tag-item'>#"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+	                     $("#tag-list").append("<li class='tag-item'>#"+tagValue+"<span class='del-btn' idx='"+counter+"' style='margin-left:9px;cursor:pointer'>x</span></li>");
 	                     addTag(tagValue);
 	                     self.val("");
 	                 } else {
@@ -113,6 +113,7 @@ $(function(){
 
 </script>
 <style>
+.modal-backdrop{display:none;}
 .aside-leader-img{width:190px;height:190px;}
 ul,p{margin:0;}
 .article-insertboard-notice{
@@ -167,7 +168,7 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
          letter-spacing: -.5px;
      }
       ul li.tag-item {
-         padding: 10px 15px;
+         padding: 7px 12px;
          padding-right:20px;
          background-color: #ffc862;
          color: white;
@@ -185,6 +186,7 @@ height:50px;clear:both;padding-left: 2%;font-size:20px;}
 </style>
 <script>
 $(document).ready(function() {
+	
 	
 	$(".summernote-images").css('display','none');
 	$("#searchBoard").selectric();
@@ -276,7 +278,7 @@ $(document).ready(function() {
 	      </div>
 	         <br />
               	<div class="article-insertboard-notice-title">
-              		제목 : <input type="text" class="input-text" name="boardTitle"/>
+              		제목 : <input type="text" class="input-text" name="boardTitle" style="padding-left:2%;"/>
               		<div class="insertboard-writer font-kor">작성자 :${memberLoggedIn.memberId }
               		<input type="hidden" name="memberCode" value="${memberLoggedIn.memberCode }" /></div>
               		<input type="hidden" name="clubCode" value="${club.clubCode }" />
@@ -287,15 +289,15 @@ $(document).ready(function() {
               
               	<div class="insertboard-content">
               	<input type="hidden" value="" name="boardCateCode" id="rdTag" />
-             	내용 &nbsp; <input type="text" class="input-text" placeholder="해시태그입력" id="tag" name="clubtag" style="padding-left:1%;"/>
-				<ul id="tag-list" style="padding-left:5%;margin-bottom:2%;">
+             	내용 &nbsp; <input type="text" class="input-text" placeholder="해시태그입력" id="tag" name="clubtag" style="padding-left:2%;"/>
+				<ul id="tag-list" style="padding-left:5%;margin-top:10px;">
        				    </ul><br />
        				    
 				<textarea name="boardContent" id="summernote" cols="30" rows="10"></textarea>	
               	</div>
               	<div class="summernote-images"></div>
               	
-              	<input type="submit" value="등록" class="btnClass" />
+              	<input type="submit" value="등록" class="btnClass" style="margin-bottom: 20px;"/>
                </form>
           </div>
           
