@@ -496,9 +496,9 @@ text-decoration: none;
                     <div class="blue-back" id="main-board">
                     	<li><a href="${pageContext.request.contextPath }/board/mainBoard.do" class="font-black">게시판</a></li>
                     </div>
-                    <div class="blue-back" id="information">
+                    <!-- <div class="blue-back" id="information">
                     	<li><a href="#" class="font-black">소개</a> </li>
-                    </div>
+                    </div> -->
                     <div class="blue-back" id="buy-membership">
                     	<li><a href="${pageContext.request.contextPath }/member/membership.do?memberCode=${memberLoggedIn.memberCode}" class="font-black">멤버쉽 구매</a></li>
                     </div>
