@@ -489,7 +489,7 @@ public class AdminController {
 	 }
 
 	 @PostMapping("/dormantNotice.do")
-	 public ModelAndView dormantNoticeInsert(ModelAndView mav, @RequestParam("memberCode") int memberCode) {
+	 public ModelAndView dormantNoticeInsert(ModelAndView mav, @RequestParam("memberCode") int memberCode, RedirectAttributes redirectAttributes) {
 		 log.debug("휴면계정 게시판 insert 페이지");
 		 
 		 String msg = "";
@@ -504,7 +504,7 @@ public class AdminController {
 			 msg = "휴면 요청에 실패하였습니다. 재로그인 후 이용해주세요";
 		 }
 		 
-		 mav.addObject("msg",msg);
+		 redirectAttributes.addFlashAttribute("msg", msg);
 		 mav.setViewName("redirect:/");
 		 
 		 return mav;

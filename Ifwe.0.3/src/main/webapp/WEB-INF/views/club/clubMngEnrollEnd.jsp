@@ -66,4 +66,10 @@ $(function(){
      </section>
 
 </body>
+<style>
+.shc-enrollmemberimg img{
+	width: 125px;
+	height: 100%;
+}
+</style>
 </html>
