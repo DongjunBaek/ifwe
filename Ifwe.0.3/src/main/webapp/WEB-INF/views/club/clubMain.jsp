@@ -979,9 +979,9 @@ width: 550px;
                                 <p class="rank-chart"></p>
                             </div>
                             <div class="select-contents">
-                            	<button id="musical-btn" style="display:none;">뮤지컬></button>
-                            	<button id="concert-btn" style="display:none;">콘서트></button>
-                            	<button id="theater-btn" style="display:none;">연극></button>
+                            	<button id="musical-btn" style="display:none;">뮤지컬&nbsp;<i class="fas fa-chevron-right"></i></button>
+                            	<button id="concert-btn" style="display:none;">콘서트 &nbsp;<i class="fas fa-chevron-right"></i></button>
+                            	<button id="theater-btn" style="display:none;">연극&nbsp;<i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
                         <div class="wrapper-listForClub"></div>
