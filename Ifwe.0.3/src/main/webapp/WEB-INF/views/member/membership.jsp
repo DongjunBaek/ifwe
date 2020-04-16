@@ -188,8 +188,8 @@ $(function(){
                <p class="p-grade-ko font-kor">프리미엄</p>
                <p class="p-grade-en bold">PREMIUM</p>
                <ul>
-                       <p> <li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 추가</li></p>
-                       <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 개수 추가</li></p>
+                       <p> <li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 최대 2000</li></p>
+                       <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 최대 10개</li></p>
                </ul>
            </div>
            <div class="grade-price"  >
@@ -225,8 +225,8 @@ $(function(){
                <p class="p-grade-ko font-kor">골드</p>
                <p class="p-grade-en bold">GOLD</p>
                <ul >
-                       <p><li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 추가</li></p>
-                       <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 개수 추가</li></p>
+                       <p><li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 최대 1000</li></p>
+                       <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 최대 6개</li></p>
                </ul>
            </div>
            <div class="grade-price font-kor">
@@ -241,8 +241,8 @@ $(function(){
                <p class="p-grade-ko font-kor">실버</p>
                <p class="p-grade-en bold">SILVER</p>
                <ul>
-                   <p><li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 추가</li></p>
-                   <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 개수 추가</li></p>
+                   <p><li class="font-kor" ><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>소모임 인원 최대 500</li></p>
+                   <p> <li class="font-kor"><i class="fas fa-circle" style="color:#2756a6;font-size:0.5em; margin-right:10px;"></i>게시판 최대 4개</li></p>
                 </ul>
             </div>
             <div class="grade-price font-kor">
