@@ -129,6 +129,10 @@ margin: 0% 10% 5% 10%;
 }
 .post1{
 color: #2756a6;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+width:305px;
 }
 .two-hr{
 width: 400px;
