@@ -100,14 +100,18 @@ public class ClubController {
 			log.debug("해쉬태그 검색");
 			totalContents = clubService.searchClubByHashtag(param).size();
 			searchListResult = clubService.searchClubByHashtag(param,numPerPage,cPage);
-			result = clubService.insertSearchKeyword(param);
+			if(clubSearchKeyword.length() !=0) {
+				result = clubService.insertSearchKeyword(param);
+			}
 			
 		}else {
 			//모임명 검색
 			log.debug("모임명 검색");
 			totalContents = clubService.selectListByName(param).size();
 			searchListResult = clubService.selectListByName(param,numPerPage,cPage);
+			if(clubSearchKeyword.length() !=0) {
 			result = clubService.insertSearchKeyword(param);
+			}
 		}
 
 		
