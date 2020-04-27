@@ -32,7 +32,7 @@ If we Proejct ReadMe
 
 -   ifwe.1.1.sql 파일 실행 (trigger 주석처리) 접속 계정 생성
 -   ifwe 계정 접속후 trigger생성 제외 f5 실행
--   ifwe dummy 3.2.sql 파일 실행 f5 실행
+-   ifwe 0.9.sql 파일 실행 f5 실행
 -   ifwe 1.1 trigger 생성
 
 #### 4 - 2 . SpringFrameWork ( sts ) 실행
