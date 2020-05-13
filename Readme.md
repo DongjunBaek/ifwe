@@ -21,7 +21,7 @@ If we Proejct ReadMe
 
 [ERD CLOUD - IFWE 자세히 보기](https://www.erdcloud.com/d/8hkEsyHYqqGc4RGj6)  
 
-![ERD](이미지파일경로.jpg)
+![ERD](./sql/ifwe_sql_erd.png)
 
 
 
