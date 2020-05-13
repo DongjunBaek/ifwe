@@ -17,9 +17,11 @@ If we Proejct ReadMe
 
 * * * * *
 
-### 2 . 프로젝트 DB 구조 설계
+### 2 . 프로젝트 DB 구조 설계 
 
-[ERD CLOUD - IFWE](https://www.erdcloud.com/d/8hkEsyHYqqGc4RGj6)  
+[ERD CLOUD - IFWE 자세히 보기](https://www.erdcloud.com/d/8hkEsyHYqqGc4RGj6)  
+
+![ERD](이미지파일경로.jpg)
 
 
 
