@@ -17,7 +17,16 @@ If we Proejct ReadMe
 
 * * * * *
 
-### 3 . 프로젝트 환경설정
+### 2 . 프로젝트 DB 구조 설계
+
+[ERD CLOUD - IFWE](https://www.erdcloud.com/d/8hkEsyHYqqGc4RGj6)  
+
+
+
+
+* * * * *
+
+### 3 . 프로젝트 환경
 
 -   Jdk 1.8
 -   SpringFrameWork 3.0
@@ -26,18 +35,20 @@ If we Proejct ReadMe
 
 * * * * *
 
+
+
 ### 4 . 프로젝트 환경 설정
 
 #### 4 - 1 . sql 관련 설정
 
--   ifwe.1.1.sql 파일 실행 (trigger 주석처리) 접속 계정 생성
--   ifwe 계정 접속후 trigger생성 제외 f5 실행
--   ifwe 0.9.sql 파일 실행 f5 실행
--   ifwe 1.1 trigger 생성
+-   ifwe.1.0 파일 실행 
+-   1. 계정 생성
+-   2. 테이블 및 더미내용 전체 실행
 
 #### 4 - 2 . SpringFrameWork ( sts ) 실행
 
--   Maven Folder 위치 설정
+-   Maven Folder 위치 설정 - maven 설정 확인
+-   settings.xml 파일 수정! <localRepository>C:\dev\maven\repository</localRepository>
 -   sts Server configue 에서 Runtime out 을 45sec -\> 120sec 로 변경
 
 ### 5 . 프로젝트 환경 설정
