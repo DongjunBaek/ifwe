@@ -110,6 +110,6 @@ If we Proejct ReadMe
 ### Update 기록
 
 -   2020-04-17 ver ifwe.1.1
--   2020-05-13 ver ifwㄷ Read Me files
+-   2020-05-13 ver ifwe Read Me files
 
 * * * * *
