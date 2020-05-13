@@ -34,6 +34,12 @@ If we Proejct ReadMe
 -   SpringFrameWork 3.0
 -   SQL Developer
 -   Oracle 11g
+-   Tomcat 8.5
+
+-   jquery 3.4.1
+-   fontawesome ( 인터넷 연결 필수 )
+-   Window 10 /  Mac
+
 
 * * * * *
 
@@ -104,5 +110,6 @@ If we Proejct ReadMe
 ### Update 기록
 
 -   2020-04-17 ver ifwe.1.1
+-   2020-05-13 ver ifwㄷ Read Me files
 
 * * * * *
