@@ -111,5 +111,11 @@ If we Proejct ReadMe
 
 -   2020-04-17 ver ifwe.1.1
 -   2020-05-13 ver ifwe Read Me files
+-   2020-05-26 ver ifwe 1.2 WEb 올리는 작업 완료 
+
 
 * * * * *
+
+### Domain
+http://myifwe.na.to/
+
